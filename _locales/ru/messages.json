@@ -1,0 +1,53 @@
+﻿{
+  "poziToolName": {
+    "message": "PoziTone"
+  }
+  ,
+  "poziToolDescription": {
+    "message": "Отображает информацию о текущем треке Онлайн-радио 101.ru посредством всплывающего сообщения."
+  }
+  ,
+  "poziBrowserActionTitle": {
+    "message": "Перейти к вкладке 101.ru"
+  }
+  ,
+  "poziNotificationTitle": {
+    "message": "101.ru – Онлайн-радио"
+  }
+  ,
+  "poziOptionsPageTitle": {
+    "message": "Настройки PoziTone"
+  }
+    ,
+    "poziOptionsPageNavSettings": {
+      "message": "Настройки"
+    }
+    ,
+    "poziOptionsPageNavSettingsH1": {
+      "message": "Настройки"
+    }
+    ,
+    "poziOptionsPageNavFaq": {
+      "message": "Вопросы и ответы"
+    }
+    ,
+    "poziOptionsPageNavAbout": {
+      "message": "О PoziTone"
+    }
+      ,
+      "poziOptionsPageSettingsH1": {
+        "message": "Настройки"
+      }
+      ,
+      "poziOptionsPageSettingsDontDisplayWhen": {
+        "message": "Показывать уведомления"
+      }
+      ,
+      "poziOptionsPageSettingsDisplayWhenStopped": {
+        "message": "Когда воспроизведение не начато / остановлено"
+      }
+      ,
+      "poziOptionsPageSettingsDisplayWhenMuted": {
+        "message": "Когда громкость на отметке 0% или звук выключен"
+      }
+}

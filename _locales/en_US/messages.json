@@ -1,0 +1,53 @@
+{
+  "poziToolName": {
+    "message": "PoziTone"
+  }
+  ,
+  "poziToolDescription": {
+    "message": "Displays info about currently played track on Online Radio 101.ru via small popup window."
+  }
+  ,
+  "poziBrowserActionTitle": {
+    "message": "Go to 101.ru tab"
+  }
+  ,
+  "poziNotificationTitle": {
+    "message": "101.ru - Online Radio"
+  }
+  ,
+  "poziOptionsPageTitle": {
+    "message": "PoziTone Options"
+  }
+    ,
+    "poziOptionsPageNavSettings": {
+      "message": "Settings"
+    }
+    ,
+    "poziOptionsPageNavSettingsH1": {
+      "message": "Settings"
+    }
+    ,
+    "poziOptionsPageNavFaq": {
+      "message": "FAQ"
+    }
+    ,
+    "poziOptionsPageNavAbout": {
+      "message": "About"
+    }
+      ,
+      "poziOptionsPageSettingsH1": {
+        "message": "Settings"
+      }
+      ,
+      "poziOptionsPageSettingsDontDisplayWhen": {
+        "message": "Show notifications"
+      }
+      ,
+      "poziOptionsPageSettingsDisplayWhenStopped": {
+        "message": "When playback not started / stopped"
+      }
+      ,
+      "poziOptionsPageSettingsDisplayWhenMuted": {
+        "message": "When volume is at 0% or sound off"
+      }
+}

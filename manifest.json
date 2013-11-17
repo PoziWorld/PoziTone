@@ -1,0 +1,43 @@
+{
+    "manifest_version"          : 2
+
+  , "default_locale"            : "ru"
+  , "name"                      : "__MSG_poziToolName__"
+  , "description"               : "__MSG_poziToolDescription__"
+  , "version"                   : "0.0.0.1"
+
+  , "icons"                     : {
+                                      "64"            : "img/pozitone.png"
+                                  }
+
+  , "permissions"               : [
+                                      "*://*.101.ru/"
+                                    , "notifications"
+                                    , "storage"
+                                    , "tabs"
+                                  ]
+  , "browser_action"            : {
+                                      "default_icon"  : "img/pozitone.png"
+                                    , "default_title" : "__MSG_poziBrowserActionTitle__"
+                                    // , "default_popup" : "html/popup.html"
+                                  }
+  , "content_scripts"           : [
+                                    {
+                                        "matches"       : [ "http://101.ru/*" ]
+                                      , "js"            : [ 
+                                            "js/uppod-player-api.js"
+                                          , "js/page-watcher.js"
+                                        ]
+                                      , "run_at"        : "document_end"
+                                    }
+                                  ]
+  , "background"                : {
+                                      "persistent"    : false
+                                    , "scripts"       : [
+                                          "js/jquery-ajax-css-deprecated-dimensions-effects-event-alias-offset-wrap.min.js"
+                                        , "js/global.js"
+                                        , "js/background.js"
+                                      ]
+                                  }
+  , "options_page"              : "html/options.html"
+}

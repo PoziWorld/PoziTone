@@ -1,0 +1,200 @@
+/* ====================================================================================
+
+  Product                 :           PoziTone
+  Author                  :           PoziWorld
+  Copyright               :           Copyright (c) 2013 PoziWorld
+  File                    :           css/options.css
+  Description             :           Options Styles
+
+  Table of Contents:
+
+  0.                              Options Globals
+  1.                              Header
+  2.                              Content
+
+==================================================================================== */
+
+/* ====================================================================================
+
+  0.                              Options Globals
+
+==================================================================================== */
+
+  *
+    {
+      margin:                 0;
+      padding:                0;
+      outline:                none;
+      border:                 none;
+    }
+  html *
+    {
+      position:               relative;
+      /**
+       * z-index is set as a global to 1
+       * - so that in case we ever need something
+       * - to be behind everything else
+       * - we can set it to z-index:0;
+      **/
+      z-index:                1;
+    }
+  html
+    {
+      background:             #fff;
+    }
+  body
+    {
+      font-family:            'Segoe UI', Tahoma, sans-serif;
+      font-weight:            normal;
+      font-size:              62.5%;
+      background:             #fff;
+      color:                  #333;
+    }
+  h1
+, h2
+, h3
+    {
+      -webkit-user-select:    none;
+      font-weight:            normal;
+      /* Makes the vertical size of the text the same for all fonts. */
+      line-height:            1;
+    }
+  a
+, a:hover
+, a:active
+    {
+      color:                  #fff;
+      text-decoration:        none;
+      outline:                none;
+    }
+
+/* ====================================================================================
+
+  1.                              Header
+
+==================================================================================== */
+
+  #header
+    {
+      float:                  left;
+      z-index:                2;
+      padding:                2em 0 0;
+      width:                  15.5em;
+    }
+  #header h1
+    {
+      font-size:              1.8em;
+      padding:                0 0 1em 1.333em;
+      color:                  #5C6166;
+    }
+  #header li
+    {
+      border-left:            .6em solid transparent;
+      padding-left:           1.8em;
+      list-style-type:        none;
+    }
+  #header li.selected
+    {
+      border-color:           rgb(78, 87, 100);
+    }
+  #header li:last-child
+    {
+      margin:                 2.7em 0 0;
+    }
+  #header li a
+    {
+      display:                inline-block;
+      font-size:              1.2em;
+      line-height:            1.417em;
+      margin:                 .5em 0;
+      color:                  #999;
+    }
+  #header li.selected a
+    {
+      color:                  #464E5A;
+    }
+
+/* ====================================================================================
+
+  2.                              Content
+
+==================================================================================== */
+
+  #content
+    {
+      padding:                0 0 0 15.5em;
+      max-width:              73.8em;
+      min-width:              60em;
+    }
+  .page
+    {
+      padding:                5.3em 0 0;
+    }
+  .pageHeading
+    {
+      position:               fixed;
+      top:                    0;
+      font-size:              1.8em;
+      padding:                1.167em 0 .722em;
+      max-width:              41em;
+      min-width:              33.333em;
+      color:                  #303942;
+    }
+  .pageHeading:after
+    {
+      -webkit-margin-end: 20px;
+      background-color: #eee;
+      content: ' ';
+      display: block;
+      height: 1px;
+      position: relative;
+      top: 13px;
+    }
+  .subpageHeading
+    {
+      font-size:              1.4em;
+      padding:                1.167em 0 .722em;
+      color:                  #000;
+    }
+  .subpage ul
+    {
+      margin:                 0 0 0 1.8em;
+      list-style:             none;
+    }
+  .subpage li
+    {
+      line-height:            3em;
+    }
+  .subpage label
+    {
+      font-size:              1.2em;
+      color:                  #303942;
+    }
+  input[type='checkbox']
+    {
+      bottom: 2px;
+      height: 13px;
+      position: relative;
+      vertical-align: middle;
+      width: 13px;
+      -webkit-appearance: none;
+      -webkit-user-select: none;
+      background-image: -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 2px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.75);
+      color: #444;
+      font: inherit;
+      margin: 0 1px 0 0;
+      text-shadow: 0 1px 0 rgb(240, 240, 240);
+    }
+  input[type='checkbox']:checked:before
+    {
+      -webkit-user-select: none;
+      background-image: url('/img/checkbox-tick.png');
+      background-size: 100% 100%;
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
