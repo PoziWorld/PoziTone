@@ -19,7 +19,6 @@
   , "browser_action"            : {
                                       "default_icon"  : "img/pozitone.png"
                                     , "default_title" : "__MSG_poziBrowserActionTitle__"
-                                    // , "default_popup" : "html/popup.html"
                                   }
   , "content_scripts"           : [
                                     {

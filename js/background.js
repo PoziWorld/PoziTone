@@ -45,6 +45,7 @@ var Background = {
           objSettingsDefaults       = {
               'boolShowNotificationWhenStopped'         : false
             , 'boolShowNotificationWhenMuted'           : false
+            , 'boolShowNotificationWhenNoTrackInfo'     : false
           }
         ;
 

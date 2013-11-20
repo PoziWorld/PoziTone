@@ -50,4 +50,8 @@
       "poziOptionsPageSettingsDisplayWhenMuted": {
         "message": "When volume is at 0% or sound off"
       }
+      ,
+      "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+        "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
+      }
 }

@@ -50,4 +50,8 @@
       "poziOptionsPageSettingsDisplayWhenMuted": {
         "message": "Когда громкость на отметке 0% или звук выключен"
       }
+      ,
+      "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+        "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
+      }
 }

@@ -29,9 +29,12 @@
 
 var Global = {
     intNotificationCount    : 1
+  , intPlayStatus           : 1             // Uppod JS API (play 1, pause 0, stop -1)
+  , intNoVolume             : 0             // Uppod JS API (volume 0-100)
   , objOpenTab              : {}
   , strNotificationId       : 'pozitone'
   , strValidUrl             : '101.ru/'
+  , strNoTrackInfo          : '...'
   ,
 
   /**
@@ -76,20 +79,27 @@ var Global = {
           [
               'boolShowNotificationWhenStopped'
             , 'boolShowNotificationWhenMuted'
+            , 'boolShowNotificationWhenNoTrackInfo'
           ]
         , function( objData ) {
 
             if (
                   objData.boolShowNotificationWhenStopped === false
               &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objPlayerInfo.status !== 1
+              &&  objPlayerInfo.status !== Global.intPlayStatus
             )
               return false;
 
             if (
                   objData.boolShowNotificationWhenMuted === false
               &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objPlayerInfo.volume === 0
+              &&  objPlayerInfo.volume === Global.intNoVolume
+            )
+              return false;
+
+            if (
+                  objData.boolShowNotificationWhenNoTrackInfo === false
+              &&  strTrackInfo === Global.strNoTrackInfo
             )
               return false;
 
