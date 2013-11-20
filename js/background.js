@@ -26,6 +26,8 @@
  ==================================================================================== */
 
 var Background = {
+    strPreviousTrack        : ''
+  ,
 
   /**
    * 1.a.
@@ -38,14 +40,21 @@ var Background = {
    **/
   init : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
-      var objTemp = {};
+      var
+          objTemp                   = {}
+          objSettingsDefaults       = {
+              'boolShowNotificationWhenStopped'         : false
+            , 'boolShowNotificationWhenMuted'           : false
+          }
+        ;
 
-      // TODO: Make object with all defaults and then loop
-      if ( !objReturn.boolShowNotificationWhenStopped )
-        objTemp.boolShowNotificationWhenStopped = false;
-
-      if ( !objReturn.boolShowNotificationWhenMuted )
-        objTemp.boolShowNotificationWhenMuted = false;
+      for ( var strSetting in objSettingsDefaults ) {
+        if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
+          // If a new setting introduced, set its default
+          if ( !objReturn[ strSetting ] )
+            objTemp[ strSetting ] = objSettingsDefaults[ strSetting ];
+        }
+      }
 
       if ( Global.isEmpty( objTemp ) !== true )
         chrome.storage.sync.set( objTemp, function() {
@@ -77,9 +86,18 @@ var Background = {
  **/
 chrome.runtime.onMessage.addListener(
   function( objMessage, objSender, sendResponse ) {
-    console.log(objMessage);
-    if ( objMessage.strTrack != '' )
-      Global.showNotification( objMessage.strTrack, objMessage.objPlayerInfo );
+    var strTrack = objMessage.strTrack;
+
+    console.log( objMessage ); // Debug
+
+    if ( strTrack !== '' && strTrack !== Background.strPreviousTrack ) {
+      Global.showNotification( strTrack, objMessage.objPlayerInfo );
+      Background.strPreviousTrack = strTrack;
+    }
+    else { // Debug
+      console.log( 'Previous Track: ' + Background.strPreviousTrack );
+      console.log( 'Current Track: ' + strTrack );
+    }
   }
 );
 
