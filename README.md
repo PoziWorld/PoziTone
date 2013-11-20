@@ -23,9 +23,15 @@ PoziTone - расширение для браузера Google Chrome.
 
 Если все шаги выполнены верно, PoziTone появится в списке Расширений.
 
+-
+
 Чтобы увидеть PoziTone в работе, пройдите по адресу http://101.ru/?an=port_allchannels и кликните по названию понравившейся онлайн-радиостанции.
+
 Как только страница полностью загрузится, первое же всплывающее сообщение с информацией о текущем треке не должно заставить себя ждать.
+
 При каждой смене трека/радиостанции будет появляться новое всплывающее сообщение.
+
+-
 
 Иконка - www.webalys.com/minicons
 
@@ -34,5 +40,7 @@ PoziTone - расширение для браузера Google Chrome.
 PoziTone - extension for Google Chrome browser.
 
 Displays info about current track on Online Radio 101.ru via popup message.
+
+-
 
 Icon - www.webalys.com/minicons
