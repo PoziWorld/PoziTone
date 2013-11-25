@@ -35,6 +35,7 @@ var Global = {
   , strNotificationId       : 'pozitone'
   , strValidUrl             : '101.ru/'
   , strNoTrackInfo          : '...'
+  , strPlayerIsOffClass     : 'play'
   ,
 
   /**
@@ -86,14 +87,14 @@ var Global = {
             if (
                   objData.boolShowNotificationWhenStopped === false
               &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objPlayerInfo.status !== Global.intPlayStatus
+              &&  objTempPlayerInfo.status === Global.strPlayerIsOffClass
             )
               return false;
 
             if (
                   objData.boolShowNotificationWhenMuted === false
               &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objPlayerInfo.volume === Global.intNoVolume
+              &&  objTempPlayerInfo.volume === Global.intNoVolume
             )
               return false;
 
