@@ -38,20 +38,38 @@
       "poziOptionsPageSettingsH1": {
         "message": "Settings"
       }
-      ,
-      "poziOptionsPageSettingsDontDisplayWhen": {
-        "message": "Show notifications"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenStopped": {
-        "message": "When playback not started / stopped"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenMuted": {
-        "message": "When volume is at 0% or sound off"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
-        "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
-      }
+
+        ,
+        "poziOptionsPageSettingsDisplayWhen": {
+          "message": "Show notifications"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenStopped": {
+          "message": "When playback not started / stopped"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenMuted": {
+          "message": "When volume is at 0% or sound off"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+          "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
+        }
+
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormat": {
+          "message": "Notification title format"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatShort": {
+          "message": "Display current station name only"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatLong": {
+          "message": "Display current station name + short description (if available)"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+          "message": "Don't display information about current station"
+        }
 }

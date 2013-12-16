@@ -57,17 +57,22 @@ var Global = {
    * Display current track info via Notification
    *
    * @type    method
+   * @param   strStationName
+   *            Short station name
+   * @param   strStationNamePlusDesc
+   *            Short station name + some additional description (if available)
+   *            Sometimes strStationNamePlusDesc === strStationName
    * @param   strTrackInfo
    *            Track info to display
    * @param   objPlayerInfo
    *            Player info (play status, volume, etc.)
    * @return  void
    **/
-  showNotification : function( strTrackInfo, objPlayerInfo ) {
+  showNotification : function( strStationName, strStationNamePlusDesc, strTrackInfo, objPlayerInfo ) {
     var
         objNotificationOptions = {
           type:     'basic',
-          title:    chrome.i18n.getMessage( 'poziNotificationTitle' ),
+          title:    '',
           message:  strTrackInfo,
           iconUrl:  'img/icon_64.png'
         }
@@ -81,6 +86,7 @@ var Global = {
               'boolShowNotificationWhenStopped'
             , 'boolShowNotificationWhenMuted'
             , 'boolShowNotificationWhenNoTrackInfo'
+            , 'strNotificationTitleFormat'
           ]
         , function( objData ) {
 
@@ -104,7 +110,14 @@ var Global = {
             )
               return false;
 
-              chrome.notifications.create( objThis.strNotificationId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
+            if ( objData.strNotificationTitleFormat === 'noStationInfo' )
+              objNotificationOptions.title = chrome.i18n.getMessage( 'poziNotificationTitle' );
+            else if ( objData.strNotificationTitleFormat === 'short' )
+              objNotificationOptions.title = strStationName;
+            else if ( objData.strNotificationTitleFormat === 'long' )
+              objNotificationOptions.title = strStationNamePlusDesc;
+
+            chrome.notifications.create( objThis.strNotificationId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
           }
       );
     });

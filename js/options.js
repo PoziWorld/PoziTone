@@ -84,6 +84,8 @@ var Options = {
         if ( typeof objStorageData[ strVarName ] !== 'undefined' ) {
           if ( typeof objStorageData[ strVarName ] === 'boolean' && objElement.type === 'checkbox' )
             objElement.checked = objStorageData[ strVarName ];
+          else if ( typeof objStorageData[ strVarName ] === 'string' && objElement.type === 'radio' && objStorageData[ strVarName ] === objElement.value )
+            objElement.checked = true;
         }
       });
     });
@@ -108,6 +110,8 @@ var Options = {
 
       if ( $this.type === 'checkbox' )
         objTemp[ $this.name ] = $( this ).prop( 'checked' );
+      else if ( $this.type === 'radio' )
+        objTemp[ $this.name ] = $( this ).val();
 
       if ( Global.isEmpty( objTemp ) !== true )
         chrome.storage.sync.set( objTemp, function() {

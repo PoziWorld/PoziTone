@@ -38,20 +38,38 @@
       "poziOptionsPageSettingsH1": {
         "message": "Настройки"
       }
-      ,
-      "poziOptionsPageSettingsDontDisplayWhen": {
-        "message": "Показывать уведомления"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenStopped": {
-        "message": "Когда воспроизведение не начато / остановлено"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenMuted": {
-        "message": "Когда громкость на отметке 0% или звук выключен"
-      }
-      ,
-      "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
-        "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
-      }
+
+        ,
+        "poziOptionsPageSettingsDisplayWhen": {
+          "message": "Показывать уведомления"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenStopped": {
+          "message": "Когда воспроизведение не начато / остановлено"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenMuted": {
+          "message": "Когда громкость на отметке 0% или звук выключен"
+        }
+        ,
+        "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+          "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
+        }
+
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormat": {
+          "message": "Формат заголовка уведомления"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatShort": {
+          "message": "Отображать только название текущей станции"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatLong": {
+          "message": "Отображать название текущей станции + краткое описание (если доступно)"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+          "message": "Не отображать информацию о текущей станции"
+        }
 }

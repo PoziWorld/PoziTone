@@ -14,8 +14,8 @@
       <nav>
         <ul>
           <li class="selected"><a href="" i18n-content="poziOptionsPageNavSettings"></a></li>
-          <li><a href="" i18n-content="poziOptionsPageNavFaq"></a></li>
-          <li><a href="" i18n-content="poziOptionsPageNavAbout"></a></li>
+          <li class="none"><a href="" i18n-content="poziOptionsPageNavFaq"></a></li>
+          <li class="none"><a href="" i18n-content="poziOptionsPageNavAbout"></a></li>
         </ul>
       </nav>
     </header>
@@ -23,24 +23,46 @@
       <section class="page">
         <h1 i18n-content="poziOptionsPageSettingsH1" class="pageHeading"></h1>
         <section class="subpage">
-          <h1 i18n-content="poziOptionsPageSettingsDontDisplayWhen" class="subpageHeading"></h1>
-          <ul>
-            <li>
-              <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">
-                <input type="checkbox" name="boolShowNotificationWhenStopped" />
-              </label>
-            </li>
-            <li>
-              <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
-                <input type="checkbox" name="boolShowNotificationWhenMuted" />
-              </label>
-            </li>
-            <li>
-              <label i18n-content="poziOptionsPageSettingsDisplayWhenNoTrackInfo">
-                <input type="checkbox" name="boolShowNotificationWhenNoTrackInfo" />
-              </label>
-            </li>
-          </ul>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="subpageHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">
+                  <input type="checkbox" name="boolShowNotificationWhenStopped" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
+                  <input type="checkbox" name="boolShowNotificationWhenMuted" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenNoTrackInfo">
+                  <input type="checkbox" name="boolShowNotificationWhenNoTrackInfo" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationTitleFormat" class="subpageHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatShort">
+                  <input type="radio" name="strNotificationTitleFormat" value="short" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatLong">
+                  <input type="radio" name="strNotificationTitleFormat" value="long" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatNoStationInfo">
+                  <input type="radio" name="strNotificationTitleFormat" value="noStationInfo" />
+                </label>
+              </li>
+            </ul>
+          </section>
         </section>
       </section>
     </article>

@@ -26,18 +26,20 @@
  ==================================================================================== */
 
 var PageWatcher = {
-    strPlayerId             : 'radioplayer_sm' // Set by 101
-  , strTrackInfoContainer   : 'titlesong'
-  , objPlayerInfo           : {
-        status              : null
-      , volume              : null
+    strPlayerId                 : 'radioplayer_sm' // Set by 101
+  , strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
+  , strStationNamePlusDesc      : document.title
+  , strTrackInfoContainerId     : 'titlesong'
+  , objPlayerInfo               : {
+        status                  : null
+      , volume                  : null
     }
   // Play/Stop button has class which is player status 
   // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
-  , objWantedClassRegExp    : / (play|stop)/
-  , intWantedClassLength    : 4
-  , $wmaPlayer              : document.getElementsByName( 'MediaPlayer' )[0]
-  , $playStopButton         : document.getElementsByClassName( 'general_play' )[0]
+  , objWantedClassRegExp        : / (play|stop)/
+  , intWantedClassLength        : 4
+  , $wmaPlayer                  : document.getElementsByName( 'MediaPlayer' )[0]
+  , $playStopButton             : document.getElementsByClassName( 'general_play' )[0]
   ,
 
   /**
@@ -151,11 +153,13 @@ var PageWatcher = {
  * @param   objEvent
  * @return  void
  **/
-document.getElementById( PageWatcher.strTrackInfoContainer ).addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
+document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
   chrome.runtime.sendMessage(
     {
-        objPlayerInfo:  PageWatcher.getPlayerInfo()
-      , strTrack:       objEvent.newValue
+        strStationName:           PageWatcher.strStationName
+      , strStationNamePlusDesc:   PageWatcher.strStationNamePlusDesc
+      , strTrackInfo:             objEvent.newValue
+      , objPlayerInfo:            PageWatcher.getPlayerInfo()
     }
   );
 }, false);

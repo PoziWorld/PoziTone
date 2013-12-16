@@ -46,6 +46,7 @@ var Background = {
               'boolShowNotificationWhenStopped'         : false
             , 'boolShowNotificationWhenMuted'           : false
             , 'boolShowNotificationWhenNoTrackInfo'     : false
+            , 'strNotificationTitleFormat'              : 'short'
           }
         ;
 
@@ -59,9 +60,10 @@ var Background = {
 
       if ( Global.isEmpty( objTemp ) !== true )
         chrome.storage.sync.set( objTemp, function() {
-          // chrome.storage.sync.get( null, function(data) {
-            // console.log(data);
-          // });
+          // Debug
+          chrome.storage.sync.get( null, function( objData ) {
+            console.log( objData );
+          });
         });
     });
   }
@@ -87,17 +89,23 @@ var Background = {
  **/
 chrome.runtime.onMessage.addListener(
   function( objMessage, objSender, sendResponse ) {
-    var strTrack = objMessage.strTrack;
+    var strTrackInfo = objMessage.strTrackInfo;
 
     console.log( objMessage ); // Debug
 
-    if ( strTrack !== '' && strTrack !== Background.strPreviousTrack ) {
-      Global.showNotification( strTrack, objMessage.objPlayerInfo );
-      Background.strPreviousTrack = strTrack;
+    if ( strTrackInfo !== '' && strTrackInfo !== Background.strPreviousTrack ) {
+      Global.showNotification(
+          objMessage.strStationName
+        , objMessage.strStationNamePlusDesc
+        , strTrackInfo
+        , objMessage.objPlayerInfo
+      );
+
+      Background.strPreviousTrack = strTrackInfo;
     }
     else { // Debug
       console.log( 'Previous Track: ' + Background.strPreviousTrack );
-      console.log( 'Current Track: ' + strTrack );
+      console.log( 'Current Track: ' + strTrackInfo );
     }
   }
 );
