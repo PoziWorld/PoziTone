@@ -17,7 +17,7 @@
     1.f.                            saveOpenTabObj()
     1.g.                            isEmpty()
   2.                              On Load
-    3.a.                            Initialize defaults
+    2.a.                            Initialize defaults
 
  ==================================================================================== */
 
@@ -28,14 +28,74 @@
  ==================================================================================== */
 
 var Global = {
-    intNotificationCount    : 1
-  , intPlayStatus           : 1             // Uppod JS API (play 1, pause 0, stop -1)
-  , intNoVolume             : 0             // Uppod JS API (volume 0-100)
-  , objOpenTab              : {}
-  , strNotificationId       : 'pozitone'
-  , strValidUrl             : '101.ru/'
-  , strNoTrackInfo          : '...'
-  , strPlayerIsOffClass     : 'play'
+    intNotificationCount          : 1
+  , intNoVolume                   : 0              // Uppod JS API (volume 0-100)
+  , objOpenTab                    : {}
+  , strValidUrl                   : '101.ru/'
+  , strNotificationId             : 'pozitone_tab' // We'll add tab ID when displaying
+  , strNotificationIconUrl        : 'img/notification-icon-80.png'
+  , strNoTrackInfo                : '...'
+  , strPlayerIsOffClass           : 'play'
+  , objSettingsDefaults           : {
+        boolShowNotificationWhenStopped         : { miscDefault : false }
+      , boolShowNotificationWhenMuted           : { miscDefault : false }
+      , boolShowNotificationWhenNoTrackInfo     : { miscDefault : false }
+      , strNotificationTitleFormat              : { miscDefault : 'short' }
+      , arrNotificationButtons                  : {
+            miscDefault           : [ 'add', 'muteUnmute' ]
+          , arrActiveButtons      : []
+          , add                   : {
+                loggedIn          : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsAddLoggedInTitle' )
+                      , iconUrl   : 'img/round_plus_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickAdd'
+                }
+            }
+          , favorite              : {
+                loggedIn          : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsFavoriteLoggedInTitle' )
+                      , iconUrl   : 'img/emotion_smile_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickFavorite'
+                }
+            }
+          , playStop              : {
+                play              : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsPlayTitle' )
+                      , iconUrl   : 'img/playback_play_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickPlayStop'
+                }
+              , stop              : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsStopTitle' )
+                      , iconUrl   : 'img/playback_stop_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickPlayStop'
+                }
+            }
+          , muteUnmute            : {
+                mute              : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsMuteTitle' )
+                      , iconUrl   : 'img/sound_mute_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickMute'
+                }
+              , unmute            : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteTitle' )
+                      , iconUrl   : 'img/sound_high_icon&16.png'
+                    }
+                  , strFunction   : 'processButtonClickUnmute'
+                }
+            }
+        }
+    }
   ,
 
   /**
@@ -57,67 +117,119 @@ var Global = {
    * Display current track info via Notification
    *
    * @type    method
-   * @param   strStationName
-   *            Short station name
-   * @param   strStationNamePlusDesc
-   *            Short station name + some additional description (if available)
-   *            Sometimes strStationNamePlusDesc === strStationName
-   * @param   strTrackInfo
-   *            Track info to display
+   * @param   boolUserLoggedIn
+   *            Whether user logged-in or not
+   * @param   boolDisregardSameMessage
+   *            If true, show notification in any case
+   * @param   intTabId
+   *            Tab ID info received from
    * @param   objPlayerInfo
    *            Player info (play status, volume, etc.)
+   * @param   objStationInfo
+   *            Station info (strStationName, strStationNamePlusDesc, strTrackInfo)
    * @return  void
    **/
-  showNotification : function( strStationName, strStationNamePlusDesc, strTrackInfo, objPlayerInfo ) {
+  showNotification : function( boolUserLoggedIn, boolDisregardSameMessage, intTabId, objPlayerInfo, objStationInfo ) {
     var
         objNotificationOptions = {
-          type:     'basic',
-          title:    '',
-          message:  strTrackInfo,
-          iconUrl:  'img/icon_64.png'
+          type                 : 'basic',
+          title                : '',
+          message              : objStationInfo.strTrackInfo,
+          iconUrl              : Global.strNotificationIconUrl
         }
-      , objThis               = this
-      , objTempPlayerInfo     = objPlayerInfo
+      , objThis                = this
+      , objTempPlayerInfo      = objPlayerInfo
+      , objTempStationInfo     = objStationInfo
       ;
 
-    chrome.notifications.clear( objThis.strNotificationId, function() {
+    chrome.notifications.clear( objThis.strNotificationId + intTabId, function() {
       chrome.storage.sync.get(
           [
               'boolShowNotificationWhenStopped'
             , 'boolShowNotificationWhenMuted'
             , 'boolShowNotificationWhenNoTrackInfo'
             , 'strNotificationTitleFormat'
+            , 'arrNotificationButtons'
           ]
         , function( objData ) {
 
             if (
-                  objData.boolShowNotificationWhenStopped === false
-              &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objTempPlayerInfo.status === Global.strPlayerIsOffClass
+                  boolDisregardSameMessage === false
+              &&  objData.boolShowNotificationWhenStopped === false
+              &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
             )
               return false;
 
             if (
-                  objData.boolShowNotificationWhenMuted === false
-              &&  typeof objTempPlayerInfo !== 'undefined'
-              &&  objTempPlayerInfo.volume === Global.intNoVolume
+                  boolDisregardSameMessage === false
+              &&  objData.boolShowNotificationWhenMuted === false
+              &&  objTempPlayerInfo.intVolume === Global.intNoVolume
             )
               return false;
 
             if (
-                  objData.boolShowNotificationWhenNoTrackInfo === false
-              &&  strTrackInfo === Global.strNoTrackInfo
+                  boolDisregardSameMessage === false
+              &&  objData.boolShowNotificationWhenNoTrackInfo === false
+              &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             )
               return false;
 
-            if ( objData.strNotificationTitleFormat === 'noStationInfo' )
+            var
+                strTitleFormat = objData.strNotificationTitleFormat
+              , arrButtons     = objData.arrNotificationButtons
+              ;
+
+            if ( strTitleFormat === 'noStationInfo' )
               objNotificationOptions.title = chrome.i18n.getMessage( 'poziNotificationTitle' );
-            else if ( objData.strNotificationTitleFormat === 'short' )
-              objNotificationOptions.title = strStationName;
-            else if ( objData.strNotificationTitleFormat === 'long' )
-              objNotificationOptions.title = strStationNamePlusDesc;
+            else if ( strTitleFormat === 'short' )
+              objNotificationOptions.title = objTempStationInfo.strStationName;
+            else if ( strTitleFormat === 'long' )
+              objNotificationOptions.title = objTempStationInfo.strStationNamePlusDesc;
 
-            chrome.notifications.create( objThis.strNotificationId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
+            if ( arrButtons.length !== 0 ) {
+              // Save active buttons for the listener
+              var arrActiveButtons = Global.objSettingsDefaults.arrNotificationButtons.arrActiveButtons = [];
+
+              objNotificationOptions.buttons = [];
+
+              // TODO: Combine all following buttons' check into one
+              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn === true ) {
+                objNotificationOptions.buttons.push(
+                  Global.objSettingsDefaults.arrNotificationButtons.add.loggedIn.objButton
+                );
+
+                arrActiveButtons.push( 'add|loggedIn' );
+              }
+
+              if ( arrButtons.indexOf( 'favorite' ) !== -1 && boolUserLoggedIn === true ) {
+                objNotificationOptions.buttons.push(
+                  Global.objSettingsDefaults.arrNotificationButtons.favorite.loggedIn.objButton
+                );
+
+                arrActiveButtons.push( 'favorite|loggedIn' );
+              }
+
+              if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {
+                objNotificationOptions.buttons.push(
+                  Global.objSettingsDefaults.arrNotificationButtons.playStop[ objTempPlayerInfo.strStatus ].objButton
+                );
+
+                arrActiveButtons.push( 'playStop|' + objTempPlayerInfo.strStatus );
+              }
+
+              if ( arrButtons.indexOf( 'muteUnmute' ) !== -1 ) {
+                var strMuteUnmuteState = ( objTempPlayerInfo.intVolume > 0 ) ? 
+                                           'mute' : 'unmute';
+
+                objNotificationOptions.buttons.push(
+                  Global.objSettingsDefaults.arrNotificationButtons.muteUnmute[ strMuteUnmuteState ].objButton
+                );
+
+                arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
+              }
+            }
+
+            chrome.notifications.create( objThis.strNotificationId + intTabId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
           }
       );
     });

@@ -10,11 +10,13 @@
 
   1.                              Background
     1.a.                            init()
-  2.                              Background Listeners
+    1.b.                            setExtensionDefaults()
+  2.                              Listeners
     2.a.                            runtime.onMessage
-    2.a.                            browserAction.onClicked
+    2.b.                            browserAction.onClicked
+    2.c.                            notifications.onButtonClicked
   3.                              On Load
-    3.a.                            inject Page Watcher
+    3.a.                            Inject Page Watcher
     3.b.                            Initialize extension defaults
 
  ==================================================================================== */
@@ -39,14 +41,30 @@ var Background = {
    * @return  void
    **/
   init : function() {
+    Background.setExtensionDefaults();
+  }
+  ,
+
+  /**
+   * 1.b.
+   *
+   * Set extension defaults
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  setExtensionDefaults : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
       var
           objTemp                   = {}
-          objSettingsDefaults       = {
-              'boolShowNotificationWhenStopped'         : false
-            , 'boolShowNotificationWhenMuted'           : false
-            , 'boolShowNotificationWhenNoTrackInfo'     : false
-            , 'strNotificationTitleFormat'              : 'short'
+          // TODO: Get defaults from Global
+        , objSettingsDefaults       = {
+              boolShowNotificationWhenStopped       : false
+            , boolShowNotificationWhenMuted         : false
+            , boolShowNotificationWhenNoTrackInfo   : false
+            , strNotificationTitleFormat            : 'short'
+            , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
           }
         ;
 
@@ -62,6 +80,7 @@ var Background = {
         chrome.storage.sync.set( objTemp, function() {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
+            console.log( 'Background setExtensionDefaults' );
             console.log( objData );
           });
         });
@@ -71,7 +90,7 @@ var Background = {
 
 /* ====================================================================================
 
-  2.                              Background Listeners
+  2.                              Listeners
 
  ==================================================================================== */
 
@@ -89,16 +108,24 @@ var Background = {
  **/
 chrome.runtime.onMessage.addListener(
   function( objMessage, objSender, sendResponse ) {
-    var strTrackInfo = objMessage.strTrackInfo;
+    var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
 
-    console.log( objMessage ); // Debug
+    // Debug
+    console.log( 'Background onMessage' );
+    console.log( objMessage );
 
-    if ( strTrackInfo !== '' && strTrackInfo !== Background.strPreviousTrack ) {
+    // Show notification if track info changed or extension asks to show it again
+    // (set of buttons needs to be changed, for example)
+    if (
+          strTrackInfo !== '' && strTrackInfo !== Background.strPreviousTrack 
+      ||  objMessage.boolDisregardSameMessage === true
+      ) {
       Global.showNotification(
-          objMessage.strStationName
-        , objMessage.strStationNamePlusDesc
-        , strTrackInfo
+          objMessage.boolUserLoggedIn
+        , objMessage.boolDisregardSameMessage
+        , objSender.tab.id
         , objMessage.objPlayerInfo
+        , objMessage.objStationInfo
       );
 
       Background.strPreviousTrack = strTrackInfo;
@@ -116,16 +143,40 @@ chrome.runtime.onMessage.addListener(
  * Activates the Tab when clicked on browser icon
  *
  * @type    method
- * @param   objMessage
- *            Message received
- * @param   objSender
- *            Sender of the message
+ * @param   objCurrentTab
+ *            Current tab details
  * @return  void
  **/
 chrome.browserAction.onClicked.addListener(
   function( objCurrentTab ) {
     if ( typeof Global.objOpenTab.windowId === 'number' && typeof Global.objOpenTab.index === 'number' )
       chrome.tabs.highlight( { windowId: Global.objOpenTab.windowId, tabs: [ Global.objOpenTab.index ] }, function() {} );
+  }
+);
+
+/**
+ * 2.c.
+ *
+ * Listens for buttons clicks from notification
+ *
+ * @type    method
+ * @param   strNotificationId
+ *            Notification ID
+ * @param   intButtonIndex
+ *            Notification button index
+ * @return  void
+ **/
+chrome.notifications.onButtonClicked.addListener(
+  function( strNotificationId, intButtonIndex ) {
+    var
+        arrButton   = Global.objSettingsDefaults.arrNotificationButtons.arrActiveButtons[ intButtonIndex ].split( '|' )
+      , intTabId    = parseInt( strNotificationId.replace( Global.strNotificationId, '' ) )
+      ;
+
+    chrome.tabs.sendMessage(
+        intTabId
+      , Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+    );
   }
 );
 
@@ -151,7 +202,7 @@ chrome.tabs.query( {}, function( tabs ) {
   for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
     if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
       console.log( 'Found open PoziTab: ' + objTab.url );
-      Global.saveOpenTabObj( objTab );
+      Global.saveOpenTabObj( objTab ); // TODO: Multiple open 101.ru pages will overwrite this
       chrome.tabs.executeScript( objTab.id, { file: '/js/page-watcher.js' } );
       return true;
     }

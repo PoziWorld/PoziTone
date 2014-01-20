@@ -14,8 +14,15 @@
     1.c.                            getPlayerStatus()
     1.d.                            getPlayerVolume()
     1.e.                            getPlayerIntVar()
-  2.                              Event Listeners
-    2.a.                            titlesong DOMCharacterDataModified()
+    1.f.                            processButtonClickAdd()
+    1.g.                            processButtonClickFavorite()
+    1.h.                            processButtonClickPlayStop()
+    1.i.                            processButtonClickMute()
+    1.j.                            processButtonClickUnmute()
+    1.k.                            sendSameMessage()
+  2.                              Listeners
+    2.a.                            titlesong DOMCharacterDataModified
+    2.b.                            runtime.onMessage
 
  ==================================================================================== */
 
@@ -26,20 +33,32 @@
  ==================================================================================== */
 
 var PageWatcher = {
-    strPlayerId                 : 'radioplayer_sm' // Set by 101
-  , strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
-  , strStationNamePlusDesc      : document.title
-  , strTrackInfoContainerId     : 'titlesong'
-  , objPlayerInfo               : {
-        status                  : null
-      , volume                  : null
-    }
+    boolUserLoggedIn            : document.getElementById( 'user-account' ) !== null
+
   // Play/Stop button has class which is player status 
   // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
   , objWantedClassRegExp        : / (play|stop)/
   , intWantedClassLength        : 4
+
   , $wmaPlayer                  : document.getElementsByName( 'MediaPlayer' )[0]
   , $playStopButton             : document.getElementsByClassName( 'general_play' )[0]
+
+  , strTrackInfoContainerId     : 'titlesong'
+  , strPlayerId                 : 'radioplayer_sm' // Set by 101
+
+  , boolDisregardSameMessage    : false
+
+  , objPlayerInfo               : {
+        boolIsMp3Player         : ! document.contains( document.getElementsByName( 'MediaPlayer' )[0] )
+      , intVolume               : 0
+      , intVolumeBeforeMuted    : 50 // Uppod doesn't save prev value, restore to this one
+      , strStatus               : ''
+    }
+  , objStationInfo              : {
+        strStationName          : document.getElementsByTagName( 'h1' )[0].innerText
+      , strStationNamePlusDesc  : document.title
+      , strTrackInfo            : ''
+    }
   ,
 
   /**
@@ -92,7 +111,7 @@ var PageWatcher = {
             strPlayStopButtonClassAttr.substr( intWantedClassPosition + 1, PageWatcher.intWantedClassLength ) : ''
         ;
 
-      PageWatcher.objPlayerInfo.status = strWantedClass;
+      PageWatcher.objPlayerInfo.strStatus = strWantedClass;
     }
   }
   ,
@@ -107,14 +126,14 @@ var PageWatcher = {
    * @return  void
    **/
   getPlayerVolume : function() {
-    if ( ! document.contains( PageWatcher.$wmaPlayer ) ) // If MP3
-      PageWatcher.getPlayerIntVar( 'getv', 'volume' );
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
+      PageWatcher.getPlayerIntVar( 'getv', 'intVolume' );
     else // If WMA
       // If muted, WMP doesn't set volume to 0. Emulate setting it to 0
       if ( typeof PageWatcher.$wmaPlayer.settings.mute !== 'undefined' && PageWatcher.$wmaPlayer.settings.mute === true )
-        PageWatcher.objPlayerInfo.volume = 0;
+        PageWatcher.objPlayerInfo.intVolume = 0;
       else if ( typeof PageWatcher.$wmaPlayer.settings.volume === 'number' )
-        PageWatcher.objPlayerInfo.volume = PageWatcher.$wmaPlayer.settings.volume;
+        PageWatcher.objPlayerInfo.intVolume = PageWatcher.$wmaPlayer.settings.volume;
   }
   ,
 
@@ -136,6 +155,112 @@ var PageWatcher = {
     if ( ! isNaN( intPlayerIntVar ) )
       PageWatcher.objPlayerInfo[ strReturnPropertyName ] = intPlayerIntVar;
   }
+  ,
+
+  /**
+   * 1.f.
+   *
+   * Simulate "Add track to playlist" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClickAdd : function() {
+    document.getElementById( 'addfavoritetracksfromair' ).click();
+  }
+  ,
+
+  /**
+   * 1.g.
+   *
+   * Simulate "I like it!" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClickFavorite : function() {
+    document.getElementById( 'polltrackaction' ).click();
+  }
+  ,
+
+  /**
+   * 1.h.
+   *
+   * Simulate "Play/Stop" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClickPlayStop : function() {
+    PageWatcher.$playStopButton.click();
+    PageWatcher.sendSameMessage();
+  }
+  ,
+
+  /**
+   * 1.i.
+   *
+   * Simulate "Mute" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClickMute : function() {
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) { // If MP3
+      // Uppod JS API doesn't provide "mute" method, emulate it by saving current value
+      PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
+      playerAPI.Uppod.uppodSend( 'radioplayer_sm', 'v0' );
+    }
+    else // If WMA
+      PageWatcher.$wmaPlayer.settings.mute = true;
+
+    PageWatcher.sendSameMessage();
+  }
+  ,
+
+  /**
+   * 1.j.
+   *
+   * Simulate "Unmute" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClickUnmute : function() {
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
+      // Uppod JS API doesn't provide "unmute" method, restore prev value
+      playerAPI.Uppod.uppodSend( 'radioplayer_sm', 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
+    else // If WMA
+      PageWatcher.$wmaPlayer.settings.mute = false;
+
+    PageWatcher.sendSameMessage();
+  }
+  ,
+
+  /**
+   * 1.k.
+   *
+   * Send same message again (set of buttons needs to be changed)
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  sendSameMessage : function() {
+    chrome.runtime.sendMessage(
+      {
+          boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
+        , boolDisregardSameMessage  : true
+        , objPlayerInfo             : PageWatcher.getPlayerInfo()
+        , objStationInfo            : PageWatcher.objStationInfo
+      }
+    );
+  }
 };
 
 /* ====================================================================================
@@ -154,12 +279,40 @@ var PageWatcher = {
  * @return  void
  **/
 document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
+  PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
+
   chrome.runtime.sendMessage(
     {
-        strStationName:           PageWatcher.strStationName
-      , strStationNamePlusDesc:   PageWatcher.strStationNamePlusDesc
-      , strTrackInfo:             objEvent.newValue
-      , objPlayerInfo:            PageWatcher.getPlayerInfo()
+        boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
+      , boolDisregardSameMessage  : false
+      , objPlayerInfo             : PageWatcher.getPlayerInfo()
+      , objStationInfo            : PageWatcher.objStationInfo
     }
   );
 }, false);
+
+/**
+ * 2.b.
+ *
+ * Listens for command sent from Background.
+ * If requested function found, call it.
+ *
+ * @type    method
+ * @param   objMessage
+ *            Message received
+ * @param   objSender
+ *            Sender of the message
+ * @return  void
+ **/
+chrome.runtime.onMessage.addListener(
+  function( objMessage, objSender, sendResponse ) {
+    // Debug
+    console.log( 'PageWatcher onMessage' );
+    console.log( objMessage );
+
+    var funcToProceedWith = PageWatcher[ objMessage ];
+
+    if ( typeof funcToProceedWith === 'function' )
+      funcToProceedWith();
+  }
+);

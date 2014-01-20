@@ -72,4 +72,50 @@
         "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
           "message": "Don't display information about current station"
         }
+
+        ,
+        "poziOptionsPageSettingsNotificationButtons": {
+          "message": "Available buttons <small>(maximum 2 can be displayed at one time)</small>"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsAdd": {
+          "message": "Add track to playlist"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsFavorite": {
+          "message": "I like it!"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+          "message": "Stop / Play"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+          "message": "Mute / Unmute"
+        }
+
+  ,
+  "poziNotificationButtonsAddLoggedInTitle": {
+    "message": "Add track to playlist"
+  }
+  ,
+  "poziNotificationButtonsFavoriteLoggedInTitle": {
+    "message": "I like it!"
+  }
+  ,
+  "poziNotificationButtonsPlayTitle": {
+    "message": "Play"
+  }
+  ,
+  "poziNotificationButtonsStopTitle": {
+    "message": "Stop"
+  }
+  ,
+  "poziNotificationButtonsMuteTitle": {
+    "message": "Mute"
+  }
+  ,
+  "poziNotificationButtonsUnmuteTitle": {
+    "message": "Unmute"
+  }
 }

@@ -70,7 +70,7 @@ var Options = {
   /**
    * 1.c.
    *
-   * Get available options
+   * Get available options and set their stored values
    *
    * @type    method
    * @param   No Parameters Taken
@@ -78,13 +78,23 @@ var Options = {
    **/
   getAvailableOptions : function() {
     $( ':input' ).each( function( intIndex, objElement ) {
-      var strVarName = objElement.name;
+      var
+          strVarName        = objElement.name
+        , strVarType        = objElement.type
+        , strVarValue       = objElement.value
+        ;
 
       chrome.storage.sync.get( strVarName, function( objStorageData ) {
-        if ( typeof objStorageData[ strVarName ] !== 'undefined' ) {
-          if ( typeof objStorageData[ strVarName ] === 'boolean' && objElement.type === 'checkbox' )
-            objElement.checked = objStorageData[ strVarName ];
-          else if ( typeof objStorageData[ strVarName ] === 'string' && objElement.type === 'radio' && objStorageData[ strVarName ] === objElement.value )
+        var miscStorageVar  = objStorageData[ strVarName ];
+
+        if ( typeof miscStorageVar !== 'undefined' ) {
+          if ( strVarType === 'checkbox' ) {
+            if ( typeof miscStorageVar === 'boolean' )
+              objElement.checked = miscStorageVar;
+            else if ( typeof miscStorageVar === 'object' && miscStorageVar.indexOf( strVarValue ) !== -1 )
+              objElement.checked = true;
+          }
+          else if ( strVarType === 'radio' && typeof miscStorageVar === 'string' && miscStorageVar === strVarValue )
             objElement.checked = true;
         }
       });
@@ -108,16 +118,32 @@ var Options = {
           objTemp = {}
         ;
 
-      if ( $this.type === 'checkbox' )
+      if ( $this.type === 'checkbox' && $this.value === 'on' )
         objTemp[ $this.name ] = $( this ).prop( 'checked' );
+      else if ( $this.type === 'checkbox' && $this.value !== 'on' ) {
+        var
+            $group    = document.getElementsByName( $this.name )
+          , arrTemp   = []
+          ;
+
+        for ( var i = 0; i < $group.length; i++ ) {
+          var $groupEl = $group[ i ];
+
+          if ( $groupEl.checked === true )
+            arrTemp.push( $groupEl.value );
+        }
+
+        objTemp[ $this.name ] = arrTemp;
+      }
       else if ( $this.type === 'radio' )
         objTemp[ $this.name ] = $( this ).val();
 
       if ( Global.isEmpty( objTemp ) !== true )
         chrome.storage.sync.set( objTemp, function() {
-          // chrome.storage.sync.get( null, function(data) {
-            // console.log(data);
-          // });
+          // Debug
+          chrome.storage.sync.get( null, function(data) {
+            console.log(data);
+          });
         });
     });
   }
@@ -129,4 +155,4 @@ var Options = {
 
  ==================================================================================== */
 
-document.addEventListener('DOMContentLoaded', Options.init);
+document.addEventListener( 'DOMContentLoaded', Options.init );

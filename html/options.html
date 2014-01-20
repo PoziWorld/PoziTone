@@ -24,26 +24,6 @@
         <h1 i18n-content="poziOptionsPageSettingsH1" class="pageHeading"></h1>
         <section class="subpage">
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="subpageHeading"></h1>
-            <ul>
-              <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">
-                  <input type="checkbox" name="boolShowNotificationWhenStopped" />
-                </label>
-              </li>
-              <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
-                  <input type="checkbox" name="boolShowNotificationWhenMuted" />
-                </label>
-              </li>
-              <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenNoTrackInfo">
-                  <input type="checkbox" name="boolShowNotificationWhenNoTrackInfo" />
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section>
             <h1 i18n-content="poziOptionsPageSettingsNotificationTitleFormat" class="subpageHeading"></h1>
             <ul>
               <li>
@@ -59,6 +39,51 @@
               <li>
                 <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatNoStationInfo">
                   <input type="radio" name="strNotificationTitleFormat" value="noStationInfo" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="subpageHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsAdd">
+                  <input type="checkbox" name="arrNotificationButtons" value="add" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsFavorite">
+                  <input type="checkbox" name="arrNotificationButtons" value="favorite" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsPlayStop">
+                  <input type="checkbox" name="arrNotificationButtons" value="playStop" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsMuteUnmute">
+                  <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="subpageHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">
+                  <input type="checkbox" name="boolShowNotificationWhenStopped" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
+                  <input type="checkbox" name="boolShowNotificationWhenMuted" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenNoTrackInfo">
+                  <input type="checkbox" name="boolShowNotificationWhenNoTrackInfo" />
                 </label>
               </li>
             </ul>

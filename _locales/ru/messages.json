@@ -72,4 +72,50 @@
         "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
           "message": "Не отображать информацию о текущей станции"
         }
+
+        ,
+        "poziOptionsPageSettingsNotificationButtons": {
+          "message": "Доступные кнопки <small>(максимум 2 могут быть отображены одновременно)</small>"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsAdd": {
+          "message": "Добавить трек в плейлист"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsFavorite": {
+          "message": "Мне нравится!"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+          "message": "Остановить/Возобновить воспроизведение"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+          "message": "Выключить/Включить звук"
+        }
+
+  ,
+  "poziNotificationButtonsAddLoggedInTitle": {
+    "message": "Добавить трек в плейлист"
+  }
+  ,
+  "poziNotificationButtonsFavoriteLoggedInTitle": {
+    "message": "Мне нравится!"
+  }
+  ,
+  "poziNotificationButtonsPlayTitle": {
+    "message": "Возобновить воспроизведение"
+  }
+  ,
+  "poziNotificationButtonsStopTitle": {
+    "message": "Остановить воспроизведение"
+  }
+  ,
+  "poziNotificationButtonsMuteTitle": {
+    "message": "Выключить звук"
+  }
+  ,
+  "poziNotificationButtonsUnmuteTitle": {
+    "message": "Включить звук"
+  }
 }
