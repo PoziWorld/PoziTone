@@ -50,7 +50,7 @@ var Global = {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsAddLoggedInTitle' )
                       , iconUrl   : 'img/round_plus_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickAdd'
+                  , strFunction   : 'add'
                 }
             }
           , favorite              : {
@@ -59,7 +59,7 @@ var Global = {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsFavoriteLoggedInTitle' )
                       , iconUrl   : 'img/emotion_smile_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickFavorite'
+                  , strFunction   : 'favorite'
                 }
             }
           , playStop              : {
@@ -68,14 +68,14 @@ var Global = {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsPlayTitle' )
                       , iconUrl   : 'img/playback_play_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickPlayStop'
+                  , strFunction   : 'playStop'
                 }
               , stop              : {
                     objButton     : {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsStopTitle' )
                       , iconUrl   : 'img/playback_stop_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickPlayStop'
+                  , strFunction   : 'playStop'
                 }
             }
           , muteUnmute            : {
@@ -84,14 +84,14 @@ var Global = {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsMuteTitle' )
                       , iconUrl   : 'img/sound_mute_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickMute'
+                  , strFunction   : 'mute'
                 }
               , unmute            : {
                     objButton     : {
                         title     : chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteTitle' )
                       , iconUrl   : 'img/sound_high_icon&16.png'
                     }
-                  , strFunction   : 'processButtonClickUnmute'
+                  , strFunction   : 'unmute'
                 }
             }
         }

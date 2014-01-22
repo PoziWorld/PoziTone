@@ -15,6 +15,7 @@
     2.a.                            runtime.onMessage
     2.b.                            browserAction.onClicked
     2.c.                            notifications.onButtonClicked
+    2.d.                            commands.onCommand
   3.                              On Load
     3.a.                            Inject Page Watcher
     3.b.                            Initialize extension defaults
@@ -175,7 +176,38 @@ chrome.notifications.onButtonClicked.addListener(
 
     chrome.tabs.sendMessage(
         intTabId
-      , Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+      , 'processButtonClick_' + Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+    );
+  }
+);
+
+/**
+ * 2.d.
+ *
+ * Listens for hotkeys
+ *
+ * @type    method
+ * @param   strNotificationId
+ *            Notification ID
+ * @param   intButtonIndex
+ *            Notification button index
+ * @return  void
+ **/
+chrome.commands.onCommand.addListener(
+  function( strCommand ) {
+
+    // Debug
+    console.log( 'Background onCommand: ' + strCommand );
+
+    var strMessagePrefix = 'processCommand_';
+
+    // For these it's the same as button click
+    if ( strCommand === 'add' || strCommand === 'playStop' )
+      strMessagePrefix = 'processButtonClick_';
+
+    chrome.tabs.sendMessage(
+        Global.objOpenTab.id
+      , strMessagePrefix + strCommand
     );
   }
 );

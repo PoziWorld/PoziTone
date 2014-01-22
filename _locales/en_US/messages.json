@@ -4,7 +4,7 @@
   }
   ,
   "poziToolDescription": {
-    "message": "Displays info about currently played track on Online Radio 101.ru via small popup window."
+    "message": "Displays info about currently played track on Online Radio 101.ru via small popup window + player control buttons + hotkeys."
   }
   ,
   "poziBrowserActionTitle": {

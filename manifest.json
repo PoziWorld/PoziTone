@@ -4,10 +4,10 @@
   , "default_locale"            : "ru"
   , "name"                      : "__MSG_poziToolName__"
   , "description"               : "__MSG_poziToolDescription__"
-  , "version"                   : "0.0.1.0"
+  , "version"                   : "0.0.1.1"
 
   , "icons"                     : {
-                                      "64"            : "img/pozitone.png"
+                                      "64"              : "img/pozitone.png"
                                   }
 
   , "permissions"               : [
@@ -17,22 +17,48 @@
                                     , "tabs"
                                   ]
   , "browser_action"            : {
-                                      "default_icon"  : "img/pozitone.png"
-                                    , "default_title" : "__MSG_poziBrowserActionTitle__"
+                                      "default_icon"      : "img/pozitone.png"
+                                    , "default_title"     : "__MSG_poziBrowserActionTitle__"
+                                  }
+  , "commands"                  : {
+                                      "add"               : {
+                                          "suggested_key" : {
+                                            "default"     : "Alt+Shift+D"
+                                          }
+                                        , "description"   : "Add track to playlist"
+                                      }
+                                    , "playStop"          : {
+                                          "suggested_key" : {
+                                            "default"     : "Alt+Shift+P"
+                                          }
+                                        , "description"   : "Stop / Play"
+                                      }
+                                    , "muteUnmute"        : {
+                                          "suggested_key" : {
+                                            "default"     : "Alt+Shift+M"
+                                          }
+                                        , "description"   : "Mute / Unmute"
+                                      }
+                                    , "showNotification"  : {
+                                          "suggested_key" : {
+                                            "default"     : "Alt+Shift+Q"
+                                          }
+                                        , "description"   : "Show notification"
+                                      }
                                   }
   , "content_scripts"           : [
                                     {
-                                        "matches"       : [ "http://101.ru/*" ]
-                                      , "js"            : [ 
+                                        "matches"         : [ "http://101.ru/*" ]
+                                      , "js"              : [ 
                                             "js/uppod-player-api.js"
                                           , "js/page-watcher.js"
                                         ]
-                                      , "run_at"        : "document_end"
+                                      , "run_at"          : "document_end"
                                     }
                                   ]
   , "background"                : {
-                                      "persistent"    : false
-                                    , "scripts"       : [
+                                      "persistent"        : false
+                                    , "scripts"           : [
                                           "js/jquery-ajax-css-deprecated-dimensions-effects-event-alias-offset-wrap.min.js"
                                         , "js/global.js"
                                         , "js/background.js"

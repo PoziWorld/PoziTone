@@ -14,12 +14,14 @@
     1.c.                            getPlayerStatus()
     1.d.                            getPlayerVolume()
     1.e.                            getPlayerIntVar()
-    1.f.                            processButtonClickAdd()
-    1.g.                            processButtonClickFavorite()
-    1.h.                            processButtonClickPlayStop()
-    1.i.                            processButtonClickMute()
-    1.j.                            processButtonClickUnmute()
+    1.f.                            processButtonClick_add()
+    1.g.                            processButtonClick_favorite()
+    1.h.                            processButtonClick_playStop()
+    1.i.                            processButtonClick_mute()
+    1.j.                            processButtonClick_unmute()
     1.k.                            sendSameMessage()
+    1.l.                            processCommand_muteUnmute()
+    1.m.                            processCommand_showNotification()
   2.                              Listeners
     2.a.                            titlesong DOMCharacterDataModified
     2.b.                            runtime.onMessage
@@ -166,7 +168,7 @@ var PageWatcher = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  processButtonClickAdd : function() {
+  processButtonClick_add : function() {
     document.getElementById( 'addfavoritetracksfromair' ).click();
   }
   ,
@@ -180,7 +182,7 @@ var PageWatcher = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  processButtonClickFavorite : function() {
+  processButtonClick_favorite : function() {
     document.getElementById( 'polltrackaction' ).click();
   }
   ,
@@ -194,7 +196,7 @@ var PageWatcher = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  processButtonClickPlayStop : function() {
+  processButtonClick_playStop : function() {
     PageWatcher.$playStopButton.click();
     PageWatcher.sendSameMessage();
   }
@@ -209,7 +211,7 @@ var PageWatcher = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  processButtonClickMute : function() {
+  processButtonClick_mute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) { // If MP3
       // Uppod JS API doesn't provide "mute" method, emulate it by saving current value
       PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
@@ -231,7 +233,7 @@ var PageWatcher = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  processButtonClickUnmute : function() {
+  processButtonClick_unmute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
       // Uppod JS API doesn't provide "unmute" method, restore prev value
       playerAPI.Uppod.uppodSend( 'radioplayer_sm', 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
@@ -260,6 +262,41 @@ var PageWatcher = {
         , objStationInfo            : PageWatcher.objStationInfo
       }
     );
+  }
+  ,
+
+  /**
+   * 1.l.
+   *
+   * If volume is not 0, then mute; otherwise unmute;
+   * TODO: Create general muteUnmute, and use it here and for button click.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processCommand_muteUnmute : function() {
+    PageWatcher.getPlayerVolume();
+
+    if ( PageWatcher.objPlayerInfo.intVolume !== 0 )
+      PageWatcher.processButtonClick_mute();
+    else
+      PageWatcher.processButtonClick_unmute();
+  }
+  ,
+
+  /**
+   * 1.m.
+   *
+   * If volume is not 0, then mute; otherwise unmute;
+   * TODO: Don't use 'processCommand_showNotification', just 'sendSameMessage' from sender.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processCommand_showNotification : function() {
+    PageWatcher.sendSameMessage();
   }
 };
 
@@ -305,12 +342,12 @@ document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener(
  * @return  void
  **/
 chrome.runtime.onMessage.addListener(
-  function( objMessage, objSender, sendResponse ) {
-    // Debug
-    console.log( 'PageWatcher onMessage' );
-    console.log( objMessage );
+  function( strMessage, objSender, sendResponse ) {
 
-    var funcToProceedWith = PageWatcher[ objMessage ];
+    // Debug
+    console.log( 'PageWatcher onMessage: ' + strMessage );
+
+    var funcToProceedWith = PageWatcher[ strMessage ];
 
     if ( typeof funcToProceedWith === 'function' )
       funcToProceedWith();
