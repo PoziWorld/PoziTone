@@ -121,15 +121,15 @@ Features
 
 *	**Simple actions**
 
-	_Want everything easy as one, two, three?_
-	Control the main actions with a help of "[hotkeys](#Hotkeys)"! And you don't need to open anything!
+	_Want everything as easy as one, two, three?_
+	Control the main actions with a help of "[hotkeys](#hotkeys)"! And you don't need to open anything!
 
 
 Installation
 --------
 
-1. Download [last available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
-2. Extract to any folder.
+1. Download [latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
+2. Extract it to any folder.
 3. Open "Customize and control Google Chrome" menu, go to Tools, then Extensions.
 4. Checkmark "Developer mode".
 5. Click on "Load unpacked extension...", choose the folder from step 2, click "OK".
@@ -144,7 +144,7 @@ Open any station that you like from [Stations list](http://101.ru/?an=port_allch
 
 Every track change `PoziTone` is in its glory for you. :)
 
-Also don't forget to interact with `PoziTone` via [hotkeys](#Hotkeys)!
+Also don't forget to interact with `PoziTone` via [hotkeys](#hotkeys)!
 
 
 Hotkeys
@@ -162,7 +162,7 @@ Limitations
 1. Maximum 2 buttons on the pop-up notification at one time (set by Google).
 2. Maximum 4 hotkeys (set by Google).
 3. Hotkeys work only in an active window of that Chrome user where an extension installed (set by Google).
-4. When multiple 101.ru tabs open under one Chrome user, hotkeys work only for the last open tab.
+4. When multiple 101.ru tabs open under one Chrome user, hotkeys work only for the last opened tab.
 
 
 Gratitude
