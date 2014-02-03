@@ -310,6 +310,7 @@ var PageWatcher = {
  * 2.a.
  *
  * Watches track info changes and sends them to Background
+ * TODO: Add check if this element exists
  *
  * @type    method
  * @param   objEvent
@@ -342,7 +343,7 @@ document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener(
  * @return  void
  **/
 chrome.runtime.onMessage.addListener(
-  function( strMessage, objSender, sendResponse ) {
+  function( strMessage, objSender, funcSendResponse ) {
 
     // Debug
     console.log( 'PageWatcher onMessage: ' + strMessage );
@@ -351,5 +352,7 @@ chrome.runtime.onMessage.addListener(
 
     if ( typeof funcToProceedWith === 'function' )
       funcToProceedWith();
+    else if ( strMessage === 'Do you copy?' )
+      funcSendResponse( 'Copy that.' );
   }
 );

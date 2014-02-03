@@ -16,6 +16,7 @@
     2.b.                            browserAction.onClicked
     2.c.                            notifications.onButtonClicked
     2.d.                            commands.onCommand
+    2.e.                            runtime.onInstalled
   3.                              On Load
     3.a.                            Inject Page Watcher
     3.b.                            Initialize extension defaults
@@ -42,7 +43,6 @@ var Background = {
    * @return  void
    **/
   init : function() {
-    Background.setExtensionDefaults();
   }
   ,
 
@@ -58,14 +58,15 @@ var Background = {
   setExtensionDefaults : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
       var
-          objTemp                   = {}
+          objTemp                                   = {}
           // TODO: Get defaults from Global
-        , objSettingsDefaults       = {
+        , objSettingsDefaults                       = {
               boolShowNotificationWhenStopped       : false
             , boolShowNotificationWhenMuted         : false
             , boolShowNotificationWhenNoTrackInfo   : false
             , strNotificationTitleFormat            : 'short'
             , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
+            , objOpenTabs                           : {}
           }
         ;
 
@@ -150,8 +151,11 @@ chrome.runtime.onMessage.addListener(
  **/
 chrome.browserAction.onClicked.addListener(
   function( objCurrentTab ) {
-    if ( typeof Global.objOpenTab.windowId === 'number' && typeof Global.objOpenTab.index === 'number' )
-      chrome.tabs.highlight( { windowId: Global.objOpenTab.windowId, tabs: [ Global.objOpenTab.index ] }, function() {} );
+    var funcHighlightTab = function( intWindowId, intTabIndex ) {
+      chrome.tabs.highlight( { windowId: intWindowId, tabs: [ intTabIndex ] }, function() {} );
+    };
+
+    Global.findFirstOpenTabInvokeCallback( funcHighlightTab );
   }
 );
 
@@ -169,15 +173,20 @@ chrome.browserAction.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
-    var
-        arrButton   = Global.objSettingsDefaults.arrNotificationButtons.arrActiveButtons[ intButtonIndex ].split( '|' )
-      , intTabId    = parseInt( strNotificationId.replace( Global.strNotificationId, '' ) )
-      ;
+    var intTabId = parseInt( strNotificationId.replace( Global.strNotificationId, '' ) );
 
-    chrome.tabs.sendMessage(
-        intTabId
-      , 'processButtonClick_' + Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
-    );
+    chrome.storage.sync.get( 'arrActiveButtons', function( objReturn ) {
+      // Debug
+      console.log( 'Background get arrActiveButtons' );
+      console.log( objReturn );
+
+      var arrButton = objReturn.arrActiveButtons[ intButtonIndex ].split( '|' );
+
+      chrome.tabs.sendMessage(
+          intTabId
+        , 'processButtonClick_' + Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+      );
+    });
   }
 );
 
@@ -205,10 +214,37 @@ chrome.commands.onCommand.addListener(
     if ( strCommand === 'add' || strCommand === 'playStop' )
       strMessagePrefix = 'processButtonClick_';
 
-    chrome.tabs.sendMessage(
-        Global.objOpenTab.id
-      , strMessagePrefix + strCommand
-    );
+    var funcSendMessage = function( intWindowId, intTabIndex, intTabId ) {
+      chrome.tabs.sendMessage(
+          intTabId
+        , strMessagePrefix + strCommand
+      );
+    };
+
+    Global.findFirstOpenTabInvokeCallback( funcSendMessage );
+  }
+);
+
+/**
+ * 2.e.
+ *
+ * Fired when the extension is first installed, 
+ * when the extension is updated to a new version, 
+ * and when Chrome is updated to a new version.
+ *
+ * @type    method
+ * @param   objDetails
+ *            Reason event is being dispatched, previous version
+ * @return  void
+ **/
+chrome.runtime.onInstalled.addListener(
+  function( objDetails ) {
+
+    // Debug
+    console.log( 'Background onInstalled' );
+    console.log( objDetails );
+
+    Background.setExtensionDefaults();
   }
 );
 
@@ -221,7 +257,8 @@ chrome.commands.onCommand.addListener(
 /**
  * 3.a.
  *
- * Checks whether tab is open. If yes, injects Page Watcher
+ * Checks whether tab is open. 
+ * If yes, injects Page Watcher.
  *
  * @type    method
  * @param   objMessage
@@ -231,16 +268,36 @@ chrome.commands.onCommand.addListener(
  * @return  void
  **/
 chrome.tabs.query( {}, function( tabs ) {
+  var objOpenTabs = {};
+
   for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
     if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
       console.log( 'Found open PoziTab: ' + objTab.url );
-      Global.saveOpenTabObj( objTab ); // TODO: Multiple open 101.ru pages will overwrite this
-      chrome.tabs.executeScript( objTab.id, { file: '/js/page-watcher.js' } );
-      return true;
+
+      var
+          intWindowId = objTab.windowId
+        , intTabId    = objTab.id
+        ;
+
+      // If there are no open tabs for this windowId saved yet
+      if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) === true )
+        objOpenTabs[ objTab.windowId ] = {};
+
+      objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
+
+      chrome.tabs.sendMessage( intTabId, 'Do you copy?', function( strResponse ) {
+        if ( strResponse !== 'Copy that.' ) {
+          chrome.tabs.executeScript( intTabId, { file: '/js/uppod-player-api.js' } );
+          chrome.tabs.executeScript( intTabId, { file: '/js/page-watcher.js' } );
+        }
+      });
     }
   }
-  console.log( 'Could not find open PoziTab.' );
-  return false;
+
+  if ( Global.isEmpty( objOpenTabs ) !== true )
+    Global.saveOpenTabs( objOpenTabs );
+  else
+    console.log( 'Could not find open PoziTab.' );
 });
 
 /**

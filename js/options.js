@@ -25,7 +25,6 @@
 
 var Options = {
     intNotificationCount    : 1
-  , objOpenTab              : {}
   , strNotificationId       : 'pozitone'
   , strValidUrl             : '101.ru/'
   ,

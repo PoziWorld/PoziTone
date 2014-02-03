@@ -14,8 +14,9 @@
     1.c.                            showNotificationCallback()
     1.d.                            isValidUrl()
     1.e.                            getValidUrl()
-    1.f.                            saveOpenTabObj()
+    1.f.                            saveOpenTabs()
     1.g.                            isEmpty()
+    1.h.                            findFirstOpenTabInvokeCallback()
   2.                              On Load
     2.a.                            Initialize defaults
 
@@ -30,7 +31,6 @@
 var Global = {
     intNotificationCount          : 1
   , intNoVolume                   : 0              // Uppod JS API (volume 0-100)
-  , objOpenTab                    : {}
   , strValidUrl                   : '101.ru/'
   , strNotificationId             : 'pozitone_tab' // We'll add tab ID when displaying
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
@@ -43,7 +43,6 @@ var Global = {
       , strNotificationTitleFormat              : { miscDefault : 'short' }
       , arrNotificationButtons                  : {
             miscDefault           : [ 'add', 'muteUnmute' ]
-          , arrActiveButtons      : []
           , add                   : {
                 loggedIn          : {
                     objButton     : {
@@ -179,16 +178,19 @@ var Global = {
               , arrButtons     = objData.arrNotificationButtons
               ;
 
-            if ( strTitleFormat === 'noStationInfo' )
-              objNotificationOptions.title = chrome.i18n.getMessage( 'poziNotificationTitle' );
-            else if ( strTitleFormat === 'short' )
+            if ( strTitleFormat === 'short' )
               objNotificationOptions.title = objTempStationInfo.strStationName;
             else if ( strTitleFormat === 'long' )
               objNotificationOptions.title = objTempStationInfo.strStationNamePlusDesc;
+            else if ( strTitleFormat === 'noStationInfo' )
+              objNotificationOptions.title = chrome.i18n.getMessage( 'poziNotificationTitle' );
 
             if ( arrButtons.length !== 0 ) {
               // Save active buttons for the listener
-              var arrActiveButtons = Global.objSettingsDefaults.arrNotificationButtons.arrActiveButtons = [];
+              var
+                  arrActiveButtons  = []
+                , objTempToSet      = {}
+                ;
 
               objNotificationOptions.buttons = [];
 
@@ -227,6 +229,16 @@ var Global = {
 
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
               }
+
+              // Save in storage for later use
+              objTempToSet.arrActiveButtons = arrActiveButtons;
+              chrome.storage.sync.set( objTempToSet, function() {
+                // Debug
+                chrome.storage.sync.get( null, function(data) {
+                  console.log( 'Global set arrActiveButtons' );
+                  console.log( data );
+                });
+              });
             }
 
             chrome.notifications.create( objThis.strNotificationId + intTabId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
@@ -284,33 +296,113 @@ var Global = {
   /**
    * 1.f.
    *
-   * Saves open tab object for later use
-   * TODO: Use localStorage, so if extension reloaded just check if tab still open rather than loop
+   * Saves open tabs objects for later use
+   * TODO: save on PageWatcher injection
    *
    * @type    method
-   * @param   intId
-   *            Open Tab ID
+   * @param   objOpenTabs
+   *            Object of open tabs
    * @return  void
    **/
-  saveOpenTabObj : function ( objTab )
+  saveOpenTabs : function ( objOpenTabs )
   {
-    this.objOpenTab = objTab;
+    chrome.storage.sync.get( null, function( objSettings ) {
+      // Debug
+      console.log( 'Global saveOpenTabs getSettings' );
+      console.log( objSettings );
+
+      var objToSet = {};
+
+      // Set objOpenTabs only, not all settings
+      objToSet.objOpenTabs = ( typeof objSettings.objOpenTabs !== 'undefined' ) ?
+        objSettings.objOpenTabs
+        :
+        {}
+        ;
+
+      for ( var intWindowId in objOpenTabs ) {
+        if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
+          // If there are no open tabs for this windowId saved yet
+          if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) === true )
+            objToSet.objOpenTabs[ intWindowId ] = {};
+
+          var objTempWindowTabs = objOpenTabs[ intWindowId ];
+
+          for ( var intTabIndex in objTempWindowTabs ) {
+            if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
+              objToSet.objOpenTabs[ intWindowId ][ intTabIndex ] = objTempWindowTabs[ intTabIndex ];
+            }
+          }
+        }
+      }
+
+      if ( Global.isEmpty( objToSet ) !== true )
+        chrome.storage.sync.set( objToSet, function() {
+          // Debug
+          chrome.storage.sync.get( null, function(data) {
+            console.log( 'Global saveOpenTabs' );
+            console.log( data );
+          });
+        });
+    });
   }
   ,
 
   /**
    * 1.g.
    *
-   * Checks whether object is empty
+   * Checks whether object/array is empty
    *
    * @type    method
-   * @param   objObj
+   * @param   objToTest
    *            Object to check against
    * @return  bool
    **/
-  isEmpty : function ( objObj )
+  isEmpty : function ( objToTest )
   {
-    return Object.keys( objObj ).length === 0;
+    for ( var i in objToTest )
+      return false;
+
+    return true;
+  }
+  ,
+
+  /**
+   * 1.h.
+   *
+   * Finds first open tab and invoke callback
+   *
+   * @type    method
+   * @param   funcCallback
+   *            Callback to invoke when open tab found
+   * @return  bool
+   **/
+  findFirstOpenTabInvokeCallback : function ( funcCallback )
+  {
+    chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
+      // Debug
+      console.log( 'Global findFirstOpenTabInvokeCallback' );
+      console.log( objReturn );
+
+      var objOpenTabs = objReturn.objOpenTabs;
+
+      for ( var intWindowId in objOpenTabs ) {
+        if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
+          var objTempWindowTabs = objOpenTabs[ intWindowId ];
+
+          for ( var intTabIndex in objTempWindowTabs ) {
+            if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
+              funcCallback(
+                  parseInt( intWindowId )
+                , parseInt( intTabIndex )
+                , objTempWindowTabs[ intTabIndex ].id
+              );
+              return;
+            }
+          }
+        }
+      }
+    });
   }
 };
 
