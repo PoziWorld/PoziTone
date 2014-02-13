@@ -11,12 +11,12 @@
   1.                              Background
     1.a.                            init()
     1.b.                            setExtensionDefaults()
+    1.c.                            saveLastTrackInfo()
   2.                              Listeners
     2.a.                            runtime.onMessage
-    2.b.                            browserAction.onClicked
-    2.c.                            notifications.onButtonClicked
-    2.d.                            commands.onCommand
-    2.e.                            runtime.onInstalled
+    2.b.                            notifications.onButtonClicked
+    2.c.                            commands.onCommand
+    2.d.                            runtime.onInstalled
   3.                              On Load
     3.a.                            Inject Page Watcher
     3.b.                            Initialize extension defaults
@@ -30,13 +30,14 @@
  ==================================================================================== */
 
 var Background = {
-    strPreviousTrack        : ''
+    strPreviousTrack              : ''
+  , strTrackPlaceholder           : 'Ожидаем следующий трек...'
   ,
 
   /**
    * 1.a.
    *
-   * Initialize defaults
+   * Initialize
    *
    * @type    method
    * @param   No Parameters Taken
@@ -67,6 +68,8 @@ var Background = {
             , strNotificationTitleFormat            : 'short'
             , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
             , objOpenTabs                           : {}
+            , arrLastTracks                         : []
+            , intLastTracksToKeep                   : 10
           }
         ;
 
@@ -82,10 +85,60 @@ var Background = {
         chrome.storage.sync.set( objTemp, function() {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
-            console.log( 'Background setExtensionDefaults' );
-            console.log( objData );
+            console.log( 'Background setExtensionDefaults ', objData );
           });
         });
+    });
+  }
+  ,
+
+  /**
+   * 1.c.
+   *
+   * Save Last Track info
+   *
+   * @type    method
+   * @param   objStationInfo
+   *            Last Track + Station info
+   * @return  void
+   **/
+  saveLastTrackInfo : function( objStationInfo ) {
+    var arrVarsToGet = [ 'arrLastTracks', 'intLastTracksToKeep' ];
+
+    chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
+      var arrLastTracks = objReturn.arrLastTracks;
+
+      // Don't save if already in array
+      if ( arrLastTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( objStationInfo.strTrackInfo ) !== -1 )
+        return;
+
+      var
+          intLastTracksExcess     = arrLastTracks.length - objReturn.intLastTracksToKeep
+        , intLastTracksToRemove   = ( intLastTracksExcess < 0 ? -1 : intLastTracksExcess ) + 1
+        , arrTempLastTrack        = []
+        ;
+
+      arrLastTracks.splice( 0, intLastTracksToRemove );
+
+      // Using array instead of object because of QUOTA_BYTES_PER_ITEM
+      // https://developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
+      arrTempLastTrack[ 0 ] = objStationInfo.strTrackInfo;
+      arrTempLastTrack[ 1 ] = objStationInfo.strStationName;
+      arrTempLastTrack[ 2 ] = objStationInfo.strLogoUrl;
+
+      arrLastTracks.push( arrTempLastTrack );
+
+      chrome.storage.sync.set( objReturn, function() {
+        if ( chrome.runtime.lastError ) {
+          // Debug
+          console.log( 'Can\'t save Last Track info' );
+        }
+
+        // Debug
+        chrome.storage.sync.get( null, function( objData ) {
+          console.log( 'Background new track to arrLastTracks ', objData );
+        });
+      });
     });
   }
 };
@@ -113,14 +166,15 @@ chrome.runtime.onMessage.addListener(
     var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
 
     // Debug
-    console.log( 'Background onMessage' );
-    console.log( objMessage );
+    console.log( 'Background onMessage ', objMessage );
 
     // Show notification if track info changed or extension asks to show it again
     // (set of buttons needs to be changed, for example)
     if (
-          strTrackInfo !== '' && strTrackInfo !== Background.strPreviousTrack 
-      ||  objMessage.boolDisregardSameMessage === true
+              strTrackInfo !== ''
+          &&  strTrackInfo !== Background.strPreviousTrack 
+          &&  strTrackInfo !== Background.strTrackPlaceholder 
+          ||  objMessage.boolDisregardSameMessage === true
       ) {
       Global.showNotification(
           objMessage.boolUserLoggedIn
@@ -133,34 +187,13 @@ chrome.runtime.onMessage.addListener(
       Background.strPreviousTrack = strTrackInfo;
     }
     else { // Debug
-      console.log( 'Previous Track: ' + Background.strPreviousTrack );
-      console.log( 'Current Track: ' + strTrackInfo );
+      console.log( 'Don\'t show notification. Current Track: ' + strTrackInfo );
     }
   }
 );
 
 /**
  * 2.b.
- *
- * Activates the Tab when clicked on browser icon
- *
- * @type    method
- * @param   objCurrentTab
- *            Current tab details
- * @return  void
- **/
-chrome.browserAction.onClicked.addListener(
-  function( objCurrentTab ) {
-    var funcHighlightTab = function( intWindowId, intTabIndex ) {
-      chrome.tabs.highlight( { windowId: intWindowId, tabs: [ intTabIndex ] }, function() {} );
-    };
-
-    Global.findFirstOpenTabInvokeCallback( funcHighlightTab );
-  }
-);
-
-/**
- * 2.c.
  *
  * Listens for buttons clicks from notification
  *
@@ -177,8 +210,7 @@ chrome.notifications.onButtonClicked.addListener(
 
     chrome.storage.sync.get( 'arrActiveButtons', function( objReturn ) {
       // Debug
-      console.log( 'Background get arrActiveButtons' );
-      console.log( objReturn );
+      console.log( 'Background get arrActiveButtons ', objReturn );
 
       var arrButton = objReturn.arrActiveButtons[ intButtonIndex ].split( '|' );
 
@@ -191,7 +223,7 @@ chrome.notifications.onButtonClicked.addListener(
 );
 
 /**
- * 2.d.
+ * 2.c.
  *
  * Listens for hotkeys
  *
@@ -226,7 +258,7 @@ chrome.commands.onCommand.addListener(
 );
 
 /**
- * 2.e.
+ * 2.d.
  *
  * Fired when the extension is first installed, 
  * when the extension is updated to a new version, 
@@ -241,8 +273,7 @@ chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
 
     // Debug
-    console.log( 'Background onInstalled' );
-    console.log( objDetails );
+    console.log( 'Background onInstalled ', objDetails );
 
     Background.setExtensionDefaults();
   }

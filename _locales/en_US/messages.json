@@ -15,24 +15,37 @@
     "message": "101.ru - Online Radio"
   }
   ,
+  "poziNotificationButtonsAddLoggedInTitle": {
+    "message": "Add track to playlist"
+  }
+  ,
+  "poziNotificationButtonsFavoriteLoggedInTitle": {
+    "message": "I like it!"
+  }
+  ,
+  "poziNotificationButtonsPlayTitle": {
+    "message": "Play"
+  }
+  ,
+  "poziNotificationButtonsStopTitle": {
+    "message": "Stop"
+  }
+  ,
+  "poziNotificationButtonsMuteTitle": {
+    "message": "Mute"
+  }
+  ,
+  "poziNotificationButtonsUnmuteTitle": {
+    "message": "Unmute"
+  }
+
+  ,
   "poziOptionsPageTitle": {
     "message": "PoziTone Options"
   }
     ,
     "poziOptionsPageNavSettings": {
       "message": "Settings"
-    }
-    ,
-    "poziOptionsPageNavSettingsH1": {
-      "message": "Settings"
-    }
-    ,
-    "poziOptionsPageNavFaq": {
-      "message": "FAQ"
-    }
-    ,
-    "poziOptionsPageNavAbout": {
-      "message": "About"
     }
       ,
       "poziOptionsPageSettingsH1": {
@@ -93,29 +106,25 @@
         "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
           "message": "Mute / Unmute"
         }
+    ,
+    "poziOptionsPageNavFaq": {
+      "message": "FAQ"
+    }
+    ,
+    "poziOptionsPageNavAbout": {
+      "message": "About"
+    }
 
   ,
-  "poziNotificationButtonsAddLoggedInTitle": {
-    "message": "Add track to playlist"
+  "poziPopupPageTitle": {
+    "message": "PoziTone"
   }
-  ,
-  "poziNotificationButtonsFavoriteLoggedInTitle": {
-    "message": "I like it!"
-  }
-  ,
-  "poziNotificationButtonsPlayTitle": {
-    "message": "Play"
-  }
-  ,
-  "poziNotificationButtonsStopTitle": {
-    "message": "Stop"
-  }
-  ,
-  "poziNotificationButtonsMuteTitle": {
-    "message": "Mute"
-  }
-  ,
-  "poziNotificationButtonsUnmuteTitle": {
-    "message": "Unmute"
-  }
+    ,
+    "poziPopupPageNavLastTracks": {
+      "message": "Last Tracks"
+    }
+      ,
+      "poziPopupPageNavLastTracksH1": {
+        "message": "Last Tracks"
+      }
 }

@@ -1,0 +1,50 @@
+/* ====================================================================================
+
+  Product                 :           PoziTone
+  Author                  :           PoziWorld
+  Copyright               :           Copyright (c) 2013 PoziWorld
+  File                    :           css/popup.css
+  Description             :           Popup Styles
+
+  Table of Contents:
+
+  0.                              Content
+
+==================================================================================== */
+
+/* ====================================================================================
+
+  0.                              Content
+
+==================================================================================== */
+
+  #content
+    {
+      min-width:              50em;
+      max-width:              50em;
+    }
+  #lastTracks
+    {
+      margin:                 1.4em 0 1.4em 1.8em;
+    }
+  #lastTracks li
+    {
+      line-height:            normal;
+      margin:                 0 0 .5em;
+    }
+  #lastTracks img
+    {
+      display:                inline-block;
+      vertical-align:         top;
+      width:                  3.2em;
+      height:                 3.2em;
+    }
+  #lastTracks span
+    {
+      display:                inline-block;
+      vertical-align:         top;
+      font-size:              1.2em;
+      line-height:            1.5em;
+      padding:                .7em 0 0 .55em;
+      max-width:              35em;
+    }

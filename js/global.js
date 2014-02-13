@@ -100,7 +100,7 @@ var Global = {
   /**
    * 1.a.
    *
-   * Initialize defaults
+   * Initialize
    *
    * @type    method
    * @param   No Parameters Taken
@@ -234,14 +234,17 @@ var Global = {
               objTempToSet.arrActiveButtons = arrActiveButtons;
               chrome.storage.sync.set( objTempToSet, function() {
                 // Debug
-                chrome.storage.sync.get( null, function(data) {
-                  console.log( 'Global set arrActiveButtons' );
-                  console.log( data );
+                chrome.storage.sync.get( null, function( objData ) {
+                  console.log( 'Global set arrActiveButtons ', objData );
                 });
               });
             }
 
-            chrome.notifications.create( objThis.strNotificationId + intTabId, objNotificationOptions, objThis.showNotificationCallback.bind( objThis ) );
+            chrome.notifications.create( 
+                objThis.strNotificationId + intTabId
+              , objNotificationOptions
+              , function() { Global.showNotificationCallback( objTempStationInfo ) }
+            );
           }
       );
     });
@@ -254,12 +257,15 @@ var Global = {
    * Actions after notification has been displayed
    *
    * @type    method
-   * @param   No Parameters Taken
+   * @param   objStationInfo
+   *            Last Track + Station info
    * @return  void
    **/
-  showNotificationCallback : function() {
-    console.log( 'Successfully created PoziTone Notification # ' + this.intNotificationCount );
-    this.intNotificationCount++;
+  showNotificationCallback : function( objStationInfo ) {
+    console.log( 'Successfully created PoziTone Notification # ' + Global.intNotificationCount );
+    Global.intNotificationCount++;
+
+    Background.saveLastTrackInfo( objStationInfo ); 
   }
   ,
 
@@ -297,7 +303,6 @@ var Global = {
    * 1.f.
    *
    * Saves open tabs objects for later use
-   * TODO: save on PageWatcher injection
    *
    * @type    method
    * @param   objOpenTabs
@@ -306,45 +311,33 @@ var Global = {
    **/
   saveOpenTabs : function ( objOpenTabs )
   {
-    chrome.storage.sync.get( null, function( objSettings ) {
-      // Debug
-      console.log( 'Global saveOpenTabs getSettings' );
-      console.log( objSettings );
+    var objToSet = {};
 
-      var objToSet = {};
+    objToSet.objOpenTabs = {};
 
-      // Set objOpenTabs only, not all settings
-      objToSet.objOpenTabs = ( typeof objSettings.objOpenTabs !== 'undefined' ) ?
-        objSettings.objOpenTabs
-        :
-        {}
-        ;
+    for ( var intWindowId in objOpenTabs ) {
+      if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
+        // If there are no open tabs for this windowId saved yet
+        if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) === true )
+          objToSet.objOpenTabs[ intWindowId ] = {};
 
-      for ( var intWindowId in objOpenTabs ) {
-        if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
-          // If there are no open tabs for this windowId saved yet
-          if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) === true )
-            objToSet.objOpenTabs[ intWindowId ] = {};
+        var objTempWindowTabs = objOpenTabs[ intWindowId ];
 
-          var objTempWindowTabs = objOpenTabs[ intWindowId ];
-
-          for ( var intTabIndex in objTempWindowTabs ) {
-            if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
-              objToSet.objOpenTabs[ intWindowId ][ intTabIndex ] = objTempWindowTabs[ intTabIndex ];
-            }
+        for ( var intTabIndex in objTempWindowTabs ) {
+          if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
+            objToSet.objOpenTabs[ intWindowId ][ intTabIndex ] = objTempWindowTabs[ intTabIndex ];
           }
         }
       }
+    }
 
-      if ( Global.isEmpty( objToSet ) !== true )
-        chrome.storage.sync.set( objToSet, function() {
-          // Debug
-          chrome.storage.sync.get( null, function(data) {
-            console.log( 'Global saveOpenTabs' );
-            console.log( data );
-          });
+    if ( Global.isEmpty( objToSet ) !== true )
+      chrome.storage.sync.set( objToSet, function() {
+        // Debug
+        chrome.storage.sync.get( null, function( objData ) {
+          console.log( 'Global saveOpenTabs ', objData );
         });
-    });
+      });
   }
   ,
 
@@ -381,8 +374,7 @@ var Global = {
   {
     chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
       // Debug
-      console.log( 'Global findFirstOpenTabInvokeCallback' );
-      console.log( objReturn );
+      console.log( 'Global findFirstOpenTabInvokeCallback ', objReturn );
 
       var objOpenTabs = objReturn.objOpenTabs;
 

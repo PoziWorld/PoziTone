@@ -15,24 +15,37 @@
     "message": "101.ru – Онлайн-радио"
   }
   ,
+  "poziNotificationButtonsAddLoggedInTitle": {
+    "message": "Добавить трек в плейлист"
+  }
+  ,
+  "poziNotificationButtonsFavoriteLoggedInTitle": {
+    "message": "Мне нравится!"
+  }
+  ,
+  "poziNotificationButtonsPlayTitle": {
+    "message": "Возобновить воспроизведение"
+  }
+  ,
+  "poziNotificationButtonsStopTitle": {
+    "message": "Остановить воспроизведение"
+  }
+  ,
+  "poziNotificationButtonsMuteTitle": {
+    "message": "Выключить звук"
+  }
+  ,
+  "poziNotificationButtonsUnmuteTitle": {
+    "message": "Включить звук"
+  }
+
+  ,
   "poziOptionsPageTitle": {
     "message": "Настройки PoziTone"
   }
     ,
     "poziOptionsPageNavSettings": {
       "message": "Настройки"
-    }
-    ,
-    "poziOptionsPageNavSettingsH1": {
-      "message": "Настройки"
-    }
-    ,
-    "poziOptionsPageNavFaq": {
-      "message": "Вопросы и ответы"
-    }
-    ,
-    "poziOptionsPageNavAbout": {
-      "message": "О PoziTone"
     }
       ,
       "poziOptionsPageSettingsH1": {
@@ -93,29 +106,25 @@
         "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
           "message": "Выключить/Включить звук"
         }
+    ,
+    "poziOptionsPageNavFaq": {
+      "message": "Вопросы и ответы"
+    }
+    ,
+    "poziOptionsPageNavAbout": {
+      "message": "О PoziTone"
+    }
 
   ,
-  "poziNotificationButtonsAddLoggedInTitle": {
-    "message": "Добавить трек в плейлист"
+  "poziPopupPageTitle": {
+    "message": "PoziTone"
   }
-  ,
-  "poziNotificationButtonsFavoriteLoggedInTitle": {
-    "message": "Мне нравится!"
-  }
-  ,
-  "poziNotificationButtonsPlayTitle": {
-    "message": "Возобновить воспроизведение"
-  }
-  ,
-  "poziNotificationButtonsStopTitle": {
-    "message": "Остановить воспроизведение"
-  }
-  ,
-  "poziNotificationButtonsMuteTitle": {
-    "message": "Выключить звук"
-  }
-  ,
-  "poziNotificationButtonsUnmuteTitle": {
-    "message": "Включить звук"
-  }
+    ,
+    "poziPopupPageNavLastTracks": {
+      "message": "Последние треки"
+    }
+      ,
+      "poziPopupPageNavLastTracksH1": {
+        "message": "Последние треки"
+      }
 }

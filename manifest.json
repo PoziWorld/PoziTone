@@ -4,7 +4,7 @@
   , "default_locale"            : "ru"
   , "name"                      : "__MSG_poziToolName__"
   , "description"               : "__MSG_poziToolDescription__"
-  , "version"                   : "0.0.1.2"
+  , "version"                   : "0.0.1.3"
 
   , "icons"                     : {
                                       "64"              : "img/pozitone.png"
@@ -18,7 +18,8 @@
                                   ]
   , "browser_action"            : {
                                       "default_icon"      : "img/pozitone.png"
-                                    , "default_title"     : "__MSG_poziBrowserActionTitle__"
+                                    , "default_title"     : "__MSG_poziToolName__"
+                                    , "default_popup"     : "html/popup.html"
                                   }
   , "commands"                  : {
                                       "add"               : {

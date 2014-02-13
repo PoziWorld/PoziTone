@@ -59,6 +59,10 @@ var PageWatcher = {
   , objStationInfo              : {
         strStationName          : document.getElementsByTagName( 'h1' )[0].innerText
       , strStationNamePlusDesc  : document.title
+      , strLogoUrl              : document
+                                    .querySelectorAll( '[rel="image_src"]' )[0]
+                                      .href
+                                        .replace( 'http://101.ru/vardata/modules/channel/dynamics/', '' )
       , strTrackInfo            : ''
     }
   ,
