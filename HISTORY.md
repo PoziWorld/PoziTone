@@ -1,5 +1,5 @@
 ### v0.0.1.3
-    * Отображение информации о 10 последних треках при щелчке по значку расширения напротив адресной строки | Showing last 10 tracks information when extension icon next to address bar clicked
+    * Отображение информации о 10 последних треках при щелчке по значку расширения напротив адресной строки | Showing 10 latest tracks information when extension icon next to address bar clicked
 
 ### v0.0.1.2
     * Оптимизация процессов | Process optimization
