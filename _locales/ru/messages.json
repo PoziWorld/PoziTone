@@ -120,11 +120,11 @@
     "message": "PoziTone"
   }
     ,
-    "poziPopupPageNavLastTracks": {
+    "poziPopupPageNavRecentTracks": {
       "message": "Последние треки"
     }
       ,
-      "poziPopupPageNavLastTracksH1": {
+      "poziPopupPageNavRecentTracksH1": {
         "message": "Последние треки"
       }
 }

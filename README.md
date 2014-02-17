@@ -27,7 +27,12 @@ PoziTone
 *	**Простота действий**
 
 	_Хотите всё на "раз-два-три"?_
-	Управляйте основными действиями с помощью "[горячих клавиш](#Горячие-клавиши)"! И не нужно ничего открывать!
+	Управляйте основными действиями с помощью [быстрых клавиш](#Быстрые-клавиши)! И не нужно ничего открывать!
+
+*	**Список последних треков**
+
+	_Что за трек играл 5 минут назад?_
+	`PoziTone` хранит информацию о 10 последних треках.
 
 
 Установка
@@ -39,7 +44,7 @@ PoziTone
 4. Отметьте галочкой "Режим разработчика".
 5. Нажмите "Загрузить распакованное расширение...", выберите папку из шага 2, нажмите "OK".
 
-Если все шаги выполнены верно, PoziTone появится в списке Расширений.
+Если все шаги выполнены верно, `PoziTone` появится в списке Расширений.
 
 
 Демо
@@ -49,10 +54,10 @@ PoziTone
 
 При каждой смене трека `PoziTone` - перед вами в полной красе. :)
 
-Также не забудьте о взаимодействии с `PoziTone` посредством "[горячих клавиш](#Горячие-клавиши)"!
+Также не забудьте о взаимодействии с `PoziTone` посредством [быстрых клавиш](#Быстрые-клавиши)!
 
 
-Горячие клавиши
+Быстрые клавиши
 --------
 
 1. Alt+Shift+D - "Добавить трек в плейлист".
@@ -65,16 +70,16 @@ PoziTone
 --------
 
 1. Максимум 2 кнопки на всплывающем уведомлении одновременно (выставлено Google).
-2. Максимум 4 горячих клавиши (выставлено Google).
-3. Горячие клавиши работают только при активном окне того пользователя Chrome, где установлено расширение (выставлено Google).
-4. Когда открыто несколько вкладок 101.ru под одним пользователем Chrome, горячие клавиши действуют только для последней открытой вкладки.
+2. Максимум 4 [быстрых клавиши](#Быстрые-клавиши) (выставлено Google).
+3. [Быстрые клавиши](#Быстрые-клавиши) работают только при активном окне того пользователя Chrome, где установлено расширение (выставлено Google).
+4. Когда открыто несколько вкладок 101.ru под одним пользователем Chrome, [быстрые клавиши](#Быстрые-клавиши) действуют только для последней открытой вкладки.
 
 
 Благодарности
 --------
 
 - Всем тем, кто дарит нам жизнь и радость!
-- Вдохновителям и тестировщикам `PoziTone`: Дарье, Евгению, Павлу, Станиславу.
+- Вдохновителям и тестировщикам `PoziTone`: Дарье, Евгению, Mel, Павлу, Станиславу.
 - Google, Inc. - за все прекрасные проекты.
 - 101.ru - за возможность бесплатно и легально слушать музыку.
 - Логотип `PoziTone` основан на работе [Webalys](http://www.webalys.com).
@@ -97,7 +102,7 @@ PoziTone
 PoziTone
 =======
 
-`PoziTone` is an extension for Google Chrome browser that makes easy to interact with Online radio 101.ru.
+`PoziTone` is an extension for the Google Chrome browser that makes it easy to interact with the Online radio 101.ru
 
 
 Features
@@ -110,44 +115,48 @@ Features
 
 *	**Easy playback control**
 
-	_Need to answer an important call? Been shared a new video?_
-	Stop/resume music playback in one click from the pop-up notification!
+	_Need to answer an important call or have you had a new video shared?_
+	Stop/resume music playback with one click from the pop-up notification!
 
 *	**Add track to a playlist**
 
 	_Enjoying the track?_
-	Add it to your playlist from the pop-up notification, and you will be able to get back to it later.
-        Or reward DJ's work by clicking on "I like it!"
+	Add it to your playlist from the pop-up notification, and you will be able to get back to it later! You can also reward a DJ's hard work by clicking on "I like it!".
 
 *	**Simple actions**
 
 	_Want everything as easy as one, two, three?_
-	Control the main actions with a help of "[hotkeys](#hotkeys)"! And you don't need to open anything!
+	Control the main actions with the help of [keyboard shortcuts](#keyboard-shortcuts)! You don't need to open anything!
+
+*	**List of recent tracks**
+
+	_Which track played 5 minutes ago?_
+	`PoziTone` keeps information about the last 10 tracks played.
 
 
 Installation
 --------
 
-1. Download [latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
+1. Download the [latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
 3. Open "Customize and control Google Chrome" menu, go to Tools, then Extensions.
 4. Checkmark "Developer mode".
 5. Click on "Load unpacked extension...", choose the folder from step 2, click "OK".
 
-If all the steps done right, PoziTone will appear in the Extensions list.
+If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
 
 
 Demo
 --------
 
-Open any station that you like from [Stations list](http://101.ru/?an=port_allchannels).
+Open any station that you like from the [Stations list](http://101.ru/?an=port_allchannels).
 
-Every track change `PoziTone` is in its glory for you. :)
+With every track change you can see the glory of `PoziTone`! :)
 
-Also don't forget to interact with `PoziTone` via [hotkeys](#hotkeys)!
+Also don't forget to interact with `PoziTone` via [keyboard shortcuts](#keyboard-shortcuts)!
 
 
-Hotkeys
+Keyboard shortcuts
 --------
 
 1. Alt+Shift+D - "Add track to playlist".
@@ -159,21 +168,21 @@ Hotkeys
 Limitations
 --------
 
-1. Maximum 2 buttons on the pop-up notification at one time (set by Google).
-2. Maximum 4 hotkeys (set by Google).
-3. Hotkeys work only in an active window of that Chrome user where an extension installed (set by Google).
-4. When multiple 101.ru tabs open under one Chrome user, hotkeys work only for the last opened tab.
+1. Maximum of 2 buttons on the pop-up notification at any one time (set by Google).
+2. Maximum of 4 [keyboard shortcuts](#keyboard-shortcuts) (set by Google).
+3. [Keyboard shortcuts](#keyboard-shortcuts) only work in an active window of the Chrome user where the extension is installed (set by Google).
+4. [Keyboard shortcuts](#keyboard-shortcuts) only work for the last opened tab when multiple 101.ru tabs are open for the same Google user.
 
 
 Gratitude
 --------
 
 - To all those who give us life and happiness!
-- To the inspirers and testers of `PoziTone`: Darya, Evgeny, Pavel, Stanislav.
-- Google, Inc. - for all excellent projects.
+- To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Pavel, Stanislav.
+- Google, Inc. - for all their excellent projects.
 - 101.ru - for a chance to listen to music for free and legally.
-- `PoziTone` logo based on a work by [Webalys](http://www.webalys.com).
-- The buttons' icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
+- `PoziTone` logo based on works by [Webalys](http://www.webalys.com).
+- The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
 licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 
 

@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013 PoziWorld
+  Copyright               :           Copyright (c) 2013-2014 PoziWorld
   File                    :           js/options.js
   Description             :           Options JavaScript
 

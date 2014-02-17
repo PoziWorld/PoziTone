@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013 PoziWorld
+  Copyright               :           Copyright (c) 2013-2014 PoziWorld
   File                    :           js/popup.js
   Description             :           Popup JavaScript
 
@@ -10,7 +10,7 @@
 
   1.                              Popup
     1.a.                            init()
-    1.b.                            populateLastTracks()
+    1.b.                            populateRecentTracks()
   2.                              Events
 
  ==================================================================================== */
@@ -36,7 +36,7 @@ var Popup = {
    **/
   init : function() {
     Page.localize( 'Popup' );
-    Popup.populateLastTracks();
+    Popup.populateRecentTracks();
   }
   ,
 
@@ -49,27 +49,27 @@ var Popup = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  populateLastTracks : function() {
-    chrome.storage.sync.get( 'arrLastTracks', function( objReturn ) {
+  populateRecentTracks : function() {
+    chrome.storage.sync.get( 'arrRecentTracks', function( objReturn ) {
       var
-          arrLastTracks   = objReturn.arrLastTracks
-        , strHtml         = ''
+          arrRecentTracks   = objReturn.arrRecentTracks
+        , strHtml           = ''
         ;
 
-      for ( var i = ( arrLastTracks.length - 1 ); i > 0; i-- ) {
+      for ( var i = ( arrRecentTracks.length - 1 ); i >= 0; i-- ) {
         strHtml += Popup.template(
-            'lastTrackRow'
+            'recentTrackRow'
           , {
-                track : arrLastTracks[ i ][ 0 ]
-              , src   : Popup.strLogoPath + arrLastTracks[ i ][ 2 ]
-              , alt   : arrLastTracks[ i ][ 1 ]
+                track : arrRecentTracks[ i ][ 0 ]
+              , src   : Popup.strLogoPath + arrRecentTracks[ i ][ 2 ]
+              , alt   : arrRecentTracks[ i ][ 1 ]
             }
         );
       }
       // TODO: Null case
       // if ( strHtml === '' )
 
-      document.getElementById( 'lastTracks' ).innerHTML = strHtml;
+      document.getElementById( 'recentTracks' ).innerHTML = strHtml;
     });
   }
   ,

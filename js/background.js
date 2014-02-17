@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013 PoziWorld
+  Copyright               :           Copyright (c) 2013-2014 PoziWorld
   File                    :           js/background.js
   Description             :           Background JavaScript
 
@@ -11,7 +11,7 @@
   1.                              Background
     1.a.                            init()
     1.b.                            setExtensionDefaults()
-    1.c.                            saveLastTrackInfo()
+    1.c.                            saveRecentTrackInfo()
   2.                              Listeners
     2.a.                            runtime.onMessage
     2.b.                            notifications.onButtonClicked
@@ -58,8 +58,9 @@ var Background = {
    **/
   setExtensionDefaults : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
+      // 1. To set
       var
-          objTemp                                   = {}
+          objTempToSet                              = {}
           // TODO: Get defaults from Global
         , objSettingsDefaults                       = {
               boolShowNotificationWhenStopped       : false
@@ -68,24 +69,48 @@ var Background = {
             , strNotificationTitleFormat            : 'short'
             , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
             , objOpenTabs                           : {}
-            , arrLastTracks                         : []
-            , intLastTracksToKeep                   : 10
+            , arrRecentTracks                       : []
+            , intRecentTracksToKeep                 : 10
           }
         ;
 
       for ( var strSetting in objSettingsDefaults ) {
         if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
           // If a new setting introduced, set its default
-          if ( !objReturn[ strSetting ] )
-            objTemp[ strSetting ] = objSettingsDefaults[ strSetting ];
+          if ( typeof objReturn[ strSetting ] === 'undefined' )
+            objTempToSet[ strSetting ] = objSettingsDefaults[ strSetting ];
         }
       }
 
-      if ( Global.isEmpty( objTemp ) !== true )
-        chrome.storage.sync.set( objTemp, function() {
+      if ( Global.isEmpty( objTempToSet ) !== true )
+        chrome.storage.sync.set( objTempToSet, function() {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
             console.log( 'Background setExtensionDefaults ', objData );
+          });
+        });
+
+      // 2. To remove
+      var
+          arrTempToRemove                           = []
+        , arrSettingsToRemove                       = [
+              'arrLastTracks'
+            , 'intLastTracksToKeep'
+          ]
+        ;
+
+      for ( var i = 0; i < arrSettingsToRemove.length; i++ ) {
+        var strSettingToRemove = arrSettingsToRemove[ i ];
+
+        if ( objReturn[ strSettingToRemove ] )
+          arrTempToRemove.push( strSettingToRemove );
+      }
+
+      if ( Global.isEmpty( arrTempToRemove ) !== true )
+        chrome.storage.sync.remove( arrTempToRemove, function() {
+          // Debug
+          chrome.storage.sync.get( null, function( objData ) {
+            console.log( 'Background setExtensionDefaults remove', objData );
           });
         });
     });
@@ -102,31 +127,31 @@ var Background = {
    *            Last Track + Station info
    * @return  void
    **/
-  saveLastTrackInfo : function( objStationInfo ) {
-    var arrVarsToGet = [ 'arrLastTracks', 'intLastTracksToKeep' ];
+  saveRecentTrackInfo : function( objStationInfo ) {
+    var arrVarsToGet = [ 'arrRecentTracks', 'intRecentTracksToKeep' ];
 
     chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
-      var arrLastTracks = objReturn.arrLastTracks;
+      var arrRecentTracks = objReturn.arrRecentTracks;
 
       // Don't save if already in array
-      if ( arrLastTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( objStationInfo.strTrackInfo ) !== -1 )
+      if ( arrRecentTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( objStationInfo.strTrackInfo ) !== -1 )
         return;
 
       var
-          intLastTracksExcess     = arrLastTracks.length - objReturn.intLastTracksToKeep
-        , intLastTracksToRemove   = ( intLastTracksExcess < 0 ? -1 : intLastTracksExcess ) + 1
-        , arrTempLastTrack        = []
+          intRecentTracksExcess     = arrRecentTracks.length - objReturn.intRecentTracksToKeep
+        , intRecentTracksToRemove   = ( intRecentTracksExcess < 0 ? -1 : intRecentTracksExcess ) + 1
+        , arrTempRecentTrack        = []
         ;
 
-      arrLastTracks.splice( 0, intLastTracksToRemove );
+      arrRecentTracks.splice( 0, intRecentTracksToRemove );
 
       // Using array instead of object because of QUOTA_BYTES_PER_ITEM
       // https://developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
-      arrTempLastTrack[ 0 ] = objStationInfo.strTrackInfo;
-      arrTempLastTrack[ 1 ] = objStationInfo.strStationName;
-      arrTempLastTrack[ 2 ] = objStationInfo.strLogoUrl;
+      arrTempRecentTrack[ 0 ] = objStationInfo.strTrackInfo;
+      arrTempRecentTrack[ 1 ] = objStationInfo.strStationName;
+      arrTempRecentTrack[ 2 ] = objStationInfo.strLogoUrl;
 
-      arrLastTracks.push( arrTempLastTrack );
+      arrRecentTracks.push( arrTempRecentTrack );
 
       chrome.storage.sync.set( objReturn, function() {
         if ( chrome.runtime.lastError ) {
@@ -136,7 +161,7 @@ var Background = {
 
         // Debug
         chrome.storage.sync.get( null, function( objData ) {
-          console.log( 'Background new track to arrLastTracks ', objData );
+          console.log( 'Background new track to arrRecentTracks ', objData );
         });
       });
     });

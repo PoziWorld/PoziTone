@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013 PoziWorld
+  Copyright               :           Copyright (c) 2013-2014 PoziWorld
   File                    :           js/global.js
   Description             :           Global JavaScript
 
@@ -265,7 +265,7 @@ var Global = {
     console.log( 'Successfully created PoziTone Notification # ' + Global.intNotificationCount );
     Global.intNotificationCount++;
 
-    Background.saveLastTrackInfo( objStationInfo ); 
+    Background.saveRecentTrackInfo( objStationInfo ); 
   }
   ,
 
