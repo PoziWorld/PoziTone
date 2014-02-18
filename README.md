@@ -137,7 +137,7 @@ Features
 Installation
 --------
 
-1. Download the [latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
+1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
 3. Open "Customize and control Google Chrome" menu, go to Tools, then Extensions.
 4. Checkmark "Developer mode".

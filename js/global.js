@@ -18,7 +18,7 @@
     1.g.                            isEmpty()
     1.h.                            findFirstOpenTabInvokeCallback()
   2.                              On Load
-    2.a.                            Initialize defaults
+    2.a.                            Initialize
 
  ==================================================================================== */
 
@@ -407,7 +407,7 @@ var Global = {
 /**
  * 2.a.
  *
- * Initialize defaults on load
+ * Initialize
  *
  * @type    method
  * @param   No Parameters taken

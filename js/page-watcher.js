@@ -25,6 +25,8 @@
   2.                              Listeners
     2.a.                            titlesong DOMCharacterDataModified
     2.b.                            runtime.onMessage
+  3.                              On Load
+    3.a.                            Initialize
 
  ==================================================================================== */
 
@@ -48,6 +50,8 @@ var PageWatcher = {
   , strTrackInfoContainerId     : 'titlesong'
   , strPlayerId                 : 'radioplayer_sm' // Set by 101
 
+  , boolHadPlayedBefore         : false
+
   , boolDisregardSameMessage    : false
 
   , objPlayerInfo               : {
@@ -63,20 +67,50 @@ var PageWatcher = {
                                     .querySelectorAll( '[rel="image_src"]' )[0]
                                       .href
                                         .replace( 'http://101.ru/vardata/modules/channel/dynamics/', '' )
-      , strTrackInfo            : ''
+      , strTrackInfo            : document.getElementById( 'titlesong' ).innerText
     }
   ,
 
   /**
    * 1.a.
    *
-   * Initialize defaults
+   * Initialize
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   init : function() {
+    // WMA player has 'stop' class by default (it's in Play mode),
+    // so mutation doesn't happen on page load
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === false )
+      PageWatcher.boolHadPlayedBefore = true;
+
+    var
+        MutationObserver  = window.MutationObserver || window.WebKitMutationObserver
+      , observer          = new MutationObserver( function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            if ( arrMutations[ i ].type === 'attributes' ) {
+              if ( PageWatcher.getPlayerStatus( true ) === 'stop' ) {
+                PageWatcher.boolHadPlayedBefore = true;
+                PageWatcher.sendSameMessage();
+              }
+              else if (
+                    PageWatcher.getPlayerStatus( true ) === 'play'
+                &&  PageWatcher.boolHadPlayedBefore === true
+              ) {
+                PageWatcher.sendSameMessage();
+              }
+
+              return;
+            }
+          };
+        });
+
+    observer.observe(
+        PageWatcher.$playStopButton
+      , { attributes: true }
+    );
   }
   ,
 
@@ -103,10 +137,11 @@ var PageWatcher = {
    * Gets player status from Play/Stop Button class attr
    *
    * @type    method
-   * @param   No Parameters Taken
-   * @return  void
+   * @param   boolReturnStatus
+   *            Return status or not
+   * @return  void / string
    **/
-  getPlayerStatus : function() {
+  getPlayerStatus : function( boolReturnStatus ) {
     if ( document.contains( PageWatcher.$playStopButton ) ) {
       // .search() is faster than for () - http://jsperf.com/for-loop-or-search-regexp
       var
@@ -118,6 +153,9 @@ var PageWatcher = {
         ;
 
       PageWatcher.objPlayerInfo.strStatus = strWantedClass;
+
+      if ( typeof boolReturnStatus !== 'undefined' )
+        return strWantedClass;
     }
   }
   ,
@@ -195,6 +233,7 @@ var PageWatcher = {
    * 1.h.
    *
    * Simulate "Play/Stop" player method
+   * Don't send message because Mutation Observer takes care of it
    *
    * @type    method
    * @param   No Parameters Taken
@@ -202,7 +241,6 @@ var PageWatcher = {
    **/
   processButtonClick_playStop : function() {
     PageWatcher.$playStopButton.click();
-    PageWatcher.sendSameMessage();
   }
   ,
 
@@ -315,6 +353,7 @@ var PageWatcher = {
  *
  * Watches track info changes and sends them to Background
  * TODO: Add check if this element exists
+ * TODO: Mutation events deprecated...
  *
  * @type    method
  * @param   objEvent
@@ -360,3 +399,20 @@ chrome.runtime.onMessage.addListener(
       funcSendResponse( 'Copy that.' );
   }
 );
+
+/* ====================================================================================
+
+  3.                              On Load
+
+ ==================================================================================== */
+
+/**
+ * 3.a.
+ *
+ * Initialize
+ *
+ * @type    method
+ * @param   No Parameters taken
+ * @return  void
+ **/
+PageWatcher.init();

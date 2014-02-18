@@ -31,7 +31,12 @@
 
 var Background = {
     strPreviousTrack              : ''
-  , strTrackPlaceholder           : 'Ожидаем следующий трек...'
+  , arrTrackInfoPlaceholders      : [
+      , ''
+      , '...'
+      , 'Ожидаем следующий трек...'
+      , 'Ждём название трека...'
+    ]
   ,
 
   /**
@@ -196,9 +201,8 @@ chrome.runtime.onMessage.addListener(
     // Show notification if track info changed or extension asks to show it again
     // (set of buttons needs to be changed, for example)
     if (
-              strTrackInfo !== ''
-          &&  strTrackInfo !== Background.strPreviousTrack 
-          &&  strTrackInfo !== Background.strTrackPlaceholder 
+              Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
+          &&  strTrackInfo !== Background.strPreviousTrack
           ||  objMessage.boolDisregardSameMessage === true
       ) {
       Global.showNotification(

@@ -1,3 +1,8 @@
+### v0.0.1.5
+    * Сохранение информации о треке, который в эфире при загрузке страницы | Saving an on air track on the page load
+    * Сохранение информации о новом треке, если воспроизведение было остановлено до него и отключено отображение уведомлений при остановке | Saving a new track information if playback was stopped before that and the notification showing when stopped is disabled
+    * Показ уведомления, если воспроизведение остановлено/возобновлено со страницы (без помощи PoziTone) | Showing the notification if playback is stopped/resumed from the page (without the help of PoziTone)
+
 ### v0.0.1.4
     * Исправлена ошибка: список последних треков не отображался, если он состоял только из одной записи | Fixed a bug: list of recent tracks wouldn't show up if it had only one record
     * Горячие клавиши => Быстрые клавиши | Hotkeys => Keyboard shortcuts
