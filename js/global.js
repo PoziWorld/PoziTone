@@ -36,6 +36,14 @@ var Global = {
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
+
+  // Don't show these buttons, if they have been clicked for this track already
+  , arrAddTrackToPlaylistFeedback : [
+        chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+      , chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
+    ]
+  , strFavoriteStatusSuccess      : chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
+
   , objSettingsDefaults           : {
         boolShowNotificationWhenStopped         : { miscDefault : false }
       , boolShowNotificationWhenMuted           : { miscDefault : false }
@@ -189,26 +197,36 @@ var Global = {
               // Save active buttons for the listener
               var
                   arrActiveButtons  = []
+                , arrTrackInfo      = objTempStationInfo.strTrackInfo.split( "\n\n" )
                 , objTempToSet      = {}
                 ;
 
               objNotificationOptions.buttons = [];
 
-              // TODO: Combine all following buttons' check into one
-              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn === true ) {
-                objNotificationOptions.buttons.push(
-                  Global.objSettingsDefaults.arrNotificationButtons.add.loggedIn.objButton
-                );
+              // TODO: Combine all following buttons check into one
 
-                arrActiveButtons.push( 'add|loggedIn' );
+              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn === true ) {
+                // Don't show button, if track is in playlist
+                // TODO: Show if track changed while waited for server response
+                if ( Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) === -1 ) {
+                  objNotificationOptions.buttons.push(
+                    Global.objSettingsDefaults.arrNotificationButtons.add.loggedIn.objButton
+                  );
+
+                  arrActiveButtons.push( 'add|loggedIn' );
+                }
               }
 
               if ( arrButtons.indexOf( 'favorite' ) !== -1 && boolUserLoggedIn === true ) {
-                objNotificationOptions.buttons.push(
-                  Global.objSettingsDefaults.arrNotificationButtons.favorite.loggedIn.objButton
-                );
+                // Don't show button, if liked this track already
+                // TODO: Show if track changed while waited for server response
+                if ( Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) === -1 ) {
+                  objNotificationOptions.buttons.push(
+                    Global.objSettingsDefaults.arrNotificationButtons.favorite.loggedIn.objButton
+                  );
 
-                arrActiveButtons.push( 'favorite|loggedIn' );
+                  arrActiveButtons.push( 'favorite|loggedIn' );
+                }
               }
 
               if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {

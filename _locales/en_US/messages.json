@@ -18,10 +18,22 @@
   "poziNotificationButtonsAddLoggedInTitle": {
     "message": "Add track to playlist"
   }
+    ,
+    "poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+      "message": "Successfully added track to playlist"
+    }
+    ,
+    "poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+      "message": "Track already in your playlist"
+    }
   ,
   "poziNotificationButtonsFavoriteLoggedInTitle": {
     "message": "I like it!"
   }
+    ,
+    "poziNotificationFavoriteStatusSuccess": {
+      "message": "Thank you for rewarding a DJ's hard work!"
+    }
   ,
   "poziNotificationButtonsPlayTitle": {
     "message": "Play"
@@ -30,14 +42,34 @@
   "poziNotificationButtonsStopTitle": {
     "message": "Stop"
   }
+    ,
+    "poziNotificationPlayerStatusChangeStarted": {
+      "message": "Playback started"
+    }
+    ,
+    "poziNotificationPlayerStatusChangeStopped": {
+      "message": "Playback stopped"
+    }
+    ,
+    "poziNotificationPlayerStatusChangeResumed": {
+      "message": "Playback resumed"
+    }
   ,
   "poziNotificationButtonsMuteTitle": {
     "message": "Mute"
   }
+    ,
+    "poziNotificationButtonsMuteFeedback": {
+      "message": "Muted"
+    }
   ,
   "poziNotificationButtonsUnmuteTitle": {
     "message": "Unmute"
   }
+    ,
+    "poziNotificationButtonsUnmuteFeedback": {
+      "message": "Unmuted"
+    }
 
   ,
   "poziOptionsPageTitle": {

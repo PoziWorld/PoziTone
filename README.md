@@ -1,7 +1,7 @@
 PoziTone
 =======
 
-`PoziTone` - расширение для браузера Google Chrome, которое облегчает взаимодействие с Онлайн-радио 101.ru.
+Расширение для браузера Google Chrome, которое облегчает взаимодействие с Онлайн-радио 101.ru.
 
 
 Особенности
@@ -102,7 +102,7 @@ PoziTone
 PoziTone
 =======
 
-`PoziTone` is an extension for the Google Chrome browser that makes it easy to interact with the Online radio 101.ru
+An extension for the Google Chrome browser that makes it easy to interact with the Online radio 101.ru.
 
 
 Features

@@ -18,10 +18,22 @@
   "poziNotificationButtonsAddLoggedInTitle": {
     "message": "Добавить трек в плейлист"
   }
+    ,
+    "poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+      "message": "Трек успешно добавлен в плейлист"
+    }
+    ,
+    "poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+      "message": "Данный трек уже есть в Вашем плейлисте"
+    }
   ,
   "poziNotificationButtonsFavoriteLoggedInTitle": {
     "message": "Мне нравится!"
   }
+    ,
+    "poziNotificationFavoriteStatusSuccess": {
+      "message": "Благодарим за поощрение трудов диджея!"
+    }
   ,
   "poziNotificationButtonsPlayTitle": {
     "message": "Возобновить воспроизведение"
@@ -30,14 +42,34 @@
   "poziNotificationButtonsStopTitle": {
     "message": "Остановить воспроизведение"
   }
+    ,
+    "poziNotificationPlayerStatusChangeStarted": {
+      "message": "Воспроизведение начато"
+    }
+    ,
+    "poziNotificationPlayerStatusChangeStopped": {
+      "message": "Воспроизведение остановлено"
+    }
+    ,
+    "poziNotificationPlayerStatusChangeResumed": {
+      "message": "Воспроизведение возобновлено"
+    }
   ,
   "poziNotificationButtonsMuteTitle": {
     "message": "Выключить звук"
   }
+    ,
+    "poziNotificationButtonsMuteFeedback": {
+      "message": "Звук выключен"
+    }
   ,
   "poziNotificationButtonsUnmuteTitle": {
     "message": "Включить звук"
   }
+    ,
+    "poziNotificationButtonsUnmuteFeedback": {
+      "message": "Звук включён"
+    }
 
   ,
   "poziOptionsPageTitle": {

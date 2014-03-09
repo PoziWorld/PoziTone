@@ -22,6 +22,10 @@
     1.k.                            sendSameMessage()
     1.l.                            processCommand_muteUnmute()
     1.m.                            processCommand_showNotification()
+    1.n.                            initObserver()
+    1.o.                            initPlayerStatusObserver()
+    1.p.                            initAddTrackToPlaylistFeedbackObserver()
+    1.q.                            initFavoriteStatusObserver()
   2.                              Listeners
     2.a.                            titlesong DOMCharacterDataModified
     2.b.                            runtime.onMessage
@@ -37,37 +41,49 @@
  ==================================================================================== */
 
 var PageWatcher = {
-    boolUserLoggedIn            : document.getElementById( 'user-account' ) !== null
+    boolUserLoggedIn                : document.getElementById( 'user-account' ) !== null
 
   // Play/Stop button has class which is player status 
   // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
-  , objWantedClassRegExp        : / (play|stop)/
-  , intWantedClassLength        : 4
+  , objWantedClassRegExp            : / (play|stop)/
+  , intWantedClassLength            : 4
 
-  , $wmaPlayer                  : document.getElementsByName( 'MediaPlayer' )[0]
-  , $playStopButton             : document.getElementsByClassName( 'general_play' )[0]
+  , $wmaPlayer                      : document.getElementsByName( 'MediaPlayer' )[0]
+  , $playStopButton                 : document.getElementsByClassName( 'general_play' )[0]
+  , $addTrackToPlaylistButton       : document.getElementById( 'airfavmsg' )
+  , $favoriteButton                 : document.getElementById( 'polltrackaction' )
+  , $trackInfo                      : document.getElementById( 'titlesong' )
 
-  , strTrackInfoContainerId     : 'titlesong'
-  , strPlayerId                 : 'radioplayer_sm' // Set by 101
+  , strTrackInfoContainerId         : 'titlesong'
+  , strPlayerId                     : 'radioplayer_sm'
+  , strFavoriteButtonSuccessClass   : 'favok'
 
-  , boolHadPlayedBefore         : false
+  , boolHadPlayedBefore             : false
+  , boolPageJustLoaded              : true
 
-  , boolDisregardSameMessage    : false
+  , boolDisregardSameMessage        : false
 
-  , objPlayerInfo               : {
-        boolIsMp3Player         : ! document.contains( document.getElementsByName( 'MediaPlayer' )[0] )
-      , intVolume               : 0
-      , intVolumeBeforeMuted    : 50 // Uppod doesn't save prev value, restore to this one
-      , strStatus               : ''
+  , objPlayerInfo                   : {
+        boolIsMp3Player             : ! document.contains( document.getElementsByName( 'MediaPlayer' )[0] )
+      , intVolume                   : 0
+      , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
+      , strStatus                   : ''
+      , strPreviousStatus           : ''
     }
-  , objStationInfo              : {
-        strStationName          : document.getElementsByTagName( 'h1' )[0].innerText
-      , strStationNamePlusDesc  : document.title
-      , strLogoUrl              : document
-                                    .querySelectorAll( '[rel="image_src"]' )[0]
-                                      .href
-                                        .replace( 'http://101.ru/vardata/modules/channel/dynamics/', '' )
-      , strTrackInfo            : document.getElementById( 'titlesong' ).innerText
+  , objStationInfo                  : {
+        strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
+      , strStationNamePlusDesc      : document.title
+      , strLogoUrl                  : document
+                                        .querySelectorAll( '[rel="image_src"]' )[0]
+                                          .href
+                                            .replace( 'http://101.ru/vardata/modules/channel/dynamics/', '' )
+      , strTrackInfo                : document.getElementById( 'titlesong' ).innerText
+    }
+  , objAddTrackToPlaylistFeedback   : {
+        'Трек успешно добавлен в плейлист'
+                                    : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+      , 'Данный трек уже есть в Вашем плейлисте'
+                                    : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
     }
   ,
 
@@ -86,31 +102,9 @@ var PageWatcher = {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === false )
       PageWatcher.boolHadPlayedBefore = true;
 
-    var
-        MutationObserver  = window.MutationObserver || window.WebKitMutationObserver
-      , observer          = new MutationObserver( function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
-            if ( arrMutations[ i ].type === 'attributes' ) {
-              if ( PageWatcher.getPlayerStatus( true ) === 'stop' ) {
-                PageWatcher.boolHadPlayedBefore = true;
-                PageWatcher.sendSameMessage();
-              }
-              else if (
-                    PageWatcher.getPlayerStatus( true ) === 'play'
-                &&  PageWatcher.boolHadPlayedBefore === true
-              ) {
-                PageWatcher.sendSameMessage();
-              }
-
-              return;
-            }
-          };
-        });
-
-    observer.observe(
-        PageWatcher.$playStopButton
-      , { attributes: true }
-    );
+    PageWatcher.initPlayerStatusObserver();
+    PageWatcher.initAddTrackToPlaylistFeedbackObserver();
+    PageWatcher.initFavoriteStatusObserver();
   }
   ,
 
@@ -262,7 +256,9 @@ var PageWatcher = {
     else // If WMA
       PageWatcher.$wmaPlayer.settings.mute = true;
 
-    PageWatcher.sendSameMessage();
+    PageWatcher.sendSameMessage(
+      chrome.i18n.getMessage( 'poziNotificationButtonsMuteFeedback' )
+    );
   }
   ,
 
@@ -282,7 +278,9 @@ var PageWatcher = {
     else // If WMA
       PageWatcher.$wmaPlayer.settings.mute = false;
 
-    PageWatcher.sendSameMessage();
+    PageWatcher.sendSameMessage(
+      chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteFeedback' )
+    );
   }
   ,
 
@@ -292,10 +290,16 @@ var PageWatcher = {
    * Send same message again (set of buttons needs to be changed)
    *
    * @type    method
-   * @param   No Parameters Taken
+   * @param   strFeedback
+   *            Feedback for main actions
    * @return  void
    **/
-  sendSameMessage : function() {
+  sendSameMessage : function( strFeedback ) {
+    PageWatcher.objStationInfo.strTrackInfo = PageWatcher.$trackInfo.innerText;
+
+    if ( typeof strFeedback !== 'undefined' )
+      PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
+
     chrome.runtime.sendMessage(
       {
           boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
@@ -340,6 +344,160 @@ var PageWatcher = {
   processCommand_showNotification : function() {
     PageWatcher.sendSameMessage();
   }
+  ,
+
+  /**
+   * 1.n.
+   *
+   * Init observer
+   *
+   * @type    method
+   * @param   $target
+   *            The Node on which to observe DOM mutations
+   * @param   objOptions
+   *            A MutationObserverInit object, specifies which DOM mutations should be reported.
+   * @param   funcCallback
+   *            The function which will be called on each DOM mutation
+   * @return  void
+   **/
+  initObserver : function( $target, objOptions, funcCallback ) {
+    var
+        MutationObserver  = window.MutationObserver || window.WebKitMutationObserver
+      , observer          = new MutationObserver( funcCallback )
+      ;
+
+    observer.observe( $target, objOptions );
+  }
+  ,
+
+  /**
+   * 1.o.
+   *
+   * Init player status changes observer
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  initPlayerStatusObserver : function() {
+    var
+        $target       = PageWatcher.$playStopButton
+      , objOptions    = {
+                            attributes        : true
+                          , attributeFilter   : [ 'class' ]
+                        }
+      , funcCallback  = function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            var strPlayerStatus = PageWatcher.getPlayerStatus( true );
+
+            // To prevent a bug when mutation happens twice on MP3 player start
+            if ( strPlayerStatus === PageWatcher.objPlayerInfo.strPreviousStatus )
+              return;
+
+            if ( strPlayerStatus === 'stop' ) {
+              var strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
+
+              if ( PageWatcher.boolPageJustLoaded === true )
+                strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
+
+              PageWatcher.boolHadPlayedBefore = true;
+              PageWatcher.sendSameMessage( strLangStartedOrResumed );
+              PageWatcher.boolPageJustLoaded = false;
+            }
+            else if (
+                  strPlayerStatus === 'play'
+              &&  PageWatcher.boolHadPlayedBefore === true
+            )
+              PageWatcher.sendSameMessage(
+                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
+              );
+
+            PageWatcher.objPlayerInfo.strPreviousStatus = strPlayerStatus;
+            return;
+          };
+        }
+      ;
+
+    PageWatcher.initObserver( $target, objOptions, funcCallback );
+  }
+  ,
+
+  /**
+   * 1.p.
+   *
+   * Init "Add track to playlist" feedback observer
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  initAddTrackToPlaylistFeedbackObserver : function() {
+    var
+        $target       = PageWatcher.$addTrackToPlaylistButton
+      , objOptions    = {
+                            characterData     : true
+                          , childList     : true
+                          , subtree     : true
+                        }
+      , funcCallback  = function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            var
+                objMutationRecord   = arrMutations[ i ]
+              , strFeedbackMessage  = ''
+              , strMessageToSend    = ''
+              ;
+
+            if ( objMutationRecord.type === 'childList' && objMutationRecord.addedNodes.length )
+              strFeedbackMessage = objMutationRecord.target.innerText;
+            else if ( objMutationRecord.type === 'characterData' && objMutationRecord.target.textContent !== '' )
+              strFeedbackMessage = objMutationRecord.target.textContent;
+
+            if ( strFeedbackMessage !== '' ) {
+              if ( typeof PageWatcher.objAddTrackToPlaylistFeedback[ strFeedbackMessage ] !== 'undefined' )
+                strMessageToSend = PageWatcher.objAddTrackToPlaylistFeedback[ strFeedbackMessage ];
+              else
+                strMessageToSend = strFeedbackMessage;
+
+              PageWatcher.sendSameMessage( strMessageToSend );
+            }
+
+            return;
+          };
+        }
+      ;
+
+    PageWatcher.initObserver( $target, objOptions, funcCallback );
+  }
+  ,
+
+  /**
+   * 1.q.
+   *
+   * Init "I like it!" button changes observer
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  initFavoriteStatusObserver : function() {
+    var
+        $target       = PageWatcher.$favoriteButton
+      , objOptions    = {
+                            attributes        : true
+                          , attributeFilter   : [ 'class' ]
+                        }
+      , funcCallback  = function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            if ( arrMutations[ i ].target.className.indexOf( PageWatcher.strFavoriteButtonSuccessClass ) > -1 ) {
+              PageWatcher.sendSameMessage( chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' ) );
+              return;
+            }
+          };
+        }
+      ;
+
+    PageWatcher.initObserver( $target, objOptions, funcCallback );
+  }
 };
 
 /* ====================================================================================
@@ -361,6 +519,15 @@ var PageWatcher = {
  **/
 document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
   PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
+
+  // When WMA player starts, it should show "Playback started", same way as MP3
+  if ( PageWatcher.boolPageJustLoaded === true && !PageWatcher.objPlayerInfo.boolIsMp3Player ) {
+    PageWatcher.sendSameMessage(
+      chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' )
+    );
+    PageWatcher.boolPageJustLoaded = false;
+    return;
+  }
 
   chrome.runtime.sendMessage(
     {
