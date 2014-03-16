@@ -58,19 +58,22 @@ var Background = {
    * Set extension defaults
    *
    * @type    method
-   * @param   No Parameters Taken
+   * @param   objDetails
+   *            Reason - install/update/chrome_update - 
+   *            and (optional) previous version
    * @return  void
    **/
-  setExtensionDefaults : function() {
+  setExtensionDefaults : function( objDetails ) {
     chrome.storage.sync.get( null, function( objReturn ) {
       // 1. To set
       var
           objTempToSet                              = {}
           // TODO: Get defaults from Global
         , objSettingsDefaults                       = {
-              boolShowNotificationWhenStopped       : false
-            , boolShowNotificationWhenMuted         : false
-            , boolShowNotificationWhenNoTrackInfo   : false
+              boolNotificationShowWhenStopped       : false
+            , boolNotificationShowWhenMuted         : false
+            , boolNotificationShowWhenNoTrackInfo   : false
+            , boolNotificationShowStationLogo       : true
             , strNotificationTitleFormat            : 'short'
             , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
             , objOpenTabs                           : {}
@@ -78,6 +81,23 @@ var Background = {
             , intRecentTracksToKeep                 : 10
           }
         ;
+
+      // Some vars have been renamed, remove old ones if updated
+      if (
+            objDetails.reason === 'update'
+        &&  typeof objDetails.previousVersion !== 'undefined'
+        &&  objDetails.previousVersion < chrome.app.getDetails().version
+      ) {
+        var
+            arrSettingsToRemove = [
+                'boolShowNotificationWhenStopped'
+              , 'boolShowNotificationWhenMuted'
+              , 'boolShowNotificationWhenNoTrackInfo'
+            ]
+          ;
+
+        chrome.storage.sync.remove( arrSettingsToRemove, function() {});
+      }
 
       for ( var strSetting in objSettingsDefaults ) {
         if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
@@ -136,10 +156,15 @@ var Background = {
     var arrVarsToGet = [ 'arrRecentTracks', 'intRecentTracksToKeep' ];
 
     chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
-      var arrRecentTracks = objReturn.arrRecentTracks;
+      var
+          arrRecentTracks = objReturn.arrRecentTracks
+        // Don't include messages with player status (started, resumed, muted, etc.)
+        , arrTrackInfo    = objStationInfo.strTrackInfo.split( "\n\n" )
+        , strTrackInfo    = arrTrackInfo[ 0 ]
+        ;
 
       // Don't save if already in array
-      if ( arrRecentTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( objStationInfo.strTrackInfo ) !== -1 )
+      if ( arrRecentTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( strTrackInfo ) !== -1 )
         return;
 
       var
@@ -152,7 +177,7 @@ var Background = {
 
       // Using array instead of object because of QUOTA_BYTES_PER_ITEM
       // https://developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
-      arrTempRecentTrack[ 0 ] = objStationInfo.strTrackInfo;
+      arrTempRecentTrack[ 0 ] = strTrackInfo;
       arrTempRecentTrack[ 1 ] = objStationInfo.strStationName;
       arrTempRecentTrack[ 2 ] = objStationInfo.strLogoUrl;
 
@@ -304,7 +329,7 @@ chrome.runtime.onInstalled.addListener(
     // Debug
     console.log( 'Background onInstalled ', objDetails );
 
-    Background.setExtensionDefaults();
+    Background.setExtensionDefaults( objDetails );
   }
 );
 

@@ -102,6 +102,15 @@
         }
 
         ,
+        "poziOptionsPageSettingsNotificationIconFormat": {
+          "message": "Формат иконки уведомления"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+          "message": "Отображать логотип текущей станции"
+        }
+
+        ,
         "poziOptionsPageSettingsNotificationTitleFormat": {
           "message": "Формат заголовка уведомления"
         }

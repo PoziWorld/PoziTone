@@ -45,9 +45,9 @@ var Global = {
   , strFavoriteStatusSuccess      : chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
   , objSettingsDefaults           : {
-        boolShowNotificationWhenStopped         : { miscDefault : false }
-      , boolShowNotificationWhenMuted           : { miscDefault : false }
-      , boolShowNotificationWhenNoTrackInfo     : { miscDefault : false }
+        boolNotificationShowWhenStopped         : { miscDefault : false }
+      , boolNotificationShowWhenMuted           : { miscDefault : false }
+      , boolNotificationShowWhenNoTrackInfo     : { miscDefault : false }
       , strNotificationTitleFormat              : { miscDefault : 'short' }
       , arrNotificationButtons                  : {
             miscDefault           : [ 'add', 'muteUnmute' ]
@@ -152,40 +152,50 @@ var Global = {
     chrome.notifications.clear( objThis.strNotificationId + intTabId, function() {
       chrome.storage.sync.get(
           [
-              'boolShowNotificationWhenStopped'
-            , 'boolShowNotificationWhenMuted'
-            , 'boolShowNotificationWhenNoTrackInfo'
+              'boolNotificationShowWhenStopped'
+            , 'boolNotificationShowWhenMuted'
+            , 'boolNotificationShowWhenNoTrackInfo'
+            , 'boolNotificationShowStationLogo'
             , 'strNotificationTitleFormat'
             , 'arrNotificationButtons'
           ]
         , function( objData ) {
 
+            // Show notification or not checks
             if (
                   boolDisregardSameMessage === false
-              &&  objData.boolShowNotificationWhenStopped === false
+              &&  objData.boolNotificationShowWhenStopped === false
               &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
             )
               return false;
 
             if (
                   boolDisregardSameMessage === false
-              &&  objData.boolShowNotificationWhenMuted === false
+              &&  objData.boolNotificationShowWhenMuted === false
               &&  objTempPlayerInfo.intVolume === Global.intNoVolume
             )
               return false;
 
             if (
                   boolDisregardSameMessage === false
-              &&  objData.boolShowNotificationWhenNoTrackInfo === false
+              &&  objData.boolNotificationShowWhenNoTrackInfo === false
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             )
               return false;
+
+            // Notification Icon Settings
+            if (
+                  objData.boolNotificationShowStationLogo === true
+              &&  objStationInfo.strLogoDataUri !== null
+            )
+              objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
 
             var
                 strTitleFormat = objData.strNotificationTitleFormat
               , arrButtons     = objData.arrNotificationButtons
               ;
 
+            // Notification Title Settings
             if ( strTitleFormat === 'short' )
               objNotificationOptions.title = objTempStationInfo.strStationName;
             else if ( strTitleFormat === 'long' )
@@ -193,6 +203,7 @@ var Global = {
             else if ( strTitleFormat === 'noStationInfo' )
               objNotificationOptions.title = chrome.i18n.getMessage( 'poziNotificationTitle' );
 
+            // Notification Buttons Settings
             if ( arrButtons.length !== 0 ) {
               // Save active buttons for the listener
               var

@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.1.7
+    * Showing the station logo in the notification (can be disabled in PoziTone Options).
+    * Fixed a bug where repeated track info was saved on a player status change.
+
 ### v0.0.1.6
     * Added "feedback" for the main actions. Now, after clicking a button on the notification or using keyboard shortcuts, a new notification will inform of a result of the performed action:
       * "Add track to playlist" - "Successfully added track to playlist" or "Track already in your playlist";

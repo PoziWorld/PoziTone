@@ -102,6 +102,15 @@
         }
 
         ,
+        "poziOptionsPageSettingsNotificationIconFormat": {
+          "message": "Notification icon format"
+        }
+        ,
+        "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+          "message": "Display current station logo"
+        }
+
+        ,
         "poziOptionsPageSettingsNotificationTitleFormat": {
           "message": "Notification title format"
         }

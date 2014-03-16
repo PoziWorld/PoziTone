@@ -26,6 +26,7 @@
     1.o.                            initPlayerStatusObserver()
     1.p.                            initAddTrackToPlaylistFeedbackObserver()
     1.q.                            initFavoriteStatusObserver()
+    1.r.                            createStationLogoCanvas()
   2.                              Listeners
     2.a.                            titlesong DOMCharacterDataModified
     2.b.                            runtime.onMessage
@@ -40,51 +41,59 @@
 
  ==================================================================================== */
 
-var PageWatcher = {
-    boolUserLoggedIn                : document.getElementById( 'user-account' ) !== null
+var
+    strLogoUrlPath                      = 'http://101.ru/vardata/modules/channel/dynamics/'
+  , strPlayerId                         = 'radioplayer_sm'
+  , strTrackInfoContainerId             = 'titlesong'
+  , strFavoriteButtonSuccessClass       = 'favok'
 
-  // Play/Stop button has class which is player status 
-  // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
-  , objWantedClassRegExp            : / (play|stop)/
-  , intWantedClassLength            : 4
+  , $stationLogo                        = document
+                                            .getElementById( 'player-site' )
+                                              .getElementsByTagName( 'img' )[0]
+  , $wmaPlayer                          = document.getElementsByName( 'MediaPlayer' )[0]
+  , $playStopButton                     = document.getElementsByClassName( 'general_play' )[0]
+  , $addTrackToPlaylistButton           = document.getElementById( 'addfavoritetracksfromair' )
+  , $addTrackToPlaylistResponse         = document.getElementById( 'airfavmsg' )
+  , $favoriteButton                     = document.getElementById( 'polltrackaction' )
+  , $trackInfo                          = document.getElementById( strTrackInfoContainerId )
 
-  , $wmaPlayer                      : document.getElementsByName( 'MediaPlayer' )[0]
-  , $playStopButton                 : document.getElementsByClassName( 'general_play' )[0]
-  , $addTrackToPlaylistButton       : document.getElementById( 'airfavmsg' )
-  , $favoriteButton                 : document.getElementById( 'polltrackaction' )
-  , $trackInfo                      : document.getElementById( 'titlesong' )
+  , PageWatcher                         = {
+        boolUserLoggedIn                : document.getElementById( 'user-account' ) !== null
 
-  , strTrackInfoContainerId         : 'titlesong'
-  , strPlayerId                     : 'radioplayer_sm'
-  , strFavoriteButtonSuccessClass   : 'favok'
+      // Play/Stop button has class which is player status 
+      // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
+      , objWantedClassRegExp            : / (play|stop)/
+      , intWantedClassLength            : 4
 
-  , boolHadPlayedBefore             : false
-  , boolPageJustLoaded              : true
+      , boolHadPlayedBefore             : false
+      , boolPageJustLoaded              : true
+      , boolDisregardSameMessage        : false
 
-  , boolDisregardSameMessage        : false
+      , intLogoBorderToAdd              : 15
+      , strLogoBorderColor              : '#FFF'
 
-  , objPlayerInfo                   : {
-        boolIsMp3Player             : ! document.contains( document.getElementsByName( 'MediaPlayer' )[0] )
-      , intVolume                   : 0
-      , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
-      , strStatus                   : ''
-      , strPreviousStatus           : ''
-    }
-  , objStationInfo                  : {
-        strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
-      , strStationNamePlusDesc      : document.title
-      , strLogoUrl                  : document
-                                        .querySelectorAll( '[rel="image_src"]' )[0]
-                                          .href
-                                            .replace( 'http://101.ru/vardata/modules/channel/dynamics/', '' )
-      , strTrackInfo                : document.getElementById( 'titlesong' ).innerText
-    }
-  , objAddTrackToPlaylistFeedback   : {
-        'Трек успешно добавлен в плейлист'
-                                    : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
-      , 'Данный трек уже есть в Вашем плейлисте'
-                                    : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
-    }
+      , objPlayerInfo                   : {
+            boolIsMp3Player             : ! document.contains( $wmaPlayer )
+          , intVolume                   : 0
+          , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
+          , strStatus                   : ''
+          , strPreviousStatus           : ''
+        }
+      , objStationInfo                  : {
+            strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
+          , strStationNamePlusDesc      : document.title
+          , strLogoUrl                  : $stationLogo
+                                            .src
+                                              .replace( strLogoUrlPath, '' )
+          , strLogoDataUri              : null
+          , strTrackInfo                : $trackInfo.innerText
+        }
+      , objAddTrackToPlaylistFeedback   : {
+            'Трек успешно добавлен в плейлист'
+                                        : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+          , 'Данный трек уже есть в Вашем плейлисте'
+                                        : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
+        }
   ,
 
   /**
@@ -105,6 +114,8 @@ var PageWatcher = {
     PageWatcher.initPlayerStatusObserver();
     PageWatcher.initAddTrackToPlaylistFeedbackObserver();
     PageWatcher.initFavoriteStatusObserver();
+
+    PageWatcher.modifyStationLogo();
   }
   ,
 
@@ -136,10 +147,10 @@ var PageWatcher = {
    * @return  void / string
    **/
   getPlayerStatus : function( boolReturnStatus ) {
-    if ( document.contains( PageWatcher.$playStopButton ) ) {
+    if ( document.contains( $playStopButton ) ) {
       // .search() is faster than for () - http://jsperf.com/for-loop-or-search-regexp
       var
-          strPlayStopButtonClassAttr    = PageWatcher.$playStopButton.className
+          strPlayStopButtonClassAttr    = $playStopButton.className
         , intWantedClassPosition        = strPlayStopButtonClassAttr.search( PageWatcher.objWantedClassRegExp )
         , strWantedClass                = ( intWantedClassPosition !== -1 ) ?
             // +1 because we don't want to include space symbol
@@ -168,10 +179,13 @@ var PageWatcher = {
       PageWatcher.getPlayerIntVar( 'getv', 'intVolume' );
     else // If WMA
       // If muted, WMP doesn't set volume to 0. Emulate setting it to 0
-      if ( typeof PageWatcher.$wmaPlayer.settings.mute !== 'undefined' && PageWatcher.$wmaPlayer.settings.mute === true )
+      if (
+            typeof $wmaPlayer.settings.mute !== 'undefined'
+        &&  $wmaPlayer.settings.mute === true
+        )
         PageWatcher.objPlayerInfo.intVolume = 0;
-      else if ( typeof PageWatcher.$wmaPlayer.settings.volume === 'number' )
-        PageWatcher.objPlayerInfo.intVolume = PageWatcher.$wmaPlayer.settings.volume;
+      else if ( typeof $wmaPlayer.settings.volume === 'number' )
+        PageWatcher.objPlayerInfo.intVolume = $wmaPlayer.settings.volume;
   }
   ,
 
@@ -188,7 +202,7 @@ var PageWatcher = {
    * @return  object
    **/
   getPlayerIntVar : function( strApiKey, strReturnPropertyName ) {
-    var intPlayerIntVar = parseInt( playerAPI.Uppod.uppodGet( PageWatcher.strPlayerId, strApiKey ) );
+    var intPlayerIntVar = parseInt( playerAPI.Uppod.uppodGet( strPlayerId, strApiKey ) );
 
     if ( ! isNaN( intPlayerIntVar ) )
       PageWatcher.objPlayerInfo[ strReturnPropertyName ] = intPlayerIntVar;
@@ -205,7 +219,7 @@ var PageWatcher = {
    * @return  void
    **/
   processButtonClick_add : function() {
-    document.getElementById( 'addfavoritetracksfromair' ).click();
+    $addTrackToPlaylistButton.click();
   }
   ,
 
@@ -219,7 +233,7 @@ var PageWatcher = {
    * @return  void
    **/
   processButtonClick_favorite : function() {
-    document.getElementById( 'polltrackaction' ).click();
+    $favoriteButton.click();
   }
   ,
 
@@ -234,7 +248,7 @@ var PageWatcher = {
    * @return  void
    **/
   processButtonClick_playStop : function() {
-    PageWatcher.$playStopButton.click();
+    $playStopButton.click();
   }
   ,
 
@@ -251,10 +265,10 @@ var PageWatcher = {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) { // If MP3
       // Uppod JS API doesn't provide "mute" method, emulate it by saving current value
       PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
-      playerAPI.Uppod.uppodSend( 'radioplayer_sm', 'v0' );
+      playerAPI.Uppod.uppodSend( strPlayerId, 'v0' );
     }
     else // If WMA
-      PageWatcher.$wmaPlayer.settings.mute = true;
+      $wmaPlayer.settings.mute = true;
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'poziNotificationButtonsMuteFeedback' )
@@ -274,9 +288,9 @@ var PageWatcher = {
   processButtonClick_unmute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
       // Uppod JS API doesn't provide "unmute" method, restore prev value
-      playerAPI.Uppod.uppodSend( 'radioplayer_sm', 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
+      playerAPI.Uppod.uppodSend( strPlayerId, 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
     else // If WMA
-      PageWatcher.$wmaPlayer.settings.mute = false;
+      $wmaPlayer.settings.mute = false;
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteFeedback' )
@@ -295,7 +309,7 @@ var PageWatcher = {
    * @return  void
    **/
   sendSameMessage : function( strFeedback ) {
-    PageWatcher.objStationInfo.strTrackInfo = PageWatcher.$trackInfo.innerText;
+    PageWatcher.objStationInfo.strTrackInfo = $trackInfo.innerText;
 
     if ( typeof strFeedback !== 'undefined' )
       PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
@@ -381,7 +395,7 @@ var PageWatcher = {
    **/
   initPlayerStatusObserver : function() {
     var
-        $target       = PageWatcher.$playStopButton
+        $target       = $playStopButton
       , objOptions    = {
                             attributes        : true
                           , attributeFilter   : [ 'class' ]
@@ -433,7 +447,7 @@ var PageWatcher = {
    **/
   initAddTrackToPlaylistFeedbackObserver : function() {
     var
-        $target       = PageWatcher.$addTrackToPlaylistButton
+        $target       = $addTrackToPlaylistResponse
       , objOptions    = {
                             characterData     : true
                           , childList     : true
@@ -481,14 +495,14 @@ var PageWatcher = {
    **/
   initFavoriteStatusObserver : function() {
     var
-        $target       = PageWatcher.$favoriteButton
+        $target       = $favoriteButton
       , objOptions    = {
                             attributes        : true
                           , attributeFilter   : [ 'class' ]
                         }
       , funcCallback  = function( arrMutations ) {  
           for ( var i = 0; i < arrMutations.length; i++ ) {
-            if ( arrMutations[ i ].target.className.indexOf( PageWatcher.strFavoriteButtonSuccessClass ) > -1 ) {
+            if ( arrMutations[ i ].target.className.indexOf( strFavoriteButtonSuccessClass ) > -1 ) {
               PageWatcher.sendSameMessage( chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' ) );
               return;
             }
@@ -497,6 +511,49 @@ var PageWatcher = {
       ;
 
     PageWatcher.initObserver( $target, objOptions, funcCallback );
+  }
+  ,
+
+  /**
+   * 1.r.
+   *
+   * Use canvas to add border to original logo image,
+   * so we can use it as notification icon.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  modifyStationLogo : function() {
+    $stationLogo.onload = function() {
+      var
+          $canvas           = document.createElement( 'canvas' )
+        , intLogoBorder     = PageWatcher.intLogoBorderToAdd
+        , intLogoWidth      = $stationLogo.width
+        , intLogoHeight     = $stationLogo.height
+        , intCanvasWidth    = intLogoWidth + 2 * intLogoBorder
+        , intCanvasHeight   = intLogoHeight + 2 * intLogoBorder
+        ;
+
+      $canvas.width         = intCanvasWidth;
+      $canvas.height        = intCanvasHeight;
+
+      var context           = $canvas.getContext( '2d' );
+
+      // Solid bg
+      context.fillStyle     = PageWatcher.strLogoBorderColor;
+      context.fillRect( 0, 0, intCanvasWidth, intCanvasHeight );
+
+      context.drawImage(
+          $stationLogo
+        , intLogoBorder
+        , intLogoBorder
+        , intLogoWidth
+        , intLogoHeight
+      );
+
+      PageWatcher.objStationInfo.strLogoDataUri = $canvas.toDataURL();
+    };
   }
 };
 
@@ -517,7 +574,7 @@ var PageWatcher = {
  * @param   objEvent
  * @return  void
  **/
-document.getElementById( PageWatcher.strTrackInfoContainerId ).addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
+$trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
   PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
 
   // When WMA player starts, it should show "Playback started", same way as MP3
