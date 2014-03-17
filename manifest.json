@@ -4,7 +4,7 @@
   , "default_locale"            : "ru"
   , "name"                      : "__MSG_poziToolName__"
   , "description"               : "__MSG_poziToolDescription__"
-  , "version"                   : "0.0.1.7"
+  , "version"                   : "0.0.1.8"
 
   , "icons"                     : {
                                       "64"              : "img/pozitone.png"
@@ -60,8 +60,7 @@
   , "background"                : {
                                       "persistent"        : false
                                     , "scripts"           : [
-                                          "js/jquery-ajax-css-deprecated-dimensions-effects-event-alias-offset-wrap.min.js"
-                                        , "js/global.js"
+                                          "js/global.js"
                                         , "js/background.js"
                                       ]
                                   }

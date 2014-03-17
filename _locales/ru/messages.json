@@ -153,8 +153,12 @@
     }
     ,
     "poziOptionsPageNavAbout": {
-      "message": "О PoziTone"
+      "message": "О расширении"
     }
+      ,
+      "poziOptionsPageAboutH1": {
+        "message": "О расширении"
+      }
 
   ,
   "poziPopupPageTitle": {

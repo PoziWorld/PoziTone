@@ -155,6 +155,10 @@
     "poziOptionsPageNavAbout": {
       "message": "About"
     }
+      ,
+      "poziOptionsPageAboutH1": {
+        "message": "About"
+      }
 
   ,
   "poziPopupPageTitle": {

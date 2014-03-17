@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="/css/global.css" />
-    <script src="/js/jquery-ajax-css-deprecated-dimensions-effects-event-alias-offset-wrap.min.js"></script>
+    <link rel="stylesheet" href="/css/options.css" />
     <script src="/js/global.js"></script>
     <script src="/js/page.js"></script>
     <script src="/js/options.js"></script>
@@ -13,15 +13,33 @@
     <header id="header">
       <h1 i18n-content="poziToolName"></h1>
       <nav>
-        <ul>
-          <li class="selected"><a href="" i18n-content="poziOptionsPageNavSettings"></a></li>
-          <li class="none"><a href="" i18n-content="poziOptionsPageNavFaq"></a></li>
-          <li class="none"><a href="" i18n-content="poziOptionsPageNavAbout"></a></li>
+        <ul id="menu">
+          <li class="selected">
+            <a
+              href="#settings"
+              class="switchPage"
+              i18n-content="poziOptionsPageNavSettings"
+                ></a>
+          </li>
+          <li class="none">
+            <a
+              href="#about"
+              class="switchPage"
+              i18n-content="poziOptionsPageNavFaq"
+                ></a>
+          </li>
+          <li class="none">
+            <a
+              href="#about"
+              class="switchPage"
+              i18n-content="poziOptionsPageNavAbout"
+                ></a>
+          </li>
         </ul>
       </nav>
     </header>
     <article id="content">
-      <section class="page">
+      <section id="settings" class="page">
         <h1 i18n-content="poziOptionsPageSettingsH1" class="pageHeading"></h1>
         <section class="subpage">
           <section>
@@ -100,6 +118,9 @@
             </ul>
           </section>
         </section>
+      </section>
+      <section id="about" class="page">
+        <h1 i18n-content="poziOptionsPageAboutH1" class="pageHeading"></h1>
       </section>
     </article>
   </body>

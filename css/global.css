@@ -80,6 +80,7 @@
 
   #header
     {
+      position:               fixed;
       float:                  left;
       z-index:                2;
       padding:                2em 0 0;
@@ -101,10 +102,10 @@
     {
       border-color:           rgb(78, 87, 100);
     }
-  #header li:last-child
+/*  #header li:last-child
     {
       margin:                 2.7em 0 0;
-    }
+    }*/
   #header li a
     {
       display:                inline-block;
@@ -132,7 +133,12 @@
     }
   .page
     {
+      display:                none;
       padding:                5.3em 0 0;
+    }
+  .page:first-child
+    {
+      display:                block;
     }
   .pageHeading
     {
@@ -142,6 +148,7 @@
       padding:                1.167em 0 .722em;
       max-width:              41em;
       min-width:              33.333em;
+      background:             #fff;
       color:                  #303942;
     }
   .pageHeading:after

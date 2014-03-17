@@ -47,12 +47,22 @@ var Page = {
    * @return  void
    **/
   localize : function( strPageName ) {
-    $( '[i18n-content]' ).each( function( intIndex, objElement ) {
-        if ( objElement.nodeName === 'LABEL' )
-          $( objElement ).append( chrome.i18n.getMessage( $( this ).attr( 'i18n-content' ) ) );
+    var $allLocalizableElements = document.querySelectorAll( '[i18n-content]' );
+
+    for (
+      var i = 0, intLocalizableElements = $allLocalizableElements.length;
+      i < intLocalizableElements;
+      i++
+        ) {
+        var $localizableElement = $allLocalizableElements[ i ];
+
+        if ( $localizableElement.nodeName === 'LABEL' )
+          $localizableElement.innerHTML = 
+              $localizableElement.innerHTML
+            + chrome.i18n.getMessage( $localizableElement.getAttribute( 'i18n-content' ) );
         else
-          objElement.innerHTML = chrome.i18n.getMessage( $( this ).attr( 'i18n-content' ) );
-    });
+          $localizableElement.innerHTML = chrome.i18n.getMessage( $localizableElement.getAttribute( 'i18n-content' ) );
+    }
 
     document.title = chrome.i18n.getMessage( 'pozi' + strPageName + 'PageTitle' );
   }

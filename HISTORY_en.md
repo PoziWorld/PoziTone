@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.1.8
+    * Extension size is reduced by ~57 KB (almost a quarter of the total size) by eliminating dependency on a third-party library (jQuery).
+
 ### v0.0.1.7
     * Showing the station logo in the notification (can be disabled in PoziTone Options).
     * Fixed a bug where repeated track info was saved on a player status change.
