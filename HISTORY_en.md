@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.1
+    * Hotfix for broken buttons in the notification.
+    * Correct quotes in README.
+
 ### v0.0.2.0
     * Added support for VK's audio player (only on full version of the site - vk.com).
     * Separate settings for each player.
