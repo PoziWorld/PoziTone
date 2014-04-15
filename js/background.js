@@ -243,7 +243,7 @@ var Background = {
       Global.showNotification(
           objMessage.boolUserLoggedIn
         , objMessage.boolDisregardSameMessage
-        , 100
+        , objSender.tab.id
         , objMessage.objPlayerInfo
         , objMessage.objStationInfo
       );
