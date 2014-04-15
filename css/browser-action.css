@@ -3,7 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
-  File                    :           css/popup.css
+  File                    :           css/browser-action.css
   Description             :           Popup Styles
 
   Table of Contents:
@@ -20,8 +20,15 @@
 
   #content
     {
+      padding:                0 2em;
       min-width:              50em;
       max-width:              50em;
+    }
+  .pageHeading
+    {
+      width:                  27.8em;
+      max-width:              none;
+      min-width:              none;
     }
   #recentTracks
     {

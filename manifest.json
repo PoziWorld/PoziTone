@@ -1,25 +1,36 @@
 {
     "manifest_version"          : 2
+  , "minimum_chrome_version"    : "28"
 
   , "default_locale"            : "ru"
   , "name"                      : "__MSG_poziToolName__"
   , "description"               : "__MSG_poziToolDescription__"
-  , "version"                   : "0.0.1.8"
+  , "version"                   : "0.0.2.0"
+
+  , "short_name"                : "PoziTone"
+  , "author"                    : "PoziWorld"
+  , "homepage_url"              : "https://github.com/poziworld/pozitone/"
 
   , "icons"                     : {
-                                      "64"              : "img/pozitone.png"
+                                      "16"                : "img/pozitone-icon-16.png"
+                                    , "48"                : "img/pozitone-icon-48.png"
+                                    , "128"               : "img/pozitone-icon-128.png"
                                   }
 
   , "permissions"               : [
-                                      "*://*.101.ru/"
+                                      "http://101.ru/"
+                                    , "*://vk.com/"
                                     , "notifications"
                                     , "storage"
                                     , "tabs"
                                   ]
   , "browser_action"            : {
-                                      "default_icon"      : "img/pozitone.png"
+                                      "default_icon"      : {
+                                          "19"            : "img/pozitone-browser-action-icon-19.png"
+                                        , "38"            : "img/pozitone-browser-action-icon-38.png"
+                                      }
                                     , "default_title"     : "__MSG_poziToolName__"
-                                    , "default_popup"     : "html/popup.html"
+                                    , "default_popup"     : "html/browser-action.html"
                                   }
   , "commands"                  : {
                                       "add"               : {
@@ -48,14 +59,21 @@
                                       }
                                   }
   , "content_scripts"           : [
-                                    {
-                                        "matches"         : [ "http://101.ru/*" ]
-                                      , "js"              : [ 
-                                            "js/uppod-player-api.js"
-                                          , "js/page-watcher.js"
-                                        ]
-                                      , "run_at"          : "document_end"
-                                    }
+                                      {
+                                          "matches"       : [ "http://101.ru/*" ]
+                                        , "js"            : [ 
+                                              "modules/ru_101/js/uppod-player-api.js"
+                                            , "modules/ru_101/js/page-watcher.js"
+                                          ]
+                                        , "run_at"        : "document_end"
+                                      }
+                                    , {
+                                          "matches"       : [ "*://vk.com/*" ]
+                                        , "js"            : [ 
+                                              "modules/com_vk_audio/js/page-watcher.js"
+                                          ]
+                                        , "run_at"        : "document_end"
+                                      }
                                   ]
   , "background"                : {
                                       "persistent"        : false

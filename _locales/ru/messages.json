@@ -4,7 +4,7 @@
   }
   ,
   "poziToolDescription": {
-    "message": "Отображает информацию о текущем треке Онлайн-радио 101.ru посредством всплывающего сообщения + кнопки управления плеером + горячие клавиши."
+    "message": "Добавляет недостающую функциональность к аудиоплеерам, такую как уведомления с информацией о треке, элементы управления вне окна браузера, а также список последних треков."
   }
   ,
   "poziBrowserActionTitle": {
@@ -33,6 +33,14 @@
     ,
     "poziNotificationFavoriteStatusSuccess": {
       "message": "Благодарим за поощрение трудов диджея!"
+    }
+  ,
+  "poziNotificationButtonsNextTitle": {
+    "message": "Следующий трек"
+  }
+    ,
+    "poziNotificationButtonsNextFeedback": {
+      "message": "Трек переключен"
     }
   ,
   "poziNotificationButtonsPlayTitle": {
@@ -83,70 +91,95 @@
       "poziOptionsPageSettingsH1": {
         "message": "Настройки"
       }
+      ,
+      "poziOptionsPageSettingsSaved": {
+        "message": " сохранены"
+      }
+
+        ,
+        "poziOptionsPageSettingsSupport": {
+          "message": "Поддержка этого плеера"
+        }
+          ,
+          "poziOptionsPageSettingsSupportEnabled": {
+            "message": "Включена"
+          }
 
         ,
         "poziOptionsPageSettingsDisplayWhen": {
           "message": "Показывать уведомления"
         }
-        ,
-        "poziOptionsPageSettingsDisplayWhenStopped": {
-          "message": "Когда воспроизведение не начато / остановлено"
-        }
-        ,
-        "poziOptionsPageSettingsDisplayWhenMuted": {
-          "message": "Когда громкость на отметке 0% или звук выключен"
-        }
-        ,
-        "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
-          "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
-        }
+          ,
+          "poziOptionsPageSettingsDisplayWhenStopped": {
+            "message": "Когда воспроизведение не начато / остановлено"
+          }
+          ,
+          "poziOptionsPageSettingsDisplayWhenMuted": {
+            "message": "Когда громкость на отметке 0% или звук выключен"
+          }
+          ,
+          "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+            "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
+          }
 
         ,
         "poziOptionsPageSettingsNotificationIconFormat": {
           "message": "Формат иконки уведомления"
         }
-        ,
-        "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
-          "message": "Отображать логотип текущей станции"
-        }
+          ,
+          "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+            "message": "Отображать логотип текущей станции"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
+            "message": "Отображать логотип ВКонтакте"
+          }
 
         ,
         "poziOptionsPageSettingsNotificationTitleFormat": {
           "message": "Формат заголовка уведомления"
         }
-        ,
-        "poziOptionsPageSettingsNotificationTitleFormatShort": {
-          "message": "Отображать только название текущей станции"
-        }
-        ,
-        "poziOptionsPageSettingsNotificationTitleFormatLong": {
-          "message": "Отображать название текущей станции + краткое описание (если доступно)"
-        }
-        ,
-        "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
-          "message": "Не отображать информацию о текущей станции"
-        }
+          ,
+          "poziOptionsPageSettingsNotificationTitleFormatShort": {
+            "message": "Отображать только название текущей станции"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationTitleFormatLong": {
+            "message": "Отображать название текущей станции + краткое описание (если доступно)"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+            "message": "Не отображать информацию о текущей станции"
+          }
 
         ,
         "poziOptionsPageSettingsNotificationButtons": {
           "message": "Доступные кнопки <small>(максимум 2 могут быть отображены одновременно)</small>"
         }
-        ,
-        "poziOptionsPageSettingsNotificationButtonsAdd": {
-          "message": "Добавить трек в плейлист"
-        }
-        ,
-        "poziOptionsPageSettingsNotificationButtonsFavorite": {
-          "message": "Мне нравится!"
-        }
-        ,
-        "poziOptionsPageSettingsNotificationButtonsPlayStop": {
-          "message": "Остановить/Возобновить воспроизведение"
-        }
-        ,
-        "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
-          "message": "Выключить/Включить звук"
-        }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsAdd": {
+            "message": "Добавить трек в плейлист"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsFavorite": {
+            "message": "Мне нравится!"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsNext": {
+            "message": "Следующий трек"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+            "message": "Остановить/Возобновить воспроизведение"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+            "message": "Выключить/Включить звук"
+          }
+      ,
+      "poziOptionsPageSettingsChooseModulePlaceholder": {
+        "message": "Введите название плеера"
+      }
     ,
     "poziOptionsPageNavFaq": {
       "message": "Вопросы и ответы"
@@ -172,4 +205,22 @@
       "poziPopupPageNavRecentTracksH1": {
         "message": "Последние треки"
       }
+
+  ,
+  "poziModule_com_vk_audio": {
+    "message": "ВКонтакте (аудио)"
+  }
+    ,
+    "poziModule_com_vk_audio_long": {
+      "message": "ВКонтакте (аудио) | vk.com"
+    }
+
+  ,
+  "poziModule_ru_101": {
+    "message": "101.ru"
+  }
+    ,
+    "poziModule_ru_101_long": {
+      "message": "Онлайн-радио 101.ru"
+    }
 }

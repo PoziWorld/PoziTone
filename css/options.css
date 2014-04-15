@@ -8,13 +8,83 @@
 
   Table of Contents:
 
-  0.                              About
+  0.                              Settings
 
 ==================================================================================== */
 
 /* ====================================================================================
 
-  0.                              About
+  0.                              Settings
 
 ==================================================================================== */
 
+  .pageHeader
+    {
+      position:               fixed;
+      z-index:                2;
+      top:                    0;
+      max-width:              73.8em;
+      min-width:              58em;
+      height:                 5.3em;
+      background:             #fff;
+    }
+  #settingsSaved
+    {
+      display:                none;
+    }
+  .show#settingsSaved
+    {
+      display:                inline;
+      opacity:                0;
+      -webkit-animation:      fadeInFadeOut 2s ease 0s forwards;
+              animation:      fadeInFadeOut 2s ease 0s forwards;
+    }
+  .reset#settingsSaved
+    {
+      opacity:                1;
+    }
+  #chooseModuleForm
+    {
+      position:               absolute;
+      top:                    1.8em;
+      right:                  0;
+    }
+  #chooseModule
+    {
+      font-family:            inherit;
+      font-size:              1.3em;
+      line-height:            1.8em;
+      padding:                0 .385em;
+      width:                  13.3em;
+      border:                 .077em solid #ddd;
+    }
+  #settings .subpage
+    {
+      display:                none;
+    }
+  .subpageHeading
+    {
+      display:                inline-block;
+      font-size:              1.6em;
+      padding:                1.167em 0 .722em;
+      max-width:              46.125em;
+      min-width:              36.25em;
+      border-bottom:          .063em solid #eee;
+      background:             #f5f5f5;
+      color:                  #000;
+      text-align:             center;
+    }
+
+@-webkit-keyframes fadeInFadeOut
+    {
+      0%   { opacity: 0; }
+      50%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+@keyframes fadeInFadeOut
+    {
+      0%   { opacity: 0; }
+      50%  { opacity: 1; }
+      100% { opacity: 0; }
+    }

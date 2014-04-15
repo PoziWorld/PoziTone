@@ -147,21 +147,22 @@
       font-size:              1.8em;
       padding:                1.167em 0 .722em;
       max-width:              41em;
-      min-width:              33.333em;
+      min-width:              32.222em;
       background:             #fff;
       color:                  #303942;
     }
-  .pageHeading:after
+  .pageHeading:before
     {
       content:                ' ';
       display:                block;
-      position:               relative;
-      top:                    13px;
-      -webkit-margin-end:     20px;
-      height:                 1px;
+      position:               absolute;
+      right:                  0;
+      bottom:                 -.056em;
+      left:                   0;
+      height:                 .056em;
       background-color:       #eee;
     }
-  .subpageHeading
+  .sectionHeading
     {
       font-size:              1.4em;
       padding:                1.167em 0 .722em;

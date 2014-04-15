@@ -3,7 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
-  File                    :           js/popup.js
+  File                    :           js/browser-action.js
   Description             :           Popup JavaScript
 
   Table of Contents:
@@ -22,9 +22,6 @@
  ==================================================================================== */
 
 var Popup = {
-    strLogoPath                   : 'http://101.ru/vardata/modules/channel/dynamics/'
-  ,
-
   /**
    * 1.a.
    *
@@ -61,7 +58,7 @@ var Popup = {
             'recentTrackRow'
           , {
                 track : arrRecentTracks[ i ][ 0 ]
-              , src   : Popup.strLogoPath + arrRecentTracks[ i ][ 2 ]
+              , src   : arrRecentTracks[ i ][ 2 ]
               , alt   : arrRecentTracks[ i ][ 1 ]
             }
         );

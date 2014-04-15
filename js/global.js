@@ -30,12 +30,18 @@
 
 var Global = {
     intNotificationCount          : 1
-  , intNoVolume                   : 0              // Uppod JS API (volume 0-100)
-  , strValidUrl                   : '101.ru/'
+  , intNoVolume                   : 0
   , strNotificationId             : 'pozitone_tab' // We'll add tab ID when displaying
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
+  , strModuleSettingsPrefix       : 'objSettings_'
+
+  // Embedded modules
+  , arrValidUrl                   : [
+      '101.ru'
+    , 'vk.com'
+  ]
 
   // Don't show these buttons, if they have been clicked for this track already
   , arrAddTrackToPlaylistFeedback : [
@@ -44,6 +50,7 @@ var Global = {
     ]
   , strFavoriteStatusSuccess      : chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
+  // All possible settings
   , objSettingsDefaults           : {
         boolNotificationShowWhenStopped         : { miscDefault : false }
       , boolNotificationShowWhenMuted           : { miscDefault : false }
@@ -67,6 +74,15 @@ var Global = {
                       , iconUrl   : 'img/emotion_smile_icon&16.png'
                     }
                   , strFunction   : 'favorite'
+                }
+            }
+          , next                  : {
+                next              : {
+                    objButton     : {
+                        title     : chrome.i18n.getMessage( 'poziNotificationButtonsNextTitle' )
+                      , iconUrl   : 'img/playback_next_icon&16.png'
+                    }
+                  , strFunction   : 'next'
                 }
             }
           , playStop              : {
@@ -147,23 +163,19 @@ var Global = {
       , objThis                = this
       , objTempPlayerInfo      = objPlayerInfo
       , objTempStationInfo     = objStationInfo
+      , strStorageVar          = Global.strModuleSettingsPrefix + objTempPlayerInfo.strModule
       ;
 
     chrome.notifications.clear( objThis.strNotificationId + intTabId, function() {
       chrome.storage.sync.get(
-          [
-              'boolNotificationShowWhenStopped'
-            , 'boolNotificationShowWhenMuted'
-            , 'boolNotificationShowWhenNoTrackInfo'
-            , 'boolNotificationShowStationLogo'
-            , 'strNotificationTitleFormat'
-            , 'arrNotificationButtons'
-          ]
-        , function( objData ) {
+          [ strStorageVar ]
+        , function( objReturn ) {
+            var objData = objReturn[ strStorageVar ];
 
-            // Show notification or not checks
+            // Whether to show notification or not
             if (
                   boolDisregardSameMessage === false
+              &&  typeof objData.boolNotificationShowWhenStopped !== 'undefined'
               &&  objData.boolNotificationShowWhenStopped === false
               &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
             )
@@ -171,6 +183,7 @@ var Global = {
 
             if (
                   boolDisregardSameMessage === false
+              &&  typeof objData.boolNotificationShowWhenMuted !== 'undefined'
               &&  objData.boolNotificationShowWhenMuted === false
               &&  objTempPlayerInfo.intVolume === Global.intNoVolume
             )
@@ -178,6 +191,7 @@ var Global = {
 
             if (
                   boolDisregardSameMessage === false
+              &&  typeof objData.boolNotificationShowWhenNoTrackInfo !== 'undefined'
               &&  objData.boolNotificationShowWhenNoTrackInfo === false
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             )
@@ -185,13 +199,13 @@ var Global = {
 
             // Notification Icon Settings
             if (
-                  objData.boolNotificationShowStationLogo === true
+                  objData.boolNotificationShowLogo === true
               &&  objStationInfo.strLogoDataUri !== null
             )
               objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
 
             var
-                strTitleFormat = objData.strNotificationTitleFormat
+                strTitleFormat = objData.strNotificationTitleFormat || ''
               , arrButtons     = objData.arrNotificationButtons
               ;
 
@@ -238,6 +252,14 @@ var Global = {
 
                   arrActiveButtons.push( 'favorite|loggedIn' );
                 }
+              }
+
+              if ( arrButtons.indexOf( 'next' ) !== -1 ) {
+                objNotificationOptions.buttons.push(
+                  Global.objSettingsDefaults.arrNotificationButtons.next.next.objButton
+                );
+
+                arrActiveButtons.push( 'next|next' );
               }
 
               if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {
@@ -309,7 +331,12 @@ var Global = {
    * @return  void
    **/
   isValidUrl : function ( strUrl ) {
-    return strUrl.indexOf( this.getValidUrl() ) !== -1;
+    // http://stackoverflow.com/a/8498668/561712
+    var $tempA = document.createElement( 'a' );
+
+    $tempA.href = strUrl;
+
+    return this.arrValidUrl.indexOf( $tempA.hostname ) !== -1;
   }
   ,
 
@@ -392,7 +419,8 @@ var Global = {
   /**
    * 1.h.
    *
-   * Finds first open tab and invoke callback
+   * Finds first open tab and invoke callback.
+   * funcCallback() should return 0 to continue search for the right tab.
    *
    * @type    method
    * @param   funcCallback
@@ -413,11 +441,12 @@ var Global = {
 
           for ( var intTabIndex in objTempWindowTabs ) {
             if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
-              funcCallback(
-                  parseInt( intWindowId )
-                , parseInt( intTabIndex )
-                , objTempWindowTabs[ intTabIndex ].id
-              );
+              
+              if ( funcCallback(
+                    parseInt( intWindowId )
+                  , parseInt( intTabIndex )
+                  , objTempWindowTabs[ intTabIndex ].id
+                ) !== 0 )
               return;
             }
           }

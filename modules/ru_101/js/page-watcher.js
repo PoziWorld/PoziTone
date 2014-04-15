@@ -4,7 +4,7 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
   File                    :           js/page-watcher.js
-  Description             :           Page Watcher JavaScript
+  Description             :           101.ru Page Watcher JavaScript
 
   Table of Contents:
 
@@ -26,7 +26,8 @@
     1.o.                            initPlayerStatusObserver()
     1.p.                            initAddTrackToPlaylistFeedbackObserver()
     1.q.                            initFavoriteStatusObserver()
-    1.r.                            createStationLogoCanvas()
+    1.r.                            setLogoLoadedCallback()
+    1.s.                            modifyStationLogo()
   2.                              Listeners
     2.a.                            titlesong DOMCharacterDataModified
     2.b.                            runtime.onMessage
@@ -42,8 +43,7 @@
  ==================================================================================== */
 
 var
-    strLogoUrlPath                      = 'http://101.ru/vardata/modules/channel/dynamics/'
-  , strPlayerId                         = 'radioplayer_sm'
+    strPlayerId                         = 'radioplayer_sm'
   , strTrackInfoContainerId             = 'titlesong'
   , strFavoriteButtonSuccessClass       = 'favok'
 
@@ -73,7 +73,8 @@ var
       , strLogoBorderColor              : '#FFF'
 
       , objPlayerInfo                   : {
-            boolIsMp3Player             : ! document.contains( $wmaPlayer )
+            strModule                   : 'ru_101'
+          , boolIsMp3Player             : ! document.contains( $wmaPlayer )
           , intVolume                   : 0
           , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
           , strStatus                   : ''
@@ -82,9 +83,7 @@ var
       , objStationInfo                  : {
             strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
           , strStationNamePlusDesc      : document.title
-          , strLogoUrl                  : $stationLogo
-                                            .src
-                                              .replace( strLogoUrlPath, '' )
+          , strLogoUrl                  : $stationLogo.src
           , strLogoDataUri              : null
           , strTrackInfo                : $trackInfo.innerText
         }
@@ -115,7 +114,7 @@ var
     PageWatcher.initAddTrackToPlaylistFeedbackObserver();
     PageWatcher.initFavoriteStatusObserver();
 
-    PageWatcher.modifyStationLogo();
+    PageWatcher.setLogoLoadedCallback();
   }
   ,
 
@@ -178,11 +177,11 @@ var
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
       PageWatcher.getPlayerIntVar( 'getv', 'intVolume' );
     else // If WMA
-      // If muted, WMP doesn't set volume to 0. Emulate setting it to 0
+      // If muted, WMP doesn't set volume to 0. Simulate setting it to 0
       if (
             typeof $wmaPlayer.settings.mute !== 'undefined'
         &&  $wmaPlayer.settings.mute === true
-        )
+      )
         PageWatcher.objPlayerInfo.intVolume = 0;
       else if ( typeof $wmaPlayer.settings.volume === 'number' )
         PageWatcher.objPlayerInfo.intVolume = $wmaPlayer.settings.volume;
@@ -263,7 +262,7 @@ var
    **/
   processButtonClick_mute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) { // If MP3
-      // Uppod JS API doesn't provide "mute" method, emulate it by saving current value
+      // Uppod JS API doesn't provide "mute" method, simulate it by saving current value
       PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
       playerAPI.Uppod.uppodSend( strPlayerId, 'v0' );
     }
@@ -517,6 +516,27 @@ var
   /**
    * 1.r.
    *
+   * Checks whether station logo is loaded.
+   * If yes, created an image for notification.
+   * If no, adds onload listener.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  setLogoLoadedCallback : function() {
+    if ( $stationLogo.complete )
+      PageWatcher.modifyStationLogo();
+    else
+      $stationLogo.onload = function() {
+        PageWatcher.modifyStationLogo();
+      };
+  }
+  ,
+
+  /**
+   * 1.s.
+   *
    * Use canvas to add border to original logo image,
    * so we can use it as notification icon.
    *
@@ -525,35 +545,33 @@ var
    * @return  void
    **/
   modifyStationLogo : function() {
-    $stationLogo.onload = function() {
-      var
-          $canvas           = document.createElement( 'canvas' )
-        , intLogoBorder     = PageWatcher.intLogoBorderToAdd
-        , intLogoWidth      = $stationLogo.width
-        , intLogoHeight     = $stationLogo.height
-        , intCanvasWidth    = intLogoWidth + 2 * intLogoBorder
-        , intCanvasHeight   = intLogoHeight + 2 * intLogoBorder
-        ;
+    var
+        $canvas           = document.createElement( 'canvas' )
+      , intLogoBorder     = PageWatcher.intLogoBorderToAdd
+      , intLogoWidth      = $stationLogo.width
+      , intLogoHeight     = $stationLogo.height
+      , intCanvasWidth    = intLogoWidth + 2 * intLogoBorder
+      , intCanvasHeight   = intLogoHeight + 2 * intLogoBorder
+      ;
 
-      $canvas.width         = intCanvasWidth;
-      $canvas.height        = intCanvasHeight;
+    $canvas.width         = intCanvasWidth;
+    $canvas.height        = intCanvasHeight;
 
-      var context           = $canvas.getContext( '2d' );
+    var context           = $canvas.getContext( '2d' );
 
-      // Solid bg
-      context.fillStyle     = PageWatcher.strLogoBorderColor;
-      context.fillRect( 0, 0, intCanvasWidth, intCanvasHeight );
+    // Solid bg
+    context.fillStyle     = PageWatcher.strLogoBorderColor;
+    context.fillRect( 0, 0, intCanvasWidth, intCanvasHeight );
 
-      context.drawImage(
-          $stationLogo
-        , intLogoBorder
-        , intLogoBorder
-        , intLogoWidth
-        , intLogoHeight
-      );
+    context.drawImage(
+        $stationLogo
+      , intLogoBorder
+      , intLogoBorder
+      , intLogoWidth
+      , intLogoHeight
+    );
 
-      PageWatcher.objStationInfo.strLogoDataUri = $canvas.toDataURL();
-    };
+    PageWatcher.objStationInfo.strLogoDataUri = $canvas.toDataURL();
   }
 };
 

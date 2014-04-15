@@ -12,8 +12,11 @@
   1.                              Options
     1.a.                            init()
     1.b.                            getAvailableOptions()
-    1.c.                            onChange()
+    1.c.                            onSettingChange()
     1.d.                            switchPage()
+    1.e.                            populateModulesList()
+    1.f.                            onChooseModuleChange()
+    1.g.                            chooseModule()
   2.                              Events
 
  ==================================================================================== */
@@ -27,6 +30,24 @@
 var
     $allInputs // All <input />
   , intInputs  // Num of $allInputs
+  , $settingsSaved
+  , $settingsSubpages
+  , $chooseModuleForm
+  , $chooseModule
+  , $chosenModule
+
+  , strModuleLocalPrefix      = 'poziModule_'
+  , strChooseModuleFormId     = 'chooseModuleForm'
+  , strChooseModuleId         = 'chooseModule'
+  , strChosenModuleId         = 'chosenModule'
+  , strModulesListId          = 'chooseModuleList'
+  , strSettingsId             = 'settings'
+  , strSettingsSavedId        = 'settingsSaved'
+  , strModuleSettingsPrefix   = 'objSettings_'
+  , strModuleSubpageIdPrefix  = 'settings_'
+  , strModuleSubpageClass     = 'module'
+
+  , intSettingsSubpages
   ;
 
 // http://code.tutsplus.com/tutorials/from-jquery-to-javascript-a-reference--net-23703
@@ -68,21 +89,59 @@ var Options = {
     Page.localize( 'Options' );
 
     // Set global values
-    $allInputs  = document.getElementsByTagName( 'input' );
-    intInputs   = $allInputs.length;
+    $allInputs          = document.querySelectorAll( '.subpage input' );
+    intInputs           = $allInputs.length;
+
+    $settingsSaved      = document.getElementById( strSettingsSavedId );
+    $settingsSubpages   = document.getElementsByClassName( strModuleSubpageClass );
+    intSettingsSubpages = $settingsSubpages.length;
+
+    $chooseModuleForm   = document.getElementById( strChooseModuleFormId );
+    $chooseModule       = document.getElementById( strChooseModuleId );
+    $chosenModule       = document.getElementById( strChosenModuleId );
+
 
     Options.getAvailableOptions();
+    Options.populateModulesList();
 
-    addEvent(
-        $allInputs
-      , 'change'
-      , function( objEvent ) { Options.onChange( objEvent ); }
-    );
 
     addEvent(
         document.getElementsByClassName( 'switchPage' )
       , 'click'
       , function( objEvent ) { Options.switchPage( objEvent ); }
+    );
+
+    addEvent(
+        $chooseModule
+      , 'change'
+      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseModule
+      , 'keyup'
+      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseModule
+      , 'input'
+      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseModuleForm
+      , 'submit'
+      , function( objEvent ) {
+          Options.chooseModule( objEvent );
+          return false;
+        }
+    );
+
+    addEvent(
+        $allInputs
+      , 'change'
+      , function( objEvent ) { Options.onSettingChange( objEvent ); }
     );
   }
   ,
@@ -99,34 +158,48 @@ var Options = {
   getAvailableOptions : function() {
     var arrAvailableOptions = [];
 
-    for ( var i = 0; i < intInputs; i++ ) {
+    for ( var i = 0; i < intSettingsSubpages; i++ ) {
       var
-          $input            = $allInputs[ i ]
-        , strVarName        = $input.name
+          objSettingsSubpage        = $settingsSubpages[ i ]
+        , strModule                 = objSettingsSubpage.id.replace( strModuleSubpageIdPrefix, '' )
+        , strStorageVar             = strModuleSettingsPrefix + strModule
         ;
 
-      arrAvailableOptions.push( strVarName );
+      arrAvailableOptions.push( strStorageVar );
     }
 
     chrome.storage.sync.get( arrAvailableOptions, function( objStorageData ) {
-      for ( i = 0; i < intInputs; i++ ) {
-        var
-            $input            = $allInputs[ i ]
-          , strVarName        = $input.name
-          , strVarType        = $input.type
-          , strVarValue       = $input.value
-          , miscStorageVar    = objStorageData[ strVarName ]
-          ;
+      for ( var strKey in objStorageData ) {
+        if ( objStorageData.hasOwnProperty( strKey ) ) {
+          var
+              objModuleSettings         = objStorageData[ strKey ]
+            , strModule                 = strKey.replace( strModuleSettingsPrefix, '' )
+            , strModuleSubpageId        = strModuleSubpageIdPrefix + strModule
+            , $moduleSubpage            = document.getElementById( strModuleSubpageId )
+            , $allModuleSubpageInputs   = $moduleSubpage.getElementsByTagName( 'input' )
+            , intModuleSubpageInputs    = $allModuleSubpageInputs.length
+            ;
 
-        if ( typeof miscStorageVar !== 'undefined' ) {
-          if ( strVarType === 'checkbox' ) {
-            if ( typeof miscStorageVar === 'boolean' )
-              $input.checked = miscStorageVar;
-            else if ( typeof miscStorageVar === 'object' && miscStorageVar.indexOf( strVarValue ) !== -1 )
-              $input.checked = true;
+          for ( i = 0; i < intModuleSubpageInputs; i++ ) {
+            var
+                $input            = $allModuleSubpageInputs[ i ]
+              , strVarName        = $input.name
+              , strVarType        = $input.type
+              , strVarValue       = $input.value
+              , miscStorageVar    = objModuleSettings[ strVarName ]
+              ;
+
+            if ( typeof miscStorageVar !== 'undefined' ) {
+              if ( strVarType === 'checkbox' ) {
+                if ( typeof miscStorageVar === 'boolean' )
+                  $input.checked = miscStorageVar;
+                else if ( typeof miscStorageVar === 'object' && miscStorageVar.indexOf( strVarValue ) !== -1 )
+                  $input.checked = true;
+              }
+              else if ( strVarType === 'radio' && typeof miscStorageVar === 'string' && miscStorageVar === strVarValue )
+                $input.checked = true;
+            }
           }
-          else if ( strVarType === 'radio' && typeof miscStorageVar === 'string' && miscStorageVar === strVarValue )
-            $input.checked = true;
         }
       }
     });
@@ -136,24 +209,33 @@ var Options = {
   /**
    * 1.c.
    *
-   * Assign change listeners
+   * Assign change listeners for settings
    *
    * @type    method
    * @param   objEvent
    * @return  void
    **/
-  onChange : function( objEvent ) {
+  onSettingChange : function( objEvent ) {
+    $settingsSaved.className = 'reset';
+
     var
-        $this   = objEvent.target
-        objTemp = {}
+        $this                 = objEvent.target
+      , objTemp               = {}
+      , objModuleSettings     = {}
+      , miscSetting
+      , strModuleSettings
+      , strChosenModuleValue  = $chosenModule.value
       ;
 
     if ( $this.type === 'checkbox' && $this.value === 'on' )
-      objTemp[ $this.name ] = $this.checked;
+      miscSetting = $this.checked;
     else if ( $this.type === 'checkbox' && $this.value !== 'on' ) {
       var
-          $group    = document.getElementsByName( $this.name )
-        , arrTemp   = []
+          $moduleSubpage  = document.getElementById( strModuleSubpageIdPrefix + strChosenModuleValue )
+        , $group          = $moduleSubpage.querySelectorAll(
+                              'input[name="' + $this.name + '"]'
+                            )
+        , arrTemp         = []
         ;
 
       for ( var i = 0; i < $group.length; i++ ) {
@@ -163,16 +245,32 @@ var Options = {
           arrTemp.push( $groupEl.value );
       }
 
-      objTemp[ $this.name ] = arrTemp;
+      miscSetting = arrTemp;
     }
     else if ( $this.type === 'radio' )
-      objTemp[ $this.name ] = $this.value;
+      miscSetting = $this.value;
+
+    strModuleSettings = strModuleSettingsPrefix + strChosenModuleValue;
+
+    // TODO: Is there a need for objTemp?
+    objTemp[ strModuleSettings ] = {};
+    objTemp[ strModuleSettings ][ $this.name ] = miscSetting;
+    objModuleSettings[ $this.name ] = miscSetting;
 
     if ( Global.isEmpty( objTemp ) !== true )
-      chrome.storage.sync.set( objTemp, function() {
-        // Debug
-        chrome.storage.sync.get( null, function(data) {
-          console.log(data);
+      chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+        for ( var strKey in objModuleSettings ) {
+          if ( objModuleSettings.hasOwnProperty( strKey ) )
+            objReturn[ strModuleSettings ][ strKey ] = objModuleSettings[ strKey ];
+        }
+
+        chrome.storage.sync.set( objReturn, function() {
+          $settingsSaved.className = 'show';
+
+          // Debug
+          chrome.storage.sync.get( null, function(data) {
+            console.log(data);
+          });
         });
       });
   }
@@ -214,6 +312,99 @@ var Options = {
     }
 
     return false;
+  }
+  ,
+
+  /**
+   * 1.e.
+   *
+   * Populate modules list
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  populateModulesList : function() {
+    var
+        $options    = document.getElementById( strModulesListId ).children
+      ;
+
+    for ( var i = 0, intOptions = $options.length; i < intOptions; i++ ) {
+      var
+          $this         = $options[ i ]
+        , strValue      = strModuleLocalPrefix + $this.dataset.module
+        , strLocalValue = chrome.i18n.getMessage( strValue )
+        ;
+
+      $this.value = strLocalValue;
+      $this.dataset.lowercasevalue = strLocalValue.toLowerCase();
+    }
+
+    $chooseModule.placeholder = chrome.i18n.getMessage( $chooseModule.dataset.placeholder );
+  }
+  ,
+
+  /**
+   * 1.f.
+   *
+   * If value equals one of the options, choose that option automatically
+   *
+   * @type    method
+   * @param   objEvent
+   * @return  void
+   **/
+   onChooseModuleChange: function( objEvent ) {
+    var
+        strValue  = $chooseModule.value.toLowerCase()
+      , $option   = document.querySelector(
+          '#chooseModuleList [data-lowercasevalue="' + strValue + '"]'
+        )
+      ;
+
+    if ( $option !== null )
+      Options.chooseModule();
+  }
+  ,
+
+  /**
+   * 1.g.
+   *
+   * When choose module form submitted
+   *
+   * @type    method
+   * @param   objEvent
+   * @return  void
+   **/
+  chooseModule : function( objEvent ) {
+    var
+        strValue  = $chooseModule.value.toLowerCase()
+      , $option   = document.querySelector(
+          '#chooseModuleList [data-lowercasevalue="' + strValue + '"]'
+        )
+      ;
+
+    if ( $option !== null ) {
+      var
+          strModuleName   = $option.dataset.module
+        , $targetSubpage  = document.getElementById( strModuleSubpageIdPrefix + strModuleName )
+        ;
+
+      if ( document.contains( $targetSubpage ) ) {
+        for ( var i = 0; i < intSettingsSubpages; i++ )
+          $settingsSubpages[ i ].style.display = 'none';
+
+        $targetSubpage.style.display = 'block';
+
+        // Save chosen module for later use
+        $chosenModule.value = strModuleName;
+
+        // Clear current form value, so the placeholder is visible
+        $chooseModule.value = '';
+      }
+    }
+
+    if ( typeof objEvent !== 'undefined' )
+      objEvent.preventDefault();
   }
 };
 

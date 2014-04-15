@@ -12,14 +12,18 @@
     1.a.                            init()
     1.b.                            setExtensionDefaults()
     1.c.                            saveRecentTrackInfo()
+    1.d.                            onMessageCallback()
+    1.e.                            checkOpenTabs()
   2.                              Listeners
-    2.a.                            runtime.onMessage
-    2.b.                            notifications.onButtonClicked
-    2.c.                            commands.onCommand
-    2.d.                            runtime.onInstalled
+    2.a.                            runtime.onMessage + runtime.onMessageExternal
+    2.b.                            notifications.onClicked
+    2.c.                            notifications.onButtonClicked
+    2.d.                            commands.onCommand
+    2.e.                            runtime.onInstalled
+    2.f.                            tabs.onUpdated
+    2.g.                            tabs.onRemoved
   3.                              On Load
-    3.a.                            Inject Page Watcher
-    3.b.                            Initialize extension defaults
+    3.a.                            Initialize extension defaults
 
  ==================================================================================== */
 
@@ -49,6 +53,7 @@ var Background = {
    * @return  void
    **/
   init : function() {
+    Background.checkOpenTabs();
   }
   ,
 
@@ -67,37 +72,43 @@ var Background = {
     chrome.storage.sync.get( null, function( objReturn ) {
       // 1. To set
       var
-          objTempToSet                              = {}
-          // TODO: Get defaults from Global
-        , objSettingsDefaults                       = {
-              boolNotificationShowWhenStopped       : false
-            , boolNotificationShowWhenMuted         : false
-            , boolNotificationShowWhenNoTrackInfo   : false
-            , boolNotificationShowStationLogo       : true
-            , strNotificationTitleFormat            : 'short'
-            , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
-            , objOpenTabs                           : {}
-            , arrRecentTracks                       : []
-            , intRecentTracksToKeep                 : 10
+          objTempToSet                                  = {}
+        , objSettingsDefaults                           = {
+              objOpenTabs                               : {}
+            , arrRecentTracks                           : []
+            , intRecentTracksToKeep                     : 10
+            
+            , objSettings_ru_101                        : {
+                  boolEnabled                           : true
+                , boolNotificationShowLogo              : true
+                , strNotificationTitleFormat            : 'short'
+                , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
+                , boolNotificationShowWhenStopped       : false
+                , boolNotificationShowWhenMuted         : false
+                , boolNotificationShowWhenNoTrackInfo   : false
+              }
+            , objSettings_com_vk_audio                  : {
+                  boolEnabled                           : true
+                , boolNotificationShowLogo              : true
+                , arrNotificationButtons                : [ 'add', 'next' ]
+                , boolNotificationShowWhenMuted         : false
+              }
           }
         ;
 
       // Some vars have been renamed, remove old ones if updated
-      if (
-            objDetails.reason === 'update'
-        &&  typeof objDetails.previousVersion !== 'undefined'
-        &&  objDetails.previousVersion < chrome.app.getDetails().version
-      ) {
-        var
-            arrSettingsToRemove = [
-                'boolShowNotificationWhenStopped'
-              , 'boolShowNotificationWhenMuted'
-              , 'boolShowNotificationWhenNoTrackInfo'
-            ]
-          ;
-
-        chrome.storage.sync.remove( arrSettingsToRemove, function() {});
-      }
+//      if (
+//            objDetails.reason === 'update'
+//        &&  typeof objDetails.previousVersion !== 'undefined'
+//        &&  objDetails.previousVersion < chrome.app.getDetails().version
+//      ) {
+//        var
+//            arrSettingsToRemove = [
+//            ]
+//          ;
+//
+//        chrome.storage.sync.remove( arrSettingsToRemove, function() {});
+//      }
 
       for ( var strSetting in objSettingsDefaults ) {
         if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
@@ -120,7 +131,13 @@ var Background = {
           arrTempToRemove                           = []
         , arrSettingsToRemove                       = [
               'arrLastTracks'
+            , 'arrNotificationButtons'
             , 'intLastTracksToKeep'
+            , 'boolNotificationShowStationLogo'
+            , 'boolNotificationShowWhenStopped'
+            , 'boolNotificationShowWhenMuted'
+            , 'boolNotificationShowWhenNoTrackInfo'
+            , 'strNotificationTitleFormat'
           ]
         ;
 
@@ -196,6 +213,96 @@ var Background = {
       });
     });
   }
+  ,
+
+  /**
+   * 1.d.
+   *
+   * Processes messages from PoziTone and its "modules" (external extensions)
+   *
+   * @type    method
+   * @param   objMessage
+   *            Message received
+   * @param   objSender
+   *            Sender of the message
+   * @return  void
+   **/
+  onMessageCallback : function( objMessage, objSender, objSendResponse ) {
+    var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
+
+    // Debug
+    console.log( 'Background onMessage ', objMessage );
+
+    // Show notification if track info changed or extension asks to show it again
+    // (set of buttons needs to be changed, for example)
+    if (
+          Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
+      &&  strTrackInfo !== Background.strPreviousTrack
+      ||  objMessage.boolDisregardSameMessage === true
+    ) {
+      Global.showNotification(
+          objMessage.boolUserLoggedIn
+        , objMessage.boolDisregardSameMessage
+        , 100
+        , objMessage.objPlayerInfo
+        , objMessage.objStationInfo
+      );
+
+      Background.strPreviousTrack = strTrackInfo;
+    }
+    else { // Debug
+      console.log( 'Don\'t show notification. Current Track: ' + strTrackInfo );
+    }
+  }
+  ,
+
+  /**
+   * 1.e.
+   *
+   * Checks if there are any changes to open tabs, 
+   * detects if supported sites were opened/closed.
+   * 
+   * TODO: Auto-injection (inject required module detector
+   * which will then inject correct PageWatcher).
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  checkOpenTabs : function() {
+    chrome.tabs.query( {}, function( tabs ) {
+      var objOpenTabs = {};
+
+      for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
+        if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
+          console.log( 'Found open PoziTab: ' + objTab.url );
+
+          var
+              intWindowId = objTab.windowId
+            , intTabId    = objTab.id
+            ;
+
+          // If there are no open tabs for this windowId saved yet
+          if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) === true )
+            objOpenTabs[ objTab.windowId ] = {};
+
+          objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
+
+          chrome.tabs.sendMessage( intTabId, 'Do you copy?', function( strResponse ) {
+            if ( strResponse !== 'Copy that.' ) {
+    //          chrome.tabs.executeScript( intTabId, { file: '/modules/ru_101/js/uppod-player-api.js' } );
+    //          chrome.tabs.executeScript( intTabId, { file: '/modules/ru_101/js/page-watcher.js' } );
+            }
+          });
+        }
+      }
+
+      if ( Global.isEmpty( objOpenTabs ) !== true )
+        Global.saveOpenTabs( objOpenTabs );
+      else
+        console.log( 'Could not find open PoziTab.' );
+    });
+  }
 };
 
 /* ====================================================================================
@@ -217,37 +324,60 @@ var Background = {
  * @return  void
  **/
 chrome.runtime.onMessage.addListener(
-  function( objMessage, objSender, sendResponse ) {
-    var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
+  function( objMessage, objSender, objSendResponse ) {
+    Background.onMessageCallback( objMessage, objSender, objSendResponse );
+  }
+);
 
-    // Debug
-    console.log( 'Background onMessage ', objMessage );
-
-    // Show notification if track info changed or extension asks to show it again
-    // (set of buttons needs to be changed, for example)
-    if (
-              Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
-          &&  strTrackInfo !== Background.strPreviousTrack
-          ||  objMessage.boolDisregardSameMessage === true
-      ) {
-      Global.showNotification(
-          objMessage.boolUserLoggedIn
-        , objMessage.boolDisregardSameMessage
-        , objSender.tab.id
-        , objMessage.objPlayerInfo
-        , objMessage.objStationInfo
-      );
-
-      Background.strPreviousTrack = strTrackInfo;
-    }
-    else { // Debug
-      console.log( 'Don\'t show notification. Current Track: ' + strTrackInfo );
-    }
+chrome.runtime.onMessageExternal.addListener(
+  function( objMessage, objSender, objSendResponse ) {
+    Background.onMessageCallback( objMessage, objSender, objSendResponse );
   }
 );
 
 /**
  * 2.b.
+ *
+ * Listens for clicks on notification
+ *
+ * @type    method
+ * @param   strNotificationId
+ *            Notification ID
+ * @param   intButtonIndex
+ *            Notification button index
+ * @return  void
+ **/
+chrome.notifications.onClicked.addListener(
+  function( strNotificationId, intButtonIndex ) {
+    var intNotificationTabId = parseInt(
+      strNotificationId.replace( Global.strNotificationId, '' )
+    );
+
+    var funcFocusTab = function( intWindowId, intTabIndex, intTabId ) {
+      if ( intNotificationTabId === intTabId )
+        chrome.windows.update(
+            intWindowId
+          , { focused: true }
+          , function() {
+              chrome.tabs.highlight(
+                  { windowId: intWindowId, tabs: intTabIndex }
+                , function() {
+
+                  }
+              );
+            }
+        );
+      // Continue searching for the right tab
+      else
+        return 0;
+    };
+
+    Global.findFirstOpenTabInvokeCallback( funcFocusTab );
+  }
+);
+
+/**
+ * 2.c.
  *
  * Listens for buttons clicks from notification
  *
@@ -277,7 +407,7 @@ chrome.notifications.onButtonClicked.addListener(
 );
 
 /**
- * 2.c.
+ * 2.d.
  *
  * Listens for hotkeys
  *
@@ -312,7 +442,7 @@ chrome.commands.onCommand.addListener(
 );
 
 /**
- * 2.d.
+ * 2.e.
  *
  * Fired when the extension is first installed, 
  * when the extension is updated to a new version, 
@@ -333,6 +463,48 @@ chrome.runtime.onInstalled.addListener(
   }
 );
 
+/**
+ * 2.f.
+ *
+ * When tab updates, recheck open tabs. 
+ * So that if we, for example, changed URL of tab which would get commands, 
+ * after it has been changed, another one gets commands.
+ *
+ * @type    method
+ * @param   intTabId
+ * @param   objChangeInfo
+ *            Lists the changes to the state of the tab that was updated.
+ * @param   objTab
+ *            Gives the state of the tab that was updated.
+ * @return  void
+ **/
+chrome.tabs.onUpdated.addListener(
+  function( intTabId, objChangeInfo, objTab ) {
+    var strStatus = objChangeInfo.status;
+
+    if ( typeof strStatus !== 'undefined' && strStatus === 'complete' )
+      Background.checkOpenTabs();
+  }
+);
+
+/**
+ * 2.g.
+ *
+ * When tab closes, recheck open tabs. 
+ * So that if we closed tab which would get commands, after it has been closed,
+ * another one gets commands.
+ *
+ * @type    method
+ * @param   objDetails
+ *            Reason event is being dispatched, previous version
+ * @return  void
+ **/
+chrome.tabs.onRemoved.addListener(
+  function() {
+    Background.checkOpenTabs();
+  }
+);
+
 /* ====================================================================================
 
   3.                              On Load
@@ -341,52 +513,6 @@ chrome.runtime.onInstalled.addListener(
 
 /**
  * 3.a.
- *
- * Checks whether tab is open. 
- * If yes, injects Page Watcher.
- *
- * @type    method
- * @param   objMessage
- *            Message received
- * @param   objSender
- *            Sender of the message
- * @return  void
- **/
-chrome.tabs.query( {}, function( tabs ) {
-  var objOpenTabs = {};
-
-  for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
-    if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
-      console.log( 'Found open PoziTab: ' + objTab.url );
-
-      var
-          intWindowId = objTab.windowId
-        , intTabId    = objTab.id
-        ;
-
-      // If there are no open tabs for this windowId saved yet
-      if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) === true )
-        objOpenTabs[ objTab.windowId ] = {};
-
-      objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
-
-      chrome.tabs.sendMessage( intTabId, 'Do you copy?', function( strResponse ) {
-        if ( strResponse !== 'Copy that.' ) {
-          chrome.tabs.executeScript( intTabId, { file: '/js/uppod-player-api.js' } );
-          chrome.tabs.executeScript( intTabId, { file: '/js/page-watcher.js' } );
-        }
-      });
-    }
-  }
-
-  if ( Global.isEmpty( objOpenTabs ) !== true )
-    Global.saveOpenTabs( objOpenTabs );
-  else
-    console.log( 'Could not find open PoziTab.' );
-});
-
-/**
- * 3.b.
  *
  * Initialize extension defaults on load
  *

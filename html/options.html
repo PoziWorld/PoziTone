@@ -40,20 +40,108 @@
     </header>
     <article id="content">
       <section id="settings" class="page">
-        <h1 i18n-content="poziOptionsPageSettingsH1" class="pageHeading"></h1>
-        <section class="subpage">
+        <header class="pageHeader">
+          <h1 class="pageHeading">
+            <span i18n-content="poziOptionsPageSettingsH1"></span>
+            <span i18n-content="poziOptionsPageSettingsSaved" id="settingsSaved"></span>
+          </h1>
+          <form id="chooseModuleForm">
+            <input
+              list="chooseModuleList"
+              id="chooseModule"
+              data-placeholder="poziOptionsPageSettingsChooseModulePlaceholder"
+              autocomplete="off"
+              autofocus
+                />
+            <datalist id="chooseModuleList">
+              <option data-module="com_vk_audio">
+              <option data-module="ru_101">
+            </datalist>
+            <input type="hidden" id="chosenModule" />
+          </form>
+        </header>
+        <section id="settings_com_vk_audio" class="subpage module">
+          <h1 i18n-content="poziModule_com_vk_audio_long" class="subpageHeading"></h1>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationIconFormat" class="subpageHeading"></h1>
+            <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationIconFormatShowStationLogo">
-                  <input type="checkbox" name="boolNotificationShowStationLogo" />
+                <label i18n-content="poziOptionsPageSettingsSupportEnabled">
+                  <input type="checkbox" name="boolEnabled" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationTitleFormat" class="subpageHeading"></h1>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationIconFormat" class="sectionHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationIconFormatShowVkLogo">
+                  <input type="checkbox" name="boolNotificationShowLogo" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="sectionHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsAdd">
+                  <input type="checkbox" name="arrNotificationButtons" value="add" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsNext">
+                  <input type="checkbox" name="arrNotificationButtons" value="next" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsPlayStop">
+                  <input type="checkbox" name="arrNotificationButtons" value="playStop" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationButtonsMuteUnmute">
+                  <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="sectionHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
+                  <input type="checkbox" name="boolNotificationShowWhenMuted" />
+                </label>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section id="settings_ru_101" class="subpage module">
+          <h1 i18n-content="poziModule_ru_101_long" class="subpageHeading"></h1>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsSupportEnabled">
+                  <input type="checkbox" name="boolEnabled" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationIconFormat" class="sectionHeading"></h1>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsNotificationIconFormatShowStationLogo">
+                  <input type="checkbox" name="boolNotificationShowLogo" />
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationTitleFormat" class="sectionHeading"></h1>
             <ul>
               <li>
                 <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatShort">
@@ -73,7 +161,7 @@
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="subpageHeading"></h1>
+            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="sectionHeading"></h1>
             <ul>
               <li>
                 <label i18n-content="poziOptionsPageSettingsNotificationButtonsAdd">
@@ -98,7 +186,7 @@
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="subpageHeading"></h1>
+            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="sectionHeading"></h1>
             <ul>
               <li>
                 <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">

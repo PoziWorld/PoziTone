@@ -1,5 +1,15 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.0
+    * Added support for VK's audio player (only on full version of the site - vk.com).
+    * Separate settings for each player.
+    * New available button – “Next track” (only for VK).
+    * Now when the pop-up notification is clicked a tab with that player will be found and activated.
+    * Added a draft PoziTone API: third-party developers will be able to create the extensions for other players; those extensions will send a required information to PoziTone, and PoziTone will take care of the rest.
+    * Fixed some bugs:
+      * for some 101.ru's stations the logo would not show up when viewing the recent tracks list;
+      * when closing one of the tabs with PoziTone injected, keyboard shortcuts would not send commands to another open tab with PoziTone.
+
 ### v0.0.1.8
     * Extension size is reduced by ~57 KB (almost a quarter of the total size) by eliminating dependency on a third-party library (jQuery).
 
@@ -8,12 +18,12 @@
     * Fixed a bug where repeated track info was saved on a player status change.
 
 ### v0.0.1.6
-    * Added "feedback" for the main actions. Now, after clicking a button on the notification or using keyboard shortcuts, a new notification will inform of a result of the performed action:
-      * "Add track to playlist" - "Successfully added track to playlist" or "Track already in your playlist";
-      * "I like it!" - "Thank you for rewarding a DJ's hard work!";
-      * "Stop / Play" - "Playback started/stopped/resumed";
-      * "Mute / Unmute" - "Muted/Unmuted".
-> Be advised that appearance of the notification for "Add track to playlist" and "I like it!" sometimes can be delayed because of technical reasons beyond `PoziTone`'s control.
+    * Added “feedback” for the main actions. Now, after clicking a button on the notification or using keyboard shortcuts, a new notification will inform of a result of the performed action:
+      * “Add track to playlist” - “Successfully added track to playlist” or “Track already in your playlist”;
+      * “I like it!” - “Thank you for rewarding a DJ's hard work!”;
+      * “Stop / Play” - “Playback started/stopped/resumed”;
+      * “Mute / Unmute” - “Muted/Unmuted”.
+> Be advised that appearance of the notification for “Add track to playlist” and “I like it!” sometimes can be delayed because of technical reasons beyond `PoziTone`'s control.
 
 ### v0.0.1.5
     * Saving an on air track on the page load.
@@ -37,10 +47,10 @@
 
 ### v0.0.1.1
     * Added keyboard shortcuts for the following actions: 
-      * "Add track to playlist" - Alt+Shift+D;
-      * "Stop / Play" - Alt+Shift+P;
-      * "Mute / Unmute" - Alt+Shift+M;
-      * "Show notification" - Alt+Shift+Q.
+      * “Add track to playlist” - Alt+Shift+D;
+      * “Stop / Play” - Alt+Shift+P;
+      * “Mute / Unmute” - Alt+Shift+M;
+      * “Show notification” - Alt+Shift+Q.
     * Detailed README.md file.
 
 ### v0.0.1.0
