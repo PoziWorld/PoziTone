@@ -22,7 +22,7 @@ Features
 *	**Add track to a playlist**
 
 	_Enjoying the track?_
-	Add it to your playlist from the pop-up notification, and you will be able to get back to it later! You can also reward a DJ's hard work by clicking on "I like it!". (Only on 101.ru.)
+	Add it to your playlist from the pop-up notification, and you will be able to get back to it later! You can also reward a DJ's hard work by clicking on “I like it!” . (Only on 101.ru.)
 
 *	**Skip to next track**
 
@@ -53,9 +53,9 @@ Installation
 
 1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
-3. Open "Customize and control Google Chrome" menu, go to Tools, then Extensions.
-4. Checkmark "Developer mode".
-5. Click on "Load unpacked extension...", choose the folder from step 2, click "OK".
+3. Open “Customize and control Google Chrome”  menu, go to Tools, then Extensions.
+4. Checkmark “Developer mode” .
+5. Click on “Load unpacked extension...” , choose the folder from step 2, click “OK” .
 
 If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
 
@@ -73,10 +73,10 @@ Also don't forget to interact with `PoziTone` via [keyboard shortcuts](#keyboard
 Keyboard shortcuts
 --------
 
-1. Alt+Shift+D - "Add track to playlist".
-2. Alt+Shift+P - "Stop / Play".
-3. Alt+Shift+M - "Mute / Unmute".
-4. Alt+Shift+Q - "Show notification".
+1. Alt+Shift+D - “Add track to playlist” .
+2. Alt+Shift+P - “Stop / Play” .
+3. Alt+Shift+M - “Mute / Unmute” .
+4. Alt+Shift+Q - “Show notification” .
 
 
 Limitations
