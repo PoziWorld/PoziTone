@@ -112,7 +112,10 @@ var
 
     PageWatcher.initPlayerStatusObserver();
     PageWatcher.initAddTrackToPlaylistFeedbackObserver();
-    PageWatcher.initFavoriteStatusObserver();
+
+    // There is no such option when not logged-in
+    if ( PageWatcher.boolUserLoggedIn === true )
+      PageWatcher.initFavoriteStatusObserver();
 
     PageWatcher.setLogoLoadedCallback();
   }

@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.2
+    * [101.ru] Fixed: the station logo wouldn't show up in the notification for not logged-in users.
+
 ### v0.0.2.1
     * Hotfix for broken buttons in the notification.
     * Correct quotes in README.
