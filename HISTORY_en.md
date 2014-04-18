@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.3
+    * Now when a tab with a player gets closed or when the address of the tab gets changed the notification is not being kept in the Chrome Notification Center.
+
 ### v0.0.2.2
     * [101.ru] Fixed: the station logo wouldn't show up in the notification for not logged-in users.
 

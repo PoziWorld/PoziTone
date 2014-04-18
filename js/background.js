@@ -8,33 +8,40 @@
 
   Table of Contents:
 
-  1.                              Background
-    1.a.                            init()
-    1.b.                            setExtensionDefaults()
-    1.c.                            saveRecentTrackInfo()
-    1.d.                            onMessageCallback()
-    1.e.                            checkOpenTabs()
-  2.                              Listeners
-    2.a.                            runtime.onMessage + runtime.onMessageExternal
-    2.b.                            notifications.onClicked
-    2.c.                            notifications.onButtonClicked
-    2.d.                            commands.onCommand
-    2.e.                            runtime.onInstalled
-    2.f.                            tabs.onUpdated
-    2.g.                            tabs.onRemoved
-  3.                              On Load
-    3.a.                            Initialize extension defaults
+  1. Background
+      init()
+      setExtensionDefaults()
+      saveRecentTrackInfo()
+      onMessageCallback()
+      checkOpenTabs()
+      checkIfOpenTabChangedDomainOnUpdated()
+      checkIfOpenTabChangedDomainOnReplaced()
+      checkIfHostnameChanged()
+      removeNotification()
+  2. Listeners
+      runtime.onMessage + runtime.onMessageExternal
+      notifications.onClicked
+      notifications.onButtonClicked
+      commands.onCommand
+      runtime.onInstalled
+      tabs.onUpdated
+      tabs.onReplaced
+      tabs.onRemoved
+  3. On Load
+      Initialize extension defaults
 
  ==================================================================================== */
 
 /* ====================================================================================
 
-  1.                              Background
+  1. Background
 
  ==================================================================================== */
 
 var Background = {
-    strPreviousTrack              : ''
+    strObjOpenTabsName            : 'objOpenTabs'
+
+  , strPreviousTrack              : ''
   , arrTrackInfoPlaceholders      : [
       , ''
       , '...'
@@ -44,8 +51,6 @@ var Background = {
   ,
 
   /**
-   * 1.a.
-   *
    * Initialize
    *
    * @type    method
@@ -58,8 +63,6 @@ var Background = {
   ,
 
   /**
-   * 1.b.
-   *
    * Set extension defaults
    *
    * @type    method
@@ -160,8 +163,6 @@ var Background = {
   ,
 
   /**
-   * 1.c.
-   *
    * Save Last Track info
    *
    * @type    method
@@ -216,8 +217,6 @@ var Background = {
   ,
 
   /**
-   * 1.d.
-   *
    * Processes messages from PoziTone and its "modules" (external extensions)
    *
    * @type    method
@@ -257,8 +256,6 @@ var Background = {
   ,
 
   /**
-   * 1.e.
-   *
    * Checks if there are any changes to open tabs, 
    * detects if supported sites were opened/closed.
    * 
@@ -266,10 +263,13 @@ var Background = {
    * which will then inject correct PageWatcher).
    *
    * @type    method
-   * @param   No Parameters Taken
+   * @param   objSavedTab
+   *            Optional. Previous state of tab.
+   * @param   intRemovedTabId
+   *            Optional. Previous ID of tab.
    * @return  void
    **/
-  checkOpenTabs : function() {
+  checkOpenTabs : function( objSavedTab, intRemovedTabId ) {
     chrome.tabs.query( {}, function( tabs ) {
       var objOpenTabs = {};
 
@@ -295,25 +295,171 @@ var Background = {
             }
           });
         }
+
+        // chrome.tabs.onReplaced
+        if (
+              typeof objSavedTab === 'object'
+          &&  typeof intRemovedTabId === 'number'
+          &&  objSavedTab.index === objTab.index
+        )
+          Background.checkIfHostnameChanged(
+              objSavedTab
+            , objTab
+            , intRemovedTabId
+          );
       }
 
-      if ( Global.isEmpty( objOpenTabs ) !== true )
-        Global.saveOpenTabs( objOpenTabs );
+      Global.saveOpenTabs( objOpenTabs );
+
+      if ( Global.isEmpty( objOpenTabs ) !== true ) {
+        // TODO: Can exceed max number of write operations
+      }
       else
         console.log( 'Could not find open PoziTab.' );
     });
+  }
+  ,
+
+  /**
+   * Checks if this tab had supported URL, and if changed to not supported one
+   * remove the notification (possibly created).
+   *
+   * @type    method
+   * @param   objTab
+   *            Tab properties
+   * @return  void
+   **/
+  checkIfOpenTabChangedDomainOnUpdated : function( objTab ) {
+    chrome.storage.sync.get(
+        Background.strObjOpenTabsName
+      , function( objReturn ) {
+          var 
+              objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
+            , objSavedWindow  = objSavedTabs[ objTab.windowId ]
+            ;
+
+          if ( typeof objSavedWindow === 'object' ) {
+            var objSavedTab = objSavedWindow[ objTab.index ];
+
+            if ( typeof objSavedTab === 'object' )
+              Background.checkIfHostnameChanged( objSavedTab, objTab );
+          }
+        }
+    );
+  }
+  ,
+
+  /**
+   * Checks if this tab had supported URL, and if changed to not supported one
+   * remove the notification (possibly created).
+   *
+   * @type    method
+   * @param   intRemovedTabId
+   *            Previous Tab ID, before replace
+   * @return  void
+   **/
+  checkIfOpenTabChangedDomainOnReplaced : function( intRemovedTabId ) {
+    // Debug
+    console.log( 'Background.checkIfOpenTabChangedDomainOnReplaced' );
+
+    chrome.storage.sync.get(
+        Background.strObjOpenTabsName
+      , function( objReturn ) {
+          var 
+              objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
+            ;
+
+          for ( var intWindowId in objSavedTabs ) {
+            if ( objSavedTabs.hasOwnProperty( intWindowId ) ) {
+              var objSavedWindows = objSavedTabs[ intWindowId ];
+
+              for ( var intTabIndex in objSavedWindows ) {
+                if ( objSavedWindows.hasOwnProperty( intTabIndex ) ) {
+                  var objSavedTab = objSavedWindows[ intTabIndex ];
+
+                  if ( objSavedTab.id === intRemovedTabId ) {
+                    // Debug
+                    console.log(
+                      'Background.checkIfOpenTabChangedDomainOnReplaced match'
+                    );
+
+                    Background.checkOpenTabs( objSavedTab, intRemovedTabId );
+                    return;
+                  }
+                }
+              }
+            }
+          }
+
+          // Debug
+          console.log(
+            'Background.checkIfOpenTabChangedDomainOnReplaced no match'
+          );
+
+          // When no tabs had been saved
+          Background.checkOpenTabs();
+        }
+    );
+  }
+  ,
+
+  /**
+   * Checks if hostname of the tab changed.
+   * If yes, removes the notification for that tab.
+   *
+   * @type    method
+   * @param   objSavedTab
+   *            Previous state of tab
+   * @param   objTab
+   *            Current state of tab
+   * @param   intRemovedTabId
+   *            Optional. Previous ID of tab
+   * @return  void
+   **/
+  checkIfHostnameChanged : function( objSavedTab, objTab, intRemovedTabId ) {
+    // http://stackoverflow.com/a/8498668/561712
+    var
+        $aSavedTab  = document.createElement( 'a' )
+      , $aTab       = document.createElement( 'a' )
+      ;
+
+    $aSavedTab.href = objSavedTab.url;
+    $aTab.href      = objTab.url;
+
+    if ( $aSavedTab.hostname !== $aTab.hostname ) {
+      var intTabId = objTab.id;
+
+      if ( typeof intRemovedTabId === 'number' )
+        intTabId = intRemovedTabId;
+
+      Background.removeNotification( intTabId );
+    }
+  }
+  ,
+
+  /**
+   * Remove the notification for this tab.
+   *
+   * @type    method
+   * @param   intTabId
+   *            ID of the tab
+   * @return  void
+   **/
+  removeNotification : function( intTabId ) {
+    chrome.notifications.clear(
+        Global.strNotificationId + intTabId
+      , function() {}
+    );
   }
 };
 
 /* ====================================================================================
 
-  2.                              Listeners
+  2. Listeners
 
  ==================================================================================== */
 
 /**
- * 2.a.
- *
  * Listens for track info sent from Page Watcher
  *
  * @type    method
@@ -336,8 +482,6 @@ chrome.runtime.onMessageExternal.addListener(
 );
 
 /**
- * 2.b.
- *
  * Listens for clicks on notification
  *
  * @type    method
@@ -377,8 +521,6 @@ chrome.notifications.onClicked.addListener(
 );
 
 /**
- * 2.c.
- *
  * Listens for buttons clicks from notification
  *
  * @type    method
@@ -407,8 +549,6 @@ chrome.notifications.onButtonClicked.addListener(
 );
 
 /**
- * 2.d.
- *
  * Listens for hotkeys
  *
  * @type    method
@@ -442,8 +582,6 @@ chrome.commands.onCommand.addListener(
 );
 
 /**
- * 2.e.
- *
  * Fired when the extension is first installed, 
  * when the extension is updated to a new version, 
  * and when Chrome is updated to a new version.
@@ -455,18 +593,15 @@ chrome.commands.onCommand.addListener(
  **/
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
-
     // Debug
-    console.log( 'Background onInstalled ', objDetails );
+    console.log( 'Background chrome.runtime.onInstalled ', objDetails );
 
     Background.setExtensionDefaults( objDetails );
   }
 );
 
 /**
- * 2.f.
- *
- * When tab updates, recheck open tabs. 
+ * When tab is updated (most likely NOT loaded from cache), recheck open tabs. 
  * So that if we, for example, changed URL of tab which would get commands, 
  * after it has been changed, another one gets commands.
  *
@@ -480,40 +615,77 @@ chrome.runtime.onInstalled.addListener(
  **/
 chrome.tabs.onUpdated.addListener(
   function( intTabId, objChangeInfo, objTab ) {
+    // Debug
+    console.log(
+        'Background chrome.tabs.onUpdated '
+      , JSON.stringify( objChangeInfo )
+    );
+
     var strStatus = objChangeInfo.status;
 
-    if ( typeof strStatus !== 'undefined' && strStatus === 'complete' )
-      Background.checkOpenTabs();
+    if ( typeof strStatus !== 'undefined' ) {
+      if ( strStatus === 'loading' )
+        Background.checkIfOpenTabChangedDomainOnUpdated( objTab );
+      else if ( strStatus === 'complete' )
+        Background.checkOpenTabs();
+    }
   }
 );
 
 /**
- * 2.g.
+ * When tab is replaced with another tab due to prerendering or instant
+ * (most likely loaded from cache), recheck open tabs. 
+ * So that if we, for example, changed URL of tab which would get commands, 
+ * after it has been changed, another one gets commands.
  *
- * When tab closes, recheck open tabs. 
+ * @type    method
+ * @param   intTabId
+ * @param   objChangeInfo
+ *            Lists the changes to the state of the tab that was updated.
+ * @param   objTab
+ *            Gives the state of the tab that was updated.
+ * @return  void
+ **/
+chrome.tabs.onReplaced.addListener(
+  function( intAddedTabId, intRemovedTabId ) {
+    // Debug
+    console.log(
+        'Background chrome.tabs.onReplaced '
+      , JSON.stringify( intAddedTabId )
+      , JSON.stringify( intRemovedTabId )
+    );
+
+    Background.checkIfOpenTabChangedDomainOnReplaced( intRemovedTabId );
+  }
+);
+
+/**
+ * When tab is closed, recheck open tabs. 
  * So that if we closed tab which would get commands, after it has been closed,
  * another one gets commands.
  *
  * @type    method
- * @param   objDetails
- *            Reason event is being dispatched, previous version
+ * @param   intTabId
+ *            ID of the tab that has been closed
  * @return  void
  **/
 chrome.tabs.onRemoved.addListener(
-  function() {
+  function( intTabId ) {
+    // Debug
+    console.log( 'Background chrome.tabs.onRemoved' );
+
     Background.checkOpenTabs();
+    Background.removeNotification( intTabId );
   }
 );
 
 /* ====================================================================================
 
-  3.                              On Load
+  3. On Load
 
  ==================================================================================== */
 
 /**
- * 3.a.
- *
  * Initialize extension defaults on load
  *
  * @type    method
