@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.3.2
+    * Fixed: Chrome does not allow 5 dot-separated integer version number.
+
 ### v0.0.2.3.1
     * Fixed: the notification would stay in the Chrome Notification Center when changing the address of a tab, if a background process of PoziTone was inactive at that moment.
 
