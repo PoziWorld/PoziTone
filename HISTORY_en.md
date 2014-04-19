@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.3.1
+    * Fixed: the notification would stay in the Chrome Notification Center when changing the address of a tab, if a background process of PoziTone was inactive at that moment.
+
 ### v0.0.2.3
     * Now when a tab with a player gets closed or when the address of the tab gets changed the notification is not being kept in the Chrome Notification Center.
 

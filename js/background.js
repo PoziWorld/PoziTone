@@ -58,7 +58,6 @@ var Background = {
    * @return  void
    **/
   init : function() {
-    Background.checkOpenTabs();
   }
   ,
 
