@@ -65,7 +65,7 @@ Installation (for Yandex)
 
 All the steps are the same as for Google Chrome, except step 3:
 
-3. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
+  3\. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
 
 
 Installation (for Amigo)
@@ -73,7 +73,7 @@ Installation (for Amigo)
 
 All the steps are the same as for Google Chrome, except step 3:
 
-3. Open “Amigo” menu, go to “Tools”, then “Extensions”.
+  3\. Open “Amigo” menu, go to “Tools”, then “Extensions”.
 
 
 Demo
