@@ -1,5 +1,10 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.4
+    * [vk.com] Fixed: the notification wouldn't show up for not logged-in users.
+    * PoziTone also works in the Yandex and Amigo browsers.
+    * Updated the README file.
+
 ### v0.0.2.3.2
     * Fixed: Chrome does not allow 5 dot-separated integer version number.
 
@@ -14,7 +19,7 @@
 
 ### v0.0.2.1
     * Hotfix for broken buttons in the notification.
-    * Correct quotes in README.
+    * Correct quotes in the README.
 
 ### v0.0.2.0
     * Added support for VK's audio player (only on full version of the site - vk.com).

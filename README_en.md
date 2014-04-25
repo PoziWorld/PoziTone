@@ -3,7 +3,7 @@
 PoziTone
 =======
 
-An extension for the Google Chrome browser that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
+An extension for the Google Chrome, Yandex and Amigo browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
 
 
 Features
@@ -48,16 +48,32 @@ Supported players
 * more to come...
 
 
-Installation
+Installation (for Google Chrome)
 --------
 
 1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
-3. Open “Customize and control Google Chrome”  menu, go to Tools, then Extensions.
+3. Open “Customize and control Google Chrome” menu, go to “Tools”, then “Extensions”.
 4. Checkmark “Developer mode” .
 5. Click on “Load unpacked extension...” , choose the folder from step 2, click “OK” .
 
 If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
+
+
+Installation (for Yandex)
+--------
+
+All the steps are the same as for Google Chrome, except step 3:
+
+3. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
+
+
+Installation (for Amigo)
+--------
+
+All the steps are the same as for Google Chrome, except step 3:
+
+3. Open “Amigo” menu, go to “Tools”, then “Extensions”.
 
 
 Demo
@@ -82,22 +98,31 @@ Keyboard shortcuts
 Limitations
 --------
 
-1. Maximum of 2 buttons on the pop-up notification at any one time (set by Google).
-2. Maximum of 4 [keyboard shortcuts](#keyboard-shortcuts) (set by Google).
-3. [Keyboard shortcuts](#keyboard-shortcuts) only work in an active window of the Chrome user where the extension is installed (set by Google).
-4. [Keyboard shortcuts](#keyboard-shortcuts) only work for the last opened tab when multiple 101.ru tabs are open for the same Google user.
+1. Maximum of 2 buttons on the pop-up notification at any one time (set by the browser developers).
+2. Maximum of 4 [keyboard shortcuts](#keyboard-shortcuts) (set by the browser developers).
+3. [Keyboard shortcuts](#keyboard-shortcuts) only work in an active window of the browser user where the extension is installed (set by the browser developers).
+4. [Keyboard shortcuts](#keyboard-shortcuts) only work for the first opened tab when multiple tabs with the supported players are open for the same browser user.
 
 
-Gratitude
+Gratitudes
 --------
 
 - To all those who give us life and happiness!
-- To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Pavel, Stanislav.
+- To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Sergey.
 - Google, Inc. - for all their excellent projects.
 - 101.ru - for a chance to listen to music for free and legally.
+
+
+Credits
+--------
+
 - `PoziTone` logo based on works by [Webalys](http://www.webalys.com).
 - The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
 licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+- Appearance of the «`PoziTone` Options» and «Recent Tracks» pages -
+  * Copyright 2014 The Chromium Authors. All rights reserved.
+  * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
+- All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
 
 
 Feedback

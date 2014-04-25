@@ -241,7 +241,7 @@ var Options = {
       for ( var i = 0; i < $group.length; i++ ) {
         var $groupEl = $group[ i ];
 
-        if ( $groupEl.checked === true )
+        if ( $groupEl.checked )
           arrTemp.push( $groupEl.value );
       }
 
@@ -257,7 +257,7 @@ var Options = {
     objTemp[ strModuleSettings ][ $this.name ] = miscSetting;
     objModuleSettings[ $this.name ] = miscSetting;
 
-    if ( Global.isEmpty( objTemp ) !== true )
+    if ( ! Global.isEmpty( objTemp ) )
       chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
         for ( var strKey in objModuleSettings ) {
           if ( objModuleSettings.hasOwnProperty( strKey ) )

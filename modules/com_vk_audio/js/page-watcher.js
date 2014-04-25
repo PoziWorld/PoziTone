@@ -21,8 +21,9 @@
        processCommand_muteUnmute()
        processCommand_showNotification()
        initObserver()
-       initPlayerStatusObserver()
        initBodyObserver()
+       initPlayerStatusObserver()
+       initPlayerLitePlayStopButtonContainerObserver()
        initTrackTitleObserver()
        initPlayerFullOpacityObserver()
        onPlayerLiteAppearance()
@@ -61,18 +62,22 @@ var
   // Buttons
   , strPlayerVisibleFullToolbarId         = 'pd'
   , strPlayerVisibleFullAddableClass      = 'add'
-  , strAddTrackToPlaylistButtonId         = 'pd_add'
-  , strAddTrackToPlaylistButtonAddedClass = 'added'
-  , strPlayNextTrackButtonId              = 'pd_next'
-  , strPlayStopButtonAddlId               = 'gp_play'
+  , strAddTrackToPlaylistBtnId            = 'pd_add'
+  , strAddTrackToPlaylistBtnAddedClass    = 'added'
+  , strPlayNextTrackBtnId                 = 'pd_next'
+  , strPlayStopBtnPlayerLiteContainerId   = 'gp_play_btn'
+  , strPlayStopBtnPlayerLiteId            = 'gp_play'
 
   , $playerVisibleFullToolbar
-  , $addTrackToPlaylistButton
+  , $addTrackToPlaylistBtn
   , $addTrackToPlaylistResponse
-  , $playNextTrackButton
-  , $playStopButton                       = document
+  , $playNextTrackBtn
+
+  , $playStopBtnHeader                    = document
                                               .getElementById( 'head_play_btn' )
-  , $playStopButtonAddl
+  , $playStopBtnPlayerLiteContainer
+  , $playStopBtnPlayerLite
+  , $mainPlayStopBtn                      = $playStopBtnHeader
 
   // Track title and performer
   , strTrackPerformerContainerId          = 'gp_performer'
@@ -107,6 +112,7 @@ var
           , intVolumeBeforeMuted          : 0
           , strStatus                     : ''
           , strPreviousStatus             : ''
+          , boolCanPlayNextTrackLoggedOut : false
         }
       , objStationInfo                    : {
             strStationName                : ''
@@ -153,8 +159,8 @@ var
    * @return  void / string
    **/
   getPlayerStatus : function( boolReturnStatus ) {
-    if ( document.contains( $playStopButton ) ) {
-      var boolPlaying = $playStopButton.classList.contains( 'playing' );
+    if ( document.contains( $mainPlayStopBtn ) ) {
+      var boolPlaying = $mainPlayStopBtn.classList.contains( 'playing' );
 
       // Follow the 101.ru logic:
       // 'stop' means it's in progress / playback can be stopped;
@@ -236,14 +242,15 @@ var
    * @return  void
    **/
   processButtonClick_playStop : function() {
-    $playStopButtonAddl = document.getElementById( strPlayStopButtonAddlId );
+    $playStopBtnPlayerLite = 
+      document.getElementById( strPlayStopBtnPlayerLiteId );
 
-    if ( document.contains( $playStopButtonAddl ) ) {
-      $playStopButtonAddl.click();
+    if ( document.contains( $playStopBtnPlayerLite ) ) {
+      $playStopBtnPlayerLite.click();
       return;
     }
 
-    $playStopButton.click();
+    $playStopBtnHeader.click();
   }
   ,
 
@@ -340,68 +347,6 @@ var
   ,
 
   /**
-   * Init player status changes observer
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
-   **/
-  initPlayerStatusObserver : function() {
-    var
-        $target       = $playStopButton
-      , objOptions    = {
-                            attributes        : true
-                          , attributeFilter   : [ 'class' ]
-                        }
-      , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
-            var
-                $target                   = arrMutations[ i ].target
-              , boolPlaying               = $target.classList.contains( 'playing' )
-              , strUpdatedPreviousStatus  = boolPlaying ? 'play' : 'stop'
-              ;
-
-            // Sometimes mutation happens even without player status change
-            if ( strUpdatedPreviousStatus === PageWatcher.objPlayerInfo.strPreviousStatus )
-              return;
-
-            // Follow the 101.ru logic
-            PageWatcher.objPlayerInfo.strPreviousStatus = strUpdatedPreviousStatus;
-
-            if ( boolPlaying ) {
-              var strLangStartedOrResumed = 
-                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
-
-              if ( PageWatcher.boolPageJustLoaded === true ) {
-                strLangStartedOrResumed =
-                  chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
-
-                PageWatcher.initTrackTitleObserver();
-              }
-
-              PageWatcher.sendSameMessage( strLangStartedOrResumed );
-
-              PageWatcher.boolHadPlayedBefore = true;
-              PageWatcher.boolPageJustLoaded = false;
-            }
-            else if (
-                  ! boolPlaying
-              &&  PageWatcher.boolHadPlayedBefore === true
-            )
-              PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
-              );
-
-            return;
-          };
-        }
-      ;
-
-    PageWatcher.initObserver( $target, objOptions, funcCallback );
-  }
-  ,
-
-  /**
    * Init <body /> observer
    *
    * @type    method
@@ -449,6 +394,122 @@ var
                 &&  arrAddedNodes[ 0 ].classList.contains( strFeedbackDialogClass )
               ) {
                 PageWatcher.onFeedbackDialogAppearance();
+                return;
+              }
+            }
+          };
+        }
+      ;
+
+    PageWatcher.initObserver( $target, objOptions, funcCallback, true );
+  }
+  ,
+
+  /**
+   * Init player status changes observer
+   *
+   * @type    method
+   * @param   $targetPlayStopBtn
+   *            Button in the header (logged-in) or lite player's (logged-out)
+   * @return  void
+   **/
+  initPlayerStatusObserver : function( $targetPlayStopBtn ) {
+    var
+        $target       = $targetPlayStopBtn
+      , objOptions    = {
+                            attributes        : true
+                          , attributeFilter   : [ 'class' ]
+                        }
+      , funcCallback  = function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            var
+                $target                   = arrMutations[ i ].target
+              , boolPlaying               = $target.classList.contains( 'playing' )
+              , strUpdatedPreviousStatus  = boolPlaying ? 'play' : 'stop'
+              ;
+
+            // Sometimes mutation happens even without player status change
+            if ( strUpdatedPreviousStatus === PageWatcher.objPlayerInfo.strPreviousStatus )
+              return;
+
+            // Follow the 101.ru logic
+            PageWatcher.objPlayerInfo.strPreviousStatus = strUpdatedPreviousStatus;
+
+            if ( boolPlaying ) {
+              var strLangStartedOrResumed = 
+                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
+
+              if ( PageWatcher.boolPageJustLoaded ) {
+                strLangStartedOrResumed =
+                  chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
+
+                PageWatcher.initTrackTitleObserver();
+              }
+
+              PageWatcher.sendSameMessage( strLangStartedOrResumed );
+
+              PageWatcher.boolHadPlayedBefore = true;
+              PageWatcher.boolPageJustLoaded = false;
+            }
+            else if (
+                  ! boolPlaying
+              &&  PageWatcher.boolHadPlayedBefore
+            )
+              PageWatcher.sendSameMessage(
+                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
+              );
+
+            return;
+          };
+        }
+      ;
+
+    PageWatcher.initObserver( $target, objOptions, funcCallback );
+  }
+  ,
+
+  /**
+   * Init lite player observer
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  initPlayerLitePlayButtonContainerObserver : function() {
+    $playStopBtnPlayerLiteContainer = 
+      document.getElementById( strPlayStopBtnPlayerLiteContainerId );
+
+    var
+        $target       = $playStopBtnPlayerLiteContainer
+      , objOptions    = {
+                            childList         : true
+                        }
+      , funcCallback  = function( arrMutations ) {  
+          for ( var i = 0; i < arrMutations.length; i++ ) {
+            var
+                objMutationRecord   = arrMutations[ i ]
+              , arrAddedNodes       = objMutationRecord.addedNodes
+              ;
+
+            if ( arrAddedNodes.length ) {
+              // Wait till play stop button gets appended to lite player.
+              if (
+                arrAddedNodes[ 0 ]
+                  .children[ 0 ]
+                    .children[ 0 ]
+                      .id === strPlayStopBtnPlayerLiteId
+              ) {
+                $playStopBtnPlayerLite = 
+                  document.getElementById( strPlayStopBtnPlayerLiteId );
+
+                $mainPlayStopBtn = $playStopBtnPlayerLite;
+
+                PageWatcher.initPlayerStatusObserver( $playStopBtnPlayerLite );
+                PageWatcher
+                  .checkIfPlayerStatusHadBeenChanged( $playStopBtnPlayerLite );
+
+                // Once button appeared, it doesn't dissapear - disconnect
+                DisconnectableObserver.disconnect();
                 return;
               }
             }
@@ -536,37 +597,22 @@ var
     // Once player appeared, it doesn't dissapear - disconnect
     DisconnectableObserver.disconnect();
 
-    $player                     = document.getElementById( strPlayerId );
-    $playerVisibleLiteClickable = document.getElementById( strPlayerVisibleLiteClickableId );
+    $player = 
+      document.getElementById( strPlayerId );
+    $playerVisibleLiteClickable =
+      document.getElementById( strPlayerVisibleLiteClickableId );
 
-    $trackPerformer             = document.getElementById( strTrackPerformerContainerId );
-    $trackTitle                 = document.getElementById( strTrackTitleContainerId );
+    $trackPerformer =
+      document.getElementById( strTrackPerformerContainerId );
+    $trackTitle =
+      document.getElementById( strTrackTitleContainerId );
 
-    PageWatcher.initPlayerStatusObserver();
-
-    // Sometimes player status changes before player appears.
-    // true after lcServer() has been called (Notifier inited).
-    // This is a fallback.
-    if ( $playStopButton.classList.contains( 'playing' ) ) {
-      var
-          strPreviousStatus = 'play'
-        , strMessage        = chrome.i18n.getMessage(
-            'poziNotificationPlayerStatusChangeStarted'
-          )
-        ;
-
-      PageWatcher.objPlayerInfo.strPreviousStatus = strPreviousStatus;
-
-      PageWatcher.sendSameMessage( strMessage );
-
-      PageWatcher.initTrackTitleObserver();
-
-      PageWatcher.boolHadPlayedBefore = true;
-      PageWatcher.boolPageJustLoaded = false;
-
-      // Debug
-      console.log( 'PoziTone: PageWatcher.initPlayerStatusObserver() fallback' );
+    if ( PageWatcher.boolUserLoggedIn ) {
+      PageWatcher.initPlayerStatusObserver( $playStopBtnHeader );
+      PageWatcher.checkIfPlayerStatusHadBeenChanged( $playStopBtnHeader );
     }
+    else
+      PageWatcher.initPlayerLitePlayButtonContainerObserver();
   }
   ,
 
@@ -618,6 +664,45 @@ var
   ,
 
   /**
+   * Sometimes player status changes before player appears (logged in) or
+   * starts playing (logged-out).
+   * 
+   * true after lcServer() has been called (Notifier inited).
+   * This is a fallback.
+   *
+   * @type    method
+   * @param   $targetPlayStopBtn
+   *            Button in the header (logged-in) or lite player's (logged-out)
+   * @return  void
+   **/
+  checkIfPlayerStatusHadBeenChanged : function( $targetPlayStopBtn ) {
+    if (
+          document.contains( $targetPlayStopBtn )
+      &&  $targetPlayStopBtn.classList.contains( 'playing' )
+    ) {
+      var
+          strPreviousStatus = 'play'
+        , strMessage        = chrome.i18n.getMessage(
+            'poziNotificationPlayerStatusChangeStarted'
+          )
+        ;
+
+      PageWatcher.objPlayerInfo.strPreviousStatus = strPreviousStatus;
+
+      PageWatcher.sendSameMessage( strMessage );
+
+      PageWatcher.initTrackTitleObserver();
+
+      PageWatcher.boolHadPlayedBefore = true;
+      PageWatcher.boolPageJustLoaded = false;
+
+      // Debug
+      console.log( 'PoziTone: PageWatcher.checkIfPlayerStatusHadBeenChanged' );
+    }
+  }
+  ,
+
+  /**
    * Add track to playlist if button is present.
    *
    * @type    method
@@ -626,10 +711,12 @@ var
    * @return  void
    **/
   addTrackToPlaylist : function( funcElse ) {
-    $playerVisibleFullToolbar = document.getElementById( strPlayerVisibleFullToolbarId );
-    $addTrackToPlaylistButton = document.getElementById( strAddTrackToPlaylistButtonId );
+    $playerVisibleFullToolbar =
+      document.getElementById( strPlayerVisibleFullToolbarId );
+    $addTrackToPlaylistBtn =
+      document.getElementById( strAddTrackToPlaylistBtnId );
 
-    if ( document.contains( $addTrackToPlaylistButton ) ) {
+    if ( document.contains( $addTrackToPlaylistBtn ) ) {
       // disconnect initPlayerFullOpacityObserver()
       DisconnectableObserver.disconnect();
 
@@ -638,23 +725,23 @@ var
             $playerVisibleFullToolbar
               .classList
                 .contains( strPlayerVisibleFullAddableClass )
-        &&  ! $addTrackToPlaylistButton
+        &&  ! $addTrackToPlaylistBtn
                 .classList
-                  .contains( strAddTrackToPlaylistButtonAddedClass )
+                  .contains( strAddTrackToPlaylistBtnAddedClass )
       ) {
         // Wait for feedback dialog
         PageWatcher.initBodyObserver( strFeedbackDialogClass );
 
-        $addTrackToPlaylistButton.click();
+        $addTrackToPlaylistBtn.click();
       }
       // If not addable ("My Music") or has been added already
       else if (
             ! $playerVisibleFullToolbar
                 .classList
                   .contains( strPlayerVisibleFullAddableClass )
-        ||  $addTrackToPlaylistButton
+        ||  $addTrackToPlaylistBtn
               .classList
-                .contains( strAddTrackToPlaylistButtonAddedClass )
+                .contains( strAddTrackToPlaylistBtnAddedClass )
       )
         PageWatcher.sendSameMessage(
           chrome.i18n.getMessage(
@@ -678,13 +765,13 @@ var
    * @return  void
    **/
   playNextTrack : function( funcElse ) {
-    $playNextTrackButton = document.getElementById( strPlayNextTrackButtonId );
+    $playNextTrackBtn = document.getElementById( strPlayNextTrackBtnId );
 
-    if ( document.contains( $playNextTrackButton ) ) {
+    if ( document.contains( $playNextTrackBtn ) ) {
       // disconnect initPlayerFullOpacityObserver()
       DisconnectableObserver.disconnect();
 
-      $playNextTrackButton.click();
+      $playNextTrackBtn.click();
 
       PageWatcher.hideOrKeepPlayerVisibleFull();
     }

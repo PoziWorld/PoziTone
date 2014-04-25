@@ -120,7 +120,7 @@ var Background = {
         }
       }
 
-      if ( Global.isEmpty( objTempToSet ) !== true )
+      if ( ! Global.isEmpty( objTempToSet ) )
         chrome.storage.sync.set( objTempToSet, function() {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
@@ -150,7 +150,7 @@ var Background = {
           arrTempToRemove.push( strSettingToRemove );
       }
 
-      if ( Global.isEmpty( arrTempToRemove ) !== true )
+      if ( ! Global.isEmpty( arrTempToRemove ) )
         chrome.storage.sync.remove( arrTempToRemove, function() {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
@@ -236,7 +236,7 @@ var Background = {
     if (
           Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
       &&  strTrackInfo !== Background.strPreviousTrack
-      ||  objMessage.boolDisregardSameMessage === true
+      ||  objMessage.boolDisregardSameMessage
     ) {
       Global.showNotification(
           objMessage.boolUserLoggedIn
@@ -282,7 +282,7 @@ var Background = {
             ;
 
           // If there are no open tabs for this windowId saved yet
-          if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) === true )
+          if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) )
             objOpenTabs[ objTab.windowId ] = {};
 
           objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
@@ -310,7 +310,7 @@ var Background = {
 
       Global.saveOpenTabs( objOpenTabs );
 
-      if ( Global.isEmpty( objOpenTabs ) !== true ) {
+      if ( ! Global.isEmpty( objOpenTabs ) ) {
         // TODO: Can exceed max number of write operations
       }
       else

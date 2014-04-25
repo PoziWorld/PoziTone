@@ -174,32 +174,32 @@ var Global = {
 
             // Whether to show notification or not
             if (
-                  boolDisregardSameMessage === false
+                  ! boolDisregardSameMessage
               &&  typeof objData.boolNotificationShowWhenStopped !== 'undefined'
-              &&  objData.boolNotificationShowWhenStopped === false
+              &&  ! objData.boolNotificationShowWhenStopped
               &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
             )
               return false;
 
             if (
-                  boolDisregardSameMessage === false
+                  ! boolDisregardSameMessage
               &&  typeof objData.boolNotificationShowWhenMuted !== 'undefined'
-              &&  objData.boolNotificationShowWhenMuted === false
+              &&  ! objData.boolNotificationShowWhenMuted
               &&  objTempPlayerInfo.intVolume === Global.intNoVolume
             )
               return false;
 
             if (
-                  boolDisregardSameMessage === false
+                  ! boolDisregardSameMessage
               &&  typeof objData.boolNotificationShowWhenNoTrackInfo !== 'undefined'
-              &&  objData.boolNotificationShowWhenNoTrackInfo === false
+              &&  ! objData.boolNotificationShowWhenNoTrackInfo
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             )
               return false;
 
             // Notification Icon Settings
             if (
-                  objData.boolNotificationShowLogo === true
+                  objData.boolNotificationShowLogo
               &&  objStationInfo.strLogoDataUri !== null
             )
               objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
@@ -230,7 +230,7 @@ var Global = {
 
               // TODO: Combine all following buttons check into one
 
-              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn === true ) {
+              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn ) {
                 // Don't show button, if track is in playlist
                 // TODO: Show if track changed while waited for server response
                 if ( Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) === -1 ) {
@@ -242,7 +242,7 @@ var Global = {
                 }
               }
 
-              if ( arrButtons.indexOf( 'favorite' ) !== -1 && boolUserLoggedIn === true ) {
+              if ( arrButtons.indexOf( 'favorite' ) !== -1 && boolUserLoggedIn ) {
                 // Don't show button, if liked this track already
                 // TODO: Show if track changed while waited for server response
                 if ( Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) === -1 ) {
@@ -254,7 +254,19 @@ var Global = {
                 }
               }
 
-              if ( arrButtons.indexOf( 'next' ) !== -1 ) {
+              if (
+                    arrButtons.indexOf( 'next' ) !== -1
+                &&  (
+                          boolUserLoggedIn
+                      ||  (
+                                typeof
+                                  objTempPlayerInfo
+                                    .boolCanPlayNextTrackLoggedOut ===
+                                      'undefined'
+                            ||  objTempPlayerInfo.boolCanPlayNextTrackLoggedOut
+                          )
+                    )
+              ) {
                 objNotificationOptions.buttons.push(
                   Global.objSettingsDefaults.arrNotificationButtons.next.next.objButton
                 );
@@ -374,7 +386,7 @@ var Global = {
     for ( var intWindowId in objOpenTabs ) {
       if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
         // If there are no open tabs for this windowId saved yet
-        if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) === true )
+        if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) )
           objToSet.objOpenTabs[ intWindowId ] = {};
 
         var objTempWindowTabs = objOpenTabs[ intWindowId ];
@@ -387,7 +399,7 @@ var Global = {
       }
     }
 
-    if ( Global.isEmpty( objToSet ) !== true )
+    if ( ! Global.isEmpty( objToSet ) )
       chrome.storage.sync.set( objToSet, function() {
         // Debug
         chrome.storage.sync.get( null, function( objData ) {

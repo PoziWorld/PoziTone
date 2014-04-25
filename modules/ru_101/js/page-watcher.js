@@ -107,14 +107,14 @@ var
   init : function() {
     // WMA player has 'stop' class by default (it's in Play mode),
     // so mutation doesn't happen on page load
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === false )
+    if ( ! PageWatcher.objPlayerInfo.boolIsMp3Player )
       PageWatcher.boolHadPlayedBefore = true;
 
     PageWatcher.initPlayerStatusObserver();
     PageWatcher.initAddTrackToPlaylistFeedbackObserver();
 
     // There is no such option when not logged-in
-    if ( PageWatcher.boolUserLoggedIn === true )
+    if ( PageWatcher.boolUserLoggedIn )
       PageWatcher.initFavoriteStatusObserver();
 
     PageWatcher.setLogoLoadedCallback();
@@ -177,13 +177,13 @@ var
    * @return  void
    **/
   getPlayerVolume : function() {
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) // If MP3
       PageWatcher.getPlayerIntVar( 'getv', 'intVolume' );
     else // If WMA
       // If muted, WMP doesn't set volume to 0. Simulate setting it to 0
       if (
             typeof $wmaPlayer.settings.mute !== 'undefined'
-        &&  $wmaPlayer.settings.mute === true
+        &&  $wmaPlayer.settings.mute
       )
         PageWatcher.objPlayerInfo.intVolume = 0;
       else if ( typeof $wmaPlayer.settings.volume === 'number' )
@@ -264,7 +264,7 @@ var
    * @return  void
    **/
   processButtonClick_mute : function() {
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) { // If MP3
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) { // If MP3
       // Uppod JS API doesn't provide "mute" method, simulate it by saving current value
       PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
       playerAPI.Uppod.uppodSend( strPlayerId, 'v0' );
@@ -288,7 +288,7 @@ var
    * @return  void
    **/
   processButtonClick_unmute : function() {
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player === true ) // If MP3
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) // If MP3
       // Uppod JS API doesn't provide "unmute" method, restore prev value
       playerAPI.Uppod.uppodSend( strPlayerId, 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
     else // If WMA
@@ -413,7 +413,7 @@ var
             if ( strPlayerStatus === 'stop' ) {
               var strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
 
-              if ( PageWatcher.boolPageJustLoaded === true )
+              if ( PageWatcher.boolPageJustLoaded )
                 strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
 
               PageWatcher.boolHadPlayedBefore = true;
@@ -422,7 +422,7 @@ var
             }
             else if (
                   strPlayerStatus === 'play'
-              &&  PageWatcher.boolHadPlayedBefore === true
+              &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
                 chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
@@ -451,9 +451,9 @@ var
     var
         $target       = $addTrackToPlaylistResponse
       , objOptions    = {
-                            characterData     : true
+                            characterData : true
                           , childList     : true
-                          , subtree     : true
+                          , subtree       : true
                         }
       , funcCallback  = function( arrMutations ) {  
           for ( var i = 0; i < arrMutations.length; i++ ) {
@@ -599,7 +599,7 @@ $trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
   PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
 
   // When WMA player starts, it should show "Playback started", same way as MP3
-  if ( PageWatcher.boolPageJustLoaded === true && !PageWatcher.objPlayerInfo.boolIsMp3Player ) {
+  if ( PageWatcher.boolPageJustLoaded && !PageWatcher.objPlayerInfo.boolIsMp3Player ) {
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' )
     );

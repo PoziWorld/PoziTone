@@ -161,12 +161,24 @@
             "message": "Добавить трек в плейлист"
           }
           ,
+          "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+            "message": "Добавить трек в плейлист <small>(требуется авторизация на сайте)</small>"
+          }
+          ,
           "poziOptionsPageSettingsNotificationButtonsFavorite": {
             "message": "Мне нравится!"
           }
           ,
+          "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+            "message": "Мне нравится! <small>(требуется авторизация на сайте)</small>"
+          }
+          ,
           "poziOptionsPageSettingsNotificationButtonsNext": {
             "message": "Следующий трек"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+            "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
           }
           ,
           "poziOptionsPageSettingsNotificationButtonsPlayStop": {

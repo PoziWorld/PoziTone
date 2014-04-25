@@ -161,12 +161,24 @@
             "message": "Add track to playlist"
           }
           ,
+          "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+            "message": "Add track to playlist <small>(authorization required on site)</small>"
+          }
+          ,
           "poziOptionsPageSettingsNotificationButtonsFavorite": {
             "message": "I like it!"
           }
           ,
+          "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+            "message": "I like it! <small>(authorization required on site)</small>"
+          }
+          ,
           "poziOptionsPageSettingsNotificationButtonsNext": {
             "message": "Next track"
+          }
+          ,
+          "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+            "message": "Next track <small>(authorization required on site)</small>"
           }
           ,
           "poziOptionsPageSettingsNotificationButtonsPlayStop": {
