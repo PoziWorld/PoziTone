@@ -14,29 +14,14 @@ Features
 	_Familiarizing with a new genre or band?_
 	`PoziTone` will show you track info (its name, band name) via a pop-up notification on every track change.
 
-*	**Easy playback control**
+*	**Easy player control**
 
-	_Need to answer an important call or have you had a new video shared?_
-	Stop/resume music playback with one click from the pop-up notification!
-
-*	**Add track to a playlist**
-
-	_Enjoying the track?_
-	Add it to your playlist from the pop-up notification, and you will be able to get back to it later! You can also reward a DJ's hard work by clicking on “I like it!” . (Only on 101.ru.)
-
-*	**Skip to next track**
-
-	_Boring track?_
-	Go to the next track with one click from the pop-up notification! (Only on vk.com.)
-
-*	**Simple actions**
-
-	_Want everything as easy as one, two, three?_
-	Control the main actions with the help of [keyboard shortcuts](#keyboard-shortcuts)! You don't need to open anything!
+	_Want to stop/resume playback, mute/unmute, switch track or add it to playlist?_
+	It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of [keyboard shortcuts](#keyboard-shortcuts)!
 
 *	**List of recent tracks**
 
-	_Which track played 5 minutes ago?_
+	_Which track played five minutes ago?_
 	`PoziTone` keeps information about the last 10 tracks played.
 
 
@@ -45,11 +30,13 @@ Supported players
 
 * [Online radio 101.ru](http://101.ru) (stations' main player).
 * [VK](https://vk.com) (audio, full version of site).
-* more to come...
+
+More to come...
 
 
-Installation (for Google Chrome)
+Installation
 --------
+### for Google Chrome
 
 1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
@@ -60,18 +47,16 @@ Installation (for Google Chrome)
 If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
 
 
-Installation (for Yandex)
---------
+### for Yandex
 
-All the steps are the same as for Google Chrome, except step 3:
+All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
 
    3\. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
 
 
-Installation (for Amigo)
---------
+### for Amigo
 
-All the steps are the same as for Google Chrome, except step 3:
+All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
 
    3\. Open “Amigo” menu, go to “Tools”, then “Extensions”.
 
@@ -82,8 +67,6 @@ Demo
 Open any station that you like from the [Stations list](http://101.ru/?an=port_allchannels).
 
 With every track change you can see the glory of `PoziTone`! :)
-
-Also don't forget to interact with `PoziTone` via [keyboard shortcuts](#keyboard-shortcuts)!
 
 
 Keyboard shortcuts
@@ -119,7 +102,7 @@ Credits
 - `PoziTone` logo based on works by [Webalys](http://www.webalys.com).
 - The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
 licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
-- Appearance of the «`PoziTone` Options» and «Recent Tracks» pages -
+- The appearance of the «`PoziTone` Options» and «Recent Tracks» pages -
   * Copyright 2014 The Chromium Authors. All rights reserved.
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
@@ -128,5 +111,5 @@ licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/
 Feedback
 --------
 
-Please report any issues/bugs [here](https://github.com/poziworld/pozitone/issues) 
-or [here](http://pozitone.idea.informer.com/).
+Please report any [issues/bugs](https://github.com/poziworld/pozitone/issues) 
+or send us your [comments/ideas](http://pozitone.idea.informer.com/).
