@@ -1,5 +1,7 @@
 > Это английская версия, см. [README.md](README.md) для русской.
 
+[![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
+
 PoziTone
 =======
 
