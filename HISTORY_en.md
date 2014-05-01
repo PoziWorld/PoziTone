@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.5
+    * [101.ru] Fixed: the “Add track to playlist” button would show up in the notification for the stations which do not support this action.
+
 ### v0.0.2.4
     * [vk.com] Fixed: the notification wouldn't show up for not logged-in users.
     * PoziTone also works in the Yandex and Amigo browsers.

@@ -46,6 +46,7 @@ var
     strPlayerId                         = 'radioplayer_sm'
   , strTrackInfoContainerId             = 'titlesong'
   , strFavoriteButtonSuccessClass       = 'favok'
+  , strFavoriteButtonSuccessClass2      = 'pollok'
 
   , $stationLogo                        = document
                                             .getElementById( 'player-site' )
@@ -86,6 +87,7 @@ var
           , strLogoUrl                  : $stationLogo.src
           , strLogoDataUri              : null
           , strTrackInfo                : $trackInfo.innerText
+          , boolHasAddToPlaylistButton  : false
         }
       , objAddTrackToPlaylistFeedback   : {
             'Трек успешно добавлен в плейлист'
@@ -110,8 +112,12 @@ var
     if ( ! PageWatcher.objPlayerInfo.boolIsMp3Player )
       PageWatcher.boolHadPlayedBefore = true;
 
+    if ( document.contains( $addTrackToPlaylistButton ) ) {
+      PageWatcher.objStationInfo.boolHasAddToPlaylistButton = true;
+      PageWatcher.initAddTrackToPlaylistFeedbackObserver();
+    }
+
     PageWatcher.initPlayerStatusObserver();
-    PageWatcher.initAddTrackToPlaylistFeedbackObserver();
 
     // There is no such option when not logged-in
     if ( PageWatcher.boolUserLoggedIn )
@@ -504,7 +510,12 @@ var
                         }
       , funcCallback  = function( arrMutations ) {  
           for ( var i = 0; i < arrMutations.length; i++ ) {
-            if ( arrMutations[ i ].target.className.indexOf( strFavoriteButtonSuccessClass ) > -1 ) {
+            var arrClassList = arrMutations[ i ].target.classList;
+
+            if (
+                  arrClassList.contains( strFavoriteButtonSuccessClass )
+              ||  arrClassList.contains( strFavoriteButtonSuccessClass2 )
+            ) {
               PageWatcher.sendSameMessage( chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' ) );
               return;
             }
