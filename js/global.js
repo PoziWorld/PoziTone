@@ -230,7 +230,19 @@ var Global = {
 
               // TODO: Combine all following buttons check into one
 
-              if ( arrButtons.indexOf( 'add' ) !== -1 && boolUserLoggedIn ) {
+              if (
+                    arrButtons.indexOf( 'add' ) !== -1
+                &&  (
+                          boolUserLoggedIn
+                      &&  (
+                                typeof
+                                  objTempStationInfo
+                                    .boolHasAddToPlaylistButton ===
+                                      'undefined'
+                            ||  objTempStationInfo.boolHasAddToPlaylistButton
+                          )
+                    )
+              ) {
                 // Don't show button, if track is in playlist
                 // TODO: Show if track changed while waited for server response
                 if ( Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) === -1 ) {
