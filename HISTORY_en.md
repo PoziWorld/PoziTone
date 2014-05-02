@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.6
+    * Fixed: the buttons on the notification could execute wrong action when playback is active at the same time on 101.ru and VK, and each player's set of the enabled buttons is different.
+
 ### v0.0.2.5
     * [101.ru] Fixed: the “Add track to playlist” button would show up in the notification for the stations which do not support this action.
 
@@ -21,7 +24,7 @@
     * [101.ru] Fixed: the station logo wouldn't show up in the notification for not logged-in users.
 
 ### v0.0.2.1
-    * Hotfix for broken buttons in the notification.
+    * Hotfix for broken buttons on the notification.
     * Correct quotes in the README.
 
 ### v0.0.2.0

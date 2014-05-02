@@ -223,7 +223,6 @@ var Global = {
               var
                   arrActiveButtons  = []
                 , arrTrackInfo      = objTempStationInfo.strTrackInfo.split( "\n\n" )
-                , objTempToSet      = {}
                 ;
 
               objNotificationOptions.buttons = [];
@@ -305,12 +304,16 @@ var Global = {
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
               }
 
-              // Save in storage for later use
-              objTempToSet.arrActiveButtons = arrActiveButtons;
-              chrome.storage.sync.set( objTempToSet, function() {
-                // Debug
-                chrome.storage.sync.get( null, function( objData ) {
-                  console.log( 'Global set arrActiveButtons ', objData );
+              // Save (per notification's tab id) in storage for later use
+              chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
+
+                objData.objActiveButtons[ intTabId ] = arrActiveButtons;
+                
+                chrome.storage.sync.set( objData, function() {
+                  // Debug
+                  chrome.storage.sync.get( null, function( objData ) {
+                    console.log( 'Global set objActiveButtons ', objData );
+                  });
                 });
               });
             }

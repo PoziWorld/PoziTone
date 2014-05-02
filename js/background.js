@@ -76,7 +76,8 @@ var Background = {
       var
           objTempToSet                                  = {}
         , objSettingsDefaults                           = {
-              objOpenTabs                               : {}
+              objActiveButtons                          : {}
+            , objOpenTabs                               : {}
             , arrRecentTracks                           : []
             , intRecentTracksToKeep                     : 10
             
@@ -132,7 +133,8 @@ var Background = {
       var
           arrTempToRemove                           = []
         , arrSettingsToRemove                       = [
-              'arrLastTracks'
+              'arrActiveButtons'
+            , 'arrLastTracks'
             , 'arrNotificationButtons'
             , 'intLastTracksToKeep'
             , 'boolNotificationShowStationLogo'
@@ -230,6 +232,12 @@ var Background = {
 
     // Debug
     console.log( 'Background onMessage ', objMessage );
+
+//    Global.updateOpenTabParameters(
+//        objSender.tab.windowId
+//      , objSender.tab.index
+//      , objMessage.objPlayerInfo.boolIsReady
+//    );
 
     // Show notification if track info changed or extension asks to show it again
     // (set of buttons needs to be changed, for example)
@@ -447,7 +455,23 @@ var Background = {
   removeNotification : function( intTabId ) {
     chrome.notifications.clear(
         Global.strNotificationId + intTabId
-      , function() {}
+      , function( boolWasCleared ) {
+          // Remove this notification's active buttons
+          if ( boolWasCleared )
+            chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
+
+              if ( typeof objData.objActiveButtons[ intTabId ] === 'object' ) {
+                delete objData.objActiveButtons[ intTabId ];
+
+                chrome.storage.sync.set( objData, function() {
+                  // Debug
+                  chrome.storage.sync.get( null, function( objData ) {
+                    console.log( 'Global remove from objActiveButtons ', objData );
+                  });
+                });
+              }
+            });
+      }
     );
   }
 };
@@ -533,11 +557,13 @@ chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
     var intTabId = parseInt( strNotificationId.replace( Global.strNotificationId, '' ) );
 
-    chrome.storage.sync.get( 'arrActiveButtons', function( objReturn ) {
+    chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
       // Debug
-      console.log( 'Background get arrActiveButtons ', objReturn );
+      console.log( 'Background get objActiveButtons ', objReturn );
 
-      var arrButton = objReturn.arrActiveButtons[ intButtonIndex ].split( '|' );
+      var arrButton = objReturn
+                        .objActiveButtons[ intTabId ][ intButtonIndex ]
+                          .split( '|' );
 
       chrome.tabs.sendMessage(
           intTabId
@@ -551,10 +577,8 @@ chrome.notifications.onButtonClicked.addListener(
  * Listens for hotkeys
  *
  * @type    method
- * @param   strNotificationId
- *            Notification ID
- * @param   intButtonIndex
- *            Notification button index
+ * @param   strCommand
+ *            Command
  * @return  void
  **/
 chrome.commands.onCommand.addListener(
@@ -576,6 +600,7 @@ chrome.commands.onCommand.addListener(
       );
     };
 
+    // TODO: Is there a need for 2 separate files, bg and global?
     Global.findFirstOpenTabInvokeCallback( funcSendMessage );
   }
 );

@@ -75,6 +75,7 @@ var
 
       , objPlayerInfo                   : {
             strModule                   : 'ru_101'
+          , boolIsReady                 : true // When page has a player
           , boolIsMp3Player             : ! document.contains( $wmaPlayer )
           , intVolume                   : 0
           , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one

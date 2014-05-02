@@ -108,6 +108,7 @@ var
 
       , objPlayerInfo                     : {
             strModule                     : strModule
+          , boolIsReady                   : false
           , intVolume                     : 0
           , intVolumeBeforeMuted          : 0
           , strStatus                     : ''
