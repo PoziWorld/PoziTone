@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.7
+    * Now when pressing keyboard shortcuts, PoziTone first sends a command to the latest active player. In a case when there is no active player (for example, the tab had been closed), a player (a tab with the player) opened earlier than others will get the command.
+
 ### v0.0.2.6
     * Fixed: the buttons on the notification could execute wrong action when playback is active at the same time on 101.ru and VK, and each player's set of the enabled buttons is different.
 
@@ -18,7 +21,7 @@
     * Fixed: the notification would stay in the Chrome Notification Center when changing the address of a tab, if a background process of PoziTone was inactive at that moment.
 
 ### v0.0.2.3
-    * Now when a tab with a player gets closed or when the address of the tab gets changed the notification is not being kept in the Chrome Notification Center.
+    * Now when a tab with a player gets closed or when the address of the tab gets changed, the notification is not being kept in the Chrome Notification Center.
 
 ### v0.0.2.2
     * [101.ru] Fixed: the station logo wouldn't show up in the notification for not logged-in users.
@@ -31,7 +34,7 @@
     * Added support for VK's audio player (only on full version of the site - vk.com).
     * Separate settings for each player.
     * New available button – “Next track” (only for VK).
-    * Now when the pop-up notification is clicked a tab with that player will be found and activated.
+    * Now when the pop-up notification is clicked, a tab with that player will be found and activated.
     * Added a draft PoziTone API: third-party developers will be able to create the extensions for other players; those extensions will send a required information to PoziTone, and PoziTone will take care of the rest.
     * Fixed some bugs:
       * for some 101.ru's stations the logo would not show up when viewing the recent tracks list;

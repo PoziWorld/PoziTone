@@ -1,4 +1,4 @@
-/* ====================================================================================
+/* =============================================================================
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
@@ -8,39 +8,39 @@
 
   Table of Contents:
 
-  1.                              Page Watcher
-    1.a.                            init()
-    1.b.                            getPlayerInfo()
-    1.c.                            getPlayerStatus()
-    1.d.                            getPlayerVolume()
-    1.e.                            getPlayerIntVar()
-    1.f.                            processButtonClick_add()
-    1.g.                            processButtonClick_favorite()
-    1.h.                            processButtonClick_playStop()
-    1.i.                            processButtonClick_mute()
-    1.j.                            processButtonClick_unmute()
-    1.k.                            sendSameMessage()
-    1.l.                            processCommand_muteUnmute()
-    1.m.                            processCommand_showNotification()
-    1.n.                            initObserver()
-    1.o.                            initPlayerStatusObserver()
-    1.p.                            initAddTrackToPlaylistFeedbackObserver()
-    1.q.                            initFavoriteStatusObserver()
-    1.r.                            setLogoLoadedCallback()
-    1.s.                            modifyStationLogo()
-  2.                              Listeners
-    2.a.                            titlesong DOMCharacterDataModified
-    2.b.                            runtime.onMessage
-  3.                              On Load
-    3.a.                            Initialize
+  1. Page Watcher
+      init()
+      getPlayerInfo()
+      getPlayerStatus()
+      getPlayerVolume()
+      getPlayerIntVar()
+      processButtonClick_add()
+      processButtonClick_favorite()
+      processButtonClick_playStop()
+      processButtonClick_mute()
+      processButtonClick_unmute()
+      sendSameMessage()
+      processCommand_muteUnmute()
+      processCommand_showNotification()
+      initObserver()
+      initPlayerStatusObserver()
+      initAddTrackToPlaylistFeedbackObserver()
+      initFavoriteStatusObserver()
+      setLogoLoadedCallback()
+      modifyStationLogo()
+  2. Listeners
+      titlesong DOMCharacterDataModified
+      runtime.onMessage
+  3. On Load
+      Initialize
 
- ==================================================================================== */
+ ============================================================================ */
 
-/* ====================================================================================
+/* =============================================================================
 
-  1.                              Page Watcher
+  1. Page Watcher
 
- ==================================================================================== */
+ ============================================================================ */
 
 var
     strPlayerId                         = 'radioplayer_sm'
@@ -75,7 +75,7 @@ var
 
       , objPlayerInfo                   : {
             strModule                   : 'ru_101'
-          , boolIsReady                 : true // When page has a player
+          , boolIsReady                 : ! document.contains( $playStopButton )
           , boolIsMp3Player             : ! document.contains( $wmaPlayer )
           , intVolume                   : 0
           , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
@@ -99,8 +99,6 @@ var
   ,
 
   /**
-   * 1.a.
-   *
    * Initialize
    *
    * @type    method
@@ -129,8 +127,6 @@ var
   ,
 
   /**
-   * 1.b.
-   *
    * Gets player info via Uppod JS API
    *
    * @type    method
@@ -146,8 +142,6 @@ var
   ,
 
   /**
-   * 1.c.
-   *
    * Gets player status from Play/Stop Button class attr
    *
    * @type    method
@@ -175,8 +169,6 @@ var
   ,
 
   /**
-   * 1.d.
-   *
    * Gets player volume
    *
    * @type    method
@@ -199,8 +191,6 @@ var
   ,
 
   /**
-   * 1.e.
-   *
    * Gets player integer var via Uppod JS API
    *
    * @type    method
@@ -219,8 +209,6 @@ var
   ,
 
   /**
-   * 1.f.
-   *
    * Simulate "Add track to playlist" player method
    *
    * @type    method
@@ -233,8 +221,6 @@ var
   ,
 
   /**
-   * 1.g.
-   *
    * Simulate "I like it!" player method
    *
    * @type    method
@@ -247,8 +233,6 @@ var
   ,
 
   /**
-   * 1.h.
-   *
    * Simulate "Play/Stop" player method
    * Don't send message because Mutation Observer takes care of it
    *
@@ -262,8 +246,6 @@ var
   ,
 
   /**
-   * 1.i.
-   *
    * Simulate "Mute" player method
    *
    * @type    method
@@ -286,8 +268,6 @@ var
   ,
 
   /**
-   * 1.j.
-   *
    * Simulate "Unmute" player method
    *
    * @type    method
@@ -308,8 +288,6 @@ var
   ,
 
   /**
-   * 1.k.
-   *
    * Send same message again (set of buttons needs to be changed)
    *
    * @type    method
@@ -335,8 +313,6 @@ var
   ,
 
   /**
-   * 1.l.
-   *
    * If volume is not 0, then mute; otherwise unmute;
    * TODO: Create general muteUnmute, and use it here and for button click.
    *
@@ -355,8 +331,6 @@ var
   ,
 
   /**
-   * 1.m.
-   *
    * If volume is not 0, then mute; otherwise unmute;
    * TODO: Don't use 'processCommand_showNotification', just 'sendSameMessage' from sender.
    *
@@ -370,8 +344,6 @@ var
   ,
 
   /**
-   * 1.n.
-   *
    * Init observer
    *
    * @type    method
@@ -394,8 +366,6 @@ var
   ,
 
   /**
-   * 1.o.
-   *
    * Init player status changes observer
    *
    * @type    method
@@ -446,8 +416,6 @@ var
   ,
 
   /**
-   * 1.p.
-   *
    * Init "Add track to playlist" feedback observer
    *
    * @type    method
@@ -494,8 +462,6 @@ var
   ,
 
   /**
-   * 1.q.
-   *
    * Init "I like it!" button changes observer
    *
    * @type    method
@@ -529,8 +495,6 @@ var
   ,
 
   /**
-   * 1.r.
-   *
    * Checks whether station logo is loaded.
    * If yes, created an image for notification.
    * If no, adds onload listener.
@@ -550,8 +514,6 @@ var
   ,
 
   /**
-   * 1.s.
-   *
    * Use canvas to add border to original logo image,
    * so we can use it as notification icon.
    *
@@ -590,15 +552,13 @@ var
   }
 };
 
-/* ====================================================================================
+/* =============================================================================
 
-  2.                              Event Listeners
+  2. Event Listeners
 
- ==================================================================================== */
+ ============================================================================ */
 
 /**
- * 2.a.
- *
  * Watches track info changes and sends them to Background
  * TODO: Add check if this element exists
  * TODO: Mutation events deprecated...
@@ -630,8 +590,6 @@ $trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
 }, false);
 
 /**
- * 2.b.
- *
  * Listens for command sent from Background.
  * If requested function found, call it.
  *
@@ -654,18 +612,24 @@ chrome.runtime.onMessage.addListener(
       funcToProceedWith();
     else if ( strMessage === 'Do you copy?' )
       funcSendResponse( 'Copy that.' );
+    else if ( strMessage === 'Are you ready to get a command?' ) {
+      var strResponse = 'Affirmative.';
+
+      if ( ! PageWatcher.objPlayerInfo.boolIsReady )
+        strResponse = 'Negative.';
+
+      funcSendResponse( strResponse );
+    }
   }
 );
 
-/* ====================================================================================
+/* =============================================================================
 
-  3.                              On Load
+  3. On Load
 
- ==================================================================================== */
+ ============================================================================ */
 
 /**
- * 3.a.
- *
  * Initialize
  *
  * @type    method

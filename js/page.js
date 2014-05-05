@@ -1,4 +1,4 @@
-/* ====================================================================================
+/* =============================================================================
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
@@ -8,24 +8,22 @@
 
   Table of Contents:
 
-  1.                              Page
-    1.a.                            init()
-    1.b.                            localize()
-  2.                              Events
+  1. Page
+      init()
+      localize()
+  2. Events
 
- ==================================================================================== */
+ ============================================================================ */
 
-/* ====================================================================================
+/* =============================================================================
 
-  1.                              Page
+  1. Page
 
- ==================================================================================== */
+ ============================================================================ */
 
 var Page = {
 
   /**
-   * 1.a.
-   *
    * Initialize
    *
    * @type    method
@@ -37,8 +35,6 @@ var Page = {
   ,
 
   /**
-   * 1.b.
-   *
    * Localize page
    *
    * @type    method
@@ -59,19 +55,25 @@ var Page = {
         if ( $localizableElement.nodeName === 'LABEL' )
           $localizableElement.innerHTML = 
               $localizableElement.innerHTML
-            + chrome.i18n.getMessage( $localizableElement.getAttribute( 'i18n-content' ) );
+            + chrome.i18n.getMessage(
+                $localizableElement.getAttribute( 'i18n-content' )
+              );
         else
-          $localizableElement.innerHTML = chrome.i18n.getMessage( $localizableElement.getAttribute( 'i18n-content' ) );
+          $localizableElement.innerHTML = 
+            chrome.i18n.getMessage(
+              $localizableElement.getAttribute( 'i18n-content' )
+            );
     }
 
-    document.title = chrome.i18n.getMessage( 'pozi' + strPageName + 'PageTitle' );
+    document.title = 
+      chrome.i18n.getMessage( 'pozi' + strPageName + 'PageTitle' );
   }
 };
 
-/* ====================================================================================
+/* =============================================================================
 
-  3.                              Events
+  2. Events
 
- ==================================================================================== */
+ ============================================================================ */
 
 document.addEventListener( 'DOMContentLoaded', Page.init );

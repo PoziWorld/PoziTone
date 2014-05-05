@@ -1,4 +1,4 @@
-/* ====================================================================================
+/* =============================================================================
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
@@ -8,24 +8,24 @@
 
   Table of Contents:
 
-  0.                              Globals
-  1.                              Options
-    1.a.                            init()
-    1.b.                            getAvailableOptions()
-    1.c.                            onSettingChange()
-    1.d.                            switchPage()
-    1.e.                            populateModulesList()
-    1.f.                            onChooseModuleChange()
-    1.g.                            chooseModule()
-  2.                              Events
+  0. Globals
+  1. Options
+      init()
+      getAvailableOptions()
+      onSettingChange()
+      switchPage()
+      populateModulesList()
+      onChooseModuleChange()
+      chooseModule()
+  2. Events
 
- ==================================================================================== */
+ ============================================================================ */
 
-/* ====================================================================================
+/* =============================================================================
 
-  0.                              Globals
+  0. Globals
 
- ==================================================================================== */
+ ============================================================================ */
 
 var
     $allInputs // All <input />
@@ -50,35 +50,31 @@ var
   , intSettingsSubpages
   ;
 
-// http://code.tutsplus.com/tutorials/from-jquery-to-javascript-a-reference--net-23703
+// code.tutsplus.com/tutorials/from-jquery-to-javascript-a-reference--net-23703
 var addEvent = (function () {
-    var filter = function(el, type, fn) {
-        for ( var i = 0, len = el.length; i < len; i++ ) {
-            addEvent(el[i], type, fn);
-        }
+  var filter = function( el, type, fn ) {
+    for ( var i = 0, len = el.length; i < len; i++ )
+      addEvent( el[i], type, fn );
+  };
+
+  if ( document.addEventListener )
+    return function ( el, type, fn ) {
+      if ( el && el.nodeName || el === window )
+        el.addEventListener( type, fn, false );
+      else if ( el && el.length )
+        filter( el, type, fn );
     };
-    if ( document.addEventListener ) {
-        return function (el, type, fn) {
-            if ( el && el.nodeName || el === window ) {
-                el.addEventListener(type, fn, false);
-            } else if (el && el.length) {
-                filter(el, type, fn);
-            }
-        };
-    }
 })();
 
-/* ====================================================================================
+/* =============================================================================
 
-  1.                              Options
+  1. Options
 
- ==================================================================================== */
+ ============================================================================ */
 
 var Options = {
 
   /**
-   * 1.a.
-   *
    * Initialize
    *
    * @type    method
@@ -93,7 +89,8 @@ var Options = {
     intInputs           = $allInputs.length;
 
     $settingsSaved      = document.getElementById( strSettingsSavedId );
-    $settingsSubpages   = document.getElementsByClassName( strModuleSubpageClass );
+    $settingsSubpages   = document
+                            .getElementsByClassName( strModuleSubpageClass );
     intSettingsSubpages = $settingsSubpages.length;
 
     $chooseModuleForm   = document.getElementById( strChooseModuleFormId );
@@ -147,8 +144,6 @@ var Options = {
   ,
 
   /**
-   * 1.b.
-   *
    * Get available options and set their stored values
    *
    * @type    method
@@ -161,7 +156,12 @@ var Options = {
     for ( var i = 0; i < intSettingsSubpages; i++ ) {
       var
           objSettingsSubpage        = $settingsSubpages[ i ]
-        , strModule                 = objSettingsSubpage.id.replace( strModuleSubpageIdPrefix, '' )
+        , strModule                 = objSettingsSubpage
+                                        .id
+                                          .replace(
+                                              strModuleSubpageIdPrefix
+                                            , ''
+                                          )
         , strStorageVar             = strModuleSettingsPrefix + strModule
         ;
 
@@ -173,10 +173,18 @@ var Options = {
         if ( objStorageData.hasOwnProperty( strKey ) ) {
           var
               objModuleSettings         = objStorageData[ strKey ]
-            , strModule                 = strKey.replace( strModuleSettingsPrefix, '' )
+            , strModule                 = strKey
+                                            .replace(
+                                                strModuleSettingsPrefix
+                                              , ''
+                                            )
             , strModuleSubpageId        = strModuleSubpageIdPrefix + strModule
-            , $moduleSubpage            = document.getElementById( strModuleSubpageId )
-            , $allModuleSubpageInputs   = $moduleSubpage.getElementsByTagName( 'input' )
+            , $moduleSubpage            = document
+                                            .getElementById(
+                                              strModuleSubpageId
+                                            )
+            , $allModuleSubpageInputs   = $moduleSubpage
+                                            .getElementsByTagName( 'input' )
             , intModuleSubpageInputs    = $allModuleSubpageInputs.length
             ;
 
@@ -193,10 +201,17 @@ var Options = {
               if ( strVarType === 'checkbox' ) {
                 if ( typeof miscStorageVar === 'boolean' )
                   $input.checked = miscStorageVar;
-                else if ( typeof miscStorageVar === 'object' && miscStorageVar.indexOf( strVarValue ) !== -1 )
+                else if (
+                      typeof miscStorageVar === 'object'
+                  &&  miscStorageVar.indexOf( strVarValue ) !== -1
+                )
                   $input.checked = true;
               }
-              else if ( strVarType === 'radio' && typeof miscStorageVar === 'string' && miscStorageVar === strVarValue )
+              else if (
+                    strVarType === 'radio'
+                &&  typeof miscStorageVar === 'string'
+                &&  miscStorageVar === strVarValue
+              )
                 $input.checked = true;
             }
           }
@@ -207,8 +222,6 @@ var Options = {
   ,
 
   /**
-   * 1.c.
-   *
    * Assign change listeners for settings
    *
    * @type    method
@@ -231,7 +244,10 @@ var Options = {
       miscSetting = $this.checked;
     else if ( $this.type === 'checkbox' && $this.value !== 'on' ) {
       var
-          $moduleSubpage  = document.getElementById( strModuleSubpageIdPrefix + strChosenModuleValue )
+          $moduleSubpage  = document
+                              .getElementById(
+                                strModuleSubpageIdPrefix + strChosenModuleValue
+                              )
         , $group          = $moduleSubpage.querySelectorAll(
                               'input[name="' + $this.name + '"]'
                             )
@@ -261,7 +277,8 @@ var Options = {
       chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
         for ( var strKey in objModuleSettings ) {
           if ( objModuleSettings.hasOwnProperty( strKey ) )
-            objReturn[ strModuleSettings ][ strKey ] = objModuleSettings[ strKey ];
+            objReturn[ strModuleSettings ][ strKey ] = 
+              objModuleSettings[ strKey ];
         }
 
         chrome.storage.sync.set( objReturn, function() {
@@ -277,8 +294,6 @@ var Options = {
   ,
 
   /**
-   * 1.d.
-   *
    * Switch page
    *
    * @type    method
@@ -303,7 +318,9 @@ var Options = {
 
       // 2. Make menu link active.
       // TODO: Switch to querySelector(All)? Performance vs Less code
-      var $allMenuLinks = document.getElementById( 'menu' ).getElementsByTagName( 'li' );
+      var $allMenuLinks = document
+                            .getElementById( 'menu' )
+                              .getElementsByTagName( 'li' );
 
       for ( var j = 0, intMenuLinks = $allMenuLinks.length; j < intMenuLinks; j++ )
         $allMenuLinks[ j ].classList.remove( 'selected' );
@@ -316,8 +333,6 @@ var Options = {
   ,
 
   /**
-   * 1.e.
-   *
    * Populate modules list
    *
    * @type    method
@@ -340,13 +355,12 @@ var Options = {
       $this.dataset.lowercasevalue = strLocalValue.toLowerCase();
     }
 
-    $chooseModule.placeholder = chrome.i18n.getMessage( $chooseModule.dataset.placeholder );
+    $chooseModule.placeholder = 
+      chrome.i18n.getMessage( $chooseModule.dataset.placeholder );
   }
   ,
 
   /**
-   * 1.f.
-   *
    * If value equals one of the options, choose that option automatically
    *
    * @type    method
@@ -367,8 +381,6 @@ var Options = {
   ,
 
   /**
-   * 1.g.
-   *
    * When choose module form submitted
    *
    * @type    method
@@ -386,7 +398,9 @@ var Options = {
     if ( $option !== null ) {
       var
           strModuleName   = $option.dataset.module
-        , $targetSubpage  = document.getElementById( strModuleSubpageIdPrefix + strModuleName )
+        , $targetSubpage  = document.getElementById(
+                              strModuleSubpageIdPrefix + strModuleName
+                            )
         ;
 
       if ( document.contains( $targetSubpage ) ) {
@@ -408,10 +422,10 @@ var Options = {
   }
 };
 
-/* ====================================================================================
+/* =============================================================================
 
-  3.                              Events
+  2. Events
 
- ==================================================================================== */
+ ============================================================================ */
 
 document.addEventListener( 'DOMContentLoaded', Options.init );

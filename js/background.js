@@ -1,4 +1,4 @@
-/* ====================================================================================
+/* =============================================================================
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
@@ -10,6 +10,8 @@
 
   1. Background
       init()
+      cleanUp()
+      removeOldSettings()
       setExtensionDefaults()
       saveRecentTrackInfo()
       onMessageCallback()
@@ -17,26 +19,26 @@
       checkIfOpenTabChangedDomainOnUpdated()
       checkIfOpenTabChangedDomainOnReplaced()
       checkIfHostnameChanged()
-      removeNotification()
   2. Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
       notifications.onButtonClicked
       commands.onCommand
       runtime.onInstalled
+      runtime.onStartup
       tabs.onUpdated
       tabs.onReplaced
       tabs.onRemoved
   3. On Load
-      Initialize extension defaults
+      Initialize
 
- ==================================================================================== */
+ ============================================================================ */
 
-/* ====================================================================================
+/* =============================================================================
 
   1. Background
 
- ==================================================================================== */
+ ============================================================================ */
 
 var Background = {
     strObjOpenTabsName            : 'objOpenTabs'
@@ -62,7 +64,37 @@ var Background = {
   ,
 
   /**
-   * Set extension defaults
+   * Clean up in case of browser (re-)load/crash, extension reload, etc.
+   *
+   * @type    method
+   * @param   boolOnInstalled
+   *            Whether to set extension defaults on clean-up complete
+   * @param   objDetails
+   *            Reason - install/update/chrome_update - 
+   *            and (optional) previous version
+   * @return  void
+   **/
+  cleanUp : function( boolOnInstalled, objDetails ) {
+    var arrSettingsToCleanUp  = [
+                                    'objActiveButtons'
+                                  , 'arrTabsIds'
+                                ];
+
+    chrome.storage.sync.remove( arrSettingsToCleanUp, function() {
+      console.log( 'Background cleanUp' );
+
+      if (
+            typeof boolOnInstalled !== 'undefined'
+        &&  boolOnInstalled
+      )
+        Background.removeOldSettings( objDetails );
+    });
+  }
+  ,
+
+  /**
+   * Remove old settings when updated to a newer version
+   * (some vars could have been renamed, deprecated)
    *
    * @type    method
    * @param   objDetails
@@ -70,7 +102,72 @@ var Background = {
    *            and (optional) previous version
    * @return  void
    **/
-  setExtensionDefaults : function( objDetails ) {
+  removeOldSettings : function( objDetails ) {
+    if (
+          objDetails.reason === 'update'
+      &&  typeof objDetails.previousVersion !== 'undefined'
+      &&  objDetails.previousVersion < chrome.app.getDetails().version
+    ) {
+      chrome.storage.sync.get( null, function( objReturn ) {
+        var
+            arrTempToRemove     = []
+          , arrSettingsToRemove = [
+                                      'arrActiveButtons'
+                                    , 'arrLastTracks'
+                                    , 'arrNotificationButtons'
+                                    , 'intLastTracksToKeep'
+                                    , 'boolNotificationShowStationLogo'
+                                    , 'boolNotificationShowWhenStopped'
+                                    , 'boolNotificationShowWhenMuted'
+                                    , 'boolNotificationShowWhenNoTrackInfo'
+                                    , 'strNotificationTitleFormat'
+                                  ]
+          ;
+
+        for (
+          var i = 0, intSettingsToRemove = arrSettingsToRemove.length;
+          i < intSettingsToRemove;
+          i++
+        ) {
+          var strSettingToRemove = arrSettingsToRemove[ i ];
+
+          // Remove it only if it is present
+          if ( objReturn[ strSettingToRemove ] )
+            arrTempToRemove.push( strSettingToRemove );
+        }
+
+        if ( ! Global.isEmpty( arrTempToRemove ) ) {
+          chrome.storage.sync.remove( arrTempToRemove, function() {
+            // Debug
+            console.log(
+                'Background removeOldSettings, arrTempToRemove'
+              , arrTempToRemove
+            );
+
+            chrome.storage.sync.get( null, function( objData ) {
+              console.log( 'Background removeOldSettings', objData );
+            });
+
+            Background.setExtensionDefaults();
+          });
+        }
+        else
+          Background.setExtensionDefaults();
+      });
+    }
+    else
+      Background.setExtensionDefaults();
+  }
+  ,
+
+  /**
+   * Set extension defaults
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  setExtensionDefaults : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
       // 1. To set
       var
@@ -78,14 +175,18 @@ var Background = {
         , objSettingsDefaults                           = {
               objActiveButtons                          : {}
             , objOpenTabs                               : {}
+            , arrTabsIds                                : []
             , arrRecentTracks                           : []
             , intRecentTracksToKeep                     : 10
-            
+
             , objSettings_ru_101                        : {
                   boolEnabled                           : true
                 , boolNotificationShowLogo              : true
                 , strNotificationTitleFormat            : 'short'
-                , arrNotificationButtons                : [ 'add', 'muteUnmute' ]
+                , arrNotificationButtons                : [
+                                                              'add'
+                                                            , 'muteUnmute'
+                                                          ]
                 , boolNotificationShowWhenStopped       : false
                 , boolNotificationShowWhenMuted         : false
                 , boolNotificationShowWhenNoTrackInfo   : false
@@ -93,25 +194,14 @@ var Background = {
             , objSettings_com_vk_audio                  : {
                   boolEnabled                           : true
                 , boolNotificationShowLogo              : true
-                , arrNotificationButtons                : [ 'add', 'next' ]
+                , arrNotificationButtons                : [
+                                                              'add'
+                                                            , 'next'
+                                                          ]
                 , boolNotificationShowWhenMuted         : false
               }
           }
         ;
-
-      // Some vars have been renamed, remove old ones if updated
-//      if (
-//            objDetails.reason === 'update'
-//        &&  typeof objDetails.previousVersion !== 'undefined'
-//        &&  objDetails.previousVersion < chrome.app.getDetails().version
-//      ) {
-//        var
-//            arrSettingsToRemove = [
-//            ]
-//          ;
-//
-//        chrome.storage.sync.remove( arrSettingsToRemove, function() {});
-//      }
 
       for ( var strSetting in objSettingsDefaults ) {
         if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
@@ -126,37 +216,6 @@ var Background = {
           // Debug
           chrome.storage.sync.get( null, function( objData ) {
             console.log( 'Background setExtensionDefaults ', objData );
-          });
-        });
-
-      // 2. To remove
-      var
-          arrTempToRemove                           = []
-        , arrSettingsToRemove                       = [
-              'arrActiveButtons'
-            , 'arrLastTracks'
-            , 'arrNotificationButtons'
-            , 'intLastTracksToKeep'
-            , 'boolNotificationShowStationLogo'
-            , 'boolNotificationShowWhenStopped'
-            , 'boolNotificationShowWhenMuted'
-            , 'boolNotificationShowWhenNoTrackInfo'
-            , 'strNotificationTitleFormat'
-          ]
-        ;
-
-      for ( var i = 0; i < arrSettingsToRemove.length; i++ ) {
-        var strSettingToRemove = arrSettingsToRemove[ i ];
-
-        if ( objReturn[ strSettingToRemove ] )
-          arrTempToRemove.push( strSettingToRemove );
-      }
-
-      if ( ! Global.isEmpty( arrTempToRemove ) )
-        chrome.storage.sync.remove( arrTempToRemove, function() {
-          // Debug
-          chrome.storage.sync.get( null, function( objData ) {
-            console.log( 'Background setExtensionDefaults remove', objData );
           });
         });
     });
@@ -177,25 +236,37 @@ var Background = {
     chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
       var
           arrRecentTracks = objReturn.arrRecentTracks
-        // Don't include messages with player status (started, resumed, muted, etc.)
+        // Don't include messages with player status (started, resumed, muted)
         , arrTrackInfo    = objStationInfo.strTrackInfo.split( "\n\n" )
         , strTrackInfo    = arrTrackInfo[ 0 ]
         ;
 
       // Don't save if already in array
-      if ( arrRecentTracks.map( function ( arrSub ) { return arrSub[0] } ).indexOf( strTrackInfo ) !== -1 )
+      if (
+        arrRecentTracks
+          .map(
+            function ( arrSub ) {
+              return arrSub[0]
+            }
+          )
+            .indexOf( strTrackInfo ) !== -1
+      )
         return;
 
       var
-          intRecentTracksExcess     = arrRecentTracks.length - objReturn.intRecentTracksToKeep
-        , intRecentTracksToRemove   = ( intRecentTracksExcess < 0 ? -1 : intRecentTracksExcess ) + 1
+          intRecentTracksExcess     = arrRecentTracks.length - 
+                                        objReturn.intRecentTracksToKeep
+        , intRecentTracksToRemove   = (
+                                        intRecentTracksExcess < 0 ?
+                                          -1 : intRecentTracksExcess
+                                      ) + 1
         , arrTempRecentTrack        = []
         ;
 
       arrRecentTracks.splice( 0, intRecentTracksToRemove );
 
       // Using array instead of object because of QUOTA_BYTES_PER_ITEM
-      // https://developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
+      // developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
       arrTempRecentTrack[ 0 ] = strTrackInfo;
       arrTempRecentTrack[ 1 ] = objStationInfo.strStationName;
       arrTempRecentTrack[ 2 ] = objStationInfo.strLogoUrl;
@@ -233,14 +304,8 @@ var Background = {
     // Debug
     console.log( 'Background onMessage ', objMessage );
 
-//    Global.updateOpenTabParameters(
-//        objSender.tab.windowId
-//      , objSender.tab.index
-//      , objMessage.objPlayerInfo.boolIsReady
-//    );
-
-    // Show notification if track info changed or extension asks to show it again
-    // (set of buttons needs to be changed, for example)
+    // Show notification if track info changed or extension asks to show it
+    // again (set of buttons needs to be changed, for example)
     if (
           Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
       &&  strTrackInfo !== Background.strPreviousTrack
@@ -295,12 +360,22 @@ var Background = {
 
           objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
 
-          chrome.tabs.sendMessage( intTabId, 'Do you copy?', function( strResponse ) {
-            if ( strResponse !== 'Copy that.' ) {
-    //          chrome.tabs.executeScript( intTabId, { file: '/modules/ru_101/js/uppod-player-api.js' } );
-    //          chrome.tabs.executeScript( intTabId, { file: '/modules/ru_101/js/page-watcher.js' } );
-            }
-          });
+          chrome.tabs.sendMessage(
+              intTabId
+            , 'Do you copy?'
+            , function( strResponse ) {
+                if ( strResponse !== 'Copy that.' ) {
+//                chrome.tabs.executeScript(
+//                    intTabId
+//                  , { file: '/modules/ru_101/js/uppod-player-api.js' }
+//                );
+//                chrome.tabs.executeScript(
+//                    intTabId
+//                  , { file: '/modules/ru_101/js/page-watcher.js' }
+//                );
+                }
+              }
+          );
         }
 
         // chrome.tabs.onReplaced
@@ -439,48 +514,16 @@ var Background = {
       if ( typeof intRemovedTabId === 'number' )
         intTabId = intRemovedTabId;
 
-      Background.removeNotification( intTabId );
+      Global.removeNotification( intTabId );
     }
-  }
-  ,
-
-  /**
-   * Remove the notification for this tab.
-   *
-   * @type    method
-   * @param   intTabId
-   *            ID of the tab
-   * @return  void
-   **/
-  removeNotification : function( intTabId ) {
-    chrome.notifications.clear(
-        Global.strNotificationId + intTabId
-      , function( boolWasCleared ) {
-          // Remove this notification's active buttons
-          if ( boolWasCleared )
-            chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
-
-              if ( typeof objData.objActiveButtons[ intTabId ] === 'object' ) {
-                delete objData.objActiveButtons[ intTabId ];
-
-                chrome.storage.sync.set( objData, function() {
-                  // Debug
-                  chrome.storage.sync.get( null, function( objData ) {
-                    console.log( 'Global remove from objActiveButtons ', objData );
-                  });
-                });
-              }
-            });
-      }
-    );
   }
 };
 
-/* ====================================================================================
+/* =============================================================================
 
   2. Listeners
 
- ==================================================================================== */
+ ============================================================================ */
 
 /**
  * Listens for track info sent from Page Watcher
@@ -555,19 +598,28 @@ chrome.notifications.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
-    var intTabId = parseInt( strNotificationId.replace( Global.strNotificationId, '' ) );
+    var intTabId = 
+      parseInt( strNotificationId.replace( Global.strNotificationId, '' ) );
 
     chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
       // Debug
       console.log( 'Background get objActiveButtons ', objReturn );
 
-      var arrButton = objReturn
+      var
+          arrButton   = objReturn
                         .objActiveButtons[ intTabId ][ intButtonIndex ]
-                          .split( '|' );
+                          .split( '|' )
+        , strFunction = Global
+                          .objSettingsDefaults
+                            .arrNotificationButtons[
+                              arrButton[ 0 ] ][ arrButton[ 1 ]
+                            ]
+                              .strFunction
+        ;
 
       chrome.tabs.sendMessage(
           intTabId
-        , 'processButtonClick_' + Global.objSettingsDefaults.arrNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+        , 'processButtonClick_' + strFunction
       );
     });
   }
@@ -593,15 +645,49 @@ chrome.commands.onCommand.addListener(
     if ( strCommand === 'add' || strCommand === 'playStop' )
       strMessagePrefix = 'processButtonClick_';
 
-    var funcSendMessage = function( intWindowId, intTabIndex, intTabId ) {
-      chrome.tabs.sendMessage(
-          intTabId
-        , strMessagePrefix + strCommand
-      );
-    };
+    chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      var
+          arrTabsIds      = objData.arrTabsIds
+        , intTabsIds      = arrTabsIds.length
+        , intArrIndex     = intTabsIds - 1
+        , funcSendMessage = function( intWindowId, intTabIndex, intTabId ) {
+                              chrome.tabs.sendMessage(
+                                  intTabId
+                                , strMessagePrefix + strCommand
+                              );
+                            }
+        ;
 
-    // TODO: Is there a need for 2 separate files, bg and global?
-    Global.findFirstOpenTabInvokeCallback( funcSendMessage );
+      // Try to send to active players first
+      var funcSendToActivePlayers = function( intArrIndex ) {
+        if ( intArrIndex >= 0 ) {
+          var intTabId = arrTabsIds[ intArrIndex ];
+
+          chrome.tabs.sendMessage(
+              intTabId
+            , 'Are you ready to get a command?'
+            , function( strResponse ) {
+                if ( strResponse === 'Affirmative.' ) {
+                  funcSendMessage( null, null, intTabId );
+                  console.log( 'Background onCommand: active player found' );
+                }
+                else {
+                  intArrIndex--;
+                  funcSendToActivePlayers( intArrIndex );
+                }
+              }
+          );
+        }
+        else {
+          // If no active players found, send to first open
+          console.log( 'Background onCommand: no active player found' );
+          Global.findFirstOpenTabInvokeCallback( funcSendMessage );
+        }
+      };
+
+      // Start from the end of array (last index = latest notification)
+      funcSendToActivePlayers( intArrIndex );
+    });
   }
 );
 
@@ -620,7 +706,23 @@ chrome.runtime.onInstalled.addListener(
     // Debug
     console.log( 'Background chrome.runtime.onInstalled ', objDetails );
 
-    Background.setExtensionDefaults( objDetails );
+    Background.cleanUp( true, objDetails );
+  }
+);
+
+/**
+ * Fired when a profile that has this extension installed first starts up.
+ *
+ * @type    method
+ * @param   No Parameters Taken
+ * @return  void
+ **/
+chrome.runtime.onStartup.addListener(
+  function() {
+    // Debug
+    console.log( 'Background chrome.runtime.onStartup' );
+
+    Background.cleanUp();
   }
 );
 
@@ -699,18 +801,18 @@ chrome.tabs.onRemoved.addListener(
     console.log( 'Background chrome.tabs.onRemoved' );
 
     Background.checkOpenTabs();
-    Background.removeNotification( intTabId );
+    Global.removeNotification( intTabId );
   }
 );
 
-/* ====================================================================================
+/* =============================================================================
 
   3. On Load
 
- ==================================================================================== */
+ ============================================================================ */
 
 /**
- * Initialize extension defaults on load
+ * Initialize
  *
  * @type    method
  * @param   No Parameters taken

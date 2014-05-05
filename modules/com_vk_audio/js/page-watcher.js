@@ -9,35 +9,35 @@
   Table of Contents:
 
   1. Page Watcher
-       init()
-       getPlayerInfo()
-       getPlayerStatus()
-       getPlayerVolume()
-       processButtonClick_add()
-       processButtonClick_next()
-       processButtonClick_playStop()
-       processButtonClick_mute()
-       processButtonClick_unmute()
-       processCommand_muteUnmute()
-       processCommand_showNotification()
-       initObserver()
-       initBodyObserver()
-       initPlayerStatusObserver()
-       initPlayerLitePlayStopButtonContainerObserver()
-       initTrackTitleObserver()
-       initPlayerFullOpacityObserver()
-       onPlayerLiteAppearance()
-       onPlayerFullAppearance()
-       onFeedbackDialogAppearance()
-       addTrackToPlaylist()
-       playNextTrack()
-       hideOrKeepPlayerVisibleFull()
-       sendSameMessage()
-       setTrackInfoAndSend()
+      init()
+      getPlayerInfo()
+      getPlayerStatus()
+      getPlayerVolume()
+      processButtonClick_add()
+      processButtonClick_next()
+      processButtonClick_playStop()
+      processButtonClick_mute()
+      processButtonClick_unmute()
+      processCommand_muteUnmute()
+      processCommand_showNotification()
+      initObserver()
+      initBodyObserver()
+      initPlayerStatusObserver()
+      initPlayerLitePlayStopButtonContainerObserver()
+      initTrackTitleObserver()
+      initPlayerFullOpacityObserver()
+      onPlayerLiteAppearance()
+      onPlayerFullAppearance()
+      onFeedbackDialogAppearance()
+      addTrackToPlaylist()
+      playNextTrack()
+      hideOrKeepPlayerVisibleFull()
+      sendSameMessage()
+      setTrackInfoAndSend()
   2. Listeners
-       runtime.onMessage
+      runtime.onMessage
   3. On Load
-       Initialize
+      Initialize
 
  ============================================================================ */
 
@@ -598,6 +598,8 @@ var
     // Once player appeared, it doesn't dissapear - disconnect
     DisconnectableObserver.disconnect();
 
+    PageWatcher.objPlayerInfo.boolIsReady = true;
+
     $player = 
       document.getElementById( strPlayerId );
     $playerVisibleLiteClickable =
@@ -873,6 +875,14 @@ chrome.runtime.onMessage.addListener(
       funcToProceedWith();
     else if ( strMessage === 'Do you copy?' )
       funcSendResponse( 'Copy that.' );
+    else if ( strMessage === 'Are you ready to get a command?' ) {
+      var strResponse = 'Affirmative.';
+
+      if ( ! PageWatcher.objPlayerInfo.boolIsReady )
+        strResponse = 'Negative.';
+
+      funcSendResponse( strResponse );
+    }
   }
 );
 
