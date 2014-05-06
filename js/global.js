@@ -476,6 +476,9 @@ var Global = {
    **/
   saveTabsIds : function ( intTabId ) {
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      if ( typeof objData.arrTabsIds === 'undefined' )
+        objData.arrTabsIds = [];
+
       var
           arrTabsIds    = objData.arrTabsIds
         , intIndex      = arrTabsIds.indexOf( intTabId )
@@ -511,6 +514,8 @@ var Global = {
    **/
   saveActiveButtons : function ( intTabId, arrActiveButtons ) {
     chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
+      if ( typeof objData.objActiveButtons === 'undefined' )
+        objData.objActiveButtons = {};
 
       objData.objActiveButtons[ intTabId ] = arrActiveButtons;
 
