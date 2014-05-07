@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.8
+    * Fixed: keyboard shortcuts presses logic from the previous version did not work correctly when 101.ru player was active.
+
 ### v0.0.2.7
     * Now when pressing keyboard shortcuts, PoziTone first sends a command to the latest active player. In a case when there is no active player (for example, the tab had been closed), a player (a tab with the player) opened earlier than others will get the command.
 
