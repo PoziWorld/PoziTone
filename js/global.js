@@ -3,6 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  License                 :           pozitone.com/license
   File                    :           js/global.js
   Description             :           Global JavaScript
 
@@ -10,6 +11,7 @@
 
   1. Global
       init()
+      setStorageItems()
       showNotification()
       showNotificationCallback()
       removeNotification()
@@ -31,10 +33,9 @@
 
  ============================================================================ */
 
-var Global = {
-    intNotificationCount          : 1
-  , intNoVolume                   : 0
-  , strNotificationId             : 'pozitone_tab' // Add tab ID when displaying
+var Global                        = {
+    intNoVolume                   : 0
+  , strNotificationId             : 'pozitone_tab' // + tab ID
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
@@ -55,9 +56,8 @@ var Global = {
           'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
         )
     ]
-  , strFavoriteStatusSuccess      : chrome.i18n.getMessage(
-                                      'poziNotificationFavoriteStatusSuccess'
-                                    )
+  , strFavoriteStatusSuccess      : 
+      chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
   // All possible settings
   , objSettingsDefaults           : {
@@ -70,9 +70,10 @@ var Global = {
           , add                   : {
                 loggedIn          : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsAddLoggedInTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsAddLoggedInTitle'
+                          )
                       , iconUrl   : 'img/round_plus_icon&16.png'
                     }
                   , strFunction   : 'add'
@@ -81,9 +82,10 @@ var Global = {
           , favorite              : {
                 loggedIn          : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsFavoriteLoggedInTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsFavoriteLoggedInTitle'
+                          )
                       , iconUrl   : 'img/emotion_smile_icon&16.png'
                     }
                   , strFunction   : 'favorite'
@@ -92,9 +94,10 @@ var Global = {
           , next                  : {
                 next              : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsNextTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsNextTitle'
+                          )
                       , iconUrl   : 'img/playback_next_icon&16.png'
                     }
                   , strFunction   : 'next'
@@ -103,18 +106,20 @@ var Global = {
           , playStop              : {
                 play              : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsPlayTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsPlayTitle'
+                          )
                       , iconUrl   : 'img/playback_play_icon&16.png'
                     }
                   , strFunction   : 'playStop'
                 }
               , stop              : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsStopTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsStopTitle'
+                          )
                       , iconUrl   : 'img/playback_stop_icon&16.png'
                     }
                   , strFunction   : 'playStop'
@@ -123,18 +128,20 @@ var Global = {
           , muteUnmute            : {
                 mute              : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsMuteTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsMuteTitle'
+                          )
                       , iconUrl   : 'img/sound_mute_icon&16.png'
                     }
                   , strFunction   : 'mute'
                 }
               , unmute            : {
                     objButton     : {
-                        title     : chrome.i18n.getMessage(
-                                      'poziNotificationButtonsUnmuteTitle'
-                                    )
+                        title     : 
+                          chrome.i18n.getMessage(
+                            'poziNotificationButtonsUnmuteTitle'
+                          )
                       , iconUrl   : 'img/sound_high_icon&16.png'
                     }
                   , strFunction   : 'unmute'
@@ -152,6 +159,33 @@ var Global = {
    * @return  void
    **/
   init : function() {
+  }
+  ,
+
+  /**
+   * Sets multiple items in StorageArea.
+   *
+   * @type    method
+   * @param   objItems
+   *            An object which gives each key/val pair to update storage with.
+   * @param   strLog
+   *            Debug line "prefix".
+   * @return  void
+   **/
+  setStorageItems : function( objItems, strLog ) {
+    chrome.storage.sync.set( objItems, function() {
+      var strSetStorageItemsLog = strLog;
+      Log.add( strLog + strLogDo, objItems );
+
+      if ( chrome.runtime.lastError ) {
+        Log.add( strLog + strLogError, {}, true );
+        return;
+      }
+
+      chrome.storage.sync.get( null, function( objAllItemsAfterUpdate ) {
+        Log.add( strSetStorageItemsLog + strLogDone, objAllItemsAfterUpdate );
+      });
+    });
   }
   ,
 
@@ -179,6 +213,9 @@ var Global = {
     , objPlayerInfo
     , objStationInfo
   ) {
+    strLog = 'showNotification';
+    Log.add( strLog, objStationInfo );
+
     var
         objNotificationOptions  = {
           type                  : 'basic',
@@ -194,6 +231,7 @@ var Global = {
       , strNotificationId       = objThis.strNotificationId + intTabId
       ;
 
+    // Clear notification for this tab first, then display a new one
     chrome.notifications.clear( strNotificationId, function() {
       chrome.storage.sync.get(
           [ strStorageVar ]
@@ -378,9 +416,10 @@ var Global = {
             chrome.notifications.create( 
                 objThis.strNotificationId + intTabId
               , objNotificationOptions
-              , function() {
+              , function( strNotificationId ) {
                   Global.showNotificationCallback(
-                      objTempStationInfo
+                      objTempPlayerInfo
+                    , objTempStationInfo
                     , intTabId
                     , arrActiveButtons
                   );
@@ -396,6 +435,8 @@ var Global = {
    * Actions after notification has been displayed
    *
    * @type    method
+   * @param   objPlayerInfo
+   *            Play status, volume, etc.
    * @param   objStationInfo
    *            Last Track + Station info
    * @param   intTabId
@@ -405,16 +446,22 @@ var Global = {
    * @return  void
    **/
   showNotificationCallback : function(
-      objStationInfo
+      objPlayerInfo
+    , objStationInfo
     , intTabId
     , arrActiveButtons
   ) {
-    console.log(
-      'Successfully created PoziTone Notification # ' +
-        Global.intNotificationCount
+    strLog = 'showNotificationCallback';
+    Log.add(
+        strLog
+      , {
+            strModule                   : objPlayerInfo.strModule
+          , strStationName              : objStationInfo.strStationName
+          , boolHasAddToPlaylistButton  : 
+              objStationInfo.boolHasAddToPlaylistButton || 'n/a'
+        }
+      , true
     );
-
-    Global.intNotificationCount++;
 
     Background.saveRecentTrackInfo( objStationInfo ); 
     Global.saveTabsIds( intTabId );
@@ -434,31 +481,33 @@ var Global = {
     chrome.notifications.clear(
         Global.strNotificationId + intTabId
       , function( boolWasCleared ) {
+          strLog = 'removeNotification';
+          Log.add( strLog, intTabId );
+
           if ( boolWasCleared ) {
             var arrVars = [ 'objActiveButtons', 'arrTabsIds' ];
 
             chrome.storage.sync.get( arrVars, function( objData ) {
+              strLog = 'removeNotification';
+              var intChanges = 0;
 
               // Remove this notification's active buttons
-              if ( typeof objData.objActiveButtons[ intTabId ] === 'object' )
+              if ( typeof objData.objActiveButtons[ intTabId ] === 'object' ) {
                 delete objData.objActiveButtons[ intTabId ];
+                intChanges++;
+              }
 
               // Remove this notification's tab id
               var intIndex = objData.arrTabsIds.indexOf( intTabId );
 
-              if ( intIndex !== -1 )
+              if ( intIndex !== -1 ) {
                 objData.arrTabsIds.splice( intIndex, 1 );
+                intChanges++;
+              }
 
               // "Submit" changes
-              chrome.storage.sync.set( objData, function() {
-                // Debug
-                chrome.storage.sync.get( null, function( objData ) {
-                  console.log(
-                      'Global.removeNotification() '
-                    , objData
-                  );
-                });
-              });
+              if ( intChanges > 0 )
+                Global.setStorageItems( objData, strLog + ', submit' );
             });
           }
       }
@@ -476,6 +525,9 @@ var Global = {
    **/
   saveTabsIds : function ( intTabId ) {
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      strLog = 'saveTabsIds';
+      Log.add( strLog, intTabId );
+
       if ( typeof objData.arrTabsIds === 'undefined' )
         objData.arrTabsIds = [];
 
@@ -483,21 +535,23 @@ var Global = {
           arrTabsIds    = objData.arrTabsIds
         , intIndex      = arrTabsIds.indexOf( intTabId )
         , intLastIndex  = arrTabsIds.length - 1
+        , intChanges    = 0
+        ;
 
-      // Save if it is not present or reposition to be the last
-      if ( intIndex === -1 )
+      // Save if it is not present or "reposition" to be the last
+      if ( intIndex === -1 ) {
         arrTabsIds.push( intTabId );
+        intChanges++;
+      }
       else if ( intIndex !== intLastIndex ) {
         arrTabsIds.splice( intIndex, 1 );
         arrTabsIds.push( intTabId );
+        intChanges++;
       }
 
-      chrome.storage.sync.set( objData, function() {
-        // Debug
-        chrome.storage.sync.get( null, function( objData ) {
-          console.log( 'Global set arrTabsIds ', objData );
-        });
-      });
+      // "Submit" changes
+      if ( intChanges > 0 )
+        Global.setStorageItems( objData, strLog );
     });
   }
   ,
@@ -514,17 +568,27 @@ var Global = {
    **/
   saveActiveButtons : function ( intTabId, arrActiveButtons ) {
     chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
+      strLog = 'saveActiveButtons';
+      Log.add(
+          strLog
+        , {
+              intTabId          : intTabId
+            , arrActiveButtons  : arrActiveButtons
+          }
+      );
+
       if ( typeof objData.objActiveButtons === 'undefined' )
         objData.objActiveButtons = {};
 
-      objData.objActiveButtons[ intTabId ] = arrActiveButtons;
+      if (
+            typeof objData.objActiveButtons[ intTabId ] === 'undefined'
+        ||  JSON.stringify( objData.objActiveButtons[ intTabId ] ) !== 
+              JSON.stringify( arrActiveButtons )
+      ) {
+        objData.objActiveButtons[ intTabId ] = arrActiveButtons;
 
-      chrome.storage.sync.set( objData, function() {
-        // Debug
-        chrome.storage.sync.get( null, function( objData ) {
-          console.log( 'Global set objActiveButtons ', objData );
-        });
-      });
+        Global.setStorageItems( objData, strLog );
+      }
     });
   }
   ,
@@ -537,8 +601,10 @@ var Global = {
    *            Object of open tabs
    * @return  void
    **/
-  saveOpenTabs : function ( objOpenTabs )
-  {
+  saveOpenTabs : function ( objOpenTabs ) {
+    strLog = 'saveOpenTabs';
+    Log.add( strLog, objOpenTabs );
+
     var objToSet = {};
 
     objToSet.objOpenTabs = {};
@@ -560,13 +626,18 @@ var Global = {
       }
     }
 
-    if ( ! Global.isEmpty( objToSet ) )
-      chrome.storage.sync.set( objToSet, function() {
-        // Debug
-        chrome.storage.sync.get( null, function( objData ) {
-          console.log( 'Global saveOpenTabs ', objData );
-        });
-      });
+    chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
+      if (
+        ! (
+              Global.isEmpty( objToSet.objOpenTabs )
+          &&  Global.isEmpty( objReturn.objOpenTabs )
+        )
+      ) {
+        strLog = 'saveOpenTabs';
+
+        Global.setStorageItems( objToSet, strLog );
+      }
+    });
   }
   ,
 
@@ -619,6 +690,26 @@ var Global = {
   ,
 
   /**
+   * Makes an object out of an array
+   *
+   * @type    method
+   * @param   arrToConvert
+   *            Array to convert
+   * @return  object
+   **/
+  convertArrToObj : function ( arrToConvert )
+  {
+    return obj = arrToConvert.reduce(
+        function( o, v, i ) {
+          o[ i ] = v;
+          return o;
+        }
+      , {}
+    );
+  }
+  ,
+
+  /**
    * Finds first open tab and invoke callback.
    * funcCallback() should return 0 to continue search for the right tab.
    *
@@ -630,8 +721,8 @@ var Global = {
   findFirstOpenTabInvokeCallback : function ( funcCallback )
   {
     chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
-      // Debug
-      console.log( 'Global findFirstOpenTabInvokeCallback ', objReturn );
+      strLog = 'findFirstOpenTabInvokeCallback';
+      Log.add( strLog );
 
       var objOpenTabs = objReturn.objOpenTabs;
 

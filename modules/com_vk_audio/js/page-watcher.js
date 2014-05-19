@@ -3,6 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  License                 :           pozitone.com/license
   File                    :           js/page-watcher.js
   Description             :           VK.com Page Watcher JavaScript
 
@@ -73,8 +74,8 @@ var
   , $addTrackToPlaylistResponse
   , $playNextTrackBtn
 
-  , $playStopBtnHeader                    = document
-                                              .getElementById( 'head_play_btn' )
+  , $playStopBtnHeader                    = 
+      document.getElementById( 'head_play_btn' )
   , $playStopBtnPlayerLiteContainer
   , $playStopBtnPlayerLite
   , $mainPlayStopBtn                      = $playStopBtnHeader
@@ -91,6 +92,8 @@ var
   , strVolumeLineId                       = 'pd_vol_line'
   , strFeedbackDialogClass                = 'top_result_baloon_wrap'
   , strFeedbackDialogHeaderClass          = 'top_result_header'
+  , boolIsLogOutButtonPresent             = 
+      document.contains( document.getElementById( 'logout_link' ) )
 
   // Module
   , strModule                             = 'com_vk_audio'
@@ -99,8 +102,7 @@ var
   , DisconnectableObserver                = null
 
   , PageWatcher                           = {
-        boolUserLoggedIn                  : document
-                                              .getElementById( 'logout_link' ) !== null
+        boolUserLoggedIn                  : boolIsLogOutButtonPresent
 
       , boolHadPlayedBefore               : false
       , boolPageJustLoaded                : true
@@ -115,12 +117,14 @@ var
           , strPreviousStatus             : ''
           , boolCanPlayNextTrackLoggedOut : false
         }
+        // When set of vars changes check Background.saveRecentTrackInfo, Log
       , objStationInfo                    : {
             strStationName                : ''
           , strStationNamePlusDesc        : ''
           , strLogoUrl                    : '/' + strImgPath + 'VK_logo-32.png'
           , strLogoDataUri                : strImgPath + 'VK_logo-80.png'
           , strTrackInfo                  : ''
+          , boolHasAddToPlaylistButton    : boolIsLogOutButtonPresent
         }
   ,
 

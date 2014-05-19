@@ -3,6 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  License                 :           pozitone.com/license
   File                    :           js/page-watcher.js
   Description             :           101.ru Page Watcher JavaScript
 
@@ -43,58 +44,79 @@
  ============================================================================ */
 
 var
-    strPlayerId                         = 'radioplayer_sm'
-  , strTrackInfoContainerId             = 'titlesong'
-  , strFavoriteButtonSuccessClass       = 'favok'
-  , strFavoriteButtonSuccessClass2      = 'pollok'
+    strPlayerId                           = 'radioplayer_sm'
+  , strTrackInfoContainerId               = 'titlesong'
+  , strFavoriteButtonSuccessClass         = 'favok'
+  , strFavoriteButtonSuccessClass2        = 'pollok'
+  , strStationName                        = 
+      document.getElementsByTagName( 'h1' )[0].innerText
 
-  , $stationLogo                        = document
-                                            .getElementById( 'player-site' )
-                                              .getElementsByTagName( 'img' )[0]
-  , $wmaPlayer                          = document.getElementsByName( 'MediaPlayer' )[0]
-  , $playStopButton                     = document.getElementsByClassName( 'general_play' )[0]
-  , $addTrackToPlaylistButton           = document.getElementById( 'addfavoritetracksfromair' )
-  , $addTrackToPlaylistResponse         = document.getElementById( 'airfavmsg' )
-  , $favoriteButton                     = document.getElementById( 'polltrackaction' )
-  , $trackInfo                          = document.getElementById( strTrackInfoContainerId )
+  , $stationLogo                          = 
+      document.getElementById( 'player-site' ).getElementsByTagName( 'img' )[0]
+  , $wmaPlayer                            = 
+      document.getElementsByName( 'MediaPlayer' )[0]
+  , $playStopButton                       = 
+      document.getElementsByClassName( 'general_play' )[0]
+  , $addTrackToPlaylistButton             = 
+      document.getElementById( 'addfavoritetracksfromair' )
+  , $addTrackToPlaylistResponse           = 
+      document.getElementById( 'airfavmsg' )
+  , $favoriteButton                       = 
+      document.getElementById( 'polltrackaction' )
+  , $trackInfo                            = 
+      document.getElementById( strTrackInfoContainerId )
 
-  , PageWatcher                         = {
-        boolUserLoggedIn                : document.getElementById( 'user-account' ) !== null
+  , boolIsLoggedInMenuPresent             = 
+      document.contains( document.getElementById( 'user-account' ) )
 
-      // Play/Stop button has class which is player status 
-      // When player is off (paused/stopped/not started), it has class 'play'; on - 'stop'
-      , objWantedClassRegExp            : / (play|stop)/
-      , intWantedClassLength            : 4
+  , PageWatcher                           = {
+        boolUserLoggedIn                  : boolIsLoggedInMenuPresent
 
-      , boolHadPlayedBefore             : false
-      , boolPageJustLoaded              : true
-      , boolDisregardSameMessage        : false
+      // Play/Stop button has class which is player status. 
 
-      , intLogoBorderToAdd              : 15
-      , strLogoBorderColor              : '#FFF'
+      // When player is off (paused/stopped/not started), 
+      // it has class 'play'; on - 'stop'.
+      , objWantedClassRegExp              : / (play|stop)/
+      , intWantedClassLength              : 4
 
-      , objPlayerInfo                   : {
-            strModule                   : 'ru_101'
-          , boolIsReady                 : document.contains( $playStopButton )
-          , boolIsMp3Player             : ! document.contains( $wmaPlayer )
-          , intVolume                   : 0
-          , intVolumeBeforeMuted        : 50 // Uppod doesn't save prev value, restore to this one
-          , strStatus                   : ''
-          , strPreviousStatus           : ''
+      , boolHadPlayedBefore               : false
+      , boolPageJustLoaded                : true
+      , boolDisregardSameMessage          : false
+
+      , intLogoBorderToAdd                : 15
+      , strLogoBorderColor                : '#FFF'
+
+      , objPlayerInfo                     : {
+            strModule                     : 'ru_101'
+          , boolIsReady                   : document.contains( $playStopButton )
+          , boolIsMp3Player               : ! document.contains( $wmaPlayer )
+          , intVolume                     : 0
+            // Uppod doesn't save prev value, restore to this one
+          , intVolumeBeforeMuted          : 50
+          , strStatus                     : ''
+          , strPreviousStatus             : ''
+          , boolCanPlayNextTrackLoggedOut : false
         }
-      , objStationInfo                  : {
-            strStationName              : document.getElementsByTagName( 'h1' )[0].innerText
-          , strStationNamePlusDesc      : document.title
-          , strLogoUrl                  : $stationLogo.src
-          , strLogoDataUri              : null
-          , strTrackInfo                : $trackInfo.innerText
-          , boolHasAddToPlaylistButton  : false
+        // When set of vars changes check Background.saveRecentTrackInfo, Log
+      , objStationInfo                    : {
+            strStationName                : strStationName
+          , strStationNamePlusDesc        : document.title
+          , strLogoUrl                    : $stationLogo.src
+          , strLogoDataUri                : null
+          , strTrackInfo                  : $trackInfo.innerText
+          , boolHasAddToPlaylistButton    : false
         }
-      , objAddTrackToPlaylistFeedback   : {
+      , objAddTrackToPlaylistFeedback     : {
             'Трек успешно добавлен в плейлист'
-                                        : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+                                          : 
+              chrome.i18n.getMessage(
+                'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
+              )
           , 'Данный трек уже есть в Вашем плейлисте'
-                                        : chrome.i18n.getMessage( 'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
+                                          : 
+              chrome.i18n.getMessage(
+                'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+              )
         }
   ,
 

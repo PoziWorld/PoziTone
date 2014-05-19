@@ -3,6 +3,7 @@
   Product                 :           PoziTone
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  License                 :           pozitone.com/license
   File                    :           js/background.js
   Description             :           Background JavaScript
 
@@ -40,7 +41,7 @@
 
  ============================================================================ */
 
-var Background = {
+var Background                    = {
     strObjOpenTabsName            : 'objOpenTabs'
 
   , strPreviousTrack              : ''
@@ -75,14 +76,15 @@ var Background = {
    * @return  void
    **/
   cleanUp : function( boolOnInstalled, objDetails ) {
+    strLog = 'cleanUp';
+    Log.add( strLog );
+
     var arrSettingsToCleanUp  = [
                                     'objActiveButtons'
                                   , 'arrTabsIds'
                                 ];
 
     chrome.storage.sync.remove( arrSettingsToCleanUp, function() {
-      console.log( 'Background cleanUp' );
-
       if (
             typeof boolOnInstalled !== 'undefined'
         &&  boolOnInstalled
@@ -103,60 +105,74 @@ var Background = {
    * @return  void
    **/
   removeOldSettings : function( objDetails ) {
+    strLog = 'removeOldSettings';
+    Log.add( strLog, objDetails );
+
     if (
           objDetails.reason === 'update'
       &&  typeof objDetails.previousVersion !== 'undefined'
-      &&  objDetails.previousVersion < chrome.app.getDetails().version
+      &&  objDetails.previousVersion < chrome.runtime.getManifest().version
     ) {
       chrome.storage.sync.get( null, function( objReturn ) {
+        strLog = 'removeOldSettings';
+
         var
-            arrTempToRemove     = []
-          , arrSettingsToRemove = [
-                                      'arrActiveButtons'
-                                    , 'arrLastTracks'
-                                    , 'arrNotificationButtons'
-                                    , 'intLastTracksToKeep'
-                                    , 'boolNotificationShowStationLogo'
-                                    , 'boolNotificationShowWhenStopped'
-                                    , 'boolNotificationShowWhenMuted'
-                                    , 'boolNotificationShowWhenNoTrackInfo'
-                                    , 'strNotificationTitleFormat'
-                                  ]
+            arrSettingsToRemove   = []
+          , arrDeprecatedSettings = [
+                                        'arrActiveButtons'
+                                      , 'arrLastTracks'
+                                      , 'arrNotificationButtons'
+                                      , 'intLastTracksToKeep'
+                                      , 'boolNotificationShowStationLogo'
+                                      , 'boolNotificationShowWhenStopped'
+                                      , 'boolNotificationShowWhenMuted'
+                                      , 'boolNotificationShowWhenNoTrackInfo'
+                                      , 'strNotificationTitleFormat'
+                                    ]
           ;
 
         for (
-          var i = 0, intSettingsToRemove = arrSettingsToRemove.length;
+          var i = 0, intSettingsToRemove = arrDeprecatedSettings.length;
           i < intSettingsToRemove;
           i++
         ) {
-          var strSettingToRemove = arrSettingsToRemove[ i ];
+          var strSettingToRemove = arrDeprecatedSettings[ i ];
 
           // Remove it only if it is present
           if ( objReturn[ strSettingToRemove ] )
-            arrTempToRemove.push( strSettingToRemove );
+            arrSettingsToRemove.push( strSettingToRemove );
         }
 
-        if ( ! Global.isEmpty( arrTempToRemove ) ) {
-          chrome.storage.sync.remove( arrTempToRemove, function() {
-            // Debug
-            console.log(
-                'Background removeOldSettings, arrTempToRemove'
-              , arrTempToRemove
-            );
+        if ( ! Global.isEmpty( arrSettingsToRemove ) ) {
+          chrome.storage.sync.remove( arrSettingsToRemove, function() {
+            strLog = 'removeOldSettings';
+            Log.add( strLog + strLogDo, arrSettingsToRemove, true );
+
+            if ( chrome.runtime.lastError ) {
+              Log.add( strLog + strLogError, {}, true );
+              return;
+            }
 
             chrome.storage.sync.get( null, function( objData ) {
-              console.log( 'Background removeOldSettings', objData );
+              strLog = 'removeOldSettings';
+              Log.add( strLog + strLogDone, objData );
             });
 
             Background.setExtensionDefaults();
           });
         }
-        else
+        else {
+          Log.add( strLog + strLogDoNot );
+
           Background.setExtensionDefaults();
+        }
       });
     }
-    else
+    else {
+      Log.add( strLog + strLogDoNot );
+      
       Background.setExtensionDefaults();
+    }
   }
   ,
 
@@ -169,6 +185,9 @@ var Background = {
    **/
   setExtensionDefaults : function() {
     chrome.storage.sync.get( null, function( objReturn ) {
+      strLog = 'setExtensionDefaults';
+      Log.add( strLog );
+
       // 1. To set
       var
           objTempToSet                                  = {}
@@ -212,12 +231,9 @@ var Background = {
       }
 
       if ( ! Global.isEmpty( objTempToSet ) )
-        chrome.storage.sync.set( objTempToSet, function() {
-          // Debug
-          chrome.storage.sync.get( null, function( objData ) {
-            console.log( 'Background setExtensionDefaults ', objData );
-          });
-        });
+        Global.setStorageItems( objTempToSet, strLog );
+      else
+        Log.add( strLog + strLogDoNot );
     });
   }
   ,
@@ -234,36 +250,43 @@ var Background = {
     var arrVarsToGet = [ 'arrRecentTracks', 'intRecentTracksToKeep' ];
 
     chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
+      strLog = 'saveRecentTrackInfo';
+      Log.add( strLog, objStationInfo );
+
       var
-          arrRecentTracks = objReturn.arrRecentTracks
+          arrRecentTracks     = objReturn.arrRecentTracks
         // Don't include messages with player status (started, resumed, muted)
-        , arrTrackInfo    = objStationInfo.strTrackInfo.split( "\n\n" )
-        , strTrackInfo    = arrTrackInfo[ 0 ]
+        , arrTrackInfo        = objStationInfo.strTrackInfo.split( "\n\n" )
+        , strTrackInfo        = arrTrackInfo[ 0 ]
+        , intIndex            = arrRecentTracks
+                                  .map(
+                                    function ( arrSub ) {
+                                      return arrSub[0]
+                                    }
+                                  )
+                                    .indexOf( strTrackInfo )
+        , arrTempRecentTrack  = []
         ;
 
-      // Don't save if already in array
-      if (
-        arrRecentTracks
-          .map(
-            function ( arrSub ) {
-              return arrSub[0]
-            }
-          )
-            .indexOf( strTrackInfo ) !== -1
-      )
-        return;
+      if ( intIndex !== -1 ) {
+        if ( intIndex !== ( arrRecentTracks.length - 1 ) )
+          arrRecentTracks.splice( intIndex, 1 );
+        // Don't save if it is already at the last position in the array
+        else
+          return;
+      }
+      else {
+        var
+            intRecentTracksExcess     = arrRecentTracks.length - 
+                                          objReturn.intRecentTracksToKeep
+          , intRecentTracksToRemove   = (
+                                          intRecentTracksExcess < 0 ?
+                                            -1 : intRecentTracksExcess
+                                        ) + 1
+          ;
 
-      var
-          intRecentTracksExcess     = arrRecentTracks.length - 
-                                        objReturn.intRecentTracksToKeep
-        , intRecentTracksToRemove   = (
-                                        intRecentTracksExcess < 0 ?
-                                          -1 : intRecentTracksExcess
-                                      ) + 1
-        , arrTempRecentTrack        = []
-        ;
-
-      arrRecentTracks.splice( 0, intRecentTracksToRemove );
+        arrRecentTracks.splice( 0, intRecentTracksToRemove );
+      }
 
       // Using array instead of object because of QUOTA_BYTES_PER_ITEM
       // developer.chrome.com/extensions/storage.html#property-sync-QUOTA_BYTES_PER_ITEM
@@ -273,17 +296,7 @@ var Background = {
 
       arrRecentTracks.push( arrTempRecentTrack );
 
-      chrome.storage.sync.set( objReturn, function() {
-        if ( chrome.runtime.lastError ) {
-          // Debug
-          console.log( 'Can\'t save Last Track info' );
-        }
-
-        // Debug
-        chrome.storage.sync.get( null, function( objData ) {
-          console.log( 'Background new track to arrRecentTracks ', objData );
-        });
-      });
+      Global.setStorageItems( objReturn, strLog );
     });
   }
   ,
@@ -299,13 +312,13 @@ var Background = {
    * @return  void
    **/
   onMessageCallback : function( objMessage, objSender, objSendResponse ) {
+    strLog = 'onMessageCallback';
+    Log.add( strLog, objMessage );
+
     var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
 
-    // Debug
-    console.log( 'Background onMessage ', objMessage );
-
     // Show notification if track info changed or extension asks to show it
-    // again (set of buttons needs to be changed, for example)
+    // again (for example, set of buttons needs to be changed)
     if (
           Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
       &&  strTrackInfo !== Background.strPreviousTrack
@@ -321,9 +334,8 @@ var Background = {
 
       Background.strPreviousTrack = strTrackInfo;
     }
-    else { // Debug
-      console.log( 'Don\'t show notification. Current Track: ' + strTrackInfo );
-    }
+    else
+      Log.add( strLog + strLogDoNot, strTrackInfo );
   }
   ,
 
@@ -343,11 +355,20 @@ var Background = {
    **/
   checkOpenTabs : function( objSavedTab, intRemovedTabId ) {
     chrome.tabs.query( {}, function( tabs ) {
+      strLog = 'checkOpenTabs';
+      Log.add(
+          strLog
+        , {
+              objSavedTab     : objSavedTab     || {}
+            , intRemovedTabId : intRemovedTabId || -1
+          }
+      );
+
       var objOpenTabs = {};
 
       for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
         if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
-          console.log( 'Found open PoziTab: ' + objTab.url );
+          Log.add( strLog + strLogSuccess, objTab.url );
 
           var
               intWindowId = objTab.windowId
@@ -355,10 +376,10 @@ var Background = {
             ;
 
           // If there are no open tabs for this windowId saved yet
-          if ( Global.isEmpty( objOpenTabs[ objTab.windowId ] ) )
-            objOpenTabs[ objTab.windowId ] = {};
+          if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) )
+            objOpenTabs[ intWindowId ] = {};
 
-          objOpenTabs[ objTab.windowId ][ objTab.index ] = objTab;
+          objOpenTabs[ intWindowId ][ objTab.index ] = objTab;
 
           chrome.tabs.sendMessage(
               intTabId
@@ -391,13 +412,13 @@ var Background = {
           );
       }
 
+      // TODO: Prevent exceeding max number of write operations
       Global.saveOpenTabs( objOpenTabs );
 
-      if ( ! Global.isEmpty( objOpenTabs ) ) {
-        // TODO: Can exceed max number of write operations
+      if ( Global.isEmpty( objOpenTabs ) ) {
+        strLog = 'checkOpenTabs';
+        Log.add( strLog + strLogNoSuccess );
       }
-      else
-        console.log( 'Could not find open PoziTab.' );
     });
   }
   ,
@@ -415,6 +436,9 @@ var Background = {
     chrome.storage.sync.get(
         Background.strObjOpenTabsName
       , function( objReturn ) {
+          strLog = 'checkIfOpenTabChangedDomainOnUpdated';
+          Log.add( strLog, objTab );
+
           var 
               objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
             , objSavedWindow  = objSavedTabs[ objTab.windowId ]
@@ -441,12 +465,12 @@ var Background = {
    * @return  void
    **/
   checkIfOpenTabChangedDomainOnReplaced : function( intRemovedTabId ) {
-    // Debug
-    console.log( 'Background.checkIfOpenTabChangedDomainOnReplaced' );
-
     chrome.storage.sync.get(
         Background.strObjOpenTabsName
       , function( objReturn ) {
+          strLog = 'checkIfOpenTabChangedDomainOnReplaced';
+          Log.add( strLog, intRemovedTabId );
+
           var 
               objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
             ;
@@ -460,10 +484,7 @@ var Background = {
                   var objSavedTab = objSavedWindows[ intTabIndex ];
 
                   if ( objSavedTab.id === intRemovedTabId ) {
-                    // Debug
-                    console.log(
-                      'Background.checkIfOpenTabChangedDomainOnReplaced match'
-                    );
+                    Log.add( strLog + strLogSuccess, intRemovedTabId );
 
                     Background.checkOpenTabs( objSavedTab, intRemovedTabId );
                     return;
@@ -473,10 +494,7 @@ var Background = {
             }
           }
 
-          // Debug
-          console.log(
-            'Background.checkIfOpenTabChangedDomainOnReplaced no match'
-          );
+          Log.add( strLog + strLogNoSuccess, intRemovedTabId );
 
           // When no tabs had been saved
           Background.checkOpenTabs();
@@ -499,6 +517,16 @@ var Background = {
    * @return  void
    **/
   checkIfHostnameChanged : function( objSavedTab, objTab, intRemovedTabId ) {
+    strLog = 'checkIfHostnameChanged';
+    Log.add(
+        strLog
+      , {
+            objSavedTab     : objSavedTab
+          , objTab          : objTab
+          , intRemovedTabId : intRemovedTabId || -1
+        }
+    );
+
     // http://stackoverflow.com/a/8498668/561712
     var
         $aSavedTab  = document.createElement( 'a' )
@@ -509,6 +537,8 @@ var Background = {
     $aTab.href      = objTab.url;
 
     if ( $aSavedTab.hostname !== $aTab.hostname ) {
+      Log.add( strLog + strLogSuccess );
+
       var intTabId = objTab.id;
 
       if ( typeof intRemovedTabId === 'number' )
@@ -548,17 +578,21 @@ chrome.runtime.onMessageExternal.addListener(
 );
 
 /**
- * Listens for clicks on notification
+ * Listens for clicks on notification.
+ * 
+ * Makes a tab which initiated the notification active, 
+ * and makes the window focused.
  *
  * @type    method
  * @param   strNotificationId
  *            Notification ID
- * @param   intButtonIndex
- *            Notification button index
  * @return  void
  **/
 chrome.notifications.onClicked.addListener(
-  function( strNotificationId, intButtonIndex ) {
+  function( strNotificationId ) {
+    strLog = 'chrome.notifications.onClicked';
+    Log.add( strLog, { strNotificationId : strNotificationId }, true, true );
+
     var intNotificationTabId = parseInt(
       strNotificationId.replace( Global.strNotificationId, '' )
     );
@@ -572,7 +606,8 @@ chrome.notifications.onClicked.addListener(
               chrome.tabs.highlight(
                   { windowId: intWindowId, tabs: intTabIndex }
                 , function() {
-
+                    strLog = 'chrome.notifications.onClicked';
+                    Log.add( strLog + strLogSuccess );
                   }
               );
             }
@@ -598,17 +633,24 @@ chrome.notifications.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
-    var intTabId = 
-      parseInt( strNotificationId.replace( Global.strNotificationId, '' ) );
-
     chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
-      // Debug
-      console.log( 'Background get objActiveButtons ', objReturn );
+      strLog = 'chrome.notifications.onButtonClicked';
+      Log.add(
+          strLog
+        , {
+              strNotificationId : strNotificationId
+            , intButtonIndex    : intButtonIndex
+            , objActiveButtons  : objReturn
+          }
+      );
 
       var
-          arrButton   = objReturn
-                        .objActiveButtons[ intTabId ][ intButtonIndex ]
-                          .split( '|' )
+          intTabId    = 
+            parseInt(
+              strNotificationId.replace( Global.strNotificationId, '' )
+            )
+        , arrButtons  = objReturn.objActiveButtons[ intTabId ]
+        , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
         , strFunction = Global
                           .objSettingsDefaults
                             .arrNotificationButtons[
@@ -616,6 +658,16 @@ chrome.notifications.onButtonClicked.addListener(
                             ]
                               .strFunction
         ;
+
+      Log.add(
+          strLog + strLogDo
+        , {
+              strButton0  : arrButtons[ 0 ]
+            , strButton1  : arrButtons[ 1 ]
+            , strFunction : strFunction
+          }
+        , true
+      );
 
       chrome.tabs.sendMessage(
           intTabId
@@ -635,17 +687,16 @@ chrome.notifications.onButtonClicked.addListener(
  **/
 chrome.commands.onCommand.addListener(
   function( strCommand ) {
-
-    // Debug
-    console.log( 'Background onCommand: ' + strCommand );
-
-    var strMessagePrefix = 'processCommand_';
-
-    // For these it's the same as button click
-    if ( strCommand === 'add' || strCommand === 'playStop' )
-      strMessagePrefix = 'processButtonClick_';
-
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      strLog = 'chrome.commands.onCommand';
+      Log.add( strLog, { strCommand : strCommand }, true );
+
+      var strMessagePrefix = 'processCommand_';
+
+      // For these it's the same as button click
+      if ( strCommand === 'add' || strCommand === 'playStop' )
+        strMessagePrefix = 'processButtonClick_';
+
       var
           arrTabsIds      = objData.arrTabsIds
         , intTabsIds      = arrTabsIds.length
@@ -668,8 +719,10 @@ chrome.commands.onCommand.addListener(
             , 'Are you ready to get a command?'
             , function( strResponse ) {
                 if ( strResponse === 'Affirmative.' ) {
+                  strLog = 'chrome.commands.onCommand';
+                  Log.add( strLog + strLogSuccess, intTabId );
+
                   funcSendMessage( null, null, intTabId );
-                  console.log( 'Background onCommand: active player found' );
                 }
                 else {
                   intArrIndex--;
@@ -680,7 +733,7 @@ chrome.commands.onCommand.addListener(
         }
         else {
           // If no active players found, send to first open
-          console.log( 'Background onCommand: no active player found' );
+          Log.add( strLog + strLogNoSuccess );
           Global.findFirstOpenTabInvokeCallback( funcSendMessage );
         }
       };
@@ -698,13 +751,15 @@ chrome.commands.onCommand.addListener(
  *
  * @type    method
  * @param   objDetails
- *            Reason event is being dispatched, previous version
+ *            Reason - install/update/chrome_update - 
+ *            and (optional) previous version
  * @return  void
  **/
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
-    // Debug
-    console.log( 'Background chrome.runtime.onInstalled ', objDetails );
+    strLog = 'chrome.runtime.onInstalled';
+    objDetails.currentVersion = chrome.runtime.getManifest().version;
+    Log.add( strLog, objDetails, true );
 
     Background.cleanUp( true, objDetails );
   }
@@ -719,8 +774,8 @@ chrome.runtime.onInstalled.addListener(
  **/
 chrome.runtime.onStartup.addListener(
   function() {
-    // Debug
-    console.log( 'Background chrome.runtime.onStartup' );
+    strLog = 'chrome.runtime.onStartup';
+    Log.add( strLog, {}, true );
 
     Background.cleanUp();
   }
@@ -741,11 +796,8 @@ chrome.runtime.onStartup.addListener(
  **/
 chrome.tabs.onUpdated.addListener(
   function( intTabId, objChangeInfo, objTab ) {
-    // Debug
-    console.log(
-        'Background chrome.tabs.onUpdated '
-      , JSON.stringify( objChangeInfo )
-    );
+    strLog = 'chrome.tabs.onUpdated';
+    Log.add( strLog, objChangeInfo );
 
     var strStatus = objChangeInfo.status;
 
@@ -774,11 +826,13 @@ chrome.tabs.onUpdated.addListener(
  **/
 chrome.tabs.onReplaced.addListener(
   function( intAddedTabId, intRemovedTabId ) {
-    // Debug
-    console.log(
-        'Background chrome.tabs.onReplaced '
-      , JSON.stringify( intAddedTabId )
-      , JSON.stringify( intRemovedTabId )
+    strLog = 'chrome.tabs.onReplaced';
+    Log.add(
+        strLog
+      , {
+            intAddedTabId   : intAddedTabId
+          , intRemovedTabId : intRemovedTabId
+        }
     );
 
     Background.checkIfOpenTabChangedDomainOnReplaced( intRemovedTabId );
@@ -797,8 +851,8 @@ chrome.tabs.onReplaced.addListener(
  **/
 chrome.tabs.onRemoved.addListener(
   function( intTabId ) {
-    // Debug
-    console.log( 'Background chrome.tabs.onRemoved' );
+    strLog = 'chrome.tabs.onRemoved';
+    Log.add( strLog, intTabId );
 
     Background.checkOpenTabs();
     Global.removeNotification( intTabId );
