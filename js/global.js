@@ -204,6 +204,8 @@ var Global                        = {
    * @param   objStationInfo
    *            Station info
    *              (strStationName, strStationNamePlusDesc, strTrackInfo)
+   * @param   strCommand
+   *            Optional. Which command made this call
    * @return  void
    **/
   showNotification : function(
@@ -212,6 +214,7 @@ var Global                        = {
     , intTabId
     , objPlayerInfo
     , objStationInfo
+    , strCommand
   ) {
     strLog = 'showNotification';
     Log.add( strLog, objStationInfo );
@@ -422,6 +425,7 @@ var Global                        = {
                     , objTempStationInfo
                     , intTabId
                     , arrActiveButtons
+                    , strCommand
                   );
                 }
             );
@@ -443,6 +447,8 @@ var Global                        = {
    *            Tab ID info received from
    * @param   arrActiveButtons
    *            Active buttons for current notification
+   * @param   strCommand
+   *            Optional. Which command made this call
    * @return  void
    **/
   showNotificationCallback : function(
@@ -450,18 +456,52 @@ var Global                        = {
     , objStationInfo
     , intTabId
     , arrActiveButtons
+    , strCommand
   ) {
-    strLog = 'showNotificationCallback';
-    Log.add(
-        strLog
-      , {
-            strModule                   : objPlayerInfo.strModule
-          , strStationName              : objStationInfo.strStationName
-          , boolHasAddToPlaylistButton  : 
-              objStationInfo.boolHasAddToPlaylistButton || 'n/a'
+    /* START Log */
+    var
+        arrTrackInfo  = objStationInfo.strTrackInfo.split( "\n\n" )
+      , funcLog       = function() {
+          strLog = 'showNotificationCallback';
+          Log.add(
+              strLog
+            , {
+                  strModule                   : objPlayerInfo.strModule
+                , strStationName              : objStationInfo.strStationName
+                , boolHasAddToPlaylistButton  : 
+                    objStationInfo.boolHasAddToPlaylistButton || 'n/a'
+              }
+            , true
+          );
         }
-      , true
-    );
+      ;
+
+    // There is no arrTrackInfo[ 1 ] only on track change (automatic and when
+    // clicked 'next', too) and on 'showNotification' command
+    if (
+          typeof arrTrackInfo[ 1 ] === 'undefined'
+      &&  strCommand !== 'showNotification'
+    )
+      funcLog();
+    else
+      chrome.storage.sync.get( 'arrRecentTracks', function( objReturn ) {
+        if ( typeof objReturn.arrRecentTracks === 'object' ) {
+          var arrLastTrack = objReturn.arrRecentTracks.pop();
+
+          // Don't log when same player, station & track info as last track. 
+          // Even on page reload.
+          if (
+                (
+                      arrLastTrack[ 0 ] !== arrTrackInfo[ 0 ]
+                  ||  arrLastTrack[ 1 ] !== objStationInfo.strStationName
+                  ||  arrLastTrack[ 2 ] !== objStationInfo.strLogoUrl
+                )
+            &&  strCommand !== 'showNotification'
+          )
+            funcLog();
+        }
+      });
+    /* END Log */
 
     Background.saveRecentTrackInfo( objStationInfo ); 
     Global.saveTabsIds( intTabId );

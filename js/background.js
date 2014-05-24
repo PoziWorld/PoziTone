@@ -330,6 +330,7 @@ var Background                    = {
         , objSender.tab.id
         , objMessage.objPlayerInfo
         , objMessage.objStationInfo
+        , objMessage.strCommand || ''
       );
 
       Background.strPreviousTrack = strTrackInfo;

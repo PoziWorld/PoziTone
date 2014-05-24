@@ -191,7 +191,9 @@ var
         ( typeof $player.getVolume === 'function' ) ?
             $player.getVolume()
           : parseInt(
-              document.getElementById( strVolumeLineId ).style.width.replace( '%', '' )
+              document
+                .getElementById( strVolumeLineId )
+                  .style.width.replace( '%', '' )
             );
   }
   ,
@@ -311,15 +313,15 @@ var
   ,
 
   /**
-   * If volume is not 0, then mute; otherwise unmute;
-   * TODO: Don't use 'processCommand_showNotification', just 'sendSameMessage' from sender.
+   * TODO: Don't use 'processCommand_showNotification', 
+   * just 'sendSameMessage' from sender.
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   processCommand_showNotification : function() {
-    PageWatcher.sendSameMessage();
+    PageWatcher.sendSameMessage( '', 'showNotification' );
   }
   ,
 
@@ -330,15 +332,22 @@ var
    * @param   $target
    *            The Node on which to observe DOM mutations
    * @param   objOptions
-   *            A MutationObserverInit object, specifies which DOM mutations should be reported.
+   *            A MutationObserverInit object, specifies which DOM mutations
+   *            should be reported.
    * @param   funcCallback
    *            The function which will be called on each DOM mutation
    * @param   boolDisconnectable
    *            If this observer should be disconnected later
    * @return  void
    **/
-  initObserver : function( $target, objOptions, funcCallback, boolDisconnectable ) {
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+  initObserver : function(
+      $target
+    , objOptions
+    , funcCallback
+    , boolDisconnectable
+  ) {
+    var MutationObserver = 
+          window.MutationObserver || window.WebKitMutationObserver;
 
     if ( typeof boolDisconnectable === 'undefined' && !boolDisconnectable ) {
       var observer = new MutationObserver( funcCallback );
@@ -396,7 +405,9 @@ var
               // Wait till feedback dialog gets appended to <body />.
               else if (
                     strElementIdOrClass === strFeedbackDialogClass
-                &&  arrAddedNodes[ 0 ].classList.contains( strFeedbackDialogClass )
+                &&  arrAddedNodes[ 0 ]
+                      .classList
+                        .contains( strFeedbackDialogClass )
               ) {
                 PageWatcher.onFeedbackDialogAppearance();
                 return;
@@ -429,24 +440,31 @@ var
           for ( var i = 0; i < arrMutations.length; i++ ) {
             var
                 $target                   = arrMutations[ i ].target
-              , boolPlaying               = $target.classList.contains( 'playing' )
+              , boolPlaying               = 
+                  $target.classList.contains( 'playing' )
               , strUpdatedPreviousStatus  = boolPlaying ? 'play' : 'stop'
               ;
 
             // Sometimes mutation happens even without player status change
-            if ( strUpdatedPreviousStatus === PageWatcher.objPlayerInfo.strPreviousStatus )
+            if ( strUpdatedPreviousStatus === 
+                    PageWatcher.objPlayerInfo.strPreviousStatus )
               return;
 
             // Follow the 101.ru logic
-            PageWatcher.objPlayerInfo.strPreviousStatus = strUpdatedPreviousStatus;
+            PageWatcher.objPlayerInfo.strPreviousStatus = 
+              strUpdatedPreviousStatus;
 
             if ( boolPlaying ) {
               var strLangStartedOrResumed = 
-                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
+                    chrome.i18n.getMessage(
+                      'poziNotificationPlayerStatusChangeResumed'
+                    );
 
               if ( PageWatcher.boolPageJustLoaded ) {
                 strLangStartedOrResumed =
-                  chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
+                  chrome.i18n.getMessage(
+                    'poziNotificationPlayerStatusChangeStarted'
+                  );
 
                 PageWatcher.initTrackTitleObserver();
               }
@@ -461,7 +479,9 @@ var
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
+                chrome.i18n.getMessage(
+                  'poziNotificationPlayerStatusChangeStopped'
+                )
               );
 
             return;
@@ -661,10 +681,11 @@ var
    * @return  void
    **/
   onFeedbackDialogAppearance : function( funcWhenReady ) {
-    var strFeedback = document
-                        .getElementsByClassName( strFeedbackDialogHeaderClass )[ 0 ]
-                          .innerText
-                        ;
+    var strFeedback =
+          document
+            .getElementsByClassName( strFeedbackDialogHeaderClass )[ 0 ]
+              .innerText
+            ;
 
     PageWatcher.sendSameMessage( strFeedback );
   }
@@ -808,13 +829,15 @@ var
    *
    * @type    method
    * @param   strFeedback
-   *            Feedback for main actions
+   *            Optional. Feedback for main actions
+   * @param   strCommand
+   *            Optional. Which command made this call
    * @return  void
    **/
-  sendSameMessage : function( strFeedback ) {
+  sendSameMessage : function( strFeedback, strCommand ) {
     PageWatcher.setTrackInfoAndSend( false );
 
-    if ( typeof strFeedback !== 'undefined' )
+    if ( typeof strFeedback !== 'undefined' && strFeedback !== '' )
       PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
 
     chrome.runtime.sendMessage(
@@ -823,6 +846,7 @@ var
         , boolDisregardSameMessage  : true
         , objPlayerInfo             : PageWatcher.getPlayerInfo()
         , objStationInfo            : PageWatcher.objStationInfo
+        , strCommand                : strCommand
       }
     );
   }

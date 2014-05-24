@@ -176,10 +176,18 @@ var
       // .search() is faster than for () - http://jsperf.com/for-loop-or-search-regexp
       var
           strPlayStopButtonClassAttr    = $playStopButton.className
-        , intWantedClassPosition        = strPlayStopButtonClassAttr.search( PageWatcher.objWantedClassRegExp )
-        , strWantedClass                = ( intWantedClassPosition !== -1 ) ?
-            // +1 because we don't want to include space symbol
-            strPlayStopButtonClassAttr.substr( intWantedClassPosition + 1, PageWatcher.intWantedClassLength ) : ''
+        , intWantedClassPosition        = 
+            strPlayStopButtonClassAttr
+              .search( PageWatcher.objWantedClassRegExp )
+        , strWantedClass                = 
+            ( intWantedClassPosition !== -1 ) ?
+                // +1 because we don't want to include space symbol
+                strPlayStopButtonClassAttr
+                  .substr(
+                      intWantedClassPosition + 1
+                    , PageWatcher.intWantedClassLength
+                  )
+              : ''
         ;
 
       PageWatcher.objPlayerInfo.strStatus = strWantedClass;
@@ -223,7 +231,8 @@ var
    * @return  object
    **/
   getPlayerIntVar : function( strApiKey, strReturnPropertyName ) {
-    var intPlayerIntVar = parseInt( playerAPI.Uppod.uppodGet( strPlayerId, strApiKey ) );
+    var intPlayerIntVar = 
+          parseInt( playerAPI.Uppod.uppodGet( strPlayerId, strApiKey ) );
 
     if ( ! isNaN( intPlayerIntVar ) )
       PageWatcher.objPlayerInfo[ strReturnPropertyName ] = intPlayerIntVar;
@@ -276,7 +285,8 @@ var
    **/
   processButtonClick_mute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) { // If MP3
-      // Uppod JS API doesn't provide "mute" method, simulate it by saving current value
+      // Uppod JS API doesn't provide "mute" method, simulate it 
+      // by saving current value
       PageWatcher.getPlayerIntVar( 'getv', 'intVolumeBeforeMuted' );
       playerAPI.Uppod.uppodSend( strPlayerId, 'v0' );
     }
@@ -299,7 +309,10 @@ var
   processButtonClick_unmute : function() {
     if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) // If MP3
       // Uppod JS API doesn't provide "unmute" method, restore prev value
-      playerAPI.Uppod.uppodSend( strPlayerId, 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
+      playerAPI.Uppod.uppodSend(
+          strPlayerId
+        , 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted
+      );
     else // If WMA
       $wmaPlayer.settings.mute = false;
 
@@ -314,13 +327,15 @@ var
    *
    * @type    method
    * @param   strFeedback
-   *            Feedback for main actions
+   *            Optional. Feedback for main actions
+   * @param   strCommand
+   *            Optional. Which command made this call
    * @return  void
    **/
-  sendSameMessage : function( strFeedback ) {
+  sendSameMessage : function( strFeedback, strCommand ) {
     PageWatcher.objStationInfo.strTrackInfo = $trackInfo.innerText;
 
-    if ( typeof strFeedback !== 'undefined' )
+    if ( typeof strFeedback !== 'undefined' && strFeedback !== '' )
       PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
 
     chrome.runtime.sendMessage(
@@ -329,6 +344,7 @@ var
         , boolDisregardSameMessage  : true
         , objPlayerInfo             : PageWatcher.getPlayerInfo()
         , objStationInfo            : PageWatcher.objStationInfo
+        , strCommand                : strCommand
       }
     );
   }
@@ -353,15 +369,15 @@ var
   ,
 
   /**
-   * If volume is not 0, then mute; otherwise unmute;
-   * TODO: Don't use 'processCommand_showNotification', just 'sendSameMessage' from sender.
+   * TODO: Don't use 'processCommand_showNotification', 
+   * just 'sendSameMessage' from sender.
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   processCommand_showNotification : function() {
-    PageWatcher.sendSameMessage();
+    PageWatcher.sendSameMessage( '', 'showNotification' );
   }
   ,
 
@@ -372,7 +388,8 @@ var
    * @param   $target
    *            The Node on which to observe DOM mutations
    * @param   objOptions
-   *            A MutationObserverInit object, specifies which DOM mutations should be reported.
+   *            A MutationObserverInit object, specifies which DOM mutations
+   *            should be reported.
    * @param   funcCallback
    *            The function which will be called on each DOM mutation
    * @return  void
@@ -406,14 +423,21 @@ var
             var strPlayerStatus = PageWatcher.getPlayerStatus( true );
 
             // To prevent a bug when mutation happens twice on MP3 player start
-            if ( strPlayerStatus === PageWatcher.objPlayerInfo.strPreviousStatus )
+            if ( strPlayerStatus === 
+                    PageWatcher.objPlayerInfo.strPreviousStatus )
               return;
 
             if ( strPlayerStatus === 'stop' ) {
-              var strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeResumed' );
+              var strLangStartedOrResumed = 
+                    chrome.i18n.getMessage(
+                      'poziNotificationPlayerStatusChangeResumed'
+                    );
 
               if ( PageWatcher.boolPageJustLoaded )
-                strLangStartedOrResumed = chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' );
+                strLangStartedOrResumed = 
+                  chrome.i18n.getMessage(
+                    'poziNotificationPlayerStatusChangeStarted'
+                  );
 
               PageWatcher.boolHadPlayedBefore = true;
               PageWatcher.sendSameMessage( strLangStartedOrResumed );
@@ -424,7 +448,9 @@ var
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStopped' )
+                chrome.i18n.getMessage(
+                  'poziNotificationPlayerStatusChangeStopped'
+                )
               );
 
             PageWatcher.objPlayerInfo.strPreviousStatus = strPlayerStatus;
@@ -460,14 +486,26 @@ var
               , strMessageToSend    = ''
               ;
 
-            if ( objMutationRecord.type === 'childList' && objMutationRecord.addedNodes.length )
+            if (
+                  objMutationRecord.type === 'childList'
+              &&  objMutationRecord.addedNodes.length
+            )
               strFeedbackMessage = objMutationRecord.target.innerText;
-            else if ( objMutationRecord.type === 'characterData' && objMutationRecord.target.textContent !== '' )
+            else if (
+                  objMutationRecord.type === 'characterData'
+              &&  objMutationRecord.target.textContent !== ''
+            )
               strFeedbackMessage = objMutationRecord.target.textContent;
 
             if ( strFeedbackMessage !== '' ) {
-              if ( typeof PageWatcher.objAddTrackToPlaylistFeedback[ strFeedbackMessage ] !== 'undefined' )
-                strMessageToSend = PageWatcher.objAddTrackToPlaylistFeedback[ strFeedbackMessage ];
+              if ( typeof
+                      PageWatcher
+                        .objAddTrackToPlaylistFeedback[ strFeedbackMessage ] !==
+                          'undefined'
+              )
+                strMessageToSend = 
+                  PageWatcher
+                    .objAddTrackToPlaylistFeedback[ strFeedbackMessage ];
               else
                 strMessageToSend = strFeedbackMessage;
 
@@ -505,7 +543,11 @@ var
                   arrClassList.contains( strFavoriteButtonSuccessClass )
               ||  arrClassList.contains( strFavoriteButtonSuccessClass2 )
             ) {
-              PageWatcher.sendSameMessage( chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' ) );
+              PageWatcher.sendSameMessage(
+                chrome.i18n.getMessage(
+                  'poziNotificationFavoriteStatusSuccess'
+                )
+              );
               return;
             }
           };
@@ -593,7 +635,10 @@ $trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
   PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
 
   // When WMA player starts, it should show "Playback started", same way as MP3
-  if ( PageWatcher.boolPageJustLoaded && !PageWatcher.objPlayerInfo.boolIsMp3Player ) {
+  if (
+        PageWatcher.boolPageJustLoaded
+    &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
+  ) {
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' )
     );
