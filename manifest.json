@@ -80,6 +80,7 @@
                                     , "scripts"           : [
                                           "js/tracking.js"
                                         , "js/log.js"
+                                        , "js/bowser.js"
                                         , "js/global.js"
                                         , "js/background.js"
                                       ]

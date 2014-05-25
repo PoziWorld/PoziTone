@@ -758,8 +758,15 @@ chrome.commands.onCommand.addListener(
  **/
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
-    strLog = 'chrome.runtime.onInstalled';
-    objDetails.currentVersion = chrome.runtime.getManifest().version;
+    strLog                        = 'chrome.runtime.onInstalled';
+    objDetails.currentVersion     = chrome.runtime.getManifest().version;
+    objDetails.browserName        = bowser.name;
+    objDetails.browserVersion     = bowser.version;
+    objDetails.browserVersionFull = bowser.versionFull;
+    objDetails.chromeVersion      = bowser.chromeVersion;
+    objDetails.chromeVersionFull  = bowser.chromeVersionFull;
+    objDetails.userAgent          = bowser.userAgent;
+
     Log.add( strLog, objDetails, true );
 
     Background.cleanUp( true, objDetails );
