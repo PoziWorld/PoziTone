@@ -12,78 +12,78 @@
   , "homepage_url"              : "https://github.com/poziworld/pozitone/"
 
   , "icons"                     : {
-                                      "16"                : "img/pozitone-icon-16.png"
-                                    , "48"                : "img/pozitone-icon-48.png"
-                                    , "128"               : "img/pozitone-icon-128.png"
-                                  }
+        "16"                    : "img/pozitone-icon-16.png"
+      , "48"                    : "img/pozitone-icon-48.png"
+      , "128"                   : "img/pozitone-icon-128.png"
+    }
 
   , "permissions"               : [
-                                      "http://101.ru/"
-                                    , "*://vk.com/"
-                                    , "notifications"
-                                    , "storage"
-                                    , "tabs"
-                                  ]
+        "*://101.ru/"
+      , "*://vk.com/"
+      , "notifications"
+      , "storage"
+      , "tabs"
+    ]
   , "browser_action"            : {
-                                      "default_icon"      : {
-                                          "19"            : "img/pozitone-browser-action-icon-19.png"
-                                        , "38"            : "img/pozitone-browser-action-icon-38.png"
-                                      }
-                                    , "default_title"     : "__MSG_poziToolName__"
-                                    , "default_popup"     : "html/browser-action.html"
-                                  }
+        "default_icon"          : {
+            "19"                : "img/pozitone-browser-action-icon-19.png"
+          , "38"                : "img/pozitone-browser-action-icon-38.png"
+        }
+      , "default_title"         : "__MSG_poziToolName__"
+      , "default_popup"         : "html/browser-action.html"
+    }
   , "commands"                  : {
-                                      "add"               : {
-                                          "suggested_key" : {
-                                            "default"     : "Alt+Shift+D"
-                                          }
-                                        , "description"   : "Add track to playlist"
-                                      }
-                                    , "playStop"          : {
-                                          "suggested_key" : {
-                                            "default"     : "Alt+Shift+P"
-                                          }
-                                        , "description"   : "Stop / Play"
-                                      }
-                                    , "muteUnmute"        : {
-                                          "suggested_key" : {
-                                            "default"     : "Alt+Shift+M"
-                                          }
-                                        , "description"   : "Mute / Unmute"
-                                      }
-                                    , "showNotification"  : {
-                                          "suggested_key" : {
-                                            "default"     : "Alt+Shift+Q"
-                                          }
-                                        , "description"   : "Show notification"
-                                      }
-                                  }
+        "add"                   : {
+            "suggested_key"     : {
+              "default"         : "Alt+Shift+D"
+            }
+          , "description"       : "Add track to playlist"
+        }
+      , "playStop"              : {
+            "suggested_key"     : {
+              "default"         : "Alt+Shift+P"
+            }
+          , "description"       : "Stop / Play"
+        }
+      , "muteUnmute"            : {
+            "suggested_key"     : {
+              "default"         : "Alt+Shift+M"
+            }
+          , "description"       : "Mute / Unmute"
+        }
+      , "showNotification"      : {
+            "suggested_key"     : {
+              "default"         : "Alt+Shift+Q"
+            }
+          , "description"       : "Show notification"
+        }
+    }
   , "content_scripts"           : [
-                                      {
-                                          "matches"       : [ "http://101.ru/*" ]
-                                        , "js"            : [ 
-                                              "modules/ru_101/js/uppod-player-api.js"
-                                            , "modules/ru_101/js/page-watcher.js"
-                                          ]
-                                        , "run_at"        : "document_end"
-                                      }
-                                    , {
-                                          "matches"       : [ "*://vk.com/*" ]
-                                        , "js"            : [ 
-                                              "modules/com_vk_audio/js/page-watcher.js"
-                                          ]
-                                        , "run_at"        : "document_end"
-                                      }
-                                  ]
+        {
+            "matches"           : [ "*://101.ru/*" ]
+          , "js"                : [ 
+                "modules/ru_101/js/uppod-player-api.js"
+              , "modules/ru_101/js/page-watcher.js"
+            ]
+          , "run_at"            : "document_end"
+        }
+      , {
+            "matches"           : [ "*://vk.com/*" ]
+          , "js"                : [ 
+                "modules/com_vk_audio/js/page-watcher.js"
+            ]
+          , "run_at"            : "document_end"
+        }
+    ]
   , "background"                : {
-                                      "persistent"        : false
-                                    , "scripts"           : [
-                                          "js/tracking.js"
-                                        , "js/log.js"
-                                        , "js/bowser.js"
-                                        , "js/global.js"
-                                        , "js/background.js"
-                                      ]
-                                  }
+        "persistent"            : false
+      , "scripts"               : [
+            "js/tracking.js"
+          , "js/log.js"
+          , "js/bowser.js"
+          , "js/global.js"
+          , "js/background.js"
+        ]
+    }
   , "options_page"              : "html/options.html"
 }

@@ -198,6 +198,9 @@ var Background                    = {
             , arrRecentTracks                           : []
             , intRecentTracksToKeep                     : 10
 
+            , objSettings_general                       : {
+                  strJoinUeip                           : 'no'
+              }
             , objSettings_ru_101                        : {
                   boolEnabled                           : true
                 , boolNotificationShowLogo              : true

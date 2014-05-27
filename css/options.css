@@ -44,22 +44,22 @@
     {
       opacity:                1;
     }
-  #chooseModuleForm
+  #chooseSubpageForm
     {
       position:               absolute;
       top:                    1.8em;
       right:                  0;
     }
-  #chooseModule
+  #chooseSubpage
     {
       font-family:            inherit;
       font-size:              1.3em;
       line-height:            1.8em;
       padding:                0 .385em;
-      width:                  13.3em;
+      width:                  15em;
       border:                 .077em solid #ddd;
     }
-  #settings .subpage
+  #settings .subpage.module
     {
       display:                none;
     }

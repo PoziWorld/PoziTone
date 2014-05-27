@@ -64,9 +64,13 @@
 , a:hover
 , a:active
     {
-      color:                  #fff;
+      color:                  #15c;
       text-decoration:        none;
       outline:                none;
+    }
+  a:hover
+    {
+      text-decoration:        underline;
     }
   .none
     {
@@ -167,6 +171,14 @@
     {
       font-size:              1.4em;
       padding:                1.167em 0 .722em;
+      color:                  #000;
+    }
+  .sectionText
+    {
+      font-size:              1.2em;
+      line-height:            1.75em;
+      padding:                0 0 .583em 1.5em;
+      width:                  46.8em;
       color:                  #000;
     }
   .subpage ul

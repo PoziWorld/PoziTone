@@ -97,100 +97,125 @@
       }
 
         ,
-        "poziOptionsPageSettingsSupport": {
-          "message": "Поддержка этого плеера"
+        "poziOptionsPageSettingsGeneral": {
+          "message": "Общие"
         }
           ,
-          "poziOptionsPageSettingsSupportEnabled": {
-            "message": "Включена"
+          "poziOptionsPageSettingsGeneralUeip": {
+            "message": "Программа улучшения качества PoziTone"
           }
+            ,
+            "poziOptionsPageSettingsGeneralUeipDesc": {
+              "message": "Эта программа предполагает сбор сведений о том, как пользователи PoziTone используют продукт и с какими проблемами они сталкиваются. Команда разработчиков PoziTone — PoziWorld — использует полученные сведения для улучшения продукта и его функций, которые пользователи используют чаще всего, а также для решения возникающих проблем. Участие в этой программе добровольно, а её конечным результатом является улучшение продукта, которое сможет лучше отвечать требованиям пользователей PoziTone."
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipMore": {
+              "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/Программа-улучшения-качества-PoziTone\" target=\"_blank\">Расскажите мне больше о программе</a>"
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipJoin": {
+              "message": "Участвовать"
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipDoNotJoin": {
+              "message": "Не участвовать"
+            }
 
-        ,
-        "poziOptionsPageSettingsDisplayWhen": {
-          "message": "Показывать уведомления"
-        }
           ,
-          "poziOptionsPageSettingsDisplayWhenStopped": {
-            "message": "Когда воспроизведение не начато / остановлено"
+          "poziOptionsPageSettingsSupport": {
+            "message": "Поддержка этого плеера"
           }
-          ,
-          "poziOptionsPageSettingsDisplayWhenMuted": {
-            "message": "Когда громкость на отметке 0% или звук выключен"
-          }
-          ,
-          "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
-            "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
-          }
+            ,
+            "poziOptionsPageSettingsSupportEnabled": {
+              "message": "Включена"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationIconFormat": {
-          "message": "Формат иконки уведомления"
-        }
           ,
-          "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
-            "message": "Отображать логотип текущей станции"
+          "poziOptionsPageSettingsDisplayWhen": {
+            "message": "Показывать уведомления"
           }
-          ,
-          "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
-            "message": "Отображать логотип ВКонтакте"
-          }
+            ,
+            "poziOptionsPageSettingsDisplayWhenStopped": {
+              "message": "Когда воспроизведение не начато / остановлено"
+            }
+            ,
+            "poziOptionsPageSettingsDisplayWhenMuted": {
+              "message": "Когда громкость на отметке 0% или звук выключен"
+            }
+            ,
+            "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+              "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationTitleFormat": {
-          "message": "Формат заголовка уведомления"
-        }
           ,
-          "poziOptionsPageSettingsNotificationTitleFormatShort": {
-            "message": "Отображать только название текущей станции"
+          "poziOptionsPageSettingsNotificationIconFormat": {
+            "message": "Формат иконки уведомления"
           }
-          ,
-          "poziOptionsPageSettingsNotificationTitleFormatLong": {
-            "message": "Отображать название текущей станции + краткое описание (если доступно)"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
-            "message": "Не отображать информацию о текущей станции"
-          }
+            ,
+            "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+              "message": "Отображать логотип текущей станции"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
+              "message": "Отображать логотип ВКонтакте"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationButtons": {
-          "message": "Доступные кнопки <small>(максимум 2 могут быть отображены одновременно)</small>"
-        }
           ,
-          "poziOptionsPageSettingsNotificationButtonsAdd": {
-            "message": "Добавить трек в плейлист"
+          "poziOptionsPageSettingsNotificationTitleFormat": {
+            "message": "Формат заголовка уведомления"
           }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatShort": {
+              "message": "Отображать только название текущей станции"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatLong": {
+              "message": "Отображать название текущей станции + краткое описание (если доступно)"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+              "message": "Не отображать информацию о текущей станции"
+            }
+
           ,
-          "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
-            "message": "Добавить трек в плейлист <small>(требуется авторизация на сайте)</small>"
+          "poziOptionsPageSettingsNotificationButtons": {
+            "message": "Доступные кнопки <small>(максимум 2 могут быть отображены одновременно)</small>"
           }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsFavorite": {
-            "message": "Мне нравится!"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
-            "message": "Мне нравится! <small>(требуется авторизация на сайте)</small>"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsNext": {
-            "message": "Следующий трек"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
-            "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsPlayStop": {
-            "message": "Остановить/Возобновить воспроизведение"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
-            "message": "Выключить/Включить звук"
-          }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsAdd": {
+              "message": "Добавить трек в плейлист"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+              "message": "Добавить трек в плейлист <small>(требуется авторизация на сайте)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsFavorite": {
+              "message": "Мне нравится!"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+              "message": "Мне нравится! <small>(требуется авторизация на сайте)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsNext": {
+              "message": "Следующий трек"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+              "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+              "message": "Остановить/Возобновить воспроизведение"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+              "message": "Выключить/Включить звук"
+            }
       ,
-      "poziOptionsPageSettingsChooseModulePlaceholder": {
-        "message": "Введите название плеера"
+      "poziOptionsPageSettingsChooseSubpage": {
+        "message": "Выберите страницу настроек"
       }
     ,
     "poziOptionsPageNavFaq": {
@@ -217,6 +242,11 @@
       "poziPopupPageNavRecentTracksH1": {
         "message": "Последние треки"
       }
+
+  ,
+  "poziModule_general": {
+    "message": "Общие"
+  }
 
   ,
   "poziModule_com_vk_audio": {

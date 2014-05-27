@@ -16,8 +16,8 @@
       onSettingChange()
       switchPage()
       populateModulesList()
-      onChooseModuleChange()
-      chooseModule()
+      onChooseSubpageChange()
+      chooseSubpage()
   2. Events
 
  ============================================================================ */
@@ -33,20 +33,20 @@ var
   , intInputs  // Num of $allInputs
   , $settingsSaved
   , $settingsSubpages
-  , $chooseModuleForm
-  , $chooseModule
-  , $chosenModule
+  , $chooseSubpageForm
+  , $chooseSubpage
+  , $chosenSubpage
 
   , strModuleLocalPrefix      = 'poziModule_'
-  , strChooseModuleFormId     = 'chooseModuleForm'
-  , strChooseModuleId         = 'chooseModule'
-  , strChosenModuleId         = 'chosenModule'
-  , strModulesListId          = 'chooseModuleList'
+  , strChooseSubpageFormId    = 'chooseSubpageForm'
+  , strChooseSubpageId        = 'chooseSubpage'
+  , strChosenSubpageId        = 'chosenSubpage'
+  , strModulesListId          = 'chooseSubpageList'
   , strSettingsId             = 'settings'
   , strSettingsSavedId        = 'settingsSaved'
   , strModuleSettingsPrefix   = 'objSettings_'
   , strModuleSubpageIdPrefix  = 'settings_'
-  , strModuleSubpageClass     = 'module'
+  , strSettingsSubpageClass   = 'settingsSubpage'
 
   , intSettingsSubpages
   ;
@@ -91,12 +91,12 @@ var Options = {
 
     $settingsSaved      = document.getElementById( strSettingsSavedId );
     $settingsSubpages   = document
-                            .getElementsByClassName( strModuleSubpageClass );
+                            .getElementsByClassName( strSettingsSubpageClass );
     intSettingsSubpages = $settingsSubpages.length;
 
-    $chooseModuleForm   = document.getElementById( strChooseModuleFormId );
-    $chooseModule       = document.getElementById( strChooseModuleId );
-    $chosenModule       = document.getElementById( strChosenModuleId );
+    $chooseSubpageForm  = document.getElementById( strChooseSubpageFormId );
+    $chooseSubpage      = document.getElementById( strChooseSubpageId );
+    $chosenSubpage      = document.getElementById( strChosenSubpageId );
 
 
     Options.getAvailableOptions();
@@ -110,28 +110,28 @@ var Options = {
     );
 
     addEvent(
-        $chooseModule
+        $chooseSubpage
       , 'change'
-      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
     );
 
     addEvent(
-        $chooseModule
+        $chooseSubpage
       , 'keyup'
-      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
     );
 
     addEvent(
-        $chooseModule
+        $chooseSubpage
       , 'input'
-      , function( objEvent ) { Options.onChooseModuleChange( objEvent ); }
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
     );
 
     addEvent(
-        $chooseModuleForm
+        $chooseSubpageForm
       , 'submit'
       , function( objEvent ) {
-          Options.chooseModule( objEvent );
+          Options.chooseSubpage( objEvent );
           return false;
         }
     );
@@ -238,7 +238,7 @@ var Options = {
       , objModuleSettings     = {}
       , miscSetting
       , strModuleSettings
-      , strChosenModuleValue  = $chosenModule.value
+      , strChosenSubpageValue = $chosenSubpage.value
       ;
 
     if ( $this.type === 'checkbox' && $this.value === 'on' )
@@ -247,7 +247,7 @@ var Options = {
       var
           $moduleSubpage  = document
                               .getElementById(
-                                strModuleSubpageIdPrefix + strChosenModuleValue
+                                strModuleSubpageIdPrefix + strChosenSubpageValue
                               )
         , $group          = $moduleSubpage.querySelectorAll(
                               'input[name="' + $this.name + '"]'
@@ -267,7 +267,7 @@ var Options = {
     else if ( $this.type === 'radio' )
       miscSetting = $this.value;
 
-    strModuleSettings = strModuleSettingsPrefix + strChosenModuleValue;
+    strModuleSettings = strModuleSettingsPrefix + strChosenSubpageValue;
 
     // TODO: Is there a need for objTemp?
     objTemp[ strModuleSettings ] = {};
@@ -319,11 +319,14 @@ var Options = {
 
       // 2. Make menu link active.
       // TODO: Switch to querySelector(All)? Performance vs Less code
-      var $allMenuLinks = document
+      var
+          $allMenuLinks = document
                             .getElementById( 'menu' )
-                              .getElementsByTagName( 'li' );
+                              .getElementsByTagName( 'li' )
+        , j
+        ;
 
-      for ( var j = 0, intMenuLinks = $allMenuLinks.length; j < intMenuLinks; j++ )
+      for ( j = 0, intMenuLinks = $allMenuLinks.length; j < intMenuLinks; j++ )
         $allMenuLinks[ j ].classList.remove( 'selected' );
 
       $target.parentNode.classList.add( 'selected' );
@@ -356,8 +359,8 @@ var Options = {
       $this.dataset.lowercasevalue = strLocalValue.toLowerCase();
     }
 
-    $chooseModule.placeholder = 
-      chrome.i18n.getMessage( $chooseModule.dataset.placeholder );
+    $chooseSubpage.placeholder = 
+      chrome.i18n.getMessage( $chooseSubpage.dataset.placeholder );
   }
   ,
 
@@ -368,16 +371,16 @@ var Options = {
    * @param   objEvent
    * @return  void
    **/
-   onChooseModuleChange: function( objEvent ) {
+   onChooseSubpageChange: function( objEvent ) {
     var
-        strValue  = $chooseModule.value.toLowerCase()
+        strValue  = $chooseSubpage.value.toLowerCase()
       , $option   = document.querySelector(
-          '#chooseModuleList [data-lowercasevalue="' + strValue + '"]'
+          '#chooseSubpageList [data-lowercasevalue="' + strValue + '"]'
         )
       ;
 
     if ( $option !== null )
-      Options.chooseModule();
+      Options.chooseSubpage();
   }
   ,
 
@@ -388,11 +391,11 @@ var Options = {
    * @param   objEvent
    * @return  void
    **/
-  chooseModule : function( objEvent ) {
+  chooseSubpage : function( objEvent ) {
     var
-        strValue  = $chooseModule.value.toLowerCase()
+        strValue  = $chooseSubpage.value.toLowerCase()
       , $option   = document.querySelector(
-          '#chooseModuleList [data-lowercasevalue="' + strValue + '"]'
+          '#chooseSubpageList [data-lowercasevalue="' + strValue + '"]'
         )
       ;
 
@@ -411,10 +414,10 @@ var Options = {
         $targetSubpage.style.display = 'block';
 
         // Save chosen module for later use
-        $chosenModule.value = strModuleName;
+        $chosenSubpage.value = strModuleName;
 
         // Clear current form value, so the placeholder is visible
-        $chooseModule.value = '';
+        $chooseSubpage.value = '';
       }
     }
 

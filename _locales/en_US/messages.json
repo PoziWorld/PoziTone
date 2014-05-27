@@ -97,100 +97,125 @@
       }
 
         ,
-        "poziOptionsPageSettingsSupport": {
-          "message": "Support this player"
+        "poziOptionsPageSettingsGeneral": {
+          "message": "General"
         }
           ,
-          "poziOptionsPageSettingsSupportEnabled": {
-            "message": "Enabled"
+          "poziOptionsPageSettingsGeneralUeip": {
+            "message": "PoziTone User Experience Improvement Program (UEIP)"
           }
+            ,
+            "poziOptionsPageSettingsGeneralUeipDesc": {
+              "message": "UEIP collects information about how our users use PoziTone and about some of the problems they encounter. The developers team of PoziTone — PoziWorld — uses this information to improve the product and features users use most often and to help solve problems. Participation in the program is voluntary, and the end results are software improvements to better meet the needs of our users."
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipMore": {
+              "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program\" target=\"_blank\">Tell me more about the program</a>"
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipJoin": {
+              "message": "Join"
+            }
+            ,
+            "poziOptionsPageSettingsGeneralUeipDoNotJoin": {
+              "message": "Do not join"
+            }
 
-        ,
-        "poziOptionsPageSettingsDisplayWhen": {
-          "message": "Show notifications"
-        }
           ,
-          "poziOptionsPageSettingsDisplayWhenStopped": {
-            "message": "When playback not started / stopped"
+          "poziOptionsPageSettingsSupport": {
+            "message": "Support this player"
           }
-          ,
-          "poziOptionsPageSettingsDisplayWhenMuted": {
-            "message": "When volume is at 0% or sound off"
-          }
-          ,
-          "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
-            "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
-          }
+            ,
+            "poziOptionsPageSettingsSupportEnabled": {
+              "message": "Enabled"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationIconFormat": {
-          "message": "Notification icon format"
-        }
           ,
-          "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
-            "message": "Display current station logo"
+          "poziOptionsPageSettingsDisplayWhen": {
+            "message": "Show notifications"
           }
-          ,
-          "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
-            "message": "Display VK logo"
-          }
+            ,
+            "poziOptionsPageSettingsDisplayWhenStopped": {
+              "message": "When playback not started / stopped"
+            }
+            ,
+            "poziOptionsPageSettingsDisplayWhenMuted": {
+              "message": "When volume is at 0% or sound off"
+            }
+            ,
+            "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+              "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationTitleFormat": {
-          "message": "Notification title format"
-        }
           ,
-          "poziOptionsPageSettingsNotificationTitleFormatShort": {
-            "message": "Display current station name only"
+          "poziOptionsPageSettingsNotificationIconFormat": {
+            "message": "Notification icon format"
           }
-          ,
-          "poziOptionsPageSettingsNotificationTitleFormatLong": {
-            "message": "Display current station name + short description (if available)"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
-            "message": "Don't display information about current station"
-          }
+            ,
+            "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+              "message": "Display current station logo"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
+              "message": "Display VK logo"
+            }
 
-        ,
-        "poziOptionsPageSettingsNotificationButtons": {
-          "message": "Available buttons <small>(maximum 2 can be displayed at one time)</small>"
-        }
           ,
-          "poziOptionsPageSettingsNotificationButtonsAdd": {
-            "message": "Add track to playlist"
+          "poziOptionsPageSettingsNotificationTitleFormat": {
+            "message": "Notification title format"
           }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatShort": {
+              "message": "Display current station name only"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatLong": {
+              "message": "Display current station name + short description (if available)"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+              "message": "Don't display information about current station"
+            }
+
           ,
-          "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
-            "message": "Add track to playlist <small>(authorization required on site)</small>"
+          "poziOptionsPageSettingsNotificationButtons": {
+            "message": "Available buttons <small>(maximum 2 can be displayed at one time)</small>"
           }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsFavorite": {
-            "message": "I like it!"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
-            "message": "I like it! <small>(authorization required on site)</small>"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsNext": {
-            "message": "Next track"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
-            "message": "Next track <small>(authorization required on site)</small>"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsPlayStop": {
-            "message": "Stop / Play"
-          }
-          ,
-          "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
-            "message": "Mute / Unmute"
-          }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsAdd": {
+              "message": "Add track to playlist"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+              "message": "Add track to playlist <small>(authorization required on site)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsFavorite": {
+              "message": "I like it!"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+              "message": "I like it! <small>(authorization required on site)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsNext": {
+              "message": "Next track"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+              "message": "Next track <small>(authorization required on site)</small>"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+              "message": "Stop / Play"
+            }
+            ,
+            "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+              "message": "Mute / Unmute"
+            }
       ,
-      "poziOptionsPageSettingsChooseModulePlaceholder": {
-        "message": "Enter a player name"
+      "poziOptionsPageSettingsChooseSubpage": {
+        "message": "Choose a settings page"
       }
     ,
     "poziOptionsPageNavFaq": {
@@ -217,6 +242,11 @@
       "poziPopupPageNavRecentTracksH1": {
         "message": "Recent Tracks"
       }
+
+  ,
+  "poziModule_general": {
+    "message": "General"
+  }
 
   ,
   "poziModule_com_vk_audio": {

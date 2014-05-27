@@ -45,22 +45,43 @@
             <span i18n-content="poziOptionsPageSettingsH1"></span>
             <span i18n-content="poziOptionsPageSettingsSaved" id="settingsSaved"></span>
           </h1>
-          <form id="chooseModuleForm">
+          <form id="chooseSubpageForm">
             <input
-              list="chooseModuleList"
-              id="chooseModule"
-              data-placeholder="poziOptionsPageSettingsChooseModulePlaceholder"
+              list="chooseSubpageList"
+              id="chooseSubpage"
+              data-placeholder="poziOptionsPageSettingsChooseSubpage"
               autocomplete="off"
               autofocus
                 />
-            <datalist id="chooseModuleList">
+            <datalist id="chooseSubpageList">
+              <option data-module="general">
               <option data-module="com_vk_audio">
               <option data-module="ru_101">
             </datalist>
-            <input type="hidden" id="chosenModule" />
+            <input type="hidden" id="chosenSubpage" value="general" />
           </form>
         </header>
-        <section id="settings_com_vk_audio" class="subpage module">
+        <section id="settings_general" class="subpage settingsSubpage">
+          <h1 i18n-content="poziOptionsPageSettingsGeneral" class="subpageHeading"></h1>
+          <section>
+            <h1 i18n-content="poziOptionsPageSettingsGeneralUeip" class="sectionHeading"></h1>
+            <p i18n-content="poziOptionsPageSettingsGeneralUeipDesc" class="sectionText"></p>
+            <p i18n-content="poziOptionsPageSettingsGeneralUeipMore" class="sectionText"></p>
+            <ul>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsGeneralUeipJoin">
+                  <input type="radio" name="strJoinUeip" value="yes" />
+                </label>
+              </li>
+              <li>
+                <label i18n-content="poziOptionsPageSettingsGeneralUeipDoNotJoin">
+                  <input type="radio" name="strJoinUeip" value="no" />
+                </label>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section id="settings_com_vk_audio" class="subpage settingsSubpage module">
           <h1 i18n-content="poziModule_com_vk_audio_long" class="subpageHeading"></h1>
           <section>
             <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>
@@ -118,7 +139,7 @@
             </ul>
           </section>
         </section>
-        <section id="settings_ru_101" class="subpage module">
+        <section id="settings_ru_101" class="subpage settingsSubpage module">
           <h1 i18n-content="poziModule_ru_101_long" class="subpageHeading"></h1>
           <section>
             <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>

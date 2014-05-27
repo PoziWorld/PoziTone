@@ -12,7 +12,9 @@
   1. Log
       init()
       add()
-  2. Events
+  2. Listeners
+      chrome.storage.onChanged
+  3. Events
 
  ============================================================================ */
 
@@ -23,15 +25,24 @@
  ============================================================================ */
 
 var
-    strLog          = ''
-  , strLogDo        = ', do'
-  , strLogDoNot     = ', do not'
-  , strLogDone      = ', done'
-  , strLogError     = ', error'
-  , strLogSuccess   = ', success'
-  , strLogNoSuccess = ', no success'
+    strLog                = ''
+  , strLogDo              = ', do'
+  , strLogDoNot           = ', do not'
+  , strLogDone            = ', done'
+  , strLogError           = ', error'
+  , strLogSuccess         = ', success'
+  , strLogNoSuccess       = ', no success'
 
-  , Log             = {
+  , strJoinUeipObj        = 'objSettings_general'
+  , strJoinUeipVar        = 'strJoinUeip'
+  , strJoinUeipAgreed     = 'yes'
+
+  , Log                   = {
+      strJoinUeip         : null
+    , intTrackCount       : 0
+    , intTrackCountMax    : 20
+    , intTrackCountDelay  : 150
+  ,
 
   /**
    * Initialize
@@ -41,6 +52,13 @@ var
    * @return  void
    **/
   init : function() {
+    chrome.storage.sync.get( strJoinUeipObj, function( objReturn ) {
+      if (
+            typeof objReturn[ strJoinUeipObj ] === 'object'
+        &&  typeof objReturn[ strJoinUeipObj ][ strJoinUeipVar ] === 'string'
+      )
+        Log.strJoinUeip = objReturn[ strJoinUeipObj ][ strJoinUeipVar ];
+    });
   }
   ,
 
@@ -66,20 +84,84 @@ var
     console.log( strEvent, miscVar );
 
     // Tracking
-    if ( typeof boolTrack !== 'undefined' && boolTrack ) {
-      if ( typeof boolDoNotSendData !== 'undefined' && boolDoNotSendData )
-        miscVar = {};
-      else if ( Array.isArray( miscVar ) )
-        miscVar = Global.convertArrToObj( miscVar );
+    var funcTrack = function(
+                        strEvent
+                      , miscVar
+                      , boolTrack
+                      , boolDoNotSendData
+                    ) {
+      var funcTrackRetry;
 
-      mixpanel.track( strEvent, miscVar );
-    }
+      if (
+            Log.strJoinUeip === strJoinUeipAgreed
+        &&  typeof boolTrack !== 'undefined'
+        &&  boolTrack
+      ) {
+        if ( typeof boolDoNotSendData !== 'undefined' && boolDoNotSendData )
+          miscVar = {};
+        else if ( Array.isArray( miscVar ) )
+          miscVar = Global.convertArrToObj( miscVar );
+
+        mixpanel.track( strEvent, miscVar );
+      }
+      // If storage hasn't returned value yet and at least one try left
+      else if (
+            Log.strJoinUeip === null
+        &&  Log.intTrackCount < Log.intTrackCountMax
+      ) {
+        funcTrackRetry  = setTimeout(
+                              function() {
+                                funcTrack(
+                                    strEvent
+                                  , miscVar
+                                  , boolTrack
+                                  , boolDoNotSendData
+                                );
+                              }
+                            , Log.intTrackCountDelay
+                          );
+        Log.intTrackCount++;
+      }
+
+      // Reset if value received
+      if ( typeof Log.strJoinUeip === 'string' )
+        Log.intTrackCount = 0;
+    };
+
+    funcTrack( strEvent, miscVar, boolTrack, boolDoNotSendData );
   }
 };
 
 /* =============================================================================
 
-  2. Events
+  2. Listeners
+
+ ============================================================================ */
+
+/**
+ * Fired when one or more items change.
+ *
+ * @type    method
+ * @param   objMessage
+ *            Message received
+ * @param   objSender
+ *            Sender of the message
+ * @return  void
+ **/
+chrome.storage.onChanged.addListener(
+  function( objChanges, strAreaName ) {
+    if (
+          typeof objChanges[ strJoinUeipObj ] === 'object'
+      &&  typeof 
+            objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ] === 'string'
+    )
+      Log.strJoinUeip = objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ];
+  }
+);
+
+/* =============================================================================
+
+  3. Events
 
  ============================================================================ */
 
