@@ -227,9 +227,34 @@ var Background                    = {
 
       for ( var strSetting in objSettingsDefaults ) {
         if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
+          var miscSetting = objSettingsDefaults[ strSetting ];
+
           // If a new setting introduced, set its default
           if ( typeof objReturn[ strSetting ] === 'undefined' )
-            objTempToSet[ strSetting ] = objSettingsDefaults[ strSetting ];
+            objTempToSet[ strSetting ] = miscSetting;
+
+          if (
+                typeof miscSetting === 'object'
+            &&  ! Array.isArray( miscSetting )
+          )
+            for ( var strSubsetting in miscSetting ) {
+              if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
+                // If a new subsetting introduced, set its default
+                if (
+                      typeof objReturn[ strSetting ] !== 'undefined'
+                  &&  typeof
+                        objReturn[ strSetting ][ strSubsetting ] === 'undefined'
+                ) {
+                  // If the setting has been set before.
+                  if ( typeof objTempToSet[ strSetting ] === 'undefined' )
+                    // Preserve other subsettings.
+                    objTempToSet[ strSetting ] = objReturn[ strSetting ];
+
+                  objTempToSet[ strSetting ][ strSubsetting ] = 
+                    miscSetting[ strSubsetting ];
+                }
+              }
+            }
         }
       }
 

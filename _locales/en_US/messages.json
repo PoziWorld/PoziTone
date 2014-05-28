@@ -113,8 +113,12 @@
               "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program\" target=\"_blank\">Tell me more about the program</a>"
             }
             ,
+            "poziOptionsPageSettingsGeneralUeipPrivacy": {
+              "message": ""
+            }
+            ,
             "poziOptionsPageSettingsGeneralUeipJoin": {
-              "message": "Join"
+              "message": "Join anonymously"
             }
             ,
             "poziOptionsPageSettingsGeneralUeipDoNotJoin": {

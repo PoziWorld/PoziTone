@@ -113,8 +113,12 @@
               "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/Программа-улучшения-качества-PoziTone\" target=\"_blank\">Расскажите мне больше о программе</a>"
             }
             ,
+            "poziOptionsPageSettingsGeneralUeipPrivacy": {
+              "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/Заявление-о-конфиденциальности-программы-улучшения-качества-PoziTone\" target=\"_blank\">Заявление о конфиденциальности</a>"
+            }
+            ,
             "poziOptionsPageSettingsGeneralUeipJoin": {
-              "message": "Участвовать"
+              "message": "Участвовать анонимно"
             }
             ,
             "poziOptionsPageSettingsGeneralUeipDoNotJoin": {

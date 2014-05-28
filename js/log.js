@@ -152,10 +152,17 @@ chrome.storage.onChanged.addListener(
   function( objChanges, strAreaName ) {
     if (
           typeof objChanges[ strJoinUeipObj ] === 'object'
+      &&  typeof objChanges[ strJoinUeipObj ].newValue === 'object'
       &&  typeof 
             objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ] === 'string'
     )
       Log.strJoinUeip = objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ];
+    else if (
+          typeof objChanges[ strJoinUeipObj ] === 'object'
+      &&  typeof objChanges[ strJoinUeipObj ].newValue === 'undefined'
+      &&  typeof objChanges[ strJoinUeipObj ].oldValue === 'object'
+    )
+      Log.strJoinUeip = null;
   }
 );
 
