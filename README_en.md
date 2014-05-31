@@ -115,3 +115,12 @@ Feedback
 
 Please report any [issues/bugs](https://github.com/poziworld/pozitone/issues) 
 or send us your [comments/ideas](http://pozitone.idea.informer.com/).
+
+
+Let's socialize
+--------
+
+- [PoziTone on VK](https://vk.com/PoziTone)
+- [PoziTone on Facebook](http://fb.com/PoziTone)
+- [PoziTone on Twitter](https://twitter.com/PoziTone)
+- [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)

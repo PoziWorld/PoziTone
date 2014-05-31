@@ -119,6 +119,7 @@ Credits
 Социализируемся
 --------
 
-- [PoziTone ВКонтакте](https://vk.com/pozitone)
+- [PoziTone ВКонтакте](https://vk.com/PoziTone)
+- [PoziTone на Facebook](http://fb.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
