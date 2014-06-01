@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
 
+### v0.0.2.9
+    * New PoziTone logo.
+    * Added PoziTone User Experience Improvement Program (voluntary participation).
+
 ### v0.0.2.8
     * Fixed: keyboard shortcuts presses logic from the previous version did not work correctly when 101.ru player was active.
 
