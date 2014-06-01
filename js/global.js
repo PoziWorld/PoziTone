@@ -492,7 +492,8 @@ var Global                        = {
           // Even on page reload.
           if (
                 (
-                      arrLastTrack[ 0 ] !== arrTrackInfo[ 0 ]
+                      arrLastTrack      === undefined
+                  ||  arrLastTrack[ 0 ] !== arrTrackInfo[ 0 ]
                   ||  arrLastTrack[ 1 ] !== objStationInfo.strStationName
                   ||  arrLastTrack[ 2 ] !== objStationInfo.strLogoUrl
                 )
