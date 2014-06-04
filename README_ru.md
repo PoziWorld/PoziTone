@@ -2,7 +2,7 @@
 
 [![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
 
-PoziTone
+PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
 Расширение для браузеров Google Chrome, Yandex и Амиго, которое добавляет недостающую [функциональность](#Особенности) [аудиоплеерам на сайтах](#Поддерживаемые-плееры).

@@ -1,4 +1,9 @@
-> Это английская версия, см. [HISTORY.md](HISTORY.md) для русской.
+> Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
+
+### v0.0.2.10
+    * Added an “About” page.
+    * Added a license agreement in Russian.
+    * Added a couple of recommendations for listening in a case of an empty recent tracks list.
 
 ### v0.0.2.9
     * New PoziTone logo.

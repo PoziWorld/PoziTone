@@ -1,8 +1,8 @@
-> Это английская версия, см. [README.md](README.md) для русской.
+> Это английская версия, см. [README_ru.md](README_ru.md) для русской.
 
 [![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
 
-PoziTone
+PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
 An extension for the Google Chrome, Yandex and Amigo browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
