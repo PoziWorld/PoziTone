@@ -51,19 +51,27 @@ var Page = {
       i < intLocalizableElements;
       i++
         ) {
-        var $localizableElement = $allLocalizableElements[ i ];
+        var
+            $localizableElement = $allLocalizableElements[ i ]
+          , strI18              = $localizableElement
+                                    .getAttribute( 'i18n-content' )
+          , strMessage          = chrome.i18n.getMessage( strI18 );
+          ;
 
         if ( $localizableElement.nodeName === 'LABEL' )
           $localizableElement.innerHTML = 
-              $localizableElement.innerHTML
-            + chrome.i18n.getMessage(
-                $localizableElement.getAttribute( 'i18n-content' )
-              );
+            $localizableElement.innerHTML + strMessage;
+        else if ( $localizableElement.nodeName === 'A' ) {
+          $localizableElement.innerHTML = strMessage;
+
+          if ( $localizableElement.href === '' )
+            $localizableElement.href = 
+              chrome.i18n.getMessage( strI18 + 'Href' );
+        }
+        else if ( $localizableElement.nodeName === 'IMG' )
+          $localizableElement.alt = strMessage;
         else
-          $localizableElement.innerHTML = 
-            chrome.i18n.getMessage(
-              $localizableElement.getAttribute( 'i18n-content' )
-            );
+          $localizableElement.innerHTML = strMessage;
     }
 
     document.title = 

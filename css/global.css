@@ -76,6 +76,12 @@
     {
       display:                none;
     }
+  .clearfix:after
+    {
+      content:                '';
+      display:                table;
+      clear:                  both;
+    }
 
 /* =============================================================================
 
@@ -148,6 +154,7 @@
   .pageHeading
     {
       position:               fixed;
+      z-index:                2;
       top:                    0;
       font-size:              1.8em;
       padding:                1.167em 0 .722em;

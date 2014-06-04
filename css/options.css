@@ -10,6 +10,7 @@
   Table of Contents:
 
   0. Settings
+  1. About
 
  ============================================================================ */
 
@@ -47,6 +48,7 @@
   #chooseSubpageForm
     {
       position:               absolute;
+      z-index:                2;
       top:                    1.8em;
       right:                  0;
     }
@@ -88,4 +90,77 @@
       0%   { opacity: 0; }
       50%  { opacity: 1; }
       100% { opacity: 0; }
+    }
+
+/* =============================================================================
+
+  1. About
+
+ ============================================================================ */
+
+  #logoName
+    {
+      margin:                 2.5em 0;
+    }
+  #logo
+    {
+      float:                  left;
+      width:                  3.2em;
+      height:                 3.2em;
+    }
+  #name
+    {
+      float:                  left;
+      font-size:              1.6em;
+      margin:                 .05em 0 0 .875em;
+    }
+  .supportMenuItem
+    {
+      float:                  left;
+      font-size:              1.2em;
+      line-height:            2em;
+      margin:                 0 .833em 0 0;
+      padding:                0 .833em;
+      min-width:              4em;
+      background-image:       -webkit-linear-gradient(
+                                  #ededed
+                                , #ededed 38%
+                                , #dedede
+                              );
+      border:                 .083em solid rgba( 0, 0, 0, .25 );
+      border-radius:          .167em;
+      box-shadow:             0 .083em 0 rgba( 0, 0, 0, .08 ),
+                              inset 0 .083em .167em rgba( 255, 255, 255, .75 );
+      color:                  #444;
+      outline:                none;
+      text-shadow:            0 .083em 0 rgb( 240, 240, 240 );
+      text-align:             center;
+      text-decoration:        none;
+    }
+  .supportMenuItem:hover
+    {
+      background-image:       -webkit-linear-gradient(
+                                  #f0f0f0
+                                , #f0f0f0 38%
+                                , #e0e0e0
+                              );
+      border-color:           rgba( 0, 0, 0, .3 );
+      box-shadow:             0 .083em 0 rgba( 0, 0, 0, .12 ),
+                              inset 0 .083em .167em rgba( 255, 255, 255, .95 );
+      color:                  #000;
+      text-decoration:        none;
+    }
+  #versionInfo
+    {
+      font-size:              1.2em;
+      margin:                 2.333em 0 0;
+    }
+  #aboutFooter
+    {
+      margin:                 19.1em 0 1.9em;
+    }
+  .aboutFooterLine
+    {
+      font-size:              1.2em;
+      line-height:            1.75em;
     }

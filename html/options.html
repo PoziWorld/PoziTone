@@ -21,14 +21,7 @@
               i18n-content="poziOptionsPageNavSettings"
                 ></a>
           </li>
-          <li class="none">
-            <a
-              href="#about"
-              class="switchPage"
-              i18n-content="poziOptionsPageNavFaq"
-                ></a>
-          </li>
-          <li class="none">
+          <li>
             <a
               href="#about"
               class="switchPage"
@@ -66,8 +59,18 @@
           <section>
             <h1 i18n-content="poziOptionsPageSettingsGeneralUeip" class="sectionHeading"></h1>
             <p i18n-content="poziOptionsPageSettingsGeneralUeipDesc" class="sectionText"></p>
-            <p i18n-content="poziOptionsPageSettingsGeneralUeipMore" class="sectionText"></p>
-            <p i18n-content="poziOptionsPageSettingsGeneralUeipPrivacy" class="sectionText"></p>
+            <p class="sectionText">
+              <a
+                i18n-content="poziOptionsPageSettingsGeneralUeipMore"
+                target="_blank"
+                  ></a>
+            </p>
+            <p class="sectionText">
+              <a
+                i18n-content="poziOptionsPageSettingsGeneralUeipPrivacy"
+                target="_blank"
+                  ></a>
+            </p>
             <ul>
               <li>
                 <label i18n-content="poziOptionsPageSettingsGeneralUeipJoin">
@@ -231,6 +234,48 @@
       </section>
       <section id="about" class="page">
         <h1 i18n-content="poziOptionsPageAboutH1" class="pageHeading"></h1>
+        <figure id="logoName" class="clearfix">
+          <img
+            src="/img/pozitone-icon-38.png"
+            id="logo"
+            i18n-content="poziToolName"
+              />
+          <figcaption id="name" i18n-content="poziToolName"></figcaption>
+        </figure>
+        <nav id="supportMenu" class="clearfix">
+          <a
+            i18n-content="poziOptionsPageInfo"
+            class="supportMenuItem"
+            target="_blank"
+              ></a>
+          <a
+            i18n-content="poziOptionsPageContact"
+            class="supportMenuItem"
+            target="_blank"
+              ></a>
+        </nav>
+        <p id="versionInfo">
+          <span i18n-content="poziOptionsPageVersion"></span>
+          <span id="version"></span>
+        </p>
+        <footer id="aboutFooter">
+          <p
+            i18n-content="poziToolName"
+            class="aboutFooterLine"
+              ></p>
+          <p
+            i18n-content="poziOptionsPageCopyright"
+            class="aboutFooterLine"
+              ></p>
+          <p
+            i18n-content="poziOptionsPageFoundation"
+            class="aboutFooterLine"
+              ></p>
+          <p
+            i18n-content="poziOptionsPageTerms"
+            class="aboutFooterLine"
+              ></p>
+        </footer>
       </section>
     </article>
   </body>

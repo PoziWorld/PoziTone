@@ -110,12 +110,20 @@
             }
             ,
             "poziOptionsPageSettingsGeneralUeipMore": {
-              "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program\" target=\"_blank\">Tell me more about the program</a>"
+              "message": "Tell me more about the program"
             }
+              ,
+              "poziOptionsPageSettingsGeneralUeipMoreHref": {
+                "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
+              }
             ,
             "poziOptionsPageSettingsGeneralUeipPrivacy": {
-              "message": "<a href=\"https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program\" target=\"_blank\">Privacy Statement</a>"
+              "message": "Privacy Statement"
             }
+              ,
+              "poziOptionsPageSettingsGeneralUeipPrivacyHref": {
+                "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+              }
             ,
             "poziOptionsPageSettingsGeneralUeipJoin": {
               "message": "Participate anonymously"
@@ -233,6 +241,38 @@
       "poziOptionsPageAboutH1": {
         "message": "About"
       }
+        ,
+        "poziOptionsPageInfo": {
+          "message": "Details about PoziTone"
+        }
+          ,
+          "poziOptionsPageInfoHref": {
+            "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
+          }
+        ,
+        "poziOptionsPageContact": {
+          "message": "Contact developers of PoziTone"
+        }
+          ,
+          "poziOptionsPageContactHref": {
+            "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
+          }
+        ,
+        "poziOptionsPageVersion": {
+          "message": "Version"
+        }
+        ,
+        "poziOptionsPageCopyright": {
+          "message": "&copy; PoziWorld, 2014"
+        }
+        ,
+        "poziOptionsPageFoundation": {
+          "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">kindness</a>."
+        }
+        ,
+        "poziOptionsPageTerms": {
+          "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE\" target=\"_blank\">license agreement</a>"
+        }
 
   ,
   "poziPopupPageTitle": {

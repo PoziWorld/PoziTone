@@ -26,8 +26,8 @@
     ]
   , "browser_action"            : {
         "default_icon"          : {
-            "19"                : "img/pozitone-browser-action-icon-19.png"
-          , "38"                : "img/pozitone-browser-action-icon-38.png"
+            "19"                : "img/pozitone-icon-19.png"
+          , "38"                : "img/pozitone-icon-38.png"
         }
       , "default_title"         : "__MSG_poziToolName__"
       , "default_popup"         : "html/browser-action.html"

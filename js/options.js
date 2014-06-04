@@ -12,12 +12,15 @@
   0. Globals
   1. Options
       init()
+      setPageValues()
       getAvailableOptions()
       onSettingChange()
       switchPage()
       populateModulesList()
+      addEventListeners()
       onChooseSubpageChange()
       chooseSubpage()
+      displayCurrentVersion()
   2. Events
 
  ============================================================================ */
@@ -47,6 +50,7 @@ var
   , strModuleSettingsPrefix   = 'objSettings_'
   , strModuleSubpageIdPrefix  = 'settings_'
   , strSettingsSubpageClass   = 'settingsSubpage'
+  , strVersionId              = 'version'
 
   , intSettingsSubpages
   ;
@@ -84,8 +88,22 @@ var Options = {
    **/
   init : function() {
     Page.localize( 'Options' );
+    Options.setPageValues();
+    Options.getAvailableOptions();
+    Options.populateModulesList();
+    Options.addEventListeners();
+    Options.displayCurrentVersion();
+  }
+  ,
 
-    // Set global values
+  /**
+   * Set values when DOM is ready
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  setPageValues : function() {
     $allInputs          = document.querySelectorAll( '.subpage input' );
     intInputs           = $allInputs.length;
 
@@ -97,50 +115,6 @@ var Options = {
     $chooseSubpageForm  = document.getElementById( strChooseSubpageFormId );
     $chooseSubpage      = document.getElementById( strChooseSubpageId );
     $chosenSubpage      = document.getElementById( strChosenSubpageId );
-
-
-    Options.getAvailableOptions();
-    Options.populateModulesList();
-
-
-    addEvent(
-        document.getElementsByClassName( 'switchPage' )
-      , 'click'
-      , function( objEvent ) { Options.switchPage( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'change'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'keyup'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'input'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpageForm
-      , 'submit'
-      , function( objEvent ) {
-          Options.chooseSubpage( objEvent );
-          return false;
-        }
-    );
-
-    addEvent(
-        $allInputs
-      , 'change'
-      , function( objEvent ) { Options.onSettingChange( objEvent ); }
-    );
   }
   ,
 
@@ -365,6 +339,55 @@ var Options = {
   ,
 
   /**
+   * Add event listeners
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  addEventListeners : function() {
+    addEvent(
+        document.getElementsByClassName( 'switchPage' )
+      , 'click'
+      , function( objEvent ) { Options.switchPage( objEvent ); }
+    );
+
+    addEvent(
+        $chooseSubpage
+      , 'change'
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseSubpage
+      , 'keyup'
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseSubpage
+      , 'input'
+      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
+    );
+
+    addEvent(
+        $chooseSubpageForm
+      , 'submit'
+      , function( objEvent ) {
+          Options.chooseSubpage( objEvent );
+          return false;
+        }
+    );
+
+    addEvent(
+        $allInputs
+      , 'change'
+      , function( objEvent ) { Options.onSettingChange( objEvent ); }
+    );
+  }
+  ,
+
+  /**
    * If value equals one of the options, choose that option automatically
    *
    * @type    method
@@ -423,6 +446,19 @@ var Options = {
 
     if ( typeof objEvent !== 'undefined' )
       objEvent.preventDefault();
+  }
+  ,
+
+  /**
+   * Display current version on About page
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  displayCurrentVersion : function() {
+    document.getElementById( strVersionId ).innerHTML =
+      chrome.runtime.getManifest().version;
   }
 };
 
