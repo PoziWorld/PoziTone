@@ -101,9 +101,7 @@ Gratitudes
 Credits
 --------
 
-- `PoziTone` logo based on works by [Webalys](http://www.webalys.com).
-- The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
-licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+- The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 - The appearance of the «`PoziTone` Options» and «Recent Tracks» pages -
   * Copyright 2014 The Chromium Authors. All rights reserved.
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.

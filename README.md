@@ -101,7 +101,6 @@ PoziTone
 Credits
 --------
 
-- Логотип `PoziTone` основан на работе [Webalys](http://www.webalys.com).
 - Иконки кнопок - из [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) 
 по лицензии [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 - Оформление страниц «Настройки `PoziTone`» и «Последние треки» -
