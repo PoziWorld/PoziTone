@@ -22,7 +22,10 @@
 
  ============================================================================ */
 
-var Popup = {
+var
+    strListId             = 'recentTracks'
+
+  , Popup                 = {
   /**
    * Initialize
    *
@@ -63,7 +66,8 @@ var Popup = {
       // TODO: Null case
       // if ( strHtml === '' )
 
-      document.getElementById( 'recentTracks' ).innerHTML = strHtml;
+      if ( strHtml !== '' )
+        document.getElementById( strListId ).innerHTML = strHtml;
     });
   }
   ,
@@ -80,13 +84,13 @@ var Popup = {
    **/
   template : function( strTemplateId, objData ) {
     return document.getElementById( strTemplateId )
-              .innerHTML
-                .replace(
-                    /%(\w*)%/g
-                  , function( m, key ) {
-                      return objData.hasOwnProperty( key ) ? objData[ key ] : '';
-                    }
-                );
+            .innerHTML
+              .replace(
+                  /%(\w*)%/g
+                , function( m, key ) {
+                    return objData.hasOwnProperty( key ) ? objData[ key ] : '';
+                  }
+              );
   }
 };
 

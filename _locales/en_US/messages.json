@@ -286,6 +286,10 @@
       "poziPopupPageNavRecentTracksH1": {
         "message": "Recent Tracks"
       }
+        ,
+        "poziPopupPageNavRecentTracksPlaceholder": {
+          "message": "Looking for some tunes?<br />How about some <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock with elements of hardcore</a>?<br />Or <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+        }
 
   ,
   "poziModule_general": {
