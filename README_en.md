@@ -111,8 +111,13 @@ Credits
 Feedback
 --------
 
-Please report any [issues/bugs](https://github.com/poziworld/pozitone/issues) 
-or send us your [comments/ideas](http://pozitone.idea.informer.com/).
+We appreciate your feedback! 
+
+Please share your ideas. Don't be shy to ask questions. Bug reports are valuable! We like praises, who doesn't? :)
+
+- [Recommended method](http://feedback.pozitone.com/?lang=en)
+- [Geeks method](https://github.com/poziworld/pozitone/issues)
+- [Other](mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;)
 
 
 Let's socialize
@@ -121,4 +126,6 @@ Let's socialize
 - [PoziTone on VK](https://vk.com/PoziTone)
 - [PoziTone on Facebook](http://fb.com/PoziTone)
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
+- [PoziTone on Instagram](https://instagram.com/PoziTone)
+- [PoziTone on Google+](https://plus.google.com/102606066526039057525)
 - [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)

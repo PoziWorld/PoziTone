@@ -111,7 +111,13 @@ Credits
 Обратная связь
 --------
 
-Пожалуйста, дайте нам знать обо всех [недостатках/недочётах](https://github.com/poziworld/pozitone/issues) или пришлите нам ваши [комментарии/идеи](http://pozitone.reformal.ru/).
+Мы ценим ваше мнение! 
+
+Пожалуйста, поделитесь своими идеями. Не стесняйтесь задавать вопросы. Сообщения об ошибках ценны! Нам нравится похвала, кому нет? :)
+
+- [Рекомендованный метод](http://feedback.pozitone.com/forum/33118-russkij/?lang=ru)
+- [Метод для гиков](https://github.com/poziworld/pozitone/issues)
+- [Другой](mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;)
 
 
 Социализируемся
@@ -120,4 +126,6 @@ Credits
 - [PoziTone ВКонтакте](https://vk.com/PoziTone)
 - [PoziTone на Facebook](http://fb.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
+- [PoziTone в Instagram](https://instagram.com/PoziTone)
+- [PoziTone в Google+](https://plus.google.com/102606066526039057525)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
