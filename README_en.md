@@ -94,8 +94,9 @@ Gratitudes
 
 - To all those who give us life and happiness!
 - To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Nike, Sergey.
-- Google, Inc. - for all their excellent projects.
-- 101.ru - for a chance to listen to music for free and legally.
+- [UserEcho](https://userecho.com) — for the excellent service, kindness and generosity!
+- Google, Inc. — for all their excellent projects.
+- 101.ru — for a chance to listen to music for free and legally.
 
 
 Credits
