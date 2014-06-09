@@ -117,7 +117,7 @@ Please share your ideas. Don't be shy to ask questions. Bug reports are valuable
 
 - [Recommended method](http://feedback.pozitone.com/?lang=en)
 - [Geeks method](https://github.com/poziworld/pozitone/issues)
-- [Other](mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;)
+- [Other](mailto:feedback@pozitone.com)
 
 
 Let's socialize

@@ -117,7 +117,7 @@ Credits
 
 - [Рекомендованный метод](http://feedback.pozitone.com/forum/33118-russkij/?lang=ru)
 - [Метод для гиков](https://github.com/poziworld/pozitone/issues)
-- [Другой](mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;)
+- [Другой](mailto:feedback@pozitone.com)
 
 
 Социализируемся
