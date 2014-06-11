@@ -41,11 +41,22 @@ var Global                        = {
   , strPlayerIsOffClass           : 'play'
   , strModuleSettingsPrefix       : 'objSettings_'
 
-  // Embedded modules
-  , arrValidUrl                   : [
-      '101.ru'
-    , 'vk.com'
-  ]
+  // Embedded modules (replicate manifest's "content_scripts")
+  , objModules                    : {
+        ru_101                    : {
+            objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
+          , arrJs                 : [
+                'modules/ru_101/js/uppod-player-api.js'
+              , 'modules/ru_101/js/uppod-player-api.js'
+          ]
+        }
+      , com_vk_audio              : {
+            objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
+          , arrJs                 : [
+                'modules/com_vk_audio/js/page-watcher.js'
+          ]
+        }
+  }
 
   // Don't show these buttons, if they have been clicked for this track already
   , arrAddTrackToPlaylistFeedback : [
@@ -683,7 +694,7 @@ var Global                        = {
   ,
 
   /**
-   * Checks whether the URL starts with correct prefix.
+   * Checks whether the URL is supported.
    *
    * @type    method
    * @param   strUrl
@@ -691,12 +702,20 @@ var Global                        = {
    * @return  void
    **/
   isValidUrl : function ( strUrl ) {
-    // http://stackoverflow.com/a/8498668/561712
-    var $tempA = document.createElement( 'a' );
+    var
+        objModules  = this.objModules
+      ;
 
-    $tempA.href = strUrl;
+    for ( var strModule in objModules ) {
+      if ( objModules.hasOwnProperty( strModule ) ) {
+        var objRegEx = objModules[ strModule ].objRegex;
 
-    return this.arrValidUrl.indexOf( $tempA.hostname ) !== -1;
+        if ( objRegEx.test( strUrl ) )
+          return strModule;
+        }
+    }
+
+    return false;
   }
   ,
 

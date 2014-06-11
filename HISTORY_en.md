@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.0.2.11
+    * First release to the Chrome Web Store (access by invitation).
+
 ### v0.0.2.10
     * Added an “About” page.
     * Added a license agreement in Russian.

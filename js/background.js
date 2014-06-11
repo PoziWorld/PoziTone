@@ -371,9 +371,6 @@ var Background                    = {
   /**
    * Checks if there are any changes to open tabs, 
    * detects if supported sites were opened/closed.
-   * 
-   * TODO: Auto-injection (inject required module detector
-   * which will then inject correct PageWatcher).
    *
    * @type    method
    * @param   objSavedTab
@@ -396,12 +393,50 @@ var Background                    = {
       var objOpenTabs = {};
 
       for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
-        if ( objTab.url && Global.isValidUrl( objTab.url ) ) {
-          Log.add( strLog + strLogSuccess, objTab.url );
+        var
+            strUrl      = objTab.url
+          , miscModule  = Global.isValidUrl( strUrl )
+          ;
+
+        if ( strUrl && miscModule ) {
+          Log.add( strLog + strLogSuccess, strUrl );
 
           var
-              intWindowId = objTab.windowId
-            , intTabId    = objTab.id
+              intWindowId   = objTab.windowId
+            , intTabId      = objTab.id
+            , funcPingPage  = function( miscModule ) {
+                chrome.tabs.sendMessage(
+                    intTabId
+                  , 'Do you copy?'
+                  , function( strResponse ) {
+                      if ( strResponse !== 'Copy that.' ) {
+                        var
+                            objModule = Global.objModules[ miscModule ]
+                          , arrCss    = objModule.arrCss
+                          , intCss    = ( typeof arrCss !== 'undefined' ) ?
+                                          arrCss.length : 0
+                          , arrJs     = objModule.arrJs
+                          , intJs     = ( typeof arrJs !== 'undefined' ) ?
+                                          arrJs.length : 0
+                          ;
+
+                        for ( var j = 0; j < intCss; j++ ) {
+                          chrome.tabs.executeScript(
+                              intTabId
+                            , { file: arrCss[ j ] }
+                          );
+                        }
+
+                        for ( var k = 0; k < intJs; k++ ) {
+                          chrome.tabs.executeScript(
+                              intTabId
+                            , { file: arrJs[ k ] }
+                          );
+                        }
+                      }
+                    }
+                );
+              }
             ;
 
           // If there are no open tabs for this windowId saved yet
@@ -410,22 +445,7 @@ var Background                    = {
 
           objOpenTabs[ intWindowId ][ objTab.index ] = objTab;
 
-          chrome.tabs.sendMessage(
-              intTabId
-            , 'Do you copy?'
-            , function( strResponse ) {
-                if ( strResponse !== 'Copy that.' ) {
-//                chrome.tabs.executeScript(
-//                    intTabId
-//                  , { file: '/modules/ru_101/js/uppod-player-api.js' }
-//                );
-//                chrome.tabs.executeScript(
-//                    intTabId
-//                  , { file: '/modules/ru_101/js/page-watcher.js' }
-//                );
-                }
-              }
-          );
+          funcPingPage( miscModule );
         }
 
         // chrome.tabs.onReplaced
@@ -798,6 +818,7 @@ chrome.runtime.onInstalled.addListener(
     Log.add( strLog, objDetails, true );
 
     Background.cleanUp( true, objDetails );
+    Background.checkOpenTabs();
   }
 );
 
@@ -814,6 +835,7 @@ chrome.runtime.onStartup.addListener(
     Log.add( strLog, {}, true );
 
     Background.cleanUp();
+    Background.checkOpenTabs();
   }
 );
 
