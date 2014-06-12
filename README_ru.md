@@ -128,5 +128,5 @@ Credits
 - [PoziTone на Facebook](http://fb.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone в Instagram](https://instagram.com/PoziTone)
-- [PoziTone в Google+](https://plus.google.com/102606066526039057525)
+- [PoziTone в Google+](https://google.com/+PoziTone)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
