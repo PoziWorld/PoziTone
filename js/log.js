@@ -39,6 +39,7 @@ var
 
   , Log                   = {
       strJoinUeip         : null
+    , strLastTrackedEvent : ''
     , intTrackCount       : 0
     , intTrackCountMax    : 20
     , intTrackCountDelay  : 150
@@ -102,7 +103,13 @@ var
         else if ( Array.isArray( miscVar ) )
           miscVar = Global.convertArrToObj( miscVar );
 
-        mixpanel.track( strEvent, miscVar );
+        if (
+              strEvent !== Log.strLastTrackedEvent
+          ||  ! Global.isEmpty( miscVar )
+        ) {
+          mixpanel.track( strEvent, miscVar );
+          Log.strLastTrackedEvent = strEvent;
+        }
       }
       // If storage hasn't returned value yet and at least one try left
       else if (
