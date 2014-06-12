@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.0.2.12
+    * Player will not respond to keyboard shortcuts if “Support this player” option is not enabled.
+
 ### v0.0.2.11
     * First release to the Chrome Web Store (access by invitation).
 
