@@ -4,7 +4,7 @@
   }
   ,
   "poziToolDescription": {
-    "message": "Adds a missing functionality to the audio players, such as the track info notifications, the controls outside of a browser window, and a recent tracks list."
+    "message": "Adds functionality to audio players, such as track info notifications, controls outside of browser window, and recent tracks list."
   }
   ,
   "poziBrowserActionTitle": {
