@@ -750,40 +750,99 @@ chrome.commands.onCommand.addListener(
           arrTabsIds      = objData.arrTabsIds
         , intTabsIds      = arrTabsIds.length
         , intArrIndex     = intTabsIds - 1
-        , funcSendMessage = function( intWindowId, intTabIndex, intTabId ) {
-                              chrome.tabs.sendMessage(
-                                  intTabId
-                                , strMessagePrefix + strCommand
-                              );
-                            }
         ;
 
-      // Try to send to active players first
+      // The final step
+      var funcSendMessage = function( intTabId ) {
+        chrome.tabs.sendMessage(
+            intTabId
+          , strMessagePrefix + strCommand
+        );
+      };
+
+      // Checks whether a module is enabled.
+      // If yes, do the final step.
+      var funcCheckIfEnabled = 
+            function( strModule, intTabId, funcElse, strFrom ) {
+
+        var strObjSettings = 'objSettings_' + strModule;
+
+        chrome.storage.sync.get(
+            strObjSettings
+          , function( objReturn ) {
+              var objModuleSettings = objReturn[ strObjSettings ];
+
+              if (
+                    typeof objModuleSettings === 'object'
+                &&  objModuleSettings.boolEnabled
+              ) {
+                strLog = 'chrome.commands.onCommand, ' + strFrom;
+                Log.add( strLog + strLogSuccess, intTabId );
+
+                funcSendMessage( intTabId );
+              }
+              else
+                funcElse( intArrIndex );
+            }
+        );
+      };
+
+      // Callback when no active players.
+      // Gets name, checks if enabled
+      var funcGetModuleNameAndProceed = 
+            function( intWindowId, intTabIndex, intTabId, strUrl ) {
+
+        var
+            miscModule            = Global.isValidUrl( strUrl )
+          , funcCheckNextOpenTab  = function() { return 0 }
+          ;
+
+        if ( strUrl && miscModule )
+          funcCheckIfEnabled(
+              miscModule
+            , intTabId
+            , funcCheckNextOpenTab
+            , 'findFirstOpenTabInvokeCallback'
+          );
+        else
+          funcCheckNextOpenTab();
+      };
+
+      // Tries to send to active players first
       var funcSendToActivePlayers = function( intArrIndex ) {
         if ( intArrIndex >= 0 ) {
           var intTabId = arrTabsIds[ intArrIndex ];
 
           chrome.tabs.sendMessage(
               intTabId
-            , 'Are you ready to get a command?'
-            , function( strResponse ) {
-                if ( strResponse === 'Affirmative.' ) {
-                  strLog = 'chrome.commands.onCommand';
-                  Log.add( strLog + strLogSuccess, intTabId );
-
-                  funcSendMessage( null, null, intTabId );
-                }
-                else {
+            , 'Ready for a command? Your name?'
+            , function( objResponse ) {
+                var funcLoopMore = function() {
                   intArrIndex--;
                   funcSendToActivePlayers( intArrIndex );
+                };
+
+                if (
+                      typeof objResponse === 'object'
+                  &&  objResponse.boolIsReady
+                  &&  typeof objResponse.strModule === 'string'
+                ) {
+                  funcCheckIfEnabled(
+                      objResponse.strModule
+                    , intTabId
+                    , funcLoopMore
+                    , 'funcSendToActivePlayers'
+                  );
                 }
+                else
+                  funcLoopMore();
               }
           );
         }
         else {
           // If no active players found, send to first open
           Log.add( strLog + strLogNoSuccess );
-          Global.findFirstOpenTabInvokeCallback( funcSendMessage );
+          Global.findFirstOpenTabInvokeCallback( funcGetModuleNameAndProceed );
         }
       };
 

@@ -74,10 +74,10 @@ With every track change you can see the glory of `PoziTone`! :)
 Keyboard shortcuts
 --------
 
-1. Alt+Shift+D - “Add track to playlist” .
-2. Alt+Shift+P - “Stop / Play” .
-3. Alt+Shift+M - “Mute / Unmute” .
-4. Alt+Shift+Q - “Show notification” .
+1. Alt+Shift+D — “Add track to playlist” .
+2. Alt+Shift+P — “Stop / Play” .
+3. Alt+Shift+M — “Mute / Unmute” .
+4. Alt+Shift+Q — “Show notification” .
 
 
 Limitations

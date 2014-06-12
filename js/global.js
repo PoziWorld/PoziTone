@@ -41,7 +41,7 @@ var Global                        = {
   , strPlayerIsOffClass           : 'play'
   , strModuleSettingsPrefix       : 'objSettings_'
 
-  // Embedded modules (replicate manifest's "content_scripts")
+  // Embedded modules (replicates manifest's "content_scripts")
   , objModules                    : {
         ru_101                    : {
             objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
@@ -797,8 +797,9 @@ var Global                        = {
                     parseInt( intWindowId )
                   , parseInt( intTabIndex )
                   , objTempWindowTabs[ intTabIndex ].id
+                  , objTempWindowTabs[ intTabIndex ].url
                 ) !== 0 )
-              return;
+                return;
             }
           }
         }

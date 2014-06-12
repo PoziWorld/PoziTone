@@ -679,13 +679,13 @@ chrome.runtime.onMessage.addListener(
       funcToProceedWith();
     else if ( strMessage === 'Do you copy?' )
       funcSendResponse( 'Copy that.' );
-    else if ( strMessage === 'Are you ready to get a command?' ) {
-      var strResponse = 'Affirmative.';
+    else if ( strMessage === 'Ready for a command? Your name?' ) {
+      var objResponse = {
+                            boolIsReady : PageWatcher.objPlayerInfo.boolIsReady
+                          , strModule   : PageWatcher.objPlayerInfo.strModule
+                        };
 
-      if ( ! PageWatcher.objPlayerInfo.boolIsReady )
-        strResponse = 'Negative.';
-
-      funcSendResponse( strResponse );
+      funcSendResponse( objResponse );
     }
   }
 );
