@@ -54,7 +54,7 @@ var
   , strPlayerVisibleLiteId                = 'gp'
   , strPlayerVisibleLiteClickableId       = 'gp_info'
   , strPlayerVisibleFullId                = 'pad_wrap'
-  , boolPlayerVisibleFullWasShown         = false
+  , boolWasPlayerVisibleFullShown         = false
 
   , $player
   , $playerVisibleLiteClickable
@@ -102,10 +102,10 @@ var
   , DisconnectableObserver                = null
 
   , PageWatcher                           = {
-        boolUserLoggedIn                  : boolIsLogOutButtonPresent
+        boolIsUserLoggedIn                : boolIsLogOutButtonPresent
 
       , boolHadPlayedBefore               : false
-      , boolPageJustLoaded                : true
+      , boolWasPageJustLoaded             : true
       , boolDisregardSameMessage          : false
 
       , objPlayerInfo                     : {
@@ -165,12 +165,12 @@ var
    **/
   getPlayerStatus : function( boolReturnStatus ) {
     if ( document.contains( $mainPlayStopBtn ) ) {
-      var boolPlaying = $mainPlayStopBtn.classList.contains( 'playing' );
+      var boolIsPlaying = $mainPlayStopBtn.classList.contains( 'playing' );
 
       // Follow the 101.ru logic:
       // 'stop' means it's in progress / playback can be stopped;
       // 'play' means it's off / playback can be started/resumed.
-      PageWatcher.objPlayerInfo.strStatus = boolPlaying ? 'stop' : 'play';
+      PageWatcher.objPlayerInfo.strStatus = boolIsPlaying ? 'stop' : 'play';
 
       if ( typeof boolReturnStatus !== 'undefined' )
         return strWantedClass;
@@ -207,7 +207,7 @@ var
    **/
   processButtonClick_add : function() {
     var funcElse = function() {
-      boolPlayerVisibleFullWasShown = false;
+      boolWasPlayerVisibleFullShown = false;
       PageWatcher.initBodyObserver( strPlayerVisibleFullId, 'add' );
 
       if ( document.contains( $playerVisibleLiteClickable ) )
@@ -227,7 +227,7 @@ var
    **/
   processButtonClick_next : function() {
     var funcElse = function() {
-      boolPlayerVisibleFullWasShown = false;
+      boolWasPlayerVisibleFullShown = false;
       PageWatcher.initBodyObserver( strPlayerVisibleFullId, 'next' );
 
       if ( document.contains( $playerVisibleLiteClickable ) )
@@ -336,7 +336,7 @@ var
    *            should be reported.
    * @param   funcCallback
    *            The function which will be called on each DOM mutation
-   * @param   boolDisconnectable
+   * @param   boolIsDisconnectable
    *            If this observer should be disconnected later
    * @return  void
    **/
@@ -344,12 +344,12 @@ var
       $target
     , objOptions
     , funcCallback
-    , boolDisconnectable
+    , boolIsDisconnectable
   ) {
     var MutationObserver = 
           window.MutationObserver || window.WebKitMutationObserver;
 
-    if ( typeof boolDisconnectable === 'undefined' && !boolDisconnectable ) {
+    if ( typeof boolIsDisconnectable === 'undefined' && !boolIsDisconnectable ) {
       var observer = new MutationObserver( funcCallback );
       observer.observe( $target, objOptions );
     }
@@ -440,9 +440,9 @@ var
           for ( var i = 0; i < arrMutations.length; i++ ) {
             var
                 $target                   = arrMutations[ i ].target
-              , boolPlaying               = 
+              , boolIsPlaying             = 
                   $target.classList.contains( 'playing' )
-              , strUpdatedPreviousStatus  = boolPlaying ? 'play' : 'stop'
+              , strUpdatedPreviousStatus  = boolIsPlaying ? 'play' : 'stop'
               ;
 
             // Sometimes mutation happens even without player status change
@@ -454,13 +454,13 @@ var
             PageWatcher.objPlayerInfo.strPreviousStatus = 
               strUpdatedPreviousStatus;
 
-            if ( boolPlaying ) {
+            if ( boolIsPlaying ) {
               var strLangStartedOrResumed = 
                     chrome.i18n.getMessage(
                       'poziNotificationPlayerStatusChangeResumed'
                     );
 
-              if ( PageWatcher.boolPageJustLoaded ) {
+              if ( PageWatcher.boolWasPageJustLoaded ) {
                 strLangStartedOrResumed =
                   chrome.i18n.getMessage(
                     'poziNotificationPlayerStatusChangeStarted'
@@ -471,11 +471,11 @@ var
 
               PageWatcher.sendSameMessage( strLangStartedOrResumed );
 
-              PageWatcher.boolHadPlayedBefore = true;
-              PageWatcher.boolPageJustLoaded = false;
+              PageWatcher.boolHadPlayedBefore   = true;
+              PageWatcher.boolWasPageJustLoaded = false;
             }
             else if (
-                  ! boolPlaying
+                  ! boolIsPlaying
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
@@ -634,7 +634,7 @@ var
     $trackTitle =
       document.getElementById( strTrackTitleContainerId );
 
-    if ( PageWatcher.boolUserLoggedIn ) {
+    if ( PageWatcher.boolIsUserLoggedIn ) {
       PageWatcher.initPlayerStatusObserver( $playStopBtnHeader );
       PageWatcher.checkIfPlayerStatusHadBeenChanged( $playStopBtnHeader );
     }
@@ -722,7 +722,7 @@ var
       PageWatcher.initTrackTitleObserver();
 
       PageWatcher.boolHadPlayedBefore = true;
-      PageWatcher.boolPageJustLoaded = false;
+      PageWatcher.boolWasPageJustLoaded = false;
 
       // Debug
       console.log( 'PoziTone: PageWatcher.checkIfPlayerStatusHadBeenChanged' );
@@ -817,10 +817,10 @@ var
    * @return  void
    **/
   hideOrKeepPlayerVisibleFull : function() {
-    if ( ! boolPlayerVisibleFullWasShown )
+    if ( ! boolWasPlayerVisibleFullShown )
       $playerVisibleLiteClickable.click();
 
-    boolPlayerVisibleFullWasShown = true;
+    boolWasPlayerVisibleFullShown = true;
   }
   ,
 
@@ -842,7 +842,7 @@ var
 
     chrome.runtime.sendMessage(
       {
-          boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
+          boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
         , boolDisregardSameMessage  : true
         , objPlayerInfo             : PageWatcher.getPlayerInfo()
         , objStationInfo            : PageWatcher.objStationInfo

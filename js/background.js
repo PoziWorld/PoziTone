@@ -68,14 +68,14 @@ var Background                    = {
    * Clean up in case of browser (re-)load/crash, extension reload, etc.
    *
    * @type    method
-   * @param   boolOnInstalled
+   * @param   boolIsCalledFromOnInstalledListener
    *            Whether to set extension defaults on clean-up complete
    * @param   objDetails
    *            Reason - install/update/chrome_update - 
    *            and (optional) previous version
    * @return  void
    **/
-  cleanUp : function( boolOnInstalled, objDetails ) {
+  cleanUp : function( boolIsCalledFromOnInstalledListener, objDetails ) {
     strLog = 'cleanUp';
     Log.add( strLog );
 
@@ -86,8 +86,8 @@ var Background                    = {
 
     chrome.storage.sync.remove( arrSettingsToCleanUp, function() {
       if (
-            typeof boolOnInstalled !== 'undefined'
-        &&  boolOnInstalled
+            typeof boolIsCalledFromOnInstalledListener !== 'undefined'
+        &&  boolIsCalledFromOnInstalledListener
       )
         Background.removeOldSettings( objDetails );
     });
@@ -202,25 +202,25 @@ var Background                    = {
                   strJoinUeip                           : 'no'
               }
             , objSettings_ru_101                        : {
-                  boolEnabled                           : true
-                , boolNotificationShowLogo              : true
+                  boolIsEnabled                         : true
+                , boolShowNotificationLogo              : true
                 , strNotificationTitleFormat            : 'short'
                 , arrNotificationButtons                : [
                                                               'add'
                                                             , 'muteUnmute'
                                                           ]
-                , boolNotificationShowWhenStopped       : false
-                , boolNotificationShowWhenMuted         : false
-                , boolNotificationShowWhenNoTrackInfo   : false
+                , boolShowNotificationWhenStopped       : false
+                , boolShowNotificationWhenMuted         : false
+                , boolShowNotificationWhenNoTrackInfo   : false
               }
             , objSettings_com_vk_audio                  : {
-                  boolEnabled                           : true
-                , boolNotificationShowLogo              : true
+                  boolIsEnabled                         : true
+                , boolShowNotificationLogo              : true
                 , arrNotificationButtons                : [
                                                               'add'
                                                             , 'next'
                                                           ]
-                , boolNotificationShowWhenMuted         : false
+                , boolShowNotificationWhenMuted         : false
               }
           }
         ;
@@ -353,7 +353,7 @@ var Background                    = {
       ||  objMessage.boolDisregardSameMessage
     ) {
       Global.showNotification(
-          objMessage.boolUserLoggedIn
+          objMessage.boolIsUserLoggedIn
         , objMessage.boolDisregardSameMessage
         , objSender.tab.id
         , objMessage.objPlayerInfo
@@ -701,11 +701,10 @@ chrome.notifications.onButtonClicked.addListener(
         , arrButtons  = objReturn.objActiveButtons[ intTabId ]
         , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
         , strFunction = Global
-                          .objSettingsDefaults
-                            .arrNotificationButtons[
-                              arrButton[ 0 ] ][ arrButton[ 1 ]
-                            ]
-                              .strFunction
+                          .arrNotificationButtons[
+                            arrButton[ 0 ] ][ arrButton[ 1 ]
+                          ]
+                            .strFunction
         ;
 
       Log.add(
@@ -765,7 +764,7 @@ chrome.commands.onCommand.addListener(
       var funcCheckIfEnabled = 
             function( strModule, intTabId, funcElse, strFrom ) {
 
-        var strObjSettings = 'objSettings_' + strModule;
+        var strObjSettings = Global.strModuleSettingsPrefix + strModule;
 
         chrome.storage.sync.get(
             strObjSettings
@@ -774,7 +773,7 @@ chrome.commands.onCommand.addListener(
 
               if (
                     typeof objModuleSettings === 'object'
-                &&  objModuleSettings.boolEnabled
+                &&  objModuleSettings.boolIsEnabled
               ) {
                 strLog = 'chrome.commands.onCommand, ' + strFrom;
                 Log.add( strLog + strLogSuccess, intTabId );

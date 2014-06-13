@@ -70,7 +70,7 @@ var
       document.contains( document.getElementById( 'user-account' ) )
 
   , PageWatcher                           = {
-        boolUserLoggedIn                  : boolIsLoggedInMenuPresent
+        boolIsUserLoggedIn                : boolIsLoggedInMenuPresent
 
       // Play/Stop button has class which is player status. 
 
@@ -80,7 +80,7 @@ var
       , intWantedClassLength              : 4
 
       , boolHadPlayedBefore               : false
-      , boolPageJustLoaded                : true
+      , boolWasPageJustLoaded             : true
       , boolDisregardSameMessage          : false
 
       , intLogoBorderToAdd                : 15
@@ -141,7 +141,7 @@ var
     PageWatcher.initPlayerStatusObserver();
 
     // There is no such option when not logged-in
-    if ( PageWatcher.boolUserLoggedIn )
+    if ( PageWatcher.boolIsUserLoggedIn )
       PageWatcher.initFavoriteStatusObserver();
 
     PageWatcher.setLogoLoadedCallback();
@@ -340,7 +340,7 @@ var
 
     chrome.runtime.sendMessage(
       {
-          boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
+          boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
         , boolDisregardSameMessage  : true
         , objPlayerInfo             : PageWatcher.getPlayerInfo()
         , objStationInfo            : PageWatcher.objStationInfo
@@ -433,7 +433,7 @@ var
                       'poziNotificationPlayerStatusChangeResumed'
                     );
 
-              if ( PageWatcher.boolPageJustLoaded )
+              if ( PageWatcher.boolWasPageJustLoaded )
                 strLangStartedOrResumed = 
                   chrome.i18n.getMessage(
                     'poziNotificationPlayerStatusChangeStarted'
@@ -441,7 +441,7 @@ var
 
               PageWatcher.boolHadPlayedBefore = true;
               PageWatcher.sendSameMessage( strLangStartedOrResumed );
-              PageWatcher.boolPageJustLoaded = false;
+              PageWatcher.boolWasPageJustLoaded = false;
             }
             else if (
                   strPlayerStatus === 'play'
@@ -636,19 +636,19 @@ $trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
 
   // When WMA player starts, it should show "Playback started", same way as MP3
   if (
-        PageWatcher.boolPageJustLoaded
+        PageWatcher.boolWasPageJustLoaded
     &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
   ) {
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' )
     );
-    PageWatcher.boolPageJustLoaded = false;
+    PageWatcher.boolWasPageJustLoaded = false;
     return;
   }
 
   chrome.runtime.sendMessage(
     {
-        boolUserLoggedIn          : PageWatcher.boolUserLoggedIn
+        boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
       , boolDisregardSameMessage  : false
       , objPlayerInfo             : PageWatcher.getPlayerInfo()
       , objStationInfo            : PageWatcher.objStationInfo

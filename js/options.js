@@ -47,7 +47,6 @@ var
   , strModulesListId          = 'chooseSubpageList'
   , strSettingsId             = 'settings'
   , strSettingsSavedId        = 'settingsSaved'
-  , strModuleSettingsPrefix   = 'objSettings_'
   , strModuleSubpageIdPrefix  = 'settings_'
   , strSettingsSubpageClass   = 'settingsSubpage'
   , strVersionId              = 'version'
@@ -137,7 +136,7 @@ var Options = {
                                               strModuleSubpageIdPrefix
                                             , ''
                                           )
-        , strStorageVar             = strModuleSettingsPrefix + strModule
+        , strStorageVar             = Global.strModuleSettingsPrefix + strModule
         ;
 
       arrAvailableOptions.push( strStorageVar );
@@ -150,7 +149,7 @@ var Options = {
               objModuleSettings         = objStorageData[ strKey ]
             , strModule                 = strKey
                                             .replace(
-                                                strModuleSettingsPrefix
+                                                Global.strModuleSettingsPrefix
                                               , ''
                                             )
             , strModuleSubpageId        = strModuleSubpageIdPrefix + strModule
@@ -241,7 +240,7 @@ var Options = {
     else if ( $this.type === 'radio' )
       miscSetting = $this.value;
 
-    strModuleSettings = strModuleSettingsPrefix + strChosenSubpageValue;
+    strModuleSettings = Global.strModuleSettingsPrefix + strChosenSubpageValue;
 
     // TODO: Is there a need for objTemp?
     objTemp[ strModuleSettings ] = {};

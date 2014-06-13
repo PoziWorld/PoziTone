@@ -70,93 +70,86 @@ var Global                        = {
   , strFavoriteStatusSuccess      : 
       chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
-  // All possible settings
-  , objSettingsDefaults           : {
-        boolNotificationShowWhenStopped         : { miscDefault : false }
-      , boolNotificationShowWhenMuted           : { miscDefault : false }
-      , boolNotificationShowWhenNoTrackInfo     : { miscDefault : false }
-      , strNotificationTitleFormat              : { miscDefault : 'short' }
-      , arrNotificationButtons                  : {
-            miscDefault           : [ 'add', 'muteUnmute' ]
-          , add                   : {
-                loggedIn          : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsAddLoggedInTitle'
-                          )
-                      , iconUrl   : 'img/round_plus_icon&16.png'
-                    }
-                  , strFunction   : 'add'
+  , arrNotificationButtons    : {
+        miscDefault           : [ 'add', 'muteUnmute' ]
+      , add                   : {
+            loggedIn          : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsAddLoggedInTitle'
+                      )
+                  , iconUrl   : 'img/round_plus_icon&16.png'
                 }
+              , strFunction   : 'add'
             }
-          , favorite              : {
-                loggedIn          : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsFavoriteLoggedInTitle'
-                          )
-                      , iconUrl   : 'img/emotion_smile_icon&16.png'
-                    }
-                  , strFunction   : 'favorite'
+        }
+      , favorite              : {
+            loggedIn          : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsFavoriteLoggedInTitle'
+                      )
+                  , iconUrl   : 'img/emotion_smile_icon&16.png'
                 }
+              , strFunction   : 'favorite'
             }
-          , next                  : {
-                next              : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsNextTitle'
-                          )
-                      , iconUrl   : 'img/playback_next_icon&16.png'
-                    }
-                  , strFunction   : 'next'
+        }
+      , next                  : {
+            next              : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsNextTitle'
+                      )
+                  , iconUrl   : 'img/playback_next_icon&16.png'
                 }
+              , strFunction   : 'next'
             }
-          , playStop              : {
-                play              : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsPlayTitle'
-                          )
-                      , iconUrl   : 'img/playback_play_icon&16.png'
-                    }
-                  , strFunction   : 'playStop'
+        }
+      , playStop              : {
+            play              : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsPlayTitle'
+                      )
+                  , iconUrl   : 'img/playback_play_icon&16.png'
                 }
-              , stop              : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsStopTitle'
-                          )
-                      , iconUrl   : 'img/playback_stop_icon&16.png'
-                    }
-                  , strFunction   : 'playStop'
-                }
+              , strFunction   : 'playStop'
             }
-          , muteUnmute            : {
-                mute              : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsMuteTitle'
-                          )
-                      , iconUrl   : 'img/sound_mute_icon&16.png'
-                    }
-                  , strFunction   : 'mute'
+          , stop              : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsStopTitle'
+                      )
+                  , iconUrl   : 'img/playback_stop_icon&16.png'
                 }
-              , unmute            : {
-                    objButton     : {
-                        title     : 
-                          chrome.i18n.getMessage(
-                            'poziNotificationButtonsUnmuteTitle'
-                          )
-                      , iconUrl   : 'img/sound_high_icon&16.png'
-                    }
-                  , strFunction   : 'unmute'
+              , strFunction   : 'playStop'
+            }
+        }
+      , muteUnmute            : {
+            mute              : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsMuteTitle'
+                      )
+                  , iconUrl   : 'img/sound_mute_icon&16.png'
                 }
+              , strFunction   : 'mute'
+            }
+          , unmute            : {
+                objButton     : {
+                    title     : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsUnmuteTitle'
+                      )
+                  , iconUrl   : 'img/sound_high_icon&16.png'
+                }
+              , strFunction   : 'unmute'
             }
         }
     }
@@ -204,7 +197,7 @@ var Global                        = {
    * Display current track info via Notification
    *
    * @type    method
-   * @param   boolUserLoggedIn
+   * @param   boolIsUserLoggedIn
    *            Whether user logged-in or not
    * @param   boolDisregardSameMessage
    *            If true, show notification in any case
@@ -220,7 +213,7 @@ var Global                        = {
    * @return  void
    **/
   showNotification : function(
-      boolUserLoggedIn
+      boolIsUserLoggedIn
     , boolDisregardSameMessage
     , intTabId
     , objPlayerInfo
@@ -256,8 +249,8 @@ var Global                        = {
             if (
                   ! boolDisregardSameMessage
               &&  typeof
-                    objData.boolNotificationShowWhenStopped !== 'undefined'
-              &&  ! objData.boolNotificationShowWhenStopped
+                    objData.boolShowNotificationWhenStopped !== 'undefined'
+              &&  ! objData.boolShowNotificationWhenStopped
               &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
             )
               return false;
@@ -265,8 +258,8 @@ var Global                        = {
             if (
                   ! boolDisregardSameMessage
               &&  typeof
-                    objData.boolNotificationShowWhenMuted !== 'undefined'
-              &&  ! objData.boolNotificationShowWhenMuted
+                    objData.boolShowNotificationWhenMuted !== 'undefined'
+              &&  ! objData.boolShowNotificationWhenMuted
               &&  objTempPlayerInfo.intVolume === Global.intNoVolume
             )
               return false;
@@ -274,15 +267,15 @@ var Global                        = {
             if (
                   ! boolDisregardSameMessage
               &&  typeof 
-                    objData.boolNotificationShowWhenNoTrackInfo !== 'undefined'
-              &&  ! objData.boolNotificationShowWhenNoTrackInfo
+                    objData.boolShowNotificationWhenNoTrackInfo !== 'undefined'
+              &&  ! objData.boolShowNotificationWhenNoTrackInfo
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             )
               return false;
 
             // Notification Icon Settings
             if (
-                  objData.boolNotificationShowLogo
+                  objData.boolShowNotificationLogo
               &&  objStationInfo.strLogoDataUri !== null
             )
               objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
@@ -319,7 +312,7 @@ var Global                        = {
               if (
                     arrButtons.indexOf( 'add' ) !== -1
                 &&  (
-                          boolUserLoggedIn
+                          boolIsUserLoggedIn
                       &&  (
                                 typeof
                                   objTempStationInfo
@@ -338,11 +331,10 @@ var Global                        = {
                 ) {
                   objNotificationOptions.buttons.push(
                     Global
-                      .objSettingsDefaults
-                        .arrNotificationButtons
-                          .add
-                            .loggedIn
-                              .objButton
+                      .arrNotificationButtons
+                        .add
+                          .loggedIn
+                            .objButton
                   );
 
                   arrActiveButtons.push( 'add|loggedIn' );
@@ -351,7 +343,7 @@ var Global                        = {
 
               if (
                     arrButtons.indexOf( 'favorite' ) !== -1
-                &&  boolUserLoggedIn
+                &&  boolIsUserLoggedIn
               ) {
                 // Don't show button, if liked this track already
                 // TODO: Show if track changed while waited for server response
@@ -362,11 +354,10 @@ var Global                        = {
                 ) {
                   objNotificationOptions.buttons.push(
                     Global
-                      .objSettingsDefaults
-                        .arrNotificationButtons
-                          .favorite
-                            .loggedIn
-                              .objButton
+                      .arrNotificationButtons
+                        .favorite
+                          .loggedIn
+                            .objButton
                   );
 
                   arrActiveButtons.push( 'favorite|loggedIn' );
@@ -376,7 +367,7 @@ var Global                        = {
               if (
                     arrButtons.indexOf( 'next' ) !== -1
                 &&  (
-                          boolUserLoggedIn
+                          boolIsUserLoggedIn
                       ||  (
                                 typeof
                                   objTempPlayerInfo
@@ -388,11 +379,10 @@ var Global                        = {
               ) {
                 objNotificationOptions.buttons.push(
                   Global
-                    .objSettingsDefaults
-                      .arrNotificationButtons
+                    .arrNotificationButtons
+                      .next
                         .next
-                          .next
-                            .objButton
+                          .objButton
                 );
 
                 arrActiveButtons.push( 'next|next' );
@@ -401,10 +391,9 @@ var Global                        = {
               if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {
                 objNotificationOptions.buttons.push(
                   Global
-                    .objSettingsDefaults
-                      .arrNotificationButtons
-                        .playStop[ objTempPlayerInfo.strStatus ]
-                          .objButton
+                    .arrNotificationButtons
+                      .playStop[ objTempPlayerInfo.strStatus ]
+                        .objButton
                 );
 
                 arrActiveButtons
@@ -417,10 +406,9 @@ var Global                        = {
 
                 objNotificationOptions.buttons.push(
                   Global
-                    .objSettingsDefaults
-                      .arrNotificationButtons
-                        .muteUnmute[ strMuteUnmuteState ]
-                          .objButton
+                    .arrNotificationButtons
+                      .muteUnmute[ strMuteUnmuteState ]
+                        .objButton
                 );
 
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
