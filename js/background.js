@@ -43,7 +43,7 @@
 
 var Background                    = {
     strObjOpenTabsName            : 'objOpenTabs'
-
+  , objPreservedSettings          : {}
   , strPreviousTrack              : ''
   , arrTrackInfoPlaceholders      : [
       , ''
@@ -118,29 +118,67 @@ var Background                    = {
 
         var
             arrSettingsToRemove   = []
-          , arrDeprecatedSettings = [
-                                        'arrActiveButtons'
-                                      , 'arrLastTracks'
-                                      , 'arrNotificationButtons'
-                                      , 'intLastTracksToKeep'
-                                      , 'boolNotificationShowStationLogo'
-                                      , 'boolNotificationShowWhenStopped'
-                                      , 'boolNotificationShowWhenMuted'
-                                      , 'boolNotificationShowWhenNoTrackInfo'
-                                      , 'strNotificationTitleFormat'
-                                    ]
+          , objDeprecatedSettings = {
+                arrActiveButtons                        : null
+              , arrLastTracks                           : null
+              , arrNotificationButtons                  : null
+              , intLastTracksToKeep                     : null
+              , boolNotificationShowStationLogo         : null
+              , boolNotificationShowWhenStopped         : null
+              , boolNotificationShowWhenMuted           : null
+              , boolNotificationShowWhenNoTrackInfo     : null
+              , strNotificationTitleFormat              : null
+              , objSettings_ru_101                      : {
+                    boolEnabled                         : null
+                  , boolNotificationShowLogo            : null
+                  , boolNotificationShowWhenStopped     : null
+                  , boolNotificationShowWhenMuted       : null
+                  , boolNotificationShowWhenNoTrackInfo : null
+                }
+              , objSettings_com_vk_audio                : {
+                    boolEnabled                         : null
+                  , boolNotificationShowLogo            : null
+                  , boolNotificationShowWhenMuted       : null
+                }
+            }
           ;
 
-        for (
-          var i = 0, intSettingsToRemove = arrDeprecatedSettings.length;
-          i < intSettingsToRemove;
-          i++
-        ) {
-          var strSettingToRemove = arrDeprecatedSettings[ i ];
+        for ( miscSetting in objDeprecatedSettings ) {
+          if ( objDeprecatedSettings.hasOwnProperty( miscSetting ) ) {
+            if ( objDeprecatedSettings[ miscSetting ] === null ) {
+              // Remove it only if it is present
+              if ( objReturn[ miscSetting ] )
+                arrSettingsToRemove.push( miscSetting );
+            }
+            else {
+              // If deprecated subsetting is present in current setting object,
+              // remove it preserving the rest.
+              // Restore preserved in setExtensionDefaults().
+              var
+                  objCurrentSetting     = objReturn[ miscSetting ]
+                , objDeprecatedSetting  = objDeprecatedSettings[ miscSetting ]
+                ;
 
-          // Remove it only if it is present
-          if ( objReturn[ strSettingToRemove ] )
-            arrSettingsToRemove.push( strSettingToRemove );
+              if ( objCurrentSetting ) {
+                for ( miscSubsetting in objDeprecatedSetting ) {
+                  if ( objDeprecatedSetting.hasOwnProperty( miscSubsetting ) ) {
+                    if ( typeof objCurrentSetting[ miscSubsetting ] === 
+                          'undefined' )
+                      delete objDeprecatedSetting[ miscSubsetting ];
+                    
+                    delete objCurrentSetting[ miscSubsetting ];
+                  }
+                }
+
+                if ( ! Global.isEmpty( objDeprecatedSetting ) ) {
+                  Background.objPreservedSettings[ miscSetting ] = 
+                    objCurrentSetting;
+
+                  arrSettingsToRemove.push( miscSetting );
+                }
+              }
+            }
+          }
         }
 
         if ( ! Global.isEmpty( arrSettingsToRemove ) ) {
@@ -252,6 +290,16 @@ var Background                    = {
 
                   objTempToSet[ strSetting ][ strSubsetting ] = 
                     miscSetting[ strSubsetting ];
+                }
+                else if ( typeof 
+                            Background
+                              .objPreservedSettings[ strSetting ] !== 
+                                'undefined' ) {
+                  objTempToSet[ strSetting ][ strSubsetting ] =
+                    Background
+                      .objPreservedSettings
+                        [ strSetting ]
+                          [ strSubsetting ];
                 }
               }
             }
