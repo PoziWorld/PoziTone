@@ -291,15 +291,17 @@ var Background                    = {
                   objTempToSet[ strSetting ][ strSubsetting ] = 
                     miscSetting[ strSubsetting ];
                 }
-                else if ( typeof 
-                            Background
-                              .objPreservedSettings[ strSetting ] !== 
-                                'undefined' ) {
-                  objTempToSet[ strSetting ][ strSubsetting ] =
-                    Background
-                      .objPreservedSettings
-                        [ strSetting ]
-                          [ strSubsetting ];
+                else {
+                  var objSetting = 
+                        Background.objPreservedSettings[ strSetting ];
+
+                  if (
+                        typeof objSetting !== 'undefined'
+                    &&  typeof objSetting[ strSubsetting ] !== 'undefined'
+                  ) {
+                    objTempToSet[ strSetting ][ strSubsetting ] =
+                      objSetting[ strSubsetting ];
+                  }
                 }
               }
             }
