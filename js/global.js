@@ -22,6 +22,10 @@
       getValidUrl()
       isEmpty()
       findFirstOpenTabInvokeCallback()
+      checkIfModuleIsEnabled()
+      getTabIdFromNotificationId()
+      composeNotificationId()
+      returnIndexOfSubarrayContaining()
   2. On Load
       Initialize
 
@@ -33,126 +37,131 @@
 
  ============================================================================ */
 
-var Global                        = {
-    intNoVolume                   : 0
-  , strNotificationId             : 'pozitone_tab' // + tab ID
-  , strNotificationIconUrl        : 'img/notification-icon-80.png'
-  , strNoTrackInfo                : '...'
-  , strPlayerIsOffClass           : 'play'
-  , strModuleSettingsPrefix       : 'objSettings_'
+var
+    strNotificationIdSeparator      = '_'
 
-  // Embedded modules (replicates manifest's "content_scripts")
-  , objModules                    : {
-        ru_101                    : {
-            objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
-          , arrJs                 : [
-                'modules/ru_101/js/uppod-player-api.js'
-              , 'modules/ru_101/js/uppod-player-api.js'
-          ]
-        }
-      , com_vk_audio              : {
-            objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
-          , arrJs                 : [
-                'modules/com_vk_audio/js/page-watcher.js'
-          ]
-        }
-  }
+  , Global                          = {
+      intNoVolume                   : 0
+    , strNotificationIdSeparator    : strNotificationIdSeparator
+    , strNotificationId             : 'PoziTone' + strNotificationIdSeparator
+                                                     // + module name + tab ID
+    , strNotificationIconUrl        : 'img/notification-icon-80.png'
+    , strNoTrackInfo                : '...'
+    , strPlayerIsOffClass           : 'play'
+    , strModuleSettingsPrefix       : 'objSettings_'
 
-  // Don't show these buttons, if they have been clicked for this track already
-  , arrAddTrackToPlaylistFeedback : [
-        chrome.i18n.getMessage(
-          'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
-        )
-      , chrome.i18n.getMessage(
-          'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
-        )
-    ]
-  , strFavoriteStatusSuccess      : 
-      chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
-
-  , arrNotificationButtons    : {
-        miscDefault           : [ 'add', 'muteUnmute' ]
-      , add                   : {
-            loggedIn          : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsAddLoggedInTitle'
-                      )
-                  , iconUrl   : 'img/round_plus_icon&16.png'
-                }
-              , strFunction   : 'add'
-            }
-        }
-      , favorite              : {
-            loggedIn          : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsFavoriteLoggedInTitle'
-                      )
-                  , iconUrl   : 'img/emotion_smile_icon&16.png'
-                }
-              , strFunction   : 'favorite'
-            }
-        }
-      , next                  : {
-            next              : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsNextTitle'
-                      )
-                  , iconUrl   : 'img/playback_next_icon&16.png'
-                }
-              , strFunction   : 'next'
-            }
-        }
-      , playStop              : {
-            play              : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsPlayTitle'
-                      )
-                  , iconUrl   : 'img/playback_play_icon&16.png'
-                }
-              , strFunction   : 'playStop'
-            }
-          , stop              : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsStopTitle'
-                      )
-                  , iconUrl   : 'img/playback_stop_icon&16.png'
-                }
-              , strFunction   : 'playStop'
-            }
-        }
-      , muteUnmute            : {
-            mute              : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsMuteTitle'
-                      )
-                  , iconUrl   : 'img/sound_mute_icon&16.png'
-                }
-              , strFunction   : 'mute'
-            }
-          , unmute            : {
-                objButton     : {
-                    title     : 
-                      chrome.i18n.getMessage(
-                        'poziNotificationButtonsUnmuteTitle'
-                      )
-                  , iconUrl   : 'img/sound_high_icon&16.png'
-                }
-              , strFunction   : 'unmute'
-            }
-        }
+    // Embedded modules (replicates manifest's "content_scripts")
+    , objModules                    : {
+          ru_101                    : {
+              objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
+            , arrJs                 : [
+                  'modules/ru_101/js/uppod-player-api.js'
+                , 'modules/ru_101/js/uppod-player-api.js'
+            ]
+          }
+        , com_vk_audio              : {
+              objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
+            , arrJs                 : [
+                  'modules/com_vk_audio/js/page-watcher.js'
+            ]
+          }
     }
+
+    // Don't show these buttons, if they've been clicked for this track already
+    , arrAddTrackToPlaylistFeedback : [
+          chrome.i18n.getMessage(
+            'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
+          )
+        , chrome.i18n.getMessage(
+            'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+          )
+      ]
+    , strFavoriteStatusSuccess      : 
+        chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
+
+    , arrNotificationButtons    : {
+          miscDefault           : [ 'add', 'muteUnmute' ]
+        , add                   : {
+              loggedIn          : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsAddLoggedInTitle'
+                        )
+                    , iconUrl   : 'img/round_plus_icon&16.png'
+                  }
+                , strFunction   : 'add'
+              }
+          }
+        , favorite              : {
+              loggedIn          : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsFavoriteLoggedInTitle'
+                        )
+                    , iconUrl   : 'img/emotion_smile_icon&16.png'
+                  }
+                , strFunction   : 'favorite'
+              }
+          }
+        , next                  : {
+              next              : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsNextTitle'
+                        )
+                    , iconUrl   : 'img/playback_next_icon&16.png'
+                  }
+                , strFunction   : 'next'
+              }
+          }
+        , playStop              : {
+              play              : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsPlayTitle'
+                        )
+                    , iconUrl   : 'img/playback_play_icon&16.png'
+                  }
+                , strFunction   : 'playStop'
+              }
+            , stop              : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsStopTitle'
+                        )
+                    , iconUrl   : 'img/playback_stop_icon&16.png'
+                  }
+                , strFunction   : 'playStop'
+              }
+          }
+        , muteUnmute            : {
+              mute              : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsMuteTitle'
+                        )
+                    , iconUrl   : 'img/sound_mute_icon&16.png'
+                  }
+                , strFunction   : 'mute'
+              }
+            , unmute            : {
+                  objButton     : {
+                      title     : 
+                        chrome.i18n.getMessage(
+                          'poziNotificationButtonsUnmuteTitle'
+                        )
+                    , iconUrl   : 'img/sound_high_icon&16.png'
+                  }
+                , strFunction   : 'unmute'
+              }
+          }
+      }
   ,
 
   /**
@@ -230,12 +239,14 @@ var Global                        = {
           message               : objStationInfo.strTrackInfo,
           iconUrl               : Global.strNotificationIconUrl
         }
-      , objThis                 = this
       , objTempPlayerInfo       = objPlayerInfo
       , objTempStationInfo      = objStationInfo
-      , strStorageVar           = Global.strModuleSettingsPrefix + 
-                                    objTempPlayerInfo.strModule
-      , strNotificationId       = objThis.strNotificationId + intTabId
+      , strModule               = objTempPlayerInfo.strModule
+      , strStorageVar           = Global.strModuleSettingsPrefix + strModule
+      , strNotificationId       = Global.composeNotificationId(
+                                      strModule
+                                    , intTabId
+                                  )
       ;
 
     // Clear notification for this tab first, then display a new one
@@ -416,7 +427,7 @@ var Global                        = {
             }
 
             chrome.notifications.create( 
-                objThis.strNotificationId + intTabId
+                strNotificationId
               , objNotificationOptions
               , function( strNotificationId ) {
                   Global.showNotificationCallback(
@@ -457,6 +468,8 @@ var Global                        = {
     , arrActiveButtons
     , strCommand
   ) {
+    var strModule = objPlayerInfo.strModule;
+
     /* START Log */
     var
         arrTrackInfo  = objStationInfo.strTrackInfo.split( "\n\n" )
@@ -465,7 +478,7 @@ var Global                        = {
           Log.add(
               strLog
             , {
-                  strModule                   : objPlayerInfo.strModule
+                  strModule                   : strModule
                 , strStationName              : objStationInfo.strStationName
                 , boolHasAddToPlaylistButton  : 
                     objStationInfo.boolHasAddToPlaylistButton || 'n/a'
@@ -504,7 +517,7 @@ var Global                        = {
     /* END Log */
 
     Background.saveRecentTrackInfo( objStationInfo ); 
-    Global.saveTabsIds( intTabId );
+    Global.saveTabsIds( intTabId, strModule );
     Global.saveActiveButtons( intTabId, arrActiveButtons );
   }
   ,
@@ -515,78 +528,120 @@ var Global                        = {
    * @type    method
    * @param   intTabId
    *            ID of the tab
+   * @param   strModule
+   *            Module notification was displayed for
    * @return  void
    **/
-  removeNotification : function( intTabId ) {
-    chrome.notifications.clear(
-        Global.strNotificationId + intTabId
-      , function( boolWasCleared ) {
-          strLog = 'removeNotification';
-          Log.add( strLog, intTabId );
+  removeNotification : function( intTabId, strModule ) {
+    var funcRemoveNotification = function( intTabId, strModule ) {
+      chrome.notifications.clear(
+          Global.composeNotificationId( strModule, intTabId )
+        , function( boolWasCleared ) {
+            strLog = 'removeNotification';
+            Log.add( strLog, intTabId );
 
-          if ( boolWasCleared ) {
-            var arrVars = [ 'objActiveButtons', 'arrTabsIds' ];
+            if ( boolWasCleared ) {
+              var arrVars = [ 'objActiveButtons', 'arrTabsIds' ];
 
-            chrome.storage.sync.get( arrVars, function( objData ) {
-              strLog = 'removeNotification';
-              var intChanges = 0;
+              chrome.storage.sync.get( arrVars, function( objData ) {
+                strLog = 'removeNotification';
+                var intChanges = 0;
 
-              // Remove this notification's active buttons
-              if ( typeof objData.objActiveButtons[ intTabId ] === 'object' ) {
-                delete objData.objActiveButtons[ intTabId ];
-                intChanges++;
-              }
+                // Remove this notification's active buttons
+                if ( typeof objData.objActiveButtons[ intTabId ] === 'object' ) {
+                  delete objData.objActiveButtons[ intTabId ];
+                  intChanges++;
+                }
 
-              // Remove this notification's tab id
-              var intIndex = objData.arrTabsIds.indexOf( intTabId );
+                // Remove this notification's tab id
+                var
+                    arrTabsIds  = objData.arrTabsIds
+                  , intIndex    = Global.returnIndexOfSubarrayContaining(
+                                      arrTabsIds
+                                    , intTabId
+                                  )
+                  ;
 
-              if ( intIndex !== -1 ) {
-                objData.arrTabsIds.splice( intIndex, 1 );
-                intChanges++;
-              }
+                if ( intIndex !== -1 ) {
+                  arrTabsIds.splice( intIndex, 1 );
+                  intChanges++;
+                }
 
-              // "Submit" changes
-              if ( intChanges > 0 )
-                Global.setStorageItems( objData, strLog + ', submit' );
-            });
-          }
-      }
-    );
+                // "Submit" changes
+                if ( intChanges > 0 )
+                  Global.setStorageItems( objData, strLog + ', submit' );
+              });
+            }
+        }
+      );
+    }
+
+    if ( typeof strModule === 'undefined' ) {
+      chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+        strLog = 'removeNotification, strModule';
+        Log.add( strLog, intTabId );
+
+        var arrTabsIds = objData.arrTabsIds;
+
+        if ( typeof arrTabsIds === 'undefined' )
+          return;
+
+        var intIndex = 
+              Global.returnIndexOfSubarrayContaining( arrTabsIds, intTabId );
+
+        if ( intIndex !== -1 ) {
+          strModule = arrTabsIds[ intIndex ][ 1 ];
+          funcRemoveNotification( intTabId, strModule );
+        }
+      });
+    }
+    else
+      funcRemoveNotification( intTabId, strModule );
   }
   ,
 
   /**
    * Save id of tab, for which notification was shown, in storage for later use
+   * 
+   * TODO: Use obj instead of arr?
    *
    * @type    method
    * @param   intTabId
    *            Tab ID info received from
+   * @param   strModule
+   *            Module notification was displayed for
    * @return  void
    **/
-  saveTabsIds : function ( intTabId ) {
+  saveTabsIds : function ( intTabId, strModule ) {
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
       strLog = 'saveTabsIds';
       Log.add( strLog, intTabId );
 
-      if ( typeof objData.arrTabsIds === 'undefined' )
-        objData.arrTabsIds = [];
+      var arrTabsIds = objData.arrTabsIds;
+
+      if ( typeof arrTabsIds === 'undefined' )
+        arrTabsIds = [];
 
       var
-          arrTabsIds    = objData.arrTabsIds
-        , intIndex      = arrTabsIds.indexOf( intTabId )
+          intIndex      = Global.returnIndexOfSubarrayContaining(
+                              arrTabsIds
+                            , intTabId
+                          )
         , intLastIndex  = arrTabsIds.length - 1
         , intChanges    = 0
+        , arrToPush     = [ intTabId, strModule ]
+        , funcPush      = function() {
+                            arrTabsIds.push( arrToPush );
+                            intChanges++;
+                          }
         ;
 
       // Save if it is not present or "reposition" to be the last
-      if ( intIndex === -1 ) {
-        arrTabsIds.push( intTabId );
-        intChanges++;
-      }
+      if ( intIndex === -1 )
+        funcPush();
       else if ( intIndex !== intLastIndex ) {
         arrTabsIds.splice( intIndex, 1 );
-        arrTabsIds.push( intTabId );
-        intChanges++;
+        funcPush();
       }
 
       // "Submit" changes
@@ -793,6 +848,110 @@ var Global                        = {
         }
       }
     });
+  }
+  ,
+
+  /**
+   * Checks whether a module is enabled.
+   *
+   * @type    method
+   * @param   strNotificationId
+   *            Notification ID
+   * @return  integer
+   **/
+  checkIfModuleIsEnabled : function (
+      strModule
+    , intTabId
+    , funcSuccess
+    , funcElse
+    , objPreservedData
+    , strFrom
+  ) {
+    var strObjSettings = Global.strModuleSettingsPrefix + strModule;
+
+    chrome.storage.sync.get(
+        strObjSettings
+      , function( objReturn ) {
+          var objModuleSettings = objReturn[ strObjSettings ];
+
+          if (
+                typeof objModuleSettings === 'object'
+            &&  objModuleSettings.boolIsEnabled
+          ) {
+            strLog = 'checkIfModuleIsEnabled, ' + strFrom;
+            Log.add( strLog + strLogSuccess, intTabId );
+
+            funcSuccess( objPreservedData );
+          }
+          else
+            funcElse( objPreservedData );
+        }
+    );
+  }
+  ,
+
+  /**
+   * Extracts tab ID from notification id.
+   *
+   * @type    method
+   * @param   strNotificationId
+   *            Notification ID
+   * @return  integer
+   **/
+  getTabIdFromNotificationId : function ( strNotificationId )
+  {
+    var
+        arrNotificationId     = strNotificationId.split(
+                                  Global.strNotificationIdSeparator
+                                )
+      , intNotificationIdLen  = arrNotificationId.length
+      , intNotificationTabId  = parseInt(
+                                  arrNotificationId[ intNotificationIdLen - 1 ]
+                                )
+      ;
+
+    return intNotificationTabId;
+  }
+  ,
+
+  /**
+   * Composes notification ID
+   *
+   * @type    method
+   * @param   intTabId
+   *            Tab ID notification belongs to
+   * @param   strModule
+   *            Module notification was displayed for
+   * @return  string
+   **/
+  composeNotificationId : function ( strModule, intTabId )
+  {
+    return Global.strNotificationId + 
+            strModule + 
+            Global.strNotificationIdSeparator + 
+            intTabId;
+  }
+  ,
+
+  /**
+   * Finds item in subarray, returns its index
+   *
+   * @type    method
+   * @param   arrContainer
+   *            Array containing subarrays
+   * @param   miscItem
+   *            What to look for
+   * @return  integer
+   **/
+  returnIndexOfSubarrayContaining : function ( arrContainer, miscItem )
+  {
+    return arrContainer
+            .map(
+              function ( arrSub ) {
+                return arrSub[ 0 ]
+              }
+            )
+              .indexOf( miscItem );
   }
 };
 

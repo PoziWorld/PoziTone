@@ -336,13 +336,10 @@ var Background                    = {
         // Don't include messages with player status (started, resumed, muted)
         , arrTrackInfo        = objStationInfo.strTrackInfo.split( "\n\n" )
         , strTrackInfo        = arrTrackInfo[ 0 ]
-        , intIndex            = arrRecentTracks
-                                  .map(
-                                    function ( arrSub ) {
-                                      return arrSub[0]
-                                    }
-                                  )
-                                    .indexOf( strTrackInfo )
+        , intIndex            = Global.returnIndexOfSubarrayContaining(
+                                    arrRecentTracks
+                                  , strTrackInfo
+                                )
         , arrTempRecentTrack  = []
         ;
 
@@ -393,28 +390,61 @@ var Background                    = {
     strLog = 'onMessageCallback';
     Log.add( strLog, objMessage );
 
-    var strTrackInfo = objMessage.objStationInfo.strTrackInfo;
+    var
+        strTrackInfo      = objMessage.objStationInfo.strTrackInfo
+      , objDataToPreserve = {
+                              // funcShowNotification
+                                objMessage    : objMessage
+                              , objSender     : objSender
+                              , strTrackInfo  : strTrackInfo
+                              // funcDoNot
+                              , strLog        : strLog
+                            }
+      ;
 
-    // Show notification if track info changed or extension asks to show it
-    // again (for example, set of buttons needs to be changed)
-    if (
-          Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
-      &&  strTrackInfo !== Background.strPreviousTrack
-      ||  objMessage.boolDisregardSameMessage
-    ) {
-      Global.showNotification(
-          objMessage.boolIsUserLoggedIn
-        , objMessage.boolDisregardSameMessage
-        , objSender.tab.id
-        , objMessage.objPlayerInfo
-        , objMessage.objStationInfo
-        , objMessage.strCommand || ''
+    var funcShowNotification = function( objPreservedData ) {
+      // Show notification if track info changed or extension asks to show it
+      // again (for example, set of buttons needs to be changed)
+      var
+          strTrackInfo  = objPreservedData.strTrackInfo
+        , objMessage    = objPreservedData.objMessage
+        ;
+
+      if (
+            Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
+        &&  strTrackInfo !== Background.strPreviousTrack
+        ||  objMessage.boolDisregardSameMessage
+      ) {
+        Global.showNotification(
+            objMessage.boolIsUserLoggedIn
+          , objMessage.boolDisregardSameMessage
+          , objPreservedData.objSender.tab.id
+          , objMessage.objPlayerInfo
+          , objMessage.objStationInfo
+          , objMessage.strCommand || ''
+        );
+
+        Background.strPreviousTrack = strTrackInfo;
+      }
+      else
+        funcDoNot( objPreservedData );
+    };
+
+    var funcDoNot = function( objPreservedData ) {
+      Log.add(
+          objPreservedData.strLog + strLogDoNot
+        , objPreservedData.strTrackInfo
       );
+    };
 
-      Background.strPreviousTrack = strTrackInfo;
-    }
-    else
-      Log.add( strLog + strLogDoNot, strTrackInfo );
+    Global.checkIfModuleIsEnabled(
+        objMessage.objPlayerInfo.strModule
+      , objSender.tab.id
+      , funcShowNotification
+      , funcDoNot
+      , objDataToPreserve
+      , 'onMessageCallback'
+    );
   }
   ,
 
@@ -692,9 +722,8 @@ chrome.notifications.onClicked.addListener(
     strLog = 'chrome.notifications.onClicked';
     Log.add( strLog, { strNotificationId : strNotificationId }, true, true );
 
-    var intNotificationTabId = parseInt(
-      strNotificationId.replace( Global.strNotificationId, '' )
-    );
+    var intNotificationTabId = 
+          Global.getTabIdFromNotificationId( strNotificationId );
 
     var funcFocusTab = function( intWindowId, intTabIndex, intTabId ) {
       if ( intNotificationTabId === intTabId )
@@ -744,10 +773,7 @@ chrome.notifications.onButtonClicked.addListener(
       );
 
       var
-          intTabId    = 
-            parseInt(
-              strNotificationId.replace( Global.strNotificationId, '' )
-            )
+          intTabId    = Global.getTabIdFromNotificationId( strNotificationId )
         , arrButtons  = objReturn.objActiveButtons[ intTabId ]
         , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
         , strFunction = Global
@@ -802,37 +828,10 @@ chrome.commands.onCommand.addListener(
         ;
 
       // The final step
-      var funcSendMessage = function( intTabId ) {
+      var funcSendMessage = function( objPreservedData ) {
         chrome.tabs.sendMessage(
-            intTabId
-          , strMessagePrefix + strCommand
-        );
-      };
-
-      // Checks whether a module is enabled.
-      // If yes, do the final step.
-      var funcCheckIfEnabled = 
-            function( strModule, intTabId, funcElse, strFrom ) {
-
-        var strObjSettings = Global.strModuleSettingsPrefix + strModule;
-
-        chrome.storage.sync.get(
-            strObjSettings
-          , function( objReturn ) {
-              var objModuleSettings = objReturn[ strObjSettings ];
-
-              if (
-                    typeof objModuleSettings === 'object'
-                &&  objModuleSettings.boolIsEnabled
-              ) {
-                strLog = 'chrome.commands.onCommand, ' + strFrom;
-                Log.add( strLog + strLogSuccess, intTabId );
-
-                funcSendMessage( intTabId );
-              }
-              else
-                funcElse( intArrIndex );
-            }
+            objPreservedData.intTabId
+          , objPreservedData.strMessagePrefix + objPreservedData.strCommand
         );
       };
 
@@ -846,13 +845,22 @@ chrome.commands.onCommand.addListener(
           , funcCheckNextOpenTab  = function() { return 0 }
           ;
 
-        if ( strUrl && miscModule )
-          funcCheckIfEnabled(
+        if ( strUrl && miscModule ) {
+          var objDataToPreserve = {
+                                      intTabId          : intTabId
+                                    , strMessagePrefix  : strMessagePrefix
+                                    , strCommand        : strCommand
+                                  };
+
+          Global.checkIfModuleIsEnabled(
               miscModule
             , intTabId
+            , funcSendMessage
             , funcCheckNextOpenTab
+            , objDataToPreserve
             , 'findFirstOpenTabInvokeCallback'
           );
+        }
         else
           funcCheckNextOpenTab();
       };
@@ -860,15 +868,15 @@ chrome.commands.onCommand.addListener(
       // Tries to send to active players first
       var funcSendToActivePlayers = function( intArrIndex ) {
         if ( intArrIndex >= 0 ) {
-          var intTabId = arrTabsIds[ intArrIndex ];
+          var intTabId = arrTabsIds[ intArrIndex ][ 0 ];
 
           chrome.tabs.sendMessage(
               intTabId
             , 'Ready for a command? Your name?'
             , function( objResponse ) {
-                var funcLoopMore = function() {
-                  intArrIndex--;
-                  funcSendToActivePlayers( intArrIndex );
+                var funcLoopMore = function( objPreservedData ) {
+                  objPreservedData.intArrIndex--;
+                  funcSendToActivePlayers( objPreservedData.intArrIndex );
                 };
 
                 if (
@@ -876,15 +884,26 @@ chrome.commands.onCommand.addListener(
                   &&  objResponse.boolIsReady
                   &&  typeof objResponse.strModule === 'string'
                 ) {
-                  funcCheckIfEnabled(
+                  var objDataToPreserve = {
+                        // funcSendMessage
+                          intTabId          : intTabId
+                        , strMessagePrefix  : strMessagePrefix
+                        , strCommand        : strCommand
+                        // funcLoopMore
+                        , intArrIndex       : intArrIndex
+                      };
+
+                  Global.checkIfModuleIsEnabled(
                       objResponse.strModule
                     , intTabId
+                    , funcSendMessage
                     , funcLoopMore
+                    , objDataToPreserve
                     , 'funcSendToActivePlayers'
                   );
                 }
                 else
-                  funcLoopMore();
+                  funcLoopMore( { intArrIndex: intArrIndex } );
               }
           );
         }

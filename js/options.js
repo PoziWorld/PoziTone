@@ -50,6 +50,7 @@ var
   , strModuleSubpageIdPrefix  = 'settings_'
   , strSettingsSubpageClass   = 'settingsSubpage'
   , strVersionId              = 'version'
+  , strEnableModule           = 'boolIsEnabled'
 
   , intSettingsSubpages
   ;
@@ -214,8 +215,14 @@ var Options = {
       , strChosenSubpageValue = $chosenSubpage.value
       ;
 
-    if ( $this.type === 'checkbox' && $this.value === 'on' )
-      miscSetting = $this.checked;
+    if ( $this.type === 'checkbox' && $this.value === 'on' ) {
+      var boolIsChecked = $this.checked;
+
+      miscSetting = boolIsChecked;
+
+      if ( $this.name === strEnableModule && ! boolIsChecked )
+        Options.removeModuleNotifications( strChosenSubpageValue );
+    }
     else if ( $this.type === 'checkbox' && $this.value !== 'on' ) {
       var
           $moduleSubpage  = document
@@ -458,6 +465,31 @@ var Options = {
   displayCurrentVersion : function() {
     document.getElementById( strVersionId ).innerHTML =
       chrome.runtime.getManifest().version;
+  }
+  ,
+
+  /**
+   * Remove all notifications for a module when just disabled it
+   *
+   * @type    method
+   * @param   strModule
+   *            Remove notifications of this module
+   * @return  void
+   **/
+  removeModuleNotifications : function( strModule ) {
+    chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      var arrTabsIds = objData.arrTabsIds;
+
+      if ( typeof arrTabsIds === 'undefined' )
+        return;
+
+      for ( var i = 0, intTabsIds = arrTabsIds.length; i < intTabsIds; i++ ) {
+        var arrTabId = arrTabsIds[ i ];
+
+        if ( arrTabId[ 1 ] === strModule )
+          Global.removeNotification( arrTabId[ 0 ], strModule );
+      }
+    });
   }
 };
 
