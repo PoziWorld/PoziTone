@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.0.2.13
+    * PoziTone will not display any notifications for a player whose support is not enabled in the Options.
+    * When the support for a player is being disabled, PoziTone removes all the notifications for that player from the (Chrome) Notification Center.
+
 ### v0.0.2.12
     * Player will not respond to keyboard shortcuts if “Support this player” option is not enabled.
 
