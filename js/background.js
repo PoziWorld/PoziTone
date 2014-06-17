@@ -818,7 +818,7 @@ chrome.commands.onCommand.addListener(
       var strMessagePrefix = 'processCommand_';
 
       // For these it's the same as button click
-      if ( strCommand === 'add' || strCommand === 'playStop' )
+      if ( [ 'add', 'next', 'playStop' ].indexOf( strCommand ) !== -1 )
         strMessagePrefix = 'processButtonClick_';
 
       var

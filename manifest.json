@@ -39,6 +39,9 @@
             }
           , "description"       : "Add track to playlist"
         }
+      , "next"                  : {
+            "description"       : "Next track"
+        }
       , "playStop"              : {
             "suggested_key"     : {
               "default"         : "Alt+Shift+P"
