@@ -74,19 +74,22 @@ With every track change you can see the glory of `PoziTone`! :)
 Keyboard shortcuts
 --------
 
-1. Alt+Shift+D — “Add track to playlist” .
-2. Alt+Shift+P — “Stop / Play” .
-3. Alt+Shift+M — “Mute / Unmute” .
-4. Alt+Shift+Q — “Show notification” .
+1. Alt+Shift+D — “Add track to playlist”.
+2. Alt+Shift+N — “Next track” (_not preset_).
+3. Alt+Shift+P — “Stop / Play”.
+4. Alt+Shift+M — “Mute / Unmute”.
+5. Alt+Shift+Q — “Show notification”.
 
+By default, while the browser is not in the foreground, the shortcut will be inactive.
 
-Limitations
---------
+As of version 35 (Chrome), you can make the shortcuts work even when the browser is not in the foreground:
 
-1. Maximum of 2 buttons on the pop-up notification at any one time (set by the browser developers).
-2. Maximum of 4 [keyboard shortcuts](#keyboard-shortcuts) (set by the browser developers).
-3. [Keyboard shortcuts](#keyboard-shortcuts) only work in an active window of the browser user where the extension is installed (set by the browser developers).
-4. [Keyboard shortcuts](#keyboard-shortcuts) only work for the first opened tab when multiple tabs with the supported players are open for the same browser user.
+1. Right-click on the `PoziTone` icon to the right of the address bar.
+2. Click on “Manage”.
+3. Scroll down the page.
+4. Click on the blue “Keyboard shortcuts” link.
+5. Find `PoziTone` in the list.
+6. Change “In Chrome” to “Global”.
 
 
 Gratitudes
