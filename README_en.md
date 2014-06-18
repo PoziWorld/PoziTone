@@ -75,10 +75,11 @@ Keyboard shortcuts
 --------
 
 1. Alt+Shift+D — “Add track to playlist”.
-2. Alt+Shift+N — “Next track” (_not preset_).
-3. Alt+Shift+P — “Stop / Play”.
-4. Alt+Shift+M — “Mute / Unmute”.
-5. Alt+Shift+Q — “Show notification”.
+2. Alt+Shift+F — “I like it!” (_not preset_).
+3. Alt+Shift+N — “Next track” (_not preset_).
+4. Alt+Shift+P — “Stop / Play”.
+5. Alt+Shift+M — “Mute / Unmute”.
+6. Alt+Shift+Q — “Show notification”.
 
 By default, while the browser is not in the foreground, the shortcut will be inactive.
 
