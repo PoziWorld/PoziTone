@@ -39,6 +39,9 @@
             }
           , "description"       : "Add track to playlist"
         }
+      , "favorite"              : {
+            "description"       : "I like it!"
+        }
       , "next"                  : {
             "description"       : "Next track"
         }

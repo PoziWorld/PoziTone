@@ -336,7 +336,7 @@ var Background                    = {
         // Don't include messages with player status (started, resumed, muted)
         , arrTrackInfo        = objStationInfo.strTrackInfo.split( "\n\n" )
         , strTrackInfo        = arrTrackInfo[ 0 ]
-        , intIndex            = Global.returnIndexOfSubarrayContaining(
+        , intIndex            = Global.returnIndexOfSubitemContaining(
                                     arrRecentTracks
                                   , strTrackInfo
                                 )
@@ -777,7 +777,7 @@ chrome.notifications.onButtonClicked.addListener(
         , arrButtons  = objReturn.objActiveButtons[ intTabId ]
         , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
         , strFunction = Global
-                          .arrNotificationButtons[
+                          .objNotificationButtons[
                             arrButton[ 0 ] ][ arrButton[ 1 ]
                           ]
                             .strFunction
@@ -811,6 +811,9 @@ chrome.notifications.onButtonClicked.addListener(
  **/
 chrome.commands.onCommand.addListener(
   function( strCommand ) {
+    // Check for changes
+    Global.getAllCommands();
+
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
       strLog = 'chrome.commands.onCommand';
       Log.add( strLog, { strCommand : strCommand }, true );
@@ -818,7 +821,7 @@ chrome.commands.onCommand.addListener(
       var strMessagePrefix = 'processCommand_';
 
       // For these it's the same as button click
-      if ( [ 'add', 'next', 'playStop' ].indexOf( strCommand ) !== -1 )
+      if ( ~ [ 'add', 'favorite', 'next', 'playStop' ].indexOf( strCommand ) )
         strMessagePrefix = 'processButtonClick_';
 
       var

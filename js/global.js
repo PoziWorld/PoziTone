@@ -11,6 +11,7 @@
 
   1. Global
       init()
+      getAllCommands()
       setStorageItems()
       showNotification()
       showNotificationCallback()
@@ -25,7 +26,8 @@
       checkIfModuleIsEnabled()
       getTabIdFromNotificationId()
       composeNotificationId()
-      returnIndexOfSubarrayContaining()
+      returnIndexOfSubitemContaining()
+      addShortcutInfo()
   2. On Load
       Initialize
 
@@ -79,99 +81,115 @@ var
     , strFavoriteStatusSuccess      : 
         chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
-    , arrNotificationButtons    : {
-          miscDefault           : [ 'add', 'muteUnmute' ]
-        , add                   : {
-              loggedIn          : {
-                  objButton     : {
-                      title     : 
+    , arrCommands                   : []
+
+    , objNotificationButtons        : {
+          add                       : {
+              loggedIn              : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsAddLoggedInTitle'
                         )
-                    , iconUrl   : 'img/round_plus_icon&16.png'
+                    , iconUrl       : 'img/round_plus_icon&16.png'
                   }
-                , strFunction   : 'add'
+                , strFunction       : 'add'
               }
           }
-        , favorite              : {
-              loggedIn          : {
-                  objButton     : {
-                      title     : 
+        , favorite                  : {
+              loggedIn              : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsFavoriteLoggedInTitle'
                         )
-                    , iconUrl   : 'img/emotion_smile_icon&16.png'
+                    , iconUrl       : 'img/emotion_smile_icon&16.png'
                   }
-                , strFunction   : 'favorite'
+                , strFunction       : 'favorite'
               }
           }
-        , next                  : {
-              next              : {
-                  objButton     : {
-                      title     : 
+        , next                      : {
+              next                  : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsNextTitle'
                         )
-                    , iconUrl   : 'img/playback_next_icon&16.png'
+                    , iconUrl       : 'img/playback_next_icon&16.png'
                   }
-                , strFunction   : 'next'
+                , strFunction       : 'next'
               }
           }
-        , playStop              : {
-              play              : {
-                  objButton     : {
-                      title     : 
+        , playStop                  : {
+              play                  : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsPlayTitle'
                         )
-                    , iconUrl   : 'img/playback_play_icon&16.png'
+                    , iconUrl       : 'img/playback_play_icon&16.png'
                   }
-                , strFunction   : 'playStop'
+                , strFunction       : 'playStop'
               }
-            , stop              : {
-                  objButton     : {
-                      title     : 
+            , stop                  : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsStopTitle'
                         )
-                    , iconUrl   : 'img/playback_stop_icon&16.png'
+                    , iconUrl       : 'img/playback_stop_icon&16.png'
                   }
-                , strFunction   : 'playStop'
+                , strFunction       : 'playStop'
               }
           }
-        , muteUnmute            : {
-              mute              : {
-                  objButton     : {
-                      title     : 
+        , muteUnmute                : {
+              mute                  : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsMuteTitle'
                         )
-                    , iconUrl   : 'img/sound_mute_icon&16.png'
+                    , iconUrl       : 'img/sound_mute_icon&16.png'
                   }
-                , strFunction   : 'mute'
+                , strFunction       : 'mute'
               }
-            , unmute            : {
-                  objButton     : {
-                      title     : 
+            , unmute                : {
+                  objButton         : {
+                      title         : 
                         chrome.i18n.getMessage(
                           'poziNotificationButtonsUnmuteTitle'
                         )
-                    , iconUrl   : 'img/sound_high_icon&16.png'
+                    , iconUrl       : 'img/sound_high_icon&16.png'
                   }
-                , strFunction   : 'unmute'
+                , strFunction       : 'unmute'
               }
           }
       }
   ,
 
   /**
-   * Initialize
+   * Things to do on initialization.
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   init : function() {
+    Global.getAllCommands();
+  }
+  ,
+
+  /**
+   * Gets all the registered extension commands and their shortcut (if active).
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  getAllCommands : function() {
+    chrome.commands.getAll( function( arrCommands ) {
+      Global.arrCommands = arrCommands;
+    } );
   }
   ,
 
@@ -203,7 +221,7 @@ var
   ,
 
   /**
-   * Display current track info via Notification
+   * Displays current track info via Notification.
    *
    * @type    method
    * @param   boolIsUserLoggedIn
@@ -252,7 +270,7 @@ var
     // Clear notification for this tab first, then display a new one
     chrome.notifications.clear( strNotificationId, function() {
       chrome.storage.sync.get(
-          [ strStorageVar ]
+          strStorageVar
         , function( objReturn ) {
             var objData = objReturn[ strStorageVar ];
 
@@ -311,9 +329,10 @@ var
             if ( arrButtons.length !== 0 ) {
               // Save active buttons for the listener
               var
-                  arrActiveButtons  = []
-                , arrTrackInfo      = objTempStationInfo
-                                        .strTrackInfo.split( "\n\n" )
+                  arrActiveButtons        = []
+                , objNotificationButtons  = Global.objNotificationButtons
+                , arrTrackInfo            = objTempStationInfo
+                                              .strTrackInfo.split( "\n\n" )
                 ;
 
               objNotificationOptions.buttons = [];
@@ -341,11 +360,10 @@ var
                       .indexOf( arrTrackInfo[ 1 ] ) === -1
                 ) {
                   objNotificationOptions.buttons.push(
-                    Global
-                      .arrNotificationButtons
-                        .add
-                          .loggedIn
-                            .objButton
+                    Global.addShortcutInfo(
+                        objNotificationButtons.add.loggedIn.objButton
+                      , 'add'
+                    )
                   );
 
                   arrActiveButtons.push( 'add|loggedIn' );
@@ -364,11 +382,10 @@ var
                       .indexOf( arrTrackInfo[ 1 ] ) === -1
                 ) {
                   objNotificationOptions.buttons.push(
-                    Global
-                      .arrNotificationButtons
-                        .favorite
-                          .loggedIn
-                            .objButton
+                    Global.addShortcutInfo(
+                        objNotificationButtons.favorite.loggedIn.objButton
+                      , 'favorite'
+                    )
                   );
 
                   arrActiveButtons.push( 'favorite|loggedIn' );
@@ -389,11 +406,10 @@ var
                     )
               ) {
                 objNotificationOptions.buttons.push(
-                  Global
-                    .arrNotificationButtons
-                      .next
-                        .next
-                          .objButton
+                  Global.addShortcutInfo(
+                      objNotificationButtons.next.next.objButton
+                    , 'next'
+                  )
                 );
 
                 arrActiveButtons.push( 'next|next' );
@@ -401,10 +417,12 @@ var
 
               if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {
                 objNotificationOptions.buttons.push(
-                  Global
-                    .arrNotificationButtons
-                      .playStop[ objTempPlayerInfo.strStatus ]
-                        .objButton
+                  Global.addShortcutInfo(
+                      objNotificationButtons
+                        .playStop[ objTempPlayerInfo.strStatus ]
+                          .objButton
+                    , 'playStop'
+                  )
                 );
 
                 arrActiveButtons
@@ -412,14 +430,16 @@ var
               }
 
               if ( arrButtons.indexOf( 'muteUnmute' ) !== -1 ) {
-                var strMuteUnmuteState = ( objTempPlayerInfo.intVolume > 0 ) ? 
-                                           'mute' : 'unmute';
+                var strMuteUnmuteState  = ( objTempPlayerInfo.intVolume > 0 ) ? 
+                                            'mute' : 'unmute';
 
                 objNotificationOptions.buttons.push(
-                  Global
-                    .arrNotificationButtons
-                      .muteUnmute[ strMuteUnmuteState ]
-                        .objButton
+                  Global.addShortcutInfo(
+                      objNotificationButtons
+                        .muteUnmute[ strMuteUnmuteState ]
+                          .objButton
+                    , 'muteUnmute'
+                  )
                 );
 
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
@@ -446,7 +466,7 @@ var
   ,
 
   /**
-   * Actions after notification has been displayed
+   * Actions after notification has been displayed.
    *
    * @type    method
    * @param   objPlayerInfo
@@ -523,7 +543,7 @@ var
   ,
 
   /**
-   * Remove the notification for this tab.
+   * Removes the notification for this tab.
    *
    * @type    method
    * @param   intTabId
@@ -556,7 +576,7 @@ var
                 // Remove this notification's tab id
                 var
                     arrTabsIds  = objData.arrTabsIds
-                  , intIndex    = Global.returnIndexOfSubarrayContaining(
+                  , intIndex    = Global.returnIndexOfSubitemContaining(
                                       arrTabsIds
                                     , intTabId
                                   )
@@ -587,7 +607,7 @@ var
           return;
 
         var intIndex = 
-              Global.returnIndexOfSubarrayContaining( arrTabsIds, intTabId );
+              Global.returnIndexOfSubitemContaining( arrTabsIds, intTabId );
 
         if ( intIndex !== -1 ) {
           strModule = arrTabsIds[ intIndex ][ 1 ];
@@ -601,7 +621,7 @@ var
   ,
 
   /**
-   * Save id of tab, for which notification was shown, in storage for later use
+   * Saves tab id, for which notification was shown, in storage for later use.
    * 
    * TODO: Use obj instead of arr?
    *
@@ -623,7 +643,7 @@ var
         arrTabsIds = [];
 
       var
-          intIndex      = Global.returnIndexOfSubarrayContaining(
+          intIndex      = Global.returnIndexOfSubitemContaining(
                               arrTabsIds
                             , intTabId
                           )
@@ -652,7 +672,7 @@ var
   ,
 
   /**
-   * Save active buttons (per notification's tab id) in storage for later use
+   * Saves active buttons (per notification's tab id) in storage for later use.
    *
    * @type    method
    * @param   intTabId
@@ -689,7 +709,7 @@ var
   ,
 
   /**
-   * Saves open tabs objects for later use
+   * Saves open tabs objects for later use.
    *
    * @type    method
    * @param   objOpenTabs
@@ -763,7 +783,7 @@ var
   ,
 
   /**
-   * Gets valid URL
+   * Gets valid URL.
    *
    * @type    method
    * @param   No Parameters Taken
@@ -776,7 +796,7 @@ var
   ,
 
   /**
-   * Checks whether object/array is empty
+   * Checks whether object/array is empty.
    *
    * @type    method
    * @param   objToTest
@@ -915,7 +935,7 @@ var
   ,
 
   /**
-   * Composes notification ID
+   * Composes notification ID.
    *
    * @type    method
    * @param   intTabId
@@ -934,24 +954,61 @@ var
   ,
 
   /**
-   * Finds item in subarray, returns its index
+   * Finds item in subarray, returns its index.
    *
    * @type    method
    * @param   arrContainer
-   *            Array containing subarrays
+   *            Array containing arrays/objects
    * @param   miscItem
    *            What to look for
+   * @param   miscProp
+   *            Array index or object key
    * @return  integer
    **/
-  returnIndexOfSubarrayContaining : function ( arrContainer, miscItem )
+  returnIndexOfSubitemContaining : function ( arrContainer, miscItem, miscProp )
   {
     return arrContainer
             .map(
-              function ( arrSub ) {
-                return arrSub[ 0 ]
+              function ( miscSub ) {
+                miscProp = ( typeof miscProp === 'undefined' ) ? 0 : miscProp;
+
+                return miscSub[ miscProp ]
               }
             )
               .indexOf( miscItem );
+  }
+  ,
+
+  /**
+   * Adds shortcut info to the title of the button
+   *
+   * @type    method
+   * @param   objButton
+   *            Button properties
+   * @return  object
+   **/
+  addShortcutInfo : function ( objButton, strCommand )
+  {
+    // We need a copy, otherwise it will append info again and again
+    var objButtonCopy   = ( typeof objButton === 'object' ) ?
+                            JSON.parse( JSON.stringify( objButton ) ) : {};
+
+    if ( typeof objButtonCopy.title === 'string' ) {
+      var intCommandsIndex  = Global.returnIndexOfSubitemContaining(
+                                  Global.arrCommands
+                                , strCommand
+                                , 'name'
+                              );
+
+      if ( intCommandsIndex !== -1 ) {
+        var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
+
+        if ( strShortcut !== '' )
+          objButtonCopy.title += ' (' + strShortcut + ')';
+      }
+    }
+
+    return objButtonCopy;
   }
 };
 
@@ -962,7 +1019,7 @@ var
  ============================================================================ */
 
 /**
- * Initialize
+ * Initializes.
  *
  * @type    method
  * @param   No Parameters taken
