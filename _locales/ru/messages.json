@@ -101,6 +101,15 @@
           "message": "Общие"
         }
           ,
+          "poziOptionsPageSettingsGeneralShortcuts": {
+            "message": "Быстрые клавиши"
+          }
+            ,
+            "poziOptionsPageSettingsGeneralShortcutsShowInNotification": {
+              "message": "Отображать подсказки в уведомлении"
+            }
+
+          ,
           "poziOptionsPageSettingsGeneralUeip": {
             "message": "Программа улучшения качества PoziTone"
           }

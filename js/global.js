@@ -51,6 +51,7 @@ var
     , strNoTrackInfo                : '...'
     , strPlayerIsOffClass           : 'play'
     , strModuleSettingsPrefix       : 'objSettings_'
+    , strGeneralSettings            : 'general'
 
     // Embedded modules (replicates manifest's "content_scripts")
     , objModules                    : {
@@ -82,6 +83,7 @@ var
         chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
 
     , arrCommands                   : []
+    , boolShowShortcuts             : true
 
     , objNotificationButtons        : {
           add                       : {
@@ -187,9 +189,28 @@ var
    * @return  void
    **/
   getAllCommands : function() {
-    chrome.commands.getAll( function( arrCommands ) {
-      Global.arrCommands = arrCommands;
-    } );
+    var strVarToGet = 
+          Global.strModuleSettingsPrefix + Global.strGeneralSettings;
+
+    chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+      strLog = 'getAllCommands';
+      Log.add( strLog, objReturn );
+
+      var objGeneralSettings  = objReturn[ strVarToGet ];
+
+      if (
+            typeof objGeneralSettings === 'object'
+        &&  objGeneralSettings.boolShowShortcutsInNotification
+      ) {
+        Global.boolShowShortcuts = true;
+
+        chrome.commands.getAll( function( arrCommands ) {
+          Global.arrCommands = arrCommands;
+        } );
+      }
+      else
+        Global.boolShowShortcuts = false;
+    });
   }
   ,
 
@@ -989,26 +1010,30 @@ var
    **/
   addShortcutInfo : function ( objButton, strCommand )
   {
-    // We need a copy, otherwise it will append info again and again
-    var objButtonCopy   = ( typeof objButton === 'object' ) ?
-                            JSON.parse( JSON.stringify( objButton ) ) : {};
+    if ( Global.boolShowShortcuts ) {
+      // We need a copy, otherwise it will append info again and again
+      var objButtonCopy   = ( typeof objButton === 'object' ) ?
+                              JSON.parse( JSON.stringify( objButton ) ) : {};
 
-    if ( typeof objButtonCopy.title === 'string' ) {
-      var intCommandsIndex  = Global.returnIndexOfSubitemContaining(
-                                  Global.arrCommands
-                                , strCommand
-                                , 'name'
-                              );
+      if ( typeof objButtonCopy.title === 'string' ) {
+        var intCommandsIndex  = Global.returnIndexOfSubitemContaining(
+                                    Global.arrCommands
+                                  , strCommand
+                                  , 'name'
+                                );
 
-      if ( intCommandsIndex !== -1 ) {
-        var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
+        if ( intCommandsIndex !== -1 ) {
+          var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
 
-        if ( strShortcut !== '' )
-          objButtonCopy.title += ' (' + strShortcut + ')';
+          if ( strShortcut !== '' )
+            objButtonCopy.title += ' (' + strShortcut + ')';
+        }
       }
-    }
 
-    return objButtonCopy;
+      return objButtonCopy;
+    }
+    else
+      return objButton;
   }
 };
 

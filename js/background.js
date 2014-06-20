@@ -238,6 +238,7 @@ var Background                    = {
 
             , objSettings_general                       : {
                   strJoinUeip                           : 'no'
+                , boolShowShortcutsInNotification       : true
               }
             , objSettings_ru_101                        : {
                   boolIsEnabled                         : true
@@ -719,6 +720,9 @@ chrome.runtime.onMessageExternal.addListener(
  **/
 chrome.notifications.onClicked.addListener(
   function( strNotificationId ) {
+    // Check for changes
+    Global.getAllCommands();
+
     strLog = 'chrome.notifications.onClicked';
     Log.add( strLog, { strNotificationId : strNotificationId }, true, true );
 
@@ -761,6 +765,9 @@ chrome.notifications.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
+    // Check for changes
+    Global.getAllCommands();
+
     chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
       strLog = 'chrome.notifications.onButtonClicked';
       Log.add(

@@ -101,6 +101,14 @@
           "message": "General"
         }
           ,
+          "poziOptionsPageSettingsGeneralShortcuts": {
+            "message": "Keyboard shortcuts"
+          }
+            ,
+            "poziOptionsPageSettingsGeneralShortcutsShowInNotification": {
+              "message": "Display tips in notification"
+            }
+          ,
           "poziOptionsPageSettingsGeneralUeip": {
             "message": "PoziTone User Experience Improvement Program (UEIP)"
           }
