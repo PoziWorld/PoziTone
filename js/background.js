@@ -416,6 +416,9 @@ var Background                    = {
         &&  strTrackInfo !== Background.strPreviousTrack
         ||  objMessage.boolDisregardSameMessage
       ) {
+        // Check for changes
+        Global.getAllCommands();
+
         Global.showNotification(
             objMessage.boolIsUserLoggedIn
           , objMessage.boolDisregardSameMessage
