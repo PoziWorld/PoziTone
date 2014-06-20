@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.0.2.16
+    * Options page now has a way to disable keyboard shortcuts tips for commands on the notification.
+
 ### v0.0.2.15
     * Added an ability to assign keyboard shortcuts for the “I like it!” action.
     * Display keyboard shortcuts on the buttons on the notification. Idea by Alexander Predko.

@@ -5,11 +5,11 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_poziToolName__"
   , "description"               : "__MSG_poziToolDescription__"
-  , "version"                   : "0.0.2.15"
+  , "version"                   : "0.0.2.16"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
-  , "homepage_url"              : "https://github.com/poziworld/pozitone/"
+  , "homepage_url"              : "https://github.com/poziworld/PoziTone/"
 
   , "icons"                     : {
         "16"                    : "img/pozitone-icon-16.png"
