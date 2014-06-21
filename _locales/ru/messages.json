@@ -288,6 +288,10 @@
     "message": "PoziTone"
   }
     ,
+    "poziPopupPageToolbarClose": {
+      "message": "Закрыть"
+    }
+    ,
     "poziPopupPageNavRecentTracks": {
       "message": "Последние треки"
     }

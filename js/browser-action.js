@@ -122,6 +122,14 @@ var
           } );
         }
     );
+
+    addEvent(
+        document.getElementById( 'bractClosePopupPage' )
+      , 'click'
+      , function( objEvent ) {
+          window.close();
+        }
+    );
   }
 };
 

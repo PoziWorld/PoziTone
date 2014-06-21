@@ -287,6 +287,10 @@
     "message": "PoziTone"
   }
     ,
+    "poziPopupPageToolbarClose": {
+      "message": "Close"
+    }
+    ,
     "poziPopupPageNavRecentTracks": {
       "message": "Recent Tracks"
     }
