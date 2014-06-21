@@ -55,22 +55,6 @@ var
   , intSettingsSubpages
   ;
 
-// code.tutsplus.com/tutorials/from-jquery-to-javascript-a-reference--net-23703
-var addEvent = (function () {
-  var filter = function( el, type, fn ) {
-    for ( var i = 0, len = el.length; i < len; i++ )
-      addEvent( el[i], type, fn );
-  };
-
-  if ( document.addEventListener )
-    return function ( el, type, fn ) {
-      if ( el && el.nodeName || el === window )
-        el.addEventListener( type, fn, false );
-      else if ( el && el.length )
-        filter( el, type, fn );
-    };
-})();
-
 /* =============================================================================
 
   1. Options

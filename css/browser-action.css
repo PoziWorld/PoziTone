@@ -9,13 +9,51 @@
 
   Table of Contents:
 
-  0. Content
+  0. Toolbar
+  1. Content
 
  ============================================================================ */
 
 /* =============================================================================
 
-  0. Content
+  0. Toolbar
+
+ ============================================================================ */
+
+  #bractToolbar
+    {
+      position:               absolute;
+      z-index:                2;
+      top:                    1em;
+      right:                  1em;
+    }
+  #bractOpenOptionsPage
+    {
+      font-size:              1em;
+      width:                  1.6em;
+      height:                 1.6em;
+      background:             url(/img/cog_icon&16.png) no-repeat;
+      cursor:                 pointer;
+      text-indent:            -9999em;
+    }
+  #bractOpenOptionsPage:hover
+    {
+      -webkit-animation-duration:         .5s;
+      -webkit-animation-iteration-count:  1;
+      -webkit-animation-name:             spin;
+      -webkit-animation-timing-function:  linear;
+}
+
+  @-webkit-keyframes spin
+    { 
+      from  { -webkit-transform: scale(1) rotate(0deg); }
+      to    { -webkit-transform: scale(1) rotate(360deg); } 
+    }
+
+
+/* =============================================================================
+
+  1. Content
 
  ============================================================================ */
 

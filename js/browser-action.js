@@ -12,6 +12,8 @@
   1. Popup
       init()
       populateRecentTracks()
+      template()
+      addEventListeners()
   2. Events
 
  ============================================================================ */
@@ -36,6 +38,7 @@ var
   init : function() {
     Page.localize( 'Popup' );
     Popup.populateRecentTracks();
+    Popup.addEventListeners();
   }
   ,
 
@@ -91,6 +94,34 @@ var
                     return objData.hasOwnProperty( key ) ? objData[ key ] : '';
                   }
               );
+  }
+  ,
+
+  /**
+   * Add event listeners
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  addEventListeners : function() {
+    addEvent(
+        document.getElementById( 'bractOpenOptionsPage' )
+      , 'click'
+      , function( objEvent ) {
+          var
+              strOptionsUrl = chrome.extension.getURL( 'html/options.html' )
+              objOptionsUrl = { url: strOptionsUrl }
+            ;
+
+          chrome.tabs.query( objOptionsUrl , function( objTabs ) {
+            if ( objTabs.length )
+              chrome.tabs.update( objTabs[0].id, { active: true } );
+            else
+              chrome.tabs.create( objOptionsUrl );
+          } );
+        }
+    );
   }
 };
 

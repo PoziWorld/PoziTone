@@ -193,8 +193,10 @@ var
           Global.strModuleSettingsPrefix + Global.strGeneralSettings;
 
     chrome.storage.sync.get( strVarToGet, function( objReturn ) {
-      strLog = 'getAllCommands';
-      Log.add( strLog, objReturn );
+      if ( typeof strLog === 'string' ) {
+        strLog = 'getAllCommands';
+        Log.add( strLog, objReturn );
+      }
 
       var objGeneralSettings  = objReturn[ strVarToGet ];
 
