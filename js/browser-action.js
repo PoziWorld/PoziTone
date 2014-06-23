@@ -109,17 +109,9 @@ var
         document.getElementById( 'bractOpenOptionsPage' )
       , 'click'
       , function( objEvent ) {
-          var
-              strOptionsUrl = chrome.extension.getURL( 'html/options.html' )
-              objOptionsUrl = { url: strOptionsUrl }
-            ;
+          var strOptionsUrl = chrome.extension.getURL( 'html/options.html' );
 
-          chrome.tabs.query( objOptionsUrl , function( objTabs ) {
-            if ( objTabs.length )
-              chrome.tabs.update( objTabs[0].id, { active: true } );
-            else
-              chrome.tabs.create( objOptionsUrl );
-          } );
+          Global.createTabOrUpdate( strOptionsUrl );
         }
     );
 

@@ -1,4 +1,8 @@
 {
+  "lang": {
+    "message": "en"
+  }
+  ,
   "poziToolName": {
     "message": "PoziTone"
   }
@@ -77,6 +81,23 @@
     ,
     "poziNotificationButtonsUnmuteFeedback": {
       "message": "Unmuted"
+    }
+
+  ,
+  "poziSystemNotificationUpdated": {
+    "message": "Extension updated!"
+  }
+    ,
+    "poziSystemNotificationUpdatedVersion": {
+      "message": " v"
+    }
+    ,
+    "poziSystemNotificationUpdatedChanges": {
+      "message": "See changes"
+    }
+    ,
+    "poziSystemNotificationUpdatedDoNotNotify": {
+      "message": "Do not notify me of updates"
     }
 
   ,

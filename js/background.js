@@ -20,6 +20,8 @@
       checkIfOpenTabChangedDomainOnUpdated()
       checkIfOpenTabChangedDomainOnReplaced()
       checkIfHostnameChanged()
+      processButtonClick_seeChanges()
+      processButtonClick_doNotNotifyOfUpdates()
   2. Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
@@ -42,7 +44,8 @@
  ============================================================================ */
 
 var Background                    = {
-    strObjOpenTabsName            : 'objOpenTabs'
+    strVersion                    : chrome.runtime.getManifest().version
+  , strObjOpenTabsName            : 'objOpenTabs'
   , objPreservedSettings          : {}
   , strPreviousTrack              : ''
   , arrTrackInfoPlaceholders      : [
@@ -51,6 +54,34 @@ var Background                    = {
       , 'Ожидаем следующий трек...'
       , 'Ждём название трека...'
     ]
+  , strProcessButtonClick         : 'processButtonClick_'
+  , strProcessCommand             : 'processCommand_'
+  , strChangelogUrl               : 
+      'https://github.com/poziworld/PoziTone/blob/v%v/HISTORY_%lang.md'
+  , strVersionParam               : '%v'
+  , strLangParam                  : '%lang'
+  , objSystemNotificationButtons  : {
+        updated                   : [
+            {
+                objButton         : {
+                    title         : chrome.i18n.getMessage(
+                                      'poziSystemNotificationUpdatedChanges'
+                                    )
+                  , iconUrl       : 'img/list_bullets_icon&16.png'
+                }
+              , strFunction       : 'seeChanges'
+            }
+          , {
+                objButton         : {
+                    title         : chrome.i18n.getMessage(
+                                      'poziSystemNotificationUpdatedDoNotNotify'
+                                    )
+                  , iconUrl       : 'img/off_icon&16.png'
+                }
+              , strFunction       : 'doNotNotifyOfUpdates'
+            }
+        ]
+    }
   ,
 
   /**
@@ -109,9 +140,8 @@ var Background                    = {
     Log.add( strLog, objDetails );
 
     if (
-          objDetails.reason === 'update'
-      &&  typeof objDetails.previousVersion !== 'undefined'
-      &&  objDetails.previousVersion < chrome.runtime.getManifest().version
+          typeof objDetails.boolWasUpdated === 'boolean'
+      &&  objDetails.boolWasUpdated
     ) {
       chrome.storage.sync.get( null, function( objReturn ) {
         strLog = 'removeOldSettings';
@@ -239,6 +269,7 @@ var Background                    = {
             , objSettings_general                       : {
                   strJoinUeip                           : 'no'
                 , boolShowShortcutsInNotification       : true
+                , boolShowWasUpdatedNotification        : true
               }
             , objSettings_ru_101                        : {
                   boolIsEnabled                         : true
@@ -680,6 +711,56 @@ var Background                    = {
       Global.removeNotification( intTabId );
     }
   }
+  ,
+
+  /**
+   * Opens the changelog
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClick_seeChanges : function() {
+    strLog = 'processButtonClick_seeChanges';
+    Log.add( strLog, {} );
+
+    var strUrl  = Background.strChangelogUrl
+                    .replace(
+                        Background.strVersionParam
+                      , Background.strVersion
+                    )
+                    .replace(
+                        Background.strLangParam
+                      , chrome.i18n.getMessage( 'lang' )
+                    );
+
+    Global.createTabOrUpdate( strUrl );
+  }
+  ,
+
+  /**
+   * Disables extension successful update notification
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClick_doNotNotifyOfUpdates : function() {
+    // TODO: 1 var
+    var strVarToGet = 
+          Global.strModuleSettingsPrefix + Global.strGeneralSettings;
+
+    chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+      strLog = 'processButtonClick_doNotNotifyOfUpdates';
+      Log.add( strLog, {} );
+
+      if ( typeof objReturn[ strVarToGet ] === 'object' ) {
+        objReturn[ strVarToGet ].boolShowWasUpdatedNotification = false;
+
+        Global.setStorageItems( objReturn, strLog );
+      }
+    });
+  }
 };
 
 /* =============================================================================
@@ -723,36 +804,40 @@ chrome.runtime.onMessageExternal.addListener(
  **/
 chrome.notifications.onClicked.addListener(
   function( strNotificationId ) {
-    // Check for changes
-    Global.getAllCommands();
-
     strLog = 'chrome.notifications.onClicked';
     Log.add( strLog, { strNotificationId : strNotificationId }, true, true );
 
-    var intNotificationTabId = 
-          Global.getTabIdFromNotificationId( strNotificationId );
+    if ( ~~ strNotificationId.indexOf( Global.strSystemNotificationId ) ) {
+      // Check for changes
+      Global.getAllCommands();
 
-    var funcFocusTab = function( intWindowId, intTabIndex, intTabId ) {
-      if ( intNotificationTabId === intTabId )
-        chrome.windows.update(
-            intWindowId
-          , { focused: true }
-          , function() {
-              chrome.tabs.highlight(
-                  { windowId: intWindowId, tabs: intTabIndex }
-                , function() {
-                    strLog = 'chrome.notifications.onClicked';
-                    Log.add( strLog + strLogSuccess );
-                  }
-              );
-            }
-        );
-      // Continue searching for the right tab
-      else
-        return 0;
-    };
+      var intNotificationTabId = 
+            Global.getTabIdFromNotificationId( strNotificationId );
 
-    Global.findFirstOpenTabInvokeCallback( funcFocusTab );
+      var funcFocusTab = function( intWindowId, intTabIndex, intTabId ) {
+        if ( intNotificationTabId === intTabId )
+          chrome.windows.update(
+              intWindowId
+            , { focused: true }
+            , function() {
+                chrome.tabs.highlight(
+                    { windowId: intWindowId, tabs: intTabIndex }
+                  , function() {
+                      strLog = 'chrome.notifications.onClicked';
+                      Log.add( strLog + strLogSuccess );
+                    }
+                );
+              }
+          );
+        // Continue searching for the right tab
+        else
+          return 0;
+      };
+
+      Global.findFirstOpenTabInvokeCallback( funcFocusTab );
+    }
+    else
+      chrome.notifications.clear( strNotificationId, function() {} );
   }
 );
 
@@ -768,46 +853,69 @@ chrome.notifications.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
-    // Check for changes
-    Global.getAllCommands();
+    if ( ~~ strNotificationId.indexOf( Global.strSystemNotificationId ) ) {
+      // Check for changes
+      Global.getAllCommands();
 
-    chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
-      strLog = 'chrome.notifications.onButtonClicked';
-      Log.add(
-          strLog
-        , {
-              strNotificationId : strNotificationId
-            , intButtonIndex    : intButtonIndex
-            , objActiveButtons  : objReturn
-          }
-      );
+      chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
+        strLog = 'chrome.notifications.onButtonClicked';
+        Log.add(
+            strLog
+          , {
+                strNotificationId : strNotificationId
+              , intButtonIndex    : intButtonIndex
+              , objActiveButtons  : objReturn
+            }
+        );
 
+        var
+            intTabId    = Global.getTabIdFromNotificationId( strNotificationId )
+          , arrButtons  = objReturn.objActiveButtons[ intTabId ]
+          , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
+          , strFunction = Global
+                            .objNotificationButtons[
+                              arrButton[ 0 ] ][ arrButton[ 1 ]
+                            ]
+                              .strFunction
+          ;
+
+        Log.add(
+            strLog + strLogDo
+          , {
+                strButton0  : arrButtons[ 0 ]
+              , strButton1  : arrButtons[ 1 ]
+              , strFunction : strFunction
+            }
+          , true
+        );
+
+        chrome.tabs.sendMessage(
+            intTabId
+          , Background.strProcessButtonClick + strFunction
+        );
+      });
+    }
+    else {
       var
-          intTabId    = Global.getTabIdFromNotificationId( strNotificationId )
-        , arrButtons  = objReturn.objActiveButtons[ intTabId ]
-        , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
-        , strFunction = Global
-                          .objNotificationButtons[
-                            arrButton[ 0 ] ][ arrButton[ 1 ]
-                          ]
-                            .strFunction
+          strNotification   = 
+            strNotificationId.replace( Global.strSystemNotificationId, '' )
+        , strFunctionAffix  = 
+            Background
+              .objSystemNotificationButtons
+                [ strNotification ]
+                  [ intButtonIndex ]
+                          .strFunction
+        , strFunction       = 
+            Background.strProcessButtonClick + strFunctionAffix
         ;
 
-      Log.add(
-          strLog + strLogDo
-        , {
-              strButton0  : arrButtons[ 0 ]
-            , strButton1  : arrButtons[ 1 ]
-            , strFunction : strFunction
-          }
-        , true
-      );
+      var funcToProceedWith = Background[ strFunction ];
 
-      chrome.tabs.sendMessage(
-          intTabId
-        , 'processButtonClick_' + strFunction
-      );
-    });
+      if ( typeof funcToProceedWith === 'function' )
+        funcToProceedWith();
+
+      chrome.notifications.clear( strNotificationId, function() {} );
+    }
   }
 );
 
@@ -828,11 +936,11 @@ chrome.commands.onCommand.addListener(
       strLog = 'chrome.commands.onCommand';
       Log.add( strLog, { strCommand : strCommand }, true );
 
-      var strMessagePrefix = 'processCommand_';
+      var strMessagePrefix = Background.strProcessCommand;
 
       // For these it's the same as button click
       if ( ~ [ 'add', 'favorite', 'next', 'playStop' ].indexOf( strCommand ) )
-        strMessagePrefix = 'processButtonClick_';
+        strMessagePrefix = Background.strProcessButtonClick;
 
       var
           arrTabsIds      = objData.arrTabsIds
@@ -947,7 +1055,7 @@ chrome.commands.onCommand.addListener(
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
     strLog                        = 'chrome.runtime.onInstalled';
-    objDetails.currentVersion     = chrome.runtime.getManifest().version;
+    objDetails.currentVersion     = Background.strVersion;
     objDetails.browserName        = bowser.name;
     objDetails.browserVersion     = bowser.version;
     objDetails.browserVersionFull = bowser.versionFull;
@@ -955,10 +1063,52 @@ chrome.runtime.onInstalled.addListener(
     objDetails.chromeVersionFull  = bowser.chromeVersionFull;
     objDetails.userAgent          = bowser.userAgent;
 
+    objDetails.boolWasUpdated     = (
+          objDetails.reason === 'update'
+      &&  typeof objDetails.previousVersion !== 'undefined'
+      &&  objDetails.previousVersion < objDetails.currentVersion
+    );
+
     Log.add( strLog, objDetails, true );
 
     Background.cleanUp( true, objDetails );
     Background.checkOpenTabs();
+
+    if ( objDetails.boolWasUpdated ) {
+      // TODO: 1 var
+      var strVarToGet = 
+            Global.strModuleSettingsPrefix + Global.strGeneralSettings;
+
+      chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+        strLog = 'chrome.runtime.onInstalled, was updated';
+        Log.add( strLog, {} );
+
+        var objGeneralSettings  = objReturn[ strVarToGet ];
+
+        if (
+              typeof objGeneralSettings === 'object'
+          &&  objGeneralSettings.boolShowWasUpdatedNotification
+        ) {
+          var arrUpdatedButtons = 
+                Background.objSystemNotificationButtons.updated;
+
+          Global.showSystemNotification(
+              'updated'
+            , chrome.i18n.getMessage( 'poziSystemNotificationUpdated' )
+            , chrome.i18n.getMessage( 'poziToolName' ) + 
+                chrome.i18n.getMessage(
+                  'poziSystemNotificationUpdatedVersion'
+                ) + 
+                objDetails.currentVersion
+            , null
+            , [
+                  arrUpdatedButtons[ 0 ].objButton
+                , arrUpdatedButtons[ 1 ].objButton
+              ]
+          );
+        }
+      });
+    }
   }
 );
 

@@ -1,4 +1,8 @@
 {
+  "lang": {
+    "message": "ru"
+  }
+  ,
   "poziToolName": {
     "message": "PoziTone"
   }
@@ -77,6 +81,23 @@
     ,
     "poziNotificationButtonsUnmuteFeedback": {
       "message": "Звук включён"
+    }
+
+  ,
+  "poziSystemNotificationUpdated": {
+    "message": "Расширение обновлено!"
+  }
+    ,
+    "poziSystemNotificationUpdatedVersion": {
+      "message": " v"
+    }
+    ,
+    "poziSystemNotificationUpdatedChanges": {
+      "message": "Просмотр изменений"
+    }
+    ,
+    "poziSystemNotificationUpdatedDoNotNotify": {
+      "message": "Не сообщать об обновлениях"
     }
 
   ,

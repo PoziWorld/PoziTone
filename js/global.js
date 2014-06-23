@@ -15,6 +15,7 @@
       setStorageItems()
       showNotification()
       showNotificationCallback()
+      showSystemNotification()
       removeNotification()
       saveTabsIds()
       saveActiveButtons()
@@ -28,6 +29,7 @@
       composeNotificationId()
       returnIndexOfSubitemContaining()
       addShortcutInfo()
+      createTabOrUpdate()
   2. On Load
       Initialize
 
@@ -39,134 +41,140 @@
 
  ============================================================================ */
 
-var
-    strNotificationIdSeparator      = '_'
+const
+    strConstExtensionName           = chrome.i18n.getMessage( 'poziToolName' )
+  , strConstNotificationIdSeparator = '_'
+  , strConstNotificationId          = 
+      strConstExtensionName + strConstNotificationIdSeparator
+  ;
 
-  , Global                          = {
-      intNoVolume                   : 0
-    , strNotificationIdSeparator    : strNotificationIdSeparator
-    , strNotificationId             : 'PoziTone' + strNotificationIdSeparator
-                                                     // + module name + tab ID
-    , strNotificationIconUrl        : 'img/notification-icon-80.png'
-    , strNoTrackInfo                : '...'
-    , strPlayerIsOffClass           : 'play'
-    , strModuleSettingsPrefix       : 'objSettings_'
-    , strGeneralSettings            : 'general'
+var Global                        = {
+    intNoVolume                   : 0
+  , strNotificationIdSeparator    : strConstNotificationIdSeparator
+  , strNotificationId             : strConstNotificationId // + module + tab ID
+  , strSystemNotificationId       : 
+      strConstNotificationId + 'system' + strConstNotificationIdSeparator
+  , strNotificationIconUrl        : 'img/notification-icon-80.png'
+  , strSystemNotificationIconUrl  : 'img/pozitone-notification-icon-80.png'
+  , strNoTrackInfo                : '...'
+  , strPlayerIsOffClass           : 'play'
+  , strModuleSettingsPrefix       : 'objSettings_'
+  , strGeneralSettings            : 'general'
 
-    // Embedded modules (replicates manifest's "content_scripts")
-    , objModules                    : {
-          ru_101                    : {
-              objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
-            , arrJs                 : [
-                  'modules/ru_101/js/uppod-player-api.js'
-                , 'modules/ru_101/js/uppod-player-api.js'
-            ]
-          }
-        , com_vk_audio              : {
-              objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
-            , arrJs                 : [
-                  'modules/com_vk_audio/js/page-watcher.js'
-            ]
-          }
+  // Embedded modules (replicates manifest's "content_scripts")
+  , objModules                    : {
+        ru_101                    : {
+            objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
+          , arrJs                 : [
+                'modules/ru_101/js/uppod-player-api.js'
+              , 'modules/ru_101/js/uppod-player-api.js'
+          ]
+        }
+      , com_vk_audio              : {
+            objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
+          , arrJs                 : [
+                'modules/com_vk_audio/js/page-watcher.js'
+          ]
+        }
+  }
+
+  // Don't show these buttons, if they've been clicked for this track already
+  , arrAddTrackToPlaylistFeedback : [
+        chrome.i18n.getMessage(
+          'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
+        )
+      , chrome.i18n.getMessage(
+          'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+        )
+    ]
+  , strFavoriteStatusSuccess      : 
+      chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
+
+  , arrCommands                   : []
+  , boolShowShortcuts             : true
+
+  , objNotificationButtons        : {
+        add                       : {
+            loggedIn              : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsAddLoggedInTitle'
+                      )
+                  , iconUrl       : 'img/round_plus_icon&16.png'
+                }
+              , strFunction       : 'add'
+            }
+        }
+      , favorite                  : {
+            loggedIn              : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsFavoriteLoggedInTitle'
+                      )
+                  , iconUrl       : 'img/emotion_smile_icon&16.png'
+                }
+              , strFunction       : 'favorite'
+            }
+        }
+      , next                      : {
+            next                  : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsNextTitle'
+                      )
+                  , iconUrl       : 'img/playback_next_icon&16.png'
+                }
+              , strFunction       : 'next'
+            }
+        }
+      , playStop                  : {
+            play                  : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsPlayTitle'
+                      )
+                  , iconUrl       : 'img/playback_play_icon&16.png'
+                }
+              , strFunction       : 'playStop'
+            }
+          , stop                  : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsStopTitle'
+                      )
+                  , iconUrl       : 'img/playback_stop_icon&16.png'
+                }
+              , strFunction       : 'playStop'
+            }
+        }
+      , muteUnmute                : {
+            mute                  : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsMuteTitle'
+                      )
+                  , iconUrl       : 'img/sound_mute_icon&16.png'
+                }
+              , strFunction       : 'mute'
+            }
+          , unmute                : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'poziNotificationButtonsUnmuteTitle'
+                      )
+                  , iconUrl       : 'img/sound_high_icon&16.png'
+                }
+              , strFunction       : 'unmute'
+            }
+        }
     }
-
-    // Don't show these buttons, if they've been clicked for this track already
-    , arrAddTrackToPlaylistFeedback : [
-          chrome.i18n.getMessage(
-            'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
-          )
-        , chrome.i18n.getMessage(
-            'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
-          )
-      ]
-    , strFavoriteStatusSuccess      : 
-        chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
-
-    , arrCommands                   : []
-    , boolShowShortcuts             : true
-
-    , objNotificationButtons        : {
-          add                       : {
-              loggedIn              : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsAddLoggedInTitle'
-                        )
-                    , iconUrl       : 'img/round_plus_icon&16.png'
-                  }
-                , strFunction       : 'add'
-              }
-          }
-        , favorite                  : {
-              loggedIn              : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsFavoriteLoggedInTitle'
-                        )
-                    , iconUrl       : 'img/emotion_smile_icon&16.png'
-                  }
-                , strFunction       : 'favorite'
-              }
-          }
-        , next                      : {
-              next                  : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsNextTitle'
-                        )
-                    , iconUrl       : 'img/playback_next_icon&16.png'
-                  }
-                , strFunction       : 'next'
-              }
-          }
-        , playStop                  : {
-              play                  : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsPlayTitle'
-                        )
-                    , iconUrl       : 'img/playback_play_icon&16.png'
-                  }
-                , strFunction       : 'playStop'
-              }
-            , stop                  : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsStopTitle'
-                        )
-                    , iconUrl       : 'img/playback_stop_icon&16.png'
-                  }
-                , strFunction       : 'playStop'
-              }
-          }
-        , muteUnmute                : {
-              mute                  : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsMuteTitle'
-                        )
-                    , iconUrl       : 'img/sound_mute_icon&16.png'
-                  }
-                , strFunction       : 'mute'
-              }
-            , unmute                : {
-                  objButton         : {
-                      title         : 
-                        chrome.i18n.getMessage(
-                          'poziNotificationButtonsUnmuteTitle'
-                        )
-                    , iconUrl       : 'img/sound_high_icon&16.png'
-                  }
-                , strFunction       : 'unmute'
-              }
-          }
-      }
   ,
 
   /**
@@ -189,6 +197,7 @@ var
    * @return  void
    **/
   getAllCommands : function() {
+    // TODO: 1 var
     var strVarToGet = 
           Global.strModuleSettingsPrefix + Global.strGeneralSettings;
 
@@ -275,10 +284,10 @@ var
 
     var
         objNotificationOptions  = {
-          type                  : 'basic',
-          title                 : '',
-          message               : objStationInfo.strTrackInfo,
-          iconUrl               : Global.strNotificationIconUrl
+            type                : 'basic'
+          , title               : ''
+          , message             : objStationInfo.strTrackInfo
+          , iconUrl             : Global.strNotificationIconUrl
         }
       , objTempPlayerInfo       = objPlayerInfo
       , objTempStationInfo      = objStationInfo
@@ -562,6 +571,58 @@ var
     Background.saveRecentTrackInfo( objStationInfo ); 
     Global.saveTabsIds( intTabId, strModule );
     Global.saveActiveButtons( intTabId, arrActiveButtons );
+  }
+  ,
+
+  /**
+   * Displays system notification.
+   *
+   * @type    method
+   * @param   strNotificationType
+   *            Type of the notification
+   * @param   strTitle
+   *            Optional. Title of the notification
+   * @param   strMessage
+   *            Optional. Message of the notification
+   * @param   strIconUrl
+   *            Optional. URL of the notification icon
+   * @param   arrButtons
+   *            Optional. Buttons of the notification
+   * @return  void
+   **/
+  showSystemNotification : function(
+      strNotificationType
+    , strTitle
+    , strMessage
+    , strIconUrl
+    , arrButtons
+  ) {
+    strLog = 'showSystemNotification';
+    Log.add( strLog, strTitle + ' | ' + strMessage );
+
+    var
+        objNotificationOptions  = {
+            type                : 'basic'
+          , title               : strTitle || ''
+          , message             : strMessage || ''
+          , iconUrl             : 
+              strIconUrl || Global.strSystemNotificationIconUrl
+        }
+      , strNotificationId       = 
+          Global.strSystemNotificationId + strNotificationType
+      ;
+
+    if ( Array.isArray( arrButtons ) && arrButtons.length )
+      objNotificationOptions.buttons = arrButtons;
+
+    // Clear previous notification of this type first, then display a new one
+    chrome.notifications.clear( strNotificationId, function() {
+      chrome.notifications.create(
+          strNotificationId
+        , objNotificationOptions
+        , function( strNotificationId ) {}
+      );
+    });
   }
   ,
 
@@ -1036,6 +1097,32 @@ var
     }
     else
       return objButton;
+  }
+  ,
+
+  /**
+   * Creates tab if it is not open or makes it active
+   *
+   * @type    method
+   * @param   strUrl
+   *            URL to open
+   * @return  void
+   **/
+  createTabOrUpdate : function ( strUrl )
+  {
+    if ( typeof strLog === 'string' ) {
+      strLog = 'createTabOrUpdate';
+      Log.add( strLog, strUrl );
+    }
+
+    var objUrl = { url: strUrl };
+
+    chrome.tabs.query( objUrl, function( objTabs ) {
+      if ( objTabs.length )
+        chrome.tabs.update( objTabs[0].id, { active: true } );
+      else
+        chrome.tabs.create( objUrl );
+    } );
   }
 };
 
