@@ -130,6 +130,14 @@
               "message": "Display tips in notification"
             }
           ,
+          "poziOptionsPageSettingsGeneralUpdates": {
+            "message": "PoziTone updates"
+          }
+            ,
+            "poziOptionsPageSettingsGeneralUpdatesNotify": {
+              "message": "Notify me when updated"
+            }
+          ,
           "poziOptionsPageSettingsGeneralUeip": {
             "message": "PoziTone User Experience Improvement Program (UEIP)"
           }

@@ -129,7 +129,14 @@
             "poziOptionsPageSettingsGeneralShortcutsShowInNotification": {
               "message": "Отображать подсказки в уведомлении"
             }
-
+          ,
+          "poziOptionsPageSettingsGeneralUpdates": {
+            "message": "Обновления PoziTone"
+          }
+            ,
+            "poziOptionsPageSettingsGeneralUpdatesNotify": {
+              "message": "Сообщать, когда обновлено"
+            }
           ,
           "poziOptionsPageSettingsGeneralUeip": {
             "message": "Программа улучшения качества PoziTone"
