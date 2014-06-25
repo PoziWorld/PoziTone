@@ -21,7 +21,9 @@
       onChooseSubpageChange()
       chooseSubpage()
       displayCurrentVersion()
-  2. Events
+  2. Listeners
+      runtime.onMessage
+  3. Events
 
  ============================================================================ */
 
@@ -479,7 +481,37 @@ var Options = {
 
 /* =============================================================================
 
-  2. Events
+  2. Listeners
+
+ ============================================================================ */
+
+/**
+ * Listens for messages from other pages
+ *
+ * @type    method
+ * @param   objMessage
+ *            Message received
+ * @param   objSender
+ *            Sender of the message
+ * @return  void
+ **/
+chrome.runtime.onMessage.addListener(
+  function( objMessage, objSender, objSendResponse ) {
+    if ( objMessage.strReceiver === 'options' ) {
+      var objVars = objMessage[ 'objVars' ];
+
+      for ( strProp in objVars ) {
+        if ( objVars.hasOwnProperty( strProp ) )
+          document.querySelector( '[name="' + strProp + '"]' ).checked = 
+            objVars[ strProp ];
+      }
+    }
+  }
+);
+
+/* =============================================================================
+
+  3. Events
 
  ============================================================================ */
 

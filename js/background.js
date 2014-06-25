@@ -758,6 +758,16 @@ var Background                    = {
         objReturn[ strVarToGet ].boolShowWasUpdatedNotification = false;
 
         Global.setStorageItems( objReturn, strLog );
+
+        // If Options page is open, update it with a new value
+        chrome.runtime.sendMessage(
+          {
+              strReceiver                       : 'options'
+            , objVars                           : {
+                boolShowWasUpdatedNotification  : false
+              }
+          }
+        );
       }
     });
   }
