@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.0.2.17
+    * Now, when being updated, PoziTone displays a notification with a button to open a changelog page.
+    * Added an Options opening button from Recent tracks.
+
 ### v0.0.2.16
     * Options page now has a way to disable keyboard shortcuts tips for commands on the notification.
 
