@@ -558,7 +558,13 @@ var Background                    = {
           if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) )
             objOpenTabs[ intWindowId ] = {};
 
-          objOpenTabs[ intWindowId ][ objTab.index ] = objTab;
+          // Do not save all the properties of an open tab
+          var objTabCopy  = {};
+
+          objTabCopy.id   = objTab.id;
+          objTabCopy.url  = objTab.url;
+
+          objOpenTabs[ intWindowId ][ objTab.index ] = objTabCopy;
 
           funcPingPage( miscModule );
         }
