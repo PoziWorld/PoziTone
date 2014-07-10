@@ -81,16 +81,25 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 5. Alt+Shift+M — «Выключить/Включить звук».
 6. Alt+Shift+Q — «Показать уведомление».
 
-По умолчанию быстрые клавиши неактивны, когда браузер не на переднем плане.
-
-Начиная с версии 35 (Chrome), Вы можете сделать так, чтобы быстрые клавиши работали даже тогда, когда браузер не на переднем плане:
+### Настройка (изменение) быстрых клавиш
 
 1. Щёлкните правой кнопкой по значку `PoziTone` справа от адресной строки.
 2. Щёлкните по «Настроить».
 3. Прокрутите страницу вниз.
 4. Щёлкните по синей ссылке «Быстрые клавиши».
 5. Найдите `PoziTone` в списке.
-6. Измените «В Chrome» на «Глобальные».
+6. Произведите необходимые изменения.
+7. Щёлкните по «OK».
+
+#### Демо: как настроить (изменить) быстрые клавиши
+
+[![Демо: как настроить (изменить) быстрые клавиши PoziTone](https://cloud.githubusercontent.com/assets/8120840/3534585/e3b12b5a-07ed-11e4-82e5-4aa4322a9484.png)](https://cloud.githubusercontent.com/assets/8120840/3534596/406df71a-07ee-11e4-85f0-42cf01bff5e3.gif)
+
+### Глобальные быстрые клавиши (вне окна браузера)
+
+По умолчанию быстрые клавиши неактивны, когда браузер не на переднем плане.
+
+Начиная с версии 35 (Chrome), Вы можете сделать так, чтобы быстрые клавиши работали даже тогда, когда браузер не на переднем плане: см. [шаги 1–7](#Настройка-изменение-быстрых-клавиш) выше, измените «В Chrome» на «Глобальные» на шаге 6.
 
 
 Благодарности
@@ -106,8 +115,9 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 Credits
 --------
 
-- Иконки кнопок - из [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) по лицензии [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
-- Оформление страниц «Настройки `PoziTone`» и «Последние треки» -
+- Иконки кнопок — [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html), Gentleface, [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+- [Иконка Play](http://thenounproject.com/term/play/5206/) — Michael Rowe, [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/us/).
+- Оформление страниц «Настройки `PoziTone`» и «Последние треки»:
   * Copyright 2014 The Chromium Authors. All rights reserved.
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - Все использованные товарные знаки (торговые марки, логотипы, бренды, названия, знаки обслуживания и т.д.) принадлежат их законным владельцам.

@@ -81,16 +81,25 @@ Keyboard shortcuts
 5. Alt+Shift+M — “Mute / Unmute”.
 6. Alt+Shift+Q — “Show notification”.
 
-By default, while the browser is not in the foreground, the shortcut will be inactive.
-
-As of version 35 (Chrome), you can make the shortcuts work even when the browser is not in the foreground:
+### Set up / change keyboards shortcuts
 
 1. Right-click on the `PoziTone` icon to the right of the address bar.
 2. Click on “Manage”.
 3. Scroll down the page.
 4. Click on the blue “Keyboard shortcuts” link.
 5. Find `PoziTone` in the list.
-6. Change “In Chrome” to “Global”.
+6. Make any necessary changes.
+7. Click on “OK”.
+
+#### Demo: how to set up / change keyboards shortcuts
+
+[![Demo: how to set up / change PoziTone keyboards shortcuts](https://cloud.githubusercontent.com/assets/8120840/3534655/a7c7ce58-07ef-11e4-89a5-c7b52e92b943.png)](https://cloud.githubusercontent.com/assets/8120840/3534660/b7bfb960-07ef-11e4-9102-7d1aa1b25496.gif)
+
+### Global keyboard shortcuts (outside of the browser window)
+
+By default, while the browser is not in the foreground, the shortcut will be inactive.
+
+As of version 35 (Chrome), you can make the shortcuts work even when the browser is not in the foreground: see [steps 1–7](#set-up--change-keyboards-shortcuts) above, change “In Chrome” to “Global” on step 6.
 
 
 Gratitudes
@@ -106,8 +115,9 @@ Gratitudes
 Credits
 --------
 
-- The button icons are from [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html) licensed under the [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
-- The appearance of the «`PoziTone` Options» and «Recent Tracks» pages -
+- The button icons — [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html), Gentleface, [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+- [The Play icon](http://thenounproject.com/term/play/5206/) — Michael Rowe, [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/us/).
+- The appearance of the «`PoziTone` Options» and «Recent Tracks» pages:
   * Copyright 2014 The Chromium Authors. All rights reserved.
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
