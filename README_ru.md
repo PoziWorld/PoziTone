@@ -39,7 +39,18 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 
 Установка
 --------
-### для Google Chrome
+### Простой способ
+
+1. Перейдите на страницу [PoziTone в Интернет-магазине Chrome](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=ru).
+2. Нажмите на кнопку «БЕСПЛАТНО».
+3. Затем — «Добавить».
+
+Готово!
+
+
+### Другой способ
+
+#### для Google Chrome
 
 1. Скачайте [последнюю доступную версию `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Разархивируйте в любую папку.
@@ -50,14 +61,14 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 Если все шаги выполнены верно, `PoziTone` появится в списке Расширений.
 
 
-### для Yandex
+#### для Yandex
 
 Все шаги такие же, как [для Google Chrome](#для-google-chrome), кроме шага 3:
 
    3\. Откройте меню «Настройки браузера Yandex», раскройте подменю «Дополнительно», перейдите в «Инструменты», затем «Расширения».
 
 
-### для Амиго
+#### для Амиго
 
 Все шаги такие же, как [для Google Chrome](#для-google-chrome), кроме шага 3:
 

@@ -39,7 +39,18 @@ More to come...
 
 Installation
 --------
-### for Google Chrome
+### Easy method
+
+1. Go to a [PoziTone in the Chrome Web Store](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=en) page.
+2. Click on “FREE”.
+3. Then “Add”.
+
+Done!
+
+
+### Another method
+
+#### for Google Chrome
 
 1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
 2. Extract it to any folder.
@@ -50,14 +61,14 @@ Installation
 If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
 
 
-### for Yandex
+#### for Yandex
 
 All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
 
    3\. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
 
 
-### for Amigo
+#### for Amigo
 
 All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
 
@@ -146,7 +157,7 @@ Please share your ideas. Don't be shy to ask questions. Bug reports are valuable
 - [Recommended method](http://feedback.pozitone.com/?lang=en)
 - [One more method](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews?hl=en)
 - [Geeks method](https://github.com/poziworld/pozitone/issues)
-- [Other](mailto:feedback@pozitone.com)
+- [Another one](mailto:feedback@pozitone.com)
 
 
 Let's socialize
