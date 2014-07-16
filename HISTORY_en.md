@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.0
+    * First stable version.
+
 ### v0.0.2.18
     * Optimization for correct operation with a large number of open tabs with player.
 

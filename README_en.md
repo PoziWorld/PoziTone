@@ -32,6 +32,7 @@ Supported players
 
 * [Online radio 101.ru](http://101.ru) (stations' main player).
 * [VK](https://vk.com) (audio, full version of site).
+* [Digitally Imported](http://www.di.fm) (coming soon).
 
 More to come...
 
@@ -123,6 +124,18 @@ Credits
 - All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
 
 
+Privacy
+--------
+
+This extension does not store/save or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
+
+
+Are you a developer?
+--------
+
+Want to add a support for your favorite player and publish it as a `PoziTone` module under your name? — Check back, we will soon share a PoziTone API draft.
+
+
 Feedback
 --------
 
@@ -131,6 +144,7 @@ We appreciate your feedback!
 Please share your ideas. Don't be shy to ask questions. Bug reports are valuable! We like praises, who doesn't? :)
 
 - [Recommended method](http://feedback.pozitone.com/?lang=en)
+- [One more method](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews?hl=en)
 - [Geeks method](https://github.com/poziworld/pozitone/issues)
 - [Other](mailto:feedback@pozitone.com)
 
