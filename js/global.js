@@ -42,7 +42,7 @@
  ============================================================================ */
 
 const
-    strConstExtensionName           = chrome.i18n.getMessage( 'poziToolName' )
+    strConstExtensionName           = chrome.i18n.getMessage( 'extensionName' )
   , strConstNotificationIdSeparator = '_'
   , strConstNotificationId          = 
       strConstExtensionName + strConstNotificationIdSeparator
@@ -81,14 +81,14 @@ var Global                        = {
   // Don't show these buttons, if they've been clicked for this track already
   , arrAddTrackToPlaylistFeedback : [
         chrome.i18n.getMessage(
-          'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
+          'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
         )
       , chrome.i18n.getMessage(
-          'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+          'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
         )
     ]
   , strFavoriteStatusSuccess      : 
-      chrome.i18n.getMessage( 'poziNotificationFavoriteStatusSuccess' )
+      chrome.i18n.getMessage( 'notificationFavoriteStatusSuccess' )
 
   , arrCommands                   : []
   , boolShowShortcuts             : true
@@ -99,7 +99,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsAddLoggedInTitle'
+                        'notificationButtonsAddLoggedInTitle'
                       )
                   , iconUrl       : 'img/round_plus_icon&16.png'
                 }
@@ -111,7 +111,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsFavoriteLoggedInTitle'
+                        'notificationButtonsFavoriteLoggedInTitle'
                       )
                   , iconUrl       : 'img/emotion_smile_icon&16.png'
                 }
@@ -123,7 +123,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsNextTitle'
+                        'notificationButtonsNextTitle'
                       )
                   , iconUrl       : 'img/playback_next_icon&16.png'
                 }
@@ -135,7 +135,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsPlayTitle'
+                        'notificationButtonsPlayTitle'
                       )
                   , iconUrl       : 'img/playback_play_icon&16.png'
                 }
@@ -145,7 +145,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsStopTitle'
+                        'notificationButtonsStopTitle'
                       )
                   , iconUrl       : 'img/playback_stop_icon&16.png'
                 }
@@ -157,7 +157,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsMuteTitle'
+                        'notificationButtonsMuteTitle'
                       )
                   , iconUrl       : 'img/sound_mute_icon&16.png'
                 }
@@ -167,7 +167,7 @@ var Global                        = {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
-                        'poziNotificationButtonsUnmuteTitle'
+                        'notificationButtonsUnmuteTitle'
                       )
                   , iconUrl       : 'img/sound_high_icon&16.png'
                 }
@@ -355,7 +355,7 @@ var Global                        = {
                 objTempStationInfo.strStationNamePlusDesc;
             else if ( strTitleFormat === 'noStationInfo' )
               objNotificationOptions.title = 
-                chrome.i18n.getMessage( 'poziNotificationTitle' );
+                chrome.i18n.getMessage( 'extensionName' );
 
             // Notification Buttons Settings
             if ( arrButtons.length !== 0 ) {

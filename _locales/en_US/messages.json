@@ -3,355 +3,347 @@
     "message": "en"
   }
   ,
-  "poziToolName": {
+  "extensionName": {
     "message": "PoziTone"
   }
   ,
-  "poziToolDescription": {
+  "extensionDescription": {
     "message": "Adds functionality to audio players, such as track info notifications, controls outside of browser window, and recent tracks list."
   }
   ,
-  "poziBrowserActionTitle": {
-    "message": "Go to 101.ru tab"
-  }
-  ,
-  "poziNotificationTitle": {
-    "message": "101.ru - Online Radio"
-  }
-  ,
-  "poziNotificationButtonsAddLoggedInTitle": {
+  "notificationButtonsAddLoggedInTitle": {
     "message": "Add track to playlist"
   }
     ,
-    "poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
       "message": "Successfully added track to playlist"
     }
     ,
-    "poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
       "message": "Track already in your playlist"
     }
   ,
-  "poziNotificationButtonsFavoriteLoggedInTitle": {
+  "notificationButtonsFavoriteLoggedInTitle": {
     "message": "I like it!"
   }
     ,
-    "poziNotificationFavoriteStatusSuccess": {
+    "notificationFavoriteStatusSuccess": {
       "message": "Thank you for rewarding a DJ's hard work!"
     }
   ,
-  "poziNotificationButtonsNextTitle": {
+  "notificationButtonsNextTitle": {
     "message": "Next track"
   }
     ,
-    "poziNotificationButtonsNextFeedback": {
+    "notificationButtonsNextFeedback": {
       "message": "Track switched"
     }
   ,
-  "poziNotificationButtonsPlayTitle": {
+  "notificationButtonsPlayTitle": {
     "message": "Play"
   }
   ,
-  "poziNotificationButtonsStopTitle": {
+  "notificationButtonsStopTitle": {
     "message": "Stop"
   }
     ,
-    "poziNotificationPlayerStatusChangeStarted": {
+    "notificationPlayerStatusChangeStarted": {
       "message": "Playback started"
     }
     ,
-    "poziNotificationPlayerStatusChangeStopped": {
+    "notificationPlayerStatusChangeStopped": {
       "message": "Playback stopped"
     }
     ,
-    "poziNotificationPlayerStatusChangeResumed": {
+    "notificationPlayerStatusChangeResumed": {
       "message": "Playback resumed"
     }
   ,
-  "poziNotificationButtonsMuteTitle": {
+  "notificationButtonsMuteTitle": {
     "message": "Mute"
   }
     ,
-    "poziNotificationButtonsMuteFeedback": {
+    "notificationButtonsMuteFeedback": {
       "message": "Muted"
     }
   ,
-  "poziNotificationButtonsUnmuteTitle": {
+  "notificationButtonsUnmuteTitle": {
     "message": "Unmute"
   }
     ,
-    "poziNotificationButtonsUnmuteFeedback": {
+    "notificationButtonsUnmuteFeedback": {
       "message": "Unmuted"
     }
 
   ,
-  "poziSystemNotificationUpdated": {
+  "systemNotificationUpdated": {
     "message": "Extension updated!"
   }
     ,
-    "poziSystemNotificationUpdatedVersion": {
+    "systemNotificationUpdatedVersion": {
       "message": " v"
     }
     ,
-    "poziSystemNotificationUpdatedChanges": {
+    "systemNotificationUpdatedChanges": {
       "message": "See changes"
     }
     ,
-    "poziSystemNotificationUpdatedDoNotNotify": {
+    "systemNotificationUpdatedDoNotNotify": {
       "message": "Do not notify me of updates"
     }
 
   ,
-  "poziOptionsPageTitle": {
+  "optionsTitle": {
     "message": "PoziTone Options"
   }
     ,
-    "poziOptionsPageNavSettings": {
+    "optionsNavSettings": {
       "message": "Settings"
     }
       ,
-      "poziOptionsPageSettingsH1": {
+      "optionsSettingsH1": {
         "message": "Settings"
       }
       ,
-      "poziOptionsPageSettingsSaved": {
+      "optionsSettingsSaved": {
         "message": " saved"
       }
 
         ,
-        "poziOptionsPageSettingsGeneral": {
+        "optionsSettingsGeneral": {
           "message": "General"
         }
           ,
-          "poziOptionsPageSettingsGeneralShortcuts": {
+          "optionsSettingsGeneralShortcuts": {
             "message": "Keyboard shortcuts"
           }
             ,
-            "poziOptionsPageSettingsGeneralShortcutsShowInNotification": {
+            "optionsSettingsGeneralShortcutsShowInNotification": {
               "message": "Display tips in notification"
             }
           ,
-          "poziOptionsPageSettingsGeneralUpdates": {
+          "optionsSettingsGeneralUpdates": {
             "message": "PoziTone updates"
           }
             ,
-            "poziOptionsPageSettingsGeneralUpdatesNotify": {
+            "optionsSettingsGeneralUpdatesNotify": {
               "message": "Notify me when updated"
             }
           ,
-          "poziOptionsPageSettingsGeneralUeip": {
+          "optionsSettingsGeneralUeip": {
             "message": "PoziTone User Experience Improvement Program (UEIP)"
           }
             ,
-            "poziOptionsPageSettingsGeneralUeipDesc": {
+            "optionsSettingsGeneralUeipDesc": {
               "message": "UEIP collects information about how our users use PoziTone and about some of the problems they encounter. The developers team of PoziTone — PoziWorld — uses this information to improve the product and features users use most often and to help solve problems. Participation in the program is voluntary, and the end results are software improvements to better meet the needs of our users."
             }
             ,
-            "poziOptionsPageSettingsGeneralUeipMore": {
+            "optionsSettingsGeneralUeipMore": {
               "message": "Tell me more about the program"
             }
               ,
-              "poziOptionsPageSettingsGeneralUeipMoreHref": {
+              "optionsSettingsGeneralUeipMoreHref": {
                 "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
               }
             ,
-            "poziOptionsPageSettingsGeneralUeipPrivacy": {
+            "optionsSettingsGeneralUeipPrivacy": {
               "message": "Privacy Statement"
             }
               ,
-              "poziOptionsPageSettingsGeneralUeipPrivacyHref": {
+              "optionsSettingsGeneralUeipPrivacyHref": {
                 "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
               }
             ,
-            "poziOptionsPageSettingsGeneralUeipJoin": {
+            "optionsSettingsGeneralUeipJoin": {
               "message": "Participate anonymously"
             }
             ,
-            "poziOptionsPageSettingsGeneralUeipDoNotJoin": {
+            "optionsSettingsGeneralUeipDoNotJoin": {
               "message": "Do not participate"
             }
 
           ,
-          "poziOptionsPageSettingsSupport": {
+          "optionsSettingsSupport": {
             "message": "Support this player"
           }
             ,
-            "poziOptionsPageSettingsSupportEnabled": {
+            "optionsSettingsSupportEnabled": {
               "message": "Enabled"
             }
 
           ,
-          "poziOptionsPageSettingsDisplayWhen": {
+          "optionsSettingsDisplayWhen": {
             "message": "Show notifications"
           }
             ,
-            "poziOptionsPageSettingsDisplayWhenStopped": {
+            "optionsSettingsDisplayWhenStopped": {
               "message": "When playback not started / stopped"
             }
             ,
-            "poziOptionsPageSettingsDisplayWhenMuted": {
+            "optionsSettingsDisplayWhenMuted": {
               "message": "When volume is at 0% or sound off"
             }
             ,
-            "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+            "optionsSettingsDisplayWhenNoTrackInfo": {
               "message": "When there is no information about what is currently being played (shown as \"...\" on website)"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationIconFormat": {
+          "optionsSettingsNotificationIconFormat": {
             "message": "Notification icon format"
           }
             ,
-            "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+            "optionsSettingsNotificationIconFormatShowStationLogo": {
               "message": "Display current station logo"
             }
             ,
-            "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
+            "optionsSettingsNotificationIconFormatShowVkLogo": {
               "message": "Display VK logo"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationTitleFormat": {
+          "optionsSettingsNotificationTitleFormat": {
             "message": "Notification title format"
           }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatShort": {
+            "optionsSettingsNotificationTitleFormatShort": {
               "message": "Display current station name only"
             }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatLong": {
+            "optionsSettingsNotificationTitleFormatLong": {
               "message": "Display current station name + short description (if available)"
             }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+            "optionsSettingsNotificationTitleFormatNoStationInfo": {
               "message": "Don't display information about current station"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationButtons": {
+          "optionsSettingsNotificationButtons": {
             "message": "Available buttons <small>(maximum 2 can be displayed at one time)</small>"
           }
             ,
-            "poziOptionsPageSettingsNotificationButtonsAdd": {
+            "optionsSettingsNotificationButtonsAdd": {
               "message": "Add track to playlist"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+            "optionsSettingsNotificationButtonsAddAuthRequired": {
               "message": "Add track to playlist <small>(authorization required on site)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsFavorite": {
+            "optionsSettingsNotificationButtonsFavorite": {
               "message": "I like it!"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+            "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
               "message": "I like it! <small>(authorization required on site)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsNext": {
+            "optionsSettingsNotificationButtonsNext": {
               "message": "Next track"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+            "optionsSettingsNotificationButtonsNextAuthRequired": {
               "message": "Next track <small>(authorization required on site)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+            "optionsSettingsNotificationButtonsPlayStop": {
               "message": "Stop / Play"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+            "optionsSettingsNotificationButtonsMuteUnmute": {
               "message": "Mute / Unmute"
             }
       ,
-      "poziOptionsPageSettingsChooseSubpage": {
+      "optionsSettingsChooseSubpage": {
         "message": "Choose a settings page"
       }
     ,
-    "poziOptionsPageNavFaq": {
+    "optionsNavFaq": {
       "message": "FAQ"
     }
     ,
-    "poziOptionsPageNavAbout": {
+    "optionsNavAbout": {
       "message": "About"
     }
       ,
-      "poziOptionsPageAboutH1": {
+      "optionsAboutH1": {
         "message": "About"
       }
         ,
-        "poziOptionsPageInfo": {
+        "optionsInfo": {
           "message": "Details about PoziTone"
         }
           ,
-          "poziOptionsPageInfoHref": {
+          "optionsInfoHref": {
             "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
           }
         ,
-        "poziOptionsPageContact": {
+        "optionsContact": {
           "message": "Contact developers of PoziTone"
         }
           ,
-          "poziOptionsPageContactHref": {
+          "optionsContactHref": {
             "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
           }
         ,
-        "poziOptionsPageVersion": {
+        "optionsVersion": {
           "message": "Version"
         }
         ,
-        "poziOptionsPageCopyright": {
+        "optionsCopyright": {
           "message": "&copy; PoziWorld, 2014"
         }
         ,
-        "poziOptionsPageFoundation": {
+        "optionsFoundation": {
           "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">kindness</a>."
         }
         ,
-        "poziOptionsPageTerms": {
+        "optionsTerms": {
           "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">license agreement</a>"
         }
 
   ,
-  "poziPopupPageTitle": {
+  "popupTitle": {
     "message": "PoziTone"
   }
     ,
-    "poziPopupPageToolbarClose": {
+    "popupToolbarClose": {
       "message": "Close"
     }
     ,
-    "poziPopupPageNavRecentTracks": {
+    "popupNavRecentTracks": {
       "message": "Recent Tracks"
     }
       ,
-      "poziPopupPageNavRecentTracksH1": {
+      "popupNavRecentTracksH1": {
         "message": "Recent Tracks"
       }
         ,
-        "poziPopupPageNavRecentTracksPlaceholder": {
+        "popupNavRecentTracksPlaceholder": {
           "message": "Looking for some tunes?<br />How about some <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock with elements of hardcore</a>?<br />Or <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
         }
 
   ,
-  "poziModule_general": {
+  "module_general": {
     "message": "General"
   }
 
   ,
-  "poziModule_com_vk_audio": {
+  "module_com_vk_audio": {
     "message": "VK (audio)"
   }
     ,
-    "poziModule_com_vk_audio_long": {
+    "module_com_vk_audio_long": {
       "message": "VK (audio) | vk.com"
     }
 
   ,
-  "poziModule_ru_101": {
+  "module_ru_101": {
     "message": "101.ru"
   }
     ,
-    "poziModule_ru_101_long": {
+    "module_ru_101_long": {
       "message": "Online radio 101.ru"
     }
 }

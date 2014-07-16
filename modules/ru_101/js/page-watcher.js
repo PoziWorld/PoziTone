@@ -110,12 +110,12 @@ var
             'Трек успешно добавлен в плейлист'
                                           : 
               chrome.i18n.getMessage(
-                'poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
+                'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
               )
           , 'Данный трек уже есть в Вашем плейлисте'
                                           : 
               chrome.i18n.getMessage(
-                'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+                'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
               )
         }
   ,
@@ -294,7 +294,7 @@ var
       $wmaPlayer.settings.mute = true;
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'poziNotificationButtonsMuteFeedback' )
+      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
   }
   ,
@@ -317,7 +317,7 @@ var
       $wmaPlayer.settings.mute = false;
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteFeedback' )
+      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
   }
   ,
@@ -430,13 +430,13 @@ var
             if ( strPlayerStatus === 'stop' ) {
               var strLangStartedOrResumed = 
                     chrome.i18n.getMessage(
-                      'poziNotificationPlayerStatusChangeResumed'
+                      'notificationPlayerStatusChangeResumed'
                     );
 
               if ( PageWatcher.boolWasPageJustLoaded )
                 strLangStartedOrResumed = 
                   chrome.i18n.getMessage(
-                    'poziNotificationPlayerStatusChangeStarted'
+                    'notificationPlayerStatusChangeStarted'
                   );
 
               PageWatcher.boolHadPlayedBefore = true;
@@ -449,7 +449,7 @@ var
             )
               PageWatcher.sendSameMessage(
                 chrome.i18n.getMessage(
-                  'poziNotificationPlayerStatusChangeStopped'
+                  'notificationPlayerStatusChangeStopped'
                 )
               );
 
@@ -545,7 +545,7 @@ var
             ) {
               PageWatcher.sendSameMessage(
                 chrome.i18n.getMessage(
-                  'poziNotificationFavoriteStatusSuccess'
+                  'notificationFavoriteStatusSuccess'
                 )
               );
               return;
@@ -640,7 +640,7 @@ $trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
     &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
   ) {
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'poziNotificationPlayerStatusChangeStarted' )
+      chrome.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
     );
     PageWatcher.boolWasPageJustLoaded = false;
     return;

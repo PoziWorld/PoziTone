@@ -3,8 +3,8 @@
   , "minimum_chrome_version"    : "28"
 
   , "default_locale"            : "en_US"
-  , "name"                      : "__MSG_poziToolName__"
-  , "description"               : "__MSG_poziToolDescription__"
+  , "name"                      : "__MSG_extensionName__"
+  , "description"               : "__MSG_extensionDescription__"
   , "version"                   : "0.0.2.18"
 
   , "short_name"                : "PoziTone"
@@ -29,7 +29,7 @@
             "19"                : "img/pozitone-icon-19.png"
           , "38"                : "img/pozitone-icon-38.png"
         }
-      , "default_title"         : "__MSG_poziToolName__"
+      , "default_title"         : "__MSG_extensionName__"
       , "default_popup"         : "html/browser-action.html"
     }
   , "commands"                  : {

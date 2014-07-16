@@ -273,7 +273,7 @@ var
     $player.setVolume( 0 );
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'poziNotificationButtonsMuteFeedback' )
+      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
   }
   ,
@@ -289,7 +289,7 @@ var
     $player.setVolume( PageWatcher.objPlayerInfo.intVolumeBeforeMuted );
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'poziNotificationButtonsUnmuteFeedback' )
+      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
   }
   ,
@@ -457,13 +457,13 @@ var
             if ( boolIsPlaying ) {
               var strLangStartedOrResumed = 
                     chrome.i18n.getMessage(
-                      'poziNotificationPlayerStatusChangeResumed'
+                      'notificationPlayerStatusChangeResumed'
                     );
 
               if ( PageWatcher.boolWasPageJustLoaded ) {
                 strLangStartedOrResumed =
                   chrome.i18n.getMessage(
-                    'poziNotificationPlayerStatusChangeStarted'
+                    'notificationPlayerStatusChangeStarted'
                   );
 
                 PageWatcher.initTrackTitleObserver();
@@ -480,7 +480,7 @@ var
             )
               PageWatcher.sendSameMessage(
                 chrome.i18n.getMessage(
-                  'poziNotificationPlayerStatusChangeStopped'
+                  'notificationPlayerStatusChangeStopped'
                 )
               );
 
@@ -711,7 +711,7 @@ var
       var
           strPreviousStatus = 'play'
         , strMessage        = chrome.i18n.getMessage(
-            'poziNotificationPlayerStatusChangeStarted'
+            'notificationPlayerStatusChangeStarted'
           )
         ;
 
@@ -773,7 +773,7 @@ var
       )
         PageWatcher.sendSameMessage(
           chrome.i18n.getMessage(
-            'poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
+            'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
           )
         );
 

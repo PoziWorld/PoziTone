@@ -3,355 +3,347 @@
     "message": "ru"
   }
   ,
-  "poziToolName": {
+  "extensionName": {
     "message": "PoziTone"
   }
   ,
-  "poziToolDescription": {
+  "extensionDescription": {
     "message": "Добавляет функциональность аудиоплеерам: уведомления с информацией о треке, управление вне окна браузера, список последних треков."
   }
   ,
-  "poziBrowserActionTitle": {
-    "message": "Перейти к вкладке 101.ru"
-  }
-  ,
-  "poziNotificationTitle": {
-    "message": "101.ru – Онлайн-радио"
-  }
-  ,
-  "poziNotificationButtonsAddLoggedInTitle": {
+  "notificationButtonsAddLoggedInTitle": {
     "message": "Добавить трек в плейлист"
   }
     ,
-    "poziNotificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
       "message": "Трек успешно добавлен в плейлист"
     }
     ,
-    "poziNotificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
       "message": "Данный трек уже есть в Вашем плейлисте"
     }
   ,
-  "poziNotificationButtonsFavoriteLoggedInTitle": {
+  "notificationButtonsFavoriteLoggedInTitle": {
     "message": "Мне нравится!"
   }
     ,
-    "poziNotificationFavoriteStatusSuccess": {
+    "notificationFavoriteStatusSuccess": {
       "message": "Благодарим за поощрение трудов диджея!"
     }
   ,
-  "poziNotificationButtonsNextTitle": {
+  "notificationButtonsNextTitle": {
     "message": "Следующий трек"
   }
     ,
-    "poziNotificationButtonsNextFeedback": {
+    "notificationButtonsNextFeedback": {
       "message": "Трек переключен"
     }
   ,
-  "poziNotificationButtonsPlayTitle": {
+  "notificationButtonsPlayTitle": {
     "message": "Возобновить воспроизведение"
   }
   ,
-  "poziNotificationButtonsStopTitle": {
+  "notificationButtonsStopTitle": {
     "message": "Остановить воспроизведение"
   }
     ,
-    "poziNotificationPlayerStatusChangeStarted": {
+    "notificationPlayerStatusChangeStarted": {
       "message": "Воспроизведение начато"
     }
     ,
-    "poziNotificationPlayerStatusChangeStopped": {
+    "notificationPlayerStatusChangeStopped": {
       "message": "Воспроизведение остановлено"
     }
     ,
-    "poziNotificationPlayerStatusChangeResumed": {
+    "notificationPlayerStatusChangeResumed": {
       "message": "Воспроизведение возобновлено"
     }
   ,
-  "poziNotificationButtonsMuteTitle": {
+  "notificationButtonsMuteTitle": {
     "message": "Выключить звук"
   }
     ,
-    "poziNotificationButtonsMuteFeedback": {
+    "notificationButtonsMuteFeedback": {
       "message": "Звук выключен"
     }
   ,
-  "poziNotificationButtonsUnmuteTitle": {
+  "notificationButtonsUnmuteTitle": {
     "message": "Включить звук"
   }
     ,
-    "poziNotificationButtonsUnmuteFeedback": {
+    "notificationButtonsUnmuteFeedback": {
       "message": "Звук включён"
     }
 
   ,
-  "poziSystemNotificationUpdated": {
+  "systemNotificationUpdated": {
     "message": "Расширение обновлено!"
   }
     ,
-    "poziSystemNotificationUpdatedVersion": {
+    "systemNotificationUpdatedVersion": {
       "message": " v"
     }
     ,
-    "poziSystemNotificationUpdatedChanges": {
+    "systemNotificationUpdatedChanges": {
       "message": "Просмотр изменений"
     }
     ,
-    "poziSystemNotificationUpdatedDoNotNotify": {
+    "systemNotificationUpdatedDoNotNotify": {
       "message": "Не сообщать об обновлениях"
     }
 
   ,
-  "poziOptionsPageTitle": {
+  "optionsTitle": {
     "message": "Настройки PoziTone"
   }
     ,
-    "poziOptionsPageNavSettings": {
+    "optionsNavSettings": {
       "message": "Настройки"
     }
       ,
-      "poziOptionsPageSettingsH1": {
+      "optionsSettingsH1": {
         "message": "Настройки"
       }
       ,
-      "poziOptionsPageSettingsSaved": {
+      "optionsSettingsSaved": {
         "message": " сохранены"
       }
 
         ,
-        "poziOptionsPageSettingsGeneral": {
+        "optionsSettingsGeneral": {
           "message": "Общие"
         }
           ,
-          "poziOptionsPageSettingsGeneralShortcuts": {
+          "optionsSettingsGeneralShortcuts": {
             "message": "Быстрые клавиши"
           }
             ,
-            "poziOptionsPageSettingsGeneralShortcutsShowInNotification": {
+            "optionsSettingsGeneralShortcutsShowInNotification": {
               "message": "Отображать подсказки в уведомлении"
             }
           ,
-          "poziOptionsPageSettingsGeneralUpdates": {
+          "optionsSettingsGeneralUpdates": {
             "message": "Обновления PoziTone"
           }
             ,
-            "poziOptionsPageSettingsGeneralUpdatesNotify": {
+            "optionsSettingsGeneralUpdatesNotify": {
               "message": "Сообщать, когда обновлено"
             }
           ,
-          "poziOptionsPageSettingsGeneralUeip": {
+          "optionsSettingsGeneralUeip": {
             "message": "Программа улучшения качества PoziTone"
           }
             ,
-            "poziOptionsPageSettingsGeneralUeipDesc": {
+            "optionsSettingsGeneralUeipDesc": {
               "message": "Эта программа предполагает сбор сведений о том, как пользователи PoziTone используют продукт и с какими проблемами они сталкиваются. Команда разработчиков PoziTone — PoziWorld — использует полученные сведения для улучшения продукта и его функций, которые пользователи используют чаще всего, а также для решения возникающих проблем. Участие в этой программе добровольно, а её конечным результатом является улучшение продукта, которое сможет лучше отвечать требованиям пользователей PoziTone."
             }
             ,
-            "poziOptionsPageSettingsGeneralUeipMore": {
+            "optionsSettingsGeneralUeipMore": {
               "message": "Расскажите мне больше о программе"
             }
               ,
-              "poziOptionsPageSettingsGeneralUeipMoreHref": {
+              "optionsSettingsGeneralUeipMoreHref": {
                 "message": "https://github.com/poziworld/pozitone/wiki/Программа-улучшения-качества-PoziTone"
               }
             ,
-            "poziOptionsPageSettingsGeneralUeipPrivacy": {
+            "optionsSettingsGeneralUeipPrivacy": {
               "message": "Заявление о конфиденциальности"
             }
               ,
-              "poziOptionsPageSettingsGeneralUeipPrivacyHref": {
+              "optionsSettingsGeneralUeipPrivacyHref": {
                 "message": "https://github.com/poziworld/pozitone/wiki/Заявление-о-конфиденциальности-программы-улучшения-качества-PoziTone"
               }
             ,
-            "poziOptionsPageSettingsGeneralUeipJoin": {
+            "optionsSettingsGeneralUeipJoin": {
               "message": "Участвовать анонимно"
             }
             ,
-            "poziOptionsPageSettingsGeneralUeipDoNotJoin": {
+            "optionsSettingsGeneralUeipDoNotJoin": {
               "message": "Не участвовать"
             }
 
           ,
-          "poziOptionsPageSettingsSupport": {
+          "optionsSettingsSupport": {
             "message": "Поддержка этого плеера"
           }
             ,
-            "poziOptionsPageSettingsSupportEnabled": {
+            "optionsSettingsSupportEnabled": {
               "message": "Включена"
             }
 
           ,
-          "poziOptionsPageSettingsDisplayWhen": {
+          "optionsSettingsDisplayWhen": {
             "message": "Показывать уведомления"
           }
             ,
-            "poziOptionsPageSettingsDisplayWhenStopped": {
+            "optionsSettingsDisplayWhenStopped": {
               "message": "Когда воспроизведение не начато / остановлено"
             }
             ,
-            "poziOptionsPageSettingsDisplayWhenMuted": {
+            "optionsSettingsDisplayWhenMuted": {
               "message": "Когда громкость на отметке 0% или звук выключен"
             }
             ,
-            "poziOptionsPageSettingsDisplayWhenNoTrackInfo": {
+            "optionsSettingsDisplayWhenNoTrackInfo": {
               "message": "Когда нет информации о том, что сейчас воспроизводится (на сайте отображается как \"...\")"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationIconFormat": {
+          "optionsSettingsNotificationIconFormat": {
             "message": "Формат иконки уведомления"
           }
             ,
-            "poziOptionsPageSettingsNotificationIconFormatShowStationLogo": {
+            "optionsSettingsNotificationIconFormatShowStationLogo": {
               "message": "Отображать логотип текущей станции"
             }
             ,
-            "poziOptionsPageSettingsNotificationIconFormatShowVkLogo": {
+            "optionsSettingsNotificationIconFormatShowVkLogo": {
               "message": "Отображать логотип ВКонтакте"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationTitleFormat": {
+          "optionsSettingsNotificationTitleFormat": {
             "message": "Формат заголовка уведомления"
           }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatShort": {
+            "optionsSettingsNotificationTitleFormatShort": {
               "message": "Отображать только название текущей станции"
             }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatLong": {
+            "optionsSettingsNotificationTitleFormatLong": {
               "message": "Отображать название текущей станции + краткое описание (если доступно)"
             }
             ,
-            "poziOptionsPageSettingsNotificationTitleFormatNoStationInfo": {
+            "optionsSettingsNotificationTitleFormatNoStationInfo": {
               "message": "Не отображать информацию о текущей станции"
             }
 
           ,
-          "poziOptionsPageSettingsNotificationButtons": {
+          "optionsSettingsNotificationButtons": {
             "message": "Доступные кнопки <small>(максимум 2 могут быть отображены одновременно)</small>"
           }
             ,
-            "poziOptionsPageSettingsNotificationButtonsAdd": {
+            "optionsSettingsNotificationButtonsAdd": {
               "message": "Добавить трек в плейлист"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsAddAuthRequired": {
+            "optionsSettingsNotificationButtonsAddAuthRequired": {
               "message": "Добавить трек в плейлист <small>(требуется авторизация на сайте)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsFavorite": {
+            "optionsSettingsNotificationButtonsFavorite": {
               "message": "Мне нравится!"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired": {
+            "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
               "message": "Мне нравится! <small>(требуется авторизация на сайте)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsNext": {
+            "optionsSettingsNotificationButtonsNext": {
               "message": "Следующий трек"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsNextAuthRequired": {
+            "optionsSettingsNotificationButtonsNextAuthRequired": {
               "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsPlayStop": {
+            "optionsSettingsNotificationButtonsPlayStop": {
               "message": "Остановить/Возобновить воспроизведение"
             }
             ,
-            "poziOptionsPageSettingsNotificationButtonsMuteUnmute": {
+            "optionsSettingsNotificationButtonsMuteUnmute": {
               "message": "Выключить/Включить звук"
             }
       ,
-      "poziOptionsPageSettingsChooseSubpage": {
+      "optionsSettingsChooseSubpage": {
         "message": "Выберите страницу настроек"
       }
     ,
-    "poziOptionsPageNavFaq": {
+    "optionsNavFaq": {
       "message": "Вопросы и ответы"
     }
     ,
-    "poziOptionsPageNavAbout": {
+    "optionsNavAbout": {
       "message": "О расширении"
     }
       ,
-      "poziOptionsPageAboutH1": {
+      "optionsAboutH1": {
         "message": "О расширении"
       }
         ,
-        "poziOptionsPageInfo": {
+        "optionsInfo": {
           "message": "Подробнее о PoziTone"
         }
           ,
-          "poziOptionsPageInfoHref": {
+          "optionsInfoHref": {
             "message": "https://github.com/poziworld/pozitone/blob/develop/README_ru.md"
           }
         ,
-        "poziOptionsPageContact": {
+        "optionsContact": {
           "message": "Связаться с разработчиками PoziTone"
         }
           ,
-          "poziOptionsPageContactHref": {
+          "optionsContactHref": {
             "message": "https://github.com/poziworld/pozitone/blob/develop/README_ru.md#%D0%9E%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F-%D1%81%D0%B2%D1%8F%D0%B7%D1%8C"
           }
         ,
-        "poziOptionsPageVersion": {
+        "optionsVersion": {
           "message": "Версия"
         }
         ,
-        "poziOptionsPageCopyright": {
+        "optionsCopyright": {
           "message": "&copy; PoziWorld, 2014"
         }
         ,
-        "poziOptionsPageFoundation": {
+        "optionsFoundation": {
           "message": "Расширение PoziTone создано на основе <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D0%B8\" target=\"_blank\">любви</a> и <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#credits\" target=\"_blank\">добра</a>."
         }
         ,
-        "poziOptionsPageTerms": {
+        "optionsTerms": {
           "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_ru\" target=\"_blank\">Лицензионное соглашение</a> PoziTone"
         }
 
   ,
-  "poziPopupPageTitle": {
+  "popupTitle": {
     "message": "PoziTone"
   }
     ,
-    "poziPopupPageToolbarClose": {
+    "popupToolbarClose": {
       "message": "Закрыть"
     }
     ,
-    "poziPopupPageNavRecentTracks": {
+    "popupNavRecentTracks": {
       "message": "Последние треки"
     }
       ,
-      "poziPopupPageNavRecentTracksH1": {
+      "popupNavRecentTracksH1": {
         "message": "Последние треки"
       }
         ,
-        "poziPopupPageNavRecentTracksPlaceholder": {
+        "popupNavRecentTracksPlaceholder": {
           "message": "Ищете, что послушать?<br />Как насчёт <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock с элементами hardcore</a>?<br />Или <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
         }
 
   ,
-  "poziModule_general": {
+  "module_general": {
     "message": "Общие"
   }
 
   ,
-  "poziModule_com_vk_audio": {
+  "module_com_vk_audio": {
     "message": "ВКонтакте (аудио)"
   }
     ,
-    "poziModule_com_vk_audio_long": {
+    "module_com_vk_audio_long": {
       "message": "ВКонтакте (аудио) | vk.com"
     }
 
   ,
-  "poziModule_ru_101": {
+  "module_ru_101": {
     "message": "101.ru"
   }
     ,
-    "poziModule_ru_101_long": {
+    "module_ru_101_long": {
       "message": "Онлайн-радио 101.ru"
     }
 }

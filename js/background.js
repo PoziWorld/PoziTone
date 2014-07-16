@@ -65,7 +65,7 @@ var Background                    = {
             {
                 objButton         : {
                     title         : chrome.i18n.getMessage(
-                                      'poziSystemNotificationUpdatedChanges'
+                                      'systemNotificationUpdatedChanges'
                                     )
                   , iconUrl       : 'img/list_bullets_icon&16.png'
                 }
@@ -74,7 +74,7 @@ var Background                    = {
           , {
                 objButton         : {
                     title         : chrome.i18n.getMessage(
-                                      'poziSystemNotificationUpdatedDoNotNotify'
+                                      'systemNotificationUpdatedDoNotNotify'
                                     )
                   , iconUrl       : 'img/off_icon&16.png'
                 }
@@ -1110,11 +1110,9 @@ chrome.runtime.onInstalled.addListener(
 
           Global.showSystemNotification(
               'updated'
-            , chrome.i18n.getMessage( 'poziSystemNotificationUpdated' )
-            , chrome.i18n.getMessage( 'poziToolName' ) + 
-                chrome.i18n.getMessage(
-                  'poziSystemNotificationUpdatedVersion'
-                ) + 
+            , chrome.i18n.getMessage( 'systemNotificationUpdated' )
+            , chrome.i18n.getMessage( 'extensionName' ) + 
+                chrome.i18n.getMessage( 'systemNotificationUpdatedVersion' ) + 
                 objDetails.currentVersion
             , null
             , [

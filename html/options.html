@@ -11,21 +11,21 @@
   </head>
   <body>
     <header id="header">
-      <h1 i18n-content="poziToolName"></h1>
+      <h1 i18n-content="extensionName"></h1>
       <nav>
         <ul id="menu">
           <li class="selected">
             <a
               href="#settings"
               class="switchPage"
-              i18n-content="poziOptionsPageNavSettings"
+              i18n-content="optionsNavSettings"
                 ></a>
           </li>
           <li>
             <a
               href="#about"
               class="switchPage"
-              i18n-content="poziOptionsPageNavAbout"
+              i18n-content="optionsNavAbout"
                 ></a>
           </li>
         </ul>
@@ -35,14 +35,14 @@
       <section id="settings" class="page">
         <header class="pageHeader">
           <h1 class="pageHeading">
-            <span i18n-content="poziOptionsPageSettingsH1"></span>
-            <span i18n-content="poziOptionsPageSettingsSaved" id="settingsSaved"></span>
+            <span i18n-content="optionsSettingsH1"></span>
+            <span i18n-content="optionsSettingsSaved" id="settingsSaved"></span>
           </h1>
           <form id="chooseSubpageForm">
             <input
               list="chooseSubpageList"
               id="chooseSubpage"
-              data-placeholder="poziOptionsPageSettingsChooseSubpage"
+              data-placeholder="optionsSettingsChooseSubpage"
               autocomplete="off"
               autofocus
                 />
@@ -55,50 +55,50 @@
           </form>
         </header>
         <section id="settings_general" class="subpage settingsSubpage">
-          <h1 i18n-content="poziOptionsPageSettingsGeneral" class="subpageHeading"></h1>
+          <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsGeneralShortcuts" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsGeneralShortcuts" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsGeneralShortcutsShowInNotification">
+                <label i18n-content="optionsSettingsGeneralShortcutsShowInNotification">
                   <input type="checkbox" name="boolShowShortcutsInNotification" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsGeneralUpdates" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsGeneralUpdates" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsGeneralUpdatesNotify">
+                <label i18n-content="optionsSettingsGeneralUpdatesNotify">
                   <input type="checkbox" name="boolShowWasUpdatedNotification" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsGeneralUeip" class="sectionHeading"></h1>
-            <p i18n-content="poziOptionsPageSettingsGeneralUeipDesc" class="sectionText"></p>
+            <h1 i18n-content="optionsSettingsGeneralUeip" class="sectionHeading"></h1>
+            <p i18n-content="optionsSettingsGeneralUeipDesc" class="sectionText"></p>
             <p class="sectionText">
               <a
-                i18n-content="poziOptionsPageSettingsGeneralUeipMore"
+                i18n-content="optionsSettingsGeneralUeipMore"
                 target="_blank"
                   ></a>
             </p>
             <p class="sectionText">
               <a
-                i18n-content="poziOptionsPageSettingsGeneralUeipPrivacy"
+                i18n-content="optionsSettingsGeneralUeipPrivacy"
                 target="_blank"
                   ></a>
             </p>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsGeneralUeipJoin">
+                <label i18n-content="optionsSettingsGeneralUeipJoin">
                   <input type="radio" name="strJoinUeip" value="yes" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsGeneralUeipDoNotJoin">
+                <label i18n-content="optionsSettingsGeneralUeipDoNotJoin">
                   <input type="radio" name="strJoinUeip" value="no" />
                 </label>
               </li>
@@ -106,57 +106,57 @@
           </section>
         </section>
         <section id="settings_com_vk_audio" class="subpage settingsSubpage module">
-          <h1 i18n-content="poziModule_com_vk_audio_long" class="subpageHeading"></h1>
+          <h1 i18n-content="module_com_vk_audio_long" class="subpageHeading"></h1>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsSupport" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsSupportEnabled">
+                <label i18n-content="optionsSettingsSupportEnabled">
                   <input type="checkbox" name="boolIsEnabled" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationIconFormat" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationIconFormatShowVkLogo">
+                <label i18n-content="optionsSettingsNotificationIconFormatShowVkLogo">
                   <input type="checkbox" name="boolShowNotificationLogo" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsNotificationButtons" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsAddAuthRequired">
+                <label i18n-content="optionsSettingsNotificationButtonsAddAuthRequired">
                   <input type="checkbox" name="arrNotificationButtons" value="add" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsNextAuthRequired">
+                <label i18n-content="optionsSettingsNotificationButtonsNextAuthRequired">
                   <input type="checkbox" name="arrNotificationButtons" value="next" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsPlayStop">
+                <label i18n-content="optionsSettingsNotificationButtonsPlayStop">
                   <input type="checkbox" name="arrNotificationButtons" value="playStop" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsMuteUnmute">
+                <label i18n-content="optionsSettingsNotificationButtonsMuteUnmute">
                   <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsDisplayWhen" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
+                <label i18n-content="optionsSettingsDisplayWhenMuted">
                   <input type="checkbox" name="boolShowNotificationWhenMuted" />
                 </label>
               </li>
@@ -164,87 +164,87 @@
           </section>
         </section>
         <section id="settings_ru_101" class="subpage settingsSubpage module">
-          <h1 i18n-content="poziModule_ru_101_long" class="subpageHeading"></h1>
+          <h1 i18n-content="module_ru_101_long" class="subpageHeading"></h1>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsSupport" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsSupport" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsSupportEnabled">
+                <label i18n-content="optionsSettingsSupportEnabled">
                   <input type="checkbox" name="boolIsEnabled" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationIconFormat" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationIconFormatShowStationLogo">
+                <label i18n-content="optionsSettingsNotificationIconFormatShowStationLogo">
                   <input type="checkbox" name="boolShowNotificationLogo" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationTitleFormat" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsNotificationTitleFormat" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatShort">
+                <label i18n-content="optionsSettingsNotificationTitleFormatShort">
                   <input type="radio" name="strNotificationTitleFormat" value="short" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatLong">
+                <label i18n-content="optionsSettingsNotificationTitleFormatLong">
                   <input type="radio" name="strNotificationTitleFormat" value="long" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationTitleFormatNoStationInfo">
+                <label i18n-content="optionsSettingsNotificationTitleFormatNoStationInfo">
                   <input type="radio" name="strNotificationTitleFormat" value="noStationInfo" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsNotificationButtons" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsNotificationButtons" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsAddAuthRequired">
+                <label i18n-content="optionsSettingsNotificationButtonsAddAuthRequired">
                   <input type="checkbox" name="arrNotificationButtons" value="add" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsFavoriteAuthRequired">
+                <label i18n-content="optionsSettingsNotificationButtonsFavoriteAuthRequired">
                   <input type="checkbox" name="arrNotificationButtons" value="favorite" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsPlayStop">
+                <label i18n-content="optionsSettingsNotificationButtonsPlayStop">
                   <input type="checkbox" name="arrNotificationButtons" value="playStop" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsNotificationButtonsMuteUnmute">
+                <label i18n-content="optionsSettingsNotificationButtonsMuteUnmute">
                   <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
                 </label>
               </li>
             </ul>
           </section>
           <section>
-            <h1 i18n-content="poziOptionsPageSettingsDisplayWhen" class="sectionHeading"></h1>
+            <h1 i18n-content="optionsSettingsDisplayWhen" class="sectionHeading"></h1>
             <ul>
               <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenStopped">
+                <label i18n-content="optionsSettingsDisplayWhenStopped">
                   <input type="checkbox" name="boolShowNotificationWhenStopped" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenMuted">
+                <label i18n-content="optionsSettingsDisplayWhenMuted">
                   <input type="checkbox" name="boolShowNotificationWhenMuted" />
                 </label>
               </li>
               <li>
-                <label i18n-content="poziOptionsPageSettingsDisplayWhenNoTrackInfo">
+                <label i18n-content="optionsSettingsDisplayWhenNoTrackInfo">
                   <input type="checkbox" name="boolShowNotificationWhenNoTrackInfo" />
                 </label>
               </li>
@@ -253,48 +253,36 @@
         </section>
       </section>
       <section id="about" class="page">
-        <h1 i18n-content="poziOptionsPageAboutH1" class="pageHeading"></h1>
+        <h1 i18n-content="optionsAboutH1" class="pageHeading"></h1>
         <figure id="logoName" class="clearfix">
           <img
             src="/img/pozitone-icon-38.png"
             id="logo"
-            i18n-content="poziToolName"
+            i18n-content="extensionName"
               />
-          <figcaption id="name" i18n-content="poziToolName"></figcaption>
+          <figcaption id="name" i18n-content="extensionName"></figcaption>
         </figure>
         <nav id="supportMenu" class="clearfix">
           <a
-            i18n-content="poziOptionsPageInfo"
+            i18n-content="optionsInfo"
             class="supportMenuItem"
             target="_blank"
               ></a>
           <a
-            i18n-content="poziOptionsPageContact"
+            i18n-content="optionsContact"
             class="supportMenuItem"
             target="_blank"
               ></a>
         </nav>
         <p id="versionInfo">
-          <span i18n-content="poziOptionsPageVersion"></span>
+          <span i18n-content="optionsVersion"></span>
           <span id="version"></span>
         </p>
         <footer id="aboutFooter">
-          <p
-            i18n-content="poziToolName"
-            class="aboutFooterLine"
-              ></p>
-          <p
-            i18n-content="poziOptionsPageCopyright"
-            class="aboutFooterLine"
-              ></p>
-          <p
-            i18n-content="poziOptionsPageFoundation"
-            class="aboutFooterLine"
-              ></p>
-          <p
-            i18n-content="poziOptionsPageTerms"
-            class="aboutFooterLine"
-              ></p>
+          <p i18n-content="extensionName" class="aboutFooterLine"></p>
+          <p i18n-content="optionsCopyright" class="aboutFooterLine"></p>
+          <p i18n-content="optionsFoundation" class="aboutFooterLine"></p>
+          <p i18n-content="optionsTerms" class="aboutFooterLine"></p>
         </footer>
       </section>
     </article>

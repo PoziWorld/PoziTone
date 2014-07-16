@@ -42,7 +42,7 @@ var
   , $chooseSubpage
   , $chosenSubpage
 
-  , strModuleLocalPrefix      = 'poziModule_'
+  , strModuleLocalPrefix      = 'module_'
   , strChooseSubpageFormId    = 'chooseSubpageForm'
   , strChooseSubpageId        = 'chooseSubpage'
   , strChosenSubpageId        = 'chosenSubpage'
