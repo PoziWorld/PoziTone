@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.1
+    * PoziTone is now available in Spanish. Translation by Paco_Zamo (Francisco Zamorano).
+
 ### v0.1.2.0
     * First stable version.
 
@@ -75,7 +78,7 @@
 ### v0.0.2.0
     * Added support for VK's audio player (only on full version of the site - vk.com).
     * Separate settings for each player.
-    * New available button – “Next track” (only for VK).
+    * New available button – “Next track” (only for VK). Idea by Nikita Maslennikov.
     * Now when the pop-up notification is clicked, a tab with that player will be found and activated.
     * Added a draft PoziTone API: third-party developers will be able to create the extensions for other players; those extensions will send a required information to PoziTone, and PoziTone will take care of the rest.
     * Fixed some bugs:
