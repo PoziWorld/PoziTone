@@ -48,7 +48,7 @@
     "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
   },
   "extensionDescription": {
-    "message": "Añade características a los reproductores de audio, tales como notificaciones sobre  información de pistas, controles externos a la ventana del explorador y lista de pistas recientes."
+    "message": "Notificaciones sobre información de pistas, controles externos a la ventana del explorador y lista de pistas recientes."
   },
   "optionsSettingsNotificationButtonsAdd": {
     "message": "Añadir pista a la lista de reproducción"
