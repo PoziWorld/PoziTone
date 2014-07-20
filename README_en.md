@@ -120,8 +120,12 @@ Gratitudes
 - To all those who give us life and happiness!
 - To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Nike, Sergey.
 - [UserEcho](https://userecho.com/?pcode=1014487) — for the excellent service, kindness and generosity!
+- [DreamHost](http://www.dreamhost.com/r.cgi?623835) — for the reliable hosting.
 - Google, Inc. — for all their excellent projects.
 - 101.ru — for a chance to listen to music for free and legally.
+- Translators:
+  - Spanish — Paco_Zamo (Francisco Zamorano);
+  - Polish — jurczak (Łukasz Jurczak).
 
 
 Credits
