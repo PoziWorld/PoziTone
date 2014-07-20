@@ -1,5 +1,8 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.2
+    * PoziTone is now available in Polish. Translation by jurczak (Łukasz Jurczak).
+
 ### v0.1.2.1
     * PoziTone is now available in Spanish. Translation by Paco_Zamo (Francisco Zamorano).
 

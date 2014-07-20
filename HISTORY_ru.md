@@ -1,5 +1,8 @@
 > This is a Russian version, see [HISTORY_en.md](HISTORY_en.md) for English.
 
+### v0.1.2.2
+    * PoziTone теперь доступен на польском языке. Перевод — jurczak (Łukasz Jurczak).
+
 ### v0.1.2.1
     * PoziTone теперь доступен на испанском языке. Перевод — Paco_Zamo (Francisco Zamorano).
 

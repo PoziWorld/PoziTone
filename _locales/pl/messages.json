@@ -1,0 +1,254 @@
+{
+  "systemNotificationUpdated": {
+    "message": "Rozszerzenie zaktualizowane!"
+  },
+  "optionsSettingsGeneralShortcutsShowInNotification": {
+    "message": "Wyświetlaj porady w powiadomieniach"
+  },
+  "optionsAboutH1": {
+    "message": "O rozszerzeniu"
+  },
+  "optionsSettingsSupportEnabled": {
+    "message": "Włączono"
+  },
+  "notificationButtonsMuteTitle": {
+    "message": "Wycisz"
+  },
+  "optionsSettingsGeneralUeipPrivacyHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+  },
+  "notificationButtonsAddLoggedInTitle": {
+    "message": "Dodaj utwór do listy odtwarzania"
+  },
+  "optionsSettingsGeneralUeipPrivacy": {
+    "message": "Zasady zachowania poufności informacji"
+  },
+  "notificationButtonsFavoriteLoggedInTitle": {
+    "message": "Lubię to!"
+  },
+  "optionsContactHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
+  },
+  "optionsSettingsGeneralUeip": {
+    "message": "PoziTone Program poprawy jakości obsługi użytkownika"
+  },
+  "optionsTerms": {
+    "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">umowa licencyjna</a>"
+  },
+  "systemNotificationUpdatedVersion": {
+    "message": "v"
+  },
+  "notificationButtonsUnmuteFeedback": {
+    "message": "Włączono dźwięk"
+  },
+  "notificationButtonsNextFeedback": {
+    "message": "Zmieniono utwór"
+  },
+  "optionsSettingsGeneralUeipMoreHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
+  },
+  "extensionDescription": {
+    "message": "Dodaje takie funkcje do odtwarzaczy jak powiadomienie z info o utworze, kontrola poza przeglądarką oraz spis ostatnich utworów."
+  },
+  "optionsSettingsNotificationButtonsAdd": {
+    "message": "Dodaj utwór do listy odtwarzania"
+  },
+  "optionsSettingsH1": {
+    "message": "Ustawienia"
+  },
+  "notificationButtonsMuteFeedback": {
+    "message": "Wyciszony"
+  },
+  "optionsSettingsGeneral": {
+    "message": "Główne ustawienia"
+  },
+  "module_com_vk_audio_long": {
+    "message": "VK (dźwięk) | vk.com"
+  },
+  "optionsSettingsNotificationButtonsNext": {
+    "message": "Następny utwór"
+  },
+  "optionsSettingsNotificationButtonsMuteUnmute": {
+    "message": "Włącz / Wyłącz dźwięk"
+  },
+  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "message": "Utwór już znajduje się na twojej liście odtwarzania"
+  },
+  "notificationButtonsUnmuteTitle": {
+    "message": "Włącz dźwięk"
+  },
+  "notificationButtonsNextTitle": {
+    "message": "Następny utwór"
+  },
+  "optionsFoundation": {
+    "message": "PoziTone zostało stworzone dzięki <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">miłości</a> oraz <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">życzliwości</a>."
+  },
+  "optionsSettingsChooseSubpage": {
+    "message": "Wybierz strone ustawień"
+  },
+  "optionsSettingsDisplayWhen": {
+    "message": "Pokaż powiadomienia"
+  },
+  "optionsSettingsGeneralUeipDesc": {
+    "message": "W Programie poprawy jakości obsługi użytkownika są zbierane informacje na temat tego, jak użytkownicy korzystają z PoziTone i jakie napotykają problemy. Twórcy PoziTone — PoziWorld — korzystają z tych informacji do ulepszania produktu i funkcji, z których najczęściej korzystają użytkownicy, oraz do rozwiązywania problemów. Uczestnictwo w tym programie jest dobrowolne i służy udoskonalaniu oprogramowania w celu jeszcze lepszego spełniania potrzeb użytkowników."
+  },
+  "optionsSettingsNotificationButtonsNextAuthRequired": {
+    "message": "Następny utwór <small>(Wymagana autoryzacja na stronie)</small>"
+  },
+  "optionsVersion": {
+    "message": "Wersja"
+  },
+  "optionsNavSettings": {
+    "message": "Ustawienia"
+  },
+  "module_com_vk_audio": {
+    "message": "VK (dźwięk)"
+  },
+  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
+    "message": "Lubię to! <small>(Wymagana autoryzacja na stronie)</small>"
+  },
+  "optionsSettingsGeneralUpdatesNotify": {
+    "message": "Poinformuje mnie po aktualizacji"
+  },
+  "optionsContact": {
+    "message": "Skontaktuj się z twórcami PoziTone"
+  },
+  "optionsNavAbout": {
+    "message": "O rozszerzeniu"
+  },
+  "popupTitle": {
+    "message": "PoziTone"
+  },
+  "popupNavRecentTracksH1": {
+    "message": "Ostatnio odtwarzane utwory"
+  },
+  "optionsCopyright": {
+    "message": "&copy; PoziWorld, 2014"
+  },
+  "popupToolbarClose": {
+    "message": "Zamknij"
+  },
+  "optionsSettingsNotificationTitleFormatNoStationInfo": {
+    "message": "Nie wyświetlaj informacji o aktualnie odtwarzanej stacji"
+  },
+  "lang": {
+    "message": "pl_PL"
+  },
+  "notificationPlayerStatusChangeStarted": {
+    "message": "Odtwarzanie rozpoczęte"
+  },
+  "optionsSettingsDisplayWhenStopped": {
+    "message": "Kiedy odtwarzanie nie jest uruchomione / zatrzymane"
+  },
+  "popupNavRecentTracksPlaceholder": {
+    "message": "Szukasz jakichśutworów?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a>?<br />oraz <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+  },
+  "module_general": {
+    "message": "Główne ustawienia"
+  },
+  "optionsInfo": {
+    "message": "Szczegóły o PoziTone"
+  },
+  "optionsSettingsNotificationTitleFormatLong": {
+    "message": "Wyświetlaj nazwę aktualnie odtwarzanej stacji + krótki opis (jeśli dostępne)"
+  },
+  "optionsSettingsNotificationButtons": {
+    "message": "Dostępne przyciski <small>(maksymalnie 2 mogą być wyświetlane w tym samym czasie)</small>"
+  },
+  "optionsSettingsSaved": {
+    "message": "zapisano"
+  },
+  "systemNotificationUpdatedDoNotNotify": {
+    "message": "Nie informuj mnie o aktualizacjach"
+  },
+  "optionsSettingsDisplayWhenNoTrackInfo": {
+    "message": "Jeśli nie ma informacji co jest aktualnie odtwarzane (wyświetlone jako \"...\" na stronie)"
+  },
+  "notificationPlayerStatusChangeResumed": {
+    "message": "Odtwarzanie wznowione"
+  },
+  "popupNavRecentTracks": {
+    "message": "Ostatnio odtwarzane utwory"
+  },
+  "optionsSettingsNotificationIconFormatShowStationLogo": {
+    "message": "Wyświetlaj logo aktualnie odtwarzanej stacji"
+  },
+  "optionsSettingsGeneralUeipMore": {
+    "message": "Dowiedź się więcej na temat programie"
+  },
+  "notificationButtonsStopTitle": {
+    "message": "Zatrzymaj odtwarzanie"
+  },
+  "optionsSettingsNotificationButtonsPlayStop": {
+    "message": "Zatrzymaj odtwarzanie / Odtwarzaj"
+  },
+  "optionsSettingsNotificationButtonsAddAuthRequired": {
+    "message": "Dodaj utwór do listy odtwarzania <small>(Wymagana autoryzacja na stronie)</small>"
+  },
+  "optionsNavFaq": {
+    "message": "FAQ"
+  },
+  "optionsSettingsGeneralShortcuts": {
+    "message": "Skróty klawiaturowe"
+  },
+  "optionsSettingsSupport": {
+    "message": "Wesprzyj ten odtwarzacz"
+  },
+  "notificationButtonsPlayTitle": {
+    "message": "Odtwarzaj"
+  },
+  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "message": "Dodano utwór do listy odtwarzania"
+  },
+  "optionsSettingsNotificationButtonsFavorite": {
+    "message": "Lubię to!"
+  },
+  "optionsSettingsNotificationIconFormat": {
+    "message": "Format ikony powiadomień"
+  },
+  "systemNotificationUpdatedChanges": {
+    "message": "Zobacz zmiany"
+  },
+  "optionsInfoHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
+  },
+  "module_ru_101_long": {
+    "message": "Radio internetowe 101.ru"
+  },
+  "optionsSettingsGeneralUeipDoNotJoin": {
+    "message": "Nie bierz udziału"
+  },
+  "optionsSettingsGeneralUeipJoin": {
+    "message": "Weź udział anonimowo"
+  },
+  "optionsSettingsNotificationTitleFormat": {
+    "message": "Format tytułu powiadomień"
+  },
+  "extensionName": {
+    "message": "PoziTone"
+  },
+  "optionsSettingsDisplayWhenMuted": {
+    "message": "Kiedy głośność jest na 0% lub wyciszona"
+  },
+  "module_ru_101": {
+    "message": "101.ru"
+  },
+  "optionsSettingsNotificationTitleFormatShort": {
+    "message": "Wyświetlaj tylko nazwę aktualnie odtwarzanej stacji "
+  },
+  "optionsSettingsNotificationIconFormatShowVkLogo": {
+    "message": "Wyświetl logo VK"
+  },
+  "optionsSettingsGeneralUpdates": {
+    "message": "Aktualizacje PoziTone"
+  },
+  "notificationFavoriteStatusSuccess": {
+    "message": "Dziękuje za nagrodzenie DJ'a za cięzką pracę!"
+  },
+  "optionsTitle": {
+    "message": "Opcje PoziTone"
+  },
+  "notificationPlayerStatusChangeStopped": {
+    "message": "Odtwarzanie zatrzymane"
+  }
+}

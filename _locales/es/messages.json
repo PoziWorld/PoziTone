@@ -90,7 +90,7 @@
     "message": "Mostrar notificaciones"
   },
   "optionsSettingsGeneralUeipDesc": {
-    "message": "El Programa de Mejora de la Experiencia de Usuario recopila información sobre como nuestros usuarios usan PoziTone y los problemas que encuentran. Nuestro equipo de desarrolladores — PoziWorld — utilizan esta información para mejorar el producto, las funciones más usadas por los usuarios y ayuda en la resolución de problemas. La participación en este programa es voluntaria y el objetivo final es realizar mejoras en el programa para satisfacer a nuestros usuarios."
+    "message": "El Programa de Mejora de la Experiencia de Usuario recopila información sobre como nuestros usuarios usan PoziTone y los problemas que encuentran. Nuestro equipo de desarrolladores — PoziWorld — utiliza esta información para mejorar el producto, las funciones más usadas por los usuarios y ayuda en la resolución de problemas. La participación en este programa es voluntaria y el objetivo final es realizar mejoras en el programa para satisfacer a nuestros usuarios."
   },
   "optionsSettingsNotificationButtonsNextAuthRequired": {
     "message": "Pista siguiente <small>(autorización expresa necesaria)</small>"
@@ -192,7 +192,7 @@
     "message": "Combinaciones de teclas"
   },
   "optionsSettingsSupport": {
-    "message": "Respalda este reproductor"
+    "message": "Patrocina el reproductor"
   },
   "notificationButtonsPlayTitle": {
     "message": "Reproducir"
@@ -204,7 +204,7 @@
     "message": "¡Me gusta!"
   },
   "optionsSettingsNotificationIconFormat": {
-    "message": "Formato del icono de la notificación"
+    "message": "Formato de icono de la notificación"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Ver cambios"
@@ -243,10 +243,10 @@
     "message": "Actualizaciones PoziTone"
   },
   "notificationFavoriteStatusSuccess": {
-    "message": "¡Gracias por recompensar el duro trabajo de un DJ!"
+    "message": "¡Gracias por reconocer el duro trabajo de un DJ!"
   },
   "optionsTitle": {
-    "message": "Configuración PoziTone"
+    "message": "Configuración de PoziTone"
   },
   "notificationPlayerStatusChangeStopped": {
     "message": "Reproducción detenida"
