@@ -36,7 +36,7 @@
     "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">umowa licencyjna</a>"
   },
   "systemNotificationUpdatedVersion": {
-    "message": "v"
+    "message": " v"
   },
   "notificationButtonsUnmuteFeedback": {
     "message": "Włączono dźwięk"
@@ -63,10 +63,13 @@
     "message": "Główne ustawienia"
   },
   "module_com_vk_audio_long": {
-    "message": "VK (dźwięk) | vk.com"
+    "message": "VK (Odtwarzacz) | vk.com"
   },
   "optionsSettingsNotificationButtonsNext": {
     "message": "Następny utwór"
+  },
+  "notificationButtonsPreviousTitle": {
+    "message": "Poprzedni utwór"
   },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Włącz / Wyłącz dźwięk"
@@ -87,7 +90,7 @@
     "message": "Wybierz strone ustawień"
   },
   "optionsSettingsDisplayWhen": {
-    "message": "Pokaż powiadomienia"
+    "message": "Powiadomienia"
   },
   "optionsSettingsGeneralUeipDesc": {
     "message": "W Programie poprawy jakości obsługi użytkownika są zbierane informacje na temat tego, jak użytkownicy korzystają z PoziTone i jakie napotykają problemy. Twórcy PoziTone — PoziWorld — korzystają z tych informacji do ulepszania produktu i funkcji, z których najczęściej korzystają użytkownicy, oraz do rozwiązywania problemów. Uczestnictwo w tym programie jest dobrowolne i służy udoskonalaniu oprogramowania w celu jeszcze lepszego spełniania potrzeb użytkowników."
@@ -102,13 +105,13 @@
     "message": "Ustawienia"
   },
   "module_com_vk_audio": {
-    "message": "VK (dźwięk)"
+    "message": "VK (Odtwarzacz)"
   },
   "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
     "message": "Lubię to! <small>(Wymagana autoryzacja na stronie)</small>"
   },
   "optionsSettingsGeneralUpdatesNotify": {
-    "message": "Poinformuje mnie po aktualizacji"
+    "message": "Poinformuje mnie o aktualizacji"
   },
   "optionsContact": {
     "message": "Skontaktuj się z twórcami PoziTone"
@@ -141,7 +144,7 @@
     "message": "Kiedy odtwarzanie nie jest uruchomione / zatrzymane"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "Szukasz jakichśutworów?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a>?<br />oraz <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+    "message": "Szukasz jakichś utworów?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
   },
   "module_general": {
     "message": "Główne ustawienia"
@@ -153,7 +156,7 @@
     "message": "Wyświetlaj nazwę aktualnie odtwarzanej stacji + krótki opis (jeśli dostępne)"
   },
   "optionsSettingsNotificationButtons": {
-    "message": "Dostępne przyciski <small>(maksymalnie 2 mogą być wyświetlane w tym samym czasie)</small>"
+    "message": "Dostępne przyciski <small>(mogą być wyświetlane maksymalnie 2 w tym samym czasie)</small>"
   },
   "optionsSettingsSaved": {
     "message": "zapisano"
@@ -161,11 +164,17 @@
   "systemNotificationUpdatedDoNotNotify": {
     "message": "Nie informuj mnie o aktualizacjach"
   },
+  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+    "message": "Poprzedni utwór <small>(Wymagana autoryzacja na stronie)</small>"
+  },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Jeśli nie ma informacji co jest aktualnie odtwarzane (wyświetlone jako \"...\" na stronie)"
   },
   "notificationPlayerStatusChangeResumed": {
     "message": "Odtwarzanie wznowione"
+  },
+  "optionsSettingsNotificationButtonsPrevious": {
+    "message": "Poprzedni utwór"
   },
   "popupNavRecentTracks": {
     "message": "Ostatnio odtwarzane utwory"
@@ -204,7 +213,7 @@
     "message": "Lubię to!"
   },
   "optionsSettingsNotificationIconFormat": {
-    "message": "Format ikony powiadomień"
+    "message": "Ikony powiadomień"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Zobacz zmiany"
@@ -218,6 +227,9 @@
   "optionsSettingsGeneralUeipDoNotJoin": {
     "message": "Nie bierz udziału"
   },
+  "notificationButtonsPreviousFeedback": {
+    "message": "Zmieniono utwór"
+  },
   "optionsSettingsGeneralUeipJoin": {
     "message": "Weź udział anonimowo"
   },
@@ -228,7 +240,7 @@
     "message": "PoziTone"
   },
   "optionsSettingsDisplayWhenMuted": {
-    "message": "Kiedy głośność jest na 0% lub wyciszona"
+    "message": "Pokaż gdy głośność jest na 0% lub wyciszona"
   },
   "module_ru_101": {
     "message": "101.ru"
@@ -237,7 +249,7 @@
     "message": "Wyświetlaj tylko nazwę aktualnie odtwarzanej stacji "
   },
   "optionsSettingsNotificationIconFormatShowVkLogo": {
-    "message": "Wyświetl logo VK"
+    "message": "Wyświetlaj logo VK"
   },
   "optionsSettingsGeneralUpdates": {
     "message": "Aktualizacje PoziTone"

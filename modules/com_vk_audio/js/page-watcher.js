@@ -16,6 +16,7 @@
       getPlayerVolume()
       processButtonClick_add()
       processButtonClick_next()
+      processButtonClick_previous()
       processButtonClick_playStop()
       processButtonClick_mute()
       processButtonClick_unmute()
@@ -32,6 +33,7 @@
       onFeedbackDialogAppearance()
       addTrackToPlaylist()
       playNextTrack()
+      playPreviousTrack()
       hideOrKeepPlayerVisibleFull()
       sendSameMessage()
       setTrackInfoAndSend()
@@ -66,6 +68,7 @@ var
   , strAddTrackToPlaylistBtnId            = 'pd_add'
   , strAddTrackToPlaylistBtnAddedClass    = 'added'
   , strPlayNextTrackBtnId                 = 'pd_next'
+  , strPlayPreviousTrackBtnId             = 'pd_prev'
   , strPlayStopBtnPlayerLiteContainerId   = 'gp_play_btn'
   , strPlayStopBtnPlayerLiteId            = 'gp_play'
 
@@ -73,6 +76,7 @@ var
   , $addTrackToPlaylistBtn
   , $addTrackToPlaylistResponse
   , $playNextTrackBtn
+  , $playPreviousTrackBtn
 
   , $playStopBtnHeader                    = 
       document.getElementById( 'head_play_btn' )
@@ -116,6 +120,7 @@ var
           , strStatus                     : ''
           , strPreviousStatus             : ''
           , boolCanPlayNextTrackLoggedOut : false
+          , boolCanPlayPreviousTrackLoggedOut : false
         }
         // When set of vars changes check Background.saveRecentTrackInfo, Log
       , objStationInfo                    : {
@@ -235,6 +240,26 @@ var
     };
 
     PageWatcher.playNextTrack( funcElse );
+  }
+  ,
+
+  /**
+   * Simulate "Previous track" player method
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  processButtonClick_previous : function() {
+    var funcElse = function() {
+      boolWasPlayerVisibleFullShown = false;
+      PageWatcher.initBodyObserver( strPlayerVisibleFullId, 'previous' );
+
+      if ( document.contains( $playerVisibleLiteClickable ) )
+        $playerVisibleLiteClickable.click();
+    };
+
+    PageWatcher.playPreviousTrack( funcElse );
   }
   ,
 
@@ -664,6 +689,8 @@ var
       // TODO: Analyze which one is more popular, and check for it first
       if ( strAction === 'next' )
         funcWhenFullOpacity = function() { PageWatcher.playNextTrack(); };
+      else if ( strAction === 'previous' )
+        funcWhenFullOpacity = function() { PageWatcher.playPreviousTrack(); };
       else if ( strAction === 'add' )
         funcWhenFullOpacity = function() { PageWatcher.addTrackToPlaylist(); };
 
@@ -785,7 +812,7 @@ var
   ,
 
   /**
-   * Add track to playlist if button is present.
+   * Play next track if button is present.
    *
    * @type    method
    * @param   funcElse
@@ -800,6 +827,31 @@ var
       DisconnectableObserver.disconnect();
 
       $playNextTrackBtn.click();
+
+      PageWatcher.hideOrKeepPlayerVisibleFull();
+    }
+    else if ( typeof funcElse === 'function' )
+      funcElse();
+  }
+  ,
+
+  /**
+   * Play previous track if button is present.
+   *
+   * @type    method
+   * @param   funcElse
+   *            Do if button is not present
+   * @return  void
+   **/
+  playPreviousTrack : function( funcElse ) {
+    $playPreviousTrackBtn = 
+      document.getElementById( strPlayPreviousTrackBtnId );
+
+    if ( document.contains( $playPreviousTrackBtn ) ) {
+      // disconnect initPlayerFullOpacityObserver()
+      DisconnectableObserver.disconnect();
+
+      $playPreviousTrackBtn.click();
 
       PageWatcher.hideOrKeepPlayerVisibleFull();
     }

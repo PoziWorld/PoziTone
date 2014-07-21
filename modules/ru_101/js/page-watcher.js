@@ -96,6 +96,7 @@ var
           , strStatus                     : ''
           , strPreviousStatus             : ''
           , boolCanPlayNextTrackLoggedOut : false
+          , boolCanPlayPreviousTrackLoggedOut : false
         }
         // When set of vars changes check Background.saveRecentTrackInfo, Log
       , objStationInfo                    : {

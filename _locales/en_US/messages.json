@@ -39,6 +39,14 @@
       "message": "Track switched"
     }
   ,
+  "notificationButtonsPreviousTitle": {
+    "message": "Previous track"
+  }
+    ,
+    "notificationButtonsPreviousFeedback": {
+      "message": "Track switched"
+    }
+  ,
   "notificationButtonsPlayTitle": {
     "message": "Play"
   }
@@ -245,6 +253,14 @@
             ,
             "optionsSettingsNotificationButtonsNextAuthRequired": {
               "message": "Next track <small>(authorization required on site)</small>"
+            }
+            ,
+            "optionsSettingsNotificationButtonsPrevious": {
+              "message": "Previous track"
+            }
+            ,
+            "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+              "message": "Previous track <small>(authorization required on site)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPlayStop": {

@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.1.2.2"
+  , "version"                   : "0.1.2.3"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -44,6 +44,9 @@
         }
       , "next"                  : {
             "description"       : "Next track"
+        }
+      , "previous"              : {
+            "description"       : "Previous track"
         }
       , "playStop"              : {
             "suggested_key"     : {

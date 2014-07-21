@@ -130,6 +130,18 @@ var Global                        = {
               , strFunction       : 'next'
             }
         }
+      , previous                  : {
+            previous              : {
+                objButton         : {
+                    title         : 
+                      chrome.i18n.getMessage(
+                        'notificationButtonsPreviousTitle'
+                      )
+                  , iconUrl       : 'img/playback_prev_icon&16.png'
+                }
+              , strFunction       : 'previous'
+            }
+        }
       , playStop                  : {
             play                  : {
                 objButton         : {
@@ -433,7 +445,8 @@ var Global                        = {
                                   objTempPlayerInfo
                                     .boolCanPlayNextTrackLoggedOut ===
                                       'undefined'
-                            ||  objTempPlayerInfo.boolCanPlayNextTrackLoggedOut
+                            ||  objTempPlayerInfo
+                                  .boolCanPlayNextTrackLoggedOut
                           )
                     )
               ) {
@@ -445,6 +458,30 @@ var Global                        = {
                 );
 
                 arrActiveButtons.push( 'next|next' );
+              }
+
+              if (
+                    arrButtons.indexOf( 'previous' ) !== -1
+                &&  (
+                          boolIsUserLoggedIn
+                      ||  (
+                                typeof
+                                  objTempPlayerInfo
+                                    .boolCanPlayPreviousTrackLoggedOut ===
+                                      'undefined'
+                            ||  objTempPlayerInfo
+                                  .boolCanPlayPreviousTrackLoggedOut
+                          )
+                    )
+              ) {
+                objNotificationOptions.buttons.push(
+                  Global.addShortcutInfo(
+                      objNotificationButtons.previous.previous.objButton
+                    , 'previous'
+                  )
+                );
+
+                arrActiveButtons.push( 'previous|previous' );
               }
 
               if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {

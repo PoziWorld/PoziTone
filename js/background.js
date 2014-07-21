@@ -955,7 +955,9 @@ chrome.commands.onCommand.addListener(
       var strMessagePrefix = Background.strProcessCommand;
 
       // For these it's the same as button click
-      if ( ~ [ 'add', 'favorite', 'next', 'playStop' ].indexOf( strCommand ) )
+      var arrCommands = [ 'add', 'favorite', 'next', 'previous', 'playStop' ];
+
+      if ( ~ arrCommands.indexOf( strCommand ) )
         strMessagePrefix = Background.strProcessButtonClick;
 
       var

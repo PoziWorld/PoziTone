@@ -29,6 +29,7 @@ Keyboard shortcuts:
 Alt+Shift+D — “Add track to playlist”.
 Alt+Shift+F — “I like it!” (not preset).
 Alt+Shift+N — “Next track” (not preset).
+Alt+Shift+B — “Previous track” (not preset).
 Alt+Shift+P — “Stop / Play”.
 Alt+Shift+M — “Mute / Unmute”.
 Alt+Shift+Q — “Show notification”.

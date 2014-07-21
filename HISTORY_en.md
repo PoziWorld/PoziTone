@@ -1,10 +1,18 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.3
+    * New available button – “Previous track” (only for VK).
+      We recommend you set the keyboard shortcut to Alt+Shift+B (see demo below).
+      Idea by Samson Karapetyan, Ilya Ilya.
+[![Demo: PoziTone keyboards shortcuts, “Previous track”](https://cloud.githubusercontent.com/assets/8120840/3534655/a7c7ce58-07ef-11e4-89a5-c7b52e92b943.png)](https://cloud.githubusercontent.com/assets/8120840/3639683/95db0482-1085-11e4-8211-83bfb09c3d9b.gif)
+
 ### v0.1.2.2
-    * PoziTone is now available in Polish. Translation by jurczak (Łukasz Jurczak).
+    * PoziTone is now available in Polish.
+      Translation by jurczak (Łukasz Jurczak).
 
 ### v0.1.2.1
-    * PoziTone is now available in Spanish. Translation by Paco_Zamo (Francisco Zamorano).
+    * PoziTone is now available in Spanish.
+      Translation by Paco_Zamo (Francisco Zamorano).
 
 ### v0.1.2.0
     * First stable version.
@@ -21,7 +29,8 @@
 
 ### v0.0.2.15
     * Added an ability to assign keyboard shortcuts for the “I like it!” action.
-    * Display keyboard shortcuts on the buttons on the notification. Idea by Alexander Predko.
+    * Display keyboard shortcuts on the buttons on the notification. 
+      Idea by Alexander Predko.
 
 ### v0.0.2.14
     * Added an ability to assign keyboard shortcuts for the “Next track” action.
@@ -49,7 +58,8 @@
     * Fixed: keyboard shortcuts presses logic from the previous version did not work correctly when 101.ru player was active.
 
 ### v0.0.2.7
-    * Now when pressing keyboard shortcuts, PoziTone first sends a command to the latest active player. In a case when there is no active player (for example, the tab had been closed), a player (a tab with the player) opened earlier than others will get the command.
+    * Now when pressing keyboard shortcuts, PoziTone first sends a command to the latest active player.
+      In a case when there is no active player (for example, the tab had been closed), a player (a tab with the player) opened earlier than others will get the command.
 
 ### v0.0.2.6
     * Fixed: the buttons on the notification could execute wrong action when playback is active at the same time on 101.ru and VK, and each player's set of the enabled buttons is different.
@@ -81,7 +91,8 @@
 ### v0.0.2.0
     * Added support for VK's audio player (only on full version of the site - vk.com).
     * Separate settings for each player.
-    * New available button – “Next track” (only for VK). Idea by Nikita Maslennikov.
+    * New available button – “Next track” (only for VK). 
+      Idea by Nikita Maslennikov.
     * Now when the pop-up notification is clicked, a tab with that player will be found and activated.
     * Added a draft PoziTone API: third-party developers will be able to create the extensions for other players; those extensions will send a required information to PoziTone, and PoziTone will take care of the rest.
     * Fixed some bugs:
@@ -96,7 +107,8 @@
     * Fixed a bug where repeated track info was saved on a player status change.
 
 ### v0.0.1.6
-    * Added “feedback” for the main actions. Now, after clicking a button on the notification or using keyboard shortcuts, a new notification will inform of a result of the performed action:
+    * Added “feedback” for the main actions. 
+      Now, after clicking a button on the notification or using keyboard shortcuts, a new notification will inform of a result of the performed action:
       * “Add track to playlist” - “Successfully added track to playlist” or “Track already in your playlist”;
       * “I like it!” - “Thank you for rewarding a DJ's hard work!”;
       * “Stop / Play” - “Playback started/stopped/resumed”;

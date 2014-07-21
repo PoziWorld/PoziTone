@@ -39,6 +39,14 @@
       "message": "Трек переключен"
     }
   ,
+  "notificationButtonsPreviousTitle": {
+    "message": "Предыдущий трек"
+  }
+    ,
+    "notificationButtonsPreviousFeedback": {
+      "message": "Трек переключен"
+    }
+  ,
   "notificationButtonsPlayTitle": {
     "message": "Возобновить воспроизведение"
   }
@@ -245,6 +253,14 @@
             ,
             "optionsSettingsNotificationButtonsNextAuthRequired": {
               "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
+            }
+            ,
+            "optionsSettingsNotificationButtonsPrevious": {
+              "message": "Предыдущий трек"
+            }
+            ,
+            "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+              "message": "Предыдущий трек <small>(требуется авторизация на сайте)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPlayStop": {

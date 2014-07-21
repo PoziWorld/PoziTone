@@ -68,6 +68,9 @@
   "optionsSettingsNotificationButtonsNext": {
     "message": "Pista siguiente"
   },
+  "notificationButtonsPreviousTitle": {
+    "message": "Pista anterior"
+  },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Silenciar / Reactivar "
   },
@@ -161,11 +164,17 @@
   "systemNotificationUpdatedDoNotNotify": {
     "message": "No notificar actualizaciones"
   },
+  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+    "message": "Pista anterior <small>(autorización expresa necesaria)</small>"
+  },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Si no hay información sobre lo que actualmente se está reproduciendo (aparece como \"...\" en el sitio web)"
   },
   "notificationPlayerStatusChangeResumed": {
     "message": "Reproducción reanudada"
+  },
+  "optionsSettingsNotificationButtonsPrevious": {
+    "message": "Pista anterior"
   },
   "popupNavRecentTracks": {
     "message": "Pistas recientes"
@@ -217,6 +226,9 @@
   },
   "optionsSettingsGeneralUeipDoNotJoin": {
     "message": "No participar"
+  },
+  "notificationButtonsPreviousFeedback": {
+    "message": "Cambio de pista"
   },
   "optionsSettingsGeneralUeipJoin": {
     "message": "Participar de forma anónima"
