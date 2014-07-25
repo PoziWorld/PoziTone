@@ -111,7 +111,7 @@
     "message": "Lubię to! <small>(Wymagana autoryzacja na stronie)</small>"
   },
   "optionsSettingsGeneralUpdatesNotify": {
-    "message": "Poinformuje mnie o aktualizacji"
+    "message": "Poinformuj mnie o aktualizacji"
   },
   "optionsContact": {
     "message": "Skontaktuj się z twórcami PoziTone"
@@ -144,7 +144,7 @@
     "message": "Kiedy odtwarzanie nie jest uruchomione / zatrzymane"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "Szukasz jakichś utworów?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+    "message": "Szukasz czegoś do posłuchania?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
   },
   "module_general": {
     "message": "Główne ustawienia"
@@ -168,7 +168,7 @@
     "message": "Poprzedni utwór <small>(Wymagana autoryzacja na stronie)</small>"
   },
   "optionsSettingsDisplayWhenNoTrackInfo": {
-    "message": "Jeśli nie ma informacji co jest aktualnie odtwarzane (wyświetlone jako \"...\" na stronie)"
+    "message": "Jeśli nie ma informacji co jest aktualnie odtwarzane (wyświetlone zostaje na stronie \"...\")"
   },
   "notificationPlayerStatusChangeResumed": {
     "message": "Odtwarzanie wznowione"
@@ -189,7 +189,7 @@
     "message": "Zatrzymaj odtwarzanie"
   },
   "optionsSettingsNotificationButtonsPlayStop": {
-    "message": "Zatrzymaj odtwarzanie / Odtwarzaj"
+    "message": "Odtwarzaj / Zatrzymaj odtwarzanie"
   },
   "optionsSettingsNotificationButtonsAddAuthRequired": {
     "message": "Dodaj utwór do listy odtwarzania <small>(Wymagana autoryzacja na stronie)</small>"
@@ -201,7 +201,7 @@
     "message": "Skróty klawiaturowe"
   },
   "optionsSettingsSupport": {
-    "message": "Wesprzyj ten odtwarzacz"
+    "message": "Stan odtwarzacza"
   },
   "notificationButtonsPlayTitle": {
     "message": "Odtwarzaj"
@@ -213,7 +213,7 @@
     "message": "Lubię to!"
   },
   "optionsSettingsNotificationIconFormat": {
-    "message": "Ikony powiadomień"
+    "message": "Ikona powiadomień"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Zobacz zmiany"
