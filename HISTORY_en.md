@@ -7,6 +7,7 @@
       * “Find on Amazon”;
       * “Copy to clipboard”.
       Idea by Alexander Predko.
+[![Demo: PoziTone. Actions with Recent tracks](https://cloud.githubusercontent.com/assets/8120840/3534655/a7c7ce58-07ef-11e4-89a5-c7b52e92b943.png)](https://cloud.githubusercontent.com/assets/8120840/3716427/527c31ca-160c-11e4-9f5e-52038a5799d1.gif)
 
 ### v0.1.2.3
     * New available button – “Previous track” (only for VK).
