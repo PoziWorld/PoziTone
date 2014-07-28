@@ -44,8 +44,7 @@
  ============================================================================ */
 
 var Background                    = {
-    strVersion                    : chrome.runtime.getManifest().version
-  , strObjOpenTabsName            : 'objOpenTabs'
+    strObjOpenTabsName            : 'objOpenTabs'
   , objPreservedSettings          : {}
   , strPreviousTrack              : ''
   , arrTrackInfoPlaceholders      : [
@@ -419,6 +418,14 @@ var Background                    = {
    * @return  void
    **/
   onMessageCallback : function( objMessage, objSender, objSendResponse ) {
+    // A page asking to track some event
+    var strReceiver = objMessage.strReceiver;
+
+    if ( typeof strReceiver === 'string' && strReceiver === 'background' ) {
+      Log.add( objMessage.strLog, objMessage.objVars, true );
+      return;
+    }
+
     strLog = 'onMessageCallback';
     Log.add( strLog, objMessage );
 
@@ -733,11 +740,11 @@ var Background                    = {
     var strUrl  = Background.strChangelogUrl
                     .replace(
                         Background.strVersionParam
-                      , Background.strVersion
+                      , strConstExtensionVersion
                     )
                     .replace(
                         Background.strLangParam
-                      , chrome.i18n.getMessage( 'lang' )
+                      , strConstExtensionLanguage
                     );
 
     Global.createTabOrUpdate( strUrl );
@@ -1073,12 +1080,13 @@ chrome.commands.onCommand.addListener(
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
     strLog                        = 'chrome.runtime.onInstalled';
-    objDetails.currentVersion     = Background.strVersion;
+    objDetails.currentVersion     = strConstExtensionVersion;
     objDetails.browserName        = bowser.name;
     objDetails.browserVersion     = bowser.version;
     objDetails.browserVersionFull = bowser.versionFull;
     objDetails.chromeVersion      = bowser.chromeVersion;
     objDetails.chromeVersionFull  = bowser.chromeVersionFull;
+    objDetails.language           = strConstExtensionLanguage;
     objDetails.userAgent          = bowser.userAgent;
 
     objDetails.boolWasUpdated     = (

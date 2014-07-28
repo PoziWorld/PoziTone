@@ -1,5 +1,13 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.4
+    * Added things to do with the Recent tracks (mouse over the image to the left of the track info):
+      * “Find on VK”;
+      * “Find on Google”;
+      * “Find on Amazon”;
+      * “Copy to clipboard”.
+      Idea by Alexander Predko.
+
 ### v0.1.2.3
     * New available button – “Previous track” (only for VK).
       We recommend you set the keyboard shortcut to Alt+Shift+B (see demo below).
@@ -22,14 +30,14 @@
 
 ### v0.0.2.17
     * Now, when being updated, PoziTone displays a notification with a button to open a changelog page.
-    * Added an Options opening button from Recent tracks.
+    * Added an Options opening button from the Recent tracks.
 
 ### v0.0.2.16
     * Options page now has a way to disable keyboard shortcuts tips for commands on the notification.
 
 ### v0.0.2.15
     * Added an ability to assign keyboard shortcuts for the “I like it!” action.
-    * Display keyboard shortcuts on the buttons on the notification. 
+    * Display keyboard shortcuts on the buttons on the notification.
       Idea by Alexander Predko.
 
 ### v0.0.2.14

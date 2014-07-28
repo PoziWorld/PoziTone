@@ -104,21 +104,26 @@
     }
   #recentTracks
     {
-      margin:                 1.4em 0 1.4em 1.8em;
+      margin:                 1.15em 0 1.4em 1.8em;
     }
-  #recentTracks li
+  .recentTrack
     {
-      line-height:            normal;
-      margin:                 0 0 .5em;
+      line-height:            normal !important;
+      padding:                .25em 0;
+      transition:             all .1s ease;
     }
-  #recentTracks img
+  .recentTrack:hover
+    {
+      background-color:       #fafafa;
+    }
+  .recentTrackImg
     {
       display:                inline-block;
       vertical-align:         top;
       width:                  3.2em;
       height:                 3.2em;
     }
-  #recentTracks span
+  .recentTrackInfo
     {
       display:                inline-block;
       vertical-align:         top;
@@ -126,4 +131,60 @@
       line-height:            1.5em;
       padding:                .7em 0 0 .55em;
       max-width:              35em;
+    }
+  .recentTrackActions
+    {
+      display:                none;
+      width:                  0;
+      height:                 0;
+    }
+  .recentTrack:hover .recentTrackActions
+    {
+      display:                block;
+      position:               absolute;
+      top:                    .25em;
+      width:                  3.2em;
+      height:                 3.2em;
+      background-color:       inherit;
+      background-image:       url(/img/cogs_icon&24.png);
+      background-position:    .4em .4em;
+      background-repeat:      no-repeat;
+      overflow:               hidden;
+      transition:             all .4s ease;
+}
+  .recentTrack:hover .recentTrackActions:hover
+    {
+      width:                  100%;
+      height:                 100%;
+    }
+  .recentTrackActionsList
+    {
+      height:                 100%;
+      margin-left:            4.3em !important;
+    }
+  .recentTrackActionsListItem
+    {
+      float:                  left;
+      padding:                .4em 0;
+      line-height:            normal !important;
+    }
+  .recentTrackAction
+    {
+      margin:                 0 .917em 0 0;
+      width:                  2em;
+      height:                 2em;
+      cursor:                 pointer;
+    }
+  .recentTrackActionImg
+    {
+      margin-top:             .15em;
+      width:                  1.333em;
+      height:                 1.333em;
+    }
+  .copyToClipboardSuccess
+    {
+      position:               absolute;
+      top:                    50%;
+      left:                   50%;
+      margin:                 -.666em 0 0 -.666em;
     }

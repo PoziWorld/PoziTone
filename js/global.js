@@ -43,6 +43,8 @@
 
 const
     strConstExtensionName           = chrome.i18n.getMessage( 'extensionName' )
+  , strConstExtensionVersion        = chrome.runtime.getManifest().version
+  , strConstExtensionLanguage       = chrome.i18n.getMessage( 'lang' )
   , strConstNotificationIdSeparator = '_'
   , strConstNotificationId          = 
       strConstExtensionName + strConstNotificationIdSeparator

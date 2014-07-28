@@ -86,15 +86,37 @@ var Page = {
         }
         else if ( $localizableElement.nodeName === 'IMG' )
           $localizableElement.alt = strMessage;
-        else
+        else if ( ! $localizableElement.classList.contains( 'i18nNoInner' ) )
           $localizableElement.innerHTML = strMessage;
 
         if ( $localizableElement.classList.contains( 'i18nTitle' ) )
           $localizableElement.setAttribute( 'title', strMessage );
     }
 
-    document.title = 
-      chrome.i18n.getMessage( 'pozi' + strPageName + 'PageTitle' );
+    document.title = chrome.i18n.getMessage( strPageName + 'Title' );
+  }
+  ,
+
+  /**
+   * Let user know something was successful
+   *
+   * @type    method
+   * @param   $element
+   *            Element which will be a success indicator
+   * @return  void
+   **/
+  showSuccess : function( $element ) {
+    $element.classList.remove( 'show' );
+
+    // Does not work the second time if there is no timeout
+    setTimeout(
+        function() {
+          $element.classList.add( 'reset' );
+          $element.classList.remove( 'reset' );
+          $element.classList.add( 'show' );
+        }
+      , 10
+    );
   }
 };
 

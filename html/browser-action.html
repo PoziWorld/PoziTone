@@ -41,14 +41,82 @@
         <h1 i18n-content="popupNavRecentTracksH1" class="pageHeading"></h1>
         <section class="subpage">
           <ul id="recentTracks">
-            <li>
+            <li class="recentTrack">
               <span i18n-content="popupNavRecentTracksPlaceholder"></span>
             </li>
           </ul>
           <script type="text/html" id="recentTrackRow">
-            <li>
-              <img src="%src%" alt="%alt%" title="%alt%" />
-              <span>%track%</span>
+            <li class="recentTrack">
+              <img src="%src%" class="recentTrackImg" alt="%alt%" />
+              <span class="recentTrackInfo">%track%</span>
+              <aside class="recentTrackActions">
+                <ul
+                  class="recentTrackActionsList clearfix"
+                  data-track="%track%"
+                    >
+                  <li class="recentTrackActionsListItem">
+                    <button
+                      class="providerAction recentTrackAction cta
+                        i18nNoInner i18nTitle"
+                      data-provider="vk"
+                      i18n-content="findOnVk"
+                        >
+                        <img
+                          src="/img/vk-icon-16.png"
+                          class="recentTrackActionImg"
+                          alt=""
+                            />
+                    </button>
+                  </li>
+                  <li class="recentTrackActionsListItem">
+                    <button
+                      class="providerAction recentTrackAction cta
+                        i18nNoInner i18nTitle"
+                      data-provider="google"
+                      i18n-content="findOnGoogle"
+                        >
+                        <img
+                          src="/img/google-icon-16.png"
+                          class="recentTrackActionImg"
+                          alt=""
+                            />
+                    </button>
+                  </li>
+                  <li class="recentTrackActionsListItem">
+                    <button
+                      class="providerAction recentTrackAction cta
+                        i18nNoInner i18nTitle"
+                      data-provider="amazon"
+                      i18n-content="findOnAmazon"
+                        >
+                        <img
+                          src="/img/amazon-icon-16.png"
+                          class="recentTrackActionImg"
+                          alt=""
+                            />
+                    </button>
+                  </li>
+                  <li class="recentTrackActionsListItem">
+                    <button
+                      class="copyToClipboard recentTrackAction cta
+                        i18nNoInner i18nTitle"
+                      i18n-content="copyToClipboard"
+                      >
+                        <img
+                          src="/img/clipboard_copy_icon&16.png"
+                          class="fadeOutFadeIn recentTrackActionImg"
+                          alt=""
+                            />
+                        <img
+                          src="/img/checkmark-success-icon-16.png"
+                          class="copyToClipboardSuccess 
+                            fadeInFadeOut recentTrackActionImg"
+                          alt=""
+                            />
+                    </button>
+                  </li>
+                </ul>
+              </aside>
             </li>
           </script>
         </section>

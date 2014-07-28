@@ -73,7 +73,7 @@ var Options = {
    * @return  void
    **/
   init : function() {
-    Page.localize( 'Options' );
+    Page.localize( 'options' );
     Options.setPageValues();
     Options.getAvailableOptions();
     Options.populateModulesList();
@@ -190,8 +190,6 @@ var Options = {
    * @return  void
    **/
   onSettingChange : function( objEvent ) {
-    $settingsSaved.className = 'reset';
-
     var
         $this                 = objEvent.target
       , objTemp               = {}
@@ -249,7 +247,7 @@ var Options = {
         }
 
         chrome.storage.sync.set( objReturn, function() {
-          $settingsSaved.className = 'show';
+          Page.showSuccess( $settingsSaved );
 
           // Debug
           chrome.storage.sync.get( null, function(data) {
@@ -449,8 +447,8 @@ var Options = {
    * @return  void
    **/
   displayCurrentVersion : function() {
-    document.getElementById( strVersionId ).innerHTML =
-      chrome.runtime.getManifest().version;
+    document.getElementById( strVersionId ).innerHTML = 
+      strConstExtensionVersion;
   }
   ,
 

@@ -30,21 +30,6 @@
       height:                 5.3em;
       background:             #fff;
     }
-  #settingsSaved
-    {
-      display:                none;
-    }
-  .show#settingsSaved
-    {
-      display:                inline;
-      opacity:                0;
-      -webkit-animation:      fadeInFadeOut 2s ease 0s forwards;
-              animation:      fadeInFadeOut 2s ease 0s forwards;
-    }
-  .reset#settingsSaved
-    {
-      opacity:                1;
-    }
   #chooseSubpageForm
     {
       position:               absolute;
@@ -78,20 +63,6 @@
       text-align:             center;
     }
 
-@-webkit-keyframes fadeInFadeOut
-    {
-      0%   { opacity: 0; }
-      50%  { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-@keyframes fadeInFadeOut
-    {
-      0%   { opacity: 0; }
-      50%  { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
 /* =============================================================================
 
   1. About
@@ -117,38 +88,10 @@
   .supportMenuItem
     {
       float:                  left;
-      font-size:              1.2em;
       line-height:            2em;
       margin:                 0 .833em 0 0;
       padding:                0 .833em;
       min-width:              4em;
-      background-image:       -webkit-linear-gradient(
-                                  #ededed
-                                , #ededed 38%
-                                , #dedede
-                              );
-      border:                 .083em solid rgba( 0, 0, 0, .25 );
-      border-radius:          .167em;
-      box-shadow:             0 .083em 0 rgba( 0, 0, 0, .08 ),
-                              inset 0 .083em .167em rgba( 255, 255, 255, .75 );
-      color:                  #444;
-      outline:                none;
-      text-shadow:            0 .083em 0 rgb( 240, 240, 240 );
-      text-align:             center;
-      text-decoration:        none;
-    }
-  .supportMenuItem:hover
-    {
-      background-image:       -webkit-linear-gradient(
-                                  #f0f0f0
-                                , #f0f0f0 38%
-                                , #e0e0e0
-                              );
-      border-color:           rgba( 0, 0, 0, .3 );
-      box-shadow:             0 .083em 0 rgba( 0, 0, 0, .12 ),
-                              inset 0 .083em .167em rgba( 255, 255, 255, .95 );
-      color:                  #000;
-      text-decoration:        none;
     }
   #versionInfo
     {
