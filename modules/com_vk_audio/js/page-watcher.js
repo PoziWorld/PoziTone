@@ -35,6 +35,7 @@
       playNextTrack()
       playPreviousTrack()
       hideOrKeepPlayerVisibleFull()
+      getKbpsInfoThenSendMessage()
       sendSameMessage()
       setTrackInfoAndSend()
   2. Listeners
@@ -50,17 +51,12 @@
 
  ============================================================================ */
 
-var
+const
   // Player
     strPlayerId                           = 'player'
   , strPlayerVisibleLiteId                = 'gp'
   , strPlayerVisibleLiteClickableId       = 'gp_info'
   , strPlayerVisibleFullId                = 'pad_wrap'
-  , boolWasPlayerVisibleFullShown         = false
-
-  , $player
-  , $playerVisibleLiteClickable
-  , $playerVisibleFull
 
   // Buttons
   , strPlayerVisibleFullToolbarId         = 'pd'
@@ -72,37 +68,54 @@ var
   , strPlayStopBtnPlayerLiteContainerId   = 'gp_play_btn'
   , strPlayStopBtnPlayerLiteId            = 'gp_play'
 
-  , $playerVisibleFullToolbar
-  , $addTrackToPlaylistBtn
-  , $addTrackToPlaylistResponse
-  , $playNextTrackBtn
-  , $playPreviousTrackBtn
-
   , $playStopBtnHeader                    = 
       document.getElementById( 'head_play_btn' )
-  , $playStopBtnPlayerLiteContainer
-  , $playStopBtnPlayerLite
-  , $mainPlayStopBtn                      = $playStopBtnHeader
 
   // Track title and performer
   , strTrackPerformerContainerId          = 'gp_performer'
   , strTrackTitleContainerId              = 'gp_title'
   , strPerformerTitleDivider              = ' - '
 
-  , $trackPerformer
-  , $trackTitle
-
   // Others
   , strVolumeLineId                       = 'pd_vol_line'
   , strFeedbackDialogClass                = 'top_result_baloon_wrap'
   , strFeedbackDialogHeaderClass          = 'top_result_header'
+  , strNotificationSeparator              = "\n\n"
+  , strModuleSettingsPrefix               = 'objSettings_'
   , boolIsLogOutButtonPresent             = 
       document.contains( document.getElementById( 'logout_link' ) )
 
   // Module
   , strModule                             = 'com_vk_audio'
   , strImgPath                            = 'modules/' + strModule + '/img/'
+  ;
 
+var
+  // Player
+    boolWasPlayerVisibleFullShown         = false
+
+  , $player
+  , $playerVisibleLiteClickable
+  , $playerVisibleFull
+
+  // Buttons
+  , $playerVisibleFullToolbar
+  , $addTrackToPlaylistBtn
+  , $addTrackToPlaylistResponse
+  , $playNextTrackBtn
+  , $playPreviousTrackBtn
+
+  , $playStopBtnPlayerLiteContainer
+  , $playStopBtnPlayerLite
+  , $mainPlayStopBtn                      = $playStopBtnHeader
+
+  // Track title and performer
+  , $trackPerformer
+  , $trackTitle
+
+  // Others
+  , intKbpsInfoIntervalAttempts           = 0
+  , intKbpsInfoIntervalAttemptsMax        = 10
   , DisconnectableObserver                = null
 
   , PageWatcher                           = {
@@ -129,6 +142,7 @@ var
           , strLogoUrl                    : '/' + strImgPath + 'VK_logo-32.png'
           , strLogoDataUri                : strImgPath + 'VK_logo-80.png'
           , strTrackInfo                  : ''
+          , strAdditionalInfo             : ''
           , boolHasAddToPlaylistButton    : boolIsLogOutButtonPresent
         }
   ,
@@ -346,7 +360,7 @@ var
    * @return  void
    **/
   processCommand_showNotification : function() {
-    PageWatcher.sendSameMessage( '', 'showNotification' );
+    PageWatcher.getKbpsInfoThenSendMessage( '', 'showNotification' );
   }
   ,
 
@@ -494,7 +508,7 @@ var
                 PageWatcher.initTrackTitleObserver();
               }
 
-              PageWatcher.sendSameMessage( strLangStartedOrResumed );
+              PageWatcher.getKbpsInfoThenSendMessage( strLangStartedOrResumed );
 
               PageWatcher.boolHadPlayedBefore   = true;
               PageWatcher.boolWasPageJustLoaded = false;
@@ -542,7 +556,7 @@ var
               ;
 
             if ( arrAddedNodes.length ) {
-              // Wait till play stop button gets appended to lite player.
+              // Wait till play/stop button gets appended to lite player.
               if (
                 arrAddedNodes[ 0 ]
                   .children[ 0 ]
@@ -595,7 +609,7 @@ var
               ;
 
             if ( objMutationRecord.target.textContent !== '' )
-              PageWatcher.setTrackInfoAndSend();
+              PageWatcher.getKbpsInfoThenSendMessage();
           };
         }
       ;
@@ -744,7 +758,7 @@ var
 
       PageWatcher.objPlayerInfo.strPreviousStatus = strPreviousStatus;
 
-      PageWatcher.sendSameMessage( strMessage );
+      PageWatcher.getKbpsInfoThenSendMessage( strMessage );
 
       PageWatcher.initTrackTitleObserver();
 
@@ -877,6 +891,115 @@ var
   ,
 
   /**
+   * Get CBR (constant bitrate) of a track.
+   *
+   * @type    method
+   * @param   strStatus
+   *            Optional. Additional playback info
+   * @param   strCommand
+   *            Optional. Which command made this call
+   * @return  void
+   **/
+  getKbpsInfoThenSendMessage : function( strStatus, strCommand ) {
+    var strModuleSettings = strModuleSettingsPrefix + strModule;
+
+    chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+      var objModuleSettings = objReturn[ strModuleSettings ];
+
+      // If set to show kbps info
+      if (
+            typeof objModuleSettings === 'object'
+        &&  typeof objModuleSettings.boolShowKbpsInfo === 'boolean'
+        &&  objModuleSettings.boolShowKbpsInfo
+      ) {
+        var
+            objLocalStorage = window.localStorage
+          , miscPlaylist    = objLocalStorage.pad_playlist
+          , strAudioId      = objLocalStorage.audio_id
+          ;
+
+        // localStorage vars got set up
+        if (
+              typeof strAudioId === 'string'
+          &&  typeof miscPlaylist === 'string'
+        ) {
+          intKbpsInfoIntervalAttempts = 0;
+
+          // Convert to object
+          miscPlaylist = JSON.parse( miscPlaylist );
+
+          // If playlist has no info about this track, do not continue
+          var objTrackInfo = miscPlaylist[ strAudioId.replace( /"/g, '' ) ];
+
+          if ( typeof objTrackInfo !== 'object' ) {
+            PageWatcher.setTrackInfoAndSend( true, strStatus, '', strCommand );
+            return;
+          }
+
+          var
+              strTrackUrl       = objTrackInfo[ 2 ]
+            , intTrackDuration  = parseInt( objTrackInfo[ 3 ] )
+            ;
+
+          if (
+                typeof strTrackUrl === 'string' && strTrackUrl !== ''
+            &&  typeof intTrackDuration === 'number'
+            && ! isNaN( intTrackDuration )
+          ) {
+            // Get file size
+            chrome.runtime.sendMessage(
+                {
+                    strReceiver     : 'background'
+                  , boolMakeCall    : true
+                  , objVars         : {
+                        strUrl      : strTrackUrl
+                    }
+                }
+              , function( intContentLength ) {
+                  var strKbpsInfo = undefined;
+
+                  if ( typeof intContentLength === 'number' ) {
+                    var intKbps = 
+                          Math.round(
+                            intContentLength / intTrackDuration / 125 / 32
+                          ) * 32;
+
+                    if ( intKbps > 320 )
+                      intKbps = 320;
+
+                    strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
+                  }
+
+                  PageWatcher.setTrackInfoAndSend(
+                      true
+                    , strStatus
+                    , strKbpsInfo
+                    , strCommand
+                  );
+              }
+            );
+          }
+        }
+        else if (
+          intKbpsInfoIntervalAttempts < intKbpsInfoIntervalAttemptsMax
+        ) {
+          // Wait till localStorage vars get set up
+          setTimeout(
+              function() {
+                PageWatcher.getKbpsInfoThenSendMessage( strStatus, strCommand );
+              }
+            , 100
+          );
+        }
+      }
+      // Not set to show kbps info
+      else
+        PageWatcher.setTrackInfoAndSend( true, strStatus, '', strCommand );
+    });
+  }
+  ,
+
+  /**
    * Send same message again (set of buttons needs to be changed)
    *
    * @type    method
@@ -884,13 +1007,17 @@ var
    *            Optional. Feedback for main actions
    * @param   strCommand
    *            Optional. Which command made this call
+   * @param   boolSetTrackInfo
+   *            Optional. Whether to set track info
    * @return  void
    **/
-  sendSameMessage : function( strFeedback, strCommand ) {
-    PageWatcher.setTrackInfoAndSend( false );
+  sendSameMessage : function( strFeedback, strCommand, boolSetTrackInfo ) {
+    if ( typeof boolSetTrackInfo === 'undefined' || boolSetTrackInfo )
+      PageWatcher.setTrackInfoAndSend( false );
 
-    if ( typeof strFeedback !== 'undefined' && strFeedback !== '' )
-      PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
+    PageWatcher.objStationInfo.strAdditionalInfo = 
+      ( typeof strFeedback === 'string' && strFeedback !== '' ) ?
+        strFeedback : '';
 
     chrome.runtime.sendMessage(
       {
@@ -911,18 +1038,31 @@ var
    * @param   boolSend
    *            Whether to set and send or just set
    * @param   strStatusMessage
-   *            Status message to append
+   *            Optional. Status message to append
+   * @param   strKbpsInfo
+   *            Optional. CBR of a track
+   * @param   strCommand
+   *            Optional. Which command made this call
    * @return  void
    **/
-  setTrackInfoAndSend : function( boolSend, strStatusMessage ) {
+  setTrackInfoAndSend : function(
+      boolSend
+    , strStatusMessage
+    , strKbpsInfo
+    , strCommand
+  ) {
     PageWatcher.objStationInfo.strTrackInfo = 
         $trackPerformer.innerText
       + strPerformerTitleDivider
       + $trackTitle.innerText
       ;
 
+    if ( typeof strKbpsInfo === 'string' && strKbpsInfo !== '' )
+      PageWatcher.objStationInfo.strTrackInfo += 
+        strNotificationSeparator + strKbpsInfo;
+
     if ( typeof boolSend === 'undefined' || boolSend )
-      PageWatcher.sendSameMessage( strStatusMessage );
+      PageWatcher.sendSameMessage( strStatusMessage, strCommand, false );
   }
 };
 

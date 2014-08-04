@@ -1,12 +1,17 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.5
+    * New: bitrate is now shown in the notification.
+      Idea by Vitalik Suhoviy, Alexander Savichev.
+![Demo: PoziTone. Bitrate is shown in the notification.](https://cloud.githubusercontent.com/assets/8120840/3794651/46e8d242-1bb0-11e4-9372-e04682069725.png)
+
 ### v0.1.2.4
     * Added things to do with the Recent tracks (mouse over the image to the left of the track info):
       * “Find on VK”;
       * “Find on Google”;
       * “Find on Amazon”;
       * “Copy to clipboard”.
-      Idea by Alexander Predko.
+      Idea by Alexander Predko, Alexander Savichev.
 [![Demo: PoziTone. Actions with Recent tracks](https://cloud.githubusercontent.com/assets/8120840/3534655/a7c7ce58-07ef-11e4-89a5-c7b52e92b943.png)](https://cloud.githubusercontent.com/assets/8120840/3716427/527c31ca-160c-11e4-9f5e-52038a5799d1.gif)
 
 ### v0.1.2.3

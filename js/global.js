@@ -45,8 +45,11 @@ const
     strConstExtensionName           = chrome.i18n.getMessage( 'extensionName' )
   , strConstExtensionVersion        = chrome.runtime.getManifest().version
   , strConstExtensionLanguage       = chrome.i18n.getMessage( 'lang' )
-  , strConstNotificationIdSeparator = '_'
-  , strConstNotificationId          = 
+  , strConstChromeVersion           = bowser.chromeVersion
+
+  , strConstNotificationIdSeparator     = '_'
+  , strConstNotificationLinesSeparator  = "\n\n"
+  , strConstNotificationId              = 
       strConstExtensionName + strConstNotificationIdSeparator
   ;
 
@@ -312,6 +315,16 @@ var Global                        = {
                                     , intTabId
                                   )
       ;
+
+    // If Chrome supports showing additional info separately
+    if ( objStationInfo.strAdditionalInfo !== '' ) {
+      if ( strConstChromeVersion >= 31 )
+        objNotificationOptions.contextMessage = 
+          objStationInfo.strAdditionalInfo;
+      else
+        objNotificationOptions.message +=
+          strConstNotificationLinesSeparator + objStationInfo.strAdditionalInfo;
+    }
 
     // Clear notification for this tab first, then display a new one
     chrome.notifications.clear( strNotificationId, function() {

@@ -82,6 +82,11 @@
     "notificationButtonsUnmuteFeedback": {
       "message": "Звук включён"
     }
+  ,
+  "kbps": {
+      "description" : "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+    , "message"     : " кбит/с"
+  }
 
   ,
   "systemNotificationUpdated": {
@@ -207,6 +212,16 @@
             ,
             "optionsSettingsNotificationIconFormatShowVkLogo": {
               "message": "Отображать логотип ВКонтакте"
+            }
+
+          ,
+          "optionsSettingsAdditionalInfo": {
+            "message": "Дополнительная информация"
+          }
+            ,
+            "optionsSettingsAdditionalInfoShowCbr": {
+                "description" : "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+              , "message"     : "Отображать <a href=\"http://ru.wikipedia.org/wiki/%D0%91%D0%B8%D1%82%D1%80%D0%B5%D0%B9%D1%82#.D0.9F.D0.BE.D1.81.D1.82.D0.BE.D1.8F.D0.BD.D0.BD.D1.8B.D0.B9_.D0.B1.D0.B8.D1.82.D1.80.D0.B5.D0.B9.D1.82\" target=\"_blank\">постоянный битрейт</a>"
             }
 
           ,

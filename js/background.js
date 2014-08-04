@@ -274,6 +274,7 @@ var Background                    = {
                   boolIsEnabled                         : true
                 , boolShowNotificationLogo              : true
                 , strNotificationTitleFormat            : 'short'
+                , boolShowKbpsInfo                      : true
                 , arrNotificationButtons                : [
                                                               'add'
                                                             , 'muteUnmute'
@@ -285,6 +286,7 @@ var Background                    = {
             , objSettings_com_vk_audio                  : {
                   boolIsEnabled                         : true
                 , boolShowNotificationLogo              : true
+                , boolShowKbpsInfo                      : true
                 , arrNotificationButtons                : [
                                                               'add'
                                                             , 'next'
@@ -418,11 +420,32 @@ var Background                    = {
    * @return  void
    **/
   onMessageCallback : function( objMessage, objSender, objSendResponse ) {
-    // A page asking to track some event
     var strReceiver = objMessage.strReceiver;
 
     if ( typeof strReceiver === 'string' && strReceiver === 'background' ) {
-      Log.add( objMessage.strLog, objMessage.objVars, true );
+      // A page asking to track some event
+      var strMessageLog = objMessage.strLog;
+
+      // TODO: Only for internal messages
+      if ( typeof strMessageLog === 'string' )
+        Log.add( strMessageLog, objMessage.objVars, true );
+
+      // A page asking to make a call
+      var boolMakeCall = objMessage.boolMakeCall;
+
+      if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
+        var objXhr = new XMLHttpRequest();
+
+        objXhr.open( 'HEAD', objMessage.objVars.strUrl, false );
+        objXhr.onreadystatechange = function() {
+          if ( objXhr.readyState === 4 && objXhr.status === 200 )
+            objSendResponse( 
+              parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
+            );
+        }
+        objXhr.send();
+      }
+
       return;
     }
 
@@ -957,7 +980,14 @@ chrome.commands.onCommand.addListener(
 
     chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
       strLog = 'chrome.commands.onCommand';
-      Log.add( strLog, { strCommand : strCommand }, true );
+
+      // No saved data for some reason
+      if ( Global.isEmpty( objData ) ) {
+        Log.add( strLog + strLogNoSuccess, { strCommand : strCommand }, true );
+        return;
+      }
+      else
+        Log.add( strLog, { strCommand : strCommand }, true );
 
       var strMessagePrefix = Background.strProcessCommand;
 
@@ -1084,7 +1114,7 @@ chrome.runtime.onInstalled.addListener(
     objDetails.browserName        = bowser.name;
     objDetails.browserVersion     = bowser.version;
     objDetails.browserVersionFull = bowser.versionFull;
-    objDetails.chromeVersion      = bowser.chromeVersion;
+    objDetails.chromeVersion      = strConstChromeVersion;
     objDetails.chromeVersionFull  = bowser.chromeVersionFull;
     objDetails.language           = strConstExtensionLanguage;
     objDetails.userAgent          = bowser.userAgent;

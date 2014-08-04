@@ -1,12 +1,17 @@
 > This is a Russian version, see [HISTORY_en.md](HISTORY_en.md) for English.
 
+### v0.1.2.5
+    * Новое: отображение битрейта в уведомлении.
+      Идея — Vitalik Suhoviy, Александр Савичев.
+![Демо: PoziTone. Отображение битрейта в уведомлении](https://cloud.githubusercontent.com/assets/8120840/3794640/2552fb4e-1bb0-11e4-9f67-aa789743b601.png)
+
 ### v0.1.2.4
     * Добавлены действия для Последних треков (наведите курсор на изображение слева от трека):
       * «Найти ВКонтакте»;
       * «Найти в Google»;
       * «Найти на Amazon»;
       * «Копировать в буфер обмена».
-      Идея — Александр Предко.
+      Идея — Александр Предко, Александр Савичев.
 [![Демо: PoziTone. Действия с Последними треками](https://cloud.githubusercontent.com/assets/8120840/3534585/e3b12b5a-07ed-11e4-82e5-4aa4322a9484.png)](https://cloud.githubusercontent.com/assets/8120840/3716320/0c6d6a80-1609-11e4-9c9c-8085e0bc4dac.gif)
 
 ### v0.1.2.3

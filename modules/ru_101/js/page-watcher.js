@@ -43,33 +43,42 @@
 
  ============================================================================ */
 
-var
+const
     strPlayerId                           = 'radioplayer_sm'
-  , strTrackInfoContainerId               = 'titlesong'
   , strFavoriteButtonSuccessClass         = 'favok'
   , strFavoriteButtonSuccessClass2        = 'pollok'
-  , strStationName                        = 
+  , strStationName                        =
       document.getElementsByTagName( 'h1' )[0].innerText
 
-  , $stationLogo                          = 
+  , $stationLogo                          =
       document.getElementById( 'player-site' ).getElementsByTagName( 'img' )[0]
-  , $wmaPlayer                            = 
+  , $wmaPlayer                            =
       document.getElementsByName( 'MediaPlayer' )[0]
-  , $playStopButton                       = 
+  , $playStopButton                       =
       document.getElementsByClassName( 'general_play' )[0]
-  , $addTrackToPlaylistButton             = 
+  , $addTrackToPlaylistButton             =
       document.getElementById( 'addfavoritetracksfromair' )
-  , $addTrackToPlaylistResponse           = 
+  , $addTrackToPlaylistResponse           =
       document.getElementById( 'airfavmsg' )
-  , $favoriteButton                       = 
+  , $favoriteButton                       =
       document.getElementById( 'polltrackaction' )
-  , $trackInfo                            = 
-      document.getElementById( strTrackInfoContainerId )
+  , $trackInfo                            =
+      document.getElementById( 'titlesong' )
+  , $kbpsInfo                             =
+      document.querySelector( '#audio_set_content .last .active' )
 
-  , boolIsLoggedInMenuPresent             = 
+  , boolIsLoggedInMenuPresent             =
       document.contains( document.getElementById( 'user-account' ) )
+  , intKbps                               =
+      document.contains( $kbpsInfo ) ?
+        $kbpsInfo.innerText.replace( 'K', '' ) : 0
 
-  , PageWatcher                           = {
+  , strNotificationSeparator              = "\n\n"
+  , strModuleSettingsPrefix               = 'objSettings_'
+  , strModule                             = 'ru_101'
+  ;
+
+var PageWatcher                           = {
         boolIsUserLoggedIn                : boolIsLoggedInMenuPresent
 
       // Play/Stop button has class which is player status. 
@@ -87,7 +96,7 @@ var
       , strLogoBorderColor                : '#FFF'
 
       , objPlayerInfo                     : {
-            strModule                     : 'ru_101'
+            strModule                     : strModule
           , boolIsReady                   : document.contains( $playStopButton )
           , boolIsMp3Player               : ! document.contains( $wmaPlayer )
           , intVolume                     : 0
@@ -105,6 +114,7 @@ var
           , strLogoUrl                    : $stationLogo.src
           , strLogoDataUri                : null
           , strTrackInfo                  : $trackInfo.innerText
+          , strAdditionalInfo             : ''
           , boolHasAddToPlaylistButton    : false
         }
       , objAddTrackToPlaylistFeedback     : {
@@ -329,25 +339,66 @@ var
    * @type    method
    * @param   strFeedback
    *            Optional. Feedback for main actions
+   * @param   boolAppendKbpsInfo
+   *            Optional. Whether kbps info should be appended to the message
    * @param   strCommand
    *            Optional. Which command made this call
+   * @param   boolDisregardSameMessage
+   *            Optional. Whether to show the same message again or not
    * @return  void
    **/
-  sendSameMessage : function( strFeedback, strCommand ) {
+  sendSameMessage : function(
+      strFeedback
+    , boolAppendKbpsInfo
+    , strCommand
+    , boolDisregardSameMessage
+  ) {
     PageWatcher.objStationInfo.strTrackInfo = $trackInfo.innerText;
 
-    if ( typeof strFeedback !== 'undefined' && strFeedback !== '' )
-      PageWatcher.objStationInfo.strTrackInfo += "\n\n" + strFeedback;
+    PageWatcher.objStationInfo.strAdditionalInfo = 
+      ( typeof strFeedback === 'string' && strFeedback !== '' ) ?
+        strFeedback : '';
 
-    chrome.runtime.sendMessage(
-      {
-          boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
-        , boolDisregardSameMessage  : true
-        , objPlayerInfo             : PageWatcher.getPlayerInfo()
-        , objStationInfo            : PageWatcher.objStationInfo
-        , strCommand                : strCommand
-      }
-    );
+    var funcSend = function() {
+      if ( typeof boolDisregardSameMessage !== 'boolean' )
+        boolDisregardSameMessage = true;
+
+      chrome.runtime.sendMessage(
+        {
+            boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
+          , boolDisregardSameMessage  : boolDisregardSameMessage
+          , objPlayerInfo             : PageWatcher.getPlayerInfo()
+          , objStationInfo            : PageWatcher.objStationInfo
+          , strCommand                : strCommand
+        }
+      );
+    };
+
+    if ( typeof boolAppendKbpsInfo === 'boolean' && boolAppendKbpsInfo ) {
+      // Check settings whether kbps info should be shown
+      var strModuleSettings = strModuleSettingsPrefix + strModule;
+
+      chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+        var objModuleSettings = objReturn[ strModuleSettings ];
+
+        // If set to show kbps info and kbps info is available
+        if (
+              typeof objModuleSettings === 'object'
+          &&  typeof objModuleSettings.boolShowKbpsInfo === 'boolean'
+          &&  objModuleSettings.boolShowKbpsInfo
+          &&  intKbps !== 0
+        ) {
+          var strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
+
+          PageWatcher.objStationInfo.strTrackInfo += 
+            strNotificationSeparator + strKbpsInfo;
+        }
+
+        funcSend();
+      });
+    }
+    else
+      funcSend();
   }
   ,
 
@@ -378,7 +429,7 @@ var
    * @return  void
    **/
   processCommand_showNotification : function() {
-    PageWatcher.sendSameMessage( '', 'showNotification' );
+    PageWatcher.sendSameMessage( '', true, 'showNotification' );
   }
   ,
 
@@ -429,19 +480,21 @@ var
               return;
 
             if ( strPlayerStatus === 'stop' ) {
-              var strLangStartedOrResumed = 
+              var strLangStartedOrResumed =
                     chrome.i18n.getMessage(
                       'notificationPlayerStatusChangeResumed'
                     );
 
               if ( PageWatcher.boolWasPageJustLoaded )
-                strLangStartedOrResumed = 
+                strLangStartedOrResumed =
                   chrome.i18n.getMessage(
                     'notificationPlayerStatusChangeStarted'
                   );
 
               PageWatcher.boolHadPlayedBefore = true;
-              PageWatcher.sendSameMessage( strLangStartedOrResumed );
+
+              PageWatcher.sendSameMessage( strLangStartedOrResumed, true );
+
               PageWatcher.boolWasPageJustLoaded = false;
             }
             else if (
@@ -632,30 +685,27 @@ var
  * @param   objEvent
  * @return  void
  **/
-$trackInfo.addEventListener( 'DOMCharacterDataModified', function( objEvent ) {
-  PageWatcher.objStationInfo.strTrackInfo = objEvent.newValue;
+$trackInfo.addEventListener(
+    'DOMCharacterDataModified'
+  , function( objEvent ) {
+      // When WMA player starts, it should show "Playback started", same as MP3
+      if (
+            PageWatcher.boolWasPageJustLoaded
+        &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
+      ) {
+        PageWatcher.sendSameMessage(
+            chrome.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
+          , true
+        );
 
-  // When WMA player starts, it should show "Playback started", same way as MP3
-  if (
-        PageWatcher.boolWasPageJustLoaded
-    &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
-  ) {
-    PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
-    );
-    PageWatcher.boolWasPageJustLoaded = false;
-    return;
-  }
+        PageWatcher.boolWasPageJustLoaded = false;
+        return;
+      }
 
-  chrome.runtime.sendMessage(
-    {
-        boolIsUserLoggedIn        : PageWatcher.boolIsUserLoggedIn
-      , boolDisregardSameMessage  : false
-      , objPlayerInfo             : PageWatcher.getPlayerInfo()
-      , objStationInfo            : PageWatcher.objStationInfo
+      PageWatcher.sendSameMessage( '', true, '', false )
     }
-  );
-}, false);
+  , false
+);
 
 /**
  * Listens for command sent from Background.
