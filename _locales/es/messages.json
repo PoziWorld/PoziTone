@@ -32,6 +32,10 @@
   "optionsSettingsGeneralUeip": {
     "message": "Programa de Mejora de la Experiencia de Usuario de PoziTone"
   },
+  "kbps": {
+      "message": " kb/s"
+    , "description": "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+  },
   "optionsTerms": {
     "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">contrato de licencia</a>"
   },
@@ -65,6 +69,9 @@
   "module_com_vk_audio_long": {
     "message": "VK (audio) | vk.com"
   },
+  "findOnGoogle": {
+    "message": "Buscar en Google"
+  },
   "optionsSettingsNotificationButtonsNext": {
     "message": "Pista siguiente"
   },
@@ -73,6 +80,9 @@
   },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Silenciar / Reactivar "
+  },
+  "findOnAmazon": {
+    "message": "Buscar en Amazon"
   },
   "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
     "message": "Pista ya existente en lista de reproducción"
@@ -89,6 +99,10 @@
   "optionsSettingsChooseSubpage": {
     "message": "Escoge una página de configuración"
   },
+  "optionsSettingsAdditionalInfoShowCbr": {
+    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>",
+      "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+  },
   "optionsSettingsDisplayWhen": {
     "message": "Mostrar notificaciones"
   },
@@ -100,6 +114,9 @@
   },
   "optionsVersion": {
     "message": "Versión"
+  },
+  "optionsSettingsAdditionalInfo": {
+    "message": "Información adicional"
   },
   "optionsNavSettings": {
     "message": "Configuración"
@@ -200,6 +217,9 @@
   "optionsSettingsGeneralShortcuts": {
     "message": "Combinaciones de teclas"
   },
+  "findOnVk": {
+    "message": "Buscar en VK"
+  },
   "optionsSettingsSupport": {
     "message": "Patrocina el reproductor"
   },
@@ -247,6 +267,9 @@
   },
   "optionsSettingsNotificationTitleFormatShort": {
     "message": "Mostrar solo el nombre de esta estación"
+  },
+  "copyToClipboard": {
+    "message": "Copiar al portapapeles"
   },
   "optionsSettingsNotificationIconFormatShowVkLogo": {
     "message": "Mostrar logo VK"

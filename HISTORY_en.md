@@ -1,5 +1,10 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.1.2.6
+    * Fix for a case when keyboard shortcuts would not work.
+      Bug reported by Alik Voronov.
+    * Updated Polish and Spanish translations.
+
 ### v0.1.2.5
     * New: bitrate is now shown in the notification.
       Idea by Vitalik Suhoviy, Alexander Savichev.

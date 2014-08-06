@@ -773,13 +773,12 @@ var Global                        = {
       strLog = 'saveTabsIds';
       Log.add( strLog, intTabId );
 
-      var arrTabsIds = objData.arrTabsIds;
-
-      if ( typeof arrTabsIds === 'undefined' )
-        arrTabsIds = [];
+      if ( typeof objData.arrTabsIds === 'undefined' )
+        objData.arrTabsIds = [];
 
       var
-          intIndex      = Global.returnIndexOfSubitemContaining(
+          arrTabsIds    = objData.arrTabsIds
+        , intIndex      = Global.returnIndexOfSubitemContaining(
                               arrTabsIds
                             , intTabId
                           )

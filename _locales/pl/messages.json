@@ -32,6 +32,10 @@
   "optionsSettingsGeneralUeip": {
     "message": "PoziTone Program poprawy jakości obsługi użytkownika"
   },
+  "kbps": {
+      "message": " kb/s"
+    , "description": "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+  },
   "optionsTerms": {
     "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">umowa licencyjna</a>"
   },
@@ -65,6 +69,9 @@
   "module_com_vk_audio_long": {
     "message": "VK (Odtwarzacz) | vk.com"
   },
+  "findOnGoogle": {
+    "message": "Znajdź na Google"
+  },
   "optionsSettingsNotificationButtonsNext": {
     "message": "Następny utwór"
   },
@@ -73,6 +80,9 @@
   },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Włącz / Wyłącz dźwięk"
+  },
+  "findOnAmazon": {
+    "message": "Znajdź na Amazonie"
   },
   "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
     "message": "Utwór już znajduje się na twojej liście odtwarzania"
@@ -89,6 +99,10 @@
   "optionsSettingsChooseSubpage": {
     "message": "Wybierz strone ustawień"
   },
+  "optionsSettingsAdditionalInfoShowCbr": {
+      "message": "Display <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>"
+    , "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+  },
   "optionsSettingsDisplayWhen": {
     "message": "Powiadomienia"
   },
@@ -100,6 +114,9 @@
   },
   "optionsVersion": {
     "message": "Wersja"
+  },
+  "optionsSettingsAdditionalInfo": {
+    "message": "Additional information"
   },
   "optionsNavSettings": {
     "message": "Ustawienia"
@@ -200,6 +217,9 @@
   "optionsSettingsGeneralShortcuts": {
     "message": "Skróty klawiaturowe"
   },
+  "findOnVk": {
+    "message": "Znajdź na VK"
+  },
   "optionsSettingsSupport": {
     "message": "Stan odtwarzacza"
   },
@@ -247,6 +267,9 @@
   },
   "optionsSettingsNotificationTitleFormatShort": {
     "message": "Wyświetlaj tylko nazwę aktualnie odtwarzanej stacji "
+  },
+  "copyToClipboard": {
+    "message": "Skopiuj do schowka"
   },
   "optionsSettingsNotificationIconFormatShowVkLogo": {
     "message": "Wyświetlaj logo VK"
