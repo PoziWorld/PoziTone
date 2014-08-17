@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.1.2.6"
+  , "version"                   : "0.2.2.0"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -25,6 +25,7 @@
       , "notifications"
       , "storage"
       , "tabs"
+      , "unlimitedStorage"
     ]
   , "browser_action"            : {
         "default_icon"          : {
@@ -90,8 +91,9 @@
         "persistent"            : false
       , "scripts"               : [
             "js/tracking.js"
-          , "js/log.js"
           , "js/bowser.js"
+          , "js/const.js"
+          , "js/log.js"
           , "js/global.js"
           , "js/background.js"
         ]

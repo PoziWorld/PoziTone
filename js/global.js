@@ -41,18 +41,6 @@
 
  ============================================================================ */
 
-const
-    strConstExtensionName           = chrome.i18n.getMessage( 'extensionName' )
-  , strConstExtensionVersion        = chrome.runtime.getManifest().version
-  , strConstExtensionLanguage       = chrome.i18n.getMessage( 'lang' )
-  , strConstChromeVersion           = bowser.chromeVersion
-
-  , strConstNotificationIdSeparator     = '_'
-  , strConstNotificationLinesSeparator  = "\n\n"
-  , strConstNotificationId              = 
-      strConstExtensionName + strConstNotificationIdSeparator
-  ;
-
 var Global                        = {
     intNoVolume                   : 0
   , strNotificationIdSeparator    : strConstNotificationIdSeparator
@@ -63,8 +51,6 @@ var Global                        = {
   , strSystemNotificationIconUrl  : 'img/pozitone-notification-icon-80.png'
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
-  , strModuleSettingsPrefix       : 'objSettings_'
-  , strGeneralSettings            : 'general'
 
   // Embedded modules (replicates manifest's "content_scripts")
   , objModules                    : {
@@ -207,24 +193,20 @@ var Global                        = {
   ,
 
   /**
-   * Gets all the registered extension commands and their shortcut (if active).
+   * Gets all the registered extension commands and their shortcuts (if active).
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   getAllCommands : function() {
-    // TODO: 1 var
-    var strVarToGet = 
-          Global.strModuleSettingsPrefix + Global.strGeneralSettings;
-
-    chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+    StorageSync.get( strConstGeneralSettings, function( objReturn ) {
       if ( typeof strLog === 'string' ) {
         strLog = 'getAllCommands';
         Log.add( strLog, objReturn );
       }
 
-      var objGeneralSettings  = objReturn[ strVarToGet ];
+      var objGeneralSettings = objReturn[ strConstGeneralSettings ];
 
       if (
             typeof objGeneralSettings === 'object'
@@ -246,23 +228,33 @@ var Global                        = {
    * Sets multiple items in StorageArea.
    *
    * @type    method
+   * @param   Storage
+   *            Target storage
    * @param   objItems
    *            An object which gives each key/val pair to update storage with.
    * @param   strLog
    *            Debug line "prefix".
    * @return  void
    **/
-  setStorageItems : function( objItems, strLog ) {
-    chrome.storage.sync.set( objItems, function() {
+  setStorageItems : function( Storage, objItems, strLog ) {
+    Storage.set( objItems, function() {
       var strSetStorageItemsLog = strLog;
       Log.add( strLog + strLogDo, objItems );
 
       if ( chrome.runtime.lastError ) {
-        Log.add( strLog + strLogError, {}, true );
+        var
+            objLogDetails   = {}
+          , strErrorMessage = chrome.runtime.lastError.message
+          ;
+
+        if ( typeof strErrorMessage === 'string' )
+          objLogDetails = { strErrorMessage: strErrorMessage };
+
+        Log.add( strLog + strLogError, objLogDetails, true );
         return;
       }
 
-      chrome.storage.sync.get( null, function( objAllItemsAfterUpdate ) {
+      Storage.get( null, function( objAllItemsAfterUpdate ) {
         Log.add( strSetStorageItemsLog + strLogDone, objAllItemsAfterUpdate );
       });
     });
@@ -309,7 +301,7 @@ var Global                        = {
       , objTempPlayerInfo       = objPlayerInfo
       , objTempStationInfo      = objStationInfo
       , strModule               = objTempPlayerInfo.strModule
-      , strStorageVar           = Global.strModuleSettingsPrefix + strModule
+      , strStorageVar           = strConstSettingsPrefix + strModule
       , strNotificationId       = Global.composeNotificationId(
                                       strModule
                                     , intTabId
@@ -328,7 +320,7 @@ var Global                        = {
 
     // Clear notification for this tab first, then display a new one
     chrome.notifications.clear( strNotificationId, function() {
-      chrome.storage.sync.get(
+      StorageSync.get(
           strStorageVar
         , function( objReturn ) {
             var objData = objReturn[ strStorageVar ];
@@ -390,8 +382,10 @@ var Global                        = {
               var
                   arrActiveButtons        = []
                 , objNotificationButtons  = Global.objNotificationButtons
-                , arrTrackInfo            = objTempStationInfo
-                                              .strTrackInfo.split( "\n\n" )
+                , arrTrackInfo            = 
+                    objTempStationInfo
+                      .strTrackInfo
+                        .split( strConstNotificationLinesSeparator )
                 ;
 
               objNotificationOptions.buttons = [];
@@ -576,7 +570,10 @@ var Global                        = {
 
     /* START Log */
     var
-        arrTrackInfo  = objStationInfo.strTrackInfo.split( "\n\n" )
+        arrTrackInfo  = 
+          objStationInfo
+            .strTrackInfo
+              .split( strConstNotificationLinesSeparator )
       , funcLog       = function() {
           strLog = 'showNotificationCallback';
           Log.add(
@@ -600,7 +597,7 @@ var Global                        = {
     )
       funcLog();
     else
-      chrome.storage.sync.get( 'arrRecentTracks', function( objReturn ) {
+      StorageSync.get( 'arrRecentTracks', function( objReturn ) {
         if ( typeof objReturn.arrRecentTracks === 'object' ) {
           var arrLastTrack = objReturn.arrRecentTracks.pop();
 
@@ -699,7 +696,7 @@ var Global                        = {
             if ( boolWasCleared ) {
               var arrVars = [ 'objActiveButtons', 'arrTabsIds' ];
 
-              chrome.storage.sync.get( arrVars, function( objData ) {
+              StorageLocal.get( arrVars, function( objData ) {
                 strLog = 'removeNotification';
                 var intChanges = 0;
 
@@ -725,7 +722,11 @@ var Global                        = {
 
                 // "Submit" changes
                 if ( intChanges > 0 )
-                  Global.setStorageItems( objData, strLog + ', submit' );
+                  Global.setStorageItems(
+                      StorageLocal
+                    , objData
+                    , strLog + ', submit'
+                  );
               });
             }
         }
@@ -733,7 +734,7 @@ var Global                        = {
     }
 
     if ( typeof strModule === 'undefined' ) {
-      chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+      StorageLocal.get( 'arrTabsIds', function( objData ) {
         strLog = 'removeNotification, strModule';
         Log.add( strLog, intTabId );
 
@@ -769,7 +770,7 @@ var Global                        = {
    * @return  void
    **/
   saveTabsIds : function ( intTabId, strModule ) {
-    chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+    StorageLocal.get( 'arrTabsIds', function( objData ) {
       strLog = 'saveTabsIds';
       Log.add( strLog, intTabId );
 
@@ -801,7 +802,7 @@ var Global                        = {
 
       // "Submit" changes
       if ( intChanges > 0 )
-        Global.setStorageItems( objData, strLog );
+        Global.setStorageItems( StorageLocal, objData, strLog );
     });
   }
   ,
@@ -817,7 +818,7 @@ var Global                        = {
    * @return  void
    **/
   saveActiveButtons : function ( intTabId, arrActiveButtons ) {
-    chrome.storage.sync.get( 'objActiveButtons', function( objData ) {
+    StorageLocal.get( 'objActiveButtons', function( objData ) {
       strLog = 'saveActiveButtons';
       Log.add(
           strLog
@@ -837,7 +838,7 @@ var Global                        = {
       ) {
         objData.objActiveButtons[ intTabId ] = arrActiveButtons;
 
-        Global.setStorageItems( objData, strLog );
+        Global.setStorageItems( StorageLocal, objData, strLog );
       }
     });
   }
@@ -876,7 +877,7 @@ var Global                        = {
       }
     }
 
-    chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
+    StorageLocal.get( 'objOpenTabs', function( objReturn ) {
       if (
         ! (
               Global.isEmpty( objToSet.objOpenTabs )
@@ -885,7 +886,7 @@ var Global                        = {
       ) {
         strLog = 'saveOpenTabs';
 
-        Global.setStorageItems( objToSet, strLog );
+        Global.setStorageItems( StorageLocal, objToSet, strLog );
       }
     });
   }
@@ -978,7 +979,7 @@ var Global                        = {
    **/
   findFirstOpenTabInvokeCallback : function ( funcCallback )
   {
-    chrome.storage.sync.get( 'objOpenTabs', function( objReturn ) {
+    StorageLocal.get( 'objOpenTabs', function( objReturn ) {
       strLog = 'findFirstOpenTabInvokeCallback';
       Log.add( strLog );
 
@@ -1022,9 +1023,9 @@ var Global                        = {
     , objPreservedData
     , strFrom
   ) {
-    var strObjSettings = Global.strModuleSettingsPrefix + strModule;
+    var strObjSettings = strConstSettingsPrefix + strModule;
 
-    chrome.storage.sync.get(
+    StorageSync.get(
         strObjSettings
       , function( objReturn ) {
           var objModuleSettings = objReturn[ strObjSettings ];

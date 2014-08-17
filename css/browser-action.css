@@ -107,6 +107,7 @@
       margin:                 1.15em 0 1.4em 1.8em;
     }
   .recentTrack
+, #tunesSuggestion
     {
       line-height:            normal !important;
       padding:                .25em 0;
@@ -124,6 +125,7 @@
       height:                 3.2em;
     }
   .recentTrackInfo
+, #tunesSuggestionInfo
     {
       display:                inline-block;
       vertical-align:         top;

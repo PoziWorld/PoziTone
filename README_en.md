@@ -173,7 +173,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 
 We want as many `PoziTone` users as possible to be able to interact with the extension in their native language.
 
-If you know any foreign language or just noticed the discrepancy in the translation, please let us know — https://www.transifex.com/projects/p/pozitone/.
+If you know any foreign language or just noticed a discrepancy in the translation, please let us know — https://www.transifex.com/projects/p/pozitone/.
 
 
 Let's socialize

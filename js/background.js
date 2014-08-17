@@ -9,7 +9,8 @@
 
   Table of Contents:
 
-  1. Background
+  1. Constants
+  2. Background
       init()
       cleanUp()
       removeOldSettings()
@@ -22,7 +23,7 @@
       checkIfHostnameChanged()
       processButtonClick_seeChanges()
       processButtonClick_doNotNotifyOfUpdates()
-  2. Listeners
+  3. Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
       notifications.onButtonClicked
@@ -32,14 +33,61 @@
       tabs.onUpdated
       tabs.onReplaced
       tabs.onRemoved
-  3. On Load
+  4. On Load
       Initialize
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Background
+  1. Constants
+
+ ============================================================================ */
+
+const
+    objSettingsNotSyncable                        = {
+        objActiveButtons                          : {}
+      , objOpenTabs                               : {}
+      , arrTabsIds                                : []
+    }
+  , objSettingsSyncable                           = {
+        arrRecentTracks                           : []
+      , intRecentTracksToKeep                     : 10
+
+      , objSettings_general                       : {
+            strJoinUeip                           : 'no'
+          , boolShowShortcutsInNotification       : true
+          , boolShowWasUpdatedNotification        : true
+        }
+      , objSettings_ru_101                        : {
+            boolIsEnabled                         : true
+          , boolShowNotificationLogo              : true
+          , strNotificationTitleFormat            : 'short'
+          , boolShowKbpsInfo                      : true
+          , arrNotificationButtons                : [
+                                                        'add'
+                                                      , 'muteUnmute'
+                                                    ]
+          , boolShowNotificationWhenStopped       : false
+          , boolShowNotificationWhenMuted         : false
+          , boolShowNotificationWhenNoTrackInfo   : false
+        }
+      , objSettings_com_vk_audio                  : {
+            boolIsEnabled                         : true
+          , boolShowNotificationLogo              : true
+          , boolShowKbpsInfo                      : true
+          , arrNotificationButtons                : [
+                                                        'add'
+                                                      , 'next'
+                                                    ]
+          , boolShowNotificationWhenMuted         : false
+        }
+    }
+  ;
+
+/* =============================================================================
+
+  2. Background
 
  ============================================================================ */
 
@@ -50,6 +98,7 @@ var Background                    = {
   , arrTrackInfoPlaceholders      : [
       , ''
       , '...'
+      , 'Ожидаем следующий трек'
       , 'Ожидаем следующий трек...'
       , 'Ждём название трека...'
     ]
@@ -114,7 +163,7 @@ var Background                    = {
                                   , 'arrTabsIds'
                                 ];
 
-    chrome.storage.sync.remove( arrSettingsToCleanUp, function() {
+    StorageLocal.remove( arrSettingsToCleanUp, function() {
       if (
             typeof boolIsCalledFromOnInstalledListener !== 'undefined'
         &&  boolIsCalledFromOnInstalledListener
@@ -142,15 +191,18 @@ var Background                    = {
           typeof objDetails.boolWasUpdated === 'boolean'
       &&  objDetails.boolWasUpdated
     ) {
-      chrome.storage.sync.get( null, function( objReturn ) {
+      StorageSync.get( null, function( objReturn ) {
         strLog = 'removeOldSettings';
 
         var
             arrSettingsToRemove   = []
           , objDeprecatedSettings = {
                 arrActiveButtons                        : null
+              , objActiveButtons                        : null
               , arrLastTracks                           : null
               , arrNotificationButtons                  : null
+              , objOpenTabs                             : null
+              , arrTabsIds                              : null
               , intLastTracksToKeep                     : null
               , boolNotificationShowStationLogo         : null
               , boolNotificationShowWhenStopped         : null
@@ -211,16 +263,24 @@ var Background                    = {
         }
 
         if ( ! Global.isEmpty( arrSettingsToRemove ) ) {
-          chrome.storage.sync.remove( arrSettingsToRemove, function() {
+          StorageSync.remove( arrSettingsToRemove, function() {
             strLog = 'removeOldSettings';
             Log.add( strLog + strLogDo, arrSettingsToRemove, true );
 
             if ( chrome.runtime.lastError ) {
-              Log.add( strLog + strLogError, {}, true );
+              var
+                  objLogDetails   = {}
+                , strErrorMessage = chrome.runtime.lastError.message
+                ;
+
+              if ( typeof strErrorMessage === 'string' )
+                objLogDetails = { strErrorMessage: strErrorMessage };
+
+              Log.add( strLog + strLogError, objLogDetails, true );
               return;
             }
 
-            chrome.storage.sync.get( null, function( objData ) {
+            StorageSync.get( null, function( objData ) {
               strLog = 'removeOldSettings';
               Log.add( strLog + strLogDone, objData );
             });
@@ -251,101 +311,67 @@ var Background                    = {
    * @return  void
    **/
   setExtensionDefaults : function() {
-    chrome.storage.sync.get( null, function( objReturn ) {
-      strLog = 'setExtensionDefaults';
-      Log.add( strLog );
+    var funcSet = function( Storage, objSettings, strLogSuffix ) {
+      Storage.get( null, function( objReturn ) {
+        strLog = 'setExtensionDefaults, ' + strLogSuffix;
+        Log.add( strLog );
 
-      // 1. To set
-      var
-          objTempToSet                                  = {}
-        , objSettingsDefaults                           = {
-              objActiveButtons                          : {}
-            , objOpenTabs                               : {}
-            , arrTabsIds                                : []
-            , arrRecentTracks                           : []
-            , intRecentTracksToKeep                     : 10
+        var objTempToSet = {};
 
-            , objSettings_general                       : {
-                  strJoinUeip                           : 'no'
-                , boolShowShortcutsInNotification       : true
-                , boolShowWasUpdatedNotification        : true
-              }
-            , objSettings_ru_101                        : {
-                  boolIsEnabled                         : true
-                , boolShowNotificationLogo              : true
-                , strNotificationTitleFormat            : 'short'
-                , boolShowKbpsInfo                      : true
-                , arrNotificationButtons                : [
-                                                              'add'
-                                                            , 'muteUnmute'
-                                                          ]
-                , boolShowNotificationWhenStopped       : false
-                , boolShowNotificationWhenMuted         : false
-                , boolShowNotificationWhenNoTrackInfo   : false
-              }
-            , objSettings_com_vk_audio                  : {
-                  boolIsEnabled                         : true
-                , boolShowNotificationLogo              : true
-                , boolShowKbpsInfo                      : true
-                , arrNotificationButtons                : [
-                                                              'add'
-                                                            , 'next'
-                                                          ]
-                , boolShowNotificationWhenMuted         : false
-              }
-          }
-        ;
+        for ( var strSetting in objSettings ) {
+          if ( objSettings.hasOwnProperty( strSetting ) ) {
+            var miscSetting = objSettings[ strSetting ];
 
-      for ( var strSetting in objSettingsDefaults ) {
-        if ( objSettingsDefaults.hasOwnProperty( strSetting ) ) {
-          var miscSetting = objSettingsDefaults[ strSetting ];
+            // If a new setting introduced, set its default
+            if ( typeof objReturn[ strSetting ] === 'undefined' )
+              objTempToSet[ strSetting ] = miscSetting;
 
-          // If a new setting introduced, set its default
-          if ( typeof objReturn[ strSetting ] === 'undefined' )
-            objTempToSet[ strSetting ] = miscSetting;
-
-          if (
-                typeof miscSetting === 'object'
-            &&  ! Array.isArray( miscSetting )
-          )
-            for ( var strSubsetting in miscSetting ) {
-              if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
-                // If a new subsetting introduced, set its default
-                if (
-                      typeof objReturn[ strSetting ] !== 'undefined'
-                  &&  typeof
-                        objReturn[ strSetting ][ strSubsetting ] === 'undefined'
-                ) {
-                  // If the setting has been set before.
-                  if ( typeof objTempToSet[ strSetting ] === 'undefined' )
-                    // Preserve other subsettings.
-                    objTempToSet[ strSetting ] = objReturn[ strSetting ];
-
-                  objTempToSet[ strSetting ][ strSubsetting ] = 
-                    miscSetting[ strSubsetting ];
-                }
-                else {
-                  var objSetting = 
-                        Background.objPreservedSettings[ strSetting ];
-
+            if (
+                  typeof miscSetting === 'object'
+              &&  ! Array.isArray( miscSetting )
+            )
+              for ( var strSubsetting in miscSetting ) {
+                if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
+                  // If a new subsetting introduced, set its default
                   if (
-                        typeof objSetting !== 'undefined'
-                    &&  typeof objSetting[ strSubsetting ] !== 'undefined'
+                        typeof objReturn[ strSetting ] !== 'undefined'
+                    &&  typeof
+                          objReturn[ strSetting ][ strSubsetting ] === 'undefined'
                   ) {
-                    objTempToSet[ strSetting ][ strSubsetting ] =
-                      objSetting[ strSubsetting ];
+                    // If the setting has been set before.
+                    if ( typeof objTempToSet[ strSetting ] === 'undefined' )
+                      // Preserve other subsettings.
+                      objTempToSet[ strSetting ] = objReturn[ strSetting ];
+
+                    objTempToSet[ strSetting ][ strSubsetting ] = 
+                      miscSetting[ strSubsetting ];
+                  }
+                  else {
+                    var objSetting = 
+                          Background.objPreservedSettings[ strSetting ];
+
+                    if (
+                          typeof objSetting !== 'undefined'
+                      &&  typeof objSetting[ strSubsetting ] !== 'undefined'
+                    ) {
+                      objTempToSet[ strSetting ][ strSubsetting ] =
+                        objSetting[ strSubsetting ];
+                    }
                   }
                 }
               }
-            }
+          }
         }
-      }
 
-      if ( ! Global.isEmpty( objTempToSet ) )
-        Global.setStorageItems( objTempToSet, strLog );
-      else
-        Log.add( strLog + strLogDoNot );
-    });
+        if ( ! Global.isEmpty( objTempToSet ) )
+          Global.setStorageItems( Storage, objTempToSet, strLog );
+        else
+          Log.add( strLog + strLogDoNot );
+      });
+    }
+
+    funcSet( StorageLocal,  objSettingsNotSyncable,   'local' );
+    funcSet( StorageSync,   objSettingsSyncable,      'sync'  );
   }
   ,
 
@@ -360,7 +386,7 @@ var Background                    = {
   saveRecentTrackInfo : function( objStationInfo ) {
     var arrVarsToGet = [ 'arrRecentTracks', 'intRecentTracksToKeep' ];
 
-    chrome.storage.sync.get( arrVarsToGet, function( objReturn ) {
+    StorageSync.get( arrVarsToGet, function( objReturn ) {
       strLog = 'saveRecentTrackInfo';
       Log.add( strLog, objStationInfo );
 
@@ -404,7 +430,7 @@ var Background                    = {
 
       arrRecentTracks.push( arrTempRecentTrack );
 
-      Global.setStorageItems( objReturn, strLog );
+      Global.setStorageItems( StorageSync, objReturn, strLog );
     });
   }
   ,
@@ -422,30 +448,33 @@ var Background                    = {
   onMessageCallback : function( objMessage, objSender, objSendResponse ) {
     var strReceiver = objMessage.strReceiver;
 
-    if ( typeof strReceiver === 'string' && strReceiver === 'background' ) {
-      // A page asking to track some event
-      var strMessageLog = objMessage.strLog;
+    if ( typeof strReceiver === 'string' ) {
+      if ( strReceiver === 'background' ) {
+        // A page asking to track some event
+        var strMessageLog = objMessage.strLog;
 
-      // TODO: Only for internal messages
-      if ( typeof strMessageLog === 'string' )
-        Log.add( strMessageLog, objMessage.objVars, true );
+        // TODO: Only for internal messages
+        if ( typeof strMessageLog === 'string' )
+          Log.add( strMessageLog, objMessage.objVars, true );
 
-      // A page asking to make a call
-      var boolMakeCall = objMessage.boolMakeCall;
+        // A page asking to make a call
+        var boolMakeCall = objMessage.boolMakeCall;
 
-      if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
-        var objXhr = new XMLHttpRequest();
+        if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
+          var objXhr = new XMLHttpRequest();
 
-        objXhr.open( 'HEAD', objMessage.objVars.strUrl, false );
-        objXhr.onreadystatechange = function() {
-          if ( objXhr.readyState === 4 && objXhr.status === 200 )
-            objSendResponse( 
-              parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
-            );
+          objXhr.open( 'HEAD', objMessage.objVars.strUrl, false );
+          objXhr.onreadystatechange = function() {
+            if ( objXhr.readyState === 4 && objXhr.status === 200 )
+              objSendResponse( 
+                parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
+              );
+          }
+          objXhr.send();
         }
-        objXhr.send();
       }
 
+      // Don't break only when there is no receiver info
       return;
     }
 
@@ -633,7 +662,7 @@ var Background                    = {
    * @return  void
    **/
   checkIfOpenTabChangedDomainOnUpdated : function( objTab ) {
-    chrome.storage.sync.get(
+    StorageLocal.get(
         Background.strObjOpenTabsName
       , function( objReturn ) {
           strLog = 'checkIfOpenTabChangedDomainOnUpdated';
@@ -665,7 +694,7 @@ var Background                    = {
    * @return  void
    **/
   checkIfOpenTabChangedDomainOnReplaced : function( intRemovedTabId ) {
-    chrome.storage.sync.get(
+    StorageLocal.get(
         Background.strObjOpenTabsName
       , function( objReturn ) {
           strLog = 'checkIfOpenTabChangedDomainOnReplaced';
@@ -782,18 +811,16 @@ var Background                    = {
    * @return  void
    **/
   processButtonClick_doNotNotifyOfUpdates : function() {
-    // TODO: 1 var
-    var strVarToGet = 
-          Global.strModuleSettingsPrefix + Global.strGeneralSettings;
-
-    chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+    StorageSync.get( strConstGeneralSettings, function( objReturn ) {
       strLog = 'processButtonClick_doNotNotifyOfUpdates';
       Log.add( strLog, {} );
 
-      if ( typeof objReturn[ strVarToGet ] === 'object' ) {
-        objReturn[ strVarToGet ].boolShowWasUpdatedNotification = false;
+      var objGeneralSettings = objReturn[ strConstGeneralSettings ];
 
-        Global.setStorageItems( objReturn, strLog );
+      if ( typeof objGeneralSettings === 'object' ) {
+        objGeneralSettings.boolShowWasUpdatedNotification = false;
+
+        Global.setStorageItems( StorageSync, objReturn, strLog );
 
         // If Options page is open, update it with a new value
         chrome.runtime.sendMessage(
@@ -811,7 +838,7 @@ var Background                    = {
 
 /* =============================================================================
 
-  2. Listeners
+  3. Listeners
 
  ============================================================================ */
 
@@ -903,7 +930,7 @@ chrome.notifications.onButtonClicked.addListener(
       // Check for changes
       Global.getAllCommands();
 
-      chrome.storage.sync.get( 'objActiveButtons', function( objReturn ) {
+      StorageLocal.get( 'objActiveButtons', function( objReturn ) {
         strLog = 'chrome.notifications.onButtonClicked';
         Log.add(
             strLog
@@ -978,7 +1005,7 @@ chrome.commands.onCommand.addListener(
     // Check for changes
     Global.getAllCommands();
 
-    chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+    StorageLocal.get( 'arrTabsIds', function( objData ) {
       strLog = 'chrome.commands.onCommand';
 
       // No saved data for some reason
@@ -1131,15 +1158,11 @@ chrome.runtime.onInstalled.addListener(
     Background.checkOpenTabs();
 
     if ( objDetails.boolWasUpdated ) {
-      // TODO: 1 var
-      var strVarToGet = 
-            Global.strModuleSettingsPrefix + Global.strGeneralSettings;
-
-      chrome.storage.sync.get( strVarToGet, function( objReturn ) {
+      StorageSync.get( strConstGeneralSettings, function( objReturn ) {
         strLog = 'chrome.runtime.onInstalled, was updated';
         Log.add( strLog, {} );
 
-        var objGeneralSettings  = objReturn[ strVarToGet ];
+        var objGeneralSettings = objReturn[ strConstGeneralSettings ];
 
         if (
               typeof objGeneralSettings === 'object'
@@ -1263,7 +1286,7 @@ chrome.tabs.onRemoved.addListener(
 
 /* =============================================================================
 
-  3. On Load
+  4. On Load
 
  ============================================================================ */
 

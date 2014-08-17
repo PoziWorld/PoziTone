@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/browser-action.css" />
     <script src="/js/bowser.js"></script>
+    <script src="/js/const.js"></script>
     <script src="/js/global.js"></script>
     <script src="/js/page.js"></script>
     <script src="/js/browser-action.js"></script>
@@ -42,8 +43,11 @@
         <h1 i18n-content="popupNavRecentTracksH1" class="pageHeading"></h1>
         <section class="subpage">
           <ul id="recentTracks">
-            <li class="recentTrack">
-              <span i18n-content="popupNavRecentTracksPlaceholder"></span>
+            <li id="tunesSuggestion">
+              <span
+                id="tunesSuggestionInfo"
+                i18n-content="popupNavRecentTracksPlaceholder"
+                  ></span>
             </li>
           </ul>
           <script type="text/html" id="recentTrackRow">

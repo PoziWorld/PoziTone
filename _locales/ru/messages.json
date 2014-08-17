@@ -352,7 +352,7 @@
       }
         ,
         "popupNavRecentTracksPlaceholder": {
-          "message": "Ищете, что послушать?<br />Как насчёт <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock с элементами hardcore</a>?<br />Или <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+          "message": "Ищете, что послушать?<br />Как насчёт <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock с элементами hardcore</a>?<br />Или <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
         }
         ,
         "findOnVk": {

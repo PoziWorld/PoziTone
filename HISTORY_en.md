@@ -1,5 +1,9 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+### v0.2.2.0
+    * Thanks to the participants of the User Experience Improvement Program, a PoziTone operation problem, when numerous tabs are open and/or those are being opened/closed frequently, was identified and resolved.
+    * Updated Polish translation.
+
 ### v0.1.2.6
     * Fix for a case when keyboard shortcuts would not work.
       Bug reported by Alik Voronov.

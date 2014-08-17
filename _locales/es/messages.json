@@ -100,8 +100,8 @@
     "message": "Escoge una página de configuración"
   },
   "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>",
-      "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+      "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>"
+    , "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
     "message": "Mostrar notificaciones"
@@ -161,7 +161,7 @@
     "message": "Reproducción no iniciada / detenida"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "¿Buscas canciones?<br />¿Qué te parece algo <a href=\"https://vk.com/funboxband\" target=\"_blank\">de punk-rock con elementos hardcore</a>?<br />o<a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop?</a>?"
+    "message": "¿Buscas canciones?<br />¿Qué te parece algo <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">de punk-rock con elementos hardcore</a>?<br />o<a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop?</a>?"
   },
   "module_general": {
     "message": "General"

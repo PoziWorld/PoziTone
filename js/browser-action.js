@@ -52,7 +52,7 @@ var Popup                   = {
    * @return  void
    **/
   populateRecentTracks : function() {
-    chrome.storage.sync.get( 'arrRecentTracks', function( objReturn ) {
+    StorageSync.get( 'arrRecentTracks', function( objReturn ) {
       var
           arrRecentTracks   = objReturn.arrRecentTracks
         , strHtml           = ''
@@ -147,6 +147,29 @@ var Popup                   = {
           );
 
           window.close();
+        }
+    );
+
+    addEvent(
+        document.querySelectorAll( '#tunesSuggestionInfo a' )
+      , 'click'
+      , function( objEvent ) {
+          var $this = objEvent.target;
+
+          // Track clicks
+          chrome.runtime.sendMessage(
+            {
+                strReceiver       : 'background'
+              , strLog            : 'browserAction.tunesSuggestion'
+              , objVars           : {
+                    strPerformer  : $this.dataset.performer
+                }
+            }
+          );
+
+          Global.createTabOrUpdate( $this.href );
+
+          objEvent.preventDefault();
         }
     );
 

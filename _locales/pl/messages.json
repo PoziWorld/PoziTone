@@ -100,7 +100,7 @@
     "message": "Wybierz strone ustawień"
   },
   "optionsSettingsAdditionalInfoShowCbr": {
-      "message": "Display <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>"
+      "message": "Wyświetl <a href=\"http://pl.wikipedia.org/wiki/Sta%C5%82a_przep%C5%82ywno%C5%9B%C4%87\" target=\"_blank\">stałą przepływność</a>"
     , "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
@@ -116,7 +116,7 @@
     "message": "Wersja"
   },
   "optionsSettingsAdditionalInfo": {
-    "message": "Additional information"
+    "message": "Dodatkowa informacja"
   },
   "optionsNavSettings": {
     "message": "Ustawienia"
@@ -161,7 +161,7 @@
     "message": "Kiedy odtwarzanie nie jest uruchomione / zatrzymane"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "Szukasz czegoś do posłuchania?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" target=\"_blank\">hip-hop</a>?"
+    "message": "Szukasz czegoś do posłuchania?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
   },
   "module_general": {
     "message": "Główne ustawienia"

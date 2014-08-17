@@ -13,7 +13,7 @@
       init()
       add()
   2. Listeners
-      chrome.storage.onChanged
+      StorageApi.onChanged
   3. Events
 
  ============================================================================ */
@@ -33,7 +33,6 @@ var
   , strLogSuccess         = ', success'
   , strLogNoSuccess       = ', no success'
 
-  , strJoinUeipObj        = 'objSettings_general'
   , strJoinUeipVar        = 'strJoinUeip'
   , strJoinUeipAgreed     = 'yes'
 
@@ -53,12 +52,14 @@ var
    * @return  void
    **/
   init : function() {
-    chrome.storage.sync.get( strJoinUeipObj, function( objReturn ) {
+    StorageSync.get( strConstGeneralSettings, function( objReturn ) {
+      var objGeneralSettings = objReturn[ strConstGeneralSettings ];
+
       if (
-            typeof objReturn[ strJoinUeipObj ] === 'object'
-        &&  typeof objReturn[ strJoinUeipObj ][ strJoinUeipVar ] === 'string'
+            typeof objGeneralSettings === 'object'
+        &&  typeof objGeneralSettings[ strJoinUeipVar ] === 'string'
       )
-        Log.strJoinUeip = objReturn[ strJoinUeipObj ][ strJoinUeipVar ];
+        Log.strJoinUeip = objGeneralSettings[ strJoinUeipVar ];
     });
   }
   ,
@@ -155,21 +156,24 @@ var
  *            Sender of the message
  * @return  void
  **/
-chrome.storage.onChanged.addListener(
+StorageApi.onChanged.addListener(
   function( objChanges, strAreaName ) {
-    if (
-          typeof objChanges[ strJoinUeipObj ] === 'object'
-      &&  typeof objChanges[ strJoinUeipObj ].newValue === 'object'
-      &&  typeof 
-            objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ] === 'string'
-    )
-      Log.strJoinUeip = objChanges[ strJoinUeipObj ].newValue[ strJoinUeipVar ];
-    else if (
-          typeof objChanges[ strJoinUeipObj ] === 'object'
-      &&  typeof objChanges[ strJoinUeipObj ].newValue === 'undefined'
-      &&  typeof objChanges[ strJoinUeipObj ].oldValue === 'object'
-    )
-      Log.strJoinUeip = null;
+    if ( strAreaName === 'sync' ) {
+      var objGeneralSettings = objChanges[ strConstGeneralSettings ];
+
+      if (
+            typeof objGeneralSettings === 'object'
+        &&  typeof objGeneralSettings.newValue === 'object'
+        &&  typeof objGeneralSettings.newValue[ strJoinUeipVar ] === 'string'
+      )
+        Log.strJoinUeip = objGeneralSettings.newValue[ strJoinUeipVar ];
+      else if (
+            typeof objGeneralSettings === 'object'
+        &&  typeof objGeneralSettings.newValue === 'undefined'
+        &&  typeof objGeneralSettings.oldValue === 'object'
+      )
+        Log.strJoinUeip = null;
+    }
   }
 );
 

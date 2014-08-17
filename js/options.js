@@ -123,20 +123,20 @@ var Options = {
                                               strModuleSubpageIdPrefix
                                             , ''
                                           )
-        , strStorageVar             = Global.strModuleSettingsPrefix + strModule
+        , strStorageVar             = strConstSettingsPrefix + strModule
         ;
 
       arrAvailableOptions.push( strStorageVar );
     }
 
-    chrome.storage.sync.get( arrAvailableOptions, function( objStorageData ) {
+    StorageSync.get( arrAvailableOptions, function( objStorageData ) {
       for ( var strKey in objStorageData ) {
         if ( objStorageData.hasOwnProperty( strKey ) ) {
           var
               objModuleSettings         = objStorageData[ strKey ]
             , strModule                 = strKey
                                             .replace(
-                                                Global.strModuleSettingsPrefix
+                                                strConstSettingsPrefix
                                               , ''
                                             )
             , strModuleSubpageId        = strModuleSubpageIdPrefix + strModule
@@ -231,7 +231,7 @@ var Options = {
     else if ( $this.type === 'radio' )
       miscSetting = $this.value;
 
-    strModuleSettings = Global.strModuleSettingsPrefix + strChosenSubpageValue;
+    strModuleSettings = strConstSettingsPrefix + strChosenSubpageValue;
 
     // TODO: Is there a need for objTemp?
     objTemp[ strModuleSettings ] = {};
@@ -239,18 +239,19 @@ var Options = {
     objModuleSettings[ $this.name ] = miscSetting;
 
     if ( ! Global.isEmpty( objTemp ) )
-      chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+      StorageSync.get( strModuleSettings, function( objReturn ) {
         for ( var strKey in objModuleSettings ) {
           if ( objModuleSettings.hasOwnProperty( strKey ) )
             objReturn[ strModuleSettings ][ strKey ] = 
               objModuleSettings[ strKey ];
         }
 
-        chrome.storage.sync.set( objReturn, function() {
+        // TODO: Add callback to Global.setStorageItems() and then utilize it
+        StorageSync.set( objReturn, function() {
           Page.showSuccess( $settingsSaved );
 
           // Debug
-          chrome.storage.sync.get( null, function(data) {
+          StorageSync.get( null, function(data) {
             console.log(data);
           });
         });
@@ -461,7 +462,7 @@ var Options = {
    * @return  void
    **/
   removeModuleNotifications : function( strModule ) {
-    chrome.storage.sync.get( 'arrTabsIds', function( objData ) {
+    StorageLocal.get( 'arrTabsIds', function( objData ) {
       var arrTabsIds = objData.arrTabsIds;
 
       if ( typeof arrTabsIds === 'undefined' )
