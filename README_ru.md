@@ -32,7 +32,7 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 
 * [Онлайн-радио 101.ru](http://101.ru) (основной плеер станций).
 * [ВКонтакте](https://vk.com) (аудиозаписи, полная версия сайта).
-* [Digitally Imported](http://www.di.fm) (скоро).
+* [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio).
 
 Список будет пополняться...
 
@@ -180,7 +180,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 --------
 
 - [PoziTone ВКонтакте](https://vk.com/PoziTone)
-- [PoziTone на Facebook](http://fb.com/PoziTone)
+- [PoziTone на Facebook](https://facebook.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone в Instagram](https://instagram.com/PoziTone)
 - [PoziTone в Google+](https://google.com/+PoziTone)

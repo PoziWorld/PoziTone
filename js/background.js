@@ -72,6 +72,18 @@ const
           , boolShowNotificationWhenMuted         : false
           , boolShowNotificationWhenNoTrackInfo   : false
         }
+      , objSettings_fm_di                         : {
+            boolIsEnabled                         : true
+          , boolShowNotificationLogo              : true
+          , strNotificationTitleFormat            : 'short'
+          , boolShowKbpsInfo                      : true
+          , arrNotificationButtons                : [
+                                                        'playStop'
+                                                      , 'muteUnmute'
+                                                    ]
+          , boolShowNotificationWhenMuted         : false
+          , boolShowNotificationWhenNoTrackInfo   : false
+        }
       , objSettings_com_vk_audio                  : {
             boolIsEnabled                         : true
           , boolShowNotificationLogo              : true

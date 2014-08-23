@@ -1,5 +1,10 @@
 > Это английская версия, см. [HISTORY_ru.md](HISTORY_ru.md) для русской.
 
+> Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
+
+### v0.2.3.0
+    * Added a support for Digitally Imported (DI, DI.FM or DI Radio).
+
 ### v0.2.2.0
     * Thanks to the participants of the User Experience Improvement Program, a PoziTone operation problem, when numerous tabs are open and/or those are being opened/closed frequently, was identified and resolved.
     * Updated Polish translation.
@@ -112,7 +117,7 @@
     * Correct quotes in the README.
 
 ### v0.0.2.0
-    * Added support for VK's audio player (only on full version of the site - vk.com).
+    * Added a support for VK's audio player (only on full version of the site - vk.com).
     * Separate settings for each player.
     * New available button – “Next track” (only for VK). 
       Idea by Nikita Maslennikov.

@@ -386,6 +386,15 @@
     }
 
   ,
+  "module_fm_di": {
+    "message": "Digitally Imported"
+  }
+    ,
+    "module_fm_di_long": {
+      "message": "Digitally Imported | di.fm"
+    }
+
+  ,
   "module_ru_101": {
     "message": "101.ru"
   }

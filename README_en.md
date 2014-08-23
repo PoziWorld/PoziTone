@@ -32,7 +32,7 @@ Supported players
 
 * [Online radio 101.ru](http://101.ru) (stations' main player).
 * [VK](https://vk.com) (audio, full version of site).
-* [Digitally Imported](http://www.di.fm) (coming soon).
+* [Digitally Imported](http://www.di.fm) (DI, DI.FM or DI Radio).
 
 More to come...
 
@@ -180,7 +180,7 @@ Let's socialize
 --------
 
 - [PoziTone on VK](https://vk.com/PoziTone)
-- [PoziTone on Facebook](http://fb.com/PoziTone)
+- [PoziTone on Facebook](https://facebook.com/PoziTone)
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
 - [PoziTone on Instagram](https://instagram.com/PoziTone)
 - [PoziTone on Google+](https://google.com/+PoziTone)

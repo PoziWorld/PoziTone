@@ -25,7 +25,7 @@
       initObserver()
       initBodyObserver()
       initPlayerStatusObserver()
-      initPlayerLitePlayStopButtonContainerObserver()
+      initPlayerLitePlayButtonContainerObserver()
       initTrackTitleObserver()
       initPlayerFullOpacityObserver()
       onPlayerLiteAppearance()
@@ -388,7 +388,10 @@ var
     var MutationObserver = 
           window.MutationObserver || window.WebKitMutationObserver;
 
-    if ( typeof boolIsDisconnectable === 'undefined' && !boolIsDisconnectable ) {
+    if (
+          typeof boolIsDisconnectable === 'undefined'
+      &&  ! boolIsDisconnectable
+    ) {
       var observer = new MutationObserver( funcCallback );
       observer.observe( $target, objOptions );
     }

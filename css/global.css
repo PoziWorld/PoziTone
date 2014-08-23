@@ -182,6 +182,7 @@
   .sectionHeading
     {
       font-size:              1.4em;
+      line-height:            1em;
       padding:                1.167em 0 .722em;
       color:                  #000;
     }
