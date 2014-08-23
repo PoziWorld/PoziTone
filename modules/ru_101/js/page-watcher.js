@@ -110,7 +110,7 @@ var PageWatcher                           = {
         // When set of vars changes check Background.saveRecentTrackInfo, Log
       , objStationInfo                    : {
             strStationName                : strStationName
-          , strStationNamePlusDesc        : document.title
+          , strStationNamePlusDesc        : ''
           , strLogoUrl                    : $stationLogo.src
           , strLogoDataUri                : null
           , strTrackInfo                  : $trackInfo.innerText
@@ -702,7 +702,7 @@ $trackInfo.addEventListener(
         return;
       }
 
-      PageWatcher.sendSameMessage( '', true, '', false )
+      PageWatcher.sendSameMessage( '', true, '', false );
     }
   , false
 );
