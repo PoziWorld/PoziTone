@@ -2,6 +2,9 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.2.3.1
+    * Fixed: when the notification for di.fm was clicked, the appropriate tab was not being activated.
+
 ### v0.2.3.0
     * Added a support for Digitally Imported (DI, DI.FM or DI Radio).
 

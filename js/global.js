@@ -61,6 +61,12 @@ var Global                        = {
               , 'modules/ru_101/js/uppod-player-api.js'
           ]
         }
+      , fm_di                     : {
+            objRegex              : /(http:\/\/|https:\/\/)www.di.fm\/.*/
+          , arrJs                 : [
+                'modules/fm_di/js/page-watcher.js'
+          ]
+        }
       , com_vk_audio              : {
             objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
           , arrJs                 : [
