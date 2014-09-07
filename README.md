@@ -2,7 +2,7 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
 
-An extension for the Google Chrome, Yandex and Amigo browsers that adds a missing functionality to the audio players on the websites.
+An extension for the Google Chrome and other Chromium-based browsers that adds a missing functionality to the audio players on the websites.
 
 More details about PoziTone — see [README_en.md](README_en.md).
 

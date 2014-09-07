@@ -5,7 +5,7 @@
 PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
-An extension for the Google Chrome, Yandex and Amigo browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
+An extension for the Google Chrome and other Chromium-based browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
 
 
 Features
@@ -59,20 +59,6 @@ Done!
 5. Click on “Load unpacked extension...” , choose the folder from step 2, click “OK” .
 
 If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
-
-
-#### for Yandex
-
-All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
-
-   3\. Open “Yandex Browser settings” menu, expand “Advanced” submenu, go to “Tools”, then “Extensions”.
-
-
-#### for Amigo
-
-All the steps are the same as [for Google Chrome](#for-google-chrome), except step 3:
-
-   3\. Open “Amigo” menu, go to “Tools”, then “Extensions”.
 
 
 Demo
