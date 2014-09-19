@@ -12,6 +12,9 @@
   1. Constants
   2. Background
       init()
+      checkIfUpdatedSilently()
+      onUpdatedCallback()
+      preventCheckForSilentUpdate()
       cleanUp()
       removeOldSettings()
       setExtensionDefaults()
@@ -46,7 +49,8 @@
 
 const
     objSettingsNotSyncable                        = {
-        objActiveButtons                          : {}
+        strLatestTrackedVersion                   : strConstExtensionVersion
+      , objActiveButtons                          : {}
       , objOpenTabs                               : {}
       , arrTabsIds                                : []
     }
@@ -105,6 +109,8 @@ const
 
 var Background                    = {
     strObjOpenTabsName            : 'objOpenTabs'
+  , intCheckSettingsTimeout       : 50
+  , boolWasAnyChromeEventFired    : false
   , objPreservedSettings          : {}
   , strPreviousTrack              : ''
   , arrTrackInfoPlaceholders      : [
@@ -152,6 +158,117 @@ var Background                    = {
    * @return  void
    **/
   init : function() {
+    Background.checkIfUpdatedSilently();
+  }
+  ,
+
+  /**
+   * When updated on a browser start-up or when the extension was disabled,
+   * it doesn't fire onInstalled, and that causes the new settings
+   * not being applied
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  checkIfUpdatedSilently : function() {
+    var funcCheck = function() {
+      StorageLocal.get( 'strLatestTrackedVersion', function( objReturn ) {
+        strLog = 'checkIfUpdatedSilently';
+        Log.add( strLog, {} );
+
+        var strLatestTrackedVersion = objReturn.strLatestTrackedVersion;
+
+        if (
+              typeof strLatestTrackedVersion === 'string'
+          &&  (
+                    strLatestTrackedVersion < strConstExtensionVersion
+                ||  strLatestTrackedVersion === ''
+              )
+          ||  typeof strLatestTrackedVersion === 'undefined'
+        ) {
+          var objDetails = {};
+
+          Background.cleanUp( true, objDetails );
+          Background.checkOpenTabs();
+          Background.onUpdatedCallback( strLog, objDetails );
+        }
+      });
+    };
+
+    setTimeout(
+        function() {
+          // Do not proceed if one of the chrome events fired
+          if ( ! Background.boolWasAnyChromeEventFired )
+            funcCheck();
+        }
+      , Background.intCheckSettingsTimeout
+    );
+  }
+  ,
+
+  /**
+   * Do stuff when updated
+   *
+   * @type    method
+   * @param   strLogFromCaller
+   *            strLog
+   * @param   objDetails
+   *            - Optional. Reason - install/update/chrome_update
+   *            - Optional. Previous version
+   * @return  void
+   **/
+  onUpdatedCallback : function( strLogFromCaller, objDetails ) {
+    strLog = 'onUpdatedCallback';
+
+    // Save this version number
+    Global.setStorageItems(
+        StorageLocal
+      , { strLatestTrackedVersion : strConstExtensionVersion }
+      , strLog + ', save version'
+    );
+
+    // Show a notification
+    objDetails.boolWasUpdated = true;
+
+    StorageSync.get( strConstGeneralSettings, function( objReturn ) {
+      strLog = 'onUpdatedCallback, ' + strLogFromCaller;
+      Log.add( strLog, objDetails );
+
+      var objGeneralSettings = objReturn[ strConstGeneralSettings ];
+
+      if (
+            typeof objGeneralSettings === 'object'
+        &&  objGeneralSettings.boolShowWasUpdatedNotification
+      ) {
+        var arrButtonsUpdated = Background.objSystemNotificationButtons.updated;
+
+        Global.showSystemNotification(
+            'updated'
+          , chrome.i18n.getMessage( 'systemNotificationUpdated' )
+          , chrome.i18n.getMessage( 'extensionName' ) +
+              chrome.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
+              strConstExtensionVersion
+          , null
+          , [
+                arrButtonsUpdated[ 0 ].objButton
+              , arrButtonsUpdated[ 1 ].objButton
+            ]
+        );
+      }
+    });
+  }
+  ,
+
+  /**
+   * Prevent from unnecessary check and setting defaults twice
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  preventCheckForSilentUpdate : function() {
+    Background.boolWasAnyChromeEventFired = true;
   }
   ,
 
@@ -162,7 +279,7 @@ var Background                    = {
    * @param   boolIsCalledFromOnInstalledListener
    *            Whether to set extension defaults on clean-up complete
    * @param   objDetails
-   *            Reason - install/update/chrome_update - 
+   *            Reason - install/update/chrome_update -
    *            and (optional) previous version
    * @return  void
    **/
@@ -866,12 +983,16 @@ var Background                    = {
  **/
 chrome.runtime.onMessage.addListener(
   function( objMessage, objSender, objSendResponse ) {
+    Background.preventCheckForSilentUpdate();
+
     Background.onMessageCallback( objMessage, objSender, objSendResponse );
   }
 );
 
 chrome.runtime.onMessageExternal.addListener(
   function( objMessage, objSender, objSendResponse ) {
+    Background.preventCheckForSilentUpdate();
+
     Background.onMessageCallback( objMessage, objSender, objSendResponse );
   }
 );
@@ -889,6 +1010,8 @@ chrome.runtime.onMessageExternal.addListener(
  **/
 chrome.notifications.onClicked.addListener(
   function( strNotificationId ) {
+    Background.preventCheckForSilentUpdate();
+
     strLog = 'chrome.notifications.onClicked';
     Log.add( strLog, { strNotificationId : strNotificationId }, true, true );
 
@@ -938,6 +1061,8 @@ chrome.notifications.onClicked.addListener(
  **/
 chrome.notifications.onButtonClicked.addListener(
   function( strNotificationId, intButtonIndex ) {
+    Background.preventCheckForSilentUpdate();
+
     if ( ~~ strNotificationId.indexOf( Global.strSystemNotificationId ) ) {
       // Check for changes
       Global.getAllCommands();
@@ -1014,6 +1139,8 @@ chrome.notifications.onButtonClicked.addListener(
  **/
 chrome.commands.onCommand.addListener(
   function( strCommand ) {
+    Background.preventCheckForSilentUpdate();
+
     // Check for changes
     Global.getAllCommands();
 
@@ -1148,6 +1275,8 @@ chrome.commands.onCommand.addListener(
  **/
 chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
+    Background.preventCheckForSilentUpdate();
+
     strLog                        = 'chrome.runtime.onInstalled';
     objDetails.currentVersion     = strConstExtensionVersion;
     objDetails.browserName        = bowser.name;
@@ -1158,45 +1287,17 @@ chrome.runtime.onInstalled.addListener(
     objDetails.language           = strConstExtensionLanguage;
     objDetails.userAgent          = bowser.userAgent;
 
-    objDetails.boolWasUpdated     = (
-          objDetails.reason === 'update'
-      &&  typeof objDetails.previousVersion !== 'undefined'
-      &&  objDetails.previousVersion < objDetails.currentVersion
-    );
-
     Log.add( strLog, objDetails, true );
 
     Background.cleanUp( true, objDetails );
     Background.checkOpenTabs();
 
-    if ( objDetails.boolWasUpdated ) {
-      StorageSync.get( strConstGeneralSettings, function( objReturn ) {
-        strLog = 'chrome.runtime.onInstalled, was updated';
-        Log.add( strLog, {} );
-
-        var objGeneralSettings = objReturn[ strConstGeneralSettings ];
-
-        if (
-              typeof objGeneralSettings === 'object'
-          &&  objGeneralSettings.boolShowWasUpdatedNotification
-        ) {
-          var arrUpdatedButtons = 
-                Background.objSystemNotificationButtons.updated;
-
-          Global.showSystemNotification(
-              'updated'
-            , chrome.i18n.getMessage( 'systemNotificationUpdated' )
-            , chrome.i18n.getMessage( 'extensionName' ) + 
-                chrome.i18n.getMessage( 'systemNotificationUpdatedVersion' ) + 
-                objDetails.currentVersion
-            , null
-            , [
-                  arrUpdatedButtons[ 0 ].objButton
-                , arrUpdatedButtons[ 1 ].objButton
-              ]
-          );
-        }
-      });
+    if (
+          objDetails.reason === 'update'
+      &&  typeof objDetails.previousVersion === 'string'
+      &&  objDetails.previousVersion < strConstExtensionVersion
+    ) {
+      Background.onUpdatedCallback( strLog, objDetails );
     }
   }
 );
@@ -1210,6 +1311,8 @@ chrome.runtime.onInstalled.addListener(
  **/
 chrome.runtime.onStartup.addListener(
   function() {
+    Background.preventCheckForSilentUpdate();
+
     strLog = 'chrome.runtime.onStartup';
     Log.add( strLog, {}, true );
 
@@ -1233,6 +1336,8 @@ chrome.runtime.onStartup.addListener(
  **/
 chrome.tabs.onUpdated.addListener(
   function( intTabId, objChangeInfo, objTab ) {
+    Background.preventCheckForSilentUpdate();
+
     strLog = 'chrome.tabs.onUpdated';
     Log.add( strLog, objChangeInfo );
 
@@ -1263,6 +1368,8 @@ chrome.tabs.onUpdated.addListener(
  **/
 chrome.tabs.onReplaced.addListener(
   function( intAddedTabId, intRemovedTabId ) {
+    Background.preventCheckForSilentUpdate();
+
     strLog = 'chrome.tabs.onReplaced';
     Log.add(
         strLog
@@ -1288,6 +1395,8 @@ chrome.tabs.onReplaced.addListener(
  **/
 chrome.tabs.onRemoved.addListener(
   function( intTabId ) {
+    Background.preventCheckForSilentUpdate();
+
     strLog = 'chrome.tabs.onRemoved';
     Log.add( strLog, intTabId );
 

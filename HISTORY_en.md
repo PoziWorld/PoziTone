@@ -2,6 +2,10 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.2.3.2
+    * Major bug fixed: in some case(s) the new settings would not be set on upgrade.
+      Bug reported by Evgeny Kuzmin.
+
 ### v0.2.3.1
     * Fixed: when the notification for di.fm was clicked, the appropriate tab was not being activated.
 
