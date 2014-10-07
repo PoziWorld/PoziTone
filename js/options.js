@@ -12,13 +12,13 @@
   0. Globals
   1. Options
       init()
+      parseQueryString()
+      openPageSubpage()
       setPageValues()
       getAvailableOptions()
       onSettingChange()
       switchPage()
-      populateModulesList()
       addEventListeners()
-      onChooseSubpageChange()
       chooseSubpage()
       displayCurrentVersion()
   2. Listeners
@@ -34,19 +34,16 @@
  ============================================================================ */
 
 var
-    $allInputs // All <input />
+    objParams                 = {}
+
+  , $allInputs // All <input />
   , intInputs  // Num of $allInputs
   , $settingsSaved
   , $settingsSubpages
-  , $chooseSubpageForm
-  , $chooseSubpage
   , $chosenSubpage
 
   , strModuleLocalPrefix      = 'module_'
-  , strChooseSubpageFormId    = 'chooseSubpageForm'
-  , strChooseSubpageId        = 'chooseSubpage'
   , strChosenSubpageId        = 'chosenSubpage'
-  , strModulesListId          = 'chooseSubpageList'
   , strSettingsId             = 'settings'
   , strSettingsSavedId        = 'settingsSaved'
   , strModuleSubpageIdPrefix  = 'settings_'
@@ -76,9 +73,63 @@ var Options = {
     Page.localize( 'options' );
     Options.setPageValues();
     Options.getAvailableOptions();
-    Options.populateModulesList();
     Options.addEventListeners();
+    Options.parseQueryString();
+    Options.openPageSubpage();
     Options.displayCurrentVersion();
+  }
+  ,
+
+  /**
+   * Parse query string (get key/value pairs)
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  parseQueryString : function() {
+    // Split into key/value pairs
+    var objQueries = window.location.search.substring( 1 ).split( '&' );
+
+    // Convert the array of strings into an object
+    for ( var i = 0, l = objQueries.length; i < l; i++ ) {
+      var arrTemp = objQueries[ i ].split( '=' );
+
+      objParams[ arrTemp[ 0 ] ] = arrTemp[ 1 ];
+    }
+  }
+  ,
+
+  /**
+   * If the query string has page parameter, open an appropriate page.
+   * Same for a subpage.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  openPageSubpage : function() {
+    var
+        strPage         = objParams[ 'page' ]
+      , strSubpage      = objParams[ 'subpage' ]
+      , boolIsValidPage = typeof strPage === 'string'
+      ;
+
+    if ( boolIsValidPage && strPage !== '' ) {
+      Options.switchPage( strPage );
+
+      if ( typeof strSubpage === 'string' && strSubpage !== '' ) {
+        Options.chooseSubpage( strSubpage );
+
+        document
+          .querySelector( '[data-subpage="' + strSubpage + '"].switchSubpage' )
+            .parentNode.classList.add( 'selected' );
+      }
+    }
+    else if ( boolIsValidPage && strPage === '' || ! boolIsValidPage ) {
+      // Open first page from nav
+      document.querySelector( '.switchSubpage' ).click();
+    }
   }
   ,
 
@@ -94,12 +145,10 @@ var Options = {
     intInputs           = $allInputs.length;
 
     $settingsSaved      = document.getElementById( strSettingsSavedId );
-    $settingsSubpages   = document
-                            .getElementsByClassName( strSettingsSubpageClass );
+    $settingsSubpages   =
+      document.getElementsByClassName( strSettingsSubpageClass );
     intSettingsSubpages = $settingsSubpages.length;
 
-    $chooseSubpageForm  = document.getElementById( strChooseSubpageFormId );
-    $chooseSubpage      = document.getElementById( strChooseSubpageId );
     $chosenSubpage      = document.getElementById( strChosenSubpageId );
   }
   ,
@@ -117,12 +166,8 @@ var Options = {
     for ( var i = 0; i < intSettingsSubpages; i++ ) {
       var
           objSettingsSubpage        = $settingsSubpages[ i ]
-        , strModule                 = objSettingsSubpage
-                                        .id
-                                          .replace(
-                                              strModuleSubpageIdPrefix
-                                            , ''
-                                          )
+        , strModule                 =
+            objSettingsSubpage.id.replace( strModuleSubpageIdPrefix, '' )
         , strStorageVar             = strConstSettingsPrefix + strModule
         ;
 
@@ -174,6 +219,14 @@ var Options = {
                 &&  miscStorageVar === strVarValue
               )
                 $input.checked = true;
+              else if (
+                    ~ [ 'number', 'range' ].indexOf( strVarType )
+                &&  (
+                          typeof miscStorageVar === 'string'
+                      ||  typeof miscStorageVar === 'number'
+                    )
+              )
+                $input.value = miscStorageVar;
             }
           }
         }
@@ -219,7 +272,7 @@ var Options = {
         , arrTemp         = []
         ;
 
-      for ( var i = 0; i < $group.length; i++ ) {
+      for ( var i = 0, l = $group.length; i < l; i++ ) {
         var $groupEl = $group[ i ];
 
         if ( $groupEl.checked )
@@ -230,6 +283,8 @@ var Options = {
     }
     else if ( $this.type === 'radio' )
       miscSetting = $this.value;
+    else if ( $this.type === 'number' )
+      miscSetting = parseInt( $this.value );
 
     strModuleSettings = strConstSettingsPrefix + strChosenSubpageValue;
 
@@ -263,21 +318,42 @@ var Options = {
    * Switch page
    *
    * @type    method
-   * @param   objEvent
+   * @param   miscParam
+   *            Event object or ID
    * @return  void
    **/
-  switchPage : function( objEvent ) {
+  switchPage : function( miscParam ) {
     var
-        $target     = objEvent.target
-      , strPageId   = $target.hash.replace( '#', '' )
-      , $page       = document.getElementById( strPageId )
+        boolIsMiscParamObject = typeof miscParam === 'object'
+      , $target
+      , strPageId
+      ;
+
+    if ( boolIsMiscParamObject ) {
+      $target   = miscParam.target;
+      strPageId = $target.dataset.page;
+
+      // TODO: Works only for General now
+      if ( ! $target.classList.contains( 'menuItem' ) )
+        $target   =
+          document
+            .querySelector( '[data-page="' + strPageId + '"].switchPage' );
+    }
+    else {
+      strPageId = miscParam;
+      $target   =
+        document.querySelector( '[data-page="' + strPageId + '"].switchPage' );
+    }
+
+    var
+        $page   = document.getElementById( strPageId )
       ;
 
     if ( document.contains( $page ) ) {
       // 1. Hide all pages, show called.
       var $allPages = document.getElementsByClassName( 'page' );
 
-      for ( var i = 0, intPages = $allPages.length; i < intPages; i++ )
+      for ( var i = 0, l = $allPages.length; i < l; i++ )
         $allPages[ i ].style.display = 'none';
 
       $page.style.display = 'block';
@@ -285,47 +361,23 @@ var Options = {
       // 2. Make menu link active.
       // TODO: Switch to querySelector(All)? Performance vs Less code
       var
-          $allMenuLinks = document
-                            .getElementById( 'menu' )
-                              .getElementsByTagName( 'li' )
-        , j
+          $allMenuLinks =
+            document.getElementById( 'menu' ).getElementsByTagName( 'li' )
         ;
 
-      for ( j = 0, intMenuLinks = $allMenuLinks.length; j < intMenuLinks; j++ )
+      for ( var j = 0, m = $allMenuLinks.length; j < m; j++ )
         $allMenuLinks[ j ].classList.remove( 'selected' );
 
-      $target.parentNode.classList.add( 'selected' );
+      if ( document.contains( $target ) )
+        $target.parentNode.classList.add( 'selected' );
+
+      if ( boolIsMiscParamObject ) {
+        var strNewUrl = $target.href;
+
+        // TODO: Do not push if URL is the same
+        window.history.pushState( { path: strNewUrl }, '', strNewUrl );
+      }
     }
-
-    return false;
-  }
-  ,
-
-  /**
-   * Populate modules list
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
-   **/
-  populateModulesList : function() {
-    var
-        $options    = document.getElementById( strModulesListId ).children
-      ;
-
-    for ( var i = 0, intOptions = $options.length; i < intOptions; i++ ) {
-      var
-          $this         = $options[ i ]
-        , strValue      = strModuleLocalPrefix + $this.dataset.module
-        , strLocalValue = chrome.i18n.getMessage( strValue )
-        ;
-
-      $this.value = strLocalValue;
-      $this.dataset.lowercasevalue = strLocalValue.toLowerCase();
-    }
-
-    $chooseSubpage.placeholder = 
-      chrome.i18n.getMessage( $chooseSubpage.dataset.placeholder );
   }
   ,
 
@@ -340,33 +392,21 @@ var Options = {
     addEvent(
         document.getElementsByClassName( 'switchPage' )
       , 'click'
-      , function( objEvent ) { Options.switchPage( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'change'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'keyup'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpage
-      , 'input'
-      , function( objEvent ) { Options.onChooseSubpageChange( objEvent ); }
-    );
-
-    addEvent(
-        $chooseSubpageForm
-      , 'submit'
       , function( objEvent ) {
+          Options.switchPage( objEvent );
+
+          objEvent.preventDefault();
+        }
+    );
+
+    addEvent(
+        document.getElementsByClassName( 'switchSubpage' )
+      , 'click'
+      , function( objEvent ) {
+          Options.switchPage( objEvent );
           Options.chooseSubpage( objEvent );
-          return false;
+
+          objEvent.preventDefault();
         }
     );
 
@@ -379,47 +419,34 @@ var Options = {
   ,
 
   /**
-   * If value equals one of the options, choose that option automatically
+   * Show an appropriate subpage
    *
    * @type    method
-   * @param   objEvent
+   * @param   miscVar
+   *            Event object or subpage ID
    * @return  void
    **/
-   onChooseSubpageChange: function( objEvent ) {
+  chooseSubpage : function( miscVar ) {
     var
-        strValue  = $chooseSubpage.value.toLowerCase()
-      , $option   = document.querySelector(
-          '#chooseSubpageList [data-lowercasevalue="' + strValue + '"]'
-        )
+        $option
+      , strSubpage
       ;
 
-    if ( $option !== null )
-      Options.chooseSubpage();
-  }
-  ,
-
-  /**
-   * When choose module form submitted
-   *
-   * @type    method
-   * @param   objEvent
-   * @return  void
-   **/
-  chooseSubpage : function( objEvent ) {
-    var
-        strValue  = $chooseSubpage.value.toLowerCase()
-      , $option   = document.querySelector(
-          '#chooseSubpageList [data-lowercasevalue="' + strValue + '"]'
-        )
-      ;
+    if ( typeof miscVar === 'object' ) {
+      $option     = miscVar.target;
+      strSubpage  = $option.dataset.subpage;
+    }
+    else {
+      strSubpage  = miscVar
+      $option     = document.querySelector(
+                      '[data-subpage="' + strSubpage + '"].switchSubpage'
+                    );
+    }
 
     if ( $option !== null ) {
-      var
-          strModuleName   = $option.dataset.module
-        , $targetSubpage  = document.getElementById(
-                              strModuleSubpageIdPrefix + strModuleName
-                            )
-        ;
+      var $targetSubpage  = document.getElementById(
+                              strModuleSubpageIdPrefix + strSubpage
+                            );
 
       if ( document.contains( $targetSubpage ) ) {
         for ( var i = 0; i < intSettingsSubpages; i++ )
@@ -428,15 +455,9 @@ var Options = {
         $targetSubpage.style.display = 'block';
 
         // Save chosen module for later use
-        $chosenSubpage.value = strModuleName;
-
-        // Clear current form value, so the placeholder is visible
-        $chooseSubpage.value = '';
+        $chosenSubpage.value = strSubpage;
       }
     }
-
-    if ( typeof objEvent !== 'undefined' )
-      objEvent.preventDefault();
   }
   ,
 
@@ -468,7 +489,7 @@ var Options = {
       if ( typeof arrTabsIds === 'undefined' )
         return;
 
-      for ( var i = 0, intTabsIds = arrTabsIds.length; i < intTabsIds; i++ ) {
+      for ( var i = 0, l = arrTabsIds.length; i < l; i++ ) {
         var arrTabId = arrTabsIds[ i ];
 
         if ( arrTabId[ 1 ] === strModule )

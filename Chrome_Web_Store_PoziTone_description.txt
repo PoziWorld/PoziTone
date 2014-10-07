@@ -10,7 +10,7 @@ Want to stop/resume playback, mute/unmute, switch track or add it to playlist? I
 
 — List of recent tracks
 
-Which track played five minutes ago? PoziTone keeps information about the last 10 tracks played.
+What track played five minutes ago? PoziTone keeps information about the last 10 tracks played.
 
 .   .   .
 
@@ -32,6 +32,8 @@ Alt+Shift+N — “Next track” (not preset).
 Alt+Shift+B — “Previous track” (not preset).
 Alt+Shift+P — “Stop / Play”.
 Alt+Shift+M — “Mute / Unmute”.
+Alt+Shift+A — “Increase sound volume” (not preset).
+Alt+Shift+Z — “Decrease sound volume” (not preset).
 Alt+Shift+Q — “Show notification”.
 
 .   .   .

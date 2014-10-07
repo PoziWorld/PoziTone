@@ -24,7 +24,8 @@ const
     strConstExtensionName         = chrome.i18n.getMessage( 'extensionName' )
   , strConstExtensionVersion      = chrome.runtime.getManifest().version
   , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
-  , strConstChromeVersion         = bowser.chromeVersion
+  , strConstChromeVersion         =
+      ( typeof bowser !== 'undefined' ) ? bowser.chromeVersion : ''
 
   , strConstNotificationIdSeparator     = '_'
   , strConstNotificationLinesSeparator  = "\n\n"

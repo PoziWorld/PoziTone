@@ -11,6 +11,10 @@
     "message": "Добавляет функциональность аудиоплеерам: уведомления с информацией о треке, управление вне окна браузера, список последних треков."
   }
   ,
+  "commandShowNotification": {
+    "message": "Показать уведомление"
+  }
+  ,
   "notificationButtonsAddLoggedInTitle": {
     "message": "Добавить трек в плейлист"
   }
@@ -83,8 +87,29 @@
       "message": "Звук включён"
     }
   ,
+  "notificationButtonsVolumeUpTitle": {
+      "message"     : "Увеличить громкость звука"
+    , "description" : "Из трёх возможных вариантов (громкость, громкость звука, уровень громкости звука) используйте 'громкость звука', пожалуйста."
+  }
+  ,
+  "notificationButtonsVolumeDownTitle": {
+      "message"     : "Уменьшить громкость звука"
+    , "description" : "Из трёх возможных вариантов (громкость, громкость звука, уровень громкости звука) используйте 'громкость звука', пожалуйста."
+  }
+    ,
+    "notificationButtonsVolumeChangeFeedback": {
+        "message"         : "Громкость звука — $VOLUME_LEVEL$%"
+      , "description"     : "Уровень громкости звука после изменения. Из трёх возможных вариантов (громкость, громкость звука, уровень громкости звука) используйте 'громкость звука', пожалуйста."
+      , "placeholders"    : {
+          "volume_level"  : {
+              "content"   : "$1"
+            , "example"   : "90"
+          }
+        }
+    }
+  ,
   "kbps": {
-      "description" : "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+      "description" : "Килобит в секунду. Больше информации — на https://ru.wikipedia.org/wiki/Бит_в_секунду"
     , "message"     : " кбит/с"
   }
 
@@ -133,6 +158,21 @@
             ,
             "optionsSettingsGeneralShortcutsShowInNotification": {
               "message": "Отображать подсказки в уведомлении"
+            }
+          ,
+          "optionsSettingsSoundVolumeControl": {
+              "message"     : "Управление громкостью звука"
+            , "description" : "Из трёх возможных вариантов (громкость, громкость звука, уровень громкости звука) используйте 'громкость звука', пожалуйста."
+          }
+            ,
+            "optionsSettingsSoundVolumeControlUseDefaults": {
+                "message"     : "Использовать <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">общие настройки</a>"
+              , "description" : "Слова внутри тега <a /> должны быть те самые, из 'module_general' and 'optionsNavSettings' ('Общие' and 'Настройки' => 'общие настройки')."
+            }
+            ,
+            "optionsSettingsSoundVolumeControlDelta": {
+                "message"     : "Изменять на, %"
+              , "description" : "Используется в поле, в котором спрашивается ввести целочисленное значение в процентах (1-99), которое будет использоваться при увеличении или уменьшении громкости звука."
             }
           ,
           "optionsSettingsGeneralUpdates": {
@@ -220,8 +260,8 @@
           }
             ,
             "optionsSettingsAdditionalInfoShowCbr": {
-                "description" : "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
-              , "message"     : "Отображать <a href=\"http://ru.wikipedia.org/wiki/%D0%91%D0%B8%D1%82%D1%80%D0%B5%D0%B9%D1%82#.D0.9F.D0.BE.D1.81.D1.82.D0.BE.D1.8F.D0.BD.D0.BD.D1.8B.D0.B9_.D0.B1.D0.B8.D1.82.D1.80.D0.B5.D0.B9.D1.82\" target=\"_blank\">постоянный битрейт</a>"
+                "description" : "http://en.wikipedia.org/wiki/Constant_Bit_Rate — если на Википедии есть статья на этом языке, пожалуйста, включите ссылку. В противном случае удалите <a /> из перевода."
+              , "message"     : "Отображать <a href=\"http://ru.wikipedia.org/wiki/Битрейт#.D0.9F.D0.BE.D1.81.D1.82.D0.BE.D1.8F.D0.BD.D0.BD.D1.8B.D0.B9_.D0.B1.D0.B8.D1.82.D1.80.D0.B5.D0.B9.D1.82\" target=\"_blank\">постоянный битрейт</a>"
             }
 
           ,
@@ -285,10 +325,6 @@
             "optionsSettingsNotificationButtonsMuteUnmute": {
               "message": "Выключить/Включить звук"
             }
-      ,
-      "optionsSettingsChooseSubpage": {
-        "message": "Выберите страницу настроек"
-      }
     ,
     "optionsNavFaq": {
       "message": "Вопросы и ответы"

@@ -23,7 +23,7 @@ Features
 
 *	**List of recent tracks**
 
-	_Which track played five minutes ago?_
+	_What track played five minutes ago?_
 	`PoziTone` keeps information about the last 10 tracks played.
 
 
@@ -78,7 +78,9 @@ Keyboard shortcuts
 4. Alt+Shift+B — “Previous track” (_not preset_).
 5. Alt+Shift+P — “Stop / Play”.
 6. Alt+Shift+M — “Mute / Unmute”.
-7. Alt+Shift+Q — “Show notification”.
+7. Alt+Shift+A — “Increase sound volume” (_not preset_).
+8. Alt+Shift+Z — “Decrease sound volume” (_not preset_).
+9. Alt+Shift+Q — “Show notification”.
 
 ### Set up / change keyboards shortcuts
 

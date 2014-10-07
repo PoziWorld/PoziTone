@@ -18,6 +18,9 @@
       processButtonClick_playStop()
       processButtonClick_mute()
       processButtonClick_unmute()
+      changeVolume()
+      processButtonClick_volumeUp()
+      processButtonClick_volumeDown()
       sendSameMessage()
       processCommand_muteUnmute()
       processCommand_showNotification()
@@ -42,7 +45,8 @@
  ============================================================================ */
 
 const
-    strFavoriteButtonContainerId          = 'wp-track-vote-buttons'
+    strPlayerId                           = 'player'
+  , strFavoriteButtonContainerId          = 'wp-track-vote-buttons'
   , strFavoriteButtonClass                = 'up'
   , strFavoriteButtonQuerySelector        = 
       '#wp-track-vote-buttons .vote-btn.up'
@@ -85,14 +89,14 @@ const
           parseInt( $kbpsInfo.parentNode.innerText.replace( /\D+/g, '' ) )
         : 0
 
-  , strNotificationSeparator              = "\n\n"
-  , strModuleSettingsPrefix               = 'objSettings_'
   , strModule                             = 'fm_di'
+  , strModuleSettings                     = strConstSettingsPrefix + strModule
   ;
 
 var
     // On stop player removes track info, so store it in a var
     strTrackInfo
+  , $player
   , $favoriteButtonContainer
   , $favoriteButton
   , DisconnectableObserver                = null
@@ -101,9 +105,9 @@ var
   , PageWatcher                           = {
         boolIsUserLoggedIn                : boolIsLoggedInMenuPresent
 
-      // Play/Stop button has class which is player status. 
+      // Play/Stop button has class which is player status.
 
-      // When player is off (paused/stopped/not started), 
+      // When player is off (paused/stopped/not started),
       // it has class 'play'; on - 'stop'.
       , objWantedClassRegExp              : /-(play|stop)/
       , intWantedClassLength              : 4
@@ -148,8 +152,8 @@ var
     PageWatcher.initTitleContainerObserver();
 
     // There is no such option when not logged-in
-     if ( PageWatcher.boolIsUserLoggedIn )
-       PageWatcher.initFavoriteButtonContainerObserver();
+    if ( PageWatcher.boolIsUserLoggedIn )
+      PageWatcher.initFavoriteButtonContainerObserver();
   }
   ,
 
@@ -284,6 +288,62 @@ var
   ,
 
   /**
+   * Change volume level (up/down).
+   * Volume level value range: 0-1.
+   *
+   * @type    method
+   * @param   strDirection
+   *            'up' or 'down'.
+   * @return  void
+   **/
+  changeVolume : function( strDirection ) {
+    var intVolume = $player._getVolume();
+
+    // Can't be changed, reached the limit
+    if (
+          strDirection === 'up' && intVolume >= 1
+      ||  strDirection === 'down' && intVolume <= 0
+    )
+      return;
+
+    var funcSetVolume = function( intVolumeDelta ) {
+      var
+          intUpDown = 1
+        , intPercentage
+        ;
+
+      if ( strDirection === 'down' )
+        intUpDown = -1;
+
+      // PoziTone operates with %, DI operates with a 0–1 range
+      intVolume += ( intUpDown * intVolumeDelta / 100 );
+
+      if ( intVolume > 1 )
+        intVolume = 1;
+      else if ( intVolume < 0 )
+        intVolume = 0;
+      else
+        // http://stackoverflow.com/a/5651139
+        intVolume = intVolume.toFixed( 2 );
+
+      $player._setVolume( intVolume );
+
+      // parseInt & Math.floor return 28 for .29 * 100
+      intPercentage = Math.round( intVolume * 100 );
+
+      PageWatcher.sendSameMessage(
+        chrome.i18n.getMessage(
+            'notificationButtonsVolumeChangeFeedback'
+          , [ intPercentage ]
+        )
+      );
+    };
+
+    PageWatcher.getVolumeDeltaSettings( funcSetVolume );
+  }
+  ,
+
+  /**
    * Send same message again (set of buttons needs to be changed)
    *
    * @type    method
@@ -326,9 +386,7 @@ var
 
     if ( typeof boolAppendKbpsInfo === 'boolean' && boolAppendKbpsInfo ) {
       // Check settings whether kbps info should be shown
-      var strModuleSettings = strModuleSettingsPrefix + strModule;
-
-      chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+      StorageSync.get( strModuleSettings, function( objReturn ) {
         var objModuleSettings = objReturn[ strModuleSettings ];
 
         // If set to show kbps info and kbps info is available
@@ -341,7 +399,7 @@ var
           var strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
 
           PageWatcher.objStationInfo.strTrackInfo += 
-            strNotificationSeparator + strKbpsInfo;
+            strConstNotificationLinesSeparator + strKbpsInfo;
         }
 
         funcSend();
@@ -453,6 +511,8 @@ var
               var strNewTrackInfo = arrAddedNodes[ 0 ].textContent;
 
               if ( strNewTrackInfo !== '' ) {
+                $player = document.getElementById( strPlayerId );
+
                 strTrackInfo = strNewTrackInfo;
 
                 PageWatcher.boolHadPlayedBefore = true;
@@ -663,6 +723,14 @@ var
     }
   }
 };
+
+// "Import" general functions
+PageWatcher.getVolumeDeltaSettings =
+  GeneralPageWatcher.getVolumeDeltaSettings;
+PageWatcher.processButtonClick_volumeUp =
+  GeneralPageWatcher.processButtonClick_volumeUp;
+PageWatcher.processButtonClick_volumeDown =
+  GeneralPageWatcher.processButtonClick_volumeDown;
 
 /* =============================================================================
 

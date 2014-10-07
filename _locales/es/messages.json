@@ -96,9 +96,6 @@
   "optionsFoundation": {
     "message": "PoziTone es una realidad gracias al <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amor</a> y <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">la generosidad</a>."
   },
-  "optionsSettingsChooseSubpage": {
-    "message": "Escoge una página de configuración"
-  },
   "optionsSettingsAdditionalInfoShowCbr": {
       "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>"
     , "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."

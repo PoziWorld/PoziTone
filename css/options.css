@@ -62,6 +62,23 @@
       color:                  #000;
       text-align:             center;
     }
+  .soundVolumeControl
+    {
+      display:                inline-block;
+      vertical-align:         middle;
+      margin-left:            1em;
+    }
+  .soundVolumeControl:first-child
+    {
+      margin-left:            0;
+    }
+  .soundVolumeControlDelta
+    {
+      line-height:            1.8em;
+      padding:                0 0 0 .385em;
+      width:                  2.6em;
+      border:                 .077em solid #ddd;
+    }
 
 /* =============================================================================
 

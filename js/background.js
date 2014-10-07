@@ -62,6 +62,7 @@ const
             strJoinUeip                           : 'no'
           , boolShowShortcutsInNotification       : true
           , boolShowWasUpdatedNotification        : true
+          , intVolumeDelta                        : 10
         }
       , objSettings_ru_101                        : {
             boolIsEnabled                         : true
@@ -75,6 +76,8 @@ const
           , boolShowNotificationWhenStopped       : false
           , boolShowNotificationWhenMuted         : false
           , boolShowNotificationWhenNoTrackInfo   : false
+          , boolUseGeneralVolumeDelta             : true
+          , intVolumeDelta                        : 10
         }
       , objSettings_fm_di                         : {
             boolIsEnabled                         : true
@@ -87,6 +90,8 @@ const
                                                     ]
           , boolShowNotificationWhenMuted         : false
           , boolShowNotificationWhenNoTrackInfo   : false
+          , boolUseGeneralVolumeDelta             : true
+          , intVolumeDelta                        : 10
         }
       , objSettings_com_vk_audio                  : {
             boolIsEnabled                         : true
@@ -97,6 +102,8 @@ const
                                                       , 'next'
                                                     ]
           , boolShowNotificationWhenMuted         : false
+          , boolUseGeneralVolumeDelta             : true
+          , intVolumeDelta                        : 10
         }
     }
   ;
@@ -531,7 +538,7 @@ var Background                    = {
         , arrTempRecentTrack  = []
         ;
 
-      if ( intIndex !== -1 ) {
+      if ( ~ intIndex ) {
         if ( intIndex !== ( arrRecentTracks.length - 1 ) )
           arrRecentTracks.splice( intIndex, 1 );
         // Don't save if it is already at the last position in the array
@@ -631,7 +638,7 @@ var Background                    = {
         ;
 
       if (
-            Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo ) === -1
+            ~~ Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo )
         &&  strTrackInfo !== Background.strPreviousTrack
         ||  objMessage.boolDisregardSameMessage
       ) {
@@ -1158,7 +1165,15 @@ chrome.commands.onCommand.addListener(
       var strMessagePrefix = Background.strProcessCommand;
 
       // For these it's the same as button click
-      var arrCommands = [ 'add', 'favorite', 'next', 'previous', 'playStop' ];
+      var arrCommands = [
+          'add'
+        , 'favorite'
+        , 'next'
+        , 'previous'
+        , 'playStop'
+        , 'volumeUp'
+        , 'volumeDown'
+      ];
 
       if ( ~ arrCommands.indexOf( strCommand ) )
         strMessagePrefix = Background.strProcessButtonClick;

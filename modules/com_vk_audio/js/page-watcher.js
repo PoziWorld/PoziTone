@@ -20,6 +20,9 @@
       processButtonClick_playStop()
       processButtonClick_mute()
       processButtonClick_unmute()
+      changeVolume()
+      processButtonClick_volumeUp()
+      processButtonClick_volumeDown()
       processCommand_muteUnmute()
       processCommand_showNotification()
       initObserver()
@@ -80,13 +83,12 @@ const
   , strVolumeLineId                       = 'pd_vol_line'
   , strFeedbackDialogClass                = 'top_result_baloon_wrap'
   , strFeedbackDialogHeaderClass          = 'top_result_header'
-  , strNotificationSeparator              = "\n\n"
-  , strModuleSettingsPrefix               = 'objSettings_'
   , boolIsLogOutButtonPresent             = 
       document.contains( document.getElementById( 'logout_link' ) )
 
   // Module
   , strModule                             = 'com_vk_audio'
+  , strModuleSettings                     = strConstSettingsPrefix + strModule
   , strImgPath                            = 'modules/' + strModule + '/img/'
   ;
 
@@ -330,6 +332,62 @@ var
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
+  }
+  ,
+
+  /**
+   * Change volume level (up/down).
+   * Volume level value range: 0-1.
+   *
+   * @type    method
+   * @param   strDirection
+   *            'up' or 'down'.
+   * @return  void
+   **/
+  changeVolume : function( strDirection ) {
+    var intVolume = $player.getVolume();
+
+    // Can't be changed, reached the limit
+    if (
+          strDirection === 'up' && intVolume >= 1
+      ||  strDirection === 'down' && intVolume <= 0
+    )
+      return;
+
+    var funcSetVolume = function( intVolumeDelta ) {
+      var
+          intUpDown = 1
+        , intPercentage
+        ;
+
+      if ( strDirection === 'down' )
+        intUpDown = -1;
+
+      // PoziTone operates with %, VK operates with a 0–1 range
+      intVolume += ( intUpDown * intVolumeDelta / 100 );
+
+      if ( intVolume > 1 )
+        intVolume = 1;
+      else if ( intVolume < 0 )
+        intVolume = 0;
+      else
+        // http://stackoverflow.com/a/5651139
+        intVolume = intVolume.toFixed( 2 );
+
+      $player.setVolume( intVolume );
+
+      // parseInt & Math.floor return 28 for .29 * 100
+      intPercentage = Math.round( intVolume * 100 );
+
+      PageWatcher.sendSameMessage(
+        chrome.i18n.getMessage(
+            'notificationButtonsVolumeChangeFeedback'
+          , [ intPercentage ]
+        )
+      );
+    };
+
+    PageWatcher.getVolumeDeltaSettings( funcSetVolume );
   }
   ,
 
@@ -904,9 +962,8 @@ var
    * @return  void
    **/
   getKbpsInfoThenSendMessage : function( strStatus, strCommand ) {
-    var strModuleSettings = strModuleSettingsPrefix + strModule;
-
-    chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+    // Check settings whether kbps info should be shown
+    StorageSync.get( strModuleSettings, function( objReturn ) {
       var objModuleSettings = objReturn[ strModuleSettings ];
 
       // If set to show kbps info
@@ -1062,12 +1119,20 @@ var
 
     if ( typeof strKbpsInfo === 'string' && strKbpsInfo !== '' )
       PageWatcher.objStationInfo.strTrackInfo += 
-        strNotificationSeparator + strKbpsInfo;
+        strConstNotificationLinesSeparator + strKbpsInfo;
 
     if ( typeof boolSend === 'undefined' || boolSend )
       PageWatcher.sendSameMessage( strStatusMessage, strCommand, false );
   }
 };
+
+// "Import" general functions
+PageWatcher.getVolumeDeltaSettings =
+  GeneralPageWatcher.getVolumeDeltaSettings;
+PageWatcher.processButtonClick_volumeUp =
+  GeneralPageWatcher.processButtonClick_volumeUp;
+PageWatcher.processButtonClick_volumeDown =
+  GeneralPageWatcher.processButtonClick_volumeDown;
 
 /* =============================================================================
 

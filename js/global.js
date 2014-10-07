@@ -57,20 +57,26 @@ var Global                        = {
         ru_101                    : {
             objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
           , arrJs                 : [
-                'modules/ru_101/js/uppod-player-api.js'
+                'js/const.js'
               , 'modules/ru_101/js/uppod-player-api.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/ru_101/js/page-watcher.js'
           ]
         }
       , fm_di                     : {
             objRegex              : /(http:\/\/|https:\/\/)www.di.fm\/.*/
           , arrJs                 : [
-                'modules/fm_di/js/page-watcher.js'
+                'js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/fm_di/js/page-watcher.js'
           ]
         }
       , com_vk_audio              : {
             objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
           , arrJs                 : [
-                'modules/com_vk_audio/js/page-watcher.js'
+                'js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_vk_audio/js/page-watcher.js'
           ]
         }
   }
@@ -181,6 +187,30 @@ var Global                        = {
                   , iconUrl       : 'img/sound_high_icon&16.png'
                 }
               , strFunction       : 'unmute'
+            }
+        }
+      , volumeUp                  : {
+            volumeUp              : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsVolumeUpTitle'
+                      )
+                  , iconUrl       : 'img/sound_up_icon&16.png'
+                }
+              , strFunction       : 'volumeUp'
+            }
+        }
+      , volumeDown                : {
+            volumeDown            : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsVolumeDownTitle'
+                      )
+                  , iconUrl       : 'img/sound_down_icon&16.png'
+                }
+              , strFunction       : 'volumeDown'
             }
         }
     }
@@ -396,10 +426,8 @@ var Global                        = {
 
               objNotificationOptions.buttons = [];
 
-              // TODO: Combine all following buttons check into one
-
               if (
-                    arrButtons.indexOf( 'add' ) !== -1
+                    ~ arrButtons.indexOf( 'add' )
                 &&  (
                           boolIsUserLoggedIn
                       &&  (
@@ -414,9 +442,9 @@ var Global                        = {
                 // Don't show button, if track is in playlist
                 // TODO: Show if track changed while waited for server response
                 if (
-                  Global
-                    .arrAddTrackToPlaylistFeedback
-                      .indexOf( arrTrackInfo[ 1 ] ) === -1
+                  ~~  Global
+                        .arrAddTrackToPlaylistFeedback
+                          .indexOf( arrTrackInfo[ 1 ] )
                 ) {
                   objNotificationOptions.buttons.push(
                     Global.addShortcutInfo(
@@ -430,15 +458,15 @@ var Global                        = {
               }
 
               if (
-                    arrButtons.indexOf( 'favorite' ) !== -1
+                    ~ arrButtons.indexOf( 'favorite' )
                 &&  boolIsUserLoggedIn
               ) {
                 // Don't show button, if liked this track already
                 // TODO: Show if track changed while waited for server response
                 if (
-                  Global
-                    .strFavoriteStatusSuccess
-                      .indexOf( arrTrackInfo[ 1 ] ) === -1
+                  ~~  Global
+                        .strFavoriteStatusSuccess
+                          .indexOf( arrTrackInfo[ 1 ] )
                 ) {
                   objNotificationOptions.buttons.push(
                     Global.addShortcutInfo(
@@ -452,7 +480,7 @@ var Global                        = {
               }
 
               if (
-                    arrButtons.indexOf( 'next' ) !== -1
+                    ~ arrButtons.indexOf( 'next' )
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
@@ -476,7 +504,7 @@ var Global                        = {
               }
 
               if (
-                    arrButtons.indexOf( 'previous' ) !== -1
+                    ~ arrButtons.indexOf( 'previous' )
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
@@ -499,7 +527,7 @@ var Global                        = {
                 arrActiveButtons.push( 'previous|previous' );
               }
 
-              if ( arrButtons.indexOf( 'playStop' ) !== -1 ) {
+              if ( ~ arrButtons.indexOf( 'playStop' ) ) {
                 objNotificationOptions.buttons.push(
                   Global.addShortcutInfo(
                       objNotificationButtons
@@ -513,7 +541,7 @@ var Global                        = {
                   .push( 'playStop|' + objTempPlayerInfo.strStatus );
               }
 
-              if ( arrButtons.indexOf( 'muteUnmute' ) !== -1 ) {
+              if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
                 var strMuteUnmuteState  = ( objTempPlayerInfo.intVolume > 0 ) ? 
                                             'mute' : 'unmute';
 
@@ -527,6 +555,28 @@ var Global                        = {
                 );
 
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
+              }
+
+              if ( ~ arrButtons.indexOf( 'volumeUp' ) ) {
+                objNotificationOptions.buttons.push(
+                  Global.addShortcutInfo(
+                      objNotificationButtons.volumeUp.volumeUp.objButton
+                    , 'volumeUp'
+                  )
+                );
+
+                arrActiveButtons.push( 'volumeUp|volumeUp' );
+              }
+
+              if ( ~ arrButtons.indexOf( 'volumeDown' ) ) {
+                objNotificationOptions.buttons.push(
+                  Global.addShortcutInfo(
+                      objNotificationButtons.volumeDown.volumeDown.objButton
+                    , 'volumeDown'
+                  )
+                );
+
+                arrActiveButtons.push( 'volumeDown|volumeDown' );
               }
             }
 
@@ -721,7 +771,7 @@ var Global                        = {
                                   )
                   ;
 
-                if ( intIndex !== -1 ) {
+                if ( ~ intIndex ) {
                   arrTabsIds.splice( intIndex, 1 );
                   intChanges++;
                 }
@@ -737,7 +787,7 @@ var Global                        = {
             }
         }
       );
-    }
+    };
 
     if ( typeof strModule === 'undefined' ) {
       StorageLocal.get( 'arrTabsIds', function( objData ) {
@@ -752,7 +802,7 @@ var Global                        = {
         var intIndex = 
               Global.returnIndexOfSubitemContaining( arrTabsIds, intTabId );
 
-        if ( intIndex !== -1 ) {
+        if ( ~ intIndex ) {
           strModule = arrTabsIds[ intIndex ][ 1 ];
           funcRemoveNotification( intTabId, strModule );
         }
@@ -799,7 +849,7 @@ var Global                        = {
         ;
 
       // Save if it is not present or "reposition" to be the last
-      if ( intIndex === -1 )
+      if ( ~ intIndex )
         funcPush();
       else if ( intIndex !== intLastIndex ) {
         arrTabsIds.splice( intIndex, 1 );
@@ -1143,7 +1193,7 @@ var Global                        = {
                                   , 'name'
                                 );
 
-        if ( intCommandsIndex !== -1 ) {
+        if ( ~ intCommandsIndex ) {
           var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
 
           if ( strShortcut !== '' )

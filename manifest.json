@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.2.3.2"
+  , "version"                   : "0.3.3.0"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -42,56 +42,68 @@
             "suggested_key"     : {
               "default"         : "Alt+Shift+D"
             }
-          , "description"       : "Add track to playlist"
+          , "description"       : "__MSG_optionsSettingsNotificationButtonsAdd__"
         }
       , "favorite"              : {
-            "description"       : "I like it!"
+            "description"       : "__MSG_optionsSettingsNotificationButtonsFavorite__"
         }
       , "next"                  : {
-            "description"       : "Next track"
+            "description"       : "__MSG_optionsSettingsNotificationButtonsNext__"
         }
       , "previous"              : {
-            "description"       : "Previous track"
+            "description"       : "__MSG_optionsSettingsNotificationButtonsPrevious__"
         }
       , "playStop"              : {
             "suggested_key"     : {
               "default"         : "Alt+Shift+P"
             }
-          , "description"       : "Stop / Play"
+          , "description"       : "__MSG_optionsSettingsNotificationButtonsPlayStop__"
         }
       , "muteUnmute"            : {
             "suggested_key"     : {
               "default"         : "Alt+Shift+M"
             }
-          , "description"       : "Mute / Unmute"
+          , "description"       : "__MSG_optionsSettingsNotificationButtonsMuteUnmute__"
+        }
+      , "volumeUp"              : {
+            "description"       : "__MSG_notificationButtonsVolumeUpTitle__"
+        }
+      , "volumeDown"            : {
+            "description"       : "__MSG_notificationButtonsVolumeDownTitle__"
         }
       , "showNotification"      : {
             "suggested_key"     : {
               "default"         : "Alt+Shift+Q"
             }
-          , "description"       : "Show notification"
+          , "description"       : "__MSG_commandShowNotification__"
         }
     }
   , "content_scripts"           : [
         {
             "matches"           : [ "*://101.ru/*" ]
-          , "js"                : [ 
-                "modules/ru_101/js/uppod-player-api.js"
+          , "js"                : [
+                "js/const.js"
+              , "modules/ru_101/js/uppod-player-api.js"
+              , "modules/general/js/page-watcher.js"
               , "modules/ru_101/js/page-watcher.js"
             ]
           , "run_at"            : "document_end"
         }
       , {
             "matches"           : [ "*://www.di.fm/*" ]
-          , "js"                : [ 
-                "modules/fm_di/js/page-watcher.js"
+          , "js"                : [
+                "js/const.js"
+              , "modules/general/js/page-watcher.js"
+              , "modules/fm_di/js/page-watcher.js"
             ]
           , "run_at"            : "document_end"
         }
       , {
             "matches"           : [ "*://vk.com/*" ]
-          , "js"                : [ 
-                "modules/com_vk_audio/js/page-watcher.js"
+          , "js"                : [
+                "js/const.js"
+              , "modules/general/js/page-watcher.js"
+              , "modules/com_vk_audio/js/page-watcher.js"
             ]
           , "run_at"            : "document_end"
         }

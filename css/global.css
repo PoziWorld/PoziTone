@@ -64,12 +64,15 @@
   a
 , a:hover
 , a:active
+, a:focus
     {
       color:                  #15c;
       text-decoration:        none;
       outline:                none;
     }
   a:hover
+, a:active
+, a:focus
     {
       text-decoration:        underline;
     }
@@ -114,15 +117,15 @@
       padding-left:           1.8em;
       list-style-type:        none;
     }
+  #header #submenu li
+    {
+      padding-left:           .8em;
+    }
   #header li.selected
     {
       border-color:           rgb(78, 87, 100);
     }
-/*  #header li:last-child
-    {
-      margin:                 2.7em 0 0;
-    }*/
-  #header li a
+  .menuItem
     {
       display:                inline-block;
       font-size:              1.2em;
@@ -130,7 +133,7 @@
       margin:                 .5em 0;
       color:                  #999;
     }
-  #header li.selected a
+  .selected.menuItem a
     {
       color:                  #464E5A;
     }

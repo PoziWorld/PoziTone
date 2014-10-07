@@ -17,17 +17,48 @@
       <h1 i18n-content="extensionName"></h1>
       <nav>
         <ul id="menu">
-          <li class="selected">
-            <a
-              href="#settings"
-              class="switchPage"
-              i18n-content="optionsNavSettings"
-                ></a>
+          <li>
+            <span class="menuItem" i18n-content="optionsNavSettings"></span>
+            <ul id="submenu">
+              <li class="selected">
+                <a
+                  href="?page=settings&subpage=general"
+                  data-page="settings" data-subpage="general"
+                  class="menuItem switchSubpage"
+                  i18n-content="module_general"
+                    ></a>
+              </li>
+              <li>
+                <a
+                  href="?page=settings&subpage=com_vk_audio"
+                  data-page="settings" data-subpage="com_vk_audio"
+                  class="menuItem switchSubpage"
+                  i18n-content="module_com_vk_audio"
+                    ></a>
+              </li>
+              <li>
+                <a
+                  href="?page=settings&subpage=fm_di"
+                  data-page="settings" data-subpage="fm_di"
+                  class="menuItem switchSubpage"
+                  i18n-content="module_fm_di"
+                    ></a>
+              </li>
+              <li>
+                <a
+                  href="?page=settings&subpage=ru_101"
+                  data-page="settings" data-subpage="ru_101"
+                  class="menuItem switchSubpage"
+                  i18n-content="module_ru_101"
+                    ></a>
+              </li>
+            </ul>
           </li>
           <li>
             <a
-              href="#about"
-              class="switchPage"
+              href="?page=about"
+              data-page="about"
+              class="menuItem switchPage"
               i18n-content="optionsNavAbout"
                 ></a>
           </li>
@@ -44,22 +75,7 @@
               i18n-content="optionsSettingsSaved"
                 ></span>
           </h1>
-          <form id="chooseSubpageForm">
-            <input
-              list="chooseSubpageList"
-              id="chooseSubpage"
-              data-placeholder="optionsSettingsChooseSubpage"
-              autocomplete="off"
-              autofocus
-                />
-            <datalist id="chooseSubpageList">
-              <option data-module="general">
-              <option data-module="com_vk_audio">
-              <option data-module="fm_di">
-              <option data-module="ru_101">
-            </datalist>
-            <input type="hidden" id="chosenSubpage" value="general" />
-          </form>
+          <input type="hidden" id="chosenSubpage" value="general" />
         </header>
         <section id="settings_general" class="subpage settingsSubpage">
           <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
@@ -70,6 +86,21 @@
                 <li>
                   <label i18n-content="optionsSettingsGeneralShortcutsShowInNotification">
                     <input type="checkbox" name="boolShowShortcutsInNotification" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                        />
                   </label>
                 </li>
               </ul>
@@ -175,6 +206,36 @@
                     <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
                   </label>
                 </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeUpTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeUp" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeDownTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeDown" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsSoundVolumeControlUseDefaults">
+                    <input type="checkbox" name="boolUseGeneralVolumeDelta" />
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                        />
+                  </label>
+                </li>
               </ul>
             </fieldset>
             <fieldset>
@@ -258,6 +319,36 @@
                 <li>
                   <label i18n-content="optionsSettingsNotificationButtonsMuteUnmute">
                     <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeUpTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeUp" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeDownTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeDown" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsSoundVolumeControlUseDefaults">
+                    <input type="checkbox" name="boolUseGeneralVolumeDelta" />
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                        />
                   </label>
                 </li>
               </ul>
@@ -348,6 +439,36 @@
                 <li>
                   <label i18n-content="optionsSettingsNotificationButtonsMuteUnmute">
                     <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeUpTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeUp" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="notificationButtonsVolumeDownTitle">
+                    <input type="checkbox" name="arrNotificationButtons" value="volumeDown" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsSoundVolumeControlUseDefaults">
+                    <input type="checkbox" name="boolUseGeneralVolumeDelta" />
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                        />
                   </label>
                 </li>
               </ul>

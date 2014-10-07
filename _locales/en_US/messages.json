@@ -11,6 +11,10 @@
     "message": "Adds functionality to audio players, such as track info notifications, controls outside of browser window, and recent tracks list."
   }
   ,
+  "commandShowNotification": {
+    "message": "Show notification"
+  }
+  ,
   "notificationButtonsAddLoggedInTitle": {
     "message": "Add track to playlist"
   }
@@ -83,8 +87,29 @@
       "message": "Unmuted"
     }
   ,
+  "notificationButtonsVolumeUpTitle": {
+      "message"     : "Increase sound volume"
+    , "description" : "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  }
+  ,
+  "notificationButtonsVolumeDownTitle": {
+      "message"     : "Decrease sound volume"
+    , "description" : "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  }
+    ,
+    "notificationButtonsVolumeChangeFeedback": {
+        "message"         : "Sound volume — $VOLUME_LEVEL$%"
+      , "description"     : "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+      , "placeholders"    : {
+          "volume_level"  : {
+              "content"   : "$1"
+            , "example"   : "90"
+          }
+        }
+    }
+  ,
   "kbps": {
-      "description" : "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+      "description" : "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
     , "message"     : " kbps"
   }
 
@@ -133,6 +158,21 @@
             ,
             "optionsSettingsGeneralShortcutsShowInNotification": {
               "message": "Display tips in notification"
+            }
+          ,
+          "optionsSettingsSoundVolumeControl": {
+              "message"     : "Sound volume control"
+            , "description" : "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+          }
+            ,
+            "optionsSettingsSoundVolumeControlUseDefaults": {
+                "message"     : "Use <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">general settings</a>"
+              , "description" : "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+            }
+            ,
+            "optionsSettingsSoundVolumeControlDelta": {
+                "message"     : "Change by, %"
+              , "description" : "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
             }
           ,
           "optionsSettingsGeneralUpdates": {
@@ -220,7 +260,7 @@
           }
             ,
             "optionsSettingsAdditionalInfoShowCbr": {
-                "description" : "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+                "description" : "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
               , "message"     : "Display <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>"
             }
 
@@ -285,10 +325,6 @@
             "optionsSettingsNotificationButtonsMuteUnmute": {
               "message": "Mute / Unmute"
             }
-      ,
-      "optionsSettingsChooseSubpage": {
-        "message": "Choose a settings page"
-      }
     ,
     "optionsNavFaq": {
       "message": "FAQ"

@@ -20,6 +20,9 @@
       processButtonClick_playStop()
       processButtonClick_mute()
       processButtonClick_unmute()
+      changeVolume()
+      processButtonClick_volumeUp()
+      processButtonClick_volumeDown()
       sendSameMessage()
       processCommand_muteUnmute()
       processCommand_showNotification()
@@ -73,17 +76,19 @@ const
       document.contains( $kbpsInfo ) ?
         $kbpsInfo.innerText.replace( 'K', '' ) : 0
 
-  , strNotificationSeparator              = "\n\n"
-  , strModuleSettingsPrefix               = 'objSettings_'
   , strModule                             = 'ru_101'
+  , strModuleSettings                     = strConstSettingsPrefix + strModule
   ;
 
-var PageWatcher                           = {
+var
+    objWmaPlayerSettings
+
+  , PageWatcher                           = {
         boolIsUserLoggedIn                : boolIsLoggedInMenuPresent
 
-      // Play/Stop button has class which is player status. 
+      // Play/Stop button has class which is player status.
 
-      // When player is off (paused/stopped/not started), 
+      // When player is off (paused/stopped/not started),
       // it has class 'play'; on - 'stop'.
       , objWantedClassRegExp              : / (play|stop)/
       , intWantedClassLength              : 4
@@ -119,12 +124,12 @@ var PageWatcher                           = {
         }
       , objAddTrackToPlaylistFeedback     : {
             'Трек успешно добавлен в плейлист'
-                                          : 
+                                          :
               chrome.i18n.getMessage(
                 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
               )
           , 'Данный трек уже есть в Вашем плейлисте'
-                                          : 
+                                          :
               chrome.i18n.getMessage(
                 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
               )
@@ -141,8 +146,11 @@ var PageWatcher                           = {
   init : function() {
     // WMA player has 'stop' class by default (it's in Play mode),
     // so mutation doesn't happen on page load
-    if ( ! PageWatcher.objPlayerInfo.boolIsMp3Player )
+    if ( ! PageWatcher.objPlayerInfo.boolIsMp3Player ) {
       PageWatcher.boolHadPlayedBefore = true;
+
+      objWmaPlayerSettings = $wmaPlayer.settings;
+    }
 
     if ( document.contains( $addTrackToPlaylistButton ) ) {
       PageWatcher.objStationInfo.boolHasAddToPlaylistButton = true;
@@ -217,17 +225,20 @@ var PageWatcher                           = {
    * @return  void
    **/
   getPlayerVolume : function() {
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) // If MP3
+    // MP3 version
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player )
       PageWatcher.getPlayerIntVar( 'getv', 'intVolume' );
-    else // If WMA
+    // WMA version
+    else {
       // If muted, WMP doesn't set volume to 0. Simulate setting it to 0
       if (
-            typeof $wmaPlayer.settings.mute !== 'undefined'
-        &&  $wmaPlayer.settings.mute
+            typeof objWmaPlayerSettings.mute !== 'undefined'
+        &&  objWmaPlayerSettings.mute
       )
         PageWatcher.objPlayerInfo.intVolume = 0;
-      else if ( typeof $wmaPlayer.settings.volume === 'number' )
-        PageWatcher.objPlayerInfo.intVolume = $wmaPlayer.settings.volume;
+      else if ( typeof objWmaPlayerSettings.volume === 'number' )
+        PageWatcher.objPlayerInfo.intVolume = objWmaPlayerSettings.volume;
+    }
   }
   ,
 
@@ -302,7 +313,7 @@ var PageWatcher                           = {
       playerAPI.Uppod.uppodSend( strPlayerId, 'v0' );
     }
     else // If WMA
-      $wmaPlayer.settings.mute = true;
+      objWmaPlayerSettings.mute = true;
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
@@ -318,18 +329,78 @@ var PageWatcher                           = {
    * @return  void
    **/
   processButtonClick_unmute : function() {
-    if ( PageWatcher.objPlayerInfo.boolIsMp3Player ) // If MP3
+    if ( PageWatcher.objPlayerInfo.boolIsMp3Player )
       // Uppod JS API doesn't provide "unmute" method, restore prev value
       playerAPI.Uppod.uppodSend(
           strPlayerId
         , 'v' + PageWatcher.objPlayerInfo.intVolumeBeforeMuted
       );
-    else // If WMA
-      $wmaPlayer.settings.mute = false;
+    else
+      objWmaPlayerSettings.mute = false;
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
+  }
+  ,
+
+  /**
+   * Change volume level (up/down).
+   * Volume level value range, %: 0-100.
+   *
+   * @type    method
+   * @param   strDirection
+   *            'up' or 'down'.
+   * @return  void
+   **/
+  changeVolume : function( strDirection ) {
+    PageWatcher.getPlayerVolume();
+
+    var intVolume = PageWatcher.objPlayerInfo.intVolume;
+
+    // Can't be changed, reached the limit
+    if (
+          strDirection === 'up' && intVolume >= 100
+      ||  strDirection === 'down' && intVolume <= 0
+    )
+      return;
+
+    var funcSetVolume = function( intVolumeDelta ) {
+      var
+          intUpDown = 1
+        ;
+
+      if ( strDirection === 'down' )
+        intUpDown = -1;
+
+      intVolume += ( intUpDown * intVolumeDelta );
+
+      if ( intVolume > 100 )
+        intVolume = 100;
+      else if ( intVolume < 0 )
+        intVolume = 0;
+
+      if ( PageWatcher.objPlayerInfo.boolIsMp3Player )
+        playerAPI.Uppod.uppodSend( strPlayerId, 'v' + intVolume );
+      /* Changing volume for WMA version doesn't seem to work
+       *
+       * 1. http://code.google.com/p/chromium/issues/detail?id=72111
+       * 2. http://www.interoperabilitybridges.com/wmp-extension-for-chrome
+       *    An extension enabling WMA playback does not work anymore
+       *    since Chrome 33.
+       */
+      else
+        objWmaPlayerSettings.volume = intVolume;
+
+      PageWatcher.sendSameMessage(
+        chrome.i18n.getMessage(
+            'notificationButtonsVolumeChangeFeedback'
+          , [ intVolume ]
+        )
+      );
+    };
+
+    PageWatcher.getVolumeDeltaSettings( funcSetVolume );
   }
   ,
 
@@ -376,9 +447,7 @@ var PageWatcher                           = {
 
     if ( typeof boolAppendKbpsInfo === 'boolean' && boolAppendKbpsInfo ) {
       // Check settings whether kbps info should be shown
-      var strModuleSettings = strModuleSettingsPrefix + strModule;
-
-      chrome.storage.sync.get( strModuleSettings, function( objReturn ) {
+      StorageSync.get( strModuleSettings, function( objReturn ) {
         var objModuleSettings = objReturn[ strModuleSettings ];
 
         // If set to show kbps info and kbps info is available
@@ -391,7 +460,7 @@ var PageWatcher                           = {
           var strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
 
           PageWatcher.objStationInfo.strTrackInfo += 
-            strNotificationSeparator + strKbpsInfo;
+            strConstNotificationLinesSeparator + strKbpsInfo;
         }
 
         funcSend();
@@ -669,6 +738,14 @@ var PageWatcher                           = {
     PageWatcher.objStationInfo.strLogoDataUri = $canvas.toDataURL();
   }
 };
+
+// "Import" general functions
+PageWatcher.getVolumeDeltaSettings =
+  GeneralPageWatcher.getVolumeDeltaSettings;
+PageWatcher.processButtonClick_volumeUp =
+  GeneralPageWatcher.processButtonClick_volumeUp;
+PageWatcher.processButtonClick_volumeDown =
+  GeneralPageWatcher.processButtonClick_volumeDown;
 
 /* =============================================================================
 
