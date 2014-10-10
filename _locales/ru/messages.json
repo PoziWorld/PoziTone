@@ -8,11 +8,11 @@
   }
   ,
   "extensionDescription": {
-    "message": "Добавляет функциональность аудиоплеерам: уведомления с информацией о треке, управление вне окна браузера, список последних треков."
+    "message": "Добавляет функциональность аудиоплеерам: оповещения с информацией о треке, управление вне окна браузера, список последних треков."
   }
   ,
   "commandShowNotification": {
-    "message": "Показать уведомление"
+    "message": "Показать оповещение"
   }
   ,
   "notificationButtonsAddLoggedInTitle": {
@@ -157,7 +157,7 @@
           }
             ,
             "optionsSettingsGeneralShortcutsShowInNotification": {
-              "message": "Отображать подсказки в уведомлении"
+              "message": "Отображать подсказки в оповещении"
             }
           ,
           "optionsSettingsSoundVolumeControl": {
@@ -226,7 +226,7 @@
 
           ,
           "optionsSettingsDisplayWhen": {
-            "message": "Показывать уведомления"
+            "message": "Показывать оповещения"
           }
             ,
             "optionsSettingsDisplayWhenStopped": {
@@ -243,7 +243,7 @@
 
           ,
           "optionsSettingsNotificationIconFormat": {
-            "message": "Формат иконки уведомления"
+            "message": "Формат иконки оповещения"
           }
             ,
             "optionsSettingsNotificationIconFormatShowStationLogo": {
@@ -266,7 +266,7 @@
 
           ,
           "optionsSettingsNotificationTitleFormat": {
-            "message": "Формат заголовка уведомления"
+            "message": "Формат заголовка оповещения"
           }
             ,
             "optionsSettingsNotificationTitleFormatShort": {
