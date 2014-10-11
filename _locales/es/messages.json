@@ -2,11 +2,19 @@
   "systemNotificationUpdated": {
     "message": "¡Extensión actualizada!"
   },
+  "notificationButtonsVolumeUpTitle": {
+    "message": "Subir volumen de sonido",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  },
   "optionsSettingsGeneralShortcutsShowInNotification": {
     "message": "Mostrar sugerencias en la notificación"
   },
   "optionsAboutH1": {
     "message": "Acerca de"
+  },
+  "optionsSettingsSoundVolumeControlDelta": {
+    "message": "Cambiar en, %",
+    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
   },
   "optionsSettingsSupportEnabled": {
     "message": "Activado"
@@ -33,8 +41,8 @@
     "message": "Programa de Mejora de la Experiencia de Usuario de PoziTone"
   },
   "kbps": {
-      "message": " kb/s"
-    , "description": "kilobit per second — see http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information"
+    "message": " kbps",
+    "description": "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
   },
   "optionsTerms": {
     "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">contrato de licencia</a>"
@@ -96,9 +104,12 @@
   "optionsFoundation": {
     "message": "PoziTone es una realidad gracias al <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amor</a> y <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">la generosidad</a>."
   },
+  "module_fm_di_long": {
+    "message": "Digitally Imported | di.fm"
+  },
   "optionsSettingsAdditionalInfoShowCbr": {
-      "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>"
-    , "description": "http://en.wikipedia.org/wiki/Constant_Bit_Rate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>",
+    "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
     "message": "Mostrar notificaciones"
@@ -163,8 +174,16 @@
   "module_general": {
     "message": "General"
   },
+  "optionsSettingsSoundVolumeControlUseDefaults": {
+    "message": "Use <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">configuración general</a>",
+    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+  },
   "optionsInfo": {
     "message": "Detalles sobre PoziTone"
+  },
+  "optionsSettingsSoundVolumeControl": {
+    "message": "Control de volumen de sonido",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
   "optionsSettingsNotificationTitleFormatLong": {
     "message": "Mostrar nombre de esta estación + breve descripción (si existe)"
@@ -174,6 +193,9 @@
   },
   "optionsSettingsSaved": {
     "message": "guardada"
+  },
+  "module_fm_di": {
+    "message": "Digitally Imported"
   },
   "systemNotificationUpdatedDoNotNotify": {
     "message": "No notificar actualizaciones"
@@ -205,8 +227,15 @@
   "optionsSettingsNotificationButtonsPlayStop": {
     "message": "Detener / Reproducir"
   },
+  "commandShowNotification": {
+    "message": "Mostrar notificación"
+  },
   "optionsSettingsNotificationButtonsAddAuthRequired": {
     "message": "Añadir pista a la lista de reproducción <small>(autorización expresa necesaria)</small>"
+  },
+  "notificationButtonsVolumeChangeFeedback": {
+    "message": "Volumen de sonido — $VOLUME_LEVEL$%",
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
   "optionsNavFaq": {
     "message": "P+F (Preguntas más frecuentes)"
@@ -270,6 +299,10 @@
   },
   "optionsSettingsNotificationIconFormatShowVkLogo": {
     "message": "Mostrar logo VK"
+  },
+  "notificationButtonsVolumeDownTitle": {
+    "message": "Bajar volumen de sonido",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
   "optionsSettingsGeneralUpdates": {
     "message": "Actualizaciones PoziTone"
