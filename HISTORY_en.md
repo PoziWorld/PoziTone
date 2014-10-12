@@ -2,6 +2,12 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.3.1
+    * PoziTone is now available in Italian.
+      Translation by Aeco (Giuseppe Mariniello).
+    * Updated Polish and Spanish translations.
+    * Minor fix for DI Radio.
+
 ### v0.3.3.0
     * Added an ability to increase/decrease sound volume with the help of the buttons on the notification
       and keyboard shortcuts.
