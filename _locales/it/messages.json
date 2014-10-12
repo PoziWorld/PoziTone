@@ -1,0 +1,319 @@
+{
+  "systemNotificationUpdated": {
+    "message": "Estensione aggiornata!"
+  },
+  "notificationButtonsVolumeUpTitle": {
+    "message": "Increase sound volume",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  },
+  "optionsSettingsGeneralShortcutsShowInNotification": {
+    "message": "Mostra consigli nelle notifiche"
+  },
+  "optionsAboutH1": {
+    "message": "Ulteriori informazioni"
+  },
+  "optionsSettingsSoundVolumeControlDelta": {
+    "message": "Change by, %",
+    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
+  },
+  "optionsSettingsSupportEnabled": {
+    "message": "Attivato"
+  },
+  "notificationButtonsMuteTitle": {
+    "message": "Muta"
+  },
+  "optionsSettingsGeneralUeipPrivacyHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+  },
+  "notificationButtonsAddLoggedInTitle": {
+    "message": "Aggiungi brano alla playlist"
+  },
+  "optionsSettingsGeneralUeipPrivacy": {
+    "message": "Informativa sulla privacy"
+  },
+  "notificationButtonsFavoriteLoggedInTitle": {
+    "message": "Mi piace!"
+  },
+  "optionsContactHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
+  },
+  "optionsSettingsGeneralUeip": {
+    "message": "Programma Analisi utilizzo software"
+  },
+  "kbps": {
+    "message": "kbps",
+    "description": "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
+  },
+  "optionsTerms": {
+    "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">Accordo di licenza</a> di PoziTone"
+  },
+  "systemNotificationUpdatedVersion": {
+    "message": "v"
+  },
+  "notificationButtonsUnmuteFeedback": {
+    "message": "Audio attivato"
+  },
+  "notificationButtonsNextFeedback": {
+    "message": "Brano cambiato"
+  },
+  "optionsSettingsGeneralUeipMoreHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
+  },
+  "extensionDescription": {
+    "message": "Aggiungi funzionalità al player audio come informazioni sul brano, controlli esterni alla finestra e la lista dei brani recenti."
+  },
+  "optionsSettingsNotificationButtonsAdd": {
+    "message": "Aggiungi brano alla playlist"
+  },
+  "optionsSettingsH1": {
+    "message": "Impostazioni"
+  },
+  "notificationButtonsMuteFeedback": {
+    "message": "Mutato"
+  },
+  "optionsSettingsGeneral": {
+    "message": "Generale"
+  },
+  "module_com_vk_audio_long": {
+    "message": "VK (audio) | vk.com"
+  },
+  "findOnGoogle": {
+    "message": "Cerca su Google"
+  },
+  "optionsSettingsNotificationButtonsNext": {
+    "message": "Prossimo brano"
+  },
+  "notificationButtonsPreviousTitle": {
+    "message": "Brano precedente"
+  },
+  "optionsSettingsNotificationButtonsMuteUnmute": {
+    "message": "Muta / Attiva audio"
+  },
+  "findOnAmazon": {
+    "message": "Cerca su Amazon"
+  },
+  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "message": "Questo brano è già presente in questa playlist"
+  },
+  "notificationButtonsUnmuteTitle": {
+    "message": "Attiva audio"
+  },
+  "notificationButtonsNextTitle": {
+    "message": "Prossimo brano"
+  },
+  "optionsFoundation": {
+    "message": "PoziTone è reso possibile dall' <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amore</a> e dalla <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">gentilezza</a>."
+  },
+  "module_fm_di_long": {
+    "message": "Digitally Imported | di.fm"
+  },
+  "optionsSettingsAdditionalInfoShowCbr": {
+    "message": "Mostra il <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>",
+    "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+  },
+  "optionsSettingsDisplayWhen": {
+    "message": "Mostrami notifiche"
+  },
+  "optionsSettingsGeneralUeipDesc": {
+    "message": "Il programma Analisi utilizzo software raccoglie le informazioni su come i nostri utenti usano PoziTone e su alcuni dei problemi da essi riscontrati. Il team di sviluppatori di PoziTone — PoziWorld — usa queste informazioni per migliorare i prodotti e le funzionalità che i clienti usano più spesso e per aiutare a risolvere i problemi. La partecipazione al programma è volontaria, e i risultati finali sono i miglioramenti del software per rispondere meglio alle esigenze dei nostri clienti."
+  },
+  "optionsSettingsNotificationButtonsNextAuthRequired": {
+    "message": "Prossimo brano <small>(richiesta l'autorizzazione sul sito)</small>"
+  },
+  "optionsVersion": {
+    "message": "Versione"
+  },
+  "optionsSettingsAdditionalInfo": {
+    "message": "Informazioni aggiuntive"
+  },
+  "optionsNavSettings": {
+    "message": "Impostazioni"
+  },
+  "module_com_vk_audio": {
+    "message": "VK (audio)"
+  },
+  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
+    "message": "Mi piace! <small>(richiesta l'autorizzazione sul sito)</small>"
+  },
+  "optionsSettingsGeneralUpdatesNotify": {
+    "message": "Avvisami quando PoziTone è aggiornato"
+  },
+  "optionsContact": {
+    "message": "Contatta gli sviluppatori di PoziTone"
+  },
+  "optionsNavAbout": {
+    "message": "Ulteriori informazioni"
+  },
+  "popupTitle": {
+    "message": "PoziTone"
+  },
+  "popupNavRecentTracksH1": {
+    "message": "Brani recenti"
+  },
+  "optionsCopyright": {
+    "message": "&copy; PoziWorld, 2014"
+  },
+  "popupToolbarClose": {
+    "message": "Chiudi"
+  },
+  "optionsSettingsNotificationTitleFormatNoStationInfo": {
+    "message": "Non mostrare informazioni riguardo la stazione radio corrente"
+  },
+  "lang": {
+    "message": "it"
+  },
+  "notificationPlayerStatusChangeStarted": {
+    "message": "Riproduzione iniziata"
+  },
+  "optionsSettingsDisplayWhenStopped": {
+    "message": "Quando la riproduzione non inizia / si interrompe"
+  },
+  "popupNavRecentTracksPlaceholder": {
+    "message": "Cerchi qualche brano? <br />Che ne dici di <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock con alcuni parti di hardcore</a>?<br />O <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
+  },
+  "module_general": {
+    "message": "Generale"
+  },
+  "optionsSettingsSoundVolumeControlUseDefaults": {
+    "message": "Use <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">general settings</a>",
+    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+  },
+  "optionsInfo": {
+    "message": "Dettagli riguardo PoziTone"
+  },
+  "optionsSettingsSoundVolumeControl": {
+    "message": "Sound volume control",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  },
+  "optionsSettingsNotificationTitleFormatLong": {
+    "message": "Mostra il nome della stazione radio corrente e una piccola descrizione (se disponibile)"
+  },
+  "optionsSettingsNotificationButtons": {
+    "message": "Pulsanti disponibili <small>(possono essere mostrati per un massimo di 2 alla volta)</small>"
+  },
+  "optionsSettingsSaved": {
+    "message": "salvate"
+  },
+  "module_fm_di": {
+    "message": "Digitally Imported"
+  },
+  "systemNotificationUpdatedDoNotNotify": {
+    "message": "Non avvisarmi degli aggiornamenti"
+  },
+  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+    "message": "Brano precedente <small>(richiesta l'autorizzazione sul sito)</small>"
+  },
+  "optionsSettingsDisplayWhenNoTrackInfo": {
+    "message": "Quando non ci sono informazioni sul brano corrente (mostrato come \"...\" sul sito)"
+  },
+  "notificationPlayerStatusChangeResumed": {
+    "message": "Riproduzione ripresa"
+  },
+  "optionsSettingsNotificationButtonsPrevious": {
+    "message": "Brano precedente"
+  },
+  "popupNavRecentTracks": {
+    "message": "Brani recenti"
+  },
+  "optionsSettingsNotificationIconFormatShowStationLogo": {
+    "message": "Mostra il logo della stazione radio corrente"
+  },
+  "optionsSettingsGeneralUeipMore": {
+    "message": "Dimmi di più sul programma"
+  },
+  "notificationButtonsStopTitle": {
+    "message": "Interrompi"
+  },
+  "optionsSettingsNotificationButtonsPlayStop": {
+    "message": "Interrompi / Riproduci"
+  },
+  "commandShowNotification": {
+    "message": "Show notification"
+  },
+  "optionsSettingsNotificationButtonsAddAuthRequired": {
+    "message": "Aggiungi brano alla playlist <small>(richiesta l'autorizzazione sul sito)</small>"
+  },
+  "notificationButtonsVolumeChangeFeedback": {
+    "message": "Sound volume — $VOLUME_LEVEL$%",
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  },
+  "optionsNavFaq": {
+    "message": "FAQ"
+  },
+  "optionsSettingsGeneralShortcuts": {
+    "message": "Scorciatoie da tastiera:"
+  },
+  "findOnVk": {
+    "message": "Cerca su VK"
+  },
+  "optionsSettingsSupport": {
+    "message": "Supporta questo player"
+  },
+  "notificationButtonsPlayTitle": {
+    "message": "Riproduci"
+  },
+  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "message": "Brano aggiunto alla playlist con successo"
+  },
+  "optionsSettingsNotificationButtonsFavorite": {
+    "message": "Mi piace!"
+  },
+  "optionsSettingsNotificationIconFormat": {
+    "message": "Formato dell'icona della notifica"
+  },
+  "systemNotificationUpdatedChanges": {
+    "message": "Guarda i cambiamenti"
+  },
+  "optionsInfoHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
+  },
+  "module_ru_101_long": {
+    "message": "Radio online 101.ru"
+  },
+  "optionsSettingsGeneralUeipDoNotJoin": {
+    "message": "Non partecipare"
+  },
+  "notificationButtonsPreviousFeedback": {
+    "message": "Brano cambiato"
+  },
+  "optionsSettingsGeneralUeipJoin": {
+    "message": "Partecipa anonimamente"
+  },
+  "optionsSettingsNotificationTitleFormat": {
+    "message": "Formato del titolo della notifica"
+  },
+  "extensionName": {
+    "message": "PoziTone"
+  },
+  "optionsSettingsDisplayWhenMuted": {
+    "message": "Quando il volume è al 0% o è disattivato"
+  },
+  "module_ru_101": {
+    "message": "101.ru"
+  },
+  "optionsSettingsNotificationTitleFormatShort": {
+    "message": "Mostra solo il nome della stazione radio corrente"
+  },
+  "copyToClipboard": {
+    "message": "Copia negli appunti"
+  },
+  "optionsSettingsNotificationIconFormatShowVkLogo": {
+    "message": "Mostra il logo VK"
+  },
+  "notificationButtonsVolumeDownTitle": {
+    "message": "Decrease sound volume",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  },
+  "optionsSettingsGeneralUpdates": {
+    "message": "Aggiornamenti di PoziTone"
+  },
+  "notificationFavoriteStatusSuccess": {
+    "message": "Grazie per aver premiato il duro lavoro di un DJ!"
+  },
+  "optionsTitle": {
+    "message": "Opzioni di PoziTone"
+  },
+  "notificationPlayerStatusChangeStopped": {
+    "message": "Riproduzione interrotta"
+  }
+}
