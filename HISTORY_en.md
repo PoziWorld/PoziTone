@@ -2,6 +2,10 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.3.2
+    * Missing parameters in the translation files would prevent PoziTone operation
+      in Italian, Polish and Spanish.
+
 ### v0.3.3.1
     * PoziTone is now available in Italian.
       Translation by Aeco (Giuseppe Mariniello).

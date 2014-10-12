@@ -48,7 +48,7 @@
     "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">Accordo di licenza</a> di PoziTone"
   },
   "systemNotificationUpdatedVersion": {
-    "message": "v"
+    "message": " v"
   },
   "notificationButtonsUnmuteFeedback": {
     "message": "Audio attivato"
@@ -235,7 +235,13 @@
   },
   "notificationButtonsVolumeChangeFeedback": {
     "message": "Sound volume — $VOLUME_LEVEL$%",
-    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'.",
+    "placeholders" : {
+      "volume_level"  : {
+          "content"   : "$1"
+        , "example"   : "90"
+      }
+    }
   },
   "optionsNavFaq": {
     "message": "FAQ"

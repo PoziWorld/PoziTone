@@ -227,7 +227,13 @@
   },
   "notificationButtonsVolumeChangeFeedback": {
     "message": "Poziom głośności — $VOLUME_LEVEL$%",
-    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'.",
+    "placeholders" : {
+      "volume_level"  : {
+          "content"   : "$1"
+        , "example"   : "90"
+      }
+    }
   },
   "optionsNavFaq": {
     "message": "FAQ"
