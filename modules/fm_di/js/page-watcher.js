@@ -86,7 +86,7 @@ const
       ||  document.contains( document.getElementById( 'link-logout' ) )
   , intKbps                               =
       document.contains( $kbpsInfo ) ?
-          parseInt( $kbpsInfo.parentNode.innerText.replace( /\D+/g, '' ) )
+          parseInt( $kbpsInfo.parentNode.innerText.match( /[0-9]{2,4}/g ) )
         : 0
 
   , strModule                             = 'fm_di'
