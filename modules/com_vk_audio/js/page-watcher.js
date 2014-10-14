@@ -141,8 +141,8 @@ var
       , objStationInfo                    : {
             strStationName                : ''
           , strStationNamePlusDesc        : ''
-          , strLogoUrl                    : '/' + strImgPath + 'VK_logo-32.png'
-          , strLogoDataUri                : strImgPath + 'VK_logo-80.png'
+          , strLogoUrl                    : '/' + strImgPath + 'vk-logo-32.png'
+          , strLogoDataUri                : strImgPath + 'vk-logo-80.png'
           , strTrackInfo                  : ''
           , strAdditionalInfo             : ''
           , boolHasAddToPlaylistButton    : boolIsLogOutButtonPresent
