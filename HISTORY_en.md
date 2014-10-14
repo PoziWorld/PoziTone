@@ -2,6 +2,9 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.3.3
+    * Minor but important fix (keyboard shortcuts could fail to work).
+
 ### v0.3.3.2
     * Missing parameters in the translation files would prevent PoziTone operation
       in Italian, Polish and Spanish.

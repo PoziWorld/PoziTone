@@ -771,7 +771,7 @@ var Global                        = {
                                   )
                   ;
 
-                if ( ~ intIndex ) {
+                if ( intIndex !== -1 ) {
                   arrTabsIds.splice( intIndex, 1 );
                   intChanges++;
                 }
@@ -802,7 +802,7 @@ var Global                        = {
         var intIndex = 
               Global.returnIndexOfSubitemContaining( arrTabsIds, intTabId );
 
-        if ( ~ intIndex ) {
+        if ( intIndex !== -1 ) {
           strModule = arrTabsIds[ intIndex ][ 1 ];
           funcRemoveNotification( intTabId, strModule );
         }
@@ -849,7 +849,7 @@ var Global                        = {
         ;
 
       // Save if it is not present or "reposition" to be the last
-      if ( ~ intIndex )
+      if ( intIndex === -1 )
         funcPush();
       else if ( intIndex !== intLastIndex ) {
         arrTabsIds.splice( intIndex, 1 );
@@ -1193,7 +1193,7 @@ var Global                        = {
                                   , 'name'
                                 );
 
-        if ( ~ intCommandsIndex ) {
+        if ( intCommandsIndex !== -1 ) {
           var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
 
           if ( strShortcut !== '' )

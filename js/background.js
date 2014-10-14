@@ -538,7 +538,7 @@ var Background                    = {
         , arrTempRecentTrack  = []
         ;
 
-      if ( ~ intIndex ) {
+      if ( intIndex !== -1 ) {
         if ( intIndex !== ( arrRecentTracks.length - 1 ) )
           arrRecentTracks.splice( intIndex, 1 );
         // Don't save if it is already at the last position in the array
