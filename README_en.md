@@ -114,7 +114,8 @@ Gratitudes
 - 101.ru — for a chance to listen to music for free and legally.
 - Translators:
   - Spanish — Paco_Zamo (Francisco Zamorano);
-  - Polish — jurczak (Łukasz Jurczak).
+  - Polish — jurczak (Łukasz Jurczak);
+  - Italian — Aeco (Giuseppe Mariniello).
 
 
 Credits

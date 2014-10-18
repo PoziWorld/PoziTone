@@ -128,7 +128,8 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 - 101.ru — за возможность бесплатно и легально слушать музыку.
 - Переводчикам:
   - испанский — Paco_Zamo (Francisco Zamorano);
-  - польский — jurczak (Łukasz Jurczak).
+  - польский — jurczak (Łukasz Jurczak);
+  - итальянский — Aeco (Giuseppe Mariniello).
 
 
 Credits
