@@ -303,8 +303,8 @@
   "copyToClipboard": {
     "message": "Copia negli appunti"
   },
-  "optionsSettingsNotificationIconFormatShowVkLogo": {
-    "message": "Mostra il logo VK"
+  "optionsSettingsNotificationIconFormatShowSiteLogo": {
+    "message": "Mostra il logo"
   },
   "notificationButtonsVolumeDownTitle": {
     "message": "Decrease sound volume",

@@ -38,6 +38,14 @@
               </li>
               <li>
                 <a
+                  href="?page=settings&subpage=ru_ok_audio"
+                  data-page="settings" data-subpage="ru_ok_audio"
+                  class="menuItem switchSubpage"
+                  i18n-content="module_ru_ok_audio"
+                    ></a>
+              </li>
+              <li>
+                <a
                   href="?page=settings&subpage=fm_di"
                   data-page="settings" data-subpage="fm_di"
                   class="menuItem switchSubpage"
@@ -162,7 +170,7 @@
               <legend i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></legend>
               <ul>
                 <li>
-                  <label i18n-content="optionsSettingsNotificationIconFormatShowVkLogo">
+                  <label i18n-content="optionsSettingsNotificationIconFormatShowSiteLogo">
                     <input type="checkbox" name="boolShowNotificationLogo" />
                   </label>
                 </li>
@@ -234,6 +242,71 @@
                       class="soundVolumeControlDelta soundVolumeControl"
                       min="1" max="99" step="1"
                         />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsDisplayWhen" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsDisplayWhenMuted">
+                    <input type="checkbox" name="boolShowNotificationWhenMuted" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
+        </section>
+        <section id="settings_ru_ok_audio" class="subpage settingsSubpage module">
+          <h1 i18n-content="module_ru_ok_audio_long" class="subpageHeading"></h1>
+          <form>
+            <fieldset>
+              <legend i18n-content="optionsSettingsSupport" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsSupportEnabled">
+                    <input type="checkbox" name="boolIsEnabled" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationIconFormatShowSiteLogo">
+                    <input type="checkbox" name="boolShowNotificationLogo" />
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsNotificationButtons" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationButtonsAddAuthRequired">
+                    <input type="checkbox" name="arrNotificationButtons" value="add" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationButtonsNextAuthRequired">
+                    <input type="checkbox" name="arrNotificationButtons" value="next" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationButtonsPreviousAuthRequired">
+                    <input type="checkbox" name="arrNotificationButtons" value="previous" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationButtonsPlayStop">
+                    <input type="checkbox" name="arrNotificationButtons" value="playStop" />
+                  </label>
+                </li>
+                <li>
+                  <label i18n-content="optionsSettingsNotificationButtonsMuteUnmute">
+                    <input type="checkbox" name="arrNotificationButtons" value="muteUnmute" />
                   </label>
                 </li>
               </ul>

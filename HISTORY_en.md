@@ -2,6 +2,9 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.4.0
+    * Added a support for Odnoklassniki's audio player (only on the full version of the site – ok.ru).
+
 ### v0.3.3.3
     * Minor but important fix (keyboard shortcuts could fail to work).
 
@@ -152,7 +155,7 @@
     * Correct quotes in the README.
 
 ### v0.0.2.0
-    * Added a support for VK's audio player (only on full version of the site - vk.com).
+    * Added a support for VK's audio player (only on the full version of the site – vk.com).
     * Separate settings for each player.
     * New available button – “Next track” (only for VK). 
       Idea by Nikita Maslennikov.
@@ -177,11 +180,11 @@
     * Added “feedback” for the main actions. 
       Now, after clicking a button on the notification or using keyboard shortcuts,
       a new notification will inform of a result of the performed action:
-      * “Add track to playlist” - “Successfully added track to playlist”
+      * “Add track to playlist” – “Successfully added track to playlist”
         or “Track already in your playlist”;
-      * “I like it!” - “Thank you for rewarding a DJ's hard work!”;
-      * “Stop / Play” - “Playback started/stopped/resumed”;
-      * “Mute / Unmute” - “Muted/Unmuted”.
+      * “I like it!” – “Thank you for rewarding a DJ's hard work!”;
+      * “Stop / Play” – “Playback started/stopped/resumed”;
+      * “Mute / Unmute” – “Muted/Unmuted”.
 > Be advised that appearance of the notification for “Add track to playlist” and “I like it!” sometimes can be delayed because of technical reasons beyond `PoziTone`'s control.
 
 ### v0.0.1.5
@@ -209,11 +212,11 @@
         the expected action wouldn't happen.
 
 ### v0.0.1.1
-    * Added keyboard shortcuts for the following actions: 
-      * “Add track to playlist” - Alt+Shift+D;
-      * “Stop / Play” - Alt+Shift+P;
-      * “Mute / Unmute” - Alt+Shift+M;
-      * “Show notification” - Alt+Shift+Q.
+    * Added keyboard shortcuts for the following actions:
+      * “Add track to playlist” – Alt+Shift+D;
+      * “Stop / Play” – Alt+Shift+P;
+      * “Mute / Unmute” – Alt+Shift+M;
+      * “Show notification” – Alt+Shift+Q.
     * Detailed README.md file.
 
 ### v0.0.1.0

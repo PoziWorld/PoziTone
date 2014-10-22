@@ -250,8 +250,8 @@
               "message": "Отображать логотип текущей станции"
             }
             ,
-            "optionsSettingsNotificationIconFormatShowVkLogo": {
-              "message": "Отображать логотип ВКонтакте"
+            "optionsSettingsNotificationIconFormatShowSiteLogo": {
+              "message": "Отображать логотип сайта"
             }
 
           ,
@@ -419,6 +419,15 @@
     ,
     "module_com_vk_audio_long": {
       "message": "ВКонтакте (аудио) | vk.com"
+    }
+
+  ,
+  "module_ru_ok_audio": {
+    "message": "Одноклассники (аудио)"
+  }
+    ,
+    "module_ru_ok_audio_long": {
+      "message": "Одноклассники (аудио) | ok.ru"
     }
 
   ,

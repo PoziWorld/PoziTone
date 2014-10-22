@@ -578,7 +578,7 @@ var
 
             PageWatcher.objPlayerInfo.strPreviousStatus = strPlayerStatus;
             return;
-          };
+          }
         }
       ;
 
@@ -636,7 +636,7 @@ var
             }
 
             return;
-          };
+          }
         }
       ;
 
@@ -673,7 +673,7 @@ var
               );
               return;
             }
-          };
+          }
         }
       ;
 

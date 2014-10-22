@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.3.3.3"
+  , "version"                   : "0.3.4.0"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -21,6 +21,8 @@
         "*://101.ru/"
       , "*://api.audioaddict.com/"
       , "*://www.di.fm/"
+      , "*://*.odnoklassniki.ru/"
+      , "*://*.ok.ru/"
       , "*://vk.com/"
       , "*://*.vk.me/"
       , "clipboardWrite"
@@ -95,6 +97,18 @@
                 "js/const.js"
               , "modules/general/js/page-watcher.js"
               , "modules/fm_di/js/page-watcher.js"
+            ]
+          , "run_at"            : "document_end"
+        }
+      , {
+            "matches"           : [
+                "*://*.odnoklassniki.ru/*"
+              , "*://*.ok.ru/*"
+            ]
+          , "js"                : [
+                "js/const.js"
+              , "modules/general/js/page-watcher.js"
+              , "modules/ru_ok_audio/js/page-watcher.js"
             ]
           , "run_at"            : "document_end"
         }

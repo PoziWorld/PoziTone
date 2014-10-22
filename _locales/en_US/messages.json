@@ -250,8 +250,8 @@
               "message": "Display current station logo"
             }
             ,
-            "optionsSettingsNotificationIconFormatShowVkLogo": {
-              "message": "Display VK logo"
+            "optionsSettingsNotificationIconFormatShowSiteLogo": {
+              "message": "Display site logo"
             }
 
           ,
@@ -411,6 +411,15 @@
   "module_general": {
     "message": "General"
   }
+
+  ,
+  "module_ru_ok_audio": {
+    "message": "Odnoklassniki (audio)"
+  }
+    ,
+    "module_ru_ok_audio_long": {
+      "message": "Odnoklassniki (audio) | ok.ru"
+    }
 
   ,
   "module_com_vk_audio": {

@@ -93,6 +93,15 @@ const
           , boolUseGeneralVolumeDelta             : true
           , intVolumeDelta                        : 10
         }
+      , objSettings_ru_ok_audio                   : {
+            boolIsEnabled                         : true
+          , boolShowNotificationLogo              : true
+          , arrNotificationButtons                : [
+                                                        'add'
+                                                      , 'next'
+                                                    ]
+          , boolShowNotificationWhenMuted         : false
+        }
       , objSettings_com_vk_audio                  : {
             boolIsEnabled                         : true
           , boolShowNotificationLogo              : true

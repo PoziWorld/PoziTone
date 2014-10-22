@@ -34,6 +34,7 @@
       onPlayerLiteAppearance()
       onPlayerFullAppearance()
       onFeedbackDialogAppearance()
+      checkIfPlayerStatusHadBeenChanged()
       addTrackToPlaylist()
       playNextTrack()
       playPreviousTrack()
@@ -60,6 +61,7 @@ const
   , strPlayerVisibleLiteId                = 'gp'
   , strPlayerVisibleLiteClickableId       = 'gp_info'
   , strPlayerVisibleFullId                = 'pad_wrap'
+  , strIsPlayingClass                     = 'playing'
 
   // Buttons
   , strPlayerVisibleFullToolbarId         = 'pd'
@@ -186,7 +188,8 @@ var
    **/
   getPlayerStatus : function( boolReturnStatus ) {
     if ( document.contains( $mainPlayStopBtn ) ) {
-      var boolIsPlaying = $mainPlayStopBtn.classList.contains( 'playing' );
+      var boolIsPlaying =
+            $mainPlayStopBtn.classList.contains( strIsPlayingClass );
 
       // Follow the 101.ru logic:
       // 'stop' means it's in progress / playback can be stopped;
@@ -513,7 +516,7 @@ var
                 return;
               }
             }
-          };
+          }
         }
       ;
 
@@ -541,7 +544,7 @@ var
             var
                 $target                   = arrMutations[ i ].target
               , boolIsPlaying             = 
-                  $target.classList.contains( 'playing' )
+                  $target.classList.contains( strIsPlayingClass )
               , strUpdatedPreviousStatus  = boolIsPlaying ? 'play' : 'stop'
               ;
 
@@ -585,7 +588,7 @@ var
               );
 
             return;
-          };
+          }
         }
       ;
 
@@ -638,7 +641,7 @@ var
                 return;
               }
             }
-          };
+          }
         }
       ;
 
@@ -671,7 +674,7 @@ var
 
             if ( objMutationRecord.target.textContent !== '' )
               PageWatcher.getKbpsInfoThenSendMessage();
-          };
+          }
         }
       ;
 
@@ -702,7 +705,7 @@ var
               funcWhenReady();
               return;
             }
-          };
+          }
         }
       ;
 
@@ -808,7 +811,7 @@ var
   checkIfPlayerStatusHadBeenChanged : function( $targetPlayStopBtn ) {
     if (
           document.contains( $targetPlayStopBtn )
-      &&  $targetPlayStopBtn.classList.contains( 'playing' )
+      &&  $targetPlayStopBtn.classList.contains( strIsPlayingClass )
     ) {
       var
           strPreviousStatus = 'play'

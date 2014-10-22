@@ -295,8 +295,8 @@
   "copyToClipboard": {
     "message": "Skopiuj do schowka"
   },
-  "optionsSettingsNotificationIconFormatShowVkLogo": {
-    "message": "Wyświetlaj logo VK"
+  "optionsSettingsNotificationIconFormatShowSiteLogo": {
+    "message": "Wyświetlaj logo"
   },
   "notificationButtonsVolumeDownTitle": {
     "message": "Zmniejsz głośność",

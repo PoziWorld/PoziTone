@@ -71,6 +71,16 @@ var Global                        = {
               , 'modules/fm_di/js/page-watcher.js'
           ]
         }
+      , ru_ok_audio               : {
+            objRegex              :
+              // TODO: Cover all possible URLs
+              /(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
+          , arrJs                 : [
+                'js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/ru_ok_audio/js/page-watcher.js'
+          ]
+        }
       , com_vk_audio              : {
             objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
           , arrJs                 : [
