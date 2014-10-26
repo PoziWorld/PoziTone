@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PoziTone website v0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-25 22:29-0800\n"
+"PO-Revision-Date: 2014-10-25 23:29-0800\n"
+"Last-Translator: \n"
+"Language-Team: PoziWorld\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# <title></title>
+# 
+# Title of the site.
+msgid "title"
+msgstr "PoziTone — audio players' missing functionality"
+
+# <meta name="description" content="" />
+# 
+# Displayed in the search engine results.
+msgid "meta_description"
+msgstr ""
+"PoziTone is an extension for the Google Chrome and other Chromium-based "
+"browsers that adds a missing functionality to the audio players on the "
+"websites."
+
+# <meta name="keywords" content="" />
+# 
+# Keywords used in the description.
+msgid "meta_keywords"
+msgstr ""
+"PoziTone, extension, browser, Google Chrome, Chromium, missing, "
+"functionality, audio player, website"
+
+# “<br />” and “&nbsp;” used here are just for a nicer look on the website.
+msgid "short_description"
+msgstr ""
+"An extension for the Google Chrome and other Chromium-based browsers that "
+"adds&nbsp;a missing functionality to&nbsp;the&nbsp;audio&nbsp;players<br "
+"/>on&nbsp;the&nbsp;websites."
+
+# Used for a link to a README file on GitHub.
+msgid "more_info"
+msgstr "More info"
+
+# Used for a link to a PoziTone page on VK.
+msgid "pozitone_on_vk"
+msgstr "PoziTone on VK"
+
+# Used for a link to a PoziTone page on Facebook.
+msgid "pozitone_on_facebook"
+msgstr "PoziTone on Facebook"
+
+# Used for a link to a PoziTone page on Twitter.
+msgid "pozitone_on_twitter"
+msgstr "PoziTone on Twitter"
+
+# Used for a link to a PoziTone page on Instagram.
+msgid "pozitone_on_instagram"
+msgstr "PoziTone on Instagram"
+
+# Used for a link to a PoziTone page on Google+.
+msgid "pozitone_on_google_plus"
+msgstr "PoziTone on Google+"
+
+# Used for a link to a PoziTone page on 101.ru.
+msgid "pozitone_on_101"
+msgstr "PoziTone on 101.ru"
+
+# Used for a link to a PoziTone page on GitHub.
+msgid "pozitone_on_github"
+msgstr "PoziTone on GitHub"
+
+# ID of an overview video of PoziTone on YouTube.
+# 
+# Use “ZrSwJfxVT9U” (no quotes) if unknown.
+msgid "youtube_video_id"
+msgstr "ZrSwJfxVT9U"
