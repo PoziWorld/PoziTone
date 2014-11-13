@@ -30,21 +30,9 @@
       height:                 5.3em;
       background:             #fff;
     }
-  #chooseSubpageForm
+  .subpage
     {
-      position:               absolute;
-      z-index:                2;
-      top:                    1.8em;
-      right:                  0;
-    }
-  #chooseSubpage
-    {
-      font-family:            inherit;
-      font-size:              1.3em;
-      line-height:            1.8em;
-      padding:                0 .385em;
-      width:                  15em;
-      border:                 .077em solid #ddd;
+      margin-bottom:          3em;
     }
   #settings .subpage.module
     {

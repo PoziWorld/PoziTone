@@ -1044,8 +1044,9 @@ chrome.notifications.onClicked.addListener(
               intWindowId
             , { focused: true }
             , function() {
-                chrome.tabs.highlight(
-                    { windowId: intWindowId, tabs: intTabIndex }
+                chrome.tabs.update(
+                    intTabId
+                  , { active: true }
                   , function() {
                       strLog = 'chrome.notifications.onClicked';
                       Log.add( strLog + strLogSuccess );

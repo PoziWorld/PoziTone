@@ -2,6 +2,10 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.4.1
+    * PoziTone works in Opera 25 and up now.
+      Get PoziTone from Opera extensions catalog – https://addons.opera.com/extensions/details/pozitone/
+
 ### v0.3.4.0
     * Added a support for Odnoklassniki's audio player (only on the full version of the site – ok.ru).
 

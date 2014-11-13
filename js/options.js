@@ -12,6 +12,7 @@
   0. Globals
   1. Options
       init()
+      removeNotAvailable()
       parseQueryString()
       openPageSubpage()
       setPageValues()
@@ -21,6 +22,7 @@
       addEventListeners()
       chooseSubpage()
       displayCurrentVersion()
+      removeModuleNotifications()
   2. Listeners
       runtime.onMessage
   3. Events
@@ -42,14 +44,15 @@ var
   , $settingsSubpages
   , $chosenSubpage
 
-  , strModuleLocalPrefix      = 'module_'
-  , strChosenSubpageId        = 'chosenSubpage'
-  , strSettingsId             = 'settings'
-  , strSettingsSavedId        = 'settingsSaved'
-  , strModuleSubpageIdPrefix  = 'settings_'
-  , strSettingsSubpageClass   = 'settingsSubpage'
-  , strVersionId              = 'version'
-  , strEnableModule           = 'boolIsEnabled'
+  , strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
+  , strModuleLocalPrefix              = 'module_'
+  , strChosenSubpageId                = 'chosenSubpage'
+  , strSettingsId                     = 'settings'
+  , strSettingsSavedId                = 'settingsSaved'
+  , strModuleSubpageIdPrefix          = 'settings_'
+  , strSettingsSubpageClass           = 'settingsSubpage'
+  , strVersionId                      = 'version'
+  , strEnableModule                   = 'boolIsEnabled'
 
   , intSettingsSubpages
   ;
@@ -70,6 +73,7 @@ var Options = {
    * @return  void
    **/
   init : function() {
+    Options.removeNotAvailable();
     Page.localize( 'options' );
     Options.setPageValues();
     Options.getAvailableOptions();
@@ -77,6 +81,28 @@ var Options = {
     Options.parseQueryString();
     Options.openPageSubpage();
     Options.displayCurrentVersion();
+  }
+  ,
+
+  /**
+   * If some settings n/a for this browser, remove them
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  removeNotAvailable : function() {
+    if ( bowser.name === 'Opera' ) {
+      var $elements =
+            document
+              .getElementsByClassName( strNotAvailableOperaSettingsClass );
+
+      for ( var i = ( $elements.length - 1 ); i >= 0; i-- ) {
+        var $element = $elements[i];
+
+        $element.parentNode.removeChild( $element );
+      }
+    }
   }
   ,
 

@@ -113,6 +113,7 @@ var
         }
       }
       // If storage hasn't returned value yet and at least one try left
+      // TODO: Use observer/deferred instead
       else if (
             Log.strJoinUeip === null
         &&  Log.intTrackCount < Log.intTrackCountMax

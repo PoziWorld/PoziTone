@@ -2,6 +2,10 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.3.4.1
+    * PoziTone теперь работает в Opera 25 и выше.
+      PoziTone доступен в каталоге расширений Opera — https://addons.opera.com/extensions/details/pozitone/
+
 ### v0.3.4.0
     * Добавлена поддержка аудиоплеера сайта Одноклассники (только на полной версии сайта — ok.ru).
 

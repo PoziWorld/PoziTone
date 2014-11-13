@@ -49,6 +49,7 @@ var Global                        = {
       strConstNotificationId + 'system' + strConstNotificationIdSeparator
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
   , strSystemNotificationIconUrl  : 'img/pozitone-notification-icon-80.png'
+  , intNotificationsClearTimeout  : 4000
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
 
@@ -356,7 +357,7 @@ var Global                        = {
 
     // If Chrome supports showing additional info separately
     if ( objStationInfo.strAdditionalInfo !== '' ) {
-      if ( strConstChromeVersion >= 31 )
+      if ( strConstChromeVersion >= 31 && bowser.name !== 'Opera' )
         objNotificationOptions.contextMessage = 
           objStationInfo.strAdditionalInfo;
       else
@@ -594,6 +595,57 @@ var Global                        = {
                 strNotificationId
               , objNotificationOptions
               , function( strNotificationId ) {
+                  // Catch errors
+                  if ( chrome.runtime.lastError ) {
+                    strLog = 'showNotification';
+
+                    var
+                        objLogDetails   = {}
+                      , strErrorMessage = chrome.runtime.lastError.message
+                      ;
+
+                    if ( typeof strErrorMessage === 'string' )
+                      objLogDetails = { strErrorMessage: strErrorMessage };
+
+                    Log.add( strLog + strLogError, objLogDetails, true );
+
+                    // Check if buttons can be added
+                    var strButtonsMessage =
+                          'Adding buttons to notifications is not supported.';
+
+                    if ( strErrorMessage === strButtonsMessage ) {
+                      // Try creating notification with no buttons
+                      delete objNotificationOptions.buttons;
+
+                      chrome.notifications.create(
+                          strNotificationId
+                        , objNotificationOptions
+                        , function( strNotificationId ) {
+                            Global.showNotificationCallback(
+                                objTempPlayerInfo
+                              , objTempStationInfo
+                              , intTabId
+                              , arrActiveButtons
+                              , strCommand
+                            );
+
+                            // This, probably, doesn't auto-close, so close it
+                            setTimeout(
+                                function() {
+                                  chrome.notifications.clear(
+                                      strNotificationId
+                                    , function() {}
+                                  );
+                                }
+                              , Global.intNotificationsClearTimeout
+                            );
+                          }
+                      );
+                    }
+                    else
+                      return;
+                  }
+
                   Global.showNotificationCallback(
                       objTempPlayerInfo
                     , objTempStationInfo
