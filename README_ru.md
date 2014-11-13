@@ -5,7 +5,7 @@
 PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
-Расширение для браузеров Google Chrome, Yandex и Амиго, которое добавляет недостающую [функциональность](#Особенности) [аудиоплеерам на сайтах](#Поддерживаемые-плееры).
+Расширение для браузеров Google Chrome, Opera, Yandex и Амиго, которое добавляет недостающую [функциональность](#Особенности) [аудиоплеерам на сайтах](#Поддерживаемые-плееры).
 
 
 Особенности
@@ -40,7 +40,6 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 
 Установка
 --------
-### Простой способ
 
 1. Перейдите на страницу [PoziTone в Интернет-магазине Chrome](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=ru).
 2. Нажмите на кнопку «БЕСПЛАТНО».
@@ -49,31 +48,12 @@ PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 Готово!
 
 
-### Другой способ
+### Для Opera
 
-#### для Google Chrome
+1. Перейдите на страницу [PoziTone в каталоге расширений Opera](https://addons.opera.com/ru/extensions/details/pozitone/?display=ru).
+2. Нажмите на кнопку «Добавить в Opera».
 
-1. Скачайте [последнюю доступную версию `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
-2. Разархивируйте в любую папку.
-3. Откройте меню «Настройка и управление Google Chrome», перейдите в «Инструменты», затем «Расширения».
-4. Отметьте галочкой «Режим разработчика».
-5. Нажмите «Загрузить распакованное расширение...», выберите папку из шага 2, нажмите «OK».
-
-Если все шаги выполнены верно, `PoziTone` появится в списке Расширений.
-
-
-#### для Yandex
-
-Все шаги такие же, как [для Google Chrome](#для-google-chrome), кроме шага 3:
-
-   3\. Откройте меню «Настройки браузера Yandex», раскройте подменю «Дополнительно», перейдите в «Инструменты», затем «Расширения».
-
-
-#### для Амиго
-
-Все шаги такие же, как [для Google Chrome](#для-google-chrome), кроме шага 3:
-
-   3\. Откройте меню «Амиго», перейдите в «Инструменты», затем «Расширения».
+Готово!
 
 
 Демо
@@ -184,8 +164,9 @@ Sprechen Sie Deutsch? Vous parlez français?
 --------
 
 - [PoziTone ВКонтакте](https://vk.com/PoziTone)
-- [PoziTone на Facebook](https://facebook.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
-- [PoziTone в Instagram](https://instagram.com/PoziTone)
+- [PoziTone на Facebook](https://facebook.com/PoziTone)
 - [PoziTone в Google+](https://google.com/+PoziTone)
+- [PoziTone на Одноклассниках](http://ok.ru/group/54738320621596)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
+- [PoziTone в Instagram](https://instagram.com/PoziTone)

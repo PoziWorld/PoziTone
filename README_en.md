@@ -5,7 +5,7 @@
 PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
-An extension for the Google Chrome and other Chromium-based browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
+An extension for the Google Chrome, Opera and other Chromium-based browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
 
 
 Features
@@ -40,7 +40,6 @@ More to come...
 
 Installation
 --------
-### Easy method
 
 1. Go to a [PoziTone in the Chrome Web Store](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=en) page.
 2. Click on “FREE”.
@@ -49,17 +48,12 @@ Installation
 Done!
 
 
-### Another method
+### For Opera
 
-#### for Google Chrome
+1. Go to a [PoziTone in the Opera extensions catalog](https://addons.opera.com/en/extensions/details/pozitone/?display=en_US) page.
+2. Click on “Add to Opera”.
 
-1. Download [the latest available version of `PoziTone`](https://github.com/poziworld/pozitone/archive/develop.zip).
-2. Extract it to any folder.
-3. Open “Customize and control Google Chrome” menu, go to “Tools”, then “Extensions”.
-4. Checkmark “Developer mode” .
-5. Click on “Load unpacked extension...” , choose the folder from step 2, click “OK” .
-
-If all the steps are done correctly, `PoziTone` will appear in the Extensions list.
+Done!
 
 
 Demo
@@ -170,8 +164,9 @@ Let's socialize
 --------
 
 - [PoziTone on VK](https://vk.com/PoziTone)
-- [PoziTone on Facebook](https://facebook.com/PoziTone)
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
-- [PoziTone on Instagram](https://instagram.com/PoziTone)
+- [PoziTone on Facebook](https://facebook.com/PoziTone)
 - [PoziTone on Google+](https://google.com/+PoziTone)
+- [PoziTone on Odnoklassniki](http://ok.ru/group/54738320621596)
 - [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)
+- [PoziTone on Instagram](https://instagram.com/PoziTone)
