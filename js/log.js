@@ -110,6 +110,12 @@ var
         ) {
           mixpanel.track( strEvent, miscVar );
           Log.strLastTrackedEvent = strEvent;
+
+          // Set properties on a user record.
+          if ( strEvent === strConstLogOnInstalled ) {
+            mixpanel.identify( mixpanel.get_distinct_id() );
+            mixpanel.people.set( miscVar );
+          }
         }
       }
       // If storage hasn't returned value yet and at least one try left

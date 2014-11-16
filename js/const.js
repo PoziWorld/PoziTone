@@ -34,6 +34,8 @@ const
 
   , strConstSettingsPrefix        = 'objSettings_'
   , strConstGeneralSettings       = strConstSettingsPrefix + 'general'
+
+  , strConstLogOnInstalled        = 'chrome.runtime.onInstalled'
   ;
 
 /* =============================================================================

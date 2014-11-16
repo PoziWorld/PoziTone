@@ -1302,7 +1302,7 @@ chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
     Background.preventCheckForSilentUpdate();
 
-    strLog                        = 'chrome.runtime.onInstalled';
+    strLog                        = strConstLogOnInstalled;
     objDetails.currentVersion     = strConstExtensionVersion;
     objDetails.browserName        = bowser.name;
     objDetails.browserVersion     = bowser.version;
