@@ -12,6 +12,7 @@
   1. Log
       init()
       add()
+      setPropertiesOnUserRecord()
   2. Listeners
       StorageApi.onChanged
   3. Events
@@ -24,9 +25,8 @@
 
  ============================================================================ */
 
-var
-    strLog                = ''
-  , strLogDo              = ', do'
+const
+    strLogDo              = ', do'
   , strLogDoNot           = ', do not'
   , strLogDone            = ', done'
   , strLogError           = ', error'
@@ -35,6 +35,10 @@ var
 
   , strJoinUeipVar        = 'strJoinUeip'
   , strJoinUeipAgreed     = 'yes'
+  ;
+
+var
+    strLog                = ''
 
   , Log                   = {
       strJoinUeip         : null
@@ -111,11 +115,8 @@ var
           mixpanel.track( strEvent, miscVar );
           Log.strLastTrackedEvent = strEvent;
 
-          // Set properties on a user record.
-          if ( strEvent === strConstLogOnInstalled ) {
-            mixpanel.identify( mixpanel.get_distinct_id() );
-            mixpanel.people.set( miscVar );
-          }
+          if ( strEvent === strConstLogOnInstalled )
+            Log.setPropertiesOnUserRecord( miscVar );
         }
       }
       // If storage hasn't returned value yet and at least one try left
@@ -144,6 +145,22 @@ var
     };
 
     funcTrack( strEvent, miscVar, boolTrack, boolDoNotSendData );
+  }
+  ,
+
+  /**
+   * Set properties on a user record
+   *
+   * @type    method
+   * @param   objProperties
+   *            The properties to set
+   * @param   funcCallback
+   *            Optional. Callback
+   * @return  void
+   **/
+  setPropertiesOnUserRecord : function( objProperties, funcCallback ) {
+    mixpanel.identify( mixpanel.get_distinct_id() );
+    mixpanel.people.set( objProperties, funcCallback );
   }
 };
 

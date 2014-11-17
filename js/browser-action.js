@@ -12,7 +12,6 @@
   1. Popup
       init()
       populateRecentTracks()
-      template()
       addEventListeners()
       composeRecentTrackActionUrl()
       encodeQuery()
@@ -59,7 +58,7 @@ var Popup                   = {
         ;
 
       for ( var i = ( arrRecentTracks.length - 1 ); i >= 0; i-- ) {
-        strHtml += Popup.template(
+        strHtml += Page.template(
             'recentTrackRow'
           , {
                 track : arrRecentTracks[ i ][ 0 ]
@@ -77,28 +76,6 @@ var Popup                   = {
       Page.localize( 'popup' );
       Popup.addEventListeners();
     });
-  }
-  ,
-
-  /**
-   * Initialize
-   *
-   * @type    method
-   * @param   strTemplateId
-   *            Element ID where template is "stored"
-   * @param   objData
-   *            Data to populate into template
-   * @return  string
-   **/
-  template : function( strTemplateId, objData ) {
-    return document.getElementById( strTemplateId )
-            .innerHTML
-              .replace(
-                  /%(\w*)%/g
-                , function( m, key ) {
-                    return objData.hasOwnProperty( key ) ? objData[ key ] : '';
-                  }
-              );
   }
   ,
 

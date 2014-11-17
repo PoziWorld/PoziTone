@@ -12,6 +12,8 @@
   1. Page
       init()
       localize()
+      template()
+      showSuccess()
   2. Events
 
  ============================================================================ */
@@ -94,6 +96,28 @@ var Page = {
     }
 
     document.title = chrome.i18n.getMessage( strPageName + 'Title' );
+  }
+  ,
+
+  /**
+   * Insert the provided data into the template
+   *
+   * @type    method
+   * @param   strTemplateId
+   *            Element ID where template is "stored"
+   * @param   objData
+   *            Data to populate into template
+   * @return  string
+   **/
+  template : function( strTemplateId, objData ) {
+    return document.getElementById( strTemplateId )
+            .innerHTML
+              .replace(
+                  /%(\w*)%/g
+                , function( m, key ) {
+                    return objData.hasOwnProperty( key ) ? objData[ key ] : '';
+                  }
+              );
   }
   ,
 

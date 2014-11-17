@@ -369,6 +369,26 @@
         "optionsTerms": {
           "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_ru\" target=\"_blank\">Лицензионное соглашение</a> PoziTone"
         }
+    ,
+    "optionsNavHelp": {
+      "message": "Помощь"
+    }
+      ,
+      "optionsHelpH1": {
+        "message": "Помощь"
+      }
+        ,
+        "optionsHelpText": {
+          "message": "Отправляя указанную ниже информацию, вы позволите разработчикам PoziTone найти решение проблемы, которую вы, возможно, испытываете, быстрее."
+        }
+        ,
+        "optionsHelpSubmitInfoCta": {
+          "message": "Отправить информацию"
+        }
+        ,
+        "optionsHelpSubmitInfoCtaSuccess": {
+          "message": "Отправлено"
+        }
 
   ,
   "popupTitle": {

@@ -25,7 +25,7 @@ const
   , strConstExtensionVersion      = chrome.runtime.getManifest().version
   , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
   , strConstChromeVersion         =
-      ( typeof bowser !== 'undefined' ) ? bowser.chromeVersion : ''
+      typeof bowser === 'object' ? bowser.chromeVersion : ''
 
   , strConstNotificationIdSeparator     = '_'
   , strConstNotificationLinesSeparator  = "\n\n"
@@ -36,6 +36,19 @@ const
   , strConstGeneralSettings       = strConstSettingsPrefix + 'general'
 
   , strConstLogOnInstalled        = 'chrome.runtime.onInstalled'
+
+  , objConstUserSetUp             = typeof bowser === 'object' ?
+        {
+            currentVersion        : strConstExtensionVersion
+          , browserName           : bowser.name
+          , browserVersion        : bowser.version
+          , browserVersionFull    : bowser.versionFull
+          , chromeVersion         : strConstChromeVersion
+          , chromeVersionFull     : bowser.chromeVersionFull
+          , language              : strConstExtensionLanguage
+          , userAgent             : bowser.userAgent
+        }
+      : {}
   ;
 
 /* =============================================================================

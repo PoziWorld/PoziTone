@@ -23,6 +23,7 @@
       chooseSubpage()
       displayCurrentVersion()
       removeModuleNotifications()
+      initEeLauncher()
   2. Listeners
       runtime.onMessage
   3. Events
@@ -35,16 +36,8 @@
 
  ============================================================================ */
 
-var
-    objParams                 = {}
-
-  , $allInputs // All <input />
-  , intInputs  // Num of $allInputs
-  , $settingsSaved
-  , $settingsSubpages
-  , $chosenSubpage
-
-  , strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
+const
+    strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
   , strModuleLocalPrefix              = 'module_'
   , strChosenSubpageId                = 'chosenSubpage'
   , strSettingsId                     = 'settings'
@@ -53,6 +46,21 @@ var
   , strSettingsSubpageClass           = 'settingsSubpage'
   , strVersionId                      = 'version'
   , strEnableModule                   = 'boolIsEnabled'
+
+  , strEeLauncherKeyword              = 'help'
+  , strEeLauncherId                   = 'helpMenuItem'
+  , strHelpInfoToSubmitId             = 'helpInfoToSubmit'
+  , strHelpSubmitInfoCtaId            = 'helpSubmitInfoCta'
+  ;
+
+var
+    objParams                 = {}
+
+  , $allInputs // All <input />
+  , intInputs  // Num of $allInputs
+  , $settingsSaved
+  , $settingsSubpages
+  , $chosenSubpage
 
   , intSettingsSubpages
   ;
@@ -81,6 +89,7 @@ var Options = {
     Options.parseQueryString();
     Options.openPageSubpage();
     Options.displayCurrentVersion();
+    Options.initEeLauncher();
   }
   ,
 
@@ -403,6 +412,26 @@ var Options = {
         // TODO: Do not push if URL is the same
         window.history.pushState( { path: strNewUrl }, '', strNewUrl );
       }
+
+      // 3. Page-specific logic
+      if ( strPageId === 'help' ) {
+        var strHtml = '';
+
+        for ( var miscProperty in objConstUserSetUp ) {
+          if ( objConstUserSetUp.hasOwnProperty( miscProperty ) ) {
+            strHtml += Page.template(
+                'helpInfoToSubmitTmpl'
+              , {
+                    key   : miscProperty
+                  , value : objConstUserSetUp[ miscProperty ]
+                }
+            );
+          }
+        }
+
+        if ( strHtml !== '' )
+          document.getElementById( strHelpInfoToSubmitId ).innerHTML = strHtml;
+      }
     }
   }
   ,
@@ -440,6 +469,24 @@ var Options = {
         $allInputs
       , 'change'
       , function( objEvent ) { Options.onSettingChange( objEvent ); }
+    );
+
+    addEvent(
+        document.getElementById( strHelpSubmitInfoCtaId )
+      , 'click'
+      , function( objEvent ) {
+          var $element = objEvent.target;
+
+          $element.disabled = true;
+          Log.setPropertiesOnUserRecord(
+              objConstUserSetUp
+            , function() {
+                $element.innerText =
+                  chrome.i18n.getMessage( 'optionsHelpSubmitInfoCtaSuccess' );
+              }
+          );
+
+        }
     );
   }
   ,
@@ -522,6 +569,31 @@ var Options = {
           Global.removeNotification( arrTabId[ 0 ], strModule );
       }
     });
+  }
+  ,
+
+  /**
+   * Initialize E.E. launcher (waits for a command)
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  initEeLauncher : function() {
+    // http://stackoverflow.com/a/18272907
+    var strInput = '';
+
+    window.addEventListener( 'keypress', function( objEvent ) {
+      var c = String.fromCharCode( objEvent.keyCode );
+
+      strInput += c.toLowerCase();
+
+      if ( strInput.length > strEeLauncherKeyword.length )
+        strInput = strInput.slice( 1 );
+
+      if ( strInput == strEeLauncherKeyword )
+        document.getElementById( strEeLauncherId ).click();
+    } );
   }
 };
 

@@ -93,10 +93,7 @@
   .supportMenuItem
     {
       float:                  left;
-      line-height:            2em;
       margin:                 0 .833em 0 0;
-      padding:                0 .833em;
-      min-width:              4em;
     }
   #versionInfo
     {
@@ -111,4 +108,36 @@
     {
       font-size:              1.2em;
       line-height:            1.75em;
+    }
+  #helpInfoToSubmit
+    {
+      padding:                1.5em;
+      width:                  55em;
+      background-color:       #fafafa;
+    }
+  #helpInfoToSubmit:after
+    {
+      content:                '';
+      display:                table;
+      clear:                  both;
+    }
+  .helpInfoToSubmitTerm
+    {
+      clear:                  both;
+      float:                  left;
+      font-size:              1.2em;
+      padding-top:            .5rem;
+      width:                  8rem;
+    }
+  .helpInfoToSubmitDefinition
+    {
+      float:                  left;
+      font-size:              1.2em;
+      padding-top:            .5rem;
+      width:                  26rem;
+    }
+  .helpInfoToSubmitTerm:first-of-type
+, .helpInfoToSubmitDefinition:first-of-type
+    {
+      padding-top:            0;
     }

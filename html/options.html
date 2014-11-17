@@ -5,6 +5,7 @@
     <title></title>
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/options.css" />
+    <script src="/js/tracking.js"></script>
     <script src="/js/bowser.js"></script>
     <script src="/js/const.js"></script>
     <script src="/js/log.js"></script>
@@ -68,6 +69,15 @@
               data-page="about"
               class="menuItem switchPage"
               i18n-content="optionsNavAbout"
+                ></a>
+          </li>
+          <li class="none">
+            <a
+              href="?page=help"
+              data-page="help"
+              id="helpMenuItem"
+              class="menuItem switchPage"
+              i18n-content="optionsNavHelp"
                 ></a>
           </li>
         </ul>
@@ -582,12 +592,12 @@
         <nav id="supportMenu" class="clearfix">
           <a
             i18n-content="optionsInfo"
-            class="supportMenuItem cta"
+            class="supportMenuItem cta hasText"
             target="_blank"
               ></a>
           <a
             i18n-content="optionsContact"
-            class="supportMenuItem cta"
+            class="supportMenuItem cta hasText"
             target="_blank"
               ></a>
         </nav>
@@ -601,6 +611,26 @@
           <p i18n-content="optionsFoundation" class="aboutFooterLine"></p>
           <p i18n-content="optionsTerms" class="aboutFooterLine"></p>
         </footer>
+      </section>
+      <section id="help" class="page">
+        <h1 i18n-content="optionsHelpH1" class="pageHeading"></h1>
+        <p i18n-content="optionsHelpText" class="sectionText first noHeading"></p>
+        <dl id="helpInfoToSubmit"></dl>
+        <p class="sectionText first noHeading">
+          <a
+            i18n-content="optionsSettingsGeneralUeipPrivacy"
+            target="_blank"
+              ></a>
+        </p>
+        <button
+          id="helpSubmitInfoCta"
+          class="cta hasText"
+          i18n-content="optionsHelpSubmitInfoCta"
+            ></button>
+        <script type="text/html" id="helpInfoToSubmitTmpl">
+          <dt class="helpInfoToSubmitTerm">%key%</dt>
+          <dd class="helpInfoToSubmitDefinition">%value%</dd>
+        </script>
       </section>
     </article>
   </body>

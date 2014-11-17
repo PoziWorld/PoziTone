@@ -369,6 +369,26 @@
         "optionsTerms": {
           "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">license agreement</a>"
         }
+    ,
+    "optionsNavHelp": {
+      "message": "Help"
+    }
+      ,
+      "optionsHelpH1": {
+        "message": "Help"
+      }
+        ,
+        "optionsHelpText": {
+          "message": "By submitting the information listed below, you will let the developers of PoziTone find a solution to a problem, you may be experiencing, quicker."
+        }
+        ,
+        "optionsHelpSubmitInfoCta": {
+          "message": "Submit info"
+        }
+        ,
+        "optionsHelpSubmitInfoCtaSuccess": {
+          "message": "Submitted"
+        }
 
   ,
   "popupTitle": {

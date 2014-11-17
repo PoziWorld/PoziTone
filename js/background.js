@@ -1302,15 +1302,13 @@ chrome.runtime.onInstalled.addListener(
   function( objDetails ) {
     Background.preventCheckForSilentUpdate();
 
-    strLog                        = strConstLogOnInstalled;
-    objDetails.currentVersion     = strConstExtensionVersion;
-    objDetails.browserName        = bowser.name;
-    objDetails.browserVersion     = bowser.version;
-    objDetails.browserVersionFull = bowser.versionFull;
-    objDetails.chromeVersion      = strConstChromeVersion;
-    objDetails.chromeVersionFull  = bowser.chromeVersionFull;
-    objDetails.language           = strConstExtensionLanguage;
-    objDetails.userAgent          = bowser.userAgent;
+    strLog = strConstLogOnInstalled;
+
+    // Copy user set-up details
+    // TODO: Replace with Object.assign() when supported
+    for ( var miscProperty in objConstUserSetUp )
+      if ( objConstUserSetUp.hasOwnProperty( miscProperty ) )
+        objDetails[ miscProperty ] = objConstUserSetUp[ miscProperty ];
 
     Log.add( strLog, objDetails, true );
 
