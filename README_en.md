@@ -5,7 +5,7 @@
 PoziTone ![PoziTone](/img/pozitone-icon-48.png)
 =======
 
-An extension for the Google Chrome, Opera and other Chromium-based browsers that adds a missing [functionality](#features) to [the audio players on the websites](#supported-players).
+An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds a missing [functionality](#features) to [audio players on websites](#supported-players).
 
 
 Features
