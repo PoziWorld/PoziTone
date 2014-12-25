@@ -37,7 +37,9 @@
  ============================================================================ */
 
 const
-    strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
+    strPage                           = 'options'
+  , strMainHeadingId                  = 'extensionName'
+  , strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
   , strModuleLocalPrefix              = 'module_'
   , strChosenSubpageId                = 'chosenSubpage'
   , strSettingsId                     = 'settings'
@@ -81,8 +83,12 @@ var Options = {
    * @return  void
    **/
   init : function() {
+    // Hide h1 in Chrome 40.0+ because new Options UI has heading already
+    if ( boolConstUseOptionsUi )
+      document.getElementById( strMainHeadingId ).remove();
+
     Options.removeNotAvailable();
-    Page.localize( 'options' );
+    Page.localize( strPage );
     Options.setPageValues();
     Options.getAvailableOptions();
     Options.addEventListeners();

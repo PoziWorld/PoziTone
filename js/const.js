@@ -21,11 +21,18 @@
  ============================================================================ */
 
 const
-    strConstExtensionName         = chrome.i18n.getMessage( 'extensionName' )
+    strConstExtensionId           = chrome.runtime.id
+  , strConstExtensionName         = chrome.i18n.getMessage( 'extensionName' )
   , strConstExtensionVersion      = chrome.runtime.getManifest().version
   , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
+
+  , boolConstIsBowserAvailable    = typeof bowser === 'object'
   , strConstChromeVersion         =
-      typeof bowser === 'object' ? bowser.chromeVersion : ''
+      boolConstIsBowserAvailable ? bowser.chromeVersion : ''
+  , boolConstUseOptionsUi         =
+          boolConstIsBowserAvailable
+      &&  strConstChromeVersion >= '40.0'
+      &&  bowser.name !== 'Opera'
 
   , strConstNotificationIdSeparator     = '_'
   , strConstNotificationLinesSeparator  = "\n\n"

@@ -91,7 +91,12 @@ var Popup                   = {
         document.getElementById( 'bractOpenOptionsPage' )
       , 'click'
       , function( objEvent ) {
-          var strOptionsUrl = chrome.extension.getURL( 'html/options.html' );
+          // Link to new Options UI for 40+
+          var strOptionsUrl =
+                boolConstUseOptionsUi
+                  ? 'chrome://extensions?options=' + strConstExtensionId
+                  : chrome.extension.getURL( 'html/options.html' )
+                  ;
 
           // Track clicks
           chrome.runtime.sendMessage(

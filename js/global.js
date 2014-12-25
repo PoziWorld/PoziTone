@@ -50,6 +50,7 @@ var Global                        = {
   , strNotificationIconUrl        : 'img/notification-icon-80.png'
   , strSystemNotificationIconUrl  : 'img/pozitone-notification-icon-80.png'
   , intNotificationsClearTimeout  : 4000
+  , strOptionsUiUrlPrefix         : 'chrome://extensions?options='
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
 
@@ -1287,12 +1288,16 @@ var Global                        = {
 
     var objUrl = { url: strUrl };
 
-    chrome.tabs.query( objUrl, function( objTabs ) {
-      if ( objTabs.length )
-        chrome.tabs.update( objTabs[0].id, { active: true } );
-      else
-        chrome.tabs.create( objUrl );
-    } );
+    if ( ~~strUrl.indexOf( Global.strOptionsUiUrlPrefix ) ) {
+      chrome.tabs.query( objUrl, function( objTabs ) {
+        if ( objTabs.length )
+          chrome.tabs.update( objTabs[0].id, { active: true } );
+        else
+          chrome.tabs.create( objUrl );
+      } );
+    }
+    else
+      chrome.tabs.create( objUrl );
   }
 };
 

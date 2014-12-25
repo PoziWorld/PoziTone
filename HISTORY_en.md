@@ -2,6 +2,9 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.3.4.2
+    * In Chrome 40 and up, PoziTone Options page is displayed over the list of installed extensions. 
+
 ### v0.3.4.1
     * PoziTone works in Opera 25 and up now.
       Get PoziTone from Opera extensions catalog – https://addons.opera.com/extensions/details/pozitone/
