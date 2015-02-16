@@ -66,7 +66,7 @@ var Global                        = {
           ]
         }
       , fm_di                     : {
-            objRegex              : /(http:\/\/|https:\/\/)www.di.fm\/.*/
+            objRegex              : /(http:\/\/|https:\/\/)old.di.fm\/.*/
           , arrJs                 : [
                 'js/const.js'
               , 'modules/general/js/page-watcher.js'
