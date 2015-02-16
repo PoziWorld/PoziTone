@@ -3,7 +3,8 @@
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
 ### v0.3.4.3
-    * Added a support for old Digitally Imported player (old.di.fm). New player (www.di.fm) is not yet supported.
+    * Added a support for old Digitally Imported player (old.di.fm).
+      New player (www.di.fm) is not yet supported.
 
 ### v0.3.4.2
     * In Chrome 40 and up, PoziTone Options page is displayed over the list of installed extensions. 
