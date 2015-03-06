@@ -25,14 +25,14 @@
       position:               fixed;
       z-index:                2;
       top:                    0;
-      max-width:              73.8em;
-      min-width:              58em;
-      height:                 5.3em;
+      max-width:              73.8rem;
+      min-width:              58rem;
+      height:                 5.3rem;
       background:             #fff;
     }
   .subpage
     {
-      margin-bottom:          3em;
+      margin-bottom:          3rem;
     }
   #settings .subpage.module
     {
@@ -42,10 +42,10 @@
     {
       display:                inline-block;
       font-size:              1.6em;
-      padding:                1.167em 0 .722em;
-      max-width:              46.125em;
-      min-width:              36.25em;
-      border-bottom:          .063em solid #eee;
+      padding:                1.867rem 0 1.155rem;
+      max-width:              73.8em;
+      min-width:              58rem;
+      border-bottom:          .1rem solid #eee;
       background:             #f5f5f5;
       color:                  #000;
       text-align:             center;
@@ -54,7 +54,7 @@
     {
       display:                inline-block;
       vertical-align:         middle;
-      margin-left:            1em;
+      margin-left:            1rem;
     }
   .soundVolumeControl:first-child
     {
@@ -63,9 +63,9 @@
   .soundVolumeControlDelta
     {
       line-height:            1.8em;
-      padding:                0 0 0 .385em;
-      width:                  2.6em;
-      border:                 .077em solid #ddd;
+      padding:                0 0 0 .5rem;
+      width:                  3.38rem;
+      border:                 .1rem solid #ddd;
     }
 
 /* =============================================================================
@@ -76,33 +76,33 @@
 
   #logoName
     {
-      margin:                 2.5em 0;
+      margin:                 2.5rem 0;
     }
   #logo
     {
       float:                  left;
-      width:                  3.2em;
-      height:                 3.2em;
+      width:                  3.2rem;
+      height:                 3.2rem;
     }
   #name
     {
       float:                  left;
       font-size:              1.6em;
-      margin:                 .05em 0 0 .875em;
+      margin:                 .08rem 0 0 1.4rem;
     }
   .supportMenuItem
     {
       float:                  left;
-      margin:                 0 .833em 0 0;
+      margin:                 0 1rem 0 0;
     }
   #versionInfo
     {
       font-size:              1.2em;
-      margin:                 2.333em 0 0;
+      margin:                 2.8rem 0 0;
     }
   #aboutFooter
     {
-      margin:                 19.1em 0 1.9em;
+      margin:                 19.1rem 0 1.9rem;
     }
   .aboutFooterLine
     {
@@ -111,8 +111,8 @@
     }
   #helpInfoToSubmit
     {
-      padding:                1.5em;
-      width:                  55em;
+      padding:                1.5rem;
+      width:                  55rem;
       background-color:       #fafafa;
     }
   #helpInfoToSubmit:after
@@ -126,15 +126,15 @@
       clear:                  both;
       float:                  left;
       font-size:              1.2em;
-      padding-top:            .5rem;
-      width:                  8rem;
+      padding-top:            .8rem;
+      width:                  12.8rem;
     }
   .helpInfoToSubmitDefinition
     {
       float:                  left;
       font-size:              1.2em;
-      padding-top:            .5rem;
-      width:                  26rem;
+      padding-top:            .8rem;
+      width:                  41.6rem;
     }
   .helpInfoToSubmitTerm:first-of-type
 , .helpInfoToSubmitDefinition:first-of-type

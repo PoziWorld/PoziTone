@@ -24,8 +24,8 @@
     {
       position:               absolute;
       z-index:                2;
-      top:                    .5em;
-      right:                  .5em;
+      top:                    .5rem;
+      right:                  .5rem;
     }
   .bractToolbarItem
     {
@@ -34,14 +34,14 @@
   .bractBtn
     {
       font-size:              1em;
-      margin:                 .5em;
-      width:                  1.6em;
-      height:                 1.6em;
+      margin:                 .5rem;
+      width:                  1.6rem;
+      height:                 1.6rem;
       background-color:       #fff;
       background-repeat:      no-repeat;
       cursor:                 pointer;
       opacity:                .25;
-      text-indent:            -9999em;
+      text-indent:            -9999rem;
     }
   .bractBtn:hover
 , .bractBtn:active
@@ -92,25 +92,25 @@
 
   #content
     {
-      padding:                0 2em;
-      min-width:              50em;
-      max-width:              50em;
+      padding:                0 2rem;
+      min-width:              50rem;
+      max-width:              50rem;
     }
   .pageHeading
     {
-      width:                  27.8em;
+      width:                  50rem;
       max-width:              none;
       min-width:              none;
     }
   #recentTracks
     {
-      margin:                 1.15em 0 1.4em 1.8em;
+      margin:                 1.15rem 0 1.4rem 1.8rem;
     }
   .recentTrack
 , #tunesSuggestion
     {
       line-height:            normal !important;
-      padding:                .25em 0;
+      padding:                .25rem 0;
       transition:             all .1s ease;
     }
   .recentTrack:hover
@@ -121,8 +121,8 @@
     {
       display:                inline-block;
       vertical-align:         top;
-      width:                  3.2em;
-      height:                 3.2em;
+      width:                  3.2rem;
+      height:                 3.2rem;
     }
   .recentTrackInfo
 , #tunesSuggestionInfo
@@ -131,8 +131,8 @@
       vertical-align:         top;
       font-size:              1.2em;
       line-height:            1.5em;
-      padding:                .7em 0 0 .55em;
-      max-width:              35em;
+      padding:                .84rem 0 0 .66em;
+      max-width:              42rem;
     }
   .recentTrackActions
     {
@@ -144,12 +144,12 @@
     {
       display:                block;
       position:               absolute;
-      top:                    .25em;
-      width:                  3.2em;
-      height:                 3.2em;
+      top:                    .25rem;
+      width:                  3.2rem;
+      height:                 3.2rem;
       background-color:       inherit;
       background-image:       url(/img/cogs_icon&24.png);
-      background-position:    .4em .4em;
+      background-position:    .4rem .4rem;
       background-repeat:      no-repeat;
       overflow:               hidden;
       transition:             all .4s ease;
@@ -162,31 +162,31 @@
   .recentTrackActionsList
     {
       height:                 100%;
-      margin-left:            4.3em !important;
+      margin-left:            4.3rem !important;
     }
   .recentTrackActionsListItem
     {
       float:                  left;
-      padding:                .4em 0;
+      padding:                .4rem 0;
       line-height:            normal !important;
     }
   .recentTrackAction
     {
-      margin:                 0 .917em 0 0;
-      width:                  2em;
-      height:                 2em;
+      margin:                 0 1.1rem 0 0;
+      width:                  2.4rem;
+      height:                 2.4rem;
       cursor:                 pointer;
     }
   .recentTrackActionImg
     {
-      margin-top:             .15em;
-      width:                  1.333em;
-      height:                 1.333em;
+      margin-top:             .18rem;
+      width:                  1.6rem;
+      height:                 1.6rem;
     }
   .copyToClipboardSuccess
     {
       position:               absolute;
       top:                    50%;
       left:                   50%;
-      margin:                 -.666em 0 0 -.666em;
+      margin:                 -.8rem 0 0 -.8rem;
     }
