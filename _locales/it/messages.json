@@ -104,9 +104,6 @@
   "optionsFoundation": {
     "message": "PoziTone è reso possibile dall' <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amore</a> e dalla <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">gentilezza</a>."
   },
-  "module_fm_di_long": {
-    "message": "Digitally Imported | old.di.fm"
-  },
   "optionsSettingsAdditionalInfoShowCbr": {
     "message": "Mostra il <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>",
     "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
@@ -151,7 +148,7 @@
     "message": "Brani recenti"
   },
   "optionsCopyright": {
-    "message": "&copy; PoziWorld, 2014"
+    "message": "&copy; PoziWorld, 2015"
   },
   "popupToolbarClose": {
     "message": "Chiudi"
@@ -193,9 +190,6 @@
   },
   "optionsSettingsSaved": {
     "message": "salvate"
-  },
-  "module_fm_di": {
-    "message": "Digitally Imported"
   },
   "systemNotificationUpdatedDoNotNotify": {
     "message": "Non avvisarmi degli aggiornamenti"

@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.3.4.3"
+  , "version"                   : "0.3.5.3"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -19,8 +19,6 @@
 
   , "permissions"               : [
         "*://101.ru/"
-      , "*://api.audioaddict.com/"
-      , "*://old.di.fm/"
       , "*://*.odnoklassniki.ru/"
       , "*://*.ok.ru/"
       , "*://vk.com/"
@@ -88,15 +86,6 @@
               , "modules/ru_101/js/uppod-player-api.js"
               , "modules/general/js/page-watcher.js"
               , "modules/ru_101/js/page-watcher.js"
-            ]
-          , "run_at"            : "document_end"
-        }
-      , {
-            "matches"           : [ "*://old.di.fm/*" ]
-          , "js"                : [
-                "js/const.js"
-              , "modules/general/js/page-watcher.js"
-              , "modules/fm_di/js/page-watcher.js"
             ]
           , "run_at"            : "document_end"
         }

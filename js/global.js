@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
   File                    :           js/global.js
   Description             :           Global JavaScript
@@ -63,14 +63,6 @@ var Global                        = {
               , 'modules/ru_101/js/uppod-player-api.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/ru_101/js/page-watcher.js'
-          ]
-        }
-      , fm_di                     : {
-            objRegex              : /(http:\/\/|https:\/\/)old.di.fm\/.*/
-          , arrJs                 : [
-                'js/const.js'
-              , 'modules/general/js/page-watcher.js'
-              , 'modules/fm_di/js/page-watcher.js'
           ]
         }
       , ru_ok_audio               : {

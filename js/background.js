@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013-2014 PoziWorld
+  Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
   File                    :           js/background.js
   Description             :           Background JavaScript
@@ -74,20 +74,6 @@ const
                                                       , 'muteUnmute'
                                                     ]
           , boolShowNotificationWhenStopped       : false
-          , boolShowNotificationWhenMuted         : false
-          , boolShowNotificationWhenNoTrackInfo   : false
-          , boolUseGeneralVolumeDelta             : true
-          , intVolumeDelta                        : 10
-        }
-      , objSettings_fm_di                         : {
-            boolIsEnabled                         : true
-          , boolShowNotificationLogo              : true
-          , strNotificationTitleFormat            : 'short'
-          , boolShowKbpsInfo                      : true
-          , arrNotificationButtons                : [
-                                                        'playStop'
-                                                      , 'muteUnmute'
-                                                    ]
           , boolShowNotificationWhenMuted         : false
           , boolShowNotificationWhenNoTrackInfo   : false
           , boolUseGeneralVolumeDelta             : true

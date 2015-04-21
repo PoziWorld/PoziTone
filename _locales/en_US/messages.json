@@ -359,7 +359,7 @@
         }
         ,
         "optionsCopyright": {
-          "message": "&copy; PoziWorld, 2014"
+          "message": "&copy; PoziWorld, 2015"
         }
         ,
         "optionsFoundation": {
@@ -448,15 +448,6 @@
     ,
     "module_com_vk_audio_long": {
       "message": "VK (audio) | vk.com"
-    }
-
-  ,
-  "module_fm_di": {
-    "message": "Digitally Imported"
-  }
-    ,
-    "module_fm_di_long": {
-      "message": "Digitally Imported | old.di.fm"
     }
 
   ,

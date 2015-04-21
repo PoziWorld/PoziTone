@@ -33,7 +33,6 @@ Supported players
 * [Online radio 101.ru](http://101.ru) (stations' main player).
 * [VK](https://vk.com) (audio, full version of site).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).
-* [Digitally Imported](http://old.di.fm) (DI, DI.FM or DI Radio).
 
 More to come...
 
