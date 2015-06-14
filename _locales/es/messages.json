@@ -12,6 +12,9 @@
   "optionsAboutH1": {
     "message": "Acerca de"
   },
+  "module_ru_ok_audio_long": {
+    "message": "Odnoklassniki (audio) | ok.ru"
+  },
   "optionsSettingsSoundVolumeControlDelta": {
     "message": "Cambiar en, %",
     "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
@@ -24,6 +27,9 @@
   },
   "optionsSettingsGeneralUeipPrivacyHref": {
     "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+  },
+  "module_ru_ok_audio": {
+    "message": "Odnoklassniki (audio)"
   },
   "notificationButtonsAddLoggedInTitle": {
     "message": "Añadir pista a lista de reproducción"
@@ -67,6 +73,9 @@
   },
   "optionsSettingsH1": {
     "message": "Configuración"
+  },
+  "optionsNavHelp": {
+    "message": "Ayuda"
   },
   "notificationButtonsMuteFeedback": {
     "message": "Silencioso"
@@ -194,6 +203,9 @@
   "systemNotificationUpdatedDoNotNotify": {
     "message": "No notificar actualizaciones"
   },
+  "optionsHelpText": {
+    "message": "Al enviar a los desarrolladores de PoziTone la información especificada aquí abajo, estos intentarán solucionar de forma rápida el problema que estás experimentando."
+  },
   "optionsSettingsNotificationButtonsPreviousAuthRequired": {
     "message": "Pista anterior <small>(autorización expresa necesaria)</small>"
   },
@@ -211,6 +223,9 @@
   },
   "optionsSettingsNotificationIconFormatShowStationLogo": {
     "message": "Mostrar logo de esta estación"
+  },
+  "optionsSettingsNotificationIconFormatShowSiteLogo": {
+    "message": "Mostrar logo del sitio"
   },
   "optionsSettingsGeneralUeipMore": {
     "message": "Indícanos que cosas cambiar para mejorar el programa"
@@ -237,6 +252,9 @@
       }
     }
   },
+  "optionsHelpSubmitInfoCta": {
+    "message": "Enviar información"
+  },
   "optionsNavFaq": {
     "message": "P+F (Preguntas más frecuentes)"
   },
@@ -245,6 +263,9 @@
   },
   "findOnVk": {
     "message": "Buscar en VK"
+  },
+  "optionsHelpSubmitInfoCtaSuccess": {
+    "message": "Enviada"
   },
   "optionsSettingsSupport": {
     "message": "Patrocina el reproductor"
@@ -260,6 +281,9 @@
   },
   "optionsSettingsNotificationIconFormat": {
     "message": "Formato de icono de la notificación"
+  },
+  "optionsHelpH1": {
+    "message": "Ayuda"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Ver cambios"
@@ -296,9 +320,6 @@
   },
   "copyToClipboard": {
     "message": "Copiar al portapapeles"
-  },
-  "optionsSettingsNotificationIconFormatShowSiteLogo": {
-    "message": "Mostrar logo"
   },
   "notificationButtonsVolumeDownTitle": {
     "message": "Bajar volumen de sonido",
