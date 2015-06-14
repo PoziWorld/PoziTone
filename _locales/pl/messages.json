@@ -12,6 +12,13 @@
   "optionsAboutH1": {
     "message": "O rozszerzeniu"
   },
+  "module_ru_ok_audio_long": {
+    "message": "Odnoklassniki (dźwięk) | ok.ru"
+  },
+  "optionsSettingsSoundVolumeControlDelta": {
+    "message": "Zmiana przez, %",
+    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
+  },
   "optionsSettingsSupportEnabled": {
     "message": "Włączono"
   },
@@ -20,6 +27,9 @@
   },
   "optionsSettingsGeneralUeipPrivacyHref": {
     "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+  },
+  "module_ru_ok_audio": {
+    "message": "Odnoklassniki (dźwięk)"
   },
   "notificationButtonsAddLoggedInTitle": {
     "message": "Dodaj utwór do listy odtwarzania"
@@ -63,6 +73,9 @@
   },
   "optionsSettingsH1": {
     "message": "Ustawienia"
+  },
+  "optionsNavHelp": {
+    "message": "Pomoc"
   },
   "notificationButtonsMuteFeedback": {
     "message": "Wyciszony"
@@ -167,6 +180,10 @@
   "module_general": {
     "message": "Główne ustawienia"
   },
+  "optionsSettingsSoundVolumeControlUseDefaults": {
+    "message": "Użyj <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">ustawienia ogólne</a>",
+    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+  },
   "optionsInfo": {
     "message": "Szczegóły o PoziTone"
   },
@@ -186,6 +203,9 @@
   "systemNotificationUpdatedDoNotNotify": {
     "message": "Nie informuj mnie o aktualizacjach"
   },
+  "optionsHelpText": {
+    "message": "Wysyłając informację wymienione poniżej pozwalasz twórcom PoziTone na znalezienie rozwiązania występującego problemu o wiele szybciej."
+  },
   "optionsSettingsNotificationButtonsPreviousAuthRequired": {
     "message": "Poprzedni utwór <small>(Wymagana autoryzacja na stronie)</small>"
   },
@@ -203,6 +223,9 @@
   },
   "optionsSettingsNotificationIconFormatShowStationLogo": {
     "message": "Wyświetlaj logo aktualnie odtwarzanej stacji"
+  },
+  "optionsSettingsNotificationIconFormatShowSiteLogo": {
+    "message": "Wyświetl logo strony"
   },
   "optionsSettingsGeneralUeipMore": {
     "message": "Dowiedź się więcej na temat programie"
@@ -229,6 +252,9 @@
       }
     }
   },
+  "optionsHelpSubmitInfoCta": {
+    "message": "Wyślij informację"
+  },
   "optionsNavFaq": {
     "message": "FAQ"
   },
@@ -237,6 +263,9 @@
   },
   "findOnVk": {
     "message": "Znajdź na VK"
+  },
+  "optionsHelpSubmitInfoCtaSuccess": {
+    "message": "Wysłano"
   },
   "optionsSettingsSupport": {
     "message": "Stan odtwarzacza"
@@ -252,6 +281,9 @@
   },
   "optionsSettingsNotificationIconFormat": {
     "message": "Ikona powiadomień"
+  },
+  "optionsHelpH1": {
+    "message": "Pomoc"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Zobacz zmiany"
@@ -288,9 +320,6 @@
   },
   "copyToClipboard": {
     "message": "Skopiuj do schowka"
-  },
-  "optionsSettingsNotificationIconFormatShowSiteLogo": {
-    "message": "Wyświetlaj logo"
   },
   "notificationButtonsVolumeDownTitle": {
     "message": "Zmniejsz głośność",
