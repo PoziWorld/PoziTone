@@ -4,89 +4,30 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           css/browser-action.css
+  File                    :           browser-action/css/browser-action.css
   Description             :           Popup Styles
 
   Table of Contents:
 
-  0. Toolbar
-  1. Content
+    Globals
+    Content
 
  ============================================================================ */
 
 /* =============================================================================
 
-  0. Toolbar
+  Globals
 
  ============================================================================ */
 
-  #bractToolbar
+  body
     {
-      position:               absolute;
-      z-index:                2;
-      top:                    .5rem;
-      right:                  .5rem;
+      min-width:              initial;
     }
-  .bractToolbarItem
-    {
-      float:                  left;
-    }
-  .bractBtn
-    {
-      font-size:              1em;
-      margin:                 .5rem;
-      width:                  1.6rem;
-      height:                 1.6rem;
-      background-color:       #fff;
-      background-repeat:      no-repeat;
-      cursor:                 pointer;
-      opacity:                .25;
-      text-indent:            -9999rem;
-    }
-  .bractBtn:hover
-, .bractBtn:active
-    {
-      opacity:                1;
-    }
-  #bractOpenOptionsPage
-    {
-      background-image:       url(/img/cog_icon&16.png);
-    }
-  #bractOpenOptionsPage:hover
-    {
-      -webkit-animation-duration:         .5s;
-      -webkit-animation-iteration-count:  1;
-      -webkit-animation-name:             spin;
-      -webkit-animation-timing-function:  linear;
-    }
-  @-webkit-keyframes spin
-    { 
-      from  { -webkit-transform: scale(1) rotate(0deg); }
-      to    { -webkit-transform: scale(1) rotate(360deg); } 
-    }
-  #bractClosePopupPage
-    {
-      background-image:       url(/img/delete_icon&16.png);
-      background-position:    center;
-      background-size:        75%;
-    }
-  #bractClosePopupPage:hover
-    {
-      -webkit-animation-duration:         .3s;
-      -webkit-animation-iteration-count:  1;
-      -webkit-animation-name:             breathe;
-      -webkit-animation-timing-function:  linear;
-    }
-  @-webkit-keyframes breathe
-    { 
-      from  { -webkit-transform: scale(1); }
-      to    { -webkit-transform: scale(1.25); } 
-    }
-
 
 /* =============================================================================
 
-  1. Content
+  Content
 
  ============================================================================ */
 
@@ -148,7 +89,7 @@
       width:                  3.2rem;
       height:                 3.2rem;
       background-color:       inherit;
-      background-image:       url(/img/cogs_icon&24.png);
+      background-image:       url(/global/img/cogs_icon&24.png);
       background-position:    .4rem .4rem;
       background-repeat:      no-repeat;
       overflow:               hidden;

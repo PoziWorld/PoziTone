@@ -114,6 +114,15 @@
   }
 
   ,
+  "messageFromDevelopersPageText": {
+    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button> от разработчиков!"
+  }
+  ,
+  "messageFromDevelopersTooltipText": {
+    "message": "Важное сообщение от разработчиков!"
+  }
+
+  ,
   "systemNotificationUpdated": {
     "message": "Расширение обновлено!"
   }
@@ -152,6 +161,14 @@
           "message": "Общие"
         }
           ,
+          "optionsSettingsGeneralShowAdvanced": {
+            "message": "Показывать расширенные настройки"
+          }
+            ,
+            "optionsSettingsGeneralShowAdvancedToggle": {
+              "message": "Расширенные"
+            }
+          ,
           "optionsSettingsGeneralShortcuts": {
             "message": "Быстрые клавиши"
           }
@@ -166,7 +183,7 @@
           }
             ,
             "optionsSettingsSoundVolumeControlUseDefaults": {
-                "message"     : "Использовать <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">общие настройки</a>"
+                "message"     : "Использовать <a href=\"#/settings/general\">общие настройки</a>"
               , "description" : "Слова внутри тега <a /> должны быть те самые, из 'module_general' and 'optionsNavSettings' ('Общие' and 'Настройки' => 'общие настройки')."
             }
             ,

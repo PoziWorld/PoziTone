@@ -4,24 +4,24 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           js/log.js
+  File                    :           global/js/log.js
   Description             :           Log JavaScript
 
   Table of Contents:
 
-  1. Log
+    Log
       init()
       add()
       setPropertiesOnUserRecord()
-  2. Listeners
+    Listeners
       StorageApi.onChanged
-  3. Events
+    Events
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Log
+  Log
 
  ============================================================================ */
 
@@ -166,7 +166,7 @@ var
 
 /* =============================================================================
 
-  2. Listeners
+  Listeners
 
  ============================================================================ */
 
@@ -203,7 +203,7 @@ StorageApi.onChanged.addListener(
 
 /* =============================================================================
 
-  3. Events
+  Events
 
  ============================================================================ */
 

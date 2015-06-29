@@ -181,7 +181,7 @@
     "message": "Główne ustawienia"
   },
   "optionsSettingsSoundVolumeControlUseDefaults": {
-    "message": "Użyj <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">ustawienia ogólne</a>",
+    "message": "Użyj <a href=\"#/settings/general\">ustawienia ogólne</a>",
     "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
   },
   "optionsInfo": {

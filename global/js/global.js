@@ -4,12 +4,12 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           js/global.js
+  File                    :           global/js/global.js
   Description             :           Global JavaScript
 
   Table of Contents:
 
-  1. Global
+    Global
       init()
       getAllCommands()
       setStorageItems()
@@ -30,58 +30,73 @@
       returnIndexOfSubitemContaining()
       addShortcutInfo()
       createTabOrUpdate()
-  2. On Load
+      isValidModule()
+      makeHttpRequest()
+      checkForDevelopersMessage()
+    On Load
       Initialize
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Global
+  Global
 
  ============================================================================ */
 
+const
+    arrContentScripts             = objConstExtensionManifest.content_scripts
+  , funcReturnModulesJsArr        = function( strUrl ) {
+      return  arrContentScripts.map( function ( objContentScript ) {
+                if ( ~ objContentScript.matches[ 0 ].indexOf( strUrl ) ) {
+                  return objContentScript.js;
+                }
+              } )[ 0 ] || [];
+    }
+
+    // Developers Message
+  , strDevelopersMessageBannerId              = 'pwMessage'
+  , strDevelopersMessageBannerNotActiveClass  = 'notActive'
+  ;
+
 var Global                        = {
     intNoVolume                   : 0
+
   , strNotificationIdSeparator    : strConstNotificationIdSeparator
   , strNotificationId             : strConstNotificationId // + module + tab ID
   , strSystemNotificationId       : 
       strConstNotificationId + 'system' + strConstNotificationIdSeparator
-  , strNotificationIconUrl        : 'img/notification-icon-80.png'
-  , strSystemNotificationIconUrl  : 'img/pozitone-notification-icon-80.png'
+  , strNotificationIconUrl        : 'global/img/notification-icon-80.png'
+  , strSystemNotificationIconUrl  :
+      'global/img/pozitone-notification-icon-80.png'
   , intNotificationsClearTimeout  : 4000
+
   , strOptionsUiUrlPrefix         : 'chrome://extensions?options='
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
+
+  , strModuleShortNameStartsWith  : 'PTM'
+  , strModuleShortNameSeparator   : ' '
+  // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch08s15.html
+  , strModuleShortNameDomainRegEx :
+      /\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b/i
+  , strModuleGreeting             : 'Welcome aboard!'
 
   // Embedded modules (replicates manifest's "content_scripts")
   , objModules                    : {
         ru_101                    : {
             objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
-          , arrJs                 : [
-                'js/const.js'
-              , 'modules/ru_101/js/uppod-player-api.js'
-              , 'modules/general/js/page-watcher.js'
-              , 'modules/ru_101/js/page-watcher.js'
-          ]
+          , arrJs                 : funcReturnModulesJsArr( '101.ru' )
         }
       , ru_ok_audio               : {
             objRegex              :
               // TODO: Cover all possible URLs
               /(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
-          , arrJs                 : [
-                'js/const.js'
-              , 'modules/general/js/page-watcher.js'
-              , 'modules/ru_ok_audio/js/page-watcher.js'
-          ]
+          , arrJs                 : funcReturnModulesJsArr( 'odnoklassniki.ru' )
         }
       , com_vk_audio              : {
             objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
-          , arrJs                 : [
-                'js/const.js'
-              , 'modules/general/js/page-watcher.js'
-              , 'modules/com_vk_audio/js/page-watcher.js'
-          ]
+          , arrJs                 : funcReturnModulesJsArr( 'vk.com' )
         }
   }
 
@@ -104,11 +119,23 @@ var Global                        = {
         add                       : {
             loggedIn              : {
                 objButton         : {
-                    title         : 
+                    title         :
                       chrome.i18n.getMessage(
                         'notificationButtonsAddLoggedInTitle'
                       )
-                  , iconUrl       : 'img/round_plus_icon&16.png'
+                  , iconUrl       : 'global/img/round_plus_icon&16.png'
+                }
+              , strFunction       : 'add'
+            }
+        }
+      , addAuth                   : {
+            loggedIn              : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsAddLoggedInTitle'
+                      )
+                  , iconUrl       : 'global/img/round_plus_icon&16.png'
                 }
               , strFunction       : 'add'
             }
@@ -120,7 +147,19 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsFavoriteLoggedInTitle'
                       )
-                  , iconUrl       : 'img/emotion_smile_icon&16.png'
+                  , iconUrl       : 'global/img/emotion_smile_icon&16.png'
+                }
+              , strFunction       : 'favorite'
+            }
+        }
+      , favoriteAuth              : {
+            loggedIn              : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsFavoriteLoggedInTitle'
+                      )
+                  , iconUrl       : 'global/img/emotion_smile_icon&16.png'
                 }
               , strFunction       : 'favorite'
             }
@@ -132,7 +171,19 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsNextTitle'
                       )
-                  , iconUrl       : 'img/playback_next_icon&16.png'
+                  , iconUrl       : 'global/img/playback_next_icon&16.png'
+                }
+              , strFunction       : 'next'
+            }
+        }
+      , nextAuth                  : {
+            next                  : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsNextTitle'
+                      )
+                  , iconUrl       : 'global/img/playback_next_icon&16.png'
                 }
               , strFunction       : 'next'
             }
@@ -144,7 +195,19 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsPreviousTitle'
                       )
-                  , iconUrl       : 'img/playback_prev_icon&16.png'
+                  , iconUrl       : 'global/img/playback_prev_icon&16.png'
+                }
+              , strFunction       : 'previous'
+            }
+        }
+      , previousAuth              : {
+            previous              : {
+                objButton         : {
+                    title         :
+                      chrome.i18n.getMessage(
+                        'notificationButtonsPreviousTitle'
+                      )
+                  , iconUrl       : 'global/img/playback_prev_icon&16.png'
                 }
               , strFunction       : 'previous'
             }
@@ -156,7 +219,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsPlayTitle'
                       )
-                  , iconUrl       : 'img/playback_play_icon&16.png'
+                  , iconUrl       : 'global/img/playback_play_icon&16.png'
                 }
               , strFunction       : 'playStop'
             }
@@ -166,7 +229,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsStopTitle'
                       )
-                  , iconUrl       : 'img/playback_stop_icon&16.png'
+                  , iconUrl       : 'global/img/playback_stop_icon&16.png'
                 }
               , strFunction       : 'playStop'
             }
@@ -178,7 +241,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsMuteTitle'
                       )
-                  , iconUrl       : 'img/sound_mute_icon&16.png'
+                  , iconUrl       : 'global/img/sound_mute_icon&16.png'
                 }
               , strFunction       : 'mute'
             }
@@ -188,7 +251,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsUnmuteTitle'
                       )
-                  , iconUrl       : 'img/sound_high_icon&16.png'
+                  , iconUrl       : 'global/img/sound_high_icon&16.png'
                 }
               , strFunction       : 'unmute'
             }
@@ -200,7 +263,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsVolumeUpTitle'
                       )
-                  , iconUrl       : 'img/sound_up_icon&16.png'
+                  , iconUrl       : 'global/img/sound_up_icon&16.png'
                 }
               , strFunction       : 'volumeUp'
             }
@@ -212,7 +275,7 @@ var Global                        = {
                       chrome.i18n.getMessage(
                         'notificationButtonsVolumeDownTitle'
                       )
-                  , iconUrl       : 'img/sound_down_icon&16.png'
+                  , iconUrl       : 'global/img/sound_down_icon&16.png'
                 }
               , strFunction       : 'volumeDown'
             }
@@ -269,14 +332,16 @@ var Global                        = {
    *
    * @type    method
    * @param   Storage
-   *            Target storage
+   *            Target storage.
    * @param   objItems
    *            An object which gives each key/val pair to update storage with.
    * @param   strLog
    *            Debug line "prefix".
+   * @param   funcCallback
+   *            Optional. Function to run on success.
    * @return  void
    **/
-  setStorageItems : function( Storage, objItems, strLog ) {
+  setStorageItems : function( Storage, objItems, strLog, funcCallback ) {
     Storage.set( objItems, function() {
       var strSetStorageItemsLog = strLog;
       Log.add( strLog + strLogDo, objItems );
@@ -288,10 +353,14 @@ var Global                        = {
           ;
 
         if ( typeof strErrorMessage === 'string' )
-          objLogDetails = { strErrorMessage: strErrorMessage };
+          objLogDetails.strErrorMessage = strErrorMessage;
 
         Log.add( strLog + strLogError, objLogDetails, true );
         return;
+      }
+
+      if ( typeof funcCallback === 'function' ) {
+        funcCallback();
       }
 
       Storage.get( null, function( objAllItemsAfterUpdate ) {
@@ -402,7 +471,7 @@ var Global                        = {
 
             var
                 strTitleFormat = objData.strNotificationTitleFormat || ''
-              , arrButtons     = objData.arrNotificationButtons
+              , arrButtons     = objData.arrActiveNotificationButtons
               ;
 
             // Notification Title Settings
@@ -598,7 +667,7 @@ var Global                        = {
                       ;
 
                     if ( typeof strErrorMessage === 'string' )
-                      objLogDetails = { strErrorMessage: strErrorMessage };
+                      objLogDetails.strErrorMessage = strErrorMessage;
 
                     Log.add( strLog + strLogError, objLogDetails, true );
 
@@ -838,7 +907,7 @@ var Global                        = {
                     , objData
                     , strLog + ', submit'
                   );
-              });
+              } );
             }
         }
       );
@@ -1291,11 +1360,234 @@ var Global                        = {
     else
       chrome.tabs.create( objUrl );
   }
+  ,
+
+  /**
+   * Checks whether an extension is a valid PoziTone Module
+   *
+   * @type    method
+   * @param   objExtensionInfo
+ *              Information about an extension, app, or theme
+   * @return  void
+   **/
+  isValidModule : function ( objExtensionInfo )
+  {
+    if (
+          typeof objExtensionInfo === 'object'
+      &&  ! Global.isEmpty( objExtensionInfo )
+    ) {
+      strLog = 'isValidModule';
+      Log.add( strLog, objExtensionInfo );
+
+      // Verify short_name format
+      var strShortName = objExtensionInfo.shortName;
+
+      if ( typeof strShortName === 'string' && strShortName !== '' ) {
+        var
+            // strShortName = Keyword + separator + target player/site
+            arrShortName  =
+              strShortName.split( Global.strModuleShortNameSeparator )
+            // Accept domains containing Unicode symbols
+          , strModuleFor  = punycode.toASCII( arrShortName[ 1 ] )
+          ;
+
+        return !!(
+              arrShortName[ 0 ] === Global.strModuleShortNameStartsWith
+          &&  Global.strModuleShortNameDomainRegEx.test( strModuleFor )
+        );
+      }
+      else
+        return false;
+    }
+    else
+      return false;
+  }
+  ,
+
+  /**
+   * Makes HTTP Request and runs callback on success
+   *
+   * @type    method
+   * @param   strUrl
+ *              URL of the request
+   * @param   funcSuccessCallback
+ *              Callback to run on success
+   * @param   objCallbackData
+ *              Additional data for the callback
+   * @param   funcErrorCallback
+ *              Callback to run on error
+   * @return  void
+   **/
+  makeHttpRequest : function (
+      strUrl
+    , funcSuccessCallback
+    , objCallbackData
+    , funcErrorCallback
+  )
+  {
+    var strLog = 'makeHttpRequest';
+    Log.add( strLog + strLogDo, strUrl );
+
+    var objXhr = new XMLHttpRequest();
+
+    objXhr.open( 'HEAD', strUrl, true );
+    objXhr.onreadystatechange = function() {
+      if (
+            objXhr.readyState === 4
+        &&  objXhr.status === 200
+        &&  typeof funcSuccessCallback === 'function'
+      ) {
+        Log.add( strLog + strLogSuccess, strUrl );
+
+        funcSuccessCallback( objXhr, objCallbackData );
+      }
+      else if (
+            objXhr.readyState === 4
+        &&  objXhr.status === 404
+        &&  typeof funcErrorCallback === 'function'
+      ) {
+        Log.add( strLog + strLogError, strUrl );
+
+        funcErrorCallback( objXhr );
+      }
+    };
+
+    objXhr.send();
+  }
+  ,
+
+  /**
+   * Check whether there is a message from developers for this PoziTone version
+   *
+   * @type    method
+   * @param   boolWasCalledFromPage
+   *            Whether this method was called from a page where a banner
+   *            should be displayed
+   * @return  void
+   **/
+  checkForDevelopersMessage : function( boolWasCalledFromPage ) {
+    var arrVars = [
+        'boolIsMessageForThisVersionAvailable'
+      , 'boolWasMessageForThisVersionClosed'
+    ];
+
+    StorageSync.get( arrVars, function( objReturn ) {
+      strLog = 'checkForDevelopersMessage';
+      Log.add( strLog, objReturn );
+
+      var
+          boolIsMessageForThisVersionAvailable =
+            objReturn.boolIsMessageForThisVersionAvailable
+        , boolWasMessageForThisVersionClosed =
+            objReturn.boolWasMessageForThisVersionClosed
+        ;
+
+      boolIsMessageForThisVersionAvailable =
+            typeof boolWasMessageForThisVersionClosed === 'boolean'
+        &&  boolWasMessageForThisVersionClosed
+        ;
+
+      boolWasMessageForThisVersionClosed =
+            typeof boolIsMessageForThisVersionAvailable === 'boolean'
+        &&  boolIsMessageForThisVersionAvailable
+        ;
+
+      if (
+            ! boolIsMessageForThisVersionAvailable
+        &&  ! boolWasMessageForThisVersionClosed
+      ) {
+        var strUrl  = strConstMessageUrl
+                        .replace(
+                            strConstVersionParam
+                          , strConstExtensionVersion
+                        )
+                        .replace(
+                            strConstLangParam
+                          , strConstExtensionLanguage
+                        );
+
+        strUrl += Log.strJoinUeip;
+
+        Global.makeHttpRequest(
+            strUrl
+          , funcOnDevelopersMessageAvailable
+          , undefined
+          , funcOnDevelopersMessageUnavailable
+        );
+
+        function funcOnDevelopersMessageAvailable() {
+          strLog = 'checkForDevelopersMessage' + strLogSuccess;
+
+          Global.setStorageItems(
+              StorageSync
+            , { boolIsMessageForThisVersionAvailable : true }
+            , strLog
+            , function() {
+                funcSetBrowserAction();
+
+                // On browser action popup/options page opening
+                if ( boolWasCalledFromPage ) {
+                  funcShowBanner();
+                }
+              }
+          );
+        }
+
+        function funcOnDevelopersMessageUnavailable() {
+          // Recheck for message
+          chrome.alarms.create(
+              strConstDevelopersMessageAlarmName
+            , {
+                delayInMinutes  : intConstDevelopersMessageAlarmDelayMinutes
+              }
+          );
+        }
+      }
+      else if (
+            boolIsMessageForThisVersionAvailable
+        &&  ! boolWasMessageForThisVersionClosed
+      ) {
+        // On update/browser (re)start
+        if ( ! boolWasCalledFromPage ) {
+          funcSetBrowserAction();
+        }
+        // On browser action popup/options page opening
+        else {
+          funcShowBanner();
+        }
+      }
+      else if (
+            ! boolIsMessageForThisVersionAvailable
+        &&  boolWasMessageForThisVersionClosed
+      ) {
+        //
+      }
+
+      function funcSetBrowserAction() {
+        chrome.browserAction.setTitle( {
+          title: strConstTitleOnDevelopersMessageText
+        } );
+
+        chrome.browserAction.setBadgeBackgroundColor( {
+          color: strConstBadgeOnDevelopersMessageColor
+        } );
+
+        chrome.browserAction.setBadgeText( {
+          text: strConstBadgeOnDevelopersMessageText
+        } );
+      }
+
+      function funcShowBanner() {
+        document.getElementById( strDevelopersMessageBannerId )
+          .classList.remove( strDevelopersMessageBannerNotActiveClass );
+      }
+    } );
+  }
 };
 
 /* =============================================================================
 
-  2. On Load
+  On Load
 
  ============================================================================ */
 

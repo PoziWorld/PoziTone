@@ -1,15 +1,16 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title></title>
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/browser-action.css" />
-    <script src="/js/bowser.js"></script>
-    <script src="/js/const.js"></script>
-    <script src="/js/global.js"></script>
-    <script src="/js/page.js"></script>
-    <script src="/js/browser-action.js"></script>
+    <link rel="stylesheet" href="/global/css/global.css" />
+    <link rel="stylesheet" href="/browser-action/css/browser-action.css" />
+    <script src="/global/js/bowser.js"></script>
+    <script src="/global/js/const.js"></script>
+    <script src="/global/js/log.js"></script>
+    <script src="/global/js/global.js"></script>
+    <script src="/global/js/page.js"></script>
+    <script src="/browser-action/js/browser-action.js"></script>
   </head>
   <body>
     <header id="header" class="none">
@@ -20,19 +21,27 @@
         </ul>
       </nav>
     </header>
-    <aside id="bractToolbar">
+    <aside id="toolbar">
       <ul>
-        <li class="bractToolbarItem">
+        <li class="toolbarItem notActive" id="pwMessage">
           <button
-            id="bractOpenOptionsPage"
-            class="bractBtn i18nTitle"
+            id="pwMessageCloseCta"
+            class="toolbarBtn i18nTitle"
+            i18n-content="popupToolbarClose"
+              ></button>
+          <span i18n-content="messageFromDevelopersPageText"></span>
+        </li>
+        <li class="toolbarItem">
+          <button
+            id="toolbarOpenOptionsPageBtn"
+            class="toolbarBtn i18nTitle"
             i18n-content="optionsTitle"
               ></button>
         </li>
-        <li class="bractToolbarItem">
+        <li class="toolbarItem">
           <button
-            id="bractClosePopupPage"
-            class="bractBtn i18nTitle"
+            id="toolbarClosePopupPageBtn"
+            class="toolbarBtn i18nTitle"
             i18n-content="popupToolbarClose"
               ></button>
         </li>
@@ -67,7 +76,7 @@
                       i18n-content="findOnVk"
                         >
                         <img
-                          src="/img/vk-icon-16.png"
+                          src="/browser-action/img/vk-icon-16.png"
                           class="recentTrackActionImg"
                           alt=""
                             />
@@ -81,7 +90,7 @@
                       i18n-content="findOnGoogle"
                         >
                         <img
-                          src="/img/google-icon-16.png"
+                          src="/browser-action/img/google-icon-16.png"
                           class="recentTrackActionImg"
                           alt=""
                             />
@@ -95,7 +104,7 @@
                       i18n-content="findOnAmazon"
                         >
                         <img
-                          src="/img/amazon-icon-16.png"
+                          src="/browser-action/img/amazon-icon-16.png"
                           class="recentTrackActionImg"
                           alt=""
                             />
@@ -108,13 +117,13 @@
                       i18n-content="copyToClipboard"
                       >
                         <img
-                          src="/img/clipboard_copy_icon&16.png"
+                          src="/browser-action/img/clipboard_copy_icon&16.png"
                           class="fadeOutFadeIn recentTrackActionImg"
                           alt=""
                             />
                         <img
-                          src="/img/checkmark-success-icon-16.png"
-                          class="copyToClipboardSuccess 
+                          src="/browser-action/img/checkmark-success-icon-16.png"
+                          class="copyToClipboardSuccess
                             fadeInFadeOut recentTrackActionImg"
                           alt=""
                             />

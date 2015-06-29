@@ -4,19 +4,20 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           js/background.js
+  File                    :           global/js/background.js
   Description             :           Background JavaScript
 
   Table of Contents:
 
-  1. Constants
-  2. Background
+    Constants
+    Background
       init()
       checkIfUpdatedSilently()
       onUpdatedCallback()
       preventCheckForSilentUpdate()
       cleanUp()
       removeOldSettings()
+      setDefaults()
       setExtensionDefaults()
       saveRecentTrackInfo()
       onMessageCallback()
@@ -26,7 +27,8 @@
       checkIfHostnameChanged()
       processButtonClick_seeChanges()
       processButtonClick_doNotNotifyOfUpdates()
-  3. Listeners
+      resetDevelopersMessageVars()
+    Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
       notifications.onButtonClicked
@@ -36,14 +38,15 @@
       tabs.onUpdated
       tabs.onReplaced
       tabs.onRemoved
-  4. On Load
+      alarms.onAlarm
+    On Load
       Initialize
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Constants
+  Constants
 
  ============================================================================ */
 
@@ -58,8 +61,12 @@ const
         arrRecentTracks                           : []
       , intRecentTracksToKeep                     : 10
 
+      , boolIsMessageForThisVersionAvailable      : false
+      , boolWasMessageForThisVersionClosed        : false
+
       , objSettings_general                       : {
             strJoinUeip                           : 'no'
+          , boolShowAdvancedSettings              : false
           , boolShowShortcutsInNotification       : true
           , boolShowWasUpdatedNotification        : true
           , intVolumeDelta                        : 10
@@ -67,10 +74,23 @@ const
       , objSettings_ru_101                        : {
             boolIsEnabled                         : true
           , boolShowNotificationLogo              : true
+          , strNotificationLogo                   : 'station'
           , strNotificationTitleFormat            : 'short'
           , boolShowKbpsInfo                      : true
-          , arrNotificationButtons                : [
-                                                        'add'
+          , arrAvailableNotificationTitleFormats  : [
+                                                        'short'
+                                                      , 'noStationInfo'
+                                                    ]
+          , arrAvailableNotificationButtons       : [
+                                                        'addAuth'
+                                                      , 'favoriteAuth'
+                                                      , 'playStop'
+                                                      , 'muteUnmute'
+                                                      , 'volumeUp'
+                                                      , 'volumeDown'
+                                                    ]
+          , arrActiveNotificationButtons          : [
+                                                        'addAuth'
                                                       , 'muteUnmute'
                                                     ]
           , boolShowNotificationWhenStopped       : false
@@ -82,19 +102,37 @@ const
       , objSettings_ru_ok_audio                   : {
             boolIsEnabled                         : true
           , boolShowNotificationLogo              : true
-          , arrNotificationButtons                : [
-                                                        'add'
-                                                      , 'next'
+          , strNotificationLogo                   : 'site'
+          , arrAvailableNotificationButtons       : [
+                                                        'addAuth'
+                                                      , 'nextAuth'
+                                                      , 'previousAuth'
+                                                      , 'playStop'
+                                                      , 'muteUnmute'
+                                                    ]
+          , arrActiveNotificationButtons          : [
+                                                        'addAuth'
+                                                      , 'nextAuth'
                                                     ]
           , boolShowNotificationWhenMuted         : false
         }
       , objSettings_com_vk_audio                  : {
             boolIsEnabled                         : true
           , boolShowNotificationLogo              : true
-          , boolShowKbpsInfo                      : true
-          , arrNotificationButtons                : [
-                                                        'add'
-                                                      , 'next'
+          , strNotificationLogo                   : 'site'
+          , boolShowKbpsInfo                      : false
+          , arrAvailableNotificationButtons       : [
+                                                        'addAuth'
+                                                      , 'nextAuth'
+                                                      , 'previousAuth'
+                                                      , 'playStop'
+                                                      , 'muteUnmute'
+                                                      , 'volumeUp'
+                                                      , 'volumeDown'
+                                                    ]
+          , arrActiveNotificationButtons          : [
+                                                        'addAuth'
+                                                      , 'nextAuth'
                                                     ]
           , boolShowNotificationWhenMuted         : false
           , boolUseGeneralVolumeDelta             : true
@@ -105,7 +143,7 @@ const
 
 /* =============================================================================
 
-  2. Background
+  Background
 
  ============================================================================ */
 
@@ -126,8 +164,6 @@ var Background                    = {
   , strProcessCommand             : 'processCommand_'
   , strChangelogUrl               : 
       'https://github.com/poziworld/PoziTone/blob/v%v/HISTORY_%lang.md'
-  , strVersionParam               : '%v'
-  , strLangParam                  : '%lang'
   , objSystemNotificationButtons  : {
         updated                   : [
             {
@@ -135,7 +171,7 @@ var Background                    = {
                     title         : chrome.i18n.getMessage(
                                       'systemNotificationUpdatedChanges'
                                     )
-                  , iconUrl       : 'img/list_bullets_icon&16.png'
+                  , iconUrl       : 'global/img/list_bullets_icon&16.png'
                 }
               , strFunction       : 'seeChanges'
             }
@@ -144,7 +180,7 @@ var Background                    = {
                     title         : chrome.i18n.getMessage(
                                       'systemNotificationUpdatedDoNotNotify'
                                     )
-                  , iconUrl       : 'img/off_icon&16.png'
+                  , iconUrl       : 'global/img/off_icon&16.png'
                 }
               , strFunction       : 'doNotNotifyOfUpdates'
             }
@@ -168,6 +204,8 @@ var Background                    = {
    * When updated on a browser start-up or when the extension was disabled,
    * it doesn't fire onInstalled, and that causes the new settings
    * not being applied
+   *
+   * TODO: utilize chrome.management.onEnabled.addListener(function callback)
    *
    * @type    method
    * @param   No Parameters Taken
@@ -296,7 +334,7 @@ var Background                    = {
 
     StorageLocal.remove( arrSettingsToCleanUp, function() {
       if (
-            typeof boolIsCalledFromOnInstalledListener !== 'undefined'
+            typeof boolIsCalledFromOnInstalledListener === 'boolean'
         &&  boolIsCalledFromOnInstalledListener
       )
         Background.removeOldSettings( objDetails );
@@ -346,11 +384,19 @@ var Background                    = {
                   , boolNotificationShowWhenStopped     : null
                   , boolNotificationShowWhenMuted       : null
                   , boolNotificationShowWhenNoTrackInfo : null
+                  , arrNotificationButtons              : []
+                }
+              , objSettings_ru_ok_audio                 : {
+                    arrNotificationButtons              : []
                 }
               , objSettings_com_vk_audio                : {
                     boolEnabled                         : null
                   , boolNotificationShowLogo            : null
                   , boolNotificationShowWhenMuted       : null
+                  , arrNotificationButtons              : []
+                }
+              , objSettings_fm_di                       : {
+                    arrNotificationButtons              : []
                 }
             }
           ;
@@ -372,13 +418,38 @@ var Background                    = {
                 ;
 
               if ( objCurrentSetting ) {
-                for ( miscSubsetting in objDeprecatedSetting ) {
+                for ( var miscSubsetting in objDeprecatedSetting ) {
                   if ( objDeprecatedSetting.hasOwnProperty( miscSubsetting ) ) {
-                    if ( typeof objCurrentSetting[ miscSubsetting ] === 
-                          'undefined' )
-                      delete objDeprecatedSetting[ miscSubsetting ];
-                    
-                    delete objCurrentSetting[ miscSubsetting ];
+                    // Special treatment for arrNotificationButtons:
+                    // if arrNotificationButtons was set and not empty,
+                    // then preserve by renaming the ones in need
+                    var arrOldButtons = objCurrentSetting[ miscSubsetting ];
+
+                    if (
+                          miscSubsetting === 'arrNotificationButtons'
+                      &&  Array.isArray( arrOldButtons )
+                      &&  ! Global.isEmpty( arrOldButtons )
+                    ) {
+                      objCurrentSetting.arrActiveNotificationButtons =
+                        arrOldButtons.map( function( strButton ) {
+                          return strButton
+                            .replace( 'add',      'addAuth'       )
+                            .replace( 'favorite', 'favoriteAuth'  )
+                            .replace( 'next',     'nextAuth'      )
+                            .replace( 'previous', 'previousAuth'  )
+                            ;
+                        } );
+
+                      // Preserved, can be deleted now
+                      delete objCurrentSetting[ miscSubsetting ];
+                    }
+                    else {
+                      if ( typeof objCurrentSetting[ miscSubsetting ] ===
+                            'undefined' )
+                        delete objDeprecatedSetting[ miscSubsetting ];
+
+                      delete objCurrentSetting[ miscSubsetting ];
+                    }
                   }
                 }
 
@@ -438,71 +509,86 @@ var Background                    = {
    * Set extension defaults
    *
    * @type    method
+   * @param   Storage
+   *            StorageSync or StorageLocal
+   * @param   objSettings
+   *            Default settings
+   * @param   strLogSuffix
+   *            Type of storage to report in the log
+   * @return  void
+   **/
+  setDefaults : function( Storage, objSettings, strLogSuffix ) {
+    Storage.get( null, function( objReturn ) {
+      strLog = 'setExtensionDefaults, ' + strLogSuffix;
+      Log.add( strLog );
+
+      var objTempToSet = {};
+
+      for ( var strSetting in objSettings ) {
+        if ( objSettings.hasOwnProperty( strSetting ) ) {
+          var
+              miscSetting       = objSettings[ strSetting ]
+            , miscReturnSetting = objReturn[ strSetting ]
+            ;
+
+          // If a new setting introduced, set its default
+          if ( typeof miscReturnSetting === 'undefined' )
+            objTempToSet[ strSetting ] = miscSetting;
+
+          if (
+                typeof miscSetting === 'object'
+            &&  ! Array.isArray( miscSetting )
+          )
+            for ( var strSubsetting in miscSetting ) {
+              if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
+                // If a new subsetting introduced, set its default
+                if (
+                      typeof miscReturnSetting !== 'undefined'
+                  &&  typeof miscReturnSetting[ strSubsetting ] === 'undefined'
+                ) {
+                  // If the setting has been set before.
+                  if ( typeof objTempToSet[ strSetting ] === 'undefined' )
+                    // Preserve other subsettings.
+                    objTempToSet[ strSetting ] = miscReturnSetting;
+
+                  objTempToSet[ strSetting ][ strSubsetting ] =
+                    miscSetting[ strSubsetting ];
+                }
+                else {
+                  var objSetting =
+                        Background.objPreservedSettings[ strSetting ];
+
+                  if (
+                        typeof objSetting !== 'undefined'
+                    &&  typeof objSetting[ strSubsetting ] !== 'undefined'
+                  ) {
+                    objTempToSet[ strSetting ][ strSubsetting ] =
+                      objSetting[ strSubsetting ];
+                  }
+                }
+              }
+            }
+        }
+      }
+
+      if ( ! Global.isEmpty( objTempToSet ) )
+        Global.setStorageItems( Storage, objTempToSet, strLog );
+      else
+        Log.add( strLog + strLogDoNot );
+    });
+  }
+  ,
+
+  /**
+   * Set extension defaults
+   *
+   * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   setExtensionDefaults : function() {
-    var funcSet = function( Storage, objSettings, strLogSuffix ) {
-      Storage.get( null, function( objReturn ) {
-        strLog = 'setExtensionDefaults, ' + strLogSuffix;
-        Log.add( strLog );
-
-        var objTempToSet = {};
-
-        for ( var strSetting in objSettings ) {
-          if ( objSettings.hasOwnProperty( strSetting ) ) {
-            var miscSetting = objSettings[ strSetting ];
-
-            // If a new setting introduced, set its default
-            if ( typeof objReturn[ strSetting ] === 'undefined' )
-              objTempToSet[ strSetting ] = miscSetting;
-
-            if (
-                  typeof miscSetting === 'object'
-              &&  ! Array.isArray( miscSetting )
-            )
-              for ( var strSubsetting in miscSetting ) {
-                if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
-                  // If a new subsetting introduced, set its default
-                  if (
-                        typeof objReturn[ strSetting ] !== 'undefined'
-                    &&  typeof
-                          objReturn[ strSetting ][ strSubsetting ] === 'undefined'
-                  ) {
-                    // If the setting has been set before.
-                    if ( typeof objTempToSet[ strSetting ] === 'undefined' )
-                      // Preserve other subsettings.
-                      objTempToSet[ strSetting ] = objReturn[ strSetting ];
-
-                    objTempToSet[ strSetting ][ strSubsetting ] = 
-                      miscSetting[ strSubsetting ];
-                  }
-                  else {
-                    var objSetting = 
-                          Background.objPreservedSettings[ strSetting ];
-
-                    if (
-                          typeof objSetting !== 'undefined'
-                      &&  typeof objSetting[ strSubsetting ] !== 'undefined'
-                    ) {
-                      objTempToSet[ strSetting ][ strSubsetting ] =
-                        objSetting[ strSubsetting ];
-                    }
-                  }
-                }
-              }
-          }
-        }
-
-        if ( ! Global.isEmpty( objTempToSet ) )
-          Global.setStorageItems( Storage, objTempToSet, strLog );
-        else
-          Log.add( strLog + strLogDoNot );
-      });
-    }
-
-    funcSet( StorageLocal,  objSettingsNotSyncable,   'local' );
-    funcSet( StorageSync,   objSettingsSyncable,      'sync'  );
+    Background.setDefaults( StorageLocal,  objSettingsNotSyncable,   'local' );
+    Background.setDefaults( StorageSync,   objSettingsSyncable,      'sync'  );
   }
   ,
 
@@ -573,10 +659,19 @@ var Background                    = {
    * @param   objMessage
    *            Message received
    * @param   objSender
-   *            Sender of the message
+   *            Sender of a message
+   * @param   objSendResponse
+   *            Used to send a response
+   * @param   boolExternal
+   *            Optional. Whether a message is sent from another extension/app
    * @return  void
    **/
-  onMessageCallback : function( objMessage, objSender, objSendResponse ) {
+  onMessageCallback : function(
+      objMessage
+    , objSender
+    , objSendResponse
+    , boolExternal
+  ) {
     var strReceiver = objMessage.strReceiver;
 
     if ( typeof strReceiver === 'string' ) {
@@ -592,16 +687,17 @@ var Background                    = {
         var boolMakeCall = objMessage.boolMakeCall;
 
         if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
-          var objXhr = new XMLHttpRequest();
+          var funcCallback = function( objXhr, objSendResponse ) {
+            objSendResponse(
+              parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
+            );
+          };
 
-          objXhr.open( 'HEAD', objMessage.objVars.strUrl, false );
-          objXhr.onreadystatechange = function() {
-            if ( objXhr.readyState === 4 && objXhr.status === 200 )
-              objSendResponse( 
-                parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
-              );
-          }
-          objXhr.send();
+          Global.makeHttpRequest(
+              objMessage.objVars.strUrl
+            , funcCallback
+            , objSendResponse
+          );
         }
       }
 
@@ -613,7 +709,8 @@ var Background                    = {
     Log.add( strLog, objMessage );
 
     var
-        strTrackInfo      = objMessage.objStationInfo.strTrackInfo
+        strModule         = objMessage.objPlayerInfo.strModule
+      , strTrackInfo      = objMessage.objStationInfo.strTrackInfo
       , objDataToPreserve = {
                               // funcShowNotification
                                 objMessage    : objMessage
@@ -623,6 +720,9 @@ var Background                    = {
                               , strLog        : strLog
                             }
       ;
+
+    if ( typeof boolExternal === 'boolean' && boolExternal )
+      strModule += objSender.id;
 
     var funcShowNotification = function( objPreservedData ) {
       // Show notification if track info changed or extension asks to show it
@@ -663,7 +763,7 @@ var Background                    = {
     };
 
     Global.checkIfModuleIsEnabled(
-        objMessage.objPlayerInfo.strModule
+        strModule
       , objSender.tab.id
       , funcShowNotification
       , funcDoNot
@@ -922,11 +1022,11 @@ var Background                    = {
 
     var strUrl  = Background.strChangelogUrl
                     .replace(
-                        Background.strVersionParam
+                        strConstVersionParam
                       , strConstExtensionVersion
                     )
                     .replace(
-                        Background.strLangParam
+                        strConstLangParam
                       , strConstExtensionLanguage
                     );
 
@@ -965,11 +1065,33 @@ var Background                    = {
       }
     });
   }
+  ,
+
+  /**
+   * Resets developers message vars.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  resetDevelopersMessageVars : function() {
+    Global.setStorageItems(
+        StorageSync
+      , {
+            boolIsMessageForThisVersionAvailable  : false
+          , boolWasMessageForThisVersionClosed    : false
+        }
+      , strLog + ', reset developers message vars'
+      , function() {
+          Global.checkForDevelopersMessage();
+        }
+    );
+  }
 };
 
 /* =============================================================================
 
-  3. Listeners
+  Listeners
 
  ============================================================================ */
 
@@ -988,6 +1110,9 @@ chrome.runtime.onMessage.addListener(
     Background.preventCheckForSilentUpdate();
 
     Background.onMessageCallback( objMessage, objSender, objSendResponse );
+
+    // Indicate that the response function will be called asynchronously
+    return true;
   }
 );
 
@@ -995,7 +1120,11 @@ chrome.runtime.onMessageExternal.addListener(
   function( objMessage, objSender, objSendResponse ) {
     Background.preventCheckForSilentUpdate();
 
-    Background.onMessageCallback( objMessage, objSender, objSendResponse );
+    Background
+      .onMessageCallback( objMessage, objSender, objSendResponse, true );
+
+    // Indicate that the response function will be called asynchronously
+    return true;
   }
 );
 
@@ -1301,12 +1430,30 @@ chrome.runtime.onInstalled.addListener(
     Background.cleanUp( true, objDetails );
     Background.checkOpenTabs();
 
-    if (
-          objDetails.reason === 'update'
-      &&  typeof objDetails.previousVersion === 'string'
-      &&  objDetails.previousVersion < strConstExtensionVersion
-    ) {
-      Background.onUpdatedCallback( strLog, objDetails );
+    var strPreviousVersion = objDetails.previousVersion;
+
+    if ( objDetails.reason === 'update' ) {
+      if (
+            typeof strPreviousVersion === 'string'
+        &&  strPreviousVersion < strConstExtensionVersion
+      ) {
+        Background.onUpdatedCallback( strLog, objDetails );
+        Background.resetDevelopersMessageVars();
+      }
+      // In case of a manual update to a lower version
+      else if (
+            typeof strPreviousVersion === 'string'
+        &&  strPreviousVersion > strConstExtensionVersion
+      ) {
+        Background.resetDevelopersMessageVars();
+      }
+      // Clicked Refresh on Extensions page
+      else {
+        Global.checkForDevelopersMessage();
+      }
+    }
+    else {
+      Global.checkForDevelopersMessage();
     }
   }
 );
@@ -1414,9 +1561,32 @@ chrome.tabs.onRemoved.addListener(
   }
 );
 
+/**
+ * When tab is closed, recheck open tabs.
+ * So that if we closed tab which would get commands, after it has been closed,
+ * another one gets commands.
+ *
+ * @type    method
+ * @param   intTabId
+ *            ID of the tab that has been closed
+ * @return  void
+ **/
+chrome.alarms.onAlarm.addListener(
+  function( objAlarm ) {
+    var strAlarmName = objAlarm.name;
+
+    if (
+          typeof strAlarmName === 'string'
+      &&  strAlarmName === strConstDevelopersMessageAlarmName
+    ) {
+      Global.checkForDevelopersMessage();
+    }
+  }
+);
+
 /* =============================================================================
 
-  4. On Load
+  On Load
 
  ============================================================================ */
 

@@ -5,16 +5,16 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.3.5.3"
+  , "version"                   : "0.4"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
   , "homepage_url"              : "https://pozitone.com/"
 
   , "icons"                     : {
-        "16"                    : "img/pozitone-icon-16.png"
-      , "48"                    : "img/pozitone-icon-48.png"
-      , "128"                   : "img/pozitone-icon-128.png"
+        "16"                    : "global/img/pozitone-icon-16.png"
+      , "48"                    : "global/img/pozitone-icon-48.png"
+      , "128"                   : "global/img/pozitone-icon-128.png"
     }
 
   , "permissions"               : [
@@ -23,6 +23,7 @@
       , "*://*.ok.ru/"
       , "*://vk.com/"
       , "*://*.vk.me/"
+      , "alarms"
       , "clipboardWrite"
       , "notifications"
       , "storage"
@@ -31,11 +32,11 @@
     ]
   , "browser_action"            : {
         "default_icon"          : {
-            "19"                : "img/pozitone-icon-19.png"
-          , "38"                : "img/pozitone-icon-38.png"
+            "19"                : "global/img/pozitone-icon-19.png"
+          , "38"                : "global/img/pozitone-icon-38.png"
         }
       , "default_title"         : "__MSG_extensionName__"
-      , "default_popup"         : "html/browser-action.html"
+      , "default_popup"         : "browser-action/index.html"
     }
   , "commands"                  : {
         "add"                   : {
@@ -82,7 +83,7 @@
         {
             "matches"           : [ "*://101.ru/*" ]
           , "js"                : [
-                "js/const.js"
+                "global/js/const.js"
               , "modules/ru_101/js/uppod-player-api.js"
               , "modules/general/js/page-watcher.js"
               , "modules/ru_101/js/page-watcher.js"
@@ -95,7 +96,7 @@
               , "*://*.ok.ru/*"
             ]
           , "js"                : [
-                "js/const.js"
+                "global/js/const.js"
               , "modules/general/js/page-watcher.js"
               , "modules/ru_ok_audio/js/page-watcher.js"
             ]
@@ -104,7 +105,7 @@
       , {
             "matches"           : [ "*://vk.com/*" ]
           , "js"                : [
-                "js/const.js"
+                "global/js/const.js"
               , "modules/general/js/page-watcher.js"
               , "modules/com_vk_audio/js/page-watcher.js"
             ]
@@ -114,17 +115,18 @@
   , "background"                : {
         "persistent"            : false
       , "scripts"               : [
-            "js/tracking.js"
-          , "js/bowser.js"
-          , "js/const.js"
-          , "js/log.js"
-          , "js/global.js"
-          , "js/background.js"
+            "global/js/tracking.js"
+          , "global/js/bowser.js"
+          , "global/js/const.js"
+          , "global/js/log.js"
+          , "global/js/global.js"
+          , "global/js/background.js"
+          , "global/js/punycode.min.js"
         ]
     }
-  , "options_page"              : "html/options.html"
+  , "options_page"              : "options/index.html"
   , "options_ui"                : {
-        "page"                  : "html/options.html"
+        "page"                  : "options/index.html"
       , "chrome_style"          : false
     }
 }

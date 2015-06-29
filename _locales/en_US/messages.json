@@ -114,6 +114,15 @@
   }
 
   ,
+  "messageFromDevelopersPageText": {
+    "message": "<button id=\"pwMessageReadCta\">Read message</button> from developers!"
+  }
+  ,
+  "messageFromDevelopersTooltipText": {
+    "message": "Important message from developers!"
+  }
+
+  ,
   "systemNotificationUpdated": {
     "message": "Extension updated!"
   }
@@ -152,6 +161,14 @@
           "message": "General"
         }
           ,
+          "optionsSettingsGeneralShowAdvanced": {
+            "message": "Show advanced settings"
+          }
+            ,
+            "optionsSettingsGeneralShowAdvancedToggle": {
+              "message": "Advanced"
+            }
+          ,
           "optionsSettingsGeneralShortcuts": {
             "message": "Keyboard shortcuts"
           }
@@ -166,7 +183,7 @@
           }
             ,
             "optionsSettingsSoundVolumeControlUseDefaults": {
-                "message"     : "Use <a href=\"?page=settings&subpage=general\" data-page=\"settings\" data-subpage=\"general\" class=\"switchSubpage\">general settings</a>"
+                "message"     : "Use <a href=\"#/settings/general\">general settings</a>"
               , "description" : "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
             }
             ,

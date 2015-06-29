@@ -4,21 +4,23 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           css/global.css
+  File                    :           global/css/global.css
   Description             :           Global Styles
 
   Table of Contents:
 
-  0. Globals
-  1. Header
-  2. Content
-  3. Animations
+    Globals
+    Header
+    Toolbar
+    Message
+    Content
+    Animations
 
  ============================================================================ */
 
 /* =============================================================================
 
-  0. Globals
+  Globals
 
  ============================================================================ */
 
@@ -47,6 +49,8 @@
     }
   body
     {
+      min-width:              75.5rem;
+      overflow-x:             hidden;
       font-family:            'Segoe UI', Tahoma, sans-serif;
       font-weight:            normal;
       font-size:              inherit;
@@ -94,7 +98,7 @@
 
 /* =============================================================================
 
-  1. Header
+  Header
 
  ============================================================================ */
 
@@ -104,7 +108,7 @@
       float:                  left;
       z-index:                2;
       padding:                2rem 0 0;
-      width:                  15.5rem;
+      width:                  16.5rem;
     }
   #header h1
     {
@@ -115,12 +119,18 @@
   #header li
     {
       border-left:            .6rem solid transparent;
-      padding-left:           1.8rem;
+      padding-left:           .5rem;
       list-style-type:        none;
+    }
+  #submenu
+    {
+      display:                flex;
+      flex-wrap:              wrap;
     }
   #header #submenu li
     {
       padding-left:           .8rem;
+      width:                  100%;
     }
   #header li.selected
     {
@@ -141,13 +151,128 @@
 
 /* =============================================================================
 
-  2. Content
+  Toolbar
+
+ ============================================================================ */
+
+  #toolbar
+    {
+      position:               fixed;
+      z-index:                2;
+      top:                    .5rem;
+      right:                  .5rem;
+    }
+  .toolbarItem
+    {
+      float:                  left;
+    }
+  .toolbarBtn
+    {
+      font-size:              1em;
+      margin:                 .5rem;
+      width:                  1.6rem;
+      height:                 1.6rem;
+      background-color:       transparent;
+      background-repeat:      no-repeat;
+      cursor:                 pointer;
+      opacity:                .25;
+      text-indent:            -9999rem;
+    }
+  .toolbarBtn:hover
+, .toolbarBtn:active
+    {
+      opacity:                1;
+    }
+  #toolbarOpenOptionsPageBtn
+    {
+      background-image:       url(/browser-action/img/cog_icon&16.png);
+    }
+  #toolbarOpenOptionsPageBtn:hover
+    {
+      -webkit-animation-duration:         .5s;
+      -webkit-animation-iteration-count:  1;
+      -webkit-animation-name:             spin;
+      -webkit-animation-timing-function:  linear;
+    }
+  @-webkit-keyframes spin
+    {
+      from  { -webkit-transform: scale(1) rotate(0deg); }
+      to    { -webkit-transform: scale(1) rotate(360deg); }
+    }
+  #toolbarClosePopupPageBtn
+, #pwMessageCloseCta
+    {
+      background-image:       url(/global/img/delete_icon&16.png);
+      background-position:    center;
+      background-size:        75%;
+    }
+  #toolbarClosePopupPageBtn:hover
+    {
+      -webkit-animation-duration:         .3s;
+      -webkit-animation-iteration-count:  1;
+      -webkit-animation-name:             breathe;
+      -webkit-animation-timing-function:  linear;
+    }
+  @-webkit-keyframes breathe
+    {
+      from  { -webkit-transform: scale(1); }
+      to    { -webkit-transform: scale(1.25); }
+    }
+
+/* =============================================================================
+
+  Message
+
+ ============================================================================ */
+
+  #pwMessage
+    {
+      font-size:              1.2em;
+      background-color:       #eee;
+      margin:                 .1rem .7rem .5rem .5rem;
+      padding:                .4rem .5rem .5rem .5rem;
+      border-radius:          .4rem;
+    }
+  .notActive#pwMessage
+    {
+      display:                none;
+    }
+  #pwMessageCloseCta
+    {
+      display:                none;
+      vertical-align:         .1rem;
+      margin:                 0;
+      width:                  1.5rem;
+      height:                 1.5rem;
+    }
+  #pwMessage:hover #pwMessageCloseCta
+    {
+      display:                inline-block;
+    }
+  #pwMessageReadCta
+    {
+      background-color:       transparent;
+      color:                  #15c;
+      cursor:                 pointer;
+      font-family:            inherit;
+      font-size:              inherit;
+      font-weight:            bold;
+      text-decoration:        none;
+    }
+  #pwMessageReadCta:hover
+    {
+      text-decoration:        underline;
+    }
+
+/* =============================================================================
+
+  Content
 
  ============================================================================ */
 
   #content
     {
-      padding:                0 0 0 15.5rem;
+      padding:                0 0 0 16.5rem;
       max-width:              73.8rem;
       min-width:              60rem;
     }
@@ -232,13 +357,20 @@
       margin:                 0 5px 0 0;
       width:                  13px;
       height:                 13px;
-      background-image:       -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
-      border:                 1px solid rgba(0, 0, 0, 0.25);
-      border-radius:          2px;
-      box-shadow:             0 1px 0 rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.75);
+      background-image:       -webkit-linear-gradient( #ededed, #ededed 38%, #dedede );
+      border:                 .1rem solid rgba( 0, 0, 0, .25 );
+      border-radius:          .2rem;
+      box-shadow:             0 .1rem 0 rgba( 0, 0, 0, .08 ), inset 0 .1rem .2rem rgba( 255, 255, 255, .75 );
       color:                  #444;
       font:                   inherit;
-      text-shadow:            0 1px 0 rgb(240, 240, 240);
+      text-shadow:            0 .1rem 0 rgb( 240, 240, 240 );
+    }
+  input[type='checkbox']:focus
+, input[type='radio']:focus
+    {
+      background-image:       -webkit-linear-gradient( #fff, #fff 38%, #eee );
+      border-color:           rgba( 0, 0, 0, .75 );
+      box-shadow:             0 .1rem 0 rgba( 0, 0, 0, .08 ), inset 0 .1rem .2rem rgba( 255, 255, 255, 1 );
     }
   input[type='checkbox']:checked:before
     {
@@ -247,7 +379,7 @@
       display:                block;
       height:                 100%;
       width:                  100%;
-      background-image:       url('/img/options-checkbox-tick-icon-11.png');
+      background-image:       url('/global/img/options-checkbox-tick-icon-11.png');
       background-size:        100% 100%;
     }
   input[type='radio']
@@ -323,7 +455,7 @@
 
 /* =============================================================================
 
-  3. Animations
+  Animations
 
  ============================================================================ */
 

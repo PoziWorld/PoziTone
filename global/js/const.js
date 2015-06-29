@@ -4,28 +4,31 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           js/const.js
+  File                    :           global/js/const.js
   Description             :           Constants JavaScript
 
   Table of Contents:
 
-  1. Constants
-  2. Storage
+    Constants
+    Storage
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Constants
+  Constants
 
  ============================================================================ */
 
 const
+    // Extension
     strConstExtensionId           = chrome.runtime.id
   , strConstExtensionName         = chrome.i18n.getMessage( 'extensionName' )
   , strConstExtensionVersion      = chrome.runtime.getManifest().version
   , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
+  , objConstExtensionManifest     = chrome.runtime.getManifest()
 
+    // Browser & UI
   , boolConstIsBowserAvailable    = typeof bowser === 'object'
   , strConstChromeVersion         =
       boolConstIsBowserAvailable ? bowser.chromeVersion : ''
@@ -34,13 +37,34 @@ const
       &&  strConstChromeVersion >= '40.0'
       &&  bowser.name !== 'Opera'
 
+    // URLs
+  , strConstMessageUrl            =
+      'http://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
+  , strConstVersionParam          = '%v'
+  , strConstLangParam             = '%lang'
+
+    // External modules & Notifications
+  , strConstExternalModuleSeparator     = '_'
   , strConstNotificationIdSeparator     = '_'
   , strConstNotificationLinesSeparator  = "\n\n"
-  , strConstNotificationId              = 
+  , strConstNotificationId              =
       strConstExtensionName + strConstNotificationIdSeparator
 
+    // Developers Message: Browser Action settings (tooltip, badge)
+  , strConstTitleOnDevelopersMessageText  =
+      chrome.i18n.getMessage( 'messageFromDevelopersTooltipText' )
+  , strConstBadgeOnDevelopersMessageText  = '!'
+  , strConstBadgeOnDevelopersMessageColor = [ 255, 0, 0, 122 ]
+
+    // Developers Message: Alarm
+  , strConstDevelopersMessageAlarmName          = 'developersMessage'
+  , intConstDevelopersMessageAlarmDelayMinutes  = 1440
+
+    // Settings
   , strConstSettingsPrefix        = 'objSettings_'
-  , strConstGeneralSettings       = strConstSettingsPrefix + 'general'
+  , strConstGeneralSettingsSuffix = 'general'
+  , strConstGeneralSettings       =
+      strConstSettingsPrefix + strConstGeneralSettingsSuffix
 
   , strConstLogOnInstalled        = 'chrome.runtime.onInstalled'
 
@@ -60,7 +84,7 @@ const
 
 /* =============================================================================
 
-  2. Storage
+  Storage
 
  ============================================================================ */
 

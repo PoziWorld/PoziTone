@@ -2,6 +2,13 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.4
+    * Simplified Options page.
+    * A notice about an important message from the developers of PoziTone will be displayed when available.
+    * Updated Spanish and Polish translations.
+
+> [Important message from the developers!](http://poziworld.github.io/PoziTone/message/v0.4/?lang=en&ref=history)
+
 ### v0.3.5.3
     * Unfortunately, di.fm is no longer supported.
 
@@ -10,7 +17,7 @@
       New player (www.di.fm) is not yet supported.
 
 ### v0.3.4.2
-    * In Chrome 40 and up, PoziTone Options page is displayed over the list of installed extensions. 
+    * In Chrome 40 and up, PoziTone Options page is displayed over the list of installed extensions.
 
 ### v0.3.4.1
     * PoziTone works in Opera 25 and up now.

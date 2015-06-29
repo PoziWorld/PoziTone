@@ -1,0 +1,50 @@
+      <section id="settings" class="page">
+        <header class="pageHeader">
+          <h1 class="pageHeading">
+            <span i18n-content="optionsSettingsH1"></span>
+            <span
+              id="settingsSaved" class="fadeInFadeOut"
+              i18n-content="optionsSettingsSaved"
+                ></span>
+          </h1>
+        </header>
+        <aside id="optionsSettingsGeneralShowAdvancedContainer">
+          <form>
+            <fieldset
+              id="optionsSettingsGeneralShowAdvanced"
+              localize
+              ng-if="boolShowAdvancedSettings !== undefined"
+                >
+              <legend
+                i18n-content="optionsSettingsGeneralShowAdvanced"
+                class="sectionHeading none"
+                  ></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowAdvancedSettings"
+                      ng-model="boolShowAdvancedSettings"
+                      ng-click="inputChange( $event, undefined, strConstGeneralSettingsSuffix )"
+                      data-track-setting-change="true"
+                        >
+                    <span i18n-content="optionsSettingsGeneralShowAdvancedToggle"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
+        </aside>
+        <section
+          id="settings_general"
+          class="subpage settingsSubpage"
+          ng-if="objModule.id === 'general'"
+          ng-include="'partials/settings-general.html'"
+            ></section>
+        <section
+          id="settings_module"
+          class="subpage settingsSubpage module"
+          ng-if="objModule.id !== 'general'"
+          ng-include="'partials/settings-module.html'"
+            ></section>
+      </section>

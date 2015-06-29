@@ -135,6 +135,17 @@ Are you a developer?
 Want to add a support for your favorite player and publish it as a `PoziTone` module under your name? — Check back, we will soon share a PoziTone API draft.
 
 
+Contribution
+--------
+### Translation
+
+Sprechen Sie Deutsch? Vous parlez français?
+
+We want as many `PoziTone` users as possible to be able to interact with the extension in their native language.
+
+If you know any foreign language or just noticed a discrepancy in the translation, please let us know — https://www.transifex.com/projects/p/pozitone/.
+
+
 Feedback
 --------
 
@@ -146,17 +157,6 @@ Please share your ideas. Don't be shy to ask questions. Bug reports are valuable
 - [One more method](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews?hl=en)
 - [Geeks method](https://github.com/poziworld/pozitone/issues)
 - [Another one](mailto:feedback@pozitone.com)
-
-
-Contribution
---------
-### Translation
-
-Sprechen Sie Deutsch? Vous parlez français?
-
-We want as many `PoziTone` users as possible to be able to interact with the extension in their native language.
-
-If you know any foreign language or just noticed a discrepancy in the translation, please let us know — https://www.transifex.com/projects/p/pozitone/.
 
 
 Let's socialize

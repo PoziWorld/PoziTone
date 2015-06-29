@@ -1,0 +1,89 @@
+          <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
+          <form id="form">
+            <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
+              <legend i18n-content="optionsSettingsGeneralShortcuts" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowShortcutsInNotification"
+                      ng-model="objModule.boolShowShortcutsInNotification"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsGeneralShortcutsShowInNotification"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                      ng-model="objModule.intVolumeDelta"
+                       >
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsGeneralUpdates" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowWasUpdatedNotification"
+                      ng-model="objModule.boolShowWasUpdatedNotification"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsGeneralUpdatesNotify"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
+              <legend i18n-content="optionsSettingsGeneralUeip" class="sectionHeading"></legend>
+              <p i18n-content="optionsSettingsGeneralUeipDesc" class="sectionText"></p>
+              <p class="sectionText">
+                <a
+                  i18n-content="optionsSettingsGeneralUeipMore"
+                  target="_blank"
+                    ></a>
+              </p>
+              <p class="sectionText">
+                <a
+                  i18n-content="optionsSettingsGeneralUeipPrivacy"
+                  target="_blank"
+                    ></a>
+              </p>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="radio" name="strJoinUeip"
+                      value="yes"
+                      ng-model="objModule.strJoinUeip"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsGeneralUeipJoin"></span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input
+                      type="radio" name="strJoinUeip"
+                      value="no"
+                      ng-model="objModule.strJoinUeip"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsGeneralUeipDoNotJoin"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </form>

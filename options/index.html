@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-csp ng-app="optionsApp">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/global/css/global.css">
+    <link rel="stylesheet" href="/options/css/options.css">
+    <script src="/global/js/angular/angular.min.js"></script>
+    <script src="/global/js/angular/angular-route.min.js"></script>
+    <script src="/global/js/tracking.js"></script>
+    <script src="/global/js/bowser.js"></script>
+    <script src="/global/js/const.js"></script>
+    <script src="/global/js/log.js"></script>
+    <script src="/global/js/global.js"></script>
+    <script src="/global/js/page.js"></script>
+    <script src="/options/js/options.js"></script>
+    <script src="/options/js/app.js"></script>
+    <script src="/options/js/controllers.js"></script>
+  </head>
+  <body>
+    <header id="header">
+      <h1 id="extensionName" i18n-content="extensionName"></h1>
+      <nav id="nav">
+        <ul id="menu" ng-controller="MenuController">
+          <li>
+            <span class="menuItem" i18n-content="optionsNavSettings"></span>
+            <ul id="submenu">
+              <li
+                  class="menuItemWrap"
+                  id="menuItemWrap_{{objModule.id}}"
+                  ng-repeat="objModule in modules"
+                  module-menu-item-directive
+                    >
+                <a
+                  ng-href="#/settings/{{objModule.id}}"
+                  class="menuItem"
+                    >{{objModule.caption}}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="menuItemWrap">
+            <a
+              ng-href="#/about"
+              data-page="about"
+              class="menuItem"
+              i18n-content="optionsNavAbout"
+                ></a>
+          </li>
+          <li class="none">
+            <a
+              ng-href="#/help"
+              data-page="help"
+              id="helpMenuItem"
+              class="menuItem"
+              i18n-content="optionsNavHelp"
+                ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <aside id="toolbar">
+      <ul>
+        <li class="toolbarItem notActive" id="pwMessage">
+          <button
+            id="pwMessageCloseCta"
+            class="toolbarBtn i18nTitle"
+            i18n-content="popupToolbarClose"
+              ></button>
+          <span
+            i18n-content="messageFromDevelopersPageText"
+            message-displayed-watcher
+              ></span>
+        </li>
+      </ul>
+    </aside>
+    <main id="content" ng-view></main>
+  </body>
+</html>

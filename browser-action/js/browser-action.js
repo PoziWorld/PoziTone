@@ -4,30 +4,31 @@
   Author                  :           PoziWorld
   Copyright               :           Copyright (c) 2013-2015 PoziWorld
   License                 :           pozitone.com/license
-  File                    :           js/browser-action.js
+  File                    :           browser-action/js/browser-action.js
   Description             :           Popup JavaScript
 
   Table of Contents:
 
-  1. Popup
+    Popup
       init()
       populateRecentTracks()
       addEventListeners()
       composeRecentTrackActionUrl()
       encodeQuery()
-  2. Events
+    Events
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Popup
+  Popup
 
  ============================================================================ */
 
 const
-    strListId               = 'recentTracks'
-    strRecentTrackActionUrl = 'http://go.pozitone.com/s/?'
+    strPage                 = 'browser-action'
+  , strListId               = 'recentTracks'
+  , strRecentTrackActionUrl = 'http://go.pozitone.com/s/?'
   ;
 
 var Popup                   = {
@@ -40,6 +41,7 @@ var Popup                   = {
    **/
   init : function() {
     Popup.populateRecentTracks();
+    Page.trackPageView();
   }
   ,
 
@@ -88,14 +90,14 @@ var Popup                   = {
    **/
   addEventListeners : function() {
     addEvent(
-        document.getElementById( 'bractOpenOptionsPage' )
+        document.getElementById( 'toolbarOpenOptionsPageBtn' )
       , 'click'
       , function( objEvent ) {
           // Link to new Options UI for 40+
           var strOptionsUrl =
                 boolConstUseOptionsUi
                   ? 'chrome://extensions?options=' + strConstExtensionId
-                  : chrome.extension.getURL( 'html/options.html' )
+                  : chrome.extension.getURL( 'options/index.html' )
                   ;
 
           // Track clicks
@@ -105,6 +107,7 @@ var Popup                   = {
               , strLog          : 'browserAction.toolbar'
               , objVars         : {
                     strAction   : 'openOptions'
+                  , strPage     : strPage
                 }
             }
           );
@@ -114,7 +117,7 @@ var Popup                   = {
     );
 
     addEvent(
-        document.getElementById( 'bractClosePopupPage' )
+        document.getElementById( 'toolbarClosePopupPageBtn' )
       , 'click'
       , function( objEvent ) {
           // Track clicks
@@ -124,6 +127,7 @@ var Popup                   = {
               , strLog          : 'browserAction.toolbar'
               , objVars         : {
                     strAction   : 'closePopup'
+                  , strPage     : strPage
                 }
             }
           );
@@ -131,6 +135,8 @@ var Popup                   = {
           window.close();
         }
     );
+
+    Page.addDeveloperMessageEventListeners();
 
     addEvent(
         document.querySelectorAll( '#tunesSuggestionInfo a' )
@@ -285,14 +291,14 @@ var Popup                   = {
               // The following are not required for percent-encoding 
               // per RFC5987, so we can allow for a little better readability
               // over the wire: |`^
-              .replace(/%(?:7C|60|5E)/g, unescape)
+              .replace( /%(?:7C|60|5E)/g, unescape )
               ;
   }
 };
 
 /* =============================================================================
 
-  3. Events
+  Events
 
  ============================================================================ */
 

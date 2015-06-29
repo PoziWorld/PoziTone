@@ -135,6 +135,17 @@ Credits
 Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля `PoziTone` под своим именем? — Следите, мы скоро поделимся черновиком PoziTone API.
 
 
+Содействие
+--------
+### Перевод
+
+Sprechen Sie Deutsch? Vous parlez français?
+
+Мы хотим, чтобы как можно большее число пользователей `PoziTone` имели возможность взаимодействовать с расширением на их родном языке.
+
+Если Вы знаете какой-либо иностранный язык или просто заметили неточность в переводе, дайте нам знать — https://www.transifex.com/projects/p/pozitone/.
+
+
 Обратная связь
 --------
 
@@ -146,17 +157,6 @@ Credits
 - [Ещё один метод](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews?hl=ru)
 - [Метод для гиков](https://github.com/poziworld/pozitone/issues)
 - [Другой](mailto:feedback@pozitone.com)
-
-
-Содействие
---------
-### Перевод
-
-Sprechen Sie Deutsch? Vous parlez français?
-
-Мы хотим, чтобы как можно большее число пользователей `PoziTone` имели возможность взаимодействовать с расширением на их родном языке.
-
-Если Вы знаете какой-либо иностранный язык или просто заметили неточность в переводе, дайте нам знать — https://www.transifex.com/projects/p/pozitone/.
 
 
 Социализируемся

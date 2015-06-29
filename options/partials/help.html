@@ -1,0 +1,20 @@
+      <section id="help" class="page">
+        <h1 i18n-content="optionsHelpH1" class="pageHeading"></h1>
+        <p i18n-content="optionsHelpText" class="sectionText first noHeading"></p>
+        <dl id="helpInfoToSubmit"></dl>
+        <p class="sectionText first noHeading">
+          <a
+            i18n-content="optionsSettingsGeneralUeipPrivacy"
+            target="_blank"
+              ></a>
+        </p>
+        <button
+          id="helpSubmitInfoCta"
+          class="cta hasText"
+          i18n-content="optionsHelpSubmitInfoCta"
+            ></button>
+        <script type="text/html" id="helpInfoToSubmitTmpl">
+          <dt class="helpInfoToSubmitTerm">%key%</dt>
+          <dd class="helpInfoToSubmitDefinition">%value%</dd>
+        </script>
+      </section>

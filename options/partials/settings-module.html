@@ -1,0 +1,404 @@
+          <header id="moduleSettingsHeader" localize ng-switch="objModule.type">
+            <h1 i18n-content="module_{{objModule.id}}_long" class="subpageHeading" ng-switch-when="internal"></h1>
+            <h1 class="subpageHeading" ng-switch-when="external">{{objModule.id}}</h1>
+          </header>
+          <form id="form">
+            <fieldset
+              id="optionsSettingsSupport"
+              localize
+              ng-if="objModule.boolIsEnabled !== undefined"
+                >
+              <legend i18n-content="optionsSettingsSupport" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolIsEnabled"
+                      ng-model="objModule.boolIsEnabled"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsSupportEnabled"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsNotificationIconFormat"
+              localize
+              ng-if="objModule.boolShowNotificationLogo !== undefined"
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label ng-switch="objModule.strNotificationLogo">
+                    <input
+                      type="checkbox" name="boolShowNotificationLogo"
+                      ng-model="objModule.boolShowNotificationLogo"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span
+                      i18n-content="optionsSettingsNotificationIconFormatShowStationLogo"
+                      ng-switch-when="station"
+                        ></span>
+                    <span
+                      i18n-content="optionsSettingsNotificationIconFormatShowSiteLogo"
+                      ng-switch-default
+                        ></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsAdditionalInfoShowCbr"
+              localize
+              ng-if="objModule.boolShowKbpsInfo !== undefined"
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsAdditionalInfo" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowKbpsInfo"
+                      ng-model="objModule.boolShowKbpsInfo"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsAdditionalInfoShowCbr"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsNotificationTitleFormat"
+              localize
+              ng-if="boolProvidesTitleFormats === true"
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsNotificationTitleFormat" class="sectionHeading"></legend>
+              <ul>
+                <li
+                  id="optionsSettingsNotificationTitleFormatShort"
+                  localize
+                  ng-if="arrAvailableNotificationTitleFormats.indexOf( 'short' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationTitleFormat"
+                      value="short"
+                      ng-model="objModule.strNotificationTitleFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationTitleFormatShort"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationTitleFormatLong"
+                  localize
+                  ng-if="arrAvailableNotificationTitleFormats.indexOf( 'long' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationTitleFormat"
+                      value="long"
+                      ng-model="objModule.strNotificationTitleFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationTitleFormatLong"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationTitleFormatNoStationInfo"
+                  localize
+                  ng-if="arrAvailableNotificationTitleFormats.indexOf( 'noStationInfo' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationTitleFormat"
+                      value="noStationInfo"
+                      ng-model="objModule.strNotificationTitleFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationTitleFormatNoStationInfo"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsNotificationButtons"
+              class="moduleAvailableNotificationButtons"
+              localize
+              ng-if="boolProvidesButtons === true"
+                >
+              <legend i18n-content="optionsSettingsNotificationButtons" class="sectionHeading"></legend>
+              <ul>
+                <li
+                  id="optionsSettingsNotificationButtonsAdd"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'add' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="add"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'add' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsAdd"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsAddAuthRequired"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'addAuth' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="addAuth"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'addAuth' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsAddAuthRequired"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsFavorite"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'favorite' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="favorite"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'favorite' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsFavorite"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsFavoriteAuthRequired"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'favoriteAuth' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="favoriteAuth"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'favoriteAuth' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsFavoriteAuthRequired"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsNext"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'next' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="next"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'next' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsNext"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsNextAuthRequired"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'nextAuth' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="nextAuth"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'nextAuth' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsNextAuthRequired"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsPrevious"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'previous' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="previous"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'previous' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsPrevious"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsPreviousAuthRequired"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'previousAuth' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="previousAuth"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'previousAuth' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsPreviousAuthRequired"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsPlayStop"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'playStop' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="playStop"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'playStop' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsPlayStop"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationButtonsMuteUnmute"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'muteUnmute' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="muteUnmute"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'muteUnmute' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationButtonsMuteUnmute"></span>
+                  </label>
+                </li>
+                <li
+                  id="notificationButtonsVolumeUpTitle"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'volumeUp' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="volumeUp"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'volumeUp' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="notificationButtonsVolumeUpTitle"></span>
+                  </label>
+                </li>
+                <li
+                  id="notificationButtonsVolumeDownTitle"
+                  localize
+                  ng-if="arrAvailableNotificationButtons.indexOf( 'volumeDown' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="arrActiveNotificationButtons"
+                      value="volumeDown"
+                      ng-checked="boolHasActiveButtons && arrActiveNotificationButtons.indexOf( 'volumeDown' ) !== -1"
+                      ng-click="inputChange( $event, 'arrActiveNotificationButtons' )"
+                        >
+                    <span i18n-content="notificationButtonsVolumeDownTitle"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsSoundVolumeControl"
+              localize
+              ng-if="objModule.boolUseGeneralVolumeDelta !== undefined"
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolUseGeneralVolumeDelta"
+                      ng-model="objModule.boolUseGeneralVolumeDelta"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsSoundVolumeControlUseDefaults"></span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <span i18n-content="optionsSettingsSoundVolumeControlDelta" class="soundVolumeControl"></span>
+                    <input
+                      type="number" name="intVolumeDelta"
+                      class="soundVolumeControlDelta soundVolumeControl"
+                      min="1" max="99" step="1"
+                      ng-model="objModule.intVolumeDelta"
+                       >
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
+              id="optionsSettingsDisplayWhen"
+              localize
+              ng-if="
+                    objModule.boolShowNotificationWhenStopped !== undefined
+                ||  objModule.boolShowNotificationWhenMuted !== undefined
+                ||  objModule.boolShowNotificationWhenNoTrackInfo !== undefined
+                "
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsDisplayWhen" class="sectionHeading"></legend>
+              <ul>
+                <li
+                  id="optionsSettingsDisplayWhenStopped"
+                  localize
+                  ng-if="objModule.boolShowNotificationWhenStopped !== undefined"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowNotificationWhenStopped"
+                      ng-model="objModule.boolShowNotificationWhenStopped"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsDisplayWhenStopped"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsDisplayWhenMuted"
+                  localize
+                  ng-if="objModule.boolShowNotificationWhenMuted !== undefined"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowNotificationWhenMuted"
+                      ng-model="objModule.boolShowNotificationWhenMuted"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsDisplayWhenMuted"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsDisplayWhenNoTrackInfo"
+                  localize
+                  ng-if="objModule.boolShowNotificationWhenNoTrackInfo !== undefined"
+                    >
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowNotificationWhenNoTrackInfo"
+                      ng-model="objModule.boolShowNotificationWhenNoTrackInfo"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsDisplayWhenNoTrackInfo"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
