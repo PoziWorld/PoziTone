@@ -531,6 +531,37 @@ var Global                        = {
               }
 
               if (
+                    ~ arrButtons.indexOf( 'addAuth' )
+                &&  (
+                          boolIsUserLoggedIn
+                      &&  (
+                                typeof
+                                  objTempStationInfo
+                                    .boolHasAddToPlaylistButton ===
+                                      'undefined'
+                            ||  objTempStationInfo.boolHasAddToPlaylistButton
+                          )
+                    )
+              ) {
+                // Don't show button, if track is in playlist
+                // TODO: Show if track changed while waited for server response
+                if (
+                  ~~  Global
+                        .arrAddTrackToPlaylistFeedback
+                          .indexOf( arrTrackInfo[ 1 ] )
+                ) {
+                  objNotificationOptions.buttons.push(
+                    Global.addShortcutInfo(
+                        objNotificationButtons.addAuth.loggedIn.objButton
+                      , 'add'
+                    )
+                  );
+
+                  arrActiveButtons.push( 'addAuth|loggedIn' );
+                }
+              }
+
+              if (
                     ~ arrButtons.indexOf( 'favorite' )
                 &&  boolIsUserLoggedIn
               ) {
@@ -549,6 +580,28 @@ var Global                        = {
                   );
 
                   arrActiveButtons.push( 'favorite|loggedIn' );
+                }
+              }
+
+              if (
+                    ~ arrButtons.indexOf( 'favoriteAuth' )
+                &&  boolIsUserLoggedIn
+              ) {
+                // Don't show button, if liked this track already
+                // TODO: Show if track changed while waited for server response
+                if (
+                  ~~  Global
+                        .strFavoriteStatusSuccess
+                          .indexOf( arrTrackInfo[ 1 ] )
+                ) {
+                  objNotificationOptions.buttons.push(
+                    Global.addShortcutInfo(
+                        objNotificationButtons.favoriteAuth.loggedIn.objButton
+                      , 'favorite'
+                    )
+                  );
+
+                  arrActiveButtons.push( 'favoriteAuth|loggedIn' );
                 }
               }
 
@@ -577,6 +630,30 @@ var Global                        = {
               }
 
               if (
+                    ~ arrButtons.indexOf( 'nextAuth' )
+                &&  (
+                          boolIsUserLoggedIn
+                      ||  (
+                                typeof
+                                  objTempPlayerInfo
+                                    .boolCanPlayNextTrackLoggedOut ===
+                                      'undefined'
+                            ||  objTempPlayerInfo
+                                  .boolCanPlayNextTrackLoggedOut
+                          )
+                    )
+              ) {
+                objNotificationOptions.buttons.push(
+                  Global.addShortcutInfo(
+                      objNotificationButtons.nextAuth.next.objButton
+                    , 'next'
+                  )
+                );
+
+                arrActiveButtons.push( 'nextAuth|next' );
+              }
+
+              if (
                     ~ arrButtons.indexOf( 'previous' )
                 &&  (
                           boolIsUserLoggedIn
@@ -598,6 +675,30 @@ var Global                        = {
                 );
 
                 arrActiveButtons.push( 'previous|previous' );
+              }
+
+              if (
+                    ~ arrButtons.indexOf( 'previousAuth' )
+                &&  (
+                          boolIsUserLoggedIn
+                      ||  (
+                                typeof
+                                  objTempPlayerInfo
+                                    .boolCanPlayPreviousTrackLoggedOut ===
+                                      'undefined'
+                            ||  objTempPlayerInfo
+                                  .boolCanPlayPreviousTrackLoggedOut
+                          )
+                    )
+              ) {
+                objNotificationOptions.buttons.push(
+                  Global.addShortcutInfo(
+                      objNotificationButtons.previousAuth.previous.objButton
+                    , 'previous'
+                  )
+                );
+
+                arrActiveButtons.push( 'previousAuth|previous' );
               }
 
               if ( ~ arrButtons.indexOf( 'playStop' ) ) {

@@ -2,6 +2,10 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.4.1
+    * Fixed: some buttons might not show up on the notification.
+      Bug reported by Andrey Phenomenon.
+
 ### v0.4
     * Simplified Options page.
     * A notice about an important message from the developers of PoziTone will be displayed when available.
