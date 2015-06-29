@@ -2,7 +2,7 @@
 
 [![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
 
-PoziTone ![PoziTone](/img/pozitone-icon-48.png)
+PoziTone ![PoziTone](/global/img/pozitone-icon-48.png)
 =======
 
 An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds a missing [functionality](#features) to [audio players on websites](#supported-players).
