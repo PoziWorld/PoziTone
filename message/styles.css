@@ -1,0 +1,32 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+section {
+  display: none;
+  max-width: 50rem;
+  margin: auto;
+}
+h1 {
+  font-size: 1.7em;
+}
+p {
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+figure {
+  margin: 0;
+  padding: 1.5rem 0;
+}
+img {
+  border-left: .1rem solid #eee;
+  border-right: .1rem solid #eee;
+  width: 25rem;
+  height: 15.6rem;
+}
+aside p {
+  font-size: small;
+  font-weight: bold;
+}
