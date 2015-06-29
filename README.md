@@ -1,4 +1,4 @@
-PoziTone ![PoziTone](/img/pozitone-icon-48.png)
+PoziTone ![PoziTone](/global/img/pozitone-icon-48.png)
 =======
 
 
