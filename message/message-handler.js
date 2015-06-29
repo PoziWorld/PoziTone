@@ -6,7 +6,9 @@
 
   if ( strQueryString.indexOf( strIndicator ) === 0 && strQueryString.length > 7 ) {
     var
-        strLang   = strQueryString.replace( strIndicator, '' )
+        strLang   = strQueryString
+                      .replace( strIndicator, '' )
+                      .substr( 0, 2 )
       , $message  = document.getElementById( strLang )
       ;
 
