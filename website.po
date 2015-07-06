@@ -38,7 +38,7 @@ msgstr ""
 msgid "short_description"
 msgstr ""
 "An extension for the Google Chrome, Opera, and other Chromium-based browsers "
-"that&nbsp;adds new features to your favorite&nbsp;online players."
+"that&nbsp;adds new features to your favorite&nbsp;online&nbsp;players."
 
 # Used for a link to a PoziTone page on the Opera Add-Ons site.
 msgid "opera_addons"
