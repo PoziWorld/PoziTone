@@ -16,10 +16,10 @@ What track played five minutes ago? PoziTone keeps information about the last 10
 
 Supported players:
 
-— Online radio 101.ru (stations' main player).
 — VK (audio, full version of site).
 — Odnoklassniki (audio, full version of site).
-— Digitally Imported (DI, DI.FM or DI Radio).
+— Online radio 101.ru (stations' main player).
+— VGM Radio.
 
 More to come...
 
@@ -41,7 +41,7 @@ Alt+Shift+Q — “Show notification”.
 
 Privacy:
 
-This extension does not store/save or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
+This extension does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
 
 .   .   .
 
