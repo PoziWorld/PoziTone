@@ -2,6 +2,13 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.5
+    * New module: VGM Radio | vgmradio.com. Don't forget to enable in Options!
+      Idea by Jason Jimmo.
+    * New permissions model: no permissions required when installing.
+      Enable only those you need in Options.
+    * New: right-click the PoziTone icon for Quick Access Options.
+
 ### v0.4.1
     * Fixed: some buttons might not show up on the notification.
       Bug reported by Andrey Phenomenon.
