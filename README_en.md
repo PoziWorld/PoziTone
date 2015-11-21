@@ -2,37 +2,63 @@
 
 [![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
 
-PoziTone ![PoziTone](/global/img/pozitone-icon-48.png)
+PoziTone <img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">
 =======
 
 An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds a missing [functionality](#features) to [audio players on websites](#supported-players).
 
+___
+
+##### Table of contents
+
+  * [Features](#features)
+  * [Supported players](#supported-players)
+  * [Installation](#installation)
+    * [For Opera](#for-opera)
+  * [Demo](#demo)
+  * [Keyboard shortcuts](#keyboard-shortcuts)
+    * [Set up / change keyboards shortcuts](#set-up--change-keyboards-shortcuts)
+      * [Demo: how to set up / change keyboards shortcuts](#demo-how-to-set-up--change-keyboards-shortcuts)
+    * [Global keyboard shortcuts (outside of the browser window)](#global-keyboard-shortcuts-outside-of-the-browser-window)
+  * [Gratitudes](#gratitudes)
+  * [Credits](#credits)
+  * [Privacy](#privacy)
+  * [Are you a developer?](#are-you-a-developer)
+  * [Contribution](#contribution)
+    * [Spread the word](#spread-the-word)
+    * [Translation](#translation)
+    * [Incentive](#incentive)
+  * [Feedback](#feedback)
+  * [PoziTone on social networks](#pozitone-on-social-networks)
+
+___
 
 Features
 --------
 
-*	**Displays info about current track**
+* **Displays info about current track**
 
-	_Familiarizing with a new genre or band?_
-	`PoziTone` will show you track info (its name, band name) via a pop-up notification on every track change.
+  _Familiarizing with a new genre or band?_
+  PoziTone will show you track info (its name, band name) via a pop-up notification on every track change.
 
-*	**Easy player control**
+* **Easy player control**
 
-	_Want to stop/resume playback, mute/unmute, switch track or add it to playlist?_
-	It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of [keyboard shortcuts](#keyboard-shortcuts)!
+  _Want to stop/resume playback, mute/unmute, switch track or add it to playlist?_
+  It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of [keyboard shortcuts](#keyboard-shortcuts)!
 
-*	**List of recent tracks**
+* **List of recent tracks**
 
-	_What track played five minutes ago?_
-	`PoziTone` keeps information about the last 10 tracks played.
+  _What track played five minutes ago?_
+  PoziTone keeps information about the last 10 tracks played.
 
 
 Supported players
 --------
 
-* [Online radio 101.ru](http://101.ru) (stations' main player).
 * [VK](https://vk.com) (audio, full version of site).
+* [VGM Radio](https://vgmradio.com).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).
+* [Online radio 101.ru](http://101.ru) (stations' main player).
 
 More to come...
 
@@ -41,15 +67,15 @@ Installation
 --------
 
 1. Go to a [PoziTone in the Chrome Web Store](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=en) page.
-2. Click on “FREE”.
-3. Then “Add”.
+2. Click on “ADD TO CHROME”.
+3. Then “Add extension”.
 
 Done!
 
 
 ### For Opera
 
-1. Go to a [PoziTone in the Opera extensions catalog](https://addons.opera.com/en/extensions/details/pozitone/?display=en_US) page.
+1. Go to a [PoziTone in the Opera add-ons catalog](https://addons.opera.com/en/extensions/details/pozitone/?display=en_US) page.
 2. Click on “Add to Opera”.
 
 Done!
@@ -60,7 +86,7 @@ Demo
 
 Open any station that you like from the [Stations list](http://101.ru/?an=port_allchannels).
 
-With every track change you can see the glory of `PoziTone`! :)
+With every track change you can see the glory of PoziTone! :)
 
 
 Keyboard shortcuts
@@ -78,11 +104,11 @@ Keyboard shortcuts
 
 ### Set up / change keyboards shortcuts
 
-1. Right-click on the `PoziTone` icon to the right of the address bar.
+1. Right-click on the PoziTone icon to the right of the address bar.
 2. Click on “Manage”.
 3. Scroll down the page.
 4. Click on the blue “Keyboard shortcuts” link.
-5. Find `PoziTone` in the list.
+5. Find PoziTone in the list.
 6. Make any necessary changes.
 7. Click on “OK”.
 
@@ -101,7 +127,7 @@ Gratitudes
 --------
 
 - To all those who give us life and happiness!
-- To the inspirers and testers of `PoziTone`: Darya, Evgeny, Mel, Nike, Sergey.
+- To the inspirers and testers of PoziTone: Darya, Evgeny, Mel, Nike, Sergey.
 - [UserEcho](https://userecho.com/?pcode=1014487) — for the excellent service, kindness and generosity!
 - [DreamHost](http://www.dreamhost.com/r.cgi?623835) — for the reliable hosting.
 - Google, Inc. — for all their excellent projects.
@@ -117,7 +143,8 @@ Credits
 
 - The button icons — [Gentleface Mono Icon Set](http://gentleface.com/free_icon_set.html), Gentleface, [CC BY-NC 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 - [The Play icon](http://thenounproject.com/term/play/5206/) — Michael Rowe, [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/us/).
-- The appearance of the «`PoziTone` Options» and «Recent Tracks» pages:
+- The Info icon — [Freepik](http://www.freepik.com) from [www.flaticon.com](http://www.flaticon.com), [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/).
+- The appearance of the “PoziTone Options” and “Recent Tracks” pages:
   * Copyright 2014 The Chromium Authors. All rights reserved.
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
@@ -126,46 +153,58 @@ Credits
 Privacy
 --------
 
-This extension does not store/save or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
+This extension does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
 
 
 Are you a developer?
 --------
 
-Want to add a support for your favorite player and publish it as a `PoziTone` module under your name? — Check back, we will soon share a PoziTone API draft.
+Want to add a support for your favorite player and publish it as a PoziTone module under your name? — Check back, we will soon share a PoziTone API draft.
 
 
 Contribution
 --------
+### Spread the word
+
+If you find PoziTone useful, why not recommend it to your friends, colleagues, and/or followers?
+
+There are a few ways you can help our cause:
+
+* Follow us on [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [VK](https://vk.com/PoziTone), [Odnoklassniki](http://ok.ru/group/54738320621596), and [Instagram](https://instagram.com/PoziTone).
+* Share the [installation link](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm) ([for Opera](https://addons.opera.com/extensions/details/pozitone/)) on your social networks and/or blog.
+* [Rate PoziTone](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)) – the feedback really helps others find this extension!
+
 ### Translation
 
 Sprechen Sie Deutsch? Vous parlez français?
 
-We want as many `PoziTone` users as possible to be able to interact with the extension in their native language.
+We want as many PoziTone users as possible to be able to interact with the extension in their native language.
 
-If you know any foreign language or just noticed a discrepancy in the translation, please let us know — https://www.transifex.com/projects/p/pozitone/.
+If you know any foreign language or just noticed a discrepancy in the translation, please [let us know](https://www.transifex.com/poziworld/pozitone/).
+
+### Incentive
+
+If you appreciate the work we have done, please consider stimulating PoziTone development via [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone), or [Coinbase](https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac).
 
 
 Feedback
 --------
 
-We appreciate your feedback! 
+We appreciate your feedback!
 
-Please share your ideas. Don't be shy to ask questions. Bug reports are valuable! We like praises, who doesn't? :)
-
-- [Recommended method](http://feedback.pozitone.com/?lang=en)
-- [One more method](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews?hl=en)
-- [Geeks method](https://github.com/poziworld/pozitone/issues)
-- [Another one](mailto:feedback@pozitone.com)
+- Please [share your ideas](http://feedback.pozitone.com/).
+- Don't be shy to [ask questions](mailto:feedback@pozitone.com).
+- [Bug reports](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([for Opera](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) are valuable!
+- We like [praises](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), who doesn't? :)
 
 
-Let's socialize
+PoziTone on social networks
 --------
 
 - [PoziTone on VK](https://vk.com/PoziTone)
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
 - [PoziTone on Facebook](https://facebook.com/PoziTone)
-- [PoziTone on Google+](https://google.com/+PoziTone)
+- [PoziTone on Google+](https://plus.google.com/+PoziTone)
 - [PoziTone on Odnoklassniki](http://ok.ru/group/54738320621596)
 - [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone on Instagram](https://instagram.com/PoziTone)
