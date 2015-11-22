@@ -5,14 +5,14 @@
 PoziTone <img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">
 =======
 
-An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds a missing [functionality](#features) to [audio players on websites](#supported-players).
+An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds new [features](#features) to your favorite [online media players](#supported-online-media-players).
 
 ___
 
 ##### Table of contents
 
   * [Features](#features)
-  * [Supported players](#supported-players)
+  * [Supported online media players](#supported-online-media-players)
   * [Installation](#installation)
     * [For Opera](#for-opera)
   * [Demo](#demo)
@@ -52,7 +52,7 @@ Features
   PoziTone keeps information about the last 10 tracks played.
 
 
-Supported players
+Supported online media players
 --------
 
 * [VK](https://vk.com) (audio, full version of site).
