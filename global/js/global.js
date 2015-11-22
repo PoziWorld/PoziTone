@@ -12,6 +12,7 @@
     Global
       init()
       getAllCommands()
+      getStorageItems()
       setStorageItems()
       showNotification()
       showNotificationCallback()
@@ -19,6 +20,7 @@
       removeNotification()
       saveTabsIds()
       saveActiveButtons()
+      getSavedOpenTabs()
       saveOpenTabs()
       isValidUrl()
       getValidUrl()
@@ -33,6 +35,8 @@
       isValidModule()
       makeHttpRequest()
       checkForDevelopersMessage()
+      checkForRuntimeError()
+      openOptionsPage()
     On Load
       Initialize
 
@@ -45,17 +49,8 @@
  ============================================================================ */
 
 const
-    arrContentScripts             = objConstExtensionManifest.content_scripts
-  , funcReturnModulesJsArr        = function( strUrl ) {
-      return  arrContentScripts.map( function ( objContentScript ) {
-                if ( ~ objContentScript.matches[ 0 ].indexOf( strUrl ) ) {
-                  return objContentScript.js;
-                }
-              } )[ 0 ] || [];
-    }
-
     // Developers Message
-  , strDevelopersMessageBannerId              = 'pwMessage'
+    strDevelopersMessageBannerId              = 'pwMessage'
   , strDevelopersMessageBannerNotActiveClass  = 'notActive'
   ;
 
@@ -86,17 +81,67 @@ var Global                        = {
   , objModules                    : {
         ru_101                    : {
             objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
-          , arrJs                 : funcReturnModulesJsArr( '101.ru' )
+          , arrHosts              : [
+                '101.ru'
+            ]
+          , arrOrigins            : [
+                '*://101.ru/*'
+            ]
+          , arrJs                 : [
+                'global/js/const.js'
+              , 'modules/ru_101/js/uppod-player-api.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/ru_101/js/page-watcher.js'
+            ]
         }
       , ru_ok_audio               : {
             objRegex              :
-              // TODO: Cover all possible URLs
+              // TODO: Cover all possible “OK” URLs
               /(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
-          , arrJs                 : funcReturnModulesJsArr( 'odnoklassniki.ru' )
+          , strImageFileName      : 'ok-logo-80.svg'
+          , arrHosts              : [
+                'odnoklassniki.ru'
+              , 'ok.ru'
+            ]
+          , arrOrigins            : [
+                '*://*.odnoklassniki.ru/*'
+              , '*://*.ok.ru/*'
+            ]
+          , arrJs                 : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/ru_ok_audio/js/page-watcher.js'
+            ]
         }
       , com_vk_audio              : {
             objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
-          , arrJs                 : funcReturnModulesJsArr( 'vk.com' )
+          , strImageFileName      : 'vk-logo-80.svg'
+          , arrHosts              : [
+                'vk.com'
+            ]
+          , arrOrigins            : [
+                '*://vk.com/*'
+            ]
+          , arrJs                 : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_vk_audio/js/page-watcher.js'
+            ]
+        }
+      , com_vgmradio              : {
+            objRegex              : /(http:\/\/|https:\/\/)vgmradio.com\/.*/
+          , strImageFileName      : 'vgmradio-logo-120.svg'
+          , arrHosts              : [
+                'vgmradio.com'
+            ]
+          , arrOrigins            : [
+                '*://vgmradio.com/*'
+            ]
+          , arrJs                 : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_vgmradio/js/page-watcher.js'
+            ]
         }
   }
 
@@ -213,7 +258,7 @@ var Global                        = {
             }
         }
       , playStop                  : {
-            play                  : {
+            0                     : {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
@@ -223,7 +268,7 @@ var Global                        = {
                 }
               , strFunction       : 'playStop'
             }
-          , stop                  : {
+          , 1                     : {
                 objButton         : {
                     title         : 
                       chrome.i18n.getMessage(
@@ -328,6 +373,58 @@ var Global                        = {
   ,
 
   /**
+   * Gets the requested data from StorageArea.
+   *
+   * @type    method
+   * @param   Storage
+   *            Target storage.
+   * @param   miscGet
+   *            A single key to get, list of keys to get, or a dictionary
+   *            specifying default values (see description of the object).
+   *            An empty list or object will return an empty result object.
+   *            Pass in null to get the entire contents of storage.
+   * @param   strLog
+   *            Debug line "prefix".
+   * @param   funcSuccessCallback
+   *            Optional. Function to run on success.
+   * @param   funcErrorCallback
+   *            Optional. Function to run on error.
+   * @param   objErrorLogDetails
+   *            Optional. Data to be passed on error.
+   * @param   boolTrackError
+   *            Optional. Whether to track error if user participates in UEIP.
+   * @return  void
+   **/
+  getStorageItems : function(
+      Storage
+    , miscGet
+    , strLog
+    , funcSuccessCallback
+    , funcErrorCallback
+    , objErrorLogDetails
+    , boolTrackError
+  ) {
+    Storage.get( miscGet, function( objReturn ) {
+      var strGetStorageItemsLog = strLog;
+      Log.add( strLog + strLogDo, miscGet );
+
+      Global.checkForRuntimeError(
+          function() {
+            if ( typeof funcSuccessCallback === 'function' ) {
+              funcSuccessCallback( objReturn );
+            }
+
+            Log.add( strGetStorageItemsLog + strLogDone, objReturn );
+          }
+        , funcErrorCallback
+        , objErrorLogDetails
+        , boolTrackError
+      );
+    } );
+  }
+  ,
+
+  /**
    * Sets multiple items in StorageArea.
    *
    * @type    method
@@ -337,35 +434,46 @@ var Global                        = {
    *            An object which gives each key/val pair to update storage with.
    * @param   strLog
    *            Debug line "prefix".
-   * @param   funcCallback
+   * @param   funcSuccessCallback
    *            Optional. Function to run on success.
+   * @param   funcErrorCallback
+   *            Optional. Function to run on error.
+   * @param   objErrorLogDetails
+   *            Optional. Data to be passed on error.
+   * @param   boolTrackError
+   *            Optional. Whether to track error if user participates in UEIP.
    * @return  void
    **/
-  setStorageItems : function( Storage, objItems, strLog, funcCallback ) {
+  setStorageItems : function(
+      Storage
+    , objItems
+    , strLog
+    , funcSuccessCallback
+    , funcErrorCallback
+    , objErrorLogDetails
+    , boolTrackError
+  ) {
     Storage.set( objItems, function() {
-      var strSetStorageItemsLog = strLog;
-      Log.add( strLog + strLogDo, objItems );
+      var strSetStorageItemsLog = strLog + ', setStorageItems';
+      Log.add( strSetStorageItemsLog + strLogDo, objItems );
 
-      if ( chrome.runtime.lastError ) {
-        var
-            objLogDetails   = {}
-          , strErrorMessage = chrome.runtime.lastError.message
-          ;
+      Global.checkForRuntimeError(
+          function() {
+            if ( typeof funcSuccessCallback === 'function' ) {
+              funcSuccessCallback();
+            }
 
-        if ( typeof strErrorMessage === 'string' )
-          objLogDetails.strErrorMessage = strErrorMessage;
-
-        Log.add( strLog + strLogError, objLogDetails, true );
-        return;
-      }
-
-      if ( typeof funcCallback === 'function' ) {
-        funcCallback();
-      }
-
-      Storage.get( null, function( objAllItemsAfterUpdate ) {
-        Log.add( strSetStorageItemsLog + strLogDone, objAllItemsAfterUpdate );
-      });
+            Storage.get( null, function( objAllItemsAfterUpdate ) {
+              Log.add(
+                  strSetStorageItemsLog + strLogDone
+                , objAllItemsAfterUpdate
+              );
+            });
+          }
+        , funcErrorCallback
+        , objErrorLogDetails
+        , boolTrackError
+      );
     });
   }
   ,
@@ -440,7 +548,7 @@ var Global                        = {
               &&  typeof
                     objData.boolShowNotificationWhenStopped !== 'undefined'
               &&  ! objData.boolShowNotificationWhenStopped
-              &&  objTempPlayerInfo.strStatus === Global.strPlayerIsOffClass
+              &&  ! objTempPlayerInfo.boolIsPlaying
             )
               return false;
 
@@ -449,7 +557,10 @@ var Global                        = {
               &&  typeof
                     objData.boolShowNotificationWhenMuted !== 'undefined'
               &&  ! objData.boolShowNotificationWhenMuted
-              &&  objTempPlayerInfo.intVolume === Global.intNoVolume
+              &&  (
+                        objTempPlayerInfo.intVolume === Global.intNoVolume
+                    ||  objTempPlayerInfo.boolIsMuted
+                  )
             )
               return false;
 
@@ -705,19 +816,25 @@ var Global                        = {
                 objNotificationOptions.buttons.push(
                   Global.addShortcutInfo(
                       objNotificationButtons
-                        .playStop[ objTempPlayerInfo.strStatus ]
+                        .playStop[ ~~ objTempPlayerInfo.boolIsPlaying ]
                           .objButton
                     , 'playStop'
                   )
                 );
 
                 arrActiveButtons
-                  .push( 'playStop|' + objTempPlayerInfo.strStatus );
+                  .push( 'playStop|' + ~~ objTempPlayerInfo.boolIsPlaying );
               }
 
               if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
-                var strMuteUnmuteState  = ( objTempPlayerInfo.intVolume > 0 ) ? 
-                                            'mute' : 'unmute';
+                var strMuteUnmuteState  =
+                      (
+                            objTempPlayerInfo.intVolume > 0
+                        &&  ! objTempPlayerInfo.boolIsMuted
+                      )
+                        ? 'mute'
+                        : 'unmute'
+                      ;
 
                 objNotificationOptions.buttons.push(
                   Global.addShortcutInfo(
@@ -1126,6 +1243,28 @@ var Global                        = {
   ,
 
   /**
+   * Gets saved open tabs from Storage.
+   *
+   * @type    method
+   * @param   funcSuccessCallback
+   *            Function to run after Storage prompted.
+   * @return  void
+   **/
+  getSavedOpenTabs : function( funcSuccessCallback ) {
+    Global.getStorageItems(
+        StorageLocal
+      , 'objOpenTabs'
+      , 'getSavedOpenTabs'
+      , function( objReturn ) {
+          if ( typeof funcSuccessCallback === 'function' ) {
+            funcSuccessCallback( objReturn );
+          }
+        }
+    );
+  }
+  ,
+
+  /**
    * Saves open tabs objects for later use.
    *
    * @type    method
@@ -1151,14 +1290,14 @@ var Global                        = {
 
         for ( var intTabIndex in objTempWindowTabs ) {
           if ( objTempWindowTabs.hasOwnProperty( intTabIndex ) ) {
-            objToSet.objOpenTabs[ intWindowId ][ intTabIndex ] = 
+            objToSet.objOpenTabs[ intWindowId ][ intTabIndex ] =
               objTempWindowTabs[ intTabIndex ];
           }
         }
       }
     }
 
-    StorageLocal.get( 'objOpenTabs', function( objReturn ) {
+    Global.getSavedOpenTabs( function( objReturn ) {
       if (
         ! (
               Global.isEmpty( objToSet.objOpenTabs )
@@ -1169,7 +1308,7 @@ var Global                        = {
 
         Global.setStorageItems( StorageLocal, objToSet, strLog );
       }
-    });
+    } );
   }
   ,
 
@@ -1179,7 +1318,7 @@ var Global                        = {
    * @type    method
    * @param   strUrl
    *            Provided URL
-   * @return  void
+   * @return  string / boolean
    **/
   isValidUrl : function ( strUrl ) {
     var
@@ -1260,7 +1399,7 @@ var Global                        = {
    **/
   findFirstOpenTabInvokeCallback : function ( funcCallback )
   {
-    StorageLocal.get( 'objOpenTabs', function( objReturn ) {
+    Global.getSavedOpenTabs( function( objReturn ) {
       strLog = 'findFirstOpenTabInvokeCallback';
       Log.add( strLog );
 
@@ -1284,7 +1423,7 @@ var Global                        = {
           }
         }
       }
-    });
+    } );
   }
   ,
 
@@ -1683,6 +1822,85 @@ var Global                        = {
           .classList.remove( strDevelopersMessageBannerNotActiveClass );
       }
     } );
+  }
+  ,
+
+  /**
+   * Runtime sets an error variable when some call failed.
+   *
+   * @type    method
+   * @param   funcCallback
+   *            Do when runtime error is not set.
+   * @param   funcErrorCallback
+   *            Optional. Callback on error.
+   * @param   objErrorLogDetails
+   *            Optional. Data to be passed on error.
+   * @param   boolTrackError
+   *            Optional. Whether to track error if user participates in UEIP.
+   * @return  boolean
+   **/
+  checkForRuntimeError : function(
+      funcCallback
+    , funcErrorCallback
+    , objErrorLogDetails
+    , boolTrackError
+  ) {
+    if ( chrome.runtime.lastError ) {
+      if ( typeof objErrorLogDetails !== 'object' ) {
+        objErrorLogDetails = {};
+      }
+
+      var strErrorMessage = chrome.runtime.lastError.message;
+
+      if ( typeof strErrorMessage === 'string' ) {
+        objErrorLogDetails.strErrorMessage = strErrorMessage;
+      }
+
+      Log.add(
+          strLog + strLogError
+        , objErrorLogDetails
+        , boolTrackError || true
+      );
+
+      if ( typeof funcErrorCallback === 'function' ) {
+        funcErrorCallback();
+      }
+    }
+    else if ( typeof funcCallback === 'function' ) {
+      funcCallback();
+    }
+  }
+  ,
+
+  /**
+   * Opens Options page.
+   *
+   * @type    method
+   * @param   strCaller
+   *            Where this was called from (action or event name).
+   * @return  boolean
+   **/
+  openOptionsPage : function( strCaller ) {
+    if ( boolConstIsBowserAvailable && strConstChromeVersion >= '42.0' ) {
+      chrome.runtime.openOptionsPage( function() {
+        Global.checkForRuntimeError(
+            undefined
+          , undefined
+          , { strCaller : strCaller || '' }
+          , true
+        );
+      } );
+    }
+    else {
+      // Link to new Options UI for 40+
+      var strOptionsUrl =
+            boolConstUseOptionsUi
+              ? 'chrome://extensions?options=' + strConstExtensionId
+              : chrome.extension.getURL( 'options/index.html' )
+              ;
+
+      Global.createTabOrUpdate( strOptionsUrl );
+    }
   }
 };
 

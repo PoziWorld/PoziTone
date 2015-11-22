@@ -74,7 +74,7 @@
   "optionsSettingsH1": {
     "message": "Configuración"
   },
-  "optionsNavHelp": {
+  "help": {
     "message": "Ayuda"
   },
   "notificationButtonsMuteFeedback": {
@@ -114,7 +114,7 @@
     "message": "PoziTone es una realidad gracias al <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amor</a> y <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">la generosidad</a>."
   },
   "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">velocidad de bits</a>",
+    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">velocidad de bits</a>",
     "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
@@ -147,7 +147,7 @@
   "optionsContact": {
     "message": "Contactar con los desarrolladores de PoziTone"
   },
-  "optionsNavAbout": {
+  "about": {
     "message": "Acerca de"
   },
   "popupTitle": {

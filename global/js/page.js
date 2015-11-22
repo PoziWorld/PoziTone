@@ -11,15 +11,19 @@
 
     Page
       init()
-      addEventListeners()
+      addDevelopersMessageEventListeners()
       localize()
       template()
       showSuccess()
       closeDevelopersMessage()
       trackPageView()
+      initStickyElement()
+      toggleElement()
     Events
 
  ============================================================================ */
+
+const strNotShownElementClass = 'none';
 
 // code.tutsplus.com/tutorials/from-jquery-to-javascript-a-reference--net-23703
 var addEvent = (function () {
@@ -73,7 +77,7 @@ var Page = {
    * @param   No Parameters Taken
    * @return  void
    **/
-  addDeveloperMessageEventListeners : function() {
+  addDevelopersMessageEventListeners : function() {
     addEvent(
         document.getElementById( this.strDevelopersMessageCloseCtaId )
       , 'click'
@@ -153,7 +157,10 @@ var Page = {
         if ( $localizableElement.nodeName === 'LABEL' )
           $localizableElement.innerHTML = 
             $localizableElement.innerHTML + strMessage;
-        else if ( $localizableElement.nodeName === 'A' ) {
+        else if (
+              $localizableElement.nodeName === 'A'
+          &&  ! $localizableElement.classList.contains( 'i18nNoInner' )
+        ) {
           $localizableElement.innerHTML = strMessage;
 
           if ( $localizableElement.href === '' )
@@ -262,13 +269,13 @@ var Page = {
   ,
 
   /**
-   * Track page, subpage (section of the page), and subsection view
+   * Track page, subpage (section of the page), and subsection view.
    *
    * @type    method
    * @param   strSubpage
-   *            Name of the subpage
-   * @param   strSubpage
-   *            Name of the subpage
+   *            Name of the subpage.
+   * @param   strSubsection
+   *            Name of the subsection.
    * @return  void
    **/
   trackPageView : function( strSubpage, strSubsection ) {
@@ -283,6 +290,74 @@ var Page = {
           }
       }
     );
+  }
+  ,
+
+  /**
+   * position: sticky replacement.
+   *
+   * @type    method
+   * @param   $$stickyElement
+   *            Element to stick.
+   * @param   intOrigOffsetY
+   *            Original offset in pixels.
+   * @return  void
+   **/
+  initStickyElement : function( $$stickyElement, intOrigOffsetY ) {
+    var intStickyElementOffsetHeight = $$stickyElement.offsetHeight
+      , strStickyElementPlaceholderHtml =
+          '<div style="height: ' + intStickyElementOffsetHeight + 'px"></div>'
+      ;
+
+    $$stickyElement.insertAdjacentHTML(
+        'afterend'
+      , strStickyElementPlaceholderHtml
+    );
+
+    function onScroll( objEvent ) {
+      $$stickyElement.classList.toggle(
+          'sticky'
+        , window.scrollY >= intOrigOffsetY
+      );
+    }
+
+    document.addEventListener( 'scroll', onScroll );
+  }
+  ,
+
+  /**
+   * Make element show up or disappear.
+   *
+   * @type    method
+   * @param   $element
+   *            Element which will be a success indicator.
+   * @param   boolShow
+   *            Optional. Whether to show or hide.
+   * @return  void
+   **/
+  toggleElement : function( $element, boolShow ) {
+    var boolHidden
+      , boolAriaHidden
+      ;
+
+    if ( typeof boolShow !== 'boolean' ) {
+      $element.classList.toggle( strNotShownElementClass );
+      boolHidden = ! $element.hidden;
+      boolAriaHidden = ! $element.getAttribute( 'aria-hidden' );
+    }
+    else if ( boolShow ) {
+      $element.classList.remove( strNotShownElementClass );
+      boolHidden = false;
+      boolAriaHidden = false;
+    }
+    else {
+      $element.classList.add( strNotShownElementClass );
+      boolHidden = true;
+      boolAriaHidden = true;
+    }
+
+    $element.hidden = boolHidden;
+    $element.setAttribute( 'aria-hidden', boolAriaHidden );
   }
 };
 

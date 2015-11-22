@@ -11,6 +11,8 @@
 
     General
     Settings
+    Projects
+    Feedback
     About
 
  ============================================================================ */
@@ -69,9 +71,71 @@
     {
       margin-bottom:          1.8rem;
     }
-  #menuItemWrap_general
+  .page
     {
-      order:                  -1;
+      min-height: 32rem;
+    }
+  #footer
+    {
+      position: absolute;
+      top: .5rem;
+      left: 0;
+      padding-right: 1.8rem;
+      max-width: 76.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  #rateCta
+    {
+      width: 12.5rem;
+      float: right;
+    }
+  #rateCtaText
+    {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-indent: -9999rem;
+    }
+  .rateCtaStar
+    {
+      float: right;
+      width: 2rem;
+      height: 2rem;
+      overflow: hidden;
+      padding: .25rem;
+      -webkit-filter: grayscale( 1 );
+      filter: grayscale( 1 );
+      opacity: .2;
+      transition: all .2s;
+    }
+  .rateCtaStar:before
+    {
+      content: '';
+      background: url(/global/img/pozitone.svg) 0 0 / 2rem no-repeat;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      margin: auto;
+    }
+      .rateCtaStar:hover
+    , .rateCtaStar:hover ~ .rateCtaStar
+      {
+        -webkit-filter: grayscale( 0 );
+        filter: grayscale( 0 );
+        opacity: 1;
+        transform: scale( 1.05 );
+      }
+  .rateCtaStarText
+    {
+      position: absolute;
+      text-indent: -9999rem;
     }
 
 /* =============================================================================
@@ -160,6 +224,231 @@
 
 /* =============================================================================
 
+  Modules list
+
+ ============================================================================ */
+
+  #settingsModulesList
+    {
+      padding-bottom: 1.5rem;
+    }
+  .sectionText
+    {
+      padding-left: .75rem;
+      padding-right: .75rem;
+    }
+  #modulesListForm
+    {
+      border-bottom: .1rem solid #eee;
+    }
+  #modulesListFormCtaContainer
+    {
+      padding: 1.5rem .75rem;
+      width: 58rem;
+      background-color: #fff;
+      z-index: 2;
+      border-bottom: .1rem solid #eee;
+      box-sizing: border-box;
+    }
+  .sticky#modulesListFormCtaContainer
+    {
+      top: 5.2rem;
+    }
+  #modulesListForm
+    {
+      margin-bottom: 2rem;
+      width: 58rem;
+    }
+  #enableAllCta
+    {
+      padding-right: 3rem;
+    }
+  #enableAllCtaInfoImg
+    {
+      position: absolute;
+      top: 0;
+      right: 1rem;
+      bottom: 0;
+      margin: auto;
+      width: 1.5rem;
+    }
+  #disableAllCta
+    {
+      margin-left: .8rem;
+    }
+  #saveCta
+    {
+      float: right;
+      opacity: 1;
+      transition: all .2s;
+      visibility: visible;
+    }
+  .highlighted#saveCta
+    {
+      font-weight: bold;
+    }
+  .modulesListItem
+    {
+      padding: .75rem .75rem .75rem 7.75rem;
+      min-height: 5rem;
+      border-bottom: .1rem dashed #f0f0f0;
+    }
+  .modulesListItem:nth-of-type( 2 )
+    {
+      padding-top: 1.5rem;
+    }
+  .modulesListItem:last-child
+    {
+      padding-bottom: 1.5rem;
+      border: 0;
+    }
+  .modulesListItem:hover
+    {
+      background-color: #fafafa;
+    }
+  .modulesListItemImg
+    {
+      position: absolute;
+      left: .75rem;
+      width: 5rem;
+      height: 5rem;
+    }
+  .modulesListItemCaption
+    {
+      display: inline-block;
+      font-size: 1.3em;
+      padding-bottom: .5rem;
+      max-width: 40rem;
+      color: #333;
+    }
+  .modulesListItemHosts
+    {
+      display: block;
+      font-size: 1.1em;
+      color: #999;
+    }
+  .modulesListItemHostWrapper:not( :first-child ):before
+    {
+      content: ', ';
+      margin: 0 0 0 -.25em;
+    }
+  .modulesListItemCheckboxWrapper
+    {
+      position: absolute;
+      top: 1rem;
+      right: .75rem;
+      cursor: pointer;
+    }
+  .modulesListItemCheckboxCopy
+    {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1.1em;
+      bottom: .2rem;
+    }
+  .modulesListItem:nth-of-type( 2 ) .modulesListItemCheckboxWrapper
+    {
+      top: 1.75rem;
+    }
+  .modulesListLegalCopy
+    {
+      font-size: .9em;
+      color: #999;
+    }
+  #privacyStatementsContainer
+    {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 16.5rem;
+      background-color: #fff;
+      width: 58rem;
+      opacity: 1;
+      transition: all .2s;
+      flex-direction: column;
+      justify-content: center;
+    }
+  .privacyStatement
+    {
+      font-size: 2em;
+      padding: 3rem 3rem 0;
+      color: #333;
+    }
+  .privacyStatement:first-child
+    {
+      padding-top: 0;
+    }
+  #generalPrivacyStatement
+    {
+      font-weight: bold;
+    }
+
+/* =============================================================================
+
+  Projects
+
+ ============================================================================ */
+
+  #projects
+    {
+      padding-bottom: 1.5rem;
+    }
+  #projectsDescriptionParagraph2
+    {
+      padding-top: .5rem;
+    }
+  .projects#modulesListForm
+    {
+      margin-top: .5rem;
+      border-top: .1rem solid #eee;
+    }
+  .projects#modulesListForm .modulesListItem
+    {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  #projects .modulesListItemCaption
+    {
+      line-height: .9;
+    }
+  .projectDescriptionParagraph
+    {
+      padding-top: .3rem;
+    }
+  .projectDescriptionParagraph:first-of-type
+    {
+      padding-top: 0;
+    }
+  #pwmDescriptionParagraph3
+    {
+      display: none;
+    }
+
+/* =============================================================================
+
+  Contribution
+
+ ============================================================================ */
+
+  #contribution
+    {
+      padding-bottom: 1.1rem;
+    }
+  .list
+    {
+      margin-left: 2.2rem;
+    }
+  .listItem
+    {
+      font-size: 1.2em;
+      padding: .3rem 0;
+      list-style-type: disc;
+    }
+
+/* =============================================================================
+
   About
 
  ============================================================================ */
@@ -192,7 +481,7 @@
     }
   #aboutFooter
     {
-      margin:                 19.1rem 0 1.9rem;
+      margin:                 8.4rem 0 1.9rem;
     }
   .aboutFooterLine
     {

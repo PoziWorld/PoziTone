@@ -9,7 +9,7 @@
 
   Table of Contents:
 
-  1. General Page Watcher
+    General Page Watcher
       getVolumeDeltaSettings()
       processButtonClick_volumeUp()
       processButtonClick_volumeDown()
@@ -18,7 +18,7 @@
 
 /* =============================================================================
 
-  1. General Page Watcher
+  General Page Watcher
 
  ============================================================================ */
 

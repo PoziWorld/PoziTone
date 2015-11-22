@@ -20,6 +20,10 @@
 
  ============================================================================ */
 
+if ( typeof strConstExtensionId !== 'undefined' ) {
+  throw new Error( 'PoziTone: already loaded' );
+}
+
 const
     // Extension
     strConstExtensionId           = chrome.runtime.id
@@ -30,22 +34,41 @@ const
 
     // Browser & UI
   , boolConstIsBowserAvailable    = typeof bowser === 'object'
+  , boolConstIsOpera              =
+      boolConstIsBowserAvailable && bowser.name === 'Opera'
+  , boolConstIsYandex             =
+      boolConstIsBowserAvailable && bowser.name === 'Yandex.Browser'
+  , boolConstIsOperaAddon         = boolConstIsOpera || boolConstIsYandex
   , strConstChromeVersion         =
       boolConstIsBowserAvailable ? bowser.chromeVersion : ''
   , boolConstUseOptionsUi         =
-          boolConstIsBowserAvailable
-      &&  strConstChromeVersion >= '40.0'
-      &&  bowser.name !== 'Opera'
+      strConstChromeVersion >= '40.0' && ! boolConstIsOpera
 
     // URLs
-  , strConstMessageUrl            =
-      'http://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
   , strConstVersionParam          = '%v'
   , strConstLangParam             = '%lang'
+  , strConstMessageUrl            =
+      'http://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
+  , strConstInstallationUrl       = ! boolConstIsOperaAddon
+      ? 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm'
+      : 'https://addons.opera.com/extensions/details/pozitone/'
+  , strConstRateUrl               =
+        strConstInstallationUrl
+      + ( ! boolConstIsOperaAddon
+          ? '/reviews'
+          : '#feedback-container'
+        )
+  , strConstBugsUrl               =
+        strConstInstallationUrl
+      + ( ! boolConstIsOperaAddon
+          ? '/support'
+          : '?reports#feedback-container'
+        )
 
-    // External modules & Notifications
-  , strConstExternalModuleSeparator     = '_'
-  , strConstNotificationIdSeparator     = '_'
+    // External modules, separators, and Notifications
+  , strConstGenericStringSeparator      = '_'
+  , strConstExternalModuleSeparator     = strConstGenericStringSeparator
+  , strConstNotificationIdSeparator     = strConstGenericStringSeparator
   , strConstNotificationLinesSeparator  = "\n\n"
   , strConstNotificationId              =
       strConstExtensionName + strConstNotificationIdSeparator

@@ -74,7 +74,7 @@
   "optionsSettingsH1": {
     "message": "Ustawienia"
   },
-  "optionsNavHelp": {
+  "help": {
     "message": "Pomoc"
   },
   "notificationButtonsMuteFeedback": {
@@ -114,7 +114,7 @@
     "message": "PoziTone zostało stworzone dzięki <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">miłości</a> oraz <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">życzliwości</a>."
   },
   "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Wyświetl <a href=\"http://pl.wikipedia.org/wiki/Sta%C5%82a_przep%C5%82ywno%C5%9B%C4%87\" target=\"_blank\">stałą przepływność</a>",
+    "message": "Wyświetl <a href=\"http://pl.wikipedia.org/wiki/Sta%C5%82a_przep%C5%82ywno%C5%9B%C4%87\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">stałą przepływność</a>",
     "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
@@ -147,7 +147,7 @@
   "optionsContact": {
     "message": "Skontaktuj się z twórcami PoziTone"
   },
-  "optionsNavAbout": {
+  "about": {
     "message": "O rozszerzeniu"
   },
   "popupTitle": {

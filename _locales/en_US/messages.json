@@ -233,15 +233,6 @@
             }
 
           ,
-          "optionsSettingsSupport": {
-            "message": "Support this player"
-          }
-            ,
-            "optionsSettingsSupportEnabled": {
-              "message": "Enabled"
-            }
-
-          ,
           "optionsSettingsDisplayWhen": {
             "message": "Show notifications"
           }
@@ -277,8 +268,8 @@
           }
             ,
             "optionsSettingsAdditionalInfoShowCbr": {
-                "description" : "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
-              , "message"     : "Display <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>"
+                "description" : "https://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+              , "message"     : "Display <a href=\"https://en.wikipedia.org/wiki/Constant_bitrate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">constant bitrate</a>"
             }
 
           ,
@@ -343,11 +334,119 @@
               "message": "Mute / Unmute"
             }
     ,
-    "optionsNavFaq": {
-      "message": "FAQ"
+    "projects": {
+      "message": "Our projects"
     }
+      ,
+      "projectsDescriptionParagraph1": {
+        "message": "PoziTone is being developed by a small team called PoziWorld."
+      }
+      ,
+      "projectsDescriptionParagraph2": {
+        "message": "PoziWorld develops web browser extensions that help you solve everyday tasks easier, faster, more&nbsp;efficiently, are free to use, and do not track your activity without your prior agreement."
+      }
+      ,
+      "sttbDescriptionParagraph1": {
+        "message": "Adds a scroll to top and/or bottom button."
+      }
+      ,
+      "sttbDescriptionParagraph2": {
+        "message": "Great for viewing long/infinite pages such as Facebook, Twitter, etc."
+      }
+      ,
+      "pwmDescriptionParagraph1": {
+        "message": "Helps you minimize print waste, save ink."
+      }
+      ,
+      "pwmDescriptionParagraph2": {
+        "message": "Go Green on the following Print Return Label pages: Amazon, eBay, and Old Navy."
+      }
     ,
-    "optionsNavAbout": {
+    "contribution": {
+      "message": "Contribution"
+    }
+      ,
+      "spreadTheWord": {
+        "message": "Spread the word"
+      }
+        ,
+        "spreadTheWordWhyNot": {
+          "message": "If you find PoziTone useful, why not recommend it to your friends, colleagues, and/or followers?"
+        }
+        ,
+        "spreadTheWordWays": {
+          "message": "There are a few ways you can help our cause:"
+        }
+        ,
+        "spreadTheWordFollowUs": {
+          "message": "Follow us on <a href=\"https://facebook.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://google.com/+PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"http://ok.ru/group/54738320621596\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+        }
+        ,
+        "spreadTheWordInstallationLink": {
+          "message": "Share the <a href=\"#\" target=\"blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">installation link</a> on your social networks and/or blog."
+        }
+        ,
+        "spreadTheWordRateLink": {
+          "message": "<a href=\"#\" target=\"blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Rate PoziTone</a> – the feedback really helps others find this extension!"
+        }
+        ,
+        "rateExtension": {
+          "message": "Please rate PoziTone – the feedback really helps others find this extension!"
+        }
+        ,
+        "rateExtensionShort": {
+          "message": "Rate PoziTone"
+        }
+      ,
+      "feedback": {
+        "message": "Feedback"
+      }
+        ,
+        "feedbackAppreciated": {
+          "message": "We appreciate your feedback!"
+        }
+        ,
+        "feedbackIdeas": {
+          "message": "Please <a href=\"http://feedback.pozitone.com/\" target=\"blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
+        }
+        ,
+        "feedbackQuestions": {
+          "message": "Don't be shy to <a href=\"mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"questions\" }'>ask questions</a>."
+        }
+        ,
+        "feedbackIssues": {
+          "message": "<a href=\"#\" target=\"blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Bug reports</a> are valuable!"
+        }
+        ,
+        "feedbackPraises": {
+          "message": "We like <a href=\"#\" target=\"blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>praises</a>, who doesn't? :)"
+        }
+      ,
+      "translation": {
+        "message": "Translation"
+      }
+        ,
+        "translationParagraph1": {
+          "message": "Sprechen Sie Deutsch? Vous parlez français?"
+        }
+        ,
+        "translationParagraph2": {
+          "message": "We want as many PoziTone users as possible to be able to interact with the extension in their native language."
+        }
+        ,
+        "translationParagraph3": {
+          "message": "If you know any foreign language or just noticed a discrepancy in the translation, please <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"blank\" class=\"externalLink\" data-id=\"translation\">let us know</a>."
+        }
+      ,
+      "incentive": {
+        "message": "Incentive"
+      }
+        ,
+        "incentiveParagraph": {
+          "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+        }
+    ,
+    "about": {
       "message": "About"
     }
       ,
@@ -366,10 +465,6 @@
         "optionsContact": {
           "message": "Contact developers of PoziTone"
         }
-          ,
-          "optionsContactHref": {
-            "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
-          }
         ,
         "optionsVersion": {
           "message": "Version"
@@ -380,14 +475,14 @@
         }
         ,
         "optionsFoundation": {
-          "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">kindness</a>."
+          "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">kindness</a>."
         }
         ,
         "optionsTerms": {
-          "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">license agreement</a>"
+          "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">license agreement</a>"
         }
     ,
-    "optionsNavHelp": {
+    "help": {
       "message": "Help"
     }
       ,
@@ -450,29 +545,85 @@
   }
 
   ,
-  "module_ru_ok_audio": {
-    "message": "Odnoklassniki (audio)"
+  "modulesBuiltIn": {
+    "message": "Built-in modules"
   }
     ,
-    "module_ru_ok_audio_long": {
-      "message": "Odnoklassniki (audio) | ok.ru"
+    "modulesBuiltInDescription": {
+      "message": "Add <em title=\"1. Current track info. 2. Easy player control. 3. List of recent tracks.\">new features</em> to your favorite online players (audio, video) by enabling appropriate PoziTone&nbsp;modules."
     }
 
-  ,
-  "module_com_vk_audio": {
-    "message": "VK (audio)"
-  }
     ,
-    "module_com_vk_audio_long": {
-      "message": "VK (audio) | vk.com"
+    "module_ru_ok_audio": {
+      "message": "Odnoklassniki (audio)"
     }
+      ,
+      "module_ru_ok_audio_long": {
+        "message": "Odnoklassniki (audio) | ok.ru"
+      }
 
-  ,
-  "module_ru_101": {
-    "message": "101.ru"
-  }
     ,
-    "module_ru_101_long": {
+    "module_com_vk_audio": {
+      "message": "VK (audio)"
+    }
+      ,
+      "module_com_vk_audio_long": {
+        "message": "VK (audio) | vk.com"
+      }
+
+    ,
+    "module_com_vgmradio": {
+      "message": "VGM Radio"
+    }
+      ,
+      "module_com_vgmradio_long": {
+        "message": "VGM Radio | vgmradio.com"
+      }
+
+    ,
+    "module_ru_101": {
       "message": "Online radio 101.ru"
     }
+      ,
+      "module_ru_101_long": {
+        "message": "Online radio 101.ru"
+      }
+
+  ,
+  "enableAll": {
+    "message": "Enable all"
+  }
+  ,
+  "disableAll": {
+    "message": "Disable all"
+  }
+  ,
+  "save": {
+    "message": "Save"
+  }
+  ,
+  "enabled": {
+    "message": "Enabled"
+  }
+
+  ,
+  "trademarksDisclaimer": {
+    "message": "All trademarks mentioned belong to their owners, third party brands, product names, trade names, corporate names and company names mentioned may be trademarks of their respective owners or registered trademarks of other companies and are used for purposes of explanation and to the owner's benefit, without implying a violation of copyright law."
+  }
+  ,
+  "trademarksDisclaimerContinued": {
+    "message": "All information and content (texts, graphics and images) are reported to the best of our knowledge, public knowledge, if unintentionally, has been published or copyrighted material in violation of the law, please inform us and we will immediately remove it."
+  }
+  ,
+  "generalPrivacyStatement": {
+    "message": "PoziTone does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
+  }
+  ,
+  "privacyStatementForOrigins": {
+    "message": "“<strong>Read and change your data</strong>”: this permission is required for the correct operation of PoziTone with a player (controlling playback, adjusting sound volume, getting current track name and performer)."
+  }
+  ,
+  "privacyStatementForTabs": {
+    "message": "“<strong>Read your browsing history</strong>”: this permission is required for getting a current URL of the page on the basis of which PoziTone checks whether to load a corresponding module."
+  }
 }

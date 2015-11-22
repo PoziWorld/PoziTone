@@ -15,44 +15,53 @@
     <script src="/global/js/page.js"></script>
     <script src="/options/js/options.js"></script>
     <script src="/options/js/app.js"></script>
-    <script src="/options/js/controllers.js"></script>
+    <script src="/options/js/controllers/settings.js"></script>
+    <script src="/options/js/controllers/settings-modules-list.js"></script>
+    <script src="/options/js/controllers/misc.js"></script>
   </head>
   <body>
     <header id="header">
       <h1 id="extensionName" i18n-content="extensionName"></h1>
       <nav id="nav">
         <ul id="menu" ng-controller="MenuController">
-          <li>
-            <span class="menuItem" i18n-content="optionsNavSettings"></span>
+          <li
+            class="menuItemWrap"
+            id="menuItemWrap_{{objModules.general.id}}"
+            module-menu-item-directive
+              >
+            <a
+              ng-href="#/settings/{{objModules.general.id}}"
+              class="menuItem"
+                >{{objModules.general.caption}}</a>
+          </li>
+          <li class="menuItemWrap">
+            <a
+              ng-href="#/settings/modules/built-in"
+              class="menuItem"
+              i18n-content="modulesBuiltIn"
+                ></a>
             <ul id="submenu">
               <li
-                  class="menuItemWrap"
-                  id="menuItemWrap_{{objModule.id}}"
-                  ng-repeat="objModule in modules"
-                  module-menu-item-directive
-                    >
+                class="menuItemWrap"
+                id="menuItemWrap_{{objModule.id}}"
+                ng-repeat="objModule in objModules"
+                ng-if="objModule.id !== 'general'"
+                module-menu-item-directive
+                  >
                 <a
-                  ng-href="#/settings/{{objModule.id}}"
+                  ng-href="#/settings/modules/built-in/{{objModule.id}}"
                   class="menuItem"
                     >{{objModule.caption}}</a>
               </li>
             </ul>
           </li>
-          <li class="menuItemWrap">
+          <li class="menuItemWrap" ng-class="{none : strPage === 'help'}" ng-repeat="strPage in arrPages">
             <a
-              ng-href="#/about"
-              data-page="about"
+              ng-href="#/{{strPage}}"
+              data-page="{{strPage}}"
               class="menuItem"
-              i18n-content="optionsNavAbout"
-                ></a>
-          </li>
-          <li class="none">
-            <a
-              ng-href="#/help"
-              data-page="help"
-              id="helpMenuItem"
-              class="menuItem"
-              i18n-content="optionsNavHelp"
+              id="{{strPage}}MenuItem"
+              i18n-content="{{strPage}}"
                 ></a>
           </li>
         </ul>
@@ -74,5 +83,30 @@
       </ul>
     </aside>
     <main id="content" ng-view></main>
+    <footer id="footer">
+      <a
+        ng-href="{{strRateUrl}}"
+        id="rateCta"
+        class="i18nNoInner i18nTitle"
+        i18n-content="rateExtension"
+          >
+        <span id="rateCtaText" i18n-content="rateExtension"></span>
+        <span class="rateCtaStar">
+          <span class="rateCtaStarText">5</span>
+        </span>
+        <span class="rateCtaStar">
+          <span class="rateCtaStarText">4</span>
+        </span>
+        <span class="rateCtaStar">
+          <span class="rateCtaStarText">3</span>
+        </span>
+        <span class="rateCtaStar">
+          <span class="rateCtaStarText">2</span>
+        </span>
+        <span class="rateCtaStar">
+          <span class="rateCtaStarText">1</span>
+        </span>
+      </a>
+    </footer>
   </body>
 </html>

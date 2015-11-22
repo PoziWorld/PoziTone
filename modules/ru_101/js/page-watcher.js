@@ -9,7 +9,7 @@
 
   Table of Contents:
 
-  1. Page Watcher
+    Page Watcher
       init()
       getPlayerInfo()
       getPlayerStatus()
@@ -32,17 +32,17 @@
       initFavoriteStatusObserver()
       setLogoLoadedCallback()
       modifyStationLogo()
-  2. Listeners
+    Listeners
       titlesong DOMCharacterDataModified
       runtime.onMessage
-  3. On Load
+    On Load
       Initialize
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Page Watcher
+  Page Watcher
 
  ============================================================================ */
 
@@ -104,10 +104,11 @@ var
             strModule                     : strModule
           , boolIsReady                   : document.contains( $playStopButton )
           , boolIsMp3Player               : ! document.contains( $wmaPlayer )
+          , boolIsPlaying                 : false
+          , boolIsMuted                   : false
           , intVolume                     : 0
             // Uppod doesn't save prev value, restore to this one
           , intVolumeBeforeMuted          : 50
-          , strStatus                     : ''
           , strPreviousStatus             : ''
           , boolCanPlayNextTrackLoggedOut : false
           , boolCanPlayPreviousTrackLoggedOut : false
@@ -209,7 +210,7 @@ var
               : ''
         ;
 
-      PageWatcher.objPlayerInfo.strStatus = strWantedClass;
+      PageWatcher.objPlayerInfo.boolIsPlaying = strWantedClass === 'stop';
 
       if ( typeof boolReturnStatus !== 'undefined' )
         return strWantedClass;
@@ -315,6 +316,8 @@ var
     else // If WMA
       objWmaPlayerSettings.mute = true;
 
+    PageWatcher.objPlayerInfo.boolIsMuted = true;
+
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
@@ -337,6 +340,8 @@ var
       );
     else
       objWmaPlayerSettings.mute = false;
+
+    PageWatcher.objPlayerInfo.boolIsMuted = false;
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
@@ -683,7 +688,7 @@ var
 
   /**
    * Checks whether station logo is loaded.
-   * If yes, created an image for notification.
+   * If yes, creates an image for notification.
    * If no, adds onload listener.
    *
    * @type    method
@@ -749,7 +754,7 @@ PageWatcher.processButtonClick_volumeDown =
 
 /* =============================================================================
 
-  2. Event Listeners
+  Event Listeners
 
  ============================================================================ */
 
@@ -820,7 +825,7 @@ chrome.runtime.onMessage.addListener(
 
 /* =============================================================================
 
-  3. On Load
+  On Load
 
  ============================================================================ */
 

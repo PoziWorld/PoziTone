@@ -105,7 +105,7 @@
     "message": "PoziTone è reso possibile dall' <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amore</a> e dalla <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">gentilezza</a>."
   },
   "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Mostra il <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\">constant bitrate</a>",
+    "message": "Mostra il <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">constant bitrate</a>",
     "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsDisplayWhen": {
@@ -138,7 +138,7 @@
   "optionsContact": {
     "message": "Contatta gli sviluppatori di PoziTone"
   },
-  "optionsNavAbout": {
+  "about": {
     "message": "Ulteriori informazioni"
   },
   "popupTitle": {

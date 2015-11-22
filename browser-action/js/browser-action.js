@@ -93,18 +93,13 @@ var Popup                   = {
         document.getElementById( 'toolbarOpenOptionsPageBtn' )
       , 'click'
       , function( objEvent ) {
-          // Link to new Options UI for 40+
-          var strOptionsUrl =
-                boolConstUseOptionsUi
-                  ? 'chrome://extensions?options=' + strConstExtensionId
-                  : chrome.extension.getURL( 'options/index.html' )
-                  ;
+          var strLog = 'browserAction.toolbar';
 
           // Track clicks
           chrome.runtime.sendMessage(
             {
                 strReceiver     : 'background'
-              , strLog          : 'browserAction.toolbar'
+              , strLog          : strLog
               , objVars         : {
                     strAction   : 'openOptions'
                   , strPage     : strPage
@@ -112,7 +107,7 @@ var Popup                   = {
             }
           );
 
-          Global.createTabOrUpdate( strOptionsUrl );
+          Global.openOptionsPage( strLog );
         }
     );
 
@@ -136,7 +131,7 @@ var Popup                   = {
         }
     );
 
-    Page.addDeveloperMessageEventListeners();
+    Page.addDevelopersMessageEventListeners();
 
     addEvent(
         document.querySelectorAll( '#tunesSuggestionInfo a' )

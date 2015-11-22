@@ -9,7 +9,7 @@
 
   Table of Contents:
 
-  1. Page Watcher
+    Page Watcher
       init()
       getPlayerInfo()
       getPlayerStatus()
@@ -35,16 +35,16 @@
       getKbpsInfoThenSendMessage()
       sendSameMessage()
       setTrackInfoAndSend()
-  2. Listeners
+    Listeners
       runtime.onMessage
-  3. On Load
+    On Load
       Initialize
 
  ============================================================================ */
 
 /* =============================================================================
 
-  1. Page Watcher
+  Page Watcher
 
  ============================================================================ */
 
@@ -111,9 +111,10 @@ var
       , objPlayerInfo                     : {
             strModule                     : strModule
           , boolIsReady                   : false
+          , boolIsPlaying                 : false
+          , boolIsMuted                   : false
           , intVolume                     : 0
           , intVolumeBeforeMuted          : 0
-          , strStatus                     : ''
           , strPreviousStatus             : ''
           , boolCanPlayNextTrackLoggedOut : false
           , boolCanPlayPreviousTrackLoggedOut : false
@@ -162,22 +163,13 @@ var
    * Get player status from Play/Stop Button class attr
    *
    * @type    method
-   * @param   boolReturnStatus
-   *            Return status or not
+   * @param   No Parameters Taken
    * @return  void / string
    **/
-  getPlayerStatus : function( boolReturnStatus ) {
+  getPlayerStatus : function() {
     if ( document.contains( $mainPlayStopBtn ) ) {
-      var boolIsPlaying =
-            $mainPlayStopBtn.classList.contains( strIsPlayingClass );
-
-      // Follow the 101.ru logic:
-      // 'stop' means it's in progress / playback can be stopped;
-      // 'play' means it's off / playback can be started/resumed.
-      PageWatcher.objPlayerInfo.strStatus = boolIsPlaying ? 'stop' : 'play';
-
-      if ( typeof boolReturnStatus !== 'undefined' )
-        return strWantedClass;
+      PageWatcher.objPlayerInfo.boolIsPlaying =
+        $mainPlayStopBtn.classList.contains( strIsPlayingClass );
     }
   }
   ,
@@ -277,8 +269,10 @@ var
     if (
           document.contains( $muteUnmuteBtn )
       &&  ! $muteUnmuteBtn.classList.contains( strMutedClass )
-    )
+    ) {
       $muteUnmuteBtn.click();
+      PageWatcher.objPlayerInfo.boolIsMuted = true;
+    }
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
@@ -297,8 +291,10 @@ var
     if (
           document.contains( $muteUnmuteBtn )
       &&  $muteUnmuteBtn.classList.contains( strMutedClass )
-    )
+    ) {
       $muteUnmuteBtn.click();
+      PageWatcher.objPlayerInfo.boolIsMuted = false;
+    }
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
@@ -803,7 +799,7 @@ var
 
 /* =============================================================================
 
-  2. Event Listeners
+  Event Listeners
 
  ============================================================================ */
 
@@ -843,7 +839,7 @@ chrome.runtime.onMessage.addListener(
 
 /* =============================================================================
 
-  3. On Load
+  On Load
 
  ============================================================================ */
 

@@ -28,6 +28,7 @@
       processButtonClick_seeChanges()
       processButtonClick_doNotNotifyOfUpdates()
       resetDevelopersMessageVars()
+      createBrowserActionContextMenu()
     Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
@@ -39,6 +40,7 @@
       tabs.onReplaced
       tabs.onRemoved
       alarms.onAlarm
+      contextMenus.onClicked
     On Load
       Initialize
 
@@ -56,6 +58,7 @@ const
       , objActiveButtons                          : {}
       , objOpenTabs                               : {}
       , arrTabsIds                                : []
+      , strOptionsPageToOpen                      : ''
     }
   , objSettingsSyncable                           = {
         arrRecentTracks                           : []
@@ -72,7 +75,7 @@ const
           , intVolumeDelta                        : 10
         }
       , objSettings_ru_101                        : {
-            boolIsEnabled                         : true
+            boolIsEnabled                         : false
           , boolShowNotificationLogo              : true
           , strNotificationLogo                   : 'station'
           , strNotificationTitleFormat            : 'short'
@@ -100,7 +103,7 @@ const
           , intVolumeDelta                        : 10
         }
       , objSettings_ru_ok_audio                   : {
-            boolIsEnabled                         : true
+            boolIsEnabled                         : false
           , boolShowNotificationLogo              : true
           , strNotificationLogo                   : 'site'
           , arrAvailableNotificationButtons       : [
@@ -117,7 +120,7 @@ const
           , boolShowNotificationWhenMuted         : false
         }
       , objSettings_com_vk_audio                  : {
-            boolIsEnabled                         : true
+            boolIsEnabled                         : false
           , boolShowNotificationLogo              : true
           , strNotificationLogo                   : 'site'
           , boolShowKbpsInfo                      : false
@@ -134,6 +137,25 @@ const
                                                         'addAuth'
                                                       , 'nextAuth'
                                                     ]
+          , boolShowNotificationWhenMuted         : false
+          , boolUseGeneralVolumeDelta             : true
+          , intVolumeDelta                        : 10
+        }
+      , objSettings_com_vgmradio                  : {
+            boolIsEnabled                         : false
+          , boolShowNotificationLogo              : true
+          , strNotificationLogo                   : 'station'
+          , arrAvailableNotificationButtons       : [
+                                                        'playStop'
+                                                      , 'muteUnmute'
+                                                      , 'volumeUp'
+                                                      , 'volumeDown'
+                                                    ]
+          , arrActiveNotificationButtons          : [
+                                                        'playStop'
+                                                      , 'muteUnmute'
+                                                    ]
+          , boolShowNotificationWhenStopped       : false
           , boolShowNotificationWhenMuted         : false
           , boolUseGeneralVolumeDelta             : true
           , intVolumeDelta                        : 10
@@ -186,6 +208,9 @@ var Background                    = {
             }
         ]
     }
+
+  , strBrowserActionContextMenuIdPrefix :
+      'browserAction' + strConstGenericStringSeparator
   ,
 
   /**
@@ -315,6 +340,8 @@ var Background                    = {
   /**
    * Clean up in case of browser (re-)load/crash, extension reload, etc.
    *
+   * TODO: Nothing to clean up on install, so skip.
+   *
    * @type    method
    * @param   boolIsCalledFromOnInstalledListener
    *            Whether to set extension defaults on clean-up complete
@@ -327,10 +354,11 @@ var Background                    = {
     strLog = 'cleanUp';
     Log.add( strLog );
 
-    var arrSettingsToCleanUp  = [
-                                    'objActiveButtons'
-                                  , 'arrTabsIds'
-                                ];
+    var arrSettingsToCleanUp = [
+        'objActiveButtons'
+      , 'arrTabsIds'
+      , 'strOptionsPageToOpen'
+    ];
 
     StorageLocal.remove( arrSettingsToCleanUp, function() {
       if (
@@ -487,20 +515,20 @@ var Background                    = {
               Log.add( strLog + strLogDone, objData );
             });
 
-            Background.setExtensionDefaults();
+            Background.setExtensionDefaults( objDetails );
           });
         }
         else {
           Log.add( strLog + strLogDoNot );
 
-          Background.setExtensionDefaults();
+          Background.setExtensionDefaults( objDetails );
         }
       });
     }
     else {
       Log.add( strLog + strLogDoNot );
       
-      Background.setExtensionDefaults();
+      Background.setExtensionDefaults( objDetails );
     }
   }
   ,
@@ -515,9 +543,12 @@ var Background                    = {
    *            Default settings
    * @param   strLogSuffix
    *            Type of storage to report in the log
+   * @param   objDetails
+   *            Reason - install/update/chrome_update -
+   *            and (optional) previous version
    * @return  void
    **/
-  setDefaults : function( Storage, objSettings, strLogSuffix ) {
+  setDefaults : function( Storage, objSettings, strLogSuffix, objDetails ) {
     Storage.get( null, function( objReturn ) {
       strLog = 'setExtensionDefaults, ' + strLogSuffix;
       Log.add( strLog );
@@ -571,8 +602,17 @@ var Background                    = {
         }
       }
 
-      if ( ! Global.isEmpty( objTempToSet ) )
-        Global.setStorageItems( Storage, objTempToSet, strLog );
+      // TODO: Check whether this is being called twice
+      if ( ! Global.isEmpty( objTempToSet ) ) {
+        // Once installed and defaults are set, open Options page
+        function funcCallback() {
+          if ( objDetails.reason === 'install' ) {
+            Global.openOptionsPage( 'install' );
+          }
+        }
+
+        Global.setStorageItems( Storage, objTempToSet, strLog, funcCallback );
+      }
       else
         Log.add( strLog + strLogDoNot );
     });
@@ -583,12 +623,25 @@ var Background                    = {
    * Set extension defaults
    *
    * @type    method
-   * @param   No Parameters Taken
+   * @param   objDetails
+   *            Reason - install/update/chrome_update -
+   *            and (optional) previous version
    * @return  void
    **/
-  setExtensionDefaults : function() {
-    Background.setDefaults( StorageLocal,  objSettingsNotSyncable,   'local' );
-    Background.setDefaults( StorageSync,   objSettingsSyncable,      'sync'  );
+  setExtensionDefaults : function( objDetails ) {
+    Background.setDefaults(
+        StorageLocal
+      , objSettingsNotSyncable
+      , 'local'
+      , objDetails
+    );
+
+    Background.setDefaults(
+        StorageSync
+      , objSettingsSyncable
+      , 'sync'
+      , objDetails
+    );
   }
   ,
 
@@ -774,7 +827,100 @@ var Background                    = {
   ,
 
   /**
-   * Checks if there are any changes to open tabs, 
+   * Check whether there is an appropriate module for the site in the tab.
+   *
+   * @type    method
+   * @param   objTab
+   *            Properties of the tab.
+   * @param   objOpenTabs
+   *            All currently open tabs and their properties.
+   * @return  object
+   **/
+  checkTab : function( objTab, objOpenTabs ) {
+    objOpenTabs = objOpenTabs || {};
+
+    var strUrl = objTab.url;
+
+    if ( typeof strUrl === 'string' && strUrl !== '' ) {
+      var miscModule = Global.isValidUrl( strUrl );
+
+      if ( strUrl && miscModule ) {
+        Log.add( strLog + strLogSuccess, strUrl );
+
+        var
+            intWindowId   = objTab.windowId
+          , intTabId      = objTab.id
+          , funcPingPage  = function( miscModule ) {
+              chrome.tabs.sendMessage(
+                  intTabId
+                , 'Do you copy?'
+                , function( strResponse ) {
+                    if ( strResponse !== 'Copy that.' ) {
+                      var
+                          objModule = Global.objModules[ miscModule ]
+                        , arrCss    = objModule.arrCss
+                        , intCss    = ( typeof arrCss !== 'undefined' ) ?
+                                        arrCss.length : 0
+                        , arrJs     = objModule.arrJs
+                        , intJs     = ( typeof arrJs !== 'undefined' ) ?
+                                        arrJs.length : 0
+                        , funcCallback = function() {
+                            Global.checkForRuntimeError(
+                                undefined
+                              , undefined
+                              , { strModule : miscModule }
+                              , false
+                            );
+                          }
+                        ;
+
+                      for ( var j = 0; j < intCss; j++ ) {
+                        chrome.tabs.executeScript(
+                            intTabId
+                          , { file: arrCss[ j ], runAt: 'document_end' }
+                          , function() {
+                              funcCallback();
+                            }
+                        );
+                      }
+
+                      for ( var k = 0; k < intJs; k++ ) {
+                        chrome.tabs.executeScript(
+                            intTabId
+                          , { file: arrJs[ k ], runAt: 'document_end' }
+                          , function() {
+                              funcCallback();
+                            }
+                        );
+                      }
+                    }
+                  }
+              );
+            }
+          ;
+
+        // If there are no open tabs for this windowId saved yet
+        if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) )
+          objOpenTabs[ intWindowId ] = {};
+
+        // Do not save all the properties of an open tab
+        var objTabCopy  = {};
+
+        objTabCopy.id   = objTab.id;
+        objTabCopy.url  = objTab.url;
+
+        objOpenTabs[ intWindowId ][ objTab.index ] = objTabCopy;
+
+        funcPingPage( miscModule );
+      }
+    }
+
+    return objOpenTabs;
+  }
+  ,
+
+  /**
+   * Checks if there are any changes to open tabs,
    * detects if supported sites were opened/closed.
    *
    * @type    method
@@ -798,66 +944,7 @@ var Background                    = {
       var objOpenTabs = {};
 
       for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
-        var
-            strUrl      = objTab.url
-          , miscModule  = Global.isValidUrl( strUrl )
-          ;
-
-        if ( strUrl && miscModule ) {
-          Log.add( strLog + strLogSuccess, strUrl );
-
-          var
-              intWindowId   = objTab.windowId
-            , intTabId      = objTab.id
-            , funcPingPage  = function( miscModule ) {
-                chrome.tabs.sendMessage(
-                    intTabId
-                  , 'Do you copy?'
-                  , function( strResponse ) {
-                      if ( strResponse !== 'Copy that.' ) {
-                        var
-                            objModule = Global.objModules[ miscModule ]
-                          , arrCss    = objModule.arrCss
-                          , intCss    = ( typeof arrCss !== 'undefined' ) ?
-                                          arrCss.length : 0
-                          , arrJs     = objModule.arrJs
-                          , intJs     = ( typeof arrJs !== 'undefined' ) ?
-                                          arrJs.length : 0
-                          ;
-
-                        for ( var j = 0; j < intCss; j++ ) {
-                          chrome.tabs.executeScript(
-                              intTabId
-                            , { file: arrCss[ j ] }
-                          );
-                        }
-
-                        for ( var k = 0; k < intJs; k++ ) {
-                          chrome.tabs.executeScript(
-                              intTabId
-                            , { file: arrJs[ k ] }
-                          );
-                        }
-                      }
-                    }
-                );
-              }
-            ;
-
-          // If there are no open tabs for this windowId saved yet
-          if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) )
-            objOpenTabs[ intWindowId ] = {};
-
-          // Do not save all the properties of an open tab
-          var objTabCopy  = {};
-
-          objTabCopy.id   = objTab.id;
-          objTabCopy.url  = objTab.url;
-
-          objOpenTabs[ intWindowId ][ objTab.index ] = objTabCopy;
-
-          funcPingPage( miscModule );
-        }
+        objOpenTabs = Background.checkTab( objTab );
 
         // chrome.tabs.onReplaced
         if (
@@ -893,25 +980,22 @@ var Background                    = {
    * @return  void
    **/
   checkIfOpenTabChangedDomainOnUpdated : function( objTab ) {
-    StorageLocal.get(
-        Background.strObjOpenTabsName
-      , function( objReturn ) {
-          strLog = 'checkIfOpenTabChangedDomainOnUpdated';
-          Log.add( strLog, objTab );
+    Global.getSavedOpenTabs( function( objReturn ) {
+      strLog = 'checkIfOpenTabChangedDomainOnUpdated';
+      Log.add( strLog, objTab );
 
-          var 
-              objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
-            , objSavedWindow  = objSavedTabs[ objTab.windowId ]
-            ;
+      var
+          objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
+        , objSavedWindow  = objSavedTabs[ objTab.windowId ]
+        ;
 
-          if ( typeof objSavedWindow === 'object' ) {
-            var objSavedTab = objSavedWindow[ objTab.index ];
+      if ( typeof objSavedWindow === 'object' ) {
+        var objSavedTab = objSavedWindow[ objTab.index ];
 
-            if ( typeof objSavedTab === 'object' )
-              Background.checkIfHostnameChanged( objSavedTab, objTab );
-          }
-        }
-    );
+        if ( typeof objSavedTab === 'object' )
+          Background.checkIfHostnameChanged( objSavedTab, objTab );
+      }
+    } );
   }
   ,
 
@@ -925,41 +1009,38 @@ var Background                    = {
    * @return  void
    **/
   checkIfOpenTabChangedDomainOnReplaced : function( intRemovedTabId ) {
-    StorageLocal.get(
-        Background.strObjOpenTabsName
-      , function( objReturn ) {
-          strLog = 'checkIfOpenTabChangedDomainOnReplaced';
-          Log.add( strLog, intRemovedTabId );
+    Global.getSavedOpenTabs( function( objReturn ) {
+      strLog = 'checkIfOpenTabChangedDomainOnReplaced';
+      Log.add( strLog, intRemovedTabId );
 
-          var 
-              objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
-            ;
+      var
+          objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
+        ;
 
-          for ( var intWindowId in objSavedTabs ) {
-            if ( objSavedTabs.hasOwnProperty( intWindowId ) ) {
-              var objSavedWindows = objSavedTabs[ intWindowId ];
+      for ( var intWindowId in objSavedTabs ) {
+        if ( objSavedTabs.hasOwnProperty( intWindowId ) ) {
+          var objSavedWindows = objSavedTabs[ intWindowId ];
 
-              for ( var intTabIndex in objSavedWindows ) {
-                if ( objSavedWindows.hasOwnProperty( intTabIndex ) ) {
-                  var objSavedTab = objSavedWindows[ intTabIndex ];
+          for ( var intTabIndex in objSavedWindows ) {
+            if ( objSavedWindows.hasOwnProperty( intTabIndex ) ) {
+              var objSavedTab = objSavedWindows[ intTabIndex ];
 
-                  if ( objSavedTab.id === intRemovedTabId ) {
-                    Log.add( strLog + strLogSuccess, intRemovedTabId );
+              if ( objSavedTab.id === intRemovedTabId ) {
+                Log.add( strLog + strLogSuccess, intRemovedTabId );
 
-                    Background.checkOpenTabs( objSavedTab, intRemovedTabId );
-                    return;
-                  }
-                }
+                Background.checkOpenTabs( objSavedTab, intRemovedTabId );
+                return;
               }
             }
           }
-
-          Log.add( strLog + strLogNoSuccess, intRemovedTabId );
-
-          // When no tabs had been saved
-          Background.checkOpenTabs();
         }
-    );
+      }
+
+      Log.add( strLog + strLogNoSuccess, intRemovedTabId );
+
+      // When no tabs had been saved
+      Background.checkOpenTabs();
+    } );
   }
   ,
 
@@ -1087,7 +1168,95 @@ var Background                    = {
         }
     );
   }
+  ,
+
+  /**
+   * Create a menu that gets shown when right-clicked on PoziTone icon next
+   * to the address bar.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+  createBrowserActionContextMenu : function() {
+    strLog = 'createBrowserActionContextMenu';
+    Log.add( strLog, {} );
+
+    var arrContextMenus = [
+            'modulesBuiltIn'
+          , 'projects'
+          , 'contribution'
+          , 'feedback'
+          , 'about'
+        ]
+      , i = 0
+      , l = arrContextMenus.length
+      , strContextMenu
+      , objContextMenuProperties
+      ;
+
+    function createContextMenu( objProperties ) {
+      chrome.contextMenus.create(
+          objProperties
+        , function() {
+            // TODO: Log error if failed creating
+          }
+      );
+    }
+
+    function createGenericContextMenuProperties( strContextMenu ) {
+      return {
+          title : chrome.i18n.getMessage( strContextMenu )
+        , contexts : [ 'browser_action' ]
+      };
+    }
+
+    function createOptionsPageLinkContextMenuProperties( strContextMenu ) {
+      objContextMenuProperties =
+        createGenericContextMenuProperties( strContextMenu );
+
+      objContextMenuProperties.id =
+          Background.strBrowserActionOptionsPageContextMenuIdPrefix
+        + strContextMenu
+        ;
+
+      return objContextMenuProperties;
+    }
+
+    function createOptionsPageLinkContextMenu( strContextMenu ) {
+      createContextMenu(
+          createOptionsPageLinkContextMenuProperties( strContextMenu )
+      );
+    }
+
+    // Rate Extension
+    objContextMenuProperties =
+      createGenericContextMenuProperties( 'rateExtensionShort' );
+
+    objContextMenuProperties.id =
+      Background.strBrowserActionRateExtensionContextMenuId;
+
+    createContextMenu( objContextMenuProperties );
+
+    // Others
+    for ( i; i < l; i++ ) {
+      strContextMenu = arrContextMenus[ i ];
+
+      createOptionsPageLinkContextMenu( strContextMenu );
+    }
+  }
 };
+
+
+Background.strBrowserActionOptionsPageContextMenuIdPrefix =
+    Background.strBrowserActionContextMenuIdPrefix
+  + 'optionsPage'
+  + strConstGenericStringSeparator
+  ;
+
+Background.strBrowserActionRateExtensionContextMenuId =
+    Background.strBrowserActionContextMenuIdPrefix + 'rateExtension'
+  ;
 
 /* =============================================================================
 
@@ -1455,6 +1624,8 @@ chrome.runtime.onInstalled.addListener(
     else {
       Global.checkForDevelopersMessage();
     }
+
+    Background.createBrowserActionContextMenu();
   }
 );
 
@@ -1474,6 +1645,7 @@ chrome.runtime.onStartup.addListener(
 
     Background.cleanUp();
     Background.checkOpenTabs();
+    Background.createBrowserActionContextMenu();
   }
 );
 
@@ -1484,6 +1656,7 @@ chrome.runtime.onStartup.addListener(
  *
  * @type    method
  * @param   intTabId
+ *            ID of the tab.
  * @param   objChangeInfo
  *            Lists the changes to the state of the tab that was updated.
  * @param   objTab
@@ -1499,11 +1672,26 @@ chrome.tabs.onUpdated.addListener(
 
     var strStatus = objChangeInfo.status;
 
-    if ( typeof strStatus !== 'undefined' ) {
-      if ( strStatus === 'loading' )
+    if ( typeof strStatus === 'string' ) {
+      if ( strStatus === 'loading' ) {
         Background.checkIfOpenTabChangedDomainOnUpdated( objTab );
-      else if ( strStatus === 'complete' )
-        Background.checkOpenTabs();
+
+        Global.getSavedOpenTabs( function( objReturn ) {
+          strLog = 'chrome.tabs.onUpdated, complete';
+          Log.add( strLog );
+
+          var objOpenTabs =
+                Background.checkTab( objTab, objReturn.objOpenTabs );
+
+          // TODO: Prevent exceeding max number of write operations
+          Global.saveOpenTabs( objOpenTabs );
+
+          if ( Global.isEmpty( objOpenTabs ) ) {
+            strLog = 'chrome.tabs.onUpdated, complete';
+            Log.add( strLog + strLogNoSuccess );
+          }
+        } );
+      }
     }
   }
 );
@@ -1556,6 +1744,8 @@ chrome.tabs.onRemoved.addListener(
     strLog = 'chrome.tabs.onRemoved';
     Log.add( strLog, intTabId );
 
+    // TODO: When multiple tabs get closed at (almost) the same time,
+    // wait for the following to finish with setTimeout
     Background.checkOpenTabs();
     Global.removeNotification( intTabId );
   }
@@ -1583,6 +1773,75 @@ chrome.alarms.onAlarm.addListener(
     }
   }
 );
+
+/**
+ * Fired when a context menu item is clicked.
+ *
+ * @type    method
+ * @param   objInfo
+ *            Information sent when a context menu item is clicked.
+ * @param   objTab
+ *            The details of the tab where the click took place.
+ *            If the click did not take place in a tab,
+ *            this parameter will be missing.
+ * @return  void
+ **/
+chrome.contextMenus.onClicked.addListener( function( objInfo, objTab ) {
+  var strLog = strLog = 'chrome.contextMenus.onClicked'
+    , strOption
+    ;
+
+  Log.add( strLog, objInfo );
+
+  var strMenuItemId = objInfo.menuItemId
+    , strBrowserActionOptionsPageContextMenuIdPrefix =
+        Background.strBrowserActionOptionsPageContextMenuIdPrefix
+    , intOptionsPageIndex = strMenuItemId.indexOf(
+        strBrowserActionOptionsPageContextMenuIdPrefix
+      )
+    ;
+
+  if ( ~ intOptionsPageIndex ) {
+    var strPage = strMenuItemId.substr(
+          strBrowserActionOptionsPageContextMenuIdPrefix.length
+        )
+      , objItems = { strOptionsPageToOpen : strPage }
+      ;
+
+    strOption = strPage;
+
+    if ( strPage !== '' ) {
+      Global.setStorageItems(
+          StorageLocal
+        , objItems
+        , strLog
+        , function() {
+            Global.openOptionsPage( strLog );
+          }
+        , undefined
+        , objItems
+        , true
+      );
+    }
+  }
+  else if (
+    ~ strMenuItemId.indexOf(
+        Background.strBrowserActionRateExtensionContextMenuId
+      )
+  ) {
+    strOption = 'rate';
+
+    Global.createTabOrUpdate( strConstRateUrl );
+  }
+
+  // Track clicks
+  var objLogDetails = objConstUserSetUp;
+
+  objLogDetails.strContext = 'browserAction';
+  objLogDetails.strOption = strOption;
+
+  Log.add( 'contextMenuClick', objLogDetails, true );
+} );
 
 /* =============================================================================
 

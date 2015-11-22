@@ -53,6 +53,8 @@ const
 
 var
     objParams                         = {}
+  , strSubpage
+  , strSubsection
 
   , $allInputs // All <input />
   , intInputs  // Num of $allInputs

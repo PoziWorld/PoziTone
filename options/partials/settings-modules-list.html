@@ -1,0 +1,121 @@
+      <section id="settingsModulesList" class="page">
+        <h1 id="modulesListPageHeading" class="pageHeading">
+          <span i18n-content="modulesBuiltIn"></span>
+          <span
+            id="settingsSaved" class="fadeInFadeOut"
+            i18n-content="optionsSettingsSaved"
+              ></span>
+        </h1>
+        <p
+          class="sectionText first"
+          id="modulesListDescription"
+          i18n-content="modulesBuiltInDescription"
+            ></p>
+        <form id="modulesListForm">
+          <p id="modulesListFormCtaContainer" class="initSticky">
+            <button
+              id="enableAllCta"
+              class="cta hasText"
+              ng-click="toggleModules( true )"
+              ng-disabled="intEnabledModules === intModules"
+                >
+              <span i18n-content="enableAll"></span>
+              <img
+                src="/global/img/info-icon.svg"
+                class="i18nNoInner i18nTitle"
+                id="enableAllCtaInfoImg"
+                i18n-content="generalPrivacyStatement"
+                  >
+            </button>
+            <button
+              id="disableAllCta"
+              class="cta hasText"
+              i18n-content="disableAll"
+              ng-click="toggleModules( false )"
+              ng-disabled="intEnabledModules === 0"
+                ></button>
+            <button
+              id="saveCta"
+              class="cta hasText"
+              i18n-content="Save"
+              ng-click="saveChanges()"
+              ng-show="intChanges !== 0"
+              ng-disabled="intChanges === 0"
+                ></button>
+          </p>
+          <p
+            ng-repeat="objModule in objModules"
+            ng-if="( strModuleId = objModule.id ) !== '' && ( objGlobalModule = objGlobalModules[ strModuleId ] ) != undefined && strModuleId !== 'general'"
+            class="modulesListItem"
+            id="modulesListItem_{{strModuleId}}"
+            localize
+              >
+            <img
+              ng-if="( strImageFileName = objGlobalModule.strImageFileName ) != undefined && strImageFileName !== ''"
+              ng-src="/modules/{{strModuleId}}/img/{{strImageFileName}}"
+              class="modulesListItemImg"
+              alt="{{strCaption}}"
+                >
+            <img
+              ng-if="strImageFileName == undefined || strImageFileName === ''"
+              ng-src="/global/img/no-logo.svg"
+              class="modulesListItemImg"
+              alt="{{strCaption}}"
+                >
+            <a
+              ng-href="#/settings/modules/built-in/{{strModuleId}}"
+              class="modulesListItemCaption"
+                >{{strCaption = objModule.caption}}</a>
+            <span class="modulesListItemHosts">
+              <span
+                class="modulesListItemHostWrapper"
+                ng-repeat="strHost in objGlobalModule.arrHosts"
+                  >
+                <a
+                  ng-href="https://{{strHost}}"
+                  class="modulesListItemHost externalLink"
+                  data-id="moduleHost"
+                  data-params='{ "strModuleId" : "{{strModuleId}}", "strHost" : "{{strHost}}" }'
+                    >{{strHost}}</a>
+              </span>
+            </span>
+            <label class="modulesListItemCheckboxWrapper">
+              <input
+                type="checkbox" name="boolIsEnabled"
+                data-module-id="{{strModuleId}}"
+                data-was-enabled="{{boolIsEnabled = objModule.boolIsEnabled}}"
+                ng-checked="boolIsEnabled"
+                ng-click="prepareModuleForSaving( $event )"
+                class="modulesListItemCheckbox"
+                  >
+              <span
+                class="modulesListItemCheckboxCopy"
+                i18n-content="enabled"
+                  ></span>
+            </label>
+          </p>
+        </form>
+        <p
+          class="sectionText modulesListLegalCopy"
+          i18n-content="trademarksDisclaimer"
+            ></p>
+        <p
+          class="sectionText modulesListLegalCopy"
+          i18n-content="trademarksDisclaimerContinued"
+            ></p>
+      </section>
+      <aside id="privacyStatementsContainer" class="ng-hide">
+        <p
+          class="privacyStatement"
+          i18n-content="privacyStatementForOrigins"
+            ></p>
+        <p
+          class="privacyStatement"
+          i18n-content="privacyStatementForTabs"
+            ></p>
+        <p
+          id="generalPrivacyStatement"
+          class="privacyStatement"
+          i18n-content="generalPrivacyStatement"
+            ></p>
+      </aside>

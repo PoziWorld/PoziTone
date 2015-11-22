@@ -1,0 +1,41 @@
+      <section id="projects" class="page">
+        <h1 class="pageHeading" i18n-content="projects"></h1>
+        <p
+          class="sectionText first"
+          id="projectsDescriptionParagraph1"
+          i18n-content="projectsDescriptionParagraph1"
+            ></p>
+        <p
+          class="sectionText"
+          id="projectsDescriptionParagraph2"
+          i18n-content="projectsDescriptionParagraph2"
+            ></p>
+        <form id="modulesListForm" class="projects" localize>
+          <p
+            ng-repeat="objProject in arrProjects"
+            class="modulesListItem"
+              >
+            <img
+              ng-src="/global/img/projects/{{objProject.strImageFileName}}"
+              class="modulesListItemImg"
+              alt="{{strName = objProject.strName}}"
+                >
+            <a
+              ng-href="{{boolIsNotOperaAddon ? objProject.strChromeLink : objProject.strOperaLink}}"
+              class="modulesListItemCaption externalLink"
+              data-id="project"
+              data-params='{ "strProjectName" : "{{strName}}", "strProjectAbbreviation" : "{{strAbbreviation = objProject.strAbbreviation}}" }'
+                >{{strName}}</a>
+            <span
+              id="{{strAbbreviation}}DescriptionParagraph1"
+              class="modulesListItemHosts projectDescriptionParagraph"
+              i18n-content="{{strAbbreviation}}DescriptionParagraph1"
+                ></span>
+            <span
+              id="{{strAbbreviation}}DescriptionParagraph2"
+              class="modulesListItemHosts projectDescriptionParagraph"
+              i18n-content="{{strAbbreviation}}DescriptionParagraph2"
+                ></span>
+          </p>
+        </form>
+      </section>

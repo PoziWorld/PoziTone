@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.4.1"
+  , "version"                   : "0.5"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"
@@ -18,17 +18,22 @@
     }
 
   , "permissions"               : [
-        "*://101.ru/"
+        "alarms"
+      , "clipboardWrite"
+      , "contextMenus"
+      , "notifications"
+      , "storage"
+      , "unlimitedStorage"
+    ]
+  , "optional_permissions"      : [
+        "*://*/"
+      , "*://101.ru/"
       , "*://*.odnoklassniki.ru/"
       , "*://*.ok.ru/"
       , "*://vk.com/"
       , "*://*.vk.me/"
-      , "alarms"
-      , "clipboardWrite"
-      , "notifications"
-      , "storage"
+      , "*://vgmradio.com/"
       , "tabs"
-      , "unlimitedStorage"
     ]
   , "browser_action"            : {
         "default_icon"          : {
@@ -79,39 +84,6 @@
           , "description"       : "__MSG_commandShowNotification__"
         }
     }
-  , "content_scripts"           : [
-        {
-            "matches"           : [ "*://101.ru/*" ]
-          , "js"                : [
-                "global/js/const.js"
-              , "modules/ru_101/js/uppod-player-api.js"
-              , "modules/general/js/page-watcher.js"
-              , "modules/ru_101/js/page-watcher.js"
-            ]
-          , "run_at"            : "document_end"
-        }
-      , {
-            "matches"           : [
-                "*://*.odnoklassniki.ru/*"
-              , "*://*.ok.ru/*"
-            ]
-          , "js"                : [
-                "global/js/const.js"
-              , "modules/general/js/page-watcher.js"
-              , "modules/ru_ok_audio/js/page-watcher.js"
-            ]
-          , "run_at"            : "document_end"
-        }
-      , {
-            "matches"           : [ "*://vk.com/*" ]
-          , "js"                : [
-                "global/js/const.js"
-              , "modules/general/js/page-watcher.js"
-              , "modules/com_vk_audio/js/page-watcher.js"
-            ]
-          , "run_at"            : "document_end"
-        }
-    ]
   , "background"                : {
         "persistent"            : false
       , "scripts"               : [
