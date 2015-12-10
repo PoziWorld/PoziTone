@@ -8,7 +8,7 @@
   }
   ,
   "extensionDescription": {
-    "message": "Adds functionality to audio players, such as track info notifications, controls outside of browser window, and recent tracks list."
+    "message": "Adds new features to favorite players, such as track info notifications, controls outside of browser window, and recent tracks list."
   }
   ,
   "commandShowNotification": {
@@ -450,57 +450,62 @@
       "message": "About"
     }
       ,
-      "optionsAboutH1": {
-        "message": "About"
+      "optionsInfo": {
+        "message": "Details about PoziTone"
       }
         ,
-        "optionsInfo": {
-          "message": "Details about PoziTone"
+        "optionsInfoHref": {
+          "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
         }
-          ,
-          "optionsInfoHref": {
-            "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
-          }
+      ,
+      "optionsContact": {
+        "message": "Contact developers of PoziTone"
+      }
+      ,
+      "optionsVersion": {
+        "message": "Version"
+      }
+      ,
+      "versionHistory": {
+        "message": "version history"
+      }
         ,
-        "optionsContact": {
-          "message": "Contact developers of PoziTone"
+        "versionHistoryHref": {
+            "description": "Please check whether there is a version of https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md for your language."
+          , "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md"
         }
-        ,
-        "optionsVersion": {
-          "message": "Version"
-        }
-        ,
-        "optionsCopyright": {
-          "message": "&copy; PoziWorld, 2015"
-        }
-        ,
-        "optionsFoundation": {
-          "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">kindness</a>."
-        }
-        ,
-        "optionsTerms": {
-          "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">license agreement</a>"
-        }
+      ,
+      "optionsCopyright": {
+        "message": "&copy; PoziWorld, 2015"
+      }
+      ,
+      "optionsFoundation": {
+        "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">kindness</a>."
+      }
+      ,
+      "optionsTerms": {
+        "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">license agreement</a>"
+      }
     ,
     "help": {
       "message": "Help"
     }
       ,
-      "optionsHelpH1": {
-        "message": "Help"
+      "optionsHelpText": {
+        "message": "By submitting the information listed below, you will let the developers of PoziTone find a solution to a problem, you may be experiencing, quicker."
       }
-        ,
-        "optionsHelpText": {
-          "message": "By submitting the information listed below, you will let the developers of PoziTone find a solution to a problem, you may be experiencing, quicker."
-        }
-        ,
-        "optionsHelpSubmitInfoCta": {
-          "message": "Submit info"
-        }
-        ,
-        "optionsHelpSubmitInfoCtaSuccess": {
-          "message": "Submitted"
-        }
+      ,
+      "optionsHelpSubmitInfoCta": {
+        "message": "Submit info"
+      }
+      ,
+      "optionsHelpSubmitInfoCtaSuccess": {
+        "message": "Submitted"
+      }
+    ,
+    "info": {
+      "message": "Info"
+    }
 
   ,
   "popupTitle": {

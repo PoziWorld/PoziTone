@@ -9,9 +9,6 @@
   "optionsSettingsGeneralShortcutsShowInNotification": {
     "message": "Mostra consigli nelle notifiche"
   },
-  "optionsAboutH1": {
-    "message": "Ulteriori informazioni"
-  },
   "optionsSettingsSoundVolumeControlDelta": {
     "message": "Change by, %",
     "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."

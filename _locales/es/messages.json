@@ -9,9 +9,6 @@
   "optionsSettingsGeneralShortcutsShowInNotification": {
     "message": "Mostrar sugerencias en la notificación"
   },
-  "optionsAboutH1": {
-    "message": "Acerca de"
-  },
   "module_ru_ok_audio_long": {
     "message": "Odnoklassniki (audio) | ok.ru"
   },
@@ -281,9 +278,6 @@
   },
   "optionsSettingsNotificationIconFormat": {
     "message": "Formato de icono de la notificación"
-  },
-  "optionsHelpH1": {
-    "message": "Ayuda"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Ver cambios"

@@ -8,7 +8,7 @@
   }
   ,
   "extensionDescription": {
-    "message": "Добавляет функциональность аудиоплеерам: оповещения с информацией о треке, управление вне окна браузера, список последних треков."
+    "message": "Добавляет новые возможности любимым плеерам: оповещения с информацией о треке, управление вне браузера, список последних треков."
   }
   ,
   "commandShowNotification": {
@@ -450,57 +450,62 @@
       "message": "О расширении"
     }
       ,
-      "optionsAboutH1": {
-        "message": "О расширении"
+      "optionsInfo": {
+        "message": "Подробнее о PoziTone"
       }
         ,
-        "optionsInfo": {
-          "message": "Подробнее о PoziTone"
+        "optionsInfoHref": {
+          "message": "https://github.com/poziworld/pozitone/blob/develop/README_ru.md"
         }
-          ,
-          "optionsInfoHref": {
-            "message": "https://github.com/poziworld/pozitone/blob/develop/README_ru.md"
-          }
+      ,
+      "optionsContact": {
+        "message": "Связаться с разработчиками PoziTone"
+      }
+      ,
+      "optionsVersion": {
+        "message": "Версия"
+      }
+      ,
+      "versionHistory": {
+        "message": "история версий"
+      }
         ,
-        "optionsContact": {
-          "message": "Связаться с разработчиками PoziTone"
+        "versionHistoryHref": {
+            "description": "Пожалуйста, проверьте, есть ли версия https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_ru.md для Вашего языка."
+          , "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_ru.md"
         }
-        ,
-        "optionsVersion": {
-          "message": "Версия"
-        }
-        ,
-        "optionsCopyright": {
-          "message": "&copy; PoziWorld, 2015"
-        }
-        ,
-        "optionsFoundation": {
-          "message": "Расширение PoziTone создано на основе <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D0%B8\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">любви</a> и <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">добра</a>."
-        }
-        ,
-        "optionsTerms": {
-          "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_ru\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">Лицензионное соглашение</a> PoziTone"
-        }
+      ,
+      "optionsCopyright": {
+        "message": "&copy; PoziWorld, 2015"
+      }
+      ,
+      "optionsFoundation": {
+        "message": "Расширение PoziTone создано на основе <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D0%B8\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">любви</a> и <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_ru.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">добра</a>."
+      }
+      ,
+      "optionsTerms": {
+        "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_ru\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">Лицензионное соглашение</a> PoziTone"
+      }
     ,
     "help": {
       "message": "Помощь"
     }
       ,
-      "optionsHelpH1": {
-        "message": "Помощь"
+      "optionsHelpText": {
+        "message": "Отправляя указанную ниже информацию, Вы позволите разработчикам PoziTone найти решение проблемы, которую Вы, возможно, испытываете, быстрее."
       }
-        ,
-        "optionsHelpText": {
-          "message": "Отправляя указанную ниже информацию, Вы позволите разработчикам PoziTone найти решение проблемы, которую Вы, возможно, испытываете, быстрее."
-        }
-        ,
-        "optionsHelpSubmitInfoCta": {
-          "message": "Отправить информацию"
-        }
-        ,
-        "optionsHelpSubmitInfoCtaSuccess": {
-          "message": "Отправлено"
-        }
+      ,
+      "optionsHelpSubmitInfoCta": {
+        "message": "Отправить информацию"
+      }
+      ,
+      "optionsHelpSubmitInfoCtaSuccess": {
+        "message": "Отправлено"
+      }
+    ,
+    "info": {
+      "message": "Инфо"
+    }
 
   ,
   "popupTitle": {

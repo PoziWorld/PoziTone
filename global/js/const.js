@@ -27,10 +27,10 @@ if ( typeof strConstExtensionId !== 'undefined' ) {
 const
     // Extension
     strConstExtensionId           = chrome.runtime.id
-  , strConstExtensionName         = chrome.i18n.getMessage( 'extensionName' )
-  , strConstExtensionVersion      = chrome.runtime.getManifest().version
-  , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
   , objConstExtensionManifest     = chrome.runtime.getManifest()
+  , strConstExtensionName         = objConstExtensionManifest.name
+  , strConstExtensionVersion      = objConstExtensionManifest.version
+  , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
 
     // Browser & UI
   , boolConstIsBowserAvailable    = typeof bowser === 'object'

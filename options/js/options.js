@@ -16,7 +16,6 @@
       setPageValues()
       onSettingChange()
       addEventListeners()
-      displayCurrentVersion()
       removeModuleNotifications()
       initEeLauncher()
     Listeners
@@ -42,7 +41,6 @@ const
   , strModuleSubpageIdPrefix          = 'settings_'
   , strSettingsSubpageClass           = 'settingsSubpage'
   , strMenuItemSelectedClass          = 'selected'
-  , strVersionId                      = 'version'
   , strEnableModule                   = 'boolIsEnabled'
 
   , strEeLauncherKeyword              = 'help'
@@ -249,19 +247,6 @@ var Options = {
 
         }
     );
-  }
-  ,
-
-  /**
-   * Display current version on About page
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
-   **/
-  displayCurrentVersion : function() {
-    document.getElementById( strVersionId ).innerHTML = 
-      strConstExtensionVersion;
   }
   ,
 

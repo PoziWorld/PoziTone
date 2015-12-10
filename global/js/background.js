@@ -1182,15 +1182,19 @@ var Background                    = {
     strLog = 'createBrowserActionContextMenu';
     Log.add( strLog, {} );
 
-    var arrContextMenus = [
+    var arrParentContextMenus = [
             'modulesBuiltIn'
-          , 'projects'
+          , 'info'
+        ]
+      , arrInfoContextMenus = [
+            'projects'
           , 'contribution'
           , 'feedback'
           , 'about'
         ]
-      , i = 0
-      , l = arrContextMenus.length
+      , i
+      , l = arrParentContextMenus.length
+      , m = arrInfoContextMenus.length
       , strContextMenu
       , objContextMenuProperties
       ;
@@ -1204,6 +1208,14 @@ var Background                    = {
       );
     }
 
+    function createContextMenuSeparator( strContextMenu ) {
+      createContextMenu( {
+          type : 'separator'
+        , id : Background.strBrowserActionContextMenuIdPrefix + strContextMenu
+        , contexts : [ 'browser_action' ]
+      } );
+    }
+
     function createGenericContextMenuProperties( strContextMenu ) {
       return {
           title : chrome.i18n.getMessage( strContextMenu )
@@ -1211,7 +1223,10 @@ var Background                    = {
       };
     }
 
-    function createOptionsPageLinkContextMenuProperties( strContextMenu ) {
+    function createOptionsPageLinkContextMenuProperties(
+        strContextMenu
+      , strParentContextMenu
+    ) {
       objContextMenuProperties =
         createGenericContextMenuProperties( strContextMenu );
 
@@ -1220,12 +1235,28 @@ var Background                    = {
         + strContextMenu
         ;
 
+      if (
+            typeof strParentContextMenu === 'string'
+        &&  strParentContextMenu !== ''
+      ) {
+        objContextMenuProperties.parentId =
+            Background.strBrowserActionOptionsPageContextMenuIdPrefix
+          + strParentContextMenu
+          ;
+      }
+
       return objContextMenuProperties;
     }
 
-    function createOptionsPageLinkContextMenu( strContextMenu ) {
+    function createOptionsPageLinkContextMenu(
+        strContextMenu
+      , strParentContextMenu
+    ) {
       createContextMenu(
-          createOptionsPageLinkContextMenuProperties( strContextMenu )
+          createOptionsPageLinkContextMenuProperties(
+              strContextMenu
+            , strParentContextMenu
+          )
       );
     }
 
@@ -1238,12 +1269,25 @@ var Background                    = {
 
     createContextMenu( objContextMenuProperties );
 
-    // Others
-    for ( i; i < l; i++ ) {
-      strContextMenu = arrContextMenus[ i ];
+    // Separator
+    createContextMenuSeparator( 'separator1' );
+
+    // Parents
+    for ( i = 0; i < l; i++ ) {
+      strContextMenu = arrParentContextMenus[ i ];
 
       createOptionsPageLinkContextMenu( strContextMenu );
     }
+
+    // Info
+    for ( i = 0; i < m; i++ ) {
+      strContextMenu = arrInfoContextMenus[ i ];
+
+      createOptionsPageLinkContextMenu( strContextMenu, 'info' );
+    }
+
+    // Create separator in Opera before Options context menu.
+    createContextMenuSeparator( 'separator2' );
   }
 };
 

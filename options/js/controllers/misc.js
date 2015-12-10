@@ -76,7 +76,10 @@ optionsControllers.controller( 'FeedbackCtrl', function( $scope, $rootScope ) {
 
 // Controller for About page
 optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
-  Options.displayCurrentVersion();
+  document.getElementById( 'logo' ).alt = strConstExtensionName;
+  document.getElementById( 'name' ).textContent = strConstExtensionName;
+  document.getElementById( 'version' ).textContent = strConstExtensionVersion;
+
   Page.localize( strPage, '#content' );
 
   strSubpage = 'about';
