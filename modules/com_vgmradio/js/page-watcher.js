@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2015 PoziWorld
+  Copyright               :           Copyright (c) 2015-2016 PoziWorld
   License                 :           pozitone.com/license
   File                    :           js/page-watcher.js
   Description             :           vgmradio.com Page Watcher JavaScript

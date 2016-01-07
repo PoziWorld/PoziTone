@@ -2,7 +2,7 @@
 
   Product                 :           PoziTone
   Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013-2015 PoziWorld
+  Copyright               :           Copyright (c) 2013-2016 PoziWorld
   License                 :           pozitone.com/license
   File                    :           browser-action/js/browser-action.js
   Description             :           Popup JavaScript
