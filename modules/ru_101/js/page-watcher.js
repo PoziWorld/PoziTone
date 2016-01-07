@@ -545,7 +545,7 @@ var
                           , attributeFilter   : [ 'class' ]
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var strPlayerStatus = PageWatcher.getPlayerStatus( true );
 
             // To prevent a bug when mutation happens twice on MP3 player start
@@ -607,7 +607,7 @@ var
                           , subtree       : true
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutationRecord   = arrMutations[ i ]
               , strFeedbackMessage  = ''
@@ -664,7 +664,7 @@ var
                           , attributeFilter   : [ 'class' ]
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var arrClassList = arrMutations[ i ].target.classList;
 
             if (

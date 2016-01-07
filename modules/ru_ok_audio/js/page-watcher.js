@@ -386,7 +386,7 @@ var
                             childList         : true
                         }
       , funcCallback  = function( arrMutations ) {
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutationRecord   = arrMutations[ i ]
               , arrAddedNodes       = objMutationRecord.addedNodes
@@ -442,7 +442,7 @@ var
                           , attributeFilter   : [ 'class' ]
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 $target                   = arrMutations[ i ].target
               , boolIsPlaying             = 
@@ -519,7 +519,7 @@ var
                           , subtree           : true
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             if (
                   arrMutations[ i ].target.textContent !== ''
               &&  $trackPerformerTitle.innerText !==
@@ -553,7 +553,7 @@ var
                           , attributeOldValue : true
                         }
       , funcCallback  = function( arrMutations ) {
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutation   = arrMutations[ i ]
               , arrClassList  = objMutation.target.classList
@@ -593,7 +593,7 @@ var
   onPlaybackStartedIndicatorAppearance : function(
       boolWasPlayerFullForcedToOpen
     ) {
-    // Once player appeared, it doesn't dissapear - disconnect
+    // Once player appeared, it doesn't disappear - disconnect
     DisconnectableObserver.disconnect();
 
     PageWatcher.objPlayerInfo.boolIsReady = true;
@@ -618,7 +618,7 @@ var
    * @return  void
    **/
   onPlayerFullAppearance : function() {
-    // Once player appeared, it doesn't dissapear - disconnect
+    // Once player appeared, it doesn't disappear - disconnect
     DisconnectableObserver.disconnect();
 
     $playerFull             = document.getElementById( strPlayerFullId );

@@ -586,15 +586,18 @@ var Global                        = {
               ;
 
             // Notification Title Settings
-            if ( strTitleFormat === 'short' )
-              objNotificationOptions.title = 
+            if ( strTitleFormat === 'short' ) {
+              objNotificationOptions.title =
                 objTempStationInfo.strStationName;
-            else if ( strTitleFormat === 'long' )
-              objNotificationOptions.title = 
+            }
+            else if ( strTitleFormat === 'long' ) {
+              objNotificationOptions.title =
                 objTempStationInfo.strStationNamePlusDesc;
-            else if ( strTitleFormat === 'noStationInfo' )
-              objNotificationOptions.title = 
+            }
+            else {
+              objNotificationOptions.title =
                 chrome.i18n.getMessage( 'extensionName' );
+            }
 
             // Notification Buttons Settings
             if ( arrButtons.length !== 0 ) {
@@ -605,6 +608,7 @@ var Global                        = {
                 , arrTrackInfo            = 
                     objTempStationInfo
                       .strTrackInfo
+                        .trim()
                         .split( strConstNotificationLinesSeparator )
                 ;
 

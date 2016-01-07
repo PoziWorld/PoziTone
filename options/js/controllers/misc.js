@@ -99,6 +99,10 @@ optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
 optionsControllers.controller( 'HelpCtrl', function( $scope ) {
   Options.removeNotAvailable();
   Page.localize( strPage, '#content' );
+
+  strSubpage = 'help';
+  strSubsection = undefined;
+
   Page.trackPageView( 'help' );
 
   // Show debug info

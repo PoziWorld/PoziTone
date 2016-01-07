@@ -479,7 +479,7 @@ var
                             childList         : true
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutationRecord   = arrMutations[ i ]
               , arrAddedNodes       = objMutationRecord.addedNodes
@@ -539,7 +539,7 @@ var
                           , attributeFilter   : [ 'class' ]
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 $target                   = arrMutations[ i ].target
               , boolIsPlaying             = 
@@ -612,7 +612,7 @@ var
                             childList         : true
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutationRecord   = arrMutations[ i ]
               , arrAddedNodes       = objMutationRecord.addedNodes
@@ -635,7 +635,7 @@ var
                 PageWatcher
                   .checkIfPlayerStatusHadBeenChanged( $playStopBtnPlayerLite );
 
-                // Once button appeared, it doesn't dissapear - disconnect
+                // Once button appeared, it doesn't disappear - disconnect
                 DisconnectableObserver.disconnect();
                 return;
               }
@@ -666,7 +666,7 @@ var
                           , subtree           : true
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             var
                 objMutationRecord   = arrMutations[ i ]
               ;
@@ -696,7 +696,7 @@ var
                           , attributeFilter   : [ 'style' ]
                         }
       , funcCallback  = function( arrMutations ) {  
-          for ( var i = 0; i < arrMutations.length; i++ ) {
+          for ( var i = 0, l = arrMutations.length; i < l; i++ ) {
             if (
                   arrMutations[i].target.style.opacity == 1
               &&  typeof funcWhenReady === 'function'
@@ -721,7 +721,7 @@ var
    * @return  void
    **/
   onPlayerLiteAppearance : function() {
-    // Once player appeared, it doesn't dissapear - disconnect
+    // Once player appeared, it doesn't disappear - disconnect
     DisconnectableObserver.disconnect();
 
     PageWatcher.objPlayerInfo.boolIsReady = true;
@@ -755,7 +755,7 @@ var
    * @return  void
    **/
   onPlayerFullAppearance : function( strAction ) {
-    // Once player appeared, it doesn't dissapear - disconnect
+    // Once player appeared, it doesn't disappear - disconnect
     DisconnectableObserver.disconnect();
 
     $playerVisibleFull = document.getElementById( strPlayerVisibleFullId );

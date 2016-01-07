@@ -30,9 +30,9 @@
       , "*://101.ru/"
       , "*://*.odnoklassniki.ru/"
       , "*://*.ok.ru/"
+      , "*://vgmradio.com/"
       , "*://vk.com/"
       , "*://*.vk.me/"
-      , "*://vgmradio.com/"
       , "tabs"
     ]
   , "browser_action"            : {
