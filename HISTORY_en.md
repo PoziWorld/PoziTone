@@ -2,6 +2,11 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.5.1
+    * Fixed: “Add track to playlist”, “Next track”, and “Previous track” buttons would not show up
+      on the notification for Odnoklassniki (ok.ru module) when logged-in.
+      Bug reported by Sergey Plotkin.
+
 ### v0.5
     * New module: VGM Radio | vgmradio.com. Don't forget to enable in Options!
       Idea by Jason Jimmo.

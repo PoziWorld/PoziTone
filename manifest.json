@@ -5,7 +5,7 @@
   , "default_locale"            : "en_US"
   , "name"                      : "__MSG_extensionName__"
   , "description"               : "__MSG_extensionDescription__"
-  , "version"                   : "0.5"
+  , "version"                   : "0.5.1"
 
   , "short_name"                : "PoziTone"
   , "author"                    : "PoziWorld"

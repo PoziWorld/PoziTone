@@ -72,7 +72,9 @@ const
   // Others
   , strMainBodyAreaId                     = 'hook_Block_BodySwitcher'
   , boolIsUserToolbarPresent              =
-      document.contains( document.getElementById( 'portal-headline_login' ) )
+      document.contains(
+        document.getElementById( 'hook_Block_ToolbarUserDropdown' )
+      )
 
   // Module
   , strModule                             = 'ru_ok_audio'
