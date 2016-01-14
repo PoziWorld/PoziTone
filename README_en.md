@@ -105,7 +105,7 @@ Keyboard shortcuts
 ### Set up / change keyboards shortcuts
 
 1. Right-click on the PoziTone icon to the right of the address bar.
-2. Click on “Manage”.
+2. Click on “Manage extensions”.
 3. Scroll down the page.
 4. Click on the blue “Keyboard shortcuts” link.
 5. Find PoziTone in the list.
