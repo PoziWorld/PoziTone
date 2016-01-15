@@ -102,6 +102,21 @@ const
           , boolUseGeneralVolumeDelta             : true
           , intVolumeDelta                        : 10
         }
+      , objSettings_fm_di : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'station'
+          , strNotificationTitleFormat : 'short'
+          , arrAvailableNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenMuted : false
+        }
       , objSettings_ru_ok_audio                   : {
             boolIsEnabled                         : false
           , boolShowNotificationLogo              : true

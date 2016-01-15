@@ -59,6 +59,7 @@ Supported online media players
 * [VGM Radio](https://vgmradio.com).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).
 * [Online radio 101.ru](http://101.ru) (stations' main player).
+* [Digitally Imported](http://www.di.fm) (DI, DI.FM or DI Radio).
 
 More to come...
 

@@ -594,6 +594,15 @@
         "message": "Online radio 101.ru"
       }
 
+    ,
+    "module_fm_di": {
+      "message": "Digitally Imported"
+    }
+      ,
+      "module_fm_di_long": {
+        "message": "Digitally Imported | di.fm"
+      }
+
   ,
   "enableAll": {
     "message": "Enable all"

@@ -94,6 +94,23 @@ var Global                        = {
               , 'modules/ru_101/js/page-watcher.js'
             ]
         }
+      , fm_di : {
+            objRegex : /(http:\/\/|https:\/\/)www.di.fm\/.*/
+          , strImageFileName : 'di-logo-120.svg'
+          , arrHosts : [
+                'di.fm'
+              , 'audioaddict.com'
+            ]
+          , arrOrigins : [
+                '*://*.audioaddict.com/*'
+              , '*://*.di.fm/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/fm_di/js/page-watcher.js'
+            ]
+        }
       , ru_ok_audio               : {
             objRegex              :
               // TODO: Cover all possible “OK” URLs
@@ -512,7 +529,7 @@ var Global                        = {
         objNotificationOptions  = {
             type                : 'basic'
           , title               : ''
-          , message             : objStationInfo.strTrackInfo
+          , message             : objStationInfo.strTrackInfo.trim()
           , iconUrl             : Global.strNotificationIconUrl
         }
       , objTempPlayerInfo       = objPlayerInfo

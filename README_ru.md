@@ -60,6 +60,7 @@ ___
 * [VGM Radio](https://vgmradio.com).
 * [Одноклассники](http://ok.ru) (аудиоплеер, полная версия сайта).
 * [Онлайн-радио 101.ru](http://101.ru) (основной плеер станций).
+* [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio).
 
 Список будет пополняться...
 
