@@ -5,6 +5,10 @@
 ### v0.5.2
     * New module: Digitally Imported (Radio) | di.fm. Don't forget to enable in Options!
 
+<a href="https://cloud.githubusercontent.com/assets/9046724/12534368/72edf838-c20b-11e5-904f-387131b9ac52.gif">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/12534582/1f50f590-c215-11e5-99d8-1cf824968c17.png" width="250" height="156" alt="Demo: How to enable new PoziTone module" title="Demo: How to enable new PoziTone module">
+</a>
+
 ### v0.5.1
     * Fixed: “Add track to playlist”, “Next track”, and “Previous track” buttons would not show up
       on the notification for Odnoklassniki (ok.ru module) when logged-in.
