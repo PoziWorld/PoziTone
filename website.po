@@ -1,52 +1,51 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PoziTone website v0.3\n"
+"Project-Id-Version: PoziTone website v0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-25 22:29-0800\n"
-"PO-Revision-Date: 2015-07-05 20:38-0800\n"
+"PO-Revision-Date: 2016-01-25 20:26-0800\n"
 "Last-Translator: PoziWorld\n"
 "Language-Team: PoziWorld\n"
 "Language: en_US\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 # <title></title>
-# 
+#
 # Title of the site.
 msgid "title"
-msgstr "PoziTone – new features of your favorite player"
+msgstr "PoziTone – new features of your favorite players"
 
 # <meta name="description" content="" />
-# 
+#
 # Displayed in the search engine results.
 msgid "meta_description"
 msgstr ""
 "PoziTone is an extension for the Google Chrome, Opera, and other Chromium-"
-"based browsers that adds new features to your favorite online players"
+"based browsers that adds new features to your favorite online media players"
 
 # <meta name="keywords" content="" />
-# 
+#
 # Keywords used in the description.
 msgid "meta_keywords"
 msgstr ""
-"PoziTone, extension, browser, Google Chrome, Opera, Chromium, new "
-"features, favorite, online, player"
+"PoziTone, extension, browser, Chrome, Opera, features, favorite, player"
 
 # “<br />” and “&nbsp;” used here are just for a nicer look on the website.
 msgid "short_description"
 msgstr ""
 "An extension for the Google Chrome, Opera, and other Chromium-based browsers "
-"that&nbsp;adds new features to your favorite&nbsp;online&nbsp;players."
+"that adds new features to your favorite online media players."
 
 # Used for a link to a PoziTone page on the Opera Add-Ons site.
 msgid "opera_addons"
-msgstr "Also available on the Opera Add-Ons site"
+msgstr "Get it from Opera add-ons"
 
 # Used for a link to a README file on GitHub.
 msgid "more_info"
-msgstr "More info about PoziTone"
+msgstr "Learn more about PoziTone"
 
 # Used for a link to a PoziTone page on VK.
 msgid "pozitone_on_vk"
@@ -81,7 +80,7 @@ msgid "pozitone_on_github"
 msgstr "PoziTone on GitHub"
 
 # ID of an overview video of PoziTone on YouTube.
-# 
+#
 # Use “ZrSwJfxVT9U” (no quotes) if unknown.
 msgid "youtube_video_id"
 msgstr "ZrSwJfxVT9U"
