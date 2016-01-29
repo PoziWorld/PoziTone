@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PoziTone website v0.3.2\n"
+"Project-Id-Version: PoziTone website v0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-25 22:29-0800\n"
-"PO-Revision-Date: 2016-01-25 20:26-0800\n"
+"PO-Revision-Date: 2016-01-26 21:26-0800\n"
 "Last-Translator: PoziWorld\n"
 "Language-Team: PoziWorld\n"
 "Language: en_US\n"
@@ -38,6 +38,10 @@ msgid "short_description"
 msgstr ""
 "An extension for the Google Chrome, Opera, and other Chromium-based browsers "
 "that adds new features to your favorite online media players."
+
+# Used for a link to a PoziTone page in the Chrome Web Store.
+msgid "chrome_web_store"
+msgstr "Get it from Chrome Web Store"
 
 # Used for a link to a PoziTone page on the Opera Add-Ons site.
 msgid "opera_addons"
