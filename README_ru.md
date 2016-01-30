@@ -52,6 +52,8 @@ ___
   _Что за трек играл пять минут назад?_
   PoziTone хранит информацию о 10 последних треках.
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Поддерживаемые онлайн-медиаплееры
 --------
@@ -63,6 +65,8 @@ ___
 * [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio).
 
 Список будет пополняться...
+
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
 
 
 Установка
@@ -90,6 +94,8 @@ ___
 
 Готово!
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Демо
 --------
@@ -97,6 +103,8 @@ ___
 Откройте понравившуюся из [Списка станций](http://101.ru/?an=port_allchannels).
 
 При каждой смене трека PoziTone — перед Вами в полной красе. :)
+
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
 
 
 Быстрые клавиши
@@ -132,6 +140,8 @@ ___
 
 Начиная с версии 35 (Chrome), Вы можете сделать так, чтобы быстрые клавиши работали даже тогда, когда браузер не на переднем плане: см. [шаги 1–7](#Настройка-изменение-быстрых-клавиш) выше, измените «В Chrome» на «Глобальные» на шаге 6.
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Благодарности
 --------
@@ -147,6 +157,8 @@ ___
   - польский — jurczak (Łukasz Jurczak);
   - итальянский — Aeco (Giuseppe Mariniello).
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Credits
 --------
@@ -159,17 +171,23 @@ Credits
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - Все использованные товарные знаки (торговые марки, логотипы, бренды, названия, знаки обслуживания и т.д.) принадлежат их законным владельцам.
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Конфиденциальность
 --------
 
 Это расширение не просматривает, не изменяет, не хранит и не передаёт Ваши личные данные (например, логины, пароли, сообщения, контакты), связанные с какими-либо сайтами в какой-либо форме, а также с компьютера.
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Вы — разработчик?
 --------
 
 Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Следите, мы скоро поделимся черновиком PoziTone API.
+
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
 
 
 Содействие
@@ -196,6 +214,8 @@ Sprechen Sie Deutsch? Vous parlez français?
 
 Если Вы цените проделанную нами работу, пожалуйста, подумайте о стимулировании разработки PoziTone посредством [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone) или [Coinbase](https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac).
 
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
+
 
 Обратная связь
 --------
@@ -206,6 +226,8 @@ Sprechen Sie Deutsch? Vous parlez français?
 - Не стесняйтесь [задавать вопросы](mailto:feedback@pozitone.com).
 - [Сообщения об ошибках](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) ценны!
 - Нам нравится [похвала](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), кому нет? :)
+
+<sup>[(вернуться к содержанию)](#Содержание)</sup>
 
 
 PoziTone в социальных сетях
@@ -218,3 +240,5 @@ PoziTone в социальных сетях
 - [PoziTone на Одноклассниках](http://ok.ru/group/54738320621596)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone в Instagram](https://instagram.com/PoziTone)
+
+<sup>[(вернуться к содержанию)](#Содержание)</sup>

@@ -51,6 +51,8 @@ Features
   _What track played five minutes ago?_
   PoziTone keeps information about the last 10 tracks played.
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Supported online media players
 --------
@@ -62,6 +64,8 @@ Supported online media players
 * [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio).
 
 More to come...
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 Installation
@@ -81,6 +85,8 @@ Done!
 
 Done!
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Demo
 --------
@@ -88,6 +94,8 @@ Demo
 Open any station that you like from the [Stations list](http://101.ru/?an=port_allchannels).
 
 With every track change you can see the glory of PoziTone! :)
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 Keyboard shortcuts
@@ -123,6 +131,8 @@ By default, while the browser is not in the foreground, the shortcut will be ina
 
 As of version 35 (Chrome), you can make the shortcuts work even when the browser is not in the foreground: see [steps 1–7](#set-up--change-keyboards-shortcuts) above, change “In Chrome” to “Global” on step 6.
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Gratitudes
 --------
@@ -138,6 +148,8 @@ Gratitudes
   - Polish — jurczak (Łukasz Jurczak);
   - Italian — Aeco (Giuseppe Mariniello).
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Credits
 --------
@@ -150,17 +162,23 @@ Credits
   * Use of this source code is governed by a BSD-style license that can be found in the [LICENSE](http://src.chromium.org/viewvc/chrome/trunk/src/LICENSE) file.
 - All trademarks used (trade names, logos, brands, names, service marks, etc.) are the property of their respective owners.
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Privacy
 --------
 
 This extension does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Are you a developer?
 --------
 
 Want to add a support for your favorite player and publish it as a PoziTone module under your name? — Check back, we will soon share a PoziTone API draft.
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 Contribution
@@ -187,6 +205,8 @@ If you know any foreign language or just noticed a discrepancy in the translatio
 
 If you appreciate the work we have done, please consider stimulating PoziTone development via [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone), or [Coinbase](https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac).
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
+
 
 Feedback
 --------
@@ -197,6 +217,8 @@ We appreciate your feedback!
 - Don't be shy to [ask questions](mailto:feedback@pozitone.com).
 - [Bug reports](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([for Opera](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) are valuable!
 - We like [praises](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), who doesn't? :)
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
 
 
 PoziTone on social networks
@@ -209,3 +231,5 @@ PoziTone on social networks
 - [PoziTone on Odnoklassniki](http://ok.ru/group/54738320621596)
 - [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone on Instagram](https://instagram.com/PoziTone)
+
+<sup>[(back to table of contents)](#table-of-contents)</sup>
