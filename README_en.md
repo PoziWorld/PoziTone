@@ -2,7 +2,7 @@
 
 [![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
 
-PoziTone <img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">
+[PoziTone<img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
 An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds new [features](#features) to your favorite [online media players](#supported-online-media-players).
