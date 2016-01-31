@@ -28,7 +28,7 @@
 const
     strPage                 = 'browser-action'
   , strListId               = 'recentTracks'
-  , strRecentTrackActionUrl = 'http://go.pozitone.com/s/?'
+  , strRecentTrackActionUrl = 'https://go.pozitone.com/s/?'
   ;
 
 var Popup                   = {
