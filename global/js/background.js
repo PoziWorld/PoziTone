@@ -107,6 +107,10 @@ const
           , boolShowNotificationLogo : true
           , strNotificationLogo : 'station'
           , strNotificationTitleFormat : 'short'
+          , arrAvailableNotificationTitleFormats : [
+                'short'
+              , 'noStationInfo'
+            ]
           , arrAvailableNotificationButtons : [
                 'playStop'
               , 'muteUnmute'
