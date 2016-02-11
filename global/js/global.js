@@ -32,7 +32,6 @@
       returnIndexOfSubitemContaining()
       addShortcutInfo()
       createTabOrUpdate()
-      isValidModule()
       makeHttpRequest()
       checkForDevelopersMessage()
       checkForRuntimeError()
@@ -70,11 +69,6 @@ var Global                        = {
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
 
-  , strModuleShortNameStartsWith  : 'PTM'
-  , strModuleShortNameSeparator   : ' '
-  // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch08s15.html
-  , strModuleShortNameDomainRegEx :
-      /\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b/i
   , strModuleGreeting             : 'Welcome aboard!'
 
   // Embedded modules (replicates manifest's "content_scripts")
@@ -1620,48 +1614,6 @@ var Global                        = {
     }
     else
       chrome.tabs.create( objUrl );
-  }
-  ,
-
-  /**
-   * Checks whether an extension is a valid PoziTone Module
-   *
-   * @type    method
-   * @param   objExtensionInfo
- *              Information about an extension, app, or theme
-   * @return  void
-   **/
-  isValidModule : function ( objExtensionInfo )
-  {
-    if (
-          typeof objExtensionInfo === 'object'
-      &&  ! Global.isEmpty( objExtensionInfo )
-    ) {
-      strLog = 'isValidModule';
-      Log.add( strLog, objExtensionInfo );
-
-      // Verify short_name format
-      var strShortName = objExtensionInfo.shortName;
-
-      if ( typeof strShortName === 'string' && strShortName !== '' ) {
-        var
-            // strShortName = Keyword + separator + target player/site
-            arrShortName  =
-              strShortName.split( Global.strModuleShortNameSeparator )
-            // Accept domains containing Unicode symbols
-          , strModuleFor  = punycode.toASCII( arrShortName[ 1 ] )
-          ;
-
-        return !!(
-              arrShortName[ 0 ] === Global.strModuleShortNameStartsWith
-          &&  Global.strModuleShortNameDomainRegEx.test( strModuleFor )
-        );
-      }
-      else
-        return false;
-    }
-    else
-      return false;
   }
   ,
 
