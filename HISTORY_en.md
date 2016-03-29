@@ -2,6 +2,18 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.5.4
+    * Fixed: VK module wouldn't work in Chrome 49 and Opera 36.
+      Discovered thanks to the participants of the PoziTone User Experience Improvement Program.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/14096791/39f40a5c-f520-11e5-9559-8635d9574c84.png">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/14096791/39f40a5c-f520-11e5-9559-8635d9574c84.png" width="250" height="168" alt="PoziTone User Experience Improvement Program" title="PoziTone User Experience Improvement Program">
+</a>
+
+### v0.5.3
+    * Fixed: PoziTone wouldn't work in Chrome 49 and Opera 36.
+      Discovered thanks to the participants of the PoziTone User Experience Improvement Program.
+
 ### v0.5.2
     * New module: Digitally Imported (Radio) | di.fm. Don't forget to enable in Options!
 

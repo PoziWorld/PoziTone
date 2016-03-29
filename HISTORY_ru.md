@@ -2,6 +2,18 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.5.4
+    * Исправлено: модуль для ВКонтакте не работал в Chrome 49 и Opera 36.
+      Обнаружено благодаря участникам Программы улучшения качества PoziTone.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/14095994/4176d3d2-f51a-11e5-9adc-e2c6e02351be.png">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/14095994/4176d3d2-f51a-11e5-9adc-e2c6e02351be.png" width="250" height="181" alt="Программа улучшения качества PoziTone" title="Программа улучшения качества PoziTone">
+</a>
+
+### v0.5.3
+    * Исправлено: PoziTone не работал в Chrome 49 и Opera 36.
+      Обнаружено благодаря участникам Программы улучшения качества PoziTone.
+
 ### v0.5.2
     * Новый модуль: Digitally Imported (Radio) | di.fm. Не забудьте подключить в Настройках!
 
