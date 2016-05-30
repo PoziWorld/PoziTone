@@ -35,6 +35,10 @@ optionsApp.config( [ '$routeProvider', function( $routeProvider ) {
         templateUrl : 'partials/settings.html'
       , controller  : 'SettingsCtrl'
     } )
+    .when( '/settings/modules/external/:moduleId', {
+        templateUrl : 'partials/settings.html'
+      , controller  : 'SettingsCtrl'
+    } )
     .when( '/projects', {
         templateUrl : 'partials/projects.html'
       , controller  : 'ProjectsCtrl'
@@ -98,52 +102,60 @@ optionsApp.run( function( $rootScope, $location ) {
   );
 
   /**
-   * Get built-in and external connected modules
+   * Get built-in and external connected modules.
+   * 
+   * TODO: Replace with Global.getModules()
    *
    * @type    method
    * @param   Storage
-   *            Local or Sync Storage API
+   *            Local or Sync Storage API.
    * @return  void
    **/
   $rootScope.getModules = function( Storage ) {
-    $rootScope.objModules = {};
+    if ( typeof $rootScope.objModules !== 'object' || Array.isArray( $rootScope.objModules ) ) {
+      $rootScope.objModules = {};
+    }
+
+    $rootScope.intModulesBuiltIn = 0;
+    $rootScope.intModulesExternal = 0;
 
     Storage.get( null, function( objStorage ) {
       for ( var strKey in objStorage ) {
-        if (
-              objStorage.hasOwnProperty( strKey )
+        if (  objStorage.hasOwnProperty( strKey )
           &&  strKey.indexOf( strConstSettingsPrefix ) === 0
         ) {
-          var
-              strModule       = strKey.replace( strConstSettingsPrefix, '' )
-            , strModuleVar    = 'module_' + strModule
-            , objModule       = objStorage[ strKey ]
+          var strModule = strKey.replace( strConstSettingsPrefix, '' )
+            , objModule = objStorage[ strKey ]
             ;
 
-          objModule.id        = strModule;
+          objModule.id = strModule;
 
+          // TODO: Avoid confusion when StorageSync === StorageLocal
           if ( Storage === StorageSync ) {
             // Check if built-in module is available
-            if (
-                  ! Global.objModules[ strModule ]
+            if (  ! Global.objModules[ strModule ]
               &&  strModule !== strConstGeneralSettingsSuffix
             ) {
               continue;
             }
 
-            objModule.type    = 'built-in';
+            var strModuleVar = 'module_' + strModule;
+
+            objModule.type = 'built-in';
             objModule.caption = chrome.i18n.getMessage( strModuleVar );
-            objModule.captionLong =
-              chrome.i18n.getMessage( strModuleVar + '_long' );
+            objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+
+            $rootScope.intModulesBuiltIn++;
           }
           else {
-            objModule.type    = 'external';
-            strModuleExternal =
-              strModule.substr(
-                  0
-                , strModule.lastIndexOf( strConstExternalModuleSeparator )
-              );
+            var strModuleExternal = strModule.substr( 0, strModule.lastIndexOf( strConstExternalModuleSeparator ) );
+
+            objModule.type = 'external';
             objModule.caption = strModuleExternal;
+            // TODO: Get i18n variotions of name
+            objModule.name = objStorage[ strKey ].strName || strModuleExternal;
+
+            $rootScope.intModulesExternal++;
           }
 
           // Keep settings in $rootScope

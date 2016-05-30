@@ -233,6 +233,15 @@
             }
 
           ,
+          "optionsSettingsSupport": {
+            "message": "Support this player"
+          }
+            ,
+            "optionsSettingsSupportEnabled": {
+              "message": "Enabled"
+            }
+
+          ,
           "optionsSettingsDisplayWhen": {
             "message": "Show notifications"
           }
@@ -379,15 +388,15 @@
         }
         ,
         "spreadTheWordFollowUs": {
-          "message": "Follow us on <a href=\"https://facebook.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://google.com/+PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"http://ok.ru/group/54738320621596\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+          "message": "Follow us on <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://google.com/+PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"http://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
         }
         ,
         "spreadTheWordInstallationLink": {
-          "message": "Share the <a href=\"#\" target=\"blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">installation link</a> on your social networks and/or blog."
+          "message": "Share the <a href=\"#\" target=\"_blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">installation link</a> on your social networks and/or blog."
         }
         ,
         "spreadTheWordRateLink": {
-          "message": "<a href=\"#\" target=\"blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Rate PoziTone</a> – the feedback really helps others find this extension!"
+          "message": "<a href=\"#\" target=\"_blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Rate PoziTone</a> – the feedback really helps others find this extension!"
         }
         ,
         "rateExtension": {
@@ -407,7 +416,7 @@
         }
         ,
         "feedbackIdeas": {
-          "message": "Please <a href=\"http://feedback.pozitone.com/\" target=\"blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
+          "message": "Please <a href=\"http://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
         }
         ,
         "feedbackQuestions": {
@@ -415,11 +424,11 @@
         }
         ,
         "feedbackIssues": {
-          "message": "<a href=\"#\" target=\"blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Bug reports</a> are valuable!"
+          "message": "<a href=\"#\" target=\"_blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Bug reports</a> are valuable!"
         }
         ,
         "feedbackPraises": {
-          "message": "We like <a href=\"#\" target=\"blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>praises</a>, who doesn't? :)"
+          "message": "We like <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>praises</a>, who doesn't? :)"
         }
       ,
       "translation": {
@@ -435,7 +444,7 @@
         }
         ,
         "translationParagraph3": {
-          "message": "If you know any foreign language or just noticed a discrepancy in the translation, please <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"blank\" class=\"externalLink\" data-id=\"translation\">let us know</a>."
+          "message": "If you know any foreign language or just noticed a discrepancy in the translation, please <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">let us know</a>."
         }
       ,
       "incentive": {
@@ -443,7 +452,7 @@
       }
         ,
         "incentiveParagraph": {
-          "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac\" target=\"blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+          "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
         }
     ,
     "about": {
@@ -604,6 +613,15 @@
       }
 
   ,
+  "modulesExternal": {
+    "message": "External modules"
+  }
+    ,
+    "modulesExternalAdvancedSupportEnable": {
+      "message": "Enable external modules advanced support"
+    }
+
+  ,
   "enableAll": {
     "message": "Enable all"
   }
@@ -639,5 +657,99 @@
   ,
   "privacyStatementForTabs": {
     "message": "“<strong>Read your browsing history</strong>”: this permission is required for getting a current URL of the page on the basis of which PoziTone checks whether to load a corresponding module."
+  }
+
+  ,
+  "apiErrorUnrecognizedMessage": {
+    "message": "Unrecognized message"
+  }
+  ,
+  "apiErrorRequestObjectCantBeEmpty": {
+    "message": "Request object can't be empty"
+  }
+  ,
+  "apiErrorTypeofMismatch": {
+      "message": "Type of “$PARAMETER$” parameter must be “$TYPE$”"
+    , "description" : "When the following JavaScript snippet equals true: typeof strCall !== 'string'"
+    , "placeholders" : {
+          "parameter" : {
+              "content" : "$1"
+            , "example" : "strCall"
+          }
+        , "type" : {
+              "content" : "$2"
+            , "example" : "string"
+          }
+      }
+  }
+  ,
+  "apiErrorCallNotSpecified": {
+    "message": "Call not specified"
+  }
+  ,
+  "apiErrorCallUnknown": {
+    "message": "Call unknown"
+  }
+  ,
+  "apiErrorMethodNotSpecified": {
+    "message": "Method not specified"
+  }
+  ,
+  "apiErrorMethodNotSupported": {
+      "message": "Method “$METHOD$” not supported"
+    , "description" : "When method is valid but not supported by this call or not valid (for example, there is a typo)"
+    , "placeholders" : {
+          "method" : {
+              "content" : "$1"
+            , "example" : "POST"
+          }
+      }
+  }
+  ,
+  "apiErrorDataObjectCantBeEmpty": {
+    "message": "Data object can't be empty"
+  }
+  ,
+  "apiErrorMissingRequiredParameter": {
+      "message": "Missing a required parameter: $PARAMETER$"
+    , "description" : "Missing a parameter required for correct operation"
+    , "placeholders" : {
+          "parameter" : {
+              "content" : "$1"
+            , "example" : "boolIsEnabled"
+          }
+      }
+  }
+  ,
+  "apiStatusCode201": {
+      "message": "Created"
+    , "description" : "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#201 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#201"
+  }
+  ,
+  "apiStatusCode400": {
+      "message": "Bad Request"
+    , "description" : "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#400 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400"
+  }
+  ,
+  "apiStatusCode409": {
+      "message": "Conflict"
+    , "description" : "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#409 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#409"
+  }
+  ,
+  "apiStatusCode500": {
+      "message": "Internal Server Error"
+    , "description" : "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#500 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500"
+  }
+  ,
+  "apiConnectModuleSuccess": {
+    "message": "Module successfully connected"
+  }
+  ,
+  "apiConnectModuleError": {
+    "message": "Module has not been connected"
+  }
+  ,
+  "apiConnectModuleHadBeenConnected": {
+    "message": "Module had already been connected to PoziTone"
   }
 }

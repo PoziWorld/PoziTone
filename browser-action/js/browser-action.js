@@ -54,26 +54,40 @@ var Popup                   = {
    **/
   populateRecentTracks : function() {
     StorageSync.get( 'arrRecentTracks', function( objReturn ) {
-      var
-          arrRecentTracks   = objReturn.arrRecentTracks
-        , strHtml           = ''
+      var arrRecentTracks = objReturn.arrRecentTracks
+        , strHtml = ''
         ;
 
       for ( var i = ( arrRecentTracks.length - 1 ); i >= 0; i-- ) {
+        var arrRecentTrack = arrRecentTracks[ i ]
+          , strSrc = arrRecentTrack[ 2 ]
+          , strExtensionId = arrRecentTrack[ 3 ]
+          ;
+
+        // External module
+        if ( typeof strExtensionId === 'string' && strExtensionId !== '' ) {
+          strSrc = 'chrome-extension://'
+            + strExtensionId
+            + ( strSrc[ 0 ] === '/' ? '' : '/' )
+            + strSrc
+            ;
+        }
+
         strHtml += Page.template(
             'recentTrackRow'
           , {
-                track : arrRecentTracks[ i ][ 0 ]
-              , src   : arrRecentTracks[ i ][ 2 ]
-              , alt   : arrRecentTracks[ i ][ 1 ]
+                track : arrRecentTrack[ 0 ]
+              , src : strSrc
+              , alt : arrRecentTrack[ 1 ]
             }
         );
       }
       // TODO: Null case
       // if ( strHtml === '' )
 
-      if ( strHtml !== '' )
+      if ( strHtml !== '' ) {
         document.getElementById( strListId ).innerHTML = strHtml;
+      }
 
       Page.localize( 'popup' );
       Popup.addEventListeners();

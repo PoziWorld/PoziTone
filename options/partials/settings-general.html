@@ -1,5 +1,20 @@
           <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
           <form id="form">
+            <fieldset ng-class="none" hidden>
+              <legend i18n-content="modulesExternal" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolEnableExternalModulesSupport"
+                      ng-model="objModule.boolEnableExternalModulesSupport"
+                      ng-click="inputChange( $event, undefined, undefined, requestManagementPermission )"
+                        >
+                    <span i18n-content="modulesExternalAdvancedSupportEnable"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
             <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
               <legend i18n-content="optionsSettingsGeneralShortcuts" class="sectionHeading"></legend>
               <ul>
@@ -31,7 +46,7 @@
                 </li>
               </ul>
             </fieldset>
-            <fieldset>
+            <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
               <legend i18n-content="optionsSettingsGeneralUpdates" class="sectionHeading"></legend>
               <ul>
                 <li>

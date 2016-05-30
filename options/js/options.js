@@ -80,8 +80,9 @@ var Options = {
    **/
   init : function() {
     // Hide h1 in Chrome 40.0+ because new Options UI has heading already
-    if ( boolConstUseOptionsUi )
+    if ( boolConstUseOptionsUi ) {
       document.getElementById( strMainHeadingId ).remove();
+    }
 
     Page.localize( strPage );
     Options.setPageValues();
@@ -142,12 +143,11 @@ var Options = {
    * @return  void
    **/
   onSettingChange : function( objEvent, strModuleOverride ) {
-    var
-        $this             = objEvent.target
-      , objTemp           = {}
+    var $this = objEvent.target
+      , objTemp = {}
       , objModuleSettings = {}
       , miscSetting
-      , strModule         = strChosenSettingsSubpage
+      , strModule = strChosenSettingsSubpage
       , strModuleSettings
       ;
 
@@ -155,37 +155,41 @@ var Options = {
       strModule = strModuleOverride;
     }
 
+    var boolIsExternal = strModule !== 'general' && ! ( strModule in Global.objModules )
+      , StorageTemp = boolIsExternal ? StorageLocal : StorageSync
+      ;
+
     if ( $this.type === 'checkbox' && $this.value === 'on' ) {
       var boolIsChecked = $this.checked;
 
       miscSetting = boolIsChecked;
 
-      if ( $this.name === strEnableModule && ! boolIsChecked )
+      if ( $this.name === strEnableModule && ! boolIsChecked ) {
         Options.removeModuleNotifications( strModule );
+      }
     }
     else if ( $this.type === 'checkbox' && $this.value !== 'on' ) {
-      var
-          $moduleSubpage  = document.getElementById( strModuleSubpageId )
-        , $group          =
-            $moduleSubpage.querySelectorAll(
-              'input[name="' + $this.name + '"]'
-            )
-        , arrTemp         = []
+      var $moduleSubpage  = document.getElementById( strModuleSubpageId )
+        , $group = $moduleSubpage.querySelectorAll( 'input[name="' + $this.name + '"]' )
+        , arrTemp = []
         ;
 
       for ( var i = 0, l = $group.length; i < l; i++ ) {
         var $groupEl = $group[ i ];
 
-        if ( $groupEl.checked )
+        if ( $groupEl.checked ) {
           arrTemp.push( $groupEl.value );
+        }
       }
 
       miscSetting = arrTemp;
     }
-    else if ( $this.type === 'radio' )
+    else if ( $this.type === 'radio' ) {
       miscSetting = $this.value;
-    else if ( $this.type === 'number' )
+    }
+    else if ( $this.type === 'number' ) {
       miscSetting = parseInt( $this.value );
+    }
 
     strModuleSettings = strConstSettingsPrefix + strModule;
 
@@ -195,7 +199,7 @@ var Options = {
     objModuleSettings[ $this.name ] = miscSetting;
 
     if ( ! Global.isEmpty( objTemp ) ) {
-      StorageSync.get( strModuleSettings, function( objReturn ) {
+      StorageTemp.get( strModuleSettings, function( objReturn ) {
         for ( var strKey in objModuleSettings ) {
           if ( objModuleSettings.hasOwnProperty( strKey ) )
             objReturn[ strModuleSettings ][ strKey ] = 
@@ -203,15 +207,15 @@ var Options = {
         }
 
         // TODO: Add callback to Global.setStorageItems() and then utilize it
-        StorageSync.set( objReturn, function() {
+        StorageTemp.set( objReturn, function() {
           Page.showSuccess( $settingsSaved );
 
           // Debug
-          StorageSync.get( null, function(data) {
+          StorageTemp.get( null, function(data) {
             console.log(data);
-          });
-        });
-      });
+          } );
+        } );
+      } );
     }
   }
   ,
@@ -317,7 +321,7 @@ var Options = {
  * @return  void
  **/
 chrome.runtime.onMessage.addListener(
-  function( objMessage, objSender, objSendResponse ) {
+  function( objMessage, objSender, funcSendResponse ) {
     if ( objMessage.strReceiver === 'options' ) {
       var objVars = objMessage[ 'objVars' ];
 

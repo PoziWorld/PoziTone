@@ -22,8 +22,9 @@
       saveActiveButtons()
       getSavedOpenTabs()
       saveOpenTabs()
-      isValidUrl()
-      getValidUrl()
+      getModuleId()
+      getModuleIdFromProvided()
+      getModules()
       isEmpty()
       findFirstOpenTabInvokeCallback()
       checkIfModuleIsEnabled()
@@ -68,8 +69,6 @@ var Global                        = {
   , strOptionsUiUrlPrefix         : 'chrome://extensions?options='
   , strNoTrackInfo                : '...'
   , strPlayerIsOffClass           : 'play'
-
-  , strModuleGreeting             : 'Welcome aboard!'
 
   // Embedded modules (replicates manifest's "content_scripts")
   , objModules                    : {
@@ -506,6 +505,10 @@ var Global                        = {
    *              (strStationName, strStationNamePlusDesc, strTrackInfo)
    * @param   strCommand
    *            Optional. Which command made this call
+   * @param   boolExternal
+   *            Optional. Whether the request is sent from another extension/app.
+   * @param   objSender
+   *            Optional. Sender of the request.
    * @return  void
    **/
   showNotification : function(
@@ -515,112 +518,105 @@ var Global                        = {
     , objPlayerInfo
     , objStationInfo
     , strCommand
+    , boolExternal
+    , objSender
   ) {
     strLog = 'showNotification';
     Log.add( strLog, objStationInfo );
 
-    var
-        objNotificationOptions  = {
-            type                : 'basic'
-          , title               : ''
-          , message             : objStationInfo.strTrackInfo.trim()
-          , iconUrl             : Global.strNotificationIconUrl
+    var objNotificationOptions = {
+            type : 'basic'
+          , title : ''
+          , message : objStationInfo.strTrackInfo.trim()
+          , iconUrl : Global.strNotificationIconUrl
         }
-      , objTempPlayerInfo       = objPlayerInfo
-      , objTempStationInfo      = objStationInfo
-      , strModule               = objTempPlayerInfo.strModule
-      , strStorageVar           = strConstSettingsPrefix + strModule
-      , strNotificationId       = Global.composeNotificationId(
-                                      strModule
-                                    , intTabId
-                                  )
+      , objTempPlayerInfo = objPlayerInfo
+      , objTempStationInfo = objStationInfo
+      , strModule = objTempPlayerInfo.strModule
+      , strStorageVar = strConstSettingsPrefix + strModule
+      , strNotificationId = Global.composeNotificationId( strModule, intTabId, boolExternal, objSender )
       ;
+
+    if ( typeof boolExternal === 'boolean' && boolExternal ) {
+      strStorageVar += strConstGenericStringSeparator + objSender.id;
+    }
 
     // If Chrome supports showing additional info separately
     if ( objStationInfo.strAdditionalInfo !== '' ) {
-      if ( strConstChromeVersion >= 31 && bowser.name !== 'Opera' )
-        objNotificationOptions.contextMessage = 
-          objStationInfo.strAdditionalInfo;
-      else
-        objNotificationOptions.message +=
-          strConstNotificationLinesSeparator + objStationInfo.strAdditionalInfo;
+      if ( strConstChromeVersion >= 31 && bowser.name !== 'Opera' ) {
+        objNotificationOptions.contextMessage = objStationInfo.strAdditionalInfo;
+      }
+      else {
+        objNotificationOptions.message += strConstNotificationLinesSeparator + objStationInfo.strAdditionalInfo;
+      }
     }
 
     // Clear notification for this tab first, then display a new one
+    // TODO: Add extension ID to strNotificationId when boolExternal === true
     chrome.notifications.clear( strNotificationId, function() {
-      StorageSync.get(
+      ( boolExternal ? StorageLocal : StorageSync ).get(
           strStorageVar
         , function( objReturn ) {
             var objData = objReturn[ strStorageVar ];
 
             // Whether to show notification or not
-            if (
-                  ! boolDisregardSameMessage
-              &&  typeof
-                    objData.boolShowNotificationWhenStopped !== 'undefined'
+            if (  ! boolDisregardSameMessage
+              &&  typeof objData.boolShowNotificationWhenStopped === 'boolean'
               &&  ! objData.boolShowNotificationWhenStopped
               &&  ! objTempPlayerInfo.boolIsPlaying
-            )
+            ) {
               return false;
+            }
 
-            if (
-                  ! boolDisregardSameMessage
-              &&  typeof
-                    objData.boolShowNotificationWhenMuted !== 'undefined'
+            if (  ! boolDisregardSameMessage
+              &&  typeof objData.boolShowNotificationWhenMuted === 'boolean'
               &&  ! objData.boolShowNotificationWhenMuted
               &&  (
                         objTempPlayerInfo.intVolume === Global.intNoVolume
                     ||  objTempPlayerInfo.boolIsMuted
                   )
-            )
+            ) {
               return false;
+            }
 
-            if (
-                  ! boolDisregardSameMessage
-              &&  typeof 
-                    objData.boolShowNotificationWhenNoTrackInfo !== 'undefined'
+            if (  ! boolDisregardSameMessage
+              &&  typeof objData.boolShowNotificationWhenNoTrackInfo === 'boolean'
               &&  ! objData.boolShowNotificationWhenNoTrackInfo
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
-            )
+            ) {
               return false;
+            }
 
             // Notification Icon Settings
-            if (
-                  objData.boolShowNotificationLogo
+            if (  typeof objData.boolShowNotificationLogo === 'boolean'
+              &&  objData.boolShowNotificationLogo
               &&  objStationInfo.strLogoDataUri !== null
-            )
+              &&  objStationInfo.strLogoDataUri !== ''
+            ) {
               objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
+            }
 
-            var
-                strTitleFormat = objData.strNotificationTitleFormat || ''
+            var strTitleFormat = objData.strNotificationTitleFormat || ''
               , arrButtons     = objData.arrActiveNotificationButtons
               ;
 
             // Notification Title Settings
             if ( strTitleFormat === 'short' ) {
-              objNotificationOptions.title =
-                objTempStationInfo.strStationName;
+              objNotificationOptions.title = objTempStationInfo.strStationName;
             }
             else if ( strTitleFormat === 'long' ) {
-              objNotificationOptions.title =
-                objTempStationInfo.strStationNamePlusDesc;
+              objNotificationOptions.title = objTempStationInfo.strStationNamePlusDesc;
             }
             else {
-              objNotificationOptions.title =
-                chrome.i18n.getMessage( 'extensionName' );
+              objNotificationOptions.title = chrome.i18n.getMessage( 'extensionName' );
             }
 
             // Notification Buttons Settings
             if ( arrButtons.length !== 0 ) {
               // Save active buttons for the listener
-              var
-                  arrActiveButtons        = []
-                , objNotificationButtons  = Global.objNotificationButtons
-                , arrTrackInfo            = 
-                    objTempStationInfo
-                      .strTrackInfo
-                        .trim()
-                        .split( strConstNotificationLinesSeparator )
+              var arrActiveButtons = []
+                , objNotificationButtons = Global.objNotificationButtons
+                , arrTrackInfo = objTempStationInfo.strTrackInfo.trim().split( strConstNotificationLinesSeparator )
                 ;
 
               objNotificationOptions.buttons = [];
@@ -844,6 +840,7 @@ var Global                        = {
               if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
                 var strMuteUnmuteState  =
                       (
+                            // TODO: Switch to 0-1
                             objTempPlayerInfo.intVolume > 0
                         &&  ! objTempPlayerInfo.boolIsMuted
                       )
@@ -894,8 +891,7 @@ var Global                        = {
                   if ( chrome.runtime.lastError ) {
                     strLog = 'showNotification';
 
-                    var
-                        objLogDetails   = {}
+                    var objLogDetails   = {}
                       , strErrorMessage = chrome.runtime.lastError.message
                       ;
 
@@ -922,6 +918,8 @@ var Global                        = {
                               , intTabId
                               , arrActiveButtons
                               , strCommand
+                              , boolExternal
+                              , objSender
                             );
 
                             // This, probably, doesn't auto-close, so close it
@@ -947,6 +945,8 @@ var Global                        = {
                     , intTabId
                     , arrActiveButtons
                     , strCommand
+                    , boolExternal
+                    , objSender
                   );
                 }
             );
@@ -970,6 +970,10 @@ var Global                        = {
    *            Active buttons for current notification
    * @param   strCommand
    *            Optional. Which command made this call
+   * @param   boolExternal
+   *            Optional. Whether the request is sent from another extension/app.
+   * @param   objSender
+   *            Optional. Sender of the request.
    * @return  void
    **/
   showNotificationCallback : function(
@@ -978,24 +982,21 @@ var Global                        = {
     , intTabId
     , arrActiveButtons
     , strCommand
+    , boolExternal
+    , objSender
   ) {
     var strModule = objPlayerInfo.strModule;
 
     /* START Log */
-    var
-        arrTrackInfo  = 
-          objStationInfo
-            .strTrackInfo
-              .split( strConstNotificationLinesSeparator )
-      , funcLog       = function() {
+    var arrTrackInfo = objStationInfo.strTrackInfo.split( strConstNotificationLinesSeparator )
+      , funcLog = function() {
           strLog = 'showNotificationCallback';
           Log.add(
               strLog
             , {
-                  strModule                   : strModule
-                , strStationName              : objStationInfo.strStationName
-                , boolHasAddToPlaylistButton  : 
-                    objStationInfo.boolHasAddToPlaylistButton || 'n/a'
+                  strModule : strModule
+                , strStationName : objStationInfo.strStationName
+                , boolHasAddToPlaylistButton : objStationInfo.boolHasAddToPlaylistButton || 'n/a'
               }
             , true
           );
@@ -1004,34 +1005,36 @@ var Global                        = {
 
     // There is no arrTrackInfo[ 1 ] only on track change (automatic and when
     // clicked 'next', too) and on 'showNotification' command
-    if (
-          typeof arrTrackInfo[ 1 ] === 'undefined'
+    if (  typeof arrTrackInfo[ 1 ] === 'undefined'
       &&  strCommand !== 'showNotification'
-    )
+    ) {
       funcLog();
-    else
-      StorageSync.get( 'arrRecentTracks', function( objReturn ) {
+    }
+    else {
+      ( boolExternal ? StorageLocal : StorageSync ).get( 'arrRecentTracks', function( objReturn ) {
         if ( typeof objReturn.arrRecentTracks === 'object' ) {
           var arrLastTrack = objReturn.arrRecentTracks.pop();
 
-          // Don't log when same player, station & track info as last track. 
+          // Don't log when same player, station & track info as last track.
           // Even on page reload.
           if (
                 (
-                      arrLastTrack      === undefined
+                      arrLastTrack === undefined
                   ||  arrLastTrack[ 0 ] !== arrTrackInfo[ 0 ]
                   ||  arrLastTrack[ 1 ] !== objStationInfo.strStationName
                   ||  arrLastTrack[ 2 ] !== objStationInfo.strLogoUrl
                 )
             &&  strCommand !== 'showNotification'
-          )
+          ) {
             funcLog();
+          }
         }
       });
+    }
     /* END Log */
 
-    Background.saveRecentTrackInfo( objStationInfo ); 
-    Global.saveTabsIds( intTabId, strModule );
+    Background.saveRecentTrackInfo( objStationInfo, boolExternal, objSender );
+    Global.saveTabsIds( intTabId, strModule, boolExternal, objSender );
     Global.saveActiveButtons( intTabId, arrActiveButtons );
   }
   ,
@@ -1120,12 +1123,8 @@ var Global                        = {
                 }
 
                 // Remove this notification's tab id
-                var
-                    arrTabsIds  = objData.arrTabsIds
-                  , intIndex    = Global.returnIndexOfSubitemContaining(
-                                      arrTabsIds
-                                    , intTabId
-                                  )
+                var arrTabsIds = objData.arrTabsIds
+                  , intIndex = Global.returnIndexOfSubitemContaining( arrTabsIds, intTabId )
                   ;
 
                 if ( intIndex !== -1 ) {
@@ -1134,12 +1133,13 @@ var Global                        = {
                 }
 
                 // "Submit" changes
-                if ( intChanges > 0 )
+                if ( intChanges > 0 ) {
                   Global.setStorageItems(
                       StorageLocal
                     , objData
                     , strLog + ', submit'
                   );
+                }
               } );
             }
         }
@@ -1177,45 +1177,52 @@ var Global                        = {
    *
    * @type    method
    * @param   intTabId
-   *            Tab ID info received from
+   *            Tab ID info received from.
    * @param   strModule
-   *            Module notification was displayed for
+   *            Module notification was displayed for.
+   * @param   boolExternal
+   *            Optional. Whether the request is sent from another extension/app.
+   * @param   objSender
+   *            Optional. Sender of the request.
    * @return  void
    **/
-  saveTabsIds : function ( intTabId, strModule ) {
+  saveTabsIds : function ( intTabId, strModule, boolExternal, objSender ) {
     StorageLocal.get( 'arrTabsIds', function( objData ) {
       strLog = 'saveTabsIds';
       Log.add( strLog, intTabId );
 
-      if ( typeof objData.arrTabsIds === 'undefined' )
+      if ( typeof objData.arrTabsIds === 'undefined' ) {
         objData.arrTabsIds = [];
+      }
 
-      var
-          arrTabsIds    = objData.arrTabsIds
-        , intIndex      = Global.returnIndexOfSubitemContaining(
-                              arrTabsIds
-                            , intTabId
-                          )
-        , intLastIndex  = arrTabsIds.length - 1
-        , intChanges    = 0
-        , arrToPush     = [ intTabId, strModule ]
-        , funcPush      = function() {
-                            arrTabsIds.push( arrToPush );
-                            intChanges++;
-                          }
+      if ( typeof boolExternal === 'boolean' && boolExternal ) {
+        strModule += strConstGenericStringSeparator + objSender.id;
+      }
+
+      var arrTabsIds = objData.arrTabsIds
+        , intIndex = Global.returnIndexOfSubitemContaining( arrTabsIds, intTabId )
+        , intLastIndex = arrTabsIds.length - 1
+        , intChanges = 0
+        , arrToPush = [ intTabId, strModule ]
+        , funcPush = function() {
+            arrTabsIds.push( arrToPush );
+            intChanges++;
+          }
         ;
 
       // Save if it is not present or "reposition" to be the last
-      if ( intIndex === -1 )
+      if ( intIndex === -1 ) {
         funcPush();
+      }
       else if ( intIndex !== intLastIndex ) {
         arrTabsIds.splice( intIndex, 1 );
         funcPush();
       }
 
       // "Submit" changes
-      if ( intChanges > 0 )
+      if ( intChanges > 0 ) {
         Global.setStorageItems( StorageLocal, objData, strLog );
+      }
     });
   }
   ,
@@ -1298,8 +1305,9 @@ var Global                        = {
     for ( var intWindowId in objOpenTabs ) {
       if ( objOpenTabs.hasOwnProperty( intWindowId ) ) {
         // If there are no open tabs for this windowId saved yet
-        if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) )
+        if ( Global.isEmpty( objToSet.objOpenTabs[ intWindowId ] ) ) {
           objToSet.objOpenTabs[ intWindowId ] = {};
+        }
 
         var objTempWindowTabs = objOpenTabs[ intWindowId ];
 
@@ -1328,67 +1336,191 @@ var Global                        = {
   ,
 
   /**
-   * Checks whether the URL is supported.
+   * Get module ID by the provided URL.
    *
    * @type    method
    * @param   strUrl
-   *            Provided URL
-   * @return  string / boolean
+   *            Provided URL.
+   * @return  string / null
    **/
-  isValidUrl : function ( strUrl ) {
-    var
-        objModules  = this.objModules
+  getModuleId : function ( strUrl ) {
+    var self = this
+      , objModules = self.objModules
+      , strModule = self.getModuleIdFromProvided( strUrl, objModules )
       ;
 
-    for ( var strModule in objModules ) {
-      if ( objModules.hasOwnProperty( strModule ) ) {
-        var objRegEx = objModules[ strModule ].objRegex;
-
-        if ( objRegEx.test( strUrl ) )
-          return strModule;
-        }
+    if ( strModule ) {
+      return strModule;
     }
 
-    return false;
+    // Not built-in, check external
+    var objExternalModules = self.objExternalModules;
+
+    if ( typeof objExternalModules !== 'object' || Array.isArray( objExternalModules ) ) {
+      var promise = new Promise( function( funcResolve, funcReject ) {
+        self.getModules( StorageLocal, objExternalModules, funcResolve, funcReject );
+      } );
+
+      promise
+        .then( function ( objExternalModules ) {
+          return self.getModuleIdFromProvided( strUrl, objExternalModules );
+        } )
+        .catch( function () {
+          return null;
+        } )
+        ;
+
+      return promise;
+    }
+    else {
+      return self.getModuleIdFromProvided( strUrl, objExternalModules );
+    }
   }
   ,
 
   /**
-   * Gets valid URL.
+   * Test URL against each of the modules RegExp.
+   *
+   * TODO: Better name
    *
    * @type    method
-   * @param   No Parameters Taken
-   * @return  string
+   * @param   strUrl
+   *            URL to test.
+   * @param   objModules
+   *            Modules to check against.
+   * @return  string / null
    **/
-  getValidUrl : function ()
+  getModuleIdFromProvided : function ( strUrl, objModules )
   {
-    return this.strValidUrl;
+    for ( var strModule in objModules ) {
+      if ( objModules.hasOwnProperty( strModule ) ) {
+            // Built-in
+        var objRegex = objModules[ strModule ].objRegex
+            // External
+          , strRegex = objModules[ strModule ].strRegex
+          ;
+
+        // The ones from Storage aren't instanceof RegExp
+        if ( objRegex instanceof RegExp && objRegex.test( strUrl )
+          || typeof strRegex === 'string' && new RegExp( strRegex ).test( strUrl )
+        ) {
+          return strModule;
+        }
+      }
+    }
+
+    return null;
   }
   ,
 
   /**
-   * Checks whether object/array is empty.
+   * Get built-in and external connected modules.
+   *
+   * @type    method
+   * @param   Storage
+   *            Local or Sync Storage API.
+   * @param   objModules
+   *            Optional. Where to save the data.
+   * @param   funcSuccessCallback
+   *            Optional. Function to run on success.
+   * @param   funcErrorCallback
+   *            Optional. Function to run on error.
+   * @return  void
+   **/
+  getModules : function( Storage, objModules, funcSuccessCallback, funcErrorCallback )
+  {
+    if ( typeof objModules !== 'object' || Array.isArray( objModules ) ) {
+      objModules = {};
+    }
+
+    var promise = new Promise( function( funcResolve, funcReject ) {
+      Storage.get( null, function( objStorage ) {
+        for ( var strKey in objStorage ) {
+          if (  objStorage.hasOwnProperty( strKey )
+            &&  strKey.indexOf( strConstSettingsPrefix ) === 0
+          ) {
+            var strModule = strKey.replace( strConstSettingsPrefix, '' )
+              , objModule = objStorage[ strKey ]
+              ;
+
+            objModule.id = strModule;
+
+            // TODO: Avoid confusion when StorageSync === StorageLocal
+            if ( Storage === StorageSync ) {
+              // Check if built-in module is available
+              if (  ! Global.objModules[ strModule ]
+                &&  strModule !== strConstGeneralSettingsSuffix
+              ) {
+                continue;
+              }
+
+              var strModuleVar = 'module_' + strModule;
+
+              objModule.type = 'built-in';
+              objModule.caption = chrome.i18n.getMessage( strModuleVar );
+              objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+            }
+            else {
+              var intLastIndex = strModule.lastIndexOf( strConstExternalModuleSeparator )
+                , strModuleExternal = strModule.substr( 0, intLastIndex )
+                ;
+
+              objModule.type = 'external';
+              objModule.caption = strModuleExternal;
+            }
+
+            objModules[ strModule ] = objModule;
+          }
+        }
+
+        funcResolve();
+      } );
+    } );
+
+    promise
+      .then( function () {
+        if ( ! Global.isEmpty( objModules ) && typeof funcSuccessCallback === 'function' ) {
+          funcSuccessCallback( objModules );
+        }
+        else if ( typeof funcErrorCallback === 'function' ) {
+          funcErrorCallback();
+        }
+      } )
+      .catch( function () {
+        if ( typeof funcErrorCallback === 'function' ) {
+          funcErrorCallback();
+        }
+      } )
+      ;
+
+    return promise;
+  }
+  ,
+
+  /**
+   * Checks whether the object/array is empty.
    *
    * @type    method
    * @param   objToTest
-   *            Object to check against
+   *            Object to check against.
    * @return  bool
    **/
   isEmpty : function ( objToTest )
   {
-    for ( var i in objToTest )
+    for ( var i in objToTest ) {
       return false;
+    }
 
     return true;
   }
   ,
 
   /**
-   * Makes an object out of an array
+   * Makes an object out of an array.
    *
    * @type    method
    * @param   arrToConvert
-   *            Array to convert
+   *            Array to convert.
    * @return  object
    **/
   convertArrToObj : function ( arrToConvert )
@@ -1409,8 +1541,8 @@ var Global                        = {
    *
    * @type    method
    * @param   funcCallback
-   *            Callback to invoke when open tab found
-   * @return  bool
+   *            Callback to invoke when open tab found.
+   * @return  void
    **/
   findFirstOpenTabInvokeCallback : function ( funcCallback )
   {
@@ -1432,8 +1564,9 @@ var Global                        = {
                   , parseInt( intTabIndex )
                   , objTempWindowTabs[ intTabIndex ].id
                   , objTempWindowTabs[ intTabIndex ].url
-                ) !== 0 )
+                ) !== 0 ) {
                 return;
+              }
             }
           }
         }
@@ -1443,41 +1576,53 @@ var Global                        = {
   ,
 
   /**
-   * Checks whether a module is enabled.
+   * Checks whether the module is enabled.
    *
    * @type    method
-   * @param   strNotificationId
-   *            Notification ID
+   * @param   strModule
+   *            Module ID.
+   * @param   intTabId
+   *            ID of the tab the request is sent from.
+   * @param   funcSuccessCallback
+   *            Function to run on success.
+   * @param   funcErrorCallback
+   *            Function to run on error.
+   * @param   objPreservedData
+   *            Data preserved for a callback.
+   * @param   strCallerLog
+   *            strLog of the caller.
+   * @param   boolExternal
+   *            Optional. Whether a message is sent from another extension/app.
    * @return  integer
    **/
   checkIfModuleIsEnabled : function (
       strModule
     , intTabId
-    , funcSuccess
-    , funcElse
+    , funcSuccessCallback
+    , funcErrorCallback
     , objPreservedData
-    , strFrom
+    , strCallerLog
+    , boolExternal
   ) {
     var strObjSettings = strConstSettingsPrefix + strModule;
 
-    StorageSync.get(
-        strObjSettings
-      , function( objReturn ) {
-          var objModuleSettings = objReturn[ strObjSettings ];
+    ( boolExternal ? StorageLocal : StorageSync ).get( strObjSettings, function( objReturn ) {
+      var objModuleSettings = objReturn[ strObjSettings ];
 
-          if (
-                typeof objModuleSettings === 'object'
-            &&  objModuleSettings.boolIsEnabled
-          ) {
-            strLog = 'checkIfModuleIsEnabled, ' + strFrom;
-            Log.add( strLog + strLogSuccess, intTabId );
+      if (  typeof objModuleSettings === 'object'
+        &&  objModuleSettings.boolIsEnabled
+      ) {
+        strLog = 'checkIfModuleIsEnabled, ' + strCallerLog;
+        Log.add( strLog + strLogSuccess, intTabId );
 
-            funcSuccess( objPreservedData );
-          }
-          else
-            funcElse( objPreservedData );
+        if ( typeof funcSuccessCallback === 'function' ) {
+          funcSuccessCallback( objPreservedData );
         }
-    );
+      }
+      else if ( typeof funcErrorCallback === 'function' ) {
+        funcErrorCallback( objPreservedData );
+      }
+    } );
   }
   ,
 
@@ -1486,19 +1631,14 @@ var Global                        = {
    *
    * @type    method
    * @param   strNotificationId
-   *            Notification ID
+   *            Notification ID.
    * @return  integer
    **/
   getTabIdFromNotificationId : function ( strNotificationId )
   {
-    var
-        arrNotificationId     = strNotificationId.split(
-                                  Global.strNotificationIdSeparator
-                                )
-      , intNotificationIdLen  = arrNotificationId.length
-      , intNotificationTabId  = parseInt(
-                                  arrNotificationId[ intNotificationIdLen - 1 ]
-                                )
+    var arrNotificationId = strNotificationId.split( strConstNotificationIdSeparator )
+      , intNotificationIdLen = arrNotificationId.length
+      , intNotificationTabId = parseInt( arrNotificationId[ intNotificationIdLen - 1 ] )
       ;
 
     return intNotificationTabId;
@@ -1510,17 +1650,24 @@ var Global                        = {
    *
    * @type    method
    * @param   intTabId
-   *            Tab ID notification belongs to
+   *            Tab ID notification belongs to.
    * @param   strModule
-   *            Module notification was displayed for
+   *            Module notification was displayed for.
+   * @param   boolExternal
+   *            Optional. Whether the request is sent from another extension/app.
+   * @param   objSender
+   *            Optional. Sender of the request.
    * @return  string
    **/
-  composeNotificationId : function ( strModule, intTabId )
+  composeNotificationId : function ( strModule, intTabId, boolExternal, objSender )
   {
-    return Global.strNotificationId + 
-            strModule + 
-            Global.strNotificationIdSeparator + 
-            intTabId;
+    return Global.strNotificationId
+          + strModule
+          + Global.strNotificationIdSeparator
+          + ( boolExternal
+                ? objSender.id + Global.strNotificationIdSeparator
+                : '' )
+          + intTabId;
   }
   ,
 
@@ -1604,16 +1751,19 @@ var Global                        = {
 
     var objUrl = { url: strUrl };
 
-    if ( ~~strUrl.indexOf( Global.strOptionsUiUrlPrefix ) ) {
+    if ( ~~ strUrl.indexOf( Global.strOptionsUiUrlPrefix ) ) {
       chrome.tabs.query( objUrl, function( objTabs ) {
-        if ( objTabs.length )
+        if ( objTabs.length ) {
           chrome.tabs.update( objTabs[0].id, { active: true } );
-        else
+        }
+        else {
           chrome.tabs.create( objUrl );
+        }
       } );
     }
-    else
+    else {
       chrome.tabs.create( objUrl );
+    }
   }
   ,
 

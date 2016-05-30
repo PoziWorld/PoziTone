@@ -9,6 +9,12 @@
   "optionsSettingsGeneralShortcutsShowInNotification": {
     "message": "Mostra consigli nelle notifiche"
   },
+  "optionsAboutH1": {
+    "message": "Ulteriori informazioni"
+  },
+  "module_ru_ok_audio_long": {
+    "message": "Odnoklassniki (audio) | ok.ru"
+  },
   "optionsSettingsSoundVolumeControlDelta": {
     "message": "Change by, %",
     "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
@@ -22,6 +28,9 @@
   "optionsSettingsGeneralUeipPrivacyHref": {
     "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
   },
+  "module_ru_ok_audio": {
+    "message": "Odnoklassniki (audio)"
+  },
   "notificationButtonsAddLoggedInTitle": {
     "message": "Aggiungi brano alla playlist"
   },
@@ -31,9 +40,6 @@
   "notificationButtonsFavoriteLoggedInTitle": {
     "message": "Mi piace!"
   },
-  "optionsContactHref": {
-    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
-  },
   "optionsSettingsGeneralUeip": {
     "message": "Programma Analisi utilizzo software"
   },
@@ -42,10 +48,16 @@
     "description": "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
   },
   "optionsTerms": {
-    "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">Accordo di licenza</a> di PoziTone"
+    "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">Contratto di licenza</a> di PoziTone"
   },
   "systemNotificationUpdatedVersion": {
     "message": " v"
+  },
+  "module_com_vgmradio_long": {
+    "message": "VGM Radio | vgmradio.com"
+  },
+  "translationParagraph2": {
+    "message": "Noi vorremmo che gli utenti di PoziTone avessero la possibilità di usare l'estensione con la propria lingua nativa."
   },
   "notificationButtonsUnmuteFeedback": {
     "message": "Audio attivato"
@@ -65,11 +77,26 @@
   "optionsSettingsH1": {
     "message": "Impostazioni"
   },
+  "modulesBuiltIn": {
+    "message": "Moduli incorporati"
+  },
   "notificationButtonsMuteFeedback": {
     "message": "Mutato"
   },
+  "help": {
+    "message": "Aiuto"
+  },
   "optionsSettingsGeneral": {
     "message": "Generale"
+  },
+  "about": {
+    "message": "Ulteriori informazioni"
+  },
+  "pwmDescriptionParagraph1": {
+    "message": "Ti aiutiamo a minimizzare lo spreco, salvando l'inchiostro."
+  },
+  "optionsSettingsGeneralShowAdvanced": {
+    "message": "Mostra impostazioni avanzate"
   },
   "module_com_vk_audio_long": {
     "message": "VK (audio) | vk.com"
@@ -83,6 +110,9 @@
   "notificationButtonsPreviousTitle": {
     "message": "Brano precedente"
   },
+  "feedbackIdeas": {
+    "message": " <a href=\"http://feedback.pozitone.com/\" target=\"blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>Condividi le tue idee</a>."
+  },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Muta / Attiva audio"
   },
@@ -92,18 +122,26 @@
   "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
     "message": "Questo brano è già presente in questa playlist"
   },
+  "disableAll": {
+    "message": "Disattiva tutto"
+  },
+  "projectsDescriptionParagraph1": {
+    "message": "PoziTone è sviluppato da un piccolo team chiamato PoziWorld."
+  },
+  "rateExtensionShort": {
+    "message": "Vota PoziTone"
+  },
+  "messageFromDevelopersPageText": {
+    "message": "<button id=\"pwMessageReadCta\">Leggi messaggio</button> dagli sviluppatori!"
+  },
   "notificationButtonsUnmuteTitle": {
     "message": "Attiva audio"
   },
   "notificationButtonsNextTitle": {
     "message": "Prossimo brano"
   },
-  "optionsFoundation": {
-    "message": "PoziTone è reso possibile dall' <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amore</a> e dalla <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">gentilezza</a>."
-  },
-  "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Mostra il <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">constant bitrate</a>",
-    "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+  "optionsSettingsGeneralShowAdvancedToggle": {
+    "message": "Avanzate"
   },
   "optionsSettingsDisplayWhen": {
     "message": "Mostrami notifiche"
@@ -135,14 +173,20 @@
   "optionsContact": {
     "message": "Contatta gli sviluppatori di PoziTone"
   },
-  "about": {
-    "message": "Ulteriori informazioni"
+  "feedbackQuestions": {
+    "message": "Non essere timido, <a href=\"mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"questions\" }'>fai una domanda</a>."
+  },
+  "module_com_vgmradio": {
+    "message": "VGM Radio"
   },
   "popupTitle": {
     "message": "PoziTone"
   },
   "popupNavRecentTracksH1": {
     "message": "Brani recenti"
+  },
+  "incentive": {
+    "message": "Incentivo"
   },
   "optionsCopyright": {
     "message": "&copy; PoziWorld, 2016"
@@ -156,8 +200,14 @@
   "lang": {
     "message": "it"
   },
+  "feedback": {
+    "message": "Commenti"
+  },
   "notificationPlayerStatusChangeStarted": {
     "message": "Riproduzione iniziata"
+  },
+  "spreadTheWordWhyNot": {
+    "message": "Se hai trovato utile PoziTone, perché non raccomandarlo ai tuoi amici, colleghi e followers?"
   },
   "optionsSettingsDisplayWhenStopped": {
     "message": "Quando la riproduzione non inizia / si interrompe"
@@ -169,11 +219,17 @@
     "message": "Generale"
   },
   "optionsSettingsSoundVolumeControlUseDefaults": {
-    "message": "Use <a href=\"#/settings/general\">general settings</a>",
+    "message": "Usa le <a href=\"#/settings/general\">impostazioni generali</a>",
     "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+  },
+  "projects": {
+    "message": "I nostri progetti"
   },
   "optionsInfo": {
     "message": "Dettagli riguardo PoziTone"
+  },
+  "spreadTheWordFollowUs": {
+    "message": "Seguici su <a href=\"https://facebook.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://google.com/+PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"http://ok.ru/group/54738320621596\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, e <a href=\"https://instagram.com/PoziTone\" target=\"blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
   },
   "optionsSettingsSoundVolumeControl": {
     "message": "Sound volume control",
@@ -194,11 +250,17 @@
   "optionsSettingsNotificationButtonsPreviousAuthRequired": {
     "message": "Brano precedente <small>(richiesta l'autorizzazione sul sito)</small>"
   },
+  "messageFromDevelopersTooltipText": {
+    "message": "Messaggio importante dagli sviluppatori!"
+  },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Quando non ci sono informazioni sul brano corrente (mostrato come \"...\" sul sito)"
   },
   "notificationPlayerStatusChangeResumed": {
     "message": "Riproduzione ripresa"
+  },
+  "enableAll": {
+    "message": "Attiva tutto"
   },
   "optionsSettingsNotificationButtonsPrevious": {
     "message": "Brano precedente"
@@ -209,11 +271,20 @@
   "optionsSettingsNotificationIconFormatShowStationLogo": {
     "message": "Mostra il logo della stazione radio corrente"
   },
+  "optionsSettingsNotificationIconFormatShowSiteLogo": {
+    "message": "Mostra il logo del sito"
+  },
   "optionsSettingsGeneralUeipMore": {
     "message": "Dimmi di più sul programma"
   },
+  "save": {
+    "message": "Salva"
+  },
   "notificationButtonsStopTitle": {
     "message": "Interrompi"
+  },
+  "translation": {
+    "message": "Traduzione"
   },
   "optionsSettingsNotificationButtonsPlayStop": {
     "message": "Interrompi / Riproduci"
@@ -234,17 +305,11 @@
       }
     }
   },
-  "optionsNavFaq": {
-    "message": "FAQ"
-  },
   "optionsSettingsGeneralShortcuts": {
     "message": "Scorciatoie da tastiera:"
   },
   "findOnVk": {
     "message": "Cerca su VK"
-  },
-  "optionsSettingsSupport": {
-    "message": "Supporta questo player"
   },
   "notificationButtonsPlayTitle": {
     "message": "Riproduci"
@@ -257,6 +322,9 @@
   },
   "optionsSettingsNotificationIconFormat": {
     "message": "Formato dell'icona della notifica"
+  },
+  "optionsHelpH1": {
+    "message": "Aiuto"
   },
   "systemNotificationUpdatedChanges": {
     "message": "Guarda i cambiamenti"
@@ -276,6 +344,9 @@
   "optionsSettingsGeneralUeipJoin": {
     "message": "Partecipa anonimamente"
   },
+  "spreadTheWordWays": {
+    "message": "Ci sono un paio di modi in cui puoi aiutarci:"
+  },
   "optionsSettingsNotificationTitleFormat": {
     "message": "Formato del titolo della notifica"
   },
@@ -286,7 +357,7 @@
     "message": "Quando il volume è al 0% o è disattivato"
   },
   "module_ru_101": {
-    "message": "101.ru"
+    "message": "Radio online 101.ru"
   },
   "optionsSettingsNotificationTitleFormatShort": {
     "message": "Mostra solo il nome della stazione radio corrente"
@@ -294,8 +365,8 @@
   "copyToClipboard": {
     "message": "Copia negli appunti"
   },
-  "optionsSettingsNotificationIconFormatShowSiteLogo": {
-    "message": "Mostra il logo"
+  "feedbackAppreciated": {
+    "message": "Apprezziamo il tuo commento!"
   },
   "notificationButtonsVolumeDownTitle": {
     "message": "Decrease sound volume",
@@ -312,5 +383,8 @@
   },
   "notificationPlayerStatusChangeStopped": {
     "message": "Riproduzione interrotta"
+  },
+  "rateExtension": {
+    "message": "Per piacere, manda un feedback su PoziTone così da aiutare altre persone a trovare questa estensione!"
   }
 }

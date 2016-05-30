@@ -25,51 +25,62 @@
 
   body
     {
-      display:                flex;
-      flex-direction:         row;
-      flex-wrap:              nowrap;
-      justify-content:        flex-start;
-      align-content:          stretch;
-      align-items:            flex-start;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: flex-start;
+      min-width: 77.5rem;
+      min-height: 100vh;
+      height: 100vh;
     }
   #header
     {
-      position:               initial;
-      float:                  initial;
-
-      order:                  0;
-      flex:                   0 0 16.5rem;
-      align-self:             auto;
+      position: initial;
+      float: initial;
+      flex: 0 0 16.5rem;
+      align-self: auto;
+      padding: 0;
+      height: 100vh;
     }
   #nav
     {
-      position:               fixed;
-      width:                  16.5rem;
+      position: fixed;
+      width: 16.5rem;
+      height: 100%;
     }
   #toolbar
     {
-      right:                  auto;
-      left:                   16.5rem;
-      width:                  58rem;
-      text-align:             right;
+      right: auto;
+      left: 16.5rem;
+      width: 58rem;
+      text-align: right;
     }
   #pwMessage
     {
-      float:                  none;
-      display:                inline-block;
-      margin-right:           0;
+      float: none;
+      display: inline-block;
+      margin-right: 0;
     }
   #content
     {
-      padding:                initial;
-
-      order:                  0;
-      flex:                   0 0 60rem;
-      align-self:             auto;
+      padding: 0 0 0 2rem;
+      flex: 0 0 60rem;
+      align-self: auto;
     }
   #menu
     {
-      margin-bottom:          1.8rem;
+      height: 100vh;
+      overflow: auto;
+    }
+  .mainMenuItemWrap:first-child
+    {
+      margin-top: 2rem;
+    }
+  .mainMenuItemWrap:nth-last-child( 2 )
+    {
+      margin-bottom: 2rem;
     }
   .page
     {

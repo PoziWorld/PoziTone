@@ -7,8 +7,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
   $scope.intChanges = 0;
   $scope.boolIsTogglingInProgress = false;
 
-  var
-      objModules = $scope.objModules
+  var objModules = $scope.objModules
     , objModule
     , strModuleId
     ;
@@ -23,8 +22,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
 
     // TODO: When all module origins are permitted, and enabled in storage,
     // only then show module as enabled.
-    if (
-          typeof arrAllPermittedOrigins === 'object'
+    if (  typeof arrAllPermittedOrigins === 'object'
       &&  Array.isArray( arrAllPermittedOrigins )
     ) {
       for ( strModuleId in objGlobalModules ) {
@@ -57,8 +55,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
   } );
 
   for ( strModuleId in objModules ) {
-    if (
-          objModules.hasOwnProperty( strModuleId )
+    if (  objModules.hasOwnProperty( strModuleId )
       &&  strModuleId !== strConstGeneralSettingsSuffix
     ) {
       $scope.intModules++;
@@ -96,8 +93,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
   };
 
   // Sticky element - START
-  var
-      $$stickyElement = document.querySelector( '.initSticky' )
+  var $$stickyElement = document.querySelector( '.initSticky' )
     , intOrigOffsetY =
           document.getElementById( 'modulesListPageHeading' ).offsetHeight
         - document.getElementById( 'modulesListForm' ).style.marginTop
@@ -106,11 +102,8 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
   Page.initStickyElement( $$stickyElement, intOrigOffsetY );
   // Sticky element - END
 
-  var
-      $$checkboxes =
-        document.getElementsByClassName( 'modulesListItemCheckbox' )
-    , $$privacyStatementsContainer =
-        document.getElementById( 'privacyStatementsContainer' )
+  var $$checkboxes = document.getElementsByClassName( 'modulesListItemCheckbox' )
+    , $$privacyStatementsContainer = document.getElementById( 'privacyStatementsContainer' )
     ;
 
   /**
@@ -141,8 +134,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
 
     $scope.boolIsTogglingInProgress = true;
 
-    var
-        strEnable = boolEnable.toString()
+    var strEnable = boolEnable.toString()
       , arrOrigins = []
       , objModulesSettings = {}
       , arrModulesIds = []
@@ -151,8 +143,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
 
     [].forEach.call( arrCheckboxesToSave || $$checkboxes, function( $$checkbox ) {
       if ( $$checkbox.dataset.wasEnabled !== strEnable ) {
-        var
-            strModuleId = $$checkbox.dataset.moduleId
+        var strModuleId = $$checkbox.dataset.moduleId
           , strModuleSettings = strConstSettingsPrefix + strModuleId
           ;
 
@@ -310,8 +301,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
     , arrModulesIds
     , arrCheckboxesToChange
   ) {
-    var
-        objLogDetails = {
+    var objLogDetails = {
             arrModulesIds : arrModulesIds
           , boolIsNotRemovingTabsPermission : true
         }
@@ -403,8 +393,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
       arrCheckboxesToChange
     , boolCheck
   ) {
-    if (
-          ! Array.isArray( arrCheckboxesToChange )
+    if (  ! Array.isArray( arrCheckboxesToChange )
       ||  typeof boolCheck !== 'boolean'
     ) {
       return;
@@ -456,8 +445,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
    * @return  void
    **/
   $scope.saveChanges = function() {
-    var
-        arrEnabledCheckboxesToSave = []
+    var arrEnabledCheckboxesToSave = []
       , arrDisabledCheckboxesToSave = []
       ;
 
@@ -501,8 +489,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
       if ( objModulesSettings.hasOwnProperty( strModuleSettings ) ) {
         strModuleId = strModuleSettings.replace( strConstSettingsPrefix, '' );
 
-        $scope.$parent.objModules[ strModuleId ] =
-          objModulesSettings[ strModuleSettings ];
+        $scope.$parent.objModules[ strModuleId ] = objModulesSettings[ strModuleSettings ];
       }
     }
 

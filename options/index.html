@@ -25,7 +25,7 @@
       <nav id="nav">
         <ul id="menu" ng-controller="MenuController">
           <li
-            class="menuItemWrap"
+            class="menuItemWrap mainMenuItemWrap"
             id="menuItemWrap_{{objModules.general.id}}"
             module-menu-item-directive
               >
@@ -34,7 +34,7 @@
               class="menuItem"
                 >{{objModules.general.caption}}</a>
           </li>
-          <li class="menuItemWrap">
+          <li class="menuItemWrap mainMenuItemWrap">
             <a
               ng-href="#/settings/modules/built-in"
               class="menuItem"
@@ -45,7 +45,7 @@
                 class="menuItemWrap"
                 id="menuItemWrap_{{objModule.id}}"
                 ng-repeat="objModule in objModules"
-                ng-if="objModule.id !== 'general'"
+                ng-if="objModule.type === 'built-in' && objModule.id !== 'general'"
                 module-menu-item-directive
                   >
                 <a
@@ -55,7 +55,36 @@
               </li>
             </ul>
           </li>
-          <li class="menuItemWrap" ng-class="{none : strPage === 'help'}" ng-repeat="strPage in arrPages">
+          <li
+            class="menuItemWrap mainMenuItemWrap"
+            id="modulesExternal"
+            ng-if="intModulesExternal > 0"
+            localize
+            >
+            <span
+              class="menuItem"
+              i18n-content="modulesExternal"
+                ></span>
+            <ul id="submenu">
+              <li
+                class="menuItemWrap"
+                id="menuItemWrap_{{objModule.id}}"
+                ng-repeat="objModule in objModules"
+                ng-if="objModule.type === 'external'"
+                module-menu-item-directive
+                  >
+                <a
+                  ng-href="#/settings/modules/external/{{objModule.id}}"
+                  class="menuItem"
+                    >{{objModule.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li
+            class="menuItemWrap mainMenuItemWrap"
+            ng-class="{none : strPage === 'help'}"
+            ng-repeat="strPage in arrPages"
+            >
             <a
               ng-href="#/{{strPage}}"
               data-page="{{strPage}}"

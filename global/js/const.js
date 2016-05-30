@@ -11,18 +11,17 @@
 
     Constants
     Storage
+    PoziTone
 
  ============================================================================ */
+
+'use strict';
 
 /* =============================================================================
 
   Constants
 
  ============================================================================ */
-
-if ( typeof strConstExtensionId !== 'undefined' ) {
-  throw new Error( 'PoziTone: already loaded' );
-}
 
 const
     // Extension
@@ -91,8 +90,8 @@ const
 
   , strConstLogOnInstalled        = 'chrome.runtime.onInstalled'
 
-  , objConstUserSetUp             = typeof bowser === 'object' ?
-        {
+  , objConstUserSetUp             = boolConstIsBowserAvailable
+      ? {
             currentVersion        : strConstExtensionVersion
           , browserName           : bowser.name
           , browserVersion        : bowser.version
@@ -111,8 +110,15 @@ const
 
  ============================================================================ */
 
-var
-    StorageApi                    = chrome.storage
-  , StorageSync                   = StorageApi.sync
-  , StorageLocal                  = StorageApi.local
+var StorageApi = chrome.storage
+  , StorageLocal = StorageApi.local
+  , StorageSync = StorageApi.sync || StorageLocal
   ;
+
+/* =============================================================================
+
+  PoziTone
+
+ ============================================================================ */
+
+var pozitone = {};

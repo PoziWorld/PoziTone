@@ -41,8 +41,6 @@
       tabs.onRemoved
       alarms.onAlarm
       contextMenus.onClicked
-    On Load
-      Initialize
 
  ============================================================================ */
 
@@ -69,6 +67,7 @@ const
 
       , objSettings_general                       : {
             strJoinUeip                           : 'no'
+          , boolEnableExternalModulesSupport      : false
           , boolShowAdvancedSettings              : false
           , boolShowShortcutsInNotification       : true
           , boolShowWasUpdatedNotification        : true
@@ -241,6 +240,12 @@ var Background                    = {
    **/
   init : function() {
     Background.checkIfUpdatedSilently();
+
+    Global.getModules( StorageLocal, undefined, function ( objModules ) {
+      Global.objExternalModules = objModules;
+    } );
+
+    pozitone.background.checkForManagementPermission();
   }
   ,
 
@@ -563,32 +568,52 @@ var Background                    = {
    * @param   strLogSuffix
    *            Type of storage to report in the log
    * @param   objDetails
-   *            Reason - install/update/chrome_update -
+   *            Optional. Reason - install/update/chrome_update -
    *            and (optional) previous version
+   * @param   funcSuccessCallback
+   *            Optional. Function to run on success.
+   * @param   funcErrorCallback
+   *            Optional. Function to run on error.
+   * @param   funcHadBeenSetCallback
+   *            Optional. Function to run when there is nothing to set.
    * @return  void
    **/
-  setDefaults : function( Storage, objSettings, strLogSuffix, objDetails ) {
+  setDefaults : function(
+      Storage
+    , objSettings
+    , strLogSuffix
+    , objDetails
+    , funcSuccessCallback
+    , funcErrorCallback
+    , funcHadBeenSetCallback
+  ) {
     Storage.get( null, function( objReturn ) {
       strLog = 'setExtensionDefaults, ' + strLogSuffix;
       Log.add( strLog );
 
-      var objTempToSet = {};
+      var objTempToSet = {}
+        , intSettings = 0
+        , intSettingsHadBeenSet = 0
+        ;
 
       for ( var strSetting in objSettings ) {
         if ( objSettings.hasOwnProperty( strSetting ) ) {
-          var
-              miscSetting       = objSettings[ strSetting ]
+          var miscSetting = objSettings[ strSetting ]
             , miscReturnSetting = objReturn[ strSetting ]
             ;
 
           // If a new setting introduced, set its default
-          if ( typeof miscReturnSetting === 'undefined' )
+          if ( typeof miscReturnSetting === 'undefined' ) {
             objTempToSet[ strSetting ] = miscSetting;
+          }
+          else {
+            intSettingsHadBeenSet++;
+          }
 
           if (
                 typeof miscSetting === 'object'
             &&  ! Array.isArray( miscSetting )
-          )
+          ) {
             for ( var strSubsetting in miscSetting ) {
               if ( miscSetting.hasOwnProperty( strSubsetting ) ) {
                 // If a new subsetting introduced, set its default
@@ -618,6 +643,9 @@ var Background                    = {
                 }
               }
             }
+          }
+
+          intSettings++;
         }
       }
 
@@ -625,16 +653,33 @@ var Background                    = {
       if ( ! Global.isEmpty( objTempToSet ) ) {
         // Once installed and defaults are set, open Options page
         function funcCallback() {
-          if ( objDetails.reason === 'install' ) {
+          if ( typeof objDetails === 'object' && objDetails.reason === 'install' ) {
             Global.openOptionsPage( 'install' );
+          }
+
+          if ( typeof funcSuccessCallback === 'function' ) {
+            funcSuccessCallback();
           }
         }
 
-        Global.setStorageItems( Storage, objTempToSet, strLog, funcCallback );
+        Global.setStorageItems(
+            Storage
+          , objTempToSet
+          , strLog
+          , funcCallback
+          , funcErrorCallback
+        );
       }
-      else
+      else {
         Log.add( strLog + strLogDoNot );
-    });
+
+        if (  intSettingsHadBeenSet === intSettings
+          &&  typeof funcHadBeenSetCallback === 'function'
+        ) {
+          funcHadBeenSetCallback();
+        }
+      }
+    } );
   }
   ,
 
@@ -669,43 +714,43 @@ var Background                    = {
    *
    * @type    method
    * @param   objStationInfo
-   *            Last Track + Station info
+   *            Last Track + Station info.
+   * @param   boolExternal
+   *            Optional. Whether the request is sent from another extension/app.
+   * @param   objSender
+   *            Optional. Sender of the request.
    * @return  void
    **/
-  saveRecentTrackInfo : function( objStationInfo ) {
+  saveRecentTrackInfo : function( objStationInfo, boolExternal, objSender ) {
     var arrVarsToGet = [ 'arrRecentTracks', 'intRecentTracksToKeep' ];
 
     StorageSync.get( arrVarsToGet, function( objReturn ) {
       strLog = 'saveRecentTrackInfo';
       Log.add( strLog, objStationInfo );
 
-      var
-          arrRecentTracks     = objReturn.arrRecentTracks
+      var arrRecentTracks = objReturn.arrRecentTracks
         // Don't include messages with player status (started, resumed, muted)
-        , arrTrackInfo        = objStationInfo.strTrackInfo.split( "\n\n" )
-        , strTrackInfo        = arrTrackInfo[ 0 ]
-        , intIndex            = Global.returnIndexOfSubitemContaining(
-                                    arrRecentTracks
-                                  , strTrackInfo
-                                )
+        , arrTrackInfo = objStationInfo.strTrackInfo.split( "\n\n" )
+        , strTrackInfo = arrTrackInfo[ 0 ]
+        , intIndex = Global.returnIndexOfSubitemContaining( arrRecentTracks, strTrackInfo )
         , arrTempRecentTrack  = []
         ;
 
       if ( intIndex !== -1 ) {
-        if ( intIndex !== ( arrRecentTracks.length - 1 ) )
+        if ( intIndex !== ( arrRecentTracks.length - 1 ) ) {
           arrRecentTracks.splice( intIndex, 1 );
+        }
         // Don't save if it is already at the last position in the array
-        else
+        else {
           return;
+        }
       }
       else {
-        var
-            intRecentTracksExcess     = arrRecentTracks.length - 
-                                          objReturn.intRecentTracksToKeep
-          , intRecentTracksToRemove   = (
-                                          intRecentTracksExcess < 0 ?
-                                            -1 : intRecentTracksExcess
-                                        ) + 1
+        var intRecentTracksExcess = arrRecentTracks.length - objReturn.intRecentTracksToKeep
+          , intRecentTracksToRemove = ( intRecentTracksExcess < 0
+                                          ? -1
+                                          : intRecentTracksExcess
+                                      ) + 1
           ;
 
         arrRecentTracks.splice( 0, intRecentTracksToRemove );
@@ -716,6 +761,10 @@ var Background                    = {
       arrTempRecentTrack[ 0 ] = strTrackInfo;
       arrTempRecentTrack[ 1 ] = objStationInfo.strStationName;
       arrTempRecentTrack[ 2 ] = objStationInfo.strLogoUrl;
+
+      if ( typeof boolExternal === 'boolean' && boolExternal ) {
+        arrTempRecentTrack[ 3 ] = objSender.id;
+      }
 
       arrRecentTracks.push( arrTempRecentTrack );
 
@@ -732,115 +781,62 @@ var Background                    = {
    *            Message received
    * @param   objSender
    *            Sender of a message
-   * @param   objSendResponse
+   * @param   funcSendResponse
    *            Used to send a response
    * @param   boolExternal
    *            Optional. Whether a message is sent from another extension/app
    * @return  void
    **/
-  onMessageCallback : function(
-      objMessage
-    , objSender
-    , objSendResponse
-    , boolExternal
-  ) {
+  onMessageCallback : function( objMessage, objSender, funcSendResponse, boolExternal ) {
     var strReceiver = objMessage.strReceiver;
 
-    if ( typeof strReceiver === 'string' ) {
-      if ( strReceiver === 'background' ) {
-        // A page asking to track some event
-        var strMessageLog = objMessage.strLog;
+    if ( typeof boolExternal !== 'boolean' || ! boolExternal ) {
+      if ( typeof strReceiver === 'string' ) {
+        if ( strReceiver === 'background' ) {
+          // A page asking to track some event
+          var strMessageLog = objMessage.strLog;
 
-        // TODO: Only for internal messages
-        if ( typeof strMessageLog === 'string' )
-          Log.add( strMessageLog, objMessage.objVars, true );
+          // TODO: Only for internal messages
+          if ( typeof strMessageLog === 'string' )
+            Log.add( strMessageLog, objMessage.objVars, true );
 
-        // A page asking to make a call
-        var boolMakeCall = objMessage.boolMakeCall;
+          // A page asking to make a call
+          var boolMakeCall = objMessage.boolMakeCall;
 
-        if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
-          var funcCallback = function( objXhr, objSendResponse ) {
-            objSendResponse(
-              parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
+          if ( typeof boolMakeCall === 'boolean' && boolMakeCall ) {
+            var funcCallback = function( objXhr, funcSendResponse ) {
+              funcSendResponse(
+                parseInt( objXhr.getResponseHeader( 'Content-Length' ) )
+              );
+            };
+
+            Global.makeHttpRequest(
+                objMessage.objVars.strUrl
+              , funcCallback
+              , funcSendResponse
             );
-          };
-
-          Global.makeHttpRequest(
-              objMessage.objVars.strUrl
-            , funcCallback
-            , objSendResponse
-          );
+          }
         }
-      }
 
-      // Don't break only when there is no receiver info
+        // Don't break only when there is no receiver info
+        return;
+      }
+    }
+    else {
+      pozitone.api.processRequest(
+          objMessage
+        , objSender
+        , funcSendResponse
+      );
+
       return;
     }
 
-    strLog = 'onMessageCallback';
-    Log.add( strLog, objMessage );
-
-    var
-        strModule         = objMessage.objPlayerInfo.strModule
-      , strTrackInfo      = objMessage.objStationInfo.strTrackInfo
-      , objDataToPreserve = {
-                              // funcShowNotification
-                                objMessage    : objMessage
-                              , objSender     : objSender
-                              , strTrackInfo  : strTrackInfo
-                              // funcDoNot
-                              , strLog        : strLog
-                            }
-      ;
-
-    if ( typeof boolExternal === 'boolean' && boolExternal )
-      strModule += objSender.id;
-
-    var funcShowNotification = function( objPreservedData ) {
-      // Show notification if track info changed or extension asks to show it
-      // again (for example, set of buttons needs to be changed)
-      var
-          strTrackInfo  = objPreservedData.strTrackInfo
-        , objMessage    = objPreservedData.objMessage
-        ;
-
-      if (
-            ~~ Background.arrTrackInfoPlaceholders.indexOf( strTrackInfo )
-        &&  strTrackInfo !== Background.strPreviousTrack
-        ||  objMessage.boolDisregardSameMessage
-      ) {
-        // Check for changes
-        Global.getAllCommands();
-
-        Global.showNotification(
-            objMessage.boolIsUserLoggedIn
-          , objMessage.boolDisregardSameMessage
-          , objPreservedData.objSender.tab.id
-          , objMessage.objPlayerInfo
-          , objMessage.objStationInfo
-          , objMessage.strCommand || ''
-        );
-
-        Background.strPreviousTrack = strTrackInfo;
-      }
-      else
-        funcDoNot( objPreservedData );
-    };
-
-    var funcDoNot = function( objPreservedData ) {
-      Log.add(
-          objPreservedData.strLog + strLogDoNot
-        , objPreservedData.strTrackInfo
-      );
-    };
-
-    Global.checkIfModuleIsEnabled(
-        strModule
-      , objSender.tab.id
-      , funcShowNotification
-      , funcDoNot
-      , objDataToPreserve
-      , 'onMessageCallback'
+    pozitone.background.processMediaNotificationRequest(
+        objMessage
+      , objSender
+      , funcSendResponse
+      , boolExternal
     );
   }
   ,
@@ -861,76 +857,76 @@ var Background                    = {
     var strUrl = objTab.url;
 
     if ( typeof strUrl === 'string' && strUrl !== '' ) {
-      var miscModule = Global.isValidUrl( strUrl );
+      var strModule = Global.getModuleId( strUrl );
 
-      if ( strUrl && miscModule ) {
+      if ( strUrl && typeof strModule === 'string' ) {
         Log.add( strLog + strLogSuccess, strUrl );
 
-        var
-            intWindowId   = objTab.windowId
-          , intTabId      = objTab.id
-          , funcPingPage  = function( miscModule ) {
-              chrome.tabs.sendMessage(
-                  intTabId
-                , 'Do you copy?'
-                , function( strResponse ) {
-                    if ( strResponse !== 'Copy that.' ) {
-                      var
-                          objModule = Global.objModules[ miscModule ]
-                        , arrCss    = objModule.arrCss
-                        , intCss    = ( typeof arrCss !== 'undefined' ) ?
-                                        arrCss.length : 0
-                        , arrJs     = objModule.arrJs
-                        , intJs     = ( typeof arrJs !== 'undefined' ) ?
-                                        arrJs.length : 0
-                        , funcCallback = function() {
-                            Global.checkForRuntimeError(
-                                undefined
-                              , undefined
-                              , { strModule : miscModule }
-                              , false
-                            );
-                          }
-                        ;
-
-                      for ( var j = 0; j < intCss; j++ ) {
-                        chrome.tabs.executeScript(
-                            intTabId
-                          , { file: arrCss[ j ], runAt: 'document_end' }
-                          , function() {
-                              funcCallback();
-                            }
-                        );
-                      }
-
-                      for ( var k = 0; k < intJs; k++ ) {
-                        chrome.tabs.executeScript(
-                            intTabId
-                          , { file: arrJs[ k ], runAt: 'document_end' }
-                          , function() {
-                              funcCallback();
-                            }
-                        );
-                      }
-                    }
-                  }
-              );
-            }
+        var intWindowId = objTab.windowId
+          , intTabId = objTab.id
           ;
 
         // If there are no open tabs for this windowId saved yet
-        if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) )
+        if ( Global.isEmpty( objOpenTabs[ intWindowId ] ) ) {
           objOpenTabs[ intWindowId ] = {};
+        }
 
         // Do not save all the properties of an open tab
-        var objTabCopy  = {};
+        var objTabCopy = {};
 
-        objTabCopy.id   = objTab.id;
-        objTabCopy.url  = objTab.url;
+        objTabCopy.id = objTab.id;
+        objTabCopy.url = objTab.url;
 
         objOpenTabs[ intWindowId ][ objTab.index ] = objTabCopy;
 
-        funcPingPage( miscModule );
+        if ( strModule in Global.objModules ) {
+          chrome.tabs.sendMessage(
+              intTabId
+            , 'Do you copy?'
+            , function( strResponse ) {
+                if ( strResponse !== 'Copy that.' ) {
+                  var objModule = Global.objModules[ strModule ]
+                    , arrCss = objModule.arrCss
+                    , intCss = ( typeof arrCss !== 'undefined' )
+                        ? arrCss.length
+                        : 0
+                    , arrJs = objModule.arrJs
+                    , intJs = ( typeof arrJs !== 'undefined' )
+                        ? arrJs.length
+                        : 0
+                    , funcCallback = function() {
+                        Global.checkForRuntimeError(
+                            undefined
+                          , undefined
+                          , { strModule : strModule }
+                          , false
+                        );
+                      }
+                    ;
+
+                  for ( var j = 0; j < intCss; j++ ) {
+                    chrome.tabs.executeScript(
+                        intTabId
+                      , { file: arrCss[ j ], runAt: 'document_end' }
+                      , function() {
+                          funcCallback();
+                        }
+                    );
+                  }
+
+                  for ( var k = 0; k < intJs; k++ ) {
+                    chrome.tabs.executeScript(
+                        intTabId
+                      , { file: arrJs[ k ], runAt: 'document_end' }
+                      , function() {
+                          funcCallback();
+                        }
+                    );
+                  }
+                }
+              }
+          );
+        }
       }
     }
 
@@ -955,27 +951,27 @@ var Background                    = {
       Log.add(
           strLog
         , {
-              objSavedTab     : objSavedTab     || {}
+              objSavedTab : objSavedTab || {}
             , intRemovedTabId : intRemovedTabId || -1
           }
       );
 
       var objOpenTabs = {};
 
-      for ( var i = 0, objTab; objTab = tabs[i]; i++ ) {
+      for ( var i = 0, objTab; objTab = tabs[ i ]; i++ ) {
         objOpenTabs = Background.checkTab( objTab );
 
         // chrome.tabs.onReplaced
-        if (
-              typeof objSavedTab === 'object'
+        if (  typeof objSavedTab === 'object'
           &&  typeof intRemovedTabId === 'number'
           &&  objSavedTab.index === objTab.index
-        )
+        ) {
           Background.checkIfHostnameChanged(
               objSavedTab
             , objTab
             , intRemovedTabId
           );
+        }
       }
 
       // TODO: Prevent exceeding max number of write operations
@@ -1003,16 +999,16 @@ var Background                    = {
       strLog = 'checkIfOpenTabChangedDomainOnUpdated';
       Log.add( strLog, objTab );
 
-      var
-          objSavedTabs    = objReturn[ Background.strObjOpenTabsName ]
-        , objSavedWindow  = objSavedTabs[ objTab.windowId ]
+      var objSavedTabs = objReturn[ Background.strObjOpenTabsName ]
+        , objSavedWindow = objSavedTabs[ objTab.windowId ]
         ;
 
       if ( typeof objSavedWindow === 'object' ) {
         var objSavedTab = objSavedWindow[ objTab.index ];
 
-        if ( typeof objSavedTab === 'object' )
+        if ( typeof objSavedTab === 'object' ) {
           Background.checkIfHostnameChanged( objSavedTab, objTab );
+        }
       }
     } );
   }
@@ -1081,28 +1077,28 @@ var Background                    = {
     Log.add(
         strLog
       , {
-            objSavedTab     : objSavedTab
-          , objTab          : objTab
+            objSavedTab : objSavedTab
+          , objTab : objTab
           , intRemovedTabId : intRemovedTabId || -1
         }
     );
 
     // http://stackoverflow.com/a/8498668/561712
-    var
-        $aSavedTab  = document.createElement( 'a' )
-      , $aTab       = document.createElement( 'a' )
+    var $aSavedTab = document.createElement( 'a' )
+      , $aTab = document.createElement( 'a' )
       ;
 
     $aSavedTab.href = objSavedTab.url;
-    $aTab.href      = objTab.url;
+    $aTab.href = objTab.url;
 
     if ( $aSavedTab.hostname !== $aTab.hostname ) {
       Log.add( strLog + strLogSuccess );
 
       var intTabId = objTab.id;
 
-      if ( typeof intRemovedTabId === 'number' )
+      if ( typeof intRemovedTabId === 'number' ) {
         intTabId = intRemovedTabId;
+      }
 
       Global.removeNotification( intTabId );
     }
@@ -1338,10 +1334,10 @@ Background.strBrowserActionRateExtensionContextMenuId =
  * @return  void
  **/
 chrome.runtime.onMessage.addListener(
-  function( objMessage, objSender, objSendResponse ) {
+  function( objMessage, objSender, funcSendResponse ) {
     Background.preventCheckForSilentUpdate();
 
-    Background.onMessageCallback( objMessage, objSender, objSendResponse );
+    Background.onMessageCallback( objMessage, objSender, funcSendResponse );
 
     // Indicate that the response function will be called asynchronously
     return true;
@@ -1349,11 +1345,10 @@ chrome.runtime.onMessage.addListener(
 );
 
 chrome.runtime.onMessageExternal.addListener(
-  function( objMessage, objSender, objSendResponse ) {
+  function( objMessage, objSender, funcSendResponse ) {
     Background.preventCheckForSilentUpdate();
 
-    Background
-      .onMessageCallback( objMessage, objSender, objSendResponse, true );
+    Background.onMessageCallback( objMessage, objSender, funcSendResponse, true );
 
     // Indicate that the response function will be called asynchronously
     return true;
@@ -1382,8 +1377,7 @@ chrome.notifications.onClicked.addListener(
       // Check for changes
       Global.getAllCommands();
 
-      var intNotificationTabId = 
-            Global.getTabIdFromNotificationId( strNotificationId );
+      var intNotificationTabId = Global.getTabIdFromNotificationId( strNotificationId );
 
       var funcFocusTab = function( intWindowId, intTabIndex, intTabId ) {
         if ( intNotificationTabId === intTabId )
@@ -1408,8 +1402,9 @@ chrome.notifications.onClicked.addListener(
 
       Global.findFirstOpenTabInvokeCallback( funcFocusTab );
     }
-    else
+    else {
       chrome.notifications.clear( strNotificationId, function() {} );
+    }
   }
 );
 
@@ -1431,62 +1426,57 @@ chrome.notifications.onButtonClicked.addListener(
       // Check for changes
       Global.getAllCommands();
 
-      StorageLocal.get( 'objActiveButtons', function( objReturn ) {
+      StorageLocal.get( [ 'arrTabsIds', 'objActiveButtons' ], function( objReturn ) {
         strLog = 'chrome.notifications.onButtonClicked';
         Log.add(
             strLog
           , {
                 strNotificationId : strNotificationId
-              , intButtonIndex    : intButtonIndex
-              , objActiveButtons  : objReturn
+              , intButtonIndex : intButtonIndex
+              , objActiveButtons : objReturn
             }
         );
 
-        var
-            intTabId    = Global.getTabIdFromNotificationId( strNotificationId )
-          , arrButtons  = objReturn.objActiveButtons[ intTabId ]
-          , arrButton   = arrButtons[ intButtonIndex ].split( '|' )
-          , strFunction = Global
-                            .objNotificationButtons[
-                              arrButton[ 0 ] ][ arrButton[ 1 ]
-                            ]
-                              .strFunction
+        var intTabId = Global.getTabIdFromNotificationId( strNotificationId )
+          , arrButtons = objReturn.objActiveButtons[ intTabId ]
+          , arrButton = arrButtons[ intButtonIndex ].split( '|' )
+          , strFunction = Global.objNotificationButtons[ arrButton[ 0 ] ][ arrButton[ 1 ] ].strFunction
+          , strModuleId = strNotificationId.replace( strConstNotificationId, '' ).replace( strConstNotificationIdSeparator + intTabId, '' )
           ;
 
         Log.add(
             strLog + strLogDo
           , {
-                strButton0  : arrButtons[ 0 ]
-              , strButton1  : arrButtons[ 1 ]
+                strButton0 : arrButtons[ 0 ]
+              , strButton1 : arrButtons[ 1 ]
               , strFunction : strFunction
+              , strModuleId : strModuleId
             }
           , true
         );
 
-        chrome.tabs.sendMessage(
-            intTabId
-          , Background.strProcessButtonClick + strFunction
-        );
+        if ( strModuleId in Global.objModules ) {
+          chrome.tabs.sendMessage(
+              intTabId
+            , Background.strProcessButtonClick + strFunction
+          );
+        }
+        else {
+          pozitone.api.sendCallToTab( strModuleId, intTabId, 'button', strFunction );
+        }
       });
     }
     else {
-      var
-          strNotification   = 
-            strNotificationId.replace( Global.strSystemNotificationId, '' )
-        , strFunctionAffix  = 
-            Background
-              .objSystemNotificationButtons
-                [ strNotification ]
-                  [ intButtonIndex ]
-                          .strFunction
-        , strFunction       = 
-            Background.strProcessButtonClick + strFunctionAffix
+      var strNotification = strNotificationId.replace( Global.strSystemNotificationId, '' )
+        , strFunctionAffix = Background.objSystemNotificationButtons[ strNotification ][ intButtonIndex ].strFunction
+        , strFunction = Background.strProcessButtonClick + strFunctionAffix
         ;
 
       var funcToProceedWith = Background[ strFunction ];
 
-      if ( typeof funcToProceedWith === 'function' )
+      if ( typeof funcToProceedWith === 'function' ) {
         funcToProceedWith();
+      }
 
       chrome.notifications.clear( strNotificationId, function() {} );
     }
@@ -1516,8 +1506,9 @@ chrome.commands.onCommand.addListener(
         Log.add( strLog + strLogNoSuccess, { strCommand : strCommand }, true );
         return;
       }
-      else
+      else {
         Log.add( strLog, { strCommand : strCommand }, true );
+      }
 
       var strMessagePrefix = Background.strProcessCommand;
 
@@ -1532,94 +1523,134 @@ chrome.commands.onCommand.addListener(
         , 'volumeDown'
       ];
 
-      if ( ~ arrCommands.indexOf( strCommand ) )
+      if ( ~ arrCommands.indexOf( strCommand ) ) {
         strMessagePrefix = Background.strProcessButtonClick;
+      }
 
-      var
-          arrTabsIds      = objData.arrTabsIds
-        , intTabsIds      = arrTabsIds.length
-        , intArrIndex     = intTabsIds - 1
+      var arrTabsIds = objData.arrTabsIds
+        , intTabsIds = arrTabsIds.length
+        , intArrIndex = intTabsIds - 1
         ;
 
       // The final step
       var funcSendMessage = function( objPreservedData ) {
-        chrome.tabs.sendMessage(
-            objPreservedData.intTabId
-          , objPreservedData.strMessagePrefix + objPreservedData.strCommand
-        );
+        if ( objPreservedData.strModuleId in Global.objModules ) {
+          chrome.tabs.sendMessage(
+              objPreservedData.intTabId
+            , objPreservedData.strMessagePrefix + objPreservedData.strCommand
+          );
+        }
+        else {
+          pozitone.api.sendCallToTab(
+              objPreservedData.strModuleId
+            , objPreservedData.intTabId
+            , 'command'
+            , objPreservedData.strCommand
+          );
+        }
       };
 
       // Callback when no active players.
       // Gets name, checks if enabled
-      var funcGetModuleNameAndProceed = 
-            function( intWindowId, intTabIndex, intTabId, strUrl ) {
+      var funcGetModuleNameAndProceed = function( intWindowId, intTabIndex, intTabId, strUrl ) {
 
-        var
-            miscModule            = Global.isValidUrl( strUrl )
-          , funcCheckNextOpenTab  = function() { return 0 }
+        var strModule = Global.getModuleId( strUrl )
+          , funcCheckNextOpenTab = function() {
+              return 0;
+            }
           ;
 
-        if ( strUrl && miscModule ) {
+        if ( strUrl && strModule ) {
           var objDataToPreserve = {
-                                      intTabId          : intTabId
-                                    , strMessagePrefix  : strMessagePrefix
-                                    , strCommand        : strCommand
-                                  };
+            // TODO: Unify naming
+              strModuleId : strModule
+            , intTabId : intTabId
+            , strMessagePrefix : strMessagePrefix
+            , strCommand : strCommand
+          };
 
           Global.checkIfModuleIsEnabled(
-              miscModule
+              strModule
             , intTabId
             , funcSendMessage
             , funcCheckNextOpenTab
             , objDataToPreserve
             , 'findFirstOpenTabInvokeCallback'
+            , strModule in Global.objExternalModules
           );
         }
-        else
+        else {
           funcCheckNextOpenTab();
+        }
       };
 
       // Tries to send to active players first
       var funcSendToActivePlayers = function( intArrIndex ) {
         if ( intArrIndex >= 0 ) {
-          var intTabId = arrTabsIds[ intArrIndex ][ 0 ];
-
-          chrome.tabs.sendMessage(
-              intTabId
-            , 'Ready for a command? Your name?'
-            , function( objResponse ) {
+          var arrTabInfo = arrTabsIds[ intArrIndex ]
+            , intTabId = arrTabInfo[ 0 ]
+            , strModuleId = arrTabInfo[ 1 ]
+            , funcOnSendMessageResponse = function ( objResponse, boolExternal, objSender ) {
                 var funcLoopMore = function( objPreservedData ) {
                   objPreservedData.intArrIndex--;
                   funcSendToActivePlayers( objPreservedData.intArrIndex );
                 };
 
-                if (
-                      typeof objResponse === 'object'
+                if (  typeof objResponse === 'object'
                   &&  objResponse.boolIsReady
                   &&  typeof objResponse.strModule === 'string'
                 ) {
+                  var strModule = objResponse.strModule;
+
+                  if ( typeof boolExternal === 'boolean' && boolExternal ) {
+                    strModule += strConstGenericStringSeparator + objSender.id;
+                  }
+
                   var objDataToPreserve = {
-                        // funcSendMessage
-                          intTabId          : intTabId
-                        , strMessagePrefix  : strMessagePrefix
-                        , strCommand        : strCommand
-                        // funcLoopMore
-                        , intArrIndex       : intArrIndex
-                      };
+                    // funcSendMessage
+                    // TODO: Unify naming
+                      strModuleId : strModule
+                    , intTabId : intTabId
+                    , strMessagePrefix : strMessagePrefix
+                    , strCommand : strCommand
+                    // funcLoopMore
+                    , intArrIndex : intArrIndex
+                  };
 
                   Global.checkIfModuleIsEnabled(
-                      objResponse.strModule
+                      strModule
                     , intTabId
                     , funcSendMessage
                     , funcLoopMore
                     , objDataToPreserve
                     , 'funcSendToActivePlayers'
+                    , boolExternal
                   );
                 }
-                else
+                else {
                   funcLoopMore( { intArrIndex: intArrIndex } );
+                }
               }
-          );
+            ;
+
+          if ( strModuleId in Global.objModules ) {
+            chrome.tabs.sendMessage(
+                intTabId
+              , 'Ready for a command? Your name?'
+              , function( objResponse ) {
+                  funcOnSendMessageResponse( objResponse );
+                }
+            );
+          }
+          else {
+            pozitone.api.sendCallToTab(
+                strModuleId
+              , intTabId
+              , 'command'
+              , 'status'
+              , funcOnSendMessageResponse
+            );
+          }
         }
         else {
           // If no active players found, send to first open
@@ -1642,7 +1673,7 @@ chrome.commands.onCommand.addListener(
  * @type    method
  * @param   objDetails
  *            Reason - install/update/chrome_update - 
- *            and (optional) previous version
+ *            and (optional) previous version.
  * @return  void
  **/
 chrome.runtime.onInstalled.addListener(
@@ -1743,8 +1774,7 @@ chrome.tabs.onUpdated.addListener(
           strLog = 'chrome.tabs.onUpdated, complete';
           Log.add( strLog );
 
-          var objOpenTabs =
-                Background.checkTab( objTab, objReturn.objOpenTabs );
+          var objOpenTabs = Background.checkTab( objTab, objReturn.objOpenTabs );
 
           // TODO: Prevent exceeding max number of write operations
           Global.saveOpenTabs( objOpenTabs );
@@ -1905,18 +1935,3 @@ chrome.contextMenus.onClicked.addListener( function( objInfo, objTab ) {
 
   Log.add( 'contextMenuClick', objLogDetails, true );
 } );
-
-/* =============================================================================
-
-  On Load
-
- ============================================================================ */
-
-/**
- * Initialize
- *
- * @type    method
- * @param   No Parameters taken
- * @return  void
- **/
-Background.init();

@@ -2,6 +2,11 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.0
+    * New: PoziTone API allows third-party developers make their own modules for PoziTone
+      (called “external modules”) that will be able to utilize all PoziTone features built-in modules have.
+    * Updated Italian translation.
+
 ### v0.5.4
     * Fixed: VK module wouldn't work in Chrome 49 and Opera 36.
       Discovered thanks to the participants of the PoziTone User Experience Improvement Program.

@@ -1,8 +1,27 @@
           <header id="moduleSettingsHeader" localize ng-switch="objModule.type">
             <h1 i18n-content="module_{{objModule.id}}_long" class="subpageHeading" ng-switch-when="built-in"></h1>
-            <h1 class="subpageHeading" ng-switch-when="external">{{objModule.id}}</h1>
+            <h1 class="subpageHeading" ng-switch-when="external">{{objModule.name}}</h1>
           </header>
           <form id="form">
+            <fieldset
+              id="optionsSettingsSupport"
+              localize
+              ng-if="objModule.type === 'external' && objModule.boolIsEnabled !== undefined"
+                >
+              <legend i18n-content="optionsSettingsSupport" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolIsEnabled"
+                      ng-model="objModule.boolIsEnabled"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsSupportEnabled"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
             <fieldset
               id="optionsSettingsNotificationIconFormat"
               localize

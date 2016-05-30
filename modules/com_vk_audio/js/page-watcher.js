@@ -55,10 +55,6 @@
 
  ============================================================================ */
 
-if ( typeof strPlayerId !== 'undefined' ) {
-  throw new Error( 'PoziTone: already loaded' );
-}
-
 const
   // Player
     strPlayerId                           = 'player'
