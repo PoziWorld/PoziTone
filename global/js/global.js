@@ -128,9 +128,11 @@ var Global                        = {
           , strImageFileName      : 'vk-logo-80.svg'
           , arrHosts              : [
                 'vk.com'
+              , 'vk.me'
             ]
           , arrOrigins            : [
                 '*://vk.com/*'
+              , '*://*.vk.me/*'
             ]
           , arrJs                 : [
                 'global/js/const.js'
