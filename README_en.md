@@ -57,7 +57,7 @@ Features
 Supported online media players
 --------
 
-* [VK](https://vk.com) (audio, full version of site).
+* [VK](https://vk.com) (audio, full version of site; doesn't support the redesigned one yet).
 * [VGM Radio](https://vgmradio.com).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).
 * [Online radio 101.ru](http://101.ru) (stations' main player).
@@ -228,7 +228,7 @@ PoziTone on social networks
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
 - [PoziTone on Facebook](https://facebook.com/PoziTone)
 - [PoziTone on Google+](https://plus.google.com/+PoziTone)
-- [PoziTone on Odnoklassniki](http://ok.ru/group/54738320621596)
+- [PoziTone on Odnoklassniki](https://ok.ru/group/54738320621596)
 - [PoziTone on 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone on Instagram](https://instagram.com/PoziTone)
 

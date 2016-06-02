@@ -58,7 +58,7 @@ ___
 Поддерживаемые онлайн-медиаплееры
 --------
 
-* [ВКонтакте](https://vk.com) (аудиоплеер, полная версия сайта).
+* [ВКонтакте](https://vk.com) (аудиоплеер, полная версия сайта; новый дизайн пока не поддерживается).
 * [VGM Radio](https://vgmradio.com).
 * [Одноклассники](http://ok.ru) (аудиоплеер, полная версия сайта).
 * [Онлайн-радио 101.ru](http://101.ru) (основной плеер станций).
@@ -237,7 +237,7 @@ PoziTone в социальных сетях
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone на Facebook](https://facebook.com/PoziTone)
 - [PoziTone в Google+](https://plus.google.com/+PoziTone)
-- [PoziTone на Одноклассниках](http://ok.ru/group/54738320621596)
+- [PoziTone на Одноклассниках](https://ok.ru/group/54738320621596)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone в Instagram](https://instagram.com/PoziTone)
 
