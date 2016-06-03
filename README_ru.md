@@ -226,6 +226,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 - Не стесняйтесь [задавать вопросы](mailto:feedback@pozitone.com).
 - [Сообщения об ошибках](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) ценны!
 - Нам нравится [похвала](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), кому нет? :)
+- Кнут полезен, но [пряник](https://cash.me/$PoziTone) слаще. ;)
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 

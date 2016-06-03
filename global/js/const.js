@@ -102,6 +102,10 @@ const
           , userAgent             : bowser.userAgent
         }
       : {}
+
+  , objConst = {
+        strIncentiveCarrotUrl : 'https://cash.me/$PoziTone'
+    }
   ;
 
 /* =============================================================================

@@ -430,6 +430,10 @@
         "feedbackPraises": {
           "message": "Нам нравится <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>похвала</a>, кому нет? :)"
         }
+        ,
+        "feedbackIncentives": {
+          "message": "Кнут полезен, но <a href=\"#\" target=\"_blank\" id=\"incentiveLink\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"carrot\" }'>пряник</a> слаще. ;)"
+        }
       ,
       "translation": {
         "message": "Перевод"

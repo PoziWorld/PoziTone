@@ -217,6 +217,7 @@ We appreciate your feedback!
 - Don't be shy to [ask questions](mailto:feedback@pozitone.com).
 - [Bug reports](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([for Opera](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) are valuable!
 - We like [praises](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), who doesn't? :)
+- Stick is helpful, but [carrot](https://cash.me/$PoziTone) is sweeter. ;)
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 

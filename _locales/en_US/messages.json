@@ -430,6 +430,10 @@
         "feedbackPraises": {
           "message": "We like <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>praises</a>, who doesn't? :)"
         }
+        ,
+        "feedbackIncentives": {
+          "message": "Stick is helpful, but <a href=\"#\" target=\"_blank\" id=\"incentiveLink\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"carrot\" }'>carrot</a> is sweeter. ;)"
+        }
       ,
       "translation": {
         "message": "Translation"

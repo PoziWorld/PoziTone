@@ -72,6 +72,7 @@ optionsControllers.controller( 'FeedbackCtrl', function( $scope, $rootScope ) {
 
   document.getElementById( 'reviewLink' ).href = strConstRateUrl;
   document.getElementById( 'bugLink' ).href = strConstBugsUrl;
+  document.getElementById( 'incentiveLink' ).href = objConst.strIncentiveCarrotUrl;
 } );
 
 // Controller for About page
