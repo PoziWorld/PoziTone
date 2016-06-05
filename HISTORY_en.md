@@ -2,6 +2,12 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.1
+    * New: ability to disable player status change notifications.
+      Idea by Maxim Sergyenko.
+    * Fix: VK module constant bitrate wouldn't show up
+      (disable and reenable the module to make it work again).
+
 ### v0.6.0
     * New: PoziTone API allows third-party developers make their own modules for PoziTone
       (called “external modules”) that will be able to utilize all PoziTone features built-in modules have.

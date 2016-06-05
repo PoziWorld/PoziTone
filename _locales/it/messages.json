@@ -6,9 +6,6 @@
     "message": "Increase sound volume",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "optionsSettingsGeneralShortcutsShowInNotification": {
-    "message": "Mostra consigli nelle notifiche"
-  },
   "optionsAboutH1": {
     "message": "Ulteriori informazioni"
   },
@@ -167,9 +164,6 @@
   "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
     "message": "Mi piace! <small>(richiesta l'autorizzazione sul sito)</small>"
   },
-  "optionsSettingsGeneralUpdatesNotify": {
-    "message": "Avvisami quando PoziTone è aggiornato"
-  },
   "optionsContact": {
     "message": "Contatta gli sviluppatori di PoziTone"
   },
@@ -305,9 +299,6 @@
       }
     }
   },
-  "optionsSettingsGeneralShortcuts": {
-    "message": "Scorciatoie da tastiera:"
-  },
   "findOnVk": {
     "message": "Cerca su VK"
   },
@@ -371,9 +362,6 @@
   "notificationButtonsVolumeDownTitle": {
     "message": "Decrease sound volume",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
-  },
-  "optionsSettingsGeneralUpdates": {
-    "message": "Aggiornamenti di PoziTone"
   },
   "notificationFavoriteStatusSuccess": {
     "message": "Grazie per aver premiato il duro lavoro di un DJ!"

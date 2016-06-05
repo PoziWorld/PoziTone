@@ -6,9 +6,6 @@
     "message": "Subir volumen de sonido",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "optionsSettingsGeneralShortcutsShowInNotification": {
-    "message": "Mostrar sugerencias en la notificación"
-  },
   "module_ru_ok_audio_long": {
     "message": "Odnoklassniki (audio) | ok.ru"
   },
@@ -138,9 +135,6 @@
   "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
     "message": "¡Me gusta! <small>(autorización expresa necesaria)</small>"
   },
-  "optionsSettingsGeneralUpdatesNotify": {
-    "message": "Notificar una vez actualizado"
-  },
   "optionsContact": {
     "message": "Contactar con los desarrolladores de PoziTone"
   },
@@ -255,9 +249,6 @@
   "optionsNavFaq": {
     "message": "P+F (Preguntas más frecuentes)"
   },
-  "optionsSettingsGeneralShortcuts": {
-    "message": "Combinaciones de teclas"
-  },
   "findOnVk": {
     "message": "Buscar en VK"
   },
@@ -318,9 +309,6 @@
   "notificationButtonsVolumeDownTitle": {
     "message": "Bajar volumen de sonido",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
-  },
-  "optionsSettingsGeneralUpdates": {
-    "message": "Actualizaciones PoziTone"
   },
   "notificationFavoriteStatusSuccess": {
     "message": "¡Gracias por reconocer el duro trabajo de un DJ!"

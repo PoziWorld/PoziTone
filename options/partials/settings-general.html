@@ -1,5 +1,44 @@
           <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
           <form id="form">
+            <fieldset>
+              <legend i18n-content="notifications" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowPlayerEventNotification"
+                      ng-model="objModule.boolShowPlayerEventNotification"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span
+                      class="i18nTitle infoTitle"
+                      i18n-content="showPlayerEventNotification"
+                      data-i18n-title="showPlayerEventNotificationLong"
+                        ></span>
+                  </label>
+                </li>
+                <li ng-class="{ none: ! boolShowAdvancedSettings }">
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowWasUpdatedNotification"
+                      ng-model="objModule.boolShowWasUpdatedNotification"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="showSuccessfulUpdateNotification"></span>
+                  </label>
+                </li>
+                <li ng-class="{ none: ! boolShowAdvancedSettings }">
+                  <label>
+                    <input
+                      type="checkbox" name="boolShowShortcutsInNotification"
+                      ng-model="objModule.boolShowShortcutsInNotification"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="displayKeyboardShortcutsTips"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
             <fieldset ng-class="none" hidden>
               <legend i18n-content="modulesExternal" class="sectionHeading"></legend>
               <ul>
@@ -16,21 +55,6 @@
               </ul>
             </fieldset>
             <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
-              <legend i18n-content="optionsSettingsGeneralShortcuts" class="sectionHeading"></legend>
-              <ul>
-                <li>
-                  <label>
-                    <input
-                      type="checkbox" name="boolShowShortcutsInNotification"
-                      ng-model="objModule.boolShowShortcutsInNotification"
-                      ng-click="inputChange( $event )"
-                        >
-                    <span i18n-content="optionsSettingsGeneralShortcutsShowInNotification"></span>
-                  </label>
-                </li>
-              </ul>
-            </fieldset>
-            <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
               <legend i18n-content="optionsSettingsSoundVolumeControl" class="sectionHeading"></legend>
               <ul>
                 <li>
@@ -42,21 +66,6 @@
                       min="1" max="99" step="1"
                       ng-model="objModule.intVolumeDelta"
                        >
-                  </label>
-                </li>
-              </ul>
-            </fieldset>
-            <fieldset ng-class="{ none: ! boolShowAdvancedSettings }">
-              <legend i18n-content="optionsSettingsGeneralUpdates" class="sectionHeading"></legend>
-              <ul>
-                <li>
-                  <label>
-                    <input
-                      type="checkbox" name="boolShowWasUpdatedNotification"
-                      ng-model="objModule.boolShowWasUpdatedNotification"
-                      ng-click="inputChange( $event )"
-                        >
-                    <span i18n-content="optionsSettingsGeneralUpdatesNotify"></span>
                   </label>
                 </li>
               </ul>

@@ -6,9 +6,6 @@
     "message": "Zwiększ głośność",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "optionsSettingsGeneralShortcutsShowInNotification": {
-    "message": "Wyświetlaj porady w powiadomieniach"
-  },
   "module_ru_ok_audio_long": {
     "message": "Odnoklassniki (dźwięk) | ok.ru"
   },
@@ -138,9 +135,6 @@
   "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
     "message": "Lubię to! <small>(Wymagana autoryzacja na stronie)</small>"
   },
-  "optionsSettingsGeneralUpdatesNotify": {
-    "message": "Poinformuj mnie o aktualizacji"
-  },
   "optionsContact": {
     "message": "Skontaktuj się z twórcami PoziTone"
   },
@@ -255,9 +249,6 @@
   "optionsNavFaq": {
     "message": "FAQ"
   },
-  "optionsSettingsGeneralShortcuts": {
-    "message": "Skróty klawiaturowe"
-  },
   "findOnVk": {
     "message": "Znajdź na VK"
   },
@@ -318,9 +309,6 @@
   "notificationButtonsVolumeDownTitle": {
     "message": "Zmniejsz głośność",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
-  },
-  "optionsSettingsGeneralUpdates": {
-    "message": "Aktualizacje PoziTone"
   },
   "notificationFavoriteStatusSuccess": {
     "message": "Dziękuje za nagrodzenie DJ'a za cięzką pracę!"

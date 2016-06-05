@@ -169,12 +169,25 @@
               "message": "Advanced"
             }
           ,
-          "optionsSettingsGeneralShortcuts": {
-            "message": "Keyboard shortcuts"
+          "notifications": {
+            "message": "Notifications"
           }
             ,
-            "optionsSettingsGeneralShortcutsShowInNotification": {
-              "message": "Display tips in notification"
+            "showPlayerEventNotification": {
+                "message": "Show when player status changes"
+              , "description": "Show notification on playback start/stop, on sound volume change, on track added to playlist, on track favorited event, on track switch, and so on."
+            }
+            ,
+            "showPlayerEventNotificationLong": {
+              "message": "Show notification on playback start/stop/resume, on sound volume change, on track added to playlist, on track favorited event, on track switch, and so on.\n\nIf unchecked, you can still make the notification show up by calling “Show notification” command with the help of keyboard shortcuts (Alt+Shift+Q if unchanged)."
+            }
+            ,
+            "showSuccessfulUpdateNotification": {
+              "message": "Show when PoziTone is successfully updated"
+            }
+            ,
+            "displayKeyboardShortcutsTips": {
+              "message": "Display keyboard shortcuts tips next to commands"
             }
           ,
           "optionsSettingsSoundVolumeControl": {
@@ -190,14 +203,6 @@
             "optionsSettingsSoundVolumeControlDelta": {
                 "message"     : "Change by, %"
               , "description" : "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
-            }
-          ,
-          "optionsSettingsGeneralUpdates": {
-            "message": "PoziTone updates"
-          }
-            ,
-            "optionsSettingsGeneralUpdatesNotify": {
-              "message": "Notify me when updated"
             }
           ,
           "optionsSettingsGeneralUeip": {

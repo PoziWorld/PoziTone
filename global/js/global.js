@@ -15,7 +15,7 @@
       getStorageItems()
       setStorageItems()
       showNotification()
-      showNotificationCallback()
+      savePlayerEventData()
       showSystemNotification()
       removeNotification()
       saveTabsIds()
@@ -535,12 +535,12 @@ var Global                        = {
       , objTempPlayerInfo = objPlayerInfo
       , objTempStationInfo = objStationInfo
       , strModule = objTempPlayerInfo.strModule
-      , strStorageVar = strConstSettingsPrefix + strModule
+      , strModuleSettings = strConstSettingsPrefix + strModule
       , strNotificationId = Global.composeNotificationId( strModule, intTabId, boolExternal, objSender )
       ;
 
     if ( typeof boolExternal === 'boolean' && boolExternal ) {
-      strStorageVar += strConstGenericStringSeparator + objSender.id;
+      strModuleSettings += strConstGenericStringSeparator + objSender.id;
     }
 
     // If Chrome supports showing additional info separately
@@ -557,22 +557,24 @@ var Global                        = {
     // TODO: Add extension ID to strNotificationId when boolExternal === true
     chrome.notifications.clear( strNotificationId, function() {
       ( boolExternal ? StorageLocal : StorageSync ).get(
-          strStorageVar
+          [ strModuleSettings, strConstGeneralSettings ]
         , function( objReturn ) {
-            var objData = objReturn[ strStorageVar ];
+            var objModuleSettings = objReturn[ strModuleSettings ]
+              , objGeneralSettings = objReturn[ strConstGeneralSettings ]
+              ;
 
             // Whether to show notification or not
             if (  ! boolDisregardSameMessage
-              &&  typeof objData.boolShowNotificationWhenStopped === 'boolean'
-              &&  ! objData.boolShowNotificationWhenStopped
+              &&  typeof objModuleSettings.boolShowNotificationWhenStopped === 'boolean'
+              &&  ! objModuleSettings.boolShowNotificationWhenStopped
               &&  ! objTempPlayerInfo.boolIsPlaying
             ) {
               return false;
             }
 
             if (  ! boolDisregardSameMessage
-              &&  typeof objData.boolShowNotificationWhenMuted === 'boolean'
-              &&  ! objData.boolShowNotificationWhenMuted
+              &&  typeof objModuleSettings.boolShowNotificationWhenMuted === 'boolean'
+              &&  ! objModuleSettings.boolShowNotificationWhenMuted
               &&  (
                         objTempPlayerInfo.intVolume === Global.intNoVolume
                     ||  objTempPlayerInfo.boolIsMuted
@@ -582,24 +584,24 @@ var Global                        = {
             }
 
             if (  ! boolDisregardSameMessage
-              &&  typeof objData.boolShowNotificationWhenNoTrackInfo === 'boolean'
-              &&  ! objData.boolShowNotificationWhenNoTrackInfo
+              &&  typeof objModuleSettings.boolShowNotificationWhenNoTrackInfo === 'boolean'
+              &&  ! objModuleSettings.boolShowNotificationWhenNoTrackInfo
               &&  objTempStationInfo.strTrackInfo === Global.strNoTrackInfo
             ) {
               return false;
             }
 
             // Notification Icon Settings
-            if (  typeof objData.boolShowNotificationLogo === 'boolean'
-              &&  objData.boolShowNotificationLogo
+            if (  typeof objModuleSettings.boolShowNotificationLogo === 'boolean'
+              &&  objModuleSettings.boolShowNotificationLogo
               &&  objStationInfo.strLogoDataUri !== null
               &&  objStationInfo.strLogoDataUri !== ''
             ) {
               objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
             }
 
-            var strTitleFormat = objData.strNotificationTitleFormat || ''
-              , arrButtons     = objData.arrActiveNotificationButtons
+            var strTitleFormat = objModuleSettings.strNotificationTitleFormat || ''
+              , arrButtons = objModuleSettings.arrActiveNotificationButtons
               ;
 
             // Notification Title Settings
@@ -628,26 +630,16 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       &&  (
-                                typeof
-                                  objTempStationInfo
-                                    .boolHasAddToPlaylistButton ===
-                                      'undefined'
+                                typeof objTempStationInfo.boolHasAddToPlaylistButton === 'undefined'
                             ||  objTempStationInfo.boolHasAddToPlaylistButton
                           )
                     )
               ) {
                 // Don't show button, if track is in playlist
                 // TODO: Show if track changed while waited for server response
-                if (
-                  ~~  Global
-                        .arrAddTrackToPlaylistFeedback
-                          .indexOf( arrTrackInfo[ 1 ] )
-                ) {
+                if ( ~~ Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) ) {
                   objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo(
-                        objNotificationButtons.add.loggedIn.objButton
-                      , 'add'
-                    )
+                    Global.addShortcutInfo( objNotificationButtons.add.loggedIn.objButton, 'add' )
                   );
 
                   arrActiveButtons.push( 'add|loggedIn' );
@@ -659,70 +651,40 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       &&  (
-                                typeof
-                                  objTempStationInfo
-                                    .boolHasAddToPlaylistButton ===
-                                      'undefined'
+                                typeof objTempStationInfo.boolHasAddToPlaylistButton === 'undefined'
                             ||  objTempStationInfo.boolHasAddToPlaylistButton
                           )
                     )
               ) {
                 // Don't show button, if track is in playlist
                 // TODO: Show if track changed while waited for server response
-                if (
-                  ~~  Global
-                        .arrAddTrackToPlaylistFeedback
-                          .indexOf( arrTrackInfo[ 1 ] )
-                ) {
+                if ( ~~ Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) ) {
                   objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo(
-                        objNotificationButtons.addAuth.loggedIn.objButton
-                      , 'add'
-                    )
+                    Global.addShortcutInfo( objNotificationButtons.addAuth.loggedIn.objButton, 'add' )
                   );
 
                   arrActiveButtons.push( 'addAuth|loggedIn' );
                 }
               }
 
-              if (
-                    ~ arrButtons.indexOf( 'favorite' )
-                &&  boolIsUserLoggedIn
-              ) {
+              if ( ~ arrButtons.indexOf( 'favorite' ) && boolIsUserLoggedIn ) {
                 // Don't show button, if liked this track already
                 // TODO: Show if track changed while waited for server response
-                if (
-                  ~~  Global
-                        .strFavoriteStatusSuccess
-                          .indexOf( arrTrackInfo[ 1 ] )
-                ) {
+                if ( ~~ Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) ) {
                   objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo(
-                        objNotificationButtons.favorite.loggedIn.objButton
-                      , 'favorite'
-                    )
+                    Global.addShortcutInfo( objNotificationButtons.favorite.loggedIn.objButton, 'favorite' )
                   );
 
                   arrActiveButtons.push( 'favorite|loggedIn' );
                 }
               }
 
-              if (
-                    ~ arrButtons.indexOf( 'favoriteAuth' )
-                &&  boolIsUserLoggedIn
-              ) {
+              if ( ~ arrButtons.indexOf( 'favoriteAuth' ) && boolIsUserLoggedIn ) {
                 // Don't show button, if liked this track already
                 // TODO: Show if track changed while waited for server response
-                if (
-                  ~~  Global
-                        .strFavoriteStatusSuccess
-                          .indexOf( arrTrackInfo[ 1 ] )
-                ) {
+                if ( ~~ Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) ) {
                   objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo(
-                        objNotificationButtons.favoriteAuth.loggedIn.objButton
-                      , 'favorite'
-                    )
+                    Global.addShortcutInfo( objNotificationButtons.favoriteAuth.loggedIn.objButton, 'favorite' )
                   );
 
                   arrActiveButtons.push( 'favoriteAuth|loggedIn' );
@@ -734,20 +696,13 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
-                                typeof
-                                  objTempPlayerInfo
-                                    .boolCanPlayNextTrackLoggedOut ===
-                                      'undefined'
-                            ||  objTempPlayerInfo
-                                  .boolCanPlayNextTrackLoggedOut
+                                typeof objTempPlayerInfo.boolCanPlayNextTrackLoggedOut === 'undefined'
+                            ||  objTempPlayerInfo.boolCanPlayNextTrackLoggedOut
                           )
                     )
               ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.next.next.objButton
-                    , 'next'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.next.next.objButton, 'next' )
                 );
 
                 arrActiveButtons.push( 'next|next' );
@@ -758,20 +713,13 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
-                                typeof
-                                  objTempPlayerInfo
-                                    .boolCanPlayNextTrackLoggedOut ===
-                                      'undefined'
-                            ||  objTempPlayerInfo
-                                  .boolCanPlayNextTrackLoggedOut
+                                typeof objTempPlayerInfo.boolCanPlayNextTrackLoggedOut === 'undefined'
+                            ||  objTempPlayerInfo.boolCanPlayNextTrackLoggedOut
                           )
                     )
               ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.nextAuth.next.objButton
-                    , 'next'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.nextAuth.next.objButton , 'next' )
                 );
 
                 arrActiveButtons.push( 'nextAuth|next' );
@@ -782,20 +730,13 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
-                                typeof
-                                  objTempPlayerInfo
-                                    .boolCanPlayPreviousTrackLoggedOut ===
-                                      'undefined'
-                            ||  objTempPlayerInfo
-                                  .boolCanPlayPreviousTrackLoggedOut
+                                typeof objTempPlayerInfo.boolCanPlayPreviousTrackLoggedOut === 'undefined'
+                            ||  objTempPlayerInfo.boolCanPlayPreviousTrackLoggedOut
                           )
                     )
               ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.previous.previous.objButton
-                    , 'previous'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.previous.previous.objButton , 'previous' )
                 );
 
                 arrActiveButtons.push( 'previous|previous' );
@@ -806,20 +747,13 @@ var Global                        = {
                 &&  (
                           boolIsUserLoggedIn
                       ||  (
-                                typeof
-                                  objTempPlayerInfo
-                                    .boolCanPlayPreviousTrackLoggedOut ===
-                                      'undefined'
-                            ||  objTempPlayerInfo
-                                  .boolCanPlayPreviousTrackLoggedOut
+                                typeof objTempPlayerInfo.boolCanPlayPreviousTrackLoggedOut === 'undefined'
+                            ||  objTempPlayerInfo.boolCanPlayPreviousTrackLoggedOut
                           )
                     )
               ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.previousAuth.previous.objButton
-                    , 'previous'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.previousAuth.previous.objButton , 'previous' )
                 );
 
                 arrActiveButtons.push( 'previousAuth|previous' );
@@ -828,15 +762,12 @@ var Global                        = {
               if ( ~ arrButtons.indexOf( 'playStop' ) ) {
                 objNotificationOptions.buttons.push(
                   Global.addShortcutInfo(
-                      objNotificationButtons
-                        .playStop[ ~~ objTempPlayerInfo.boolIsPlaying ]
-                          .objButton
+                      objNotificationButtons.playStop[ ~~ objTempPlayerInfo.boolIsPlaying ].objButton
                     , 'playStop'
                   )
                 );
 
-                arrActiveButtons
-                  .push( 'playStop|' + ~~ objTempPlayerInfo.boolIsPlaying );
+                arrActiveButtons.push( 'playStop|' + ~~ objTempPlayerInfo.boolIsPlaying );
               }
 
               if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
@@ -851,12 +782,7 @@ var Global                        = {
                       ;
 
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons
-                        .muteUnmute[ strMuteUnmuteState ]
-                          .objButton
-                    , 'muteUnmute'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.muteUnmute[ strMuteUnmuteState ].objButton, 'muteUnmute' )
                 );
 
                 arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
@@ -864,10 +790,7 @@ var Global                        = {
 
               if ( ~ arrButtons.indexOf( 'volumeUp' ) ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.volumeUp.volumeUp.objButton
-                    , 'volumeUp'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.volumeUp.volumeUp.objButton, 'volumeUp' )
                 );
 
                 arrActiveButtons.push( 'volumeUp|volumeUp' );
@@ -875,36 +798,58 @@ var Global                        = {
 
               if ( ~ arrButtons.indexOf( 'volumeDown' ) ) {
                 objNotificationOptions.buttons.push(
-                  Global.addShortcutInfo(
-                      objNotificationButtons.volumeDown.volumeDown.objButton
-                    , 'volumeDown'
-                  )
+                  Global.addShortcutInfo( objNotificationButtons.volumeDown.volumeDown.objButton, 'volumeDown' )
                 );
 
                 arrActiveButtons.push( 'volumeDown|volumeDown' );
               }
             }
 
-            chrome.notifications.create( 
+            function funcSavePlayerEventData() {
+              Global.savePlayerEventData(
+                  objTempPlayerInfo
+                , objTempStationInfo
+                , intTabId
+                , arrActiveButtons
+                , strCommand
+                , boolExternal
+                , objSender
+              );
+            }
+
+            if (
+                  (
+                          typeof objGeneralSettings.boolShowPlayerEventNotification !== 'boolean'
+                      ||  ! objGeneralSettings.boolShowPlayerEventNotification
+                  )
+              &&  strCommand !== 'showNotification'
+            ) {
+              funcSavePlayerEventData();
+
+              return;
+            }
+
+            chrome.notifications.create(
                 strNotificationId
               , objNotificationOptions
               , function( strNotificationId ) {
                   // Catch errors
+                  // TODO: Utilize Global.checkForRuntimeError()
                   if ( chrome.runtime.lastError ) {
                     strLog = 'showNotification';
 
-                    var objLogDetails   = {}
+                    var objLogDetails = {}
                       , strErrorMessage = chrome.runtime.lastError.message
                       ;
 
-                    if ( typeof strErrorMessage === 'string' )
+                    if ( typeof strErrorMessage === 'string' ) {
                       objLogDetails.strErrorMessage = strErrorMessage;
+                    }
 
                     Log.add( strLog + strLogError, objLogDetails, true );
 
                     // Check if buttons can be added
-                    var strButtonsMessage =
-                          'Adding buttons to notifications is not supported.';
+                    var strButtonsMessage = 'Adding buttons to notifications is not supported.';
 
                     if ( strErrorMessage === strButtonsMessage ) {
                       // Try creating notification with no buttons
@@ -914,42 +859,24 @@ var Global                        = {
                           strNotificationId
                         , objNotificationOptions
                         , function( strNotificationId ) {
-                            Global.showNotificationCallback(
-                                objTempPlayerInfo
-                              , objTempStationInfo
-                              , intTabId
-                              , arrActiveButtons
-                              , strCommand
-                              , boolExternal
-                              , objSender
-                            );
+                            funcSavePlayerEventData();
 
                             // This, probably, doesn't auto-close, so close it
                             setTimeout(
                                 function() {
-                                  chrome.notifications.clear(
-                                      strNotificationId
-                                    , function() {}
-                                  );
+                                  chrome.notifications.clear( strNotificationId, function() {} );
                                 }
                               , Global.intNotificationsClearTimeout
                             );
                           }
                       );
                     }
-                    else
+                    else {
                       return;
+                    }
                   }
 
-                  Global.showNotificationCallback(
-                      objTempPlayerInfo
-                    , objTempStationInfo
-                    , intTabId
-                    , arrActiveButtons
-                    , strCommand
-                    , boolExternal
-                    , objSender
-                  );
+                  funcSavePlayerEventData();
                 }
             );
           }
@@ -971,14 +898,14 @@ var Global                        = {
    * @param   arrActiveButtons
    *            Active buttons for current notification
    * @param   strCommand
-   *            Optional. Which command made this call
+   *            Optional. What command made this call
    * @param   boolExternal
    *            Optional. Whether the request is sent from another extension/app.
    * @param   objSender
    *            Optional. Sender of the request.
    * @return  void
    **/
-  showNotificationCallback : function(
+  savePlayerEventData : function(
       objPlayerInfo
     , objStationInfo
     , intTabId
@@ -992,7 +919,7 @@ var Global                        = {
     /* START Log */
     var arrTrackInfo = objStationInfo.strTrackInfo.split( strConstNotificationLinesSeparator )
       , funcLog = function() {
-          strLog = 'showNotificationCallback';
+          strLog = 'savePlayerEventData';
           Log.add(
               strLog
             , {
@@ -1007,9 +934,7 @@ var Global                        = {
 
     // There is no arrTrackInfo[ 1 ] only on track change (automatic and when
     // clicked 'next', too) and on 'showNotification' command
-    if (  typeof arrTrackInfo[ 1 ] === 'undefined'
-      &&  strCommand !== 'showNotification'
-    ) {
+    if ( typeof arrTrackInfo[ 1 ] === 'undefined' && strCommand !== 'showNotification' ) {
       funcLog();
     }
     else {

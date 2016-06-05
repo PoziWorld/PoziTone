@@ -69,6 +69,7 @@ const
             strJoinUeip                           : 'no'
           , boolEnableExternalModulesSupport      : false
           , boolShowAdvancedSettings              : false
+          , boolShowPlayerEventNotification       : true
           , boolShowShortcutsInNotification       : true
           , boolShowWasUpdatedNotification        : true
           , intVolumeDelta                        : 10

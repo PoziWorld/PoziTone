@@ -169,12 +169,25 @@
               "message": "Расширенные"
             }
           ,
-          "optionsSettingsGeneralShortcuts": {
-            "message": "Быстрые клавиши"
+          "notifications": {
+            "message": "Оповещения"
           }
             ,
-            "optionsSettingsGeneralShortcutsShowInNotification": {
-              "message": "Отображать подсказки в оповещении"
+            "showPlayerEventNotification": {
+                "message": "Показывать при смене статуса плеера"
+              , "description": "Показывать оповещение при начале/остановке воспроизведения, при изменении громкости звука, когда трек добавлен в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д."
+            }
+            ,
+            "showPlayerEventNotificationLong": {
+              "message": "Показывать оповещение при начале/остановке/возобновлении воспроизведения, при изменении громкости звука, когда трек добавлен в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д.\n\nЕсли неотмеченно, вы по-прежнему можете вызвать оповещение командой «Показать оповещение» с помощью быстрых клавиш (Alt+Shift+Q, если не изменялось)."
+            }
+            ,
+            "showSuccessfulUpdateNotification": {
+              "message": "Показывать при успешном обновлении PoziTone"
+            }
+            ,
+            "displayKeyboardShortcutsTips": {
+              "message": "Отображать подсказки с быстрыми клавишами рядом с командами"
             }
           ,
           "optionsSettingsSoundVolumeControl": {
@@ -190,14 +203,6 @@
             "optionsSettingsSoundVolumeControlDelta": {
                 "message"     : "Изменять на, %"
               , "description" : "Используется в поле, в котором спрашивается ввести целочисленное значение в процентах (1-99), которое будет использоваться при увеличении или уменьшении громкости звука."
-            }
-          ,
-          "optionsSettingsGeneralUpdates": {
-            "message": "Обновления PoziTone"
-          }
-            ,
-            "optionsSettingsGeneralUpdatesNotify": {
-              "message": "Сообщать, когда обновлено"
             }
           ,
           "optionsSettingsGeneralUeip": {

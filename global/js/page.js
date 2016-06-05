@@ -133,51 +133,85 @@ var Page = {
    * @return  void
    **/
   localize : function( strPageName, strCustomSelectorParent ) {
-    var
-        boolIsCustomSelectorParentPresent =
-          typeof strCustomSelectorParent === 'string'
-      , strSelectorPrefix                 =
-          boolIsCustomSelectorParentPresent ? strCustomSelectorParent + ' ' : ''
-      , $allLocalizableElements           =
-          document.querySelectorAll( strSelectorPrefix + '[i18n-content]' )
+    var boolIsCustomSelectorParentPresent = typeof strCustomSelectorParent === 'string'
+      , strSelectorPrefix = boolIsCustomSelectorParentPresent ? strCustomSelectorParent + ' ' : ''
+      , $$allLocalizableElements = document.querySelectorAll( strSelectorPrefix + '[i18n-content]' )
       ;
 
-    for (
-      var i = 0, intLocalizableElements = $allLocalizableElements.length;
-      i < intLocalizableElements;
-      i++
-        ) {
-        var
-            $localizableElement = $allLocalizableElements[ i ]
-          , strI18              = $localizableElement
-                                    .getAttribute( 'i18n-content' )
-          , strMessage          = chrome.i18n.getMessage( strI18 )
+    for ( var i = 0, l = $$allLocalizableElements.length; i < l; i++ ) {
+        var $$localizableElement = $$allLocalizableElements[ i ]
+          , strI18n = $$localizableElement.getAttribute( 'i18n-content' )
+          , strI18nParameters = $$localizableElement.getAttribute( 'data-i18n-parameters' )
+          , arrI18nParameters
           ;
 
-        if ( $localizableElement.nodeName === 'LABEL' )
-          $localizableElement.innerHTML = 
-            $localizableElement.innerHTML + strMessage;
-        else if (
-              $localizableElement.nodeName === 'A'
-          &&  ! $localizableElement.classList.contains( 'i18nNoInner' )
-        ) {
-          $localizableElement.innerHTML = strMessage;
-
-          if ( $localizableElement.href === '' )
-            $localizableElement.href = 
-              chrome.i18n.getMessage( strI18 + 'Href' );
+        if ( typeof strI18nParameters === 'string' && strI18nParameters !== '' ) {
+          arrI18nParameters = strI18nParameters.split( '|' );
         }
-        else if ( $localizableElement.nodeName === 'IMG' )
-          $localizableElement.alt = strMessage;
-        else if ( ! $localizableElement.classList.contains( 'i18nNoInner' ) )
-          $localizableElement.innerHTML = strMessage;
 
-        if ( $localizableElement.classList.contains( 'i18nTitle' ) )
-          $localizableElement.setAttribute( 'title', strMessage );
+        var strMessage = chrome.i18n.getMessage( strI18n, arrI18nParameters );
+
+        if ( $$localizableElement.nodeName === 'LABEL' ) {
+          $$localizableElement.innerHTML = $$localizableElement.innerHTML + strMessage;
+        }
+        else if ( $$localizableElement.nodeName === 'A'
+              &&  ! $$localizableElement.classList.contains( 'i18nNoInner' )
+        ) {
+          $$localizableElement.innerHTML = strMessage;
+
+          if ( $$localizableElement.href === '' ) {
+            $$localizableElement.href = chrome.i18n.getMessage( strI18n + 'Href' );
+          }
+        }
+        else if ( $$localizableElement.nodeName === 'IMG' ) {
+          $$localizableElement.alt = strMessage;
+        }
+        else if ( $$localizableElement.nodeName === 'OPTGROUP' ) {
+          $$localizableElement.label = strMessage;
+        }
+        else if ( ! $$localizableElement.classList.contains( 'i18nNoInner' ) ) {
+          $$localizableElement.innerHTML = strMessage;
+        }
+
+        if ( $$localizableElement.classList.contains( 'i18nTitle' ) ) {
+          var strI18nTitle = $$localizableElement.getAttribute( 'data-i18n-title' )
+            , strTitle = strMessage
+            ;
+
+          if ( typeof strI18nTitle === 'string' && strI18nTitle !== '' ) {
+            strTitle = chrome.i18n.getMessage( strI18nTitle );
+          }
+
+          $$localizableElement.setAttribute( 'title', strTitle );
+        }
+
+        // Replace copyright year placeholder with the current year if the start year matches
+        // or with a start-current range if the start year is less than the current one.
+        var $$copyrightYear = $$localizableElement.getElementsByClassName( 'copyrightYear' );
+
+        if ( $$copyrightYear.length ) {
+          [].forEach.call( $$copyrightYear, function ( $$element ) {
+            var strCopyrightStartYear = $$element.getAttribute( 'data-copyright-start-year' );
+
+            if ( strCopyrightStartYear && strCopyrightStartYear !== '' && strCopyrightStartYear.length === 4 ) {
+              var intCopyrightStartYear = parseInt( strCopyrightStartYear )
+                , intCurrentYear = new Date().getFullYear()
+                ;
+
+              if ( intCopyrightStartYear < intCurrentYear ) {
+                $$element.textContent = '' + intCopyrightStartYear + '-' + intCurrentYear;
+              }
+              else {
+                $$element.textContent = intCurrentYear;
+              }
+            }
+          } );
+        }
     }
 
-    if ( !boolIsCustomSelectorParentPresent )
+    if ( ! boolIsCustomSelectorParentPresent && strPageName ) {
       document.title = chrome.i18n.getMessage( strPageName + 'Title' );
+    }
   }
   ,
 
