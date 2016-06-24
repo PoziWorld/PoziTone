@@ -47,7 +47,7 @@ const
   , strConstVersionParam          = '%v'
   , strConstLangParam             = '%lang'
   , strConstMessageUrl            =
-      'http://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
+      'https://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
   , strConstInstallationUrl       = ! boolConstIsOperaAddon
       ? 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm'
       : 'https://addons.opera.com/extensions/details/pozitone/'

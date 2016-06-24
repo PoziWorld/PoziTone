@@ -69,7 +69,7 @@
     * Уведомление о важном сообщении от разработчиков PoziTone будет отображено когда доступно.
     * Обновлены испанский и польский переводы.
 
-> [Важное сообщение от разработчиков!](http://poziworld.github.io/PoziTone/message/v0.4/?lang=ru&ref=history)
+> [Важное сообщение от разработчиков!](https://poziworld.github.io/PoziTone/message/v0.4/?lang=ru&ref=history)
 
 ### v0.3.5.3
     * К сожалению, di.fm больше не поддерживается.
