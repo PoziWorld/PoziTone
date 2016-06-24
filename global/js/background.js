@@ -139,26 +139,20 @@ const
           , boolShowNotificationWhenMuted         : false
         }
       , objSettings_com_vk_audio                  : {
-            boolIsEnabled                         : false
-          , boolShowNotificationLogo              : true
-          , strNotificationLogo                   : 'site'
-          , boolShowKbpsInfo                      : false
-          , arrAvailableNotificationButtons       : [
-                                                        'addAuth'
-                                                      , 'nextAuth'
-                                                      , 'previousAuth'
-                                                      , 'playStop'
-                                                      , 'muteUnmute'
-                                                      , 'volumeUp'
-                                                      , 'volumeDown'
-                                                    ]
-          , arrActiveNotificationButtons          : [
-                                                        'addAuth'
-                                                      , 'nextAuth'
-                                                    ]
-          , boolShowNotificationWhenMuted         : false
-          , boolUseGeneralVolumeDelta             : true
-          , intVolumeDelta                        : 10
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'site'
+          , arrAvailableNotificationButtons : [
+                'addAuth'
+              , 'nextAuth'
+              , 'previousAuth'
+              , 'playStop'
+            ]
+          , arrActiveNotificationButtons : [
+                'addAuth'
+              , 'nextAuth'
+            ]
+          , boolShowNotificationWhenMuted : false
         }
       , objSettings_com_vgmradio                  : {
             boolIsEnabled                         : false
@@ -269,10 +263,8 @@ var Background                    = {
 
         var strLatestTrackedVersion = objReturn.strLatestTrackedVersion;
 
-        if (
-              typeof strLatestTrackedVersion === 'string'
-          &&  (
-                    strLatestTrackedVersion < strConstExtensionVersion
+        if (  typeof strLatestTrackedVersion === 'string'
+          &&  (     strLatestTrackedVersion < strConstExtensionVersion
                 ||  strLatestTrackedVersion === ''
               )
           ||  typeof strLatestTrackedVersion === 'undefined'
@@ -327,8 +319,7 @@ var Background                    = {
 
       var objGeneralSettings = objReturn[ strConstGeneralSettings ];
 
-      if (
-            typeof objGeneralSettings === 'object'
+      if (  typeof objGeneralSettings === 'object'
         &&  objGeneralSettings.boolShowWasUpdatedNotification
       ) {
         var arrButtonsUpdated = Background.objSystemNotificationButtons.updated;
@@ -386,11 +377,11 @@ var Background                    = {
     ];
 
     StorageLocal.remove( arrSettingsToCleanUp, function() {
-      if (
-            typeof boolIsCalledFromOnInstalledListener === 'boolean'
+      if (  typeof boolIsCalledFromOnInstalledListener === 'boolean'
         &&  boolIsCalledFromOnInstalledListener
-      )
+      ) {
         Background.removeOldSettings( objDetails );
+      }
     });
   }
   ,
@@ -409,47 +400,47 @@ var Background                    = {
     strLog = 'removeOldSettings';
     Log.add( strLog, objDetails );
 
-    if (
-          typeof objDetails.boolWasUpdated === 'boolean'
+    if (  typeof objDetails.boolWasUpdated === 'boolean'
       &&  objDetails.boolWasUpdated
     ) {
       StorageSync.get( null, function( objReturn ) {
         strLog = 'removeOldSettings';
 
-        var
-            arrSettingsToRemove   = []
+        var arrSettingsToRemove = []
           , objDeprecatedSettings = {
-                arrActiveButtons                        : null
-              , objActiveButtons                        : null
-              , arrLastTracks                           : null
-              , arrNotificationButtons                  : null
-              , objOpenTabs                             : null
-              , arrTabsIds                              : null
-              , intLastTracksToKeep                     : null
-              , boolNotificationShowStationLogo         : null
-              , boolNotificationShowWhenStopped         : null
-              , boolNotificationShowWhenMuted           : null
-              , boolNotificationShowWhenNoTrackInfo     : null
-              , strNotificationTitleFormat              : null
-              , objSettings_ru_101                      : {
-                    boolEnabled                         : null
-                  , boolNotificationShowLogo            : null
-                  , boolNotificationShowWhenStopped     : null
-                  , boolNotificationShowWhenMuted       : null
+                arrActiveButtons : null
+              , objActiveButtons : null
+              , arrLastTracks : null
+              , arrNotificationButtons : null
+              , objOpenTabs : null
+              , arrTabsIds : null
+              , intLastTracksToKeep : null
+              , boolNotificationShowStationLogo : null
+              , boolNotificationShowWhenStopped : null
+              , boolNotificationShowWhenMuted : null
+              , boolNotificationShowWhenNoTrackInfo : null
+              , strNotificationTitleFormat : null
+              , objSettings_ru_101 : {
+                    boolEnabled : null
+                  , boolNotificationShowLogo : null
+                  , boolNotificationShowWhenStopped : null
+                  , boolNotificationShowWhenMuted : null
                   , boolNotificationShowWhenNoTrackInfo : null
-                  , arrNotificationButtons              : []
+                  , arrNotificationButtons : []
                 }
-              , objSettings_ru_ok_audio                 : {
-                    arrNotificationButtons              : []
+              , objSettings_ru_ok_audio : {
+                    arrNotificationButtons : []
                 }
-              , objSettings_com_vk_audio                : {
-                    boolEnabled                         : null
-                  , boolNotificationShowLogo            : null
-                  , boolNotificationShowWhenMuted       : null
-                  , arrNotificationButtons              : []
+              , objSettings_com_vk_audio : {
+                    boolEnabled : null
+                  , boolNotificationShowLogo : null
+                  , boolNotificationShowWhenMuted : null
+                  , arrNotificationButtons : []
+                  , arrAvailableNotificationButtons : []
+                  , boolShowKbpsInfo : []
                 }
-              , objSettings_fm_di                       : {
-                    arrNotificationButtons              : []
+              , objSettings_fm_di : {
+                    arrNotificationButtons : []
                 }
             }
           ;

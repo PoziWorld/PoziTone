@@ -124,20 +124,23 @@ var Global                        = {
             ]
         }
       , com_vk_audio              : {
-            objRegex              : /(http:\/\/|https:\/\/)vk.com\/.*/
+            objRegex              : /(http:\/\/|https:\/\/)(vk.com|new.vk.com)\/.*/
           , strImageFileName      : 'vk-logo-80.svg'
           , arrHosts              : [
                 'vk.com'
+              , 'new.vk.com'
               , 'vk.me'
             ]
           , arrOrigins            : [
-                '*://vk.com/*'
+                '*://*.vk.com/*'
               , '*://*.vk.me/*'
             ]
           , arrJs                 : [
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/com_vk_audio/js/page-watcher.js'
+              , 'modules/com_vk_audio/js/page-watcher-2.js'
+              , 'modules/com_vk_audio/js/page-watcher-loader.js'
             ]
         }
       , com_vgmradio              : {
@@ -799,37 +802,49 @@ var Global                        = {
                 }
 
                 if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
-                  var strMuteUnmuteState  =
-                        (
-                              // TODO: Switch to 0-1
-                              objTempPlayerInfo.intVolume > 0
-                          &&  ! objTempPlayerInfo.boolIsMuted
-                        )
-                          ? 'mute'
-                          : 'unmute'
-                        ;
+                  if ( boolExternal
+                    || ~ objSettingsSyncable[ strModuleSettings ].arrAvailableNotificationButtons.indexOf( 'muteUnmute' )
+                  ) {
+                    var strMuteUnmuteState  =
+                          (
+                                // TODO: Switch to 0-1
+                                objTempPlayerInfo.intVolume > 0
+                            &&  ! objTempPlayerInfo.boolIsMuted
+                          )
+                            ? 'mute'
+                            : 'unmute'
+                          ;
 
-                  objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo( objNotificationButtons.muteUnmute[ strMuteUnmuteState ].objButton, 'muteUnmute' )
-                  );
+                    objNotificationOptions.buttons.push(
+                      Global.addShortcutInfo( objNotificationButtons.muteUnmute[ strMuteUnmuteState ].objButton, 'muteUnmute' )
+                    );
 
-                  arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
+                    arrActiveButtons.push( 'muteUnmute|' + strMuteUnmuteState );
+                  }
                 }
 
                 if ( ~ arrButtons.indexOf( 'volumeUp' ) ) {
-                  objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo( objNotificationButtons.volumeUp.volumeUp.objButton, 'volumeUp' )
-                  );
+                  if ( boolExternal
+                    || ~ objSettingsSyncable[ strModuleSettings ].arrAvailableNotificationButtons.indexOf( 'volumeUp' )
+                  ) {
+                    objNotificationOptions.buttons.push(
+                      Global.addShortcutInfo( objNotificationButtons.volumeUp.volumeUp.objButton, 'volumeUp' )
+                    );
 
-                  arrActiveButtons.push( 'volumeUp|volumeUp' );
+                    arrActiveButtons.push( 'volumeUp|volumeUp' );
+                  }
                 }
 
                 if ( ~ arrButtons.indexOf( 'volumeDown' ) ) {
-                  objNotificationOptions.buttons.push(
-                    Global.addShortcutInfo( objNotificationButtons.volumeDown.volumeDown.objButton, 'volumeDown' )
-                  );
+                  if ( boolExternal
+                    || ~ objSettingsSyncable[ strModuleSettings ].arrAvailableNotificationButtons.indexOf( 'volumeDown' )
+                  ) {
+                    objNotificationOptions.buttons.push(
+                      Global.addShortcutInfo( objNotificationButtons.volumeDown.volumeDown.objButton, 'volumeDown' )
+                    );
 
-                  arrActiveButtons.push( 'volumeDown|volumeDown' );
+                    arrActiveButtons.push( 'volumeDown|volumeDown' );
+                  }
                 }
               }
 

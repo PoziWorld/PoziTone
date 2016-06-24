@@ -2,6 +2,14 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.6.3
+    * Новое: поддержка новой версии ВКонтакте.
+      Идея — The YarG Yarik.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/16328900/5fab7da4-3993-11e6-82ba-7fa6de6a983d.gif">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/16328899/5fab55fe-3993-11e6-9493-c419778c2f36.png" width="250" height="156" alt="PoziTone v0.6.3 * Как переподключить ВКонтакте-модуль." title="PoziTone v0.6.3 * Как переподключить ВКонтакте-модуль.">
+</a>
+
 ### v0.6.2
     * Исправлено: оповещение не появлялось для внешних модулей.
 

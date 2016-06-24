@@ -57,7 +57,7 @@ Features
 Supported online media players
 --------
 
-* [VK](https://vk.com) (audio, full version of site; doesn't support the redesigned one yet).
+* [VK](https://vk.com) (audio, full version of site – old & new).
 * [VGM Radio](https://vgmradio.com).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).
 * [Online radio 101.ru](http://101.ru) (stations' main player).

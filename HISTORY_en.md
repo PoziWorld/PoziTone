@@ -2,6 +2,14 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.3
+    * New: support of new version of VK.
+      Idea by The YarG Yarik.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/16328902/5faf6284-3993-11e6-8e9f-9ee7c419319f.gif">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/16328901/5fadd5c2-3993-11e6-9a73-cf9f7360893c.png" width="250" height="156" alt="PoziTone v0.6.3 * How to reenable VK module." title="PoziTone v0.6.3 * How to reenable VK module.">
+</a>
+
 ### v0.6.2
     * Fix: notification wouldn't show up for external modules.
 
