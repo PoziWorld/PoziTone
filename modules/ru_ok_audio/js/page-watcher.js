@@ -29,6 +29,7 @@
       initAddTrackToPlaylistButtonObserver()
       onPlaybackStartedIndicatorAppearance()
       onPlayerFullAppearance()
+      initPlayerElements()
       checkIfPlayerFullHadBeenOpened()
       checkIfPlayerStatusHadBeenChanged()
       hideOrKeepPlayerVisibleFull()
@@ -532,6 +533,7 @@ var
         }
       ;
 
+    this.initPlayerElements();
     PageWatcher.initObserver( $target, objOptions, funcCallback );
   }
   ,
@@ -623,15 +625,26 @@ var
     // Once player appeared, it doesn't disappear - disconnect
     DisconnectableObserver.disconnect();
 
-    $playerFull             = document.getElementById( strPlayerFullId );
-    $trackPerformerTitle    =
-      document.getElementsByClassName( strPerformerTitleContainerClass )[ 0 ];
-    $muteUnmuteBtn          =
-      document.getElementsByClassName( strMuteUnmuteBtnClass )[ 0 ];
+    this.initPlayerElements();
 
     PageWatcher.hideOrKeepPlayerVisibleFull();
     PageWatcher.initPlayerStatusObserver( $playStopBtnHeader );
     PageWatcher.checkIfPlayerStatusHadBeenChanged( $playStopBtnHeader );
+  }
+  ,
+
+  /**
+   * Find player nodes and cache them.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+
+  initPlayerElements : function() {
+    $playerFull = document.getElementById( strPlayerFullId );
+    $trackPerformerTitle = document.getElementsByClassName( strPerformerTitleContainerClass )[ 0 ];
+    $muteUnmuteBtn = document.getElementsByClassName( strMuteUnmuteBtnClass )[ 0 ];
   }
   ,
 
