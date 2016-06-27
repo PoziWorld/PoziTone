@@ -138,6 +138,24 @@ const
                                                     ]
           , boolShowNotificationWhenMuted         : false
         }
+      , objSettings_com_soundcloud : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'site'
+          , strNotificationTitleFormat : 'short'
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'next'
+              , 'previous'
+              , 'playStop'
+              , 'muteUnmute'
+            ]
+          , arrActiveNotificationButtons : [
+                'next'
+              , 'playStop'
+            ]
+          , boolShowNotificationWhenMuted : false
+        }
       , objSettings_com_vk_audio                  : {
             boolIsEnabled : false
           , boolShowNotificationLogo : true
@@ -780,9 +798,11 @@ var Background                    = {
    * @return  void
    **/
   onMessageCallback : function( objMessage, objSender, funcSendResponse, boolExternal ) {
-    var strReceiver = objMessage.strReceiver;
-
     if ( typeof boolExternal !== 'boolean' || ! boolExternal ) {
+      var strReceiver = objMessage.strReceiver
+        , objRequest = objMessage.objPozitoneApiRequest
+        ;
+
       if ( typeof strReceiver === 'string' ) {
         if ( strReceiver === 'background' ) {
           // A page asking to track some event
@@ -811,6 +831,16 @@ var Background                    = {
         }
 
         // Don't break only when there is no receiver info
+        return;
+      }
+      else if ( typeof objRequest === 'object' && ! Array.isArray( objRequest ) ) {
+        // TODO: Optimize to not repeat
+        pozitone.api.processRequest(
+            objMessage
+          , objSender
+          , funcSendResponse
+        );
+
         return;
       }
     }
@@ -849,9 +879,9 @@ var Background                    = {
     var strUrl = objTab.url;
 
     if ( typeof strUrl === 'string' && strUrl !== '' ) {
-      var strModule = Global.getModuleId( strUrl );
+      var strModuleId = Global.getModuleId( strUrl );
 
-      if ( strUrl && typeof strModule === 'string' ) {
+      if ( strUrl && typeof strModuleId === 'string' ) {
         Log.add( strLog + strLogSuccess, strUrl );
 
         var intWindowId = objTab.windowId
@@ -871,53 +901,62 @@ var Background                    = {
 
         objOpenTabs[ intWindowId ][ objTab.index ] = objTabCopy;
 
-        if ( strModule in Global.objModules ) {
-          chrome.tabs.sendMessage(
-              intTabId
-            , 'Do you copy?'
-            , function( strResponse ) {
-                if ( strResponse !== 'Copy that.' ) {
-                  var objModule = Global.objModules[ strModule ]
-                    , arrCss = objModule.arrCss
-                    , intCss = ( typeof arrCss !== 'undefined' )
-                        ? arrCss.length
-                        : 0
-                    , arrJs = objModule.arrJs
-                    , intJs = ( typeof arrJs !== 'undefined' )
-                        ? arrJs.length
-                        : 0
-                    , funcCallback = function() {
-                        Global.checkForRuntimeError(
-                            undefined
-                          , undefined
-                          , { strModule : strModule }
-                          , false
-                        );
-                      }
-                    ;
+        if ( pozitone.global.isModuleBuiltIn( strModuleId )  ) {
+          var strTabStatus = objTab.status
+            , boolIsTabLoading = typeof strTabStatus === 'string' && strTabStatus === 'loading'
+            ;
 
-                  for ( var j = 0; j < intCss; j++ ) {
-                    chrome.tabs.executeScript(
-                        intTabId
-                      , { file: arrCss[ j ], runAt: 'document_end' }
-                      , function() {
-                          funcCallback();
+          if ( ! pozitone.global.isModuleBuiltInApiCompliant( strModuleId, true ) || boolIsTabLoading ) {
+            chrome.tabs.sendMessage(
+                intTabId
+              , 'Do you copy?'
+              , function( miscResponse ) {
+                  if (  typeof miscResponse === 'undefined'
+                    ||  miscResponse !== 'Copy that.'
+                    &&  typeof miscResponse.objPozitoneApiResponse === 'undefined'
+                  ) {
+                    var objModule = Global.objModules[ strModuleId ]
+                      , arrCss = objModule.arrCss
+                      , intCss = ( typeof arrCss !== 'undefined' )
+                          ? arrCss.length
+                          : 0
+                      , arrJs = objModule.arrJs
+                      , intJs = ( typeof arrJs !== 'undefined' )
+                          ? arrJs.length
+                          : 0
+                      , funcCallback = function() {
+                          Global.checkForRuntimeError(
+                              undefined
+                            , undefined
+                            , { strModuleId : strModuleId }
+                            , false
+                          );
                         }
-                    );
-                  }
+                      ;
 
-                  for ( var k = 0; k < intJs; k++ ) {
-                    chrome.tabs.executeScript(
-                        intTabId
-                      , { file: arrJs[ k ], runAt: 'document_end' }
-                      , function() {
-                          funcCallback();
-                        }
-                    );
+                    for ( var j = 0; j < intCss; j++ ) {
+                      chrome.tabs.executeScript(
+                          intTabId
+                        , { file: arrCss[ j ], runAt: 'document_end' }
+                        , function() {
+                            funcCallback();
+                          }
+                      );
+                    }
+
+                    for ( var k = 0; k < intJs; k++ ) {
+                      chrome.tabs.executeScript(
+                          intTabId
+                        , { file: arrJs[ k ], runAt: 'document_end' }
+                        , function() {
+                            funcCallback();
+                          }
+                      );
+                    }
                   }
                 }
-              }
-          );
+            );
+          }
         }
       }
     }
@@ -1447,7 +1486,9 @@ chrome.notifications.onButtonClicked.addListener(
           , true
         );
 
-        if ( strModuleId in Global.objModules ) {
+        if (  pozitone.global.isModuleBuiltIn( strModuleId )
+          &&  ! pozitone.global.isModuleBuiltInApiCompliant( strModuleId, true )
+        ) {
           chrome.tabs.sendMessage(
               intTabId
             , Background.strProcessButtonClick + strFunction
@@ -1456,7 +1497,7 @@ chrome.notifications.onButtonClicked.addListener(
         else {
           pozitone.api.sendCallToTab( strModuleId, intTabId, 'button', strFunction );
         }
-      });
+      } );
     }
     else {
       var strNotification = strNotificationId.replace( Global.strSystemNotificationId, '' )
@@ -1526,7 +1567,9 @@ chrome.commands.onCommand.addListener(
 
       // The final step
       var funcSendMessage = function( objPreservedData ) {
-        if ( objPreservedData.strModuleId in Global.objModules ) {
+        if (  pozitone.global.isModuleBuiltIn( objPreservedData.strModuleId )
+          &&  ! pozitone.global.isModuleBuiltInApiCompliant( objPreservedData.strModuleId, true )
+        ) {
           chrome.tabs.sendMessage(
               objPreservedData.intTabId
             , objPreservedData.strMessagePrefix + objPreservedData.strCommand
@@ -1561,14 +1604,14 @@ chrome.commands.onCommand.addListener(
             , strCommand : strCommand
           };
 
-          Global.checkIfModuleIsEnabled(
+          Global.isModuleEnabled(
               strModule
             , intTabId
             , funcSendMessage
             , funcCheckNextOpenTab
             , objDataToPreserve
             , 'findFirstOpenTabInvokeCallback'
-            , strModule in Global.objExternalModules
+            , pozitone.global.isModuleExternal( strModule )
           );
         }
         else {
@@ -1609,7 +1652,7 @@ chrome.commands.onCommand.addListener(
                     , intArrIndex : intArrIndex
                   };
 
-                  Global.checkIfModuleIsEnabled(
+                  Global.isModuleEnabled(
                       strModule
                     , intTabId
                     , funcSendMessage
@@ -1625,7 +1668,9 @@ chrome.commands.onCommand.addListener(
               }
             ;
 
-          if ( strModuleId in Global.objModules ) {
+          if (  pozitone.global.isModuleBuiltIn( strModuleId )
+            &&  ! pozitone.global.isModuleBuiltInApiCompliant( strModuleId, true )
+          ) {
             chrome.tabs.sendMessage(
                 intTabId
               , 'Ready for a command? Your name?'
@@ -1676,9 +1721,11 @@ chrome.runtime.onInstalled.addListener(
 
     // Copy user set-up details
     // TODO: Replace with Object.assign() when supported
-    for ( var miscProperty in objConstUserSetUp )
-      if ( objConstUserSetUp.hasOwnProperty( miscProperty ) )
+    for ( var miscProperty in objConstUserSetUp ) {
+      if ( objConstUserSetUp.hasOwnProperty( miscProperty ) ) {
         objDetails[ miscProperty ] = objConstUserSetUp[ miscProperty ];
+      }
+    }
 
     Log.add( strLog, objDetails, true );
 
@@ -1688,8 +1735,7 @@ chrome.runtime.onInstalled.addListener(
     var strPreviousVersion = objDetails.previousVersion;
 
     if ( objDetails.reason === 'update' ) {
-      if (
-            typeof strPreviousVersion === 'string'
+      if (  typeof strPreviousVersion === 'string'
         &&  strPreviousVersion < strConstExtensionVersion
       ) {
         Background.onUpdatedCallback( strLog, objDetails );

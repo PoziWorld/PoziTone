@@ -155,7 +155,7 @@ var Options = {
       strModule = strModuleOverride;
     }
 
-    var boolIsExternal = strModule !== 'general' && ! ( strModule in Global.objModules )
+    var boolIsExternal = strModule !== 'general' && pozitone.global.isModuleExternal( strModule )
       , StorageTemp = boolIsExternal ? StorageLocal : StorageSync
       ;
 

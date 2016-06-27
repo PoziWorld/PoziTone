@@ -147,42 +147,44 @@
     Log.add( strLog, objData );
 
     // Additional info is retrieved from messages.json.
-    // EPTMs send event names which are translated properly.
-    if ( typeof boolExternal === 'boolean' && boolExternal ) {
-      var strAdditionalInfo = objData.objStationInfo.strAdditionalInfo
-        , boolIsAdditionalInfoRecognized = false
-        ;
+    // Modules send event names which are translated properly.
+    var strAdditionalInfo = objData.objStationInfo.strAdditionalInfo
+      , boolIsAdditionalInfoRecognized = false
+      ;
 
-      if ( typeof strAdditionalInfo === 'string' && strAdditionalInfo !== '' ) {
-        switch ( strAdditionalInfo ) {
-          case 'onFirstPlay':
-            strAdditionalInfo = 'notificationPlayerStatusChangeStarted';
-            boolIsAdditionalInfoRecognized = true;
-            break;
-          case 'onPlay':
-            strAdditionalInfo = 'notificationPlayerStatusChangeResumed';
-            boolIsAdditionalInfoRecognized = true;
-            break;
-          case 'onPause':
-            strAdditionalInfo = 'notificationPlayerStatusChangeStopped';
-            boolIsAdditionalInfoRecognized = true;
-            break;
-          case 'onMute':
-            strAdditionalInfo = 'notificationButtonsMuteFeedback';
-            boolIsAdditionalInfoRecognized = true;
-            break;
-          case 'onUnmute':
-            strAdditionalInfo = 'notificationButtonsUnmuteFeedback';
-            boolIsAdditionalInfoRecognized = true;
-            break;
-          // TODO: May reconsider in future. For now, ignore.
-          default:
-            objData.objStationInfo.strAdditionalInfo = '';
-        }
+    if ( typeof strAdditionalInfo === 'string' && strAdditionalInfo !== '' ) {
+      switch ( strAdditionalInfo ) {
+        case 'onFavorite':
+          strAdditionalInfo = 'notificationFavoriteStatusSuccess';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        case 'onFirstPlay':
+          strAdditionalInfo = 'notificationPlayerStatusChangeStarted';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        case 'onPlay':
+          strAdditionalInfo = 'notificationPlayerStatusChangeResumed';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        case 'onPause':
+          strAdditionalInfo = 'notificationPlayerStatusChangeStopped';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        case 'onMute':
+          strAdditionalInfo = 'notificationButtonsMuteFeedback';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        case 'onUnmute':
+          strAdditionalInfo = 'notificationButtonsUnmuteFeedback';
+          boolIsAdditionalInfoRecognized = true;
+          break;
+        // TODO: May reconsider in future. For now, ignore.
+        default:
+          objData.objStationInfo.strAdditionalInfo = '';
+      }
 
-        if ( boolIsAdditionalInfoRecognized ) {
-          objData.objStationInfo.strAdditionalInfo = chrome.i18n.getMessage( strAdditionalInfo );
-        }
+      if ( boolIsAdditionalInfoRecognized ) {
+        objData.objStationInfo.strAdditionalInfo = chrome.i18n.getMessage( strAdditionalInfo );
       }
     }
 
@@ -241,7 +243,7 @@
       );
     };
 
-    Global.checkIfModuleIsEnabled(
+    Global.isModuleEnabled(
         strModule
       , objSender.tab.id
       , funcShowNotification
@@ -268,4 +270,5 @@
  * @param   No Parameters taken
  * @return  void
  **/
+
 Background.init();

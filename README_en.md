@@ -57,6 +57,7 @@ Features
 Supported online media players
 --------
 
+* [SoundCloud](https://soundcloud.com) (full version of site).
 * [VK](https://vk.com) (audio, full version of site – old & new).
 * [VGM Radio](https://vgmradio.com).
 * [Odnoklassniki](http://ok.ru) (audio, full version of site).

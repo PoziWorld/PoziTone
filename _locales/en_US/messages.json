@@ -577,12 +577,39 @@
     }
 
     ,
+    "module_ru_101": {
+      "message": "Online radio 101.ru"
+    }
+      ,
+      "module_ru_101_long": {
+        "message": "Online radio 101.ru"
+      }
+
+    ,
+    "module_fm_di": {
+      "message": "Digitally Imported"
+    }
+      ,
+      "module_fm_di_long": {
+        "message": "Digitally Imported | di.fm"
+      }
+
+    ,
     "module_ru_ok_audio": {
       "message": "Odnoklassniki (audio)"
     }
       ,
       "module_ru_ok_audio_long": {
         "message": "Odnoklassniki (audio) | ok.ru"
+      }
+
+    ,
+    "module_com_soundcloud": {
+      "message": "SoundCloud"
+    }
+      ,
+      "module_com_soundcloud_long": {
+        "message": "SoundCloud | soundcloud.com"
       }
 
     ,
@@ -601,24 +628,6 @@
       ,
       "module_com_vgmradio_long": {
         "message": "VGM Radio | vgmradio.com"
-      }
-
-    ,
-    "module_ru_101": {
-      "message": "Online radio 101.ru"
-    }
-      ,
-      "module_ru_101_long": {
-        "message": "Online radio 101.ru"
-      }
-
-    ,
-    "module_fm_di": {
-      "message": "Digitally Imported"
-    }
-      ,
-      "module_fm_di_long": {
-        "message": "Digitally Imported | di.fm"
       }
 
   ,

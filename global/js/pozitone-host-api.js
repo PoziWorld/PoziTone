@@ -27,7 +27,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.2';
+    var strVersion = '0.3';
 
     this.strCallDivider = '/';
 
@@ -388,7 +388,7 @@
               objData
             , objSender
             , funcSendResponse
-            , true
+            , objSender.id !== chrome.runtime.id
           );
         }
         else {
@@ -510,6 +510,8 @@
    *            Button clicked.
    * @param   funcCallback
    *            Optional. Function to call on response.
+   * @param   boolIsExternal
+   *            Optional. Whether the request is sent from another extension/app.
    * @return  void
    **/
 
@@ -519,6 +521,7 @@
     , strCall
     , strCallParameter
     , funcCallback
+    , boolIsExternal
   ) {
     strLog = 'Api.sendCallToTab';
     Log.add(
@@ -532,26 +535,45 @@
         }
     );
 
-    var arrModuleId = strModuleId.split( strConstNotificationIdSeparator )
-      , intModuleIdLen = arrModuleId.length
-      , strExtensionId = arrModuleId[ intModuleIdLen - 1 ]
-      ;
+    if ( boolIsExternal || pozitone.global.isModuleExternal( strModuleId ) ) {
+      var arrModuleId = strModuleId.split( strConstNotificationIdSeparator )
+        , intModuleIdLen = arrModuleId.length
+        , strExtensionId = arrModuleId[ intModuleIdLen - 1 ]
+        ;
 
-    chrome.runtime.sendMessage(
-        strExtensionId
-      , {
-          objPozitoneApiRequest : {
-              strVersion : this.getApiVersion()
-            , strCall : this.createCallString( [ 'tab', intTabId, strCall, strCallParameter ] )
-            , strMethod : 'GET'
+      chrome.runtime.sendMessage(
+          strExtensionId
+        , {
+            objPozitoneApiRequest : {
+                strVersion : this.getApiVersion()
+              , strCall : this.createCallString( [ 'tab', intTabId, strCall, strCallParameter ] )
+              , strMethod : 'GET'
+            }
           }
-        }
-      , function ( objResponse ) {
-          if ( typeof funcCallback === 'function' && typeof objResponse === 'object' ) {
-            funcCallback( objResponse, true, { id : strExtensionId } );
+        , function ( objResponse ) {
+            if ( typeof funcCallback === 'function' && typeof objResponse === 'object' ) {
+              funcCallback( objResponse, true, { id : strExtensionId } );
+            }
           }
-        }
-    );
+      );
+    }
+    else {
+      chrome.tabs.sendMessage(
+          intTabId
+        , {
+            objPozitoneApiRequest : {
+                strVersion : this.getApiVersion()
+              , strCall : this.createCallString( [ strCall, strCallParameter ] )
+              , strMethod : 'GET'
+            }
+          }
+        , function ( objResponse ) {
+            if ( typeof funcCallback === 'function' && typeof objResponse === 'object' ) {
+              funcCallback( objResponse, false );
+            }
+          }
+      );
+    }
   };
 
   /**

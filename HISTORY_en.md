@@ -2,6 +2,15 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.4
+    * New module: SoundCloud | soundcloud.com. Don't forget to enable in Options!
+      Idea by Nike Kolder, Ivan Zusko.
+    * Fix: PoziTone wouldn't work on Odnoklassniki.
+
+<a href="https://youtu.be/2Dmtaq4sxCM?rel=0">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/16366220/a0de06ac-3bc8-11e6-9593-6931bca24a85.png" width="250" height="141" alt="PoziTone v0.6.4 features demo/overview" title="PoziTone v0.6.4 features demo/overview">
+</a>
+
 ### v0.6.3
     * New: support of new version of VK
       (disable and reenable the module to make it work again).

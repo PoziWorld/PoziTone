@@ -27,7 +27,7 @@
       getModules()
       isEmpty()
       findFirstOpenTabInvokeCallback()
-      checkIfModuleIsEnabled()
+      isModuleEnabled()
       getTabIdFromNotificationId()
       composeNotificationId()
       returnIndexOfSubitemContaining()
@@ -121,6 +121,22 @@ var Global                        = {
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/ru_ok_audio/js/page-watcher.js'
+            ]
+        }
+      , com_soundcloud : {
+            boolIsApiCompliant : true
+          , objRegex : /(http:\/\/|https:\/\/)soundcloud.com\/.*/
+          , strImageFileName : 'soundcloud-logo-80.png'
+          , arrHosts : [
+                'soundcloud.com'
+            ]
+          , arrOrigins : [
+                '*://*.soundcloud.com/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'global/js/pozitone-module-api.js'
+              , 'modules/com_soundcloud/js/page-watcher.js'
             ]
         }
       , com_vk_audio              : {
@@ -1566,7 +1582,7 @@ var Global                        = {
    *            Optional. Whether a message is sent from another extension/app.
    * @return  integer
    **/
-  checkIfModuleIsEnabled : function (
+  isModuleEnabled : function (
       strModule
     , intTabId
     , funcSuccessCallback
@@ -1583,7 +1599,7 @@ var Global                        = {
       if (  typeof objModuleSettings === 'object'
         &&  objModuleSettings.boolIsEnabled
       ) {
-        strLog = 'checkIfModuleIsEnabled, ' + strCallerLog;
+        strLog = 'isModuleEnabled, ' + strCallerLog;
         Log.add( strLog + strLogSuccess, intTabId );
 
         if ( typeof funcSuccessCallback === 'function' ) {
@@ -1997,18 +2013,3 @@ var Global                        = {
     }
   }
 };
-
-/* =============================================================================
-
-  On Load
-
- ============================================================================ */
-
-/**
- * Initializes.
- *
- * @type    method
- * @param   No Parameters taken
- * @return  void
- **/
-Global.init();

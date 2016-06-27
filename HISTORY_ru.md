@@ -2,6 +2,15 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.6.4
+    * Новый модуль: SoundCloud | soundcloud.com. Не забудьте подключить в Настройках!
+      Идея — Nike Kolder, Іван Зусько.
+    * Исправлено: PoziTone не работал на Одноклассниках.
+
+<a href="https://youtu.be/-gUdsClgJA8?rel=0">
+  <img src="https://cloud.githubusercontent.com/assets/9046724/16366221/a0e6e56a-3bc8-11e6-8442-28c85d586f95.png" width="250" height="141" alt="PoziTone v0.6.4: демо/обзор возможностей" title="PoziTone v0.6.4: демо/обзор возможностей">
+</a>
+
 ### v0.6.3
     * Новое: поддержка новой версии ВКонтакте
       (отключите модуль и включите снова, чтобы заработало).
