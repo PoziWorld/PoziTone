@@ -13,6 +13,7 @@ ___
 
   * [Features](#features)
   * [Supported online media players](#supported-online-media-players)
+    * [External PoziTone modules](#external-pozitone-modules)
   * [Installation](#installation)
     * [For Opera](#for-opera)
   * [Demo](#demo)
@@ -23,7 +24,6 @@ ___
   * [Gratitudes](#gratitudes)
   * [Credits](#credits)
   * [Privacy](#privacy)
-  * [Are you a developer?](#are-you-a-developer)
   * [Contribution](#contribution)
     * [Spread the word](#spread-the-word)
     * [Translation](#translation)
@@ -65,6 +65,17 @@ Supported online media players
 * [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio).
 
 More to come...
+
+
+### External PoziTone modules
+
+An external PoziTone module is a standalone extension which is able to provide PoziTone [features](#features) by communicating directly with PoziTone behind the scenes.
+
+* [Sovyatnik](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([for Opera](https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/)).
+* SoundCloud widget (currently in development).
+
+
+_Are you a developer?_ Want to add a support for your favorite player and publish it as a PoziTone module under your name? – Check [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
@@ -170,14 +181,6 @@ Privacy
 --------
 
 This extension does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
-
-<sup>[(back to table of contents)](#table-of-contents)</sup>
-
-
-Are you a developer?
---------
-
-Want to add a support for your favorite player and publish it as a PoziTone module under your name? — Check back, we will soon share a PoziTone API draft.
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
