@@ -72,7 +72,7 @@ More to come...
 An external PoziTone module is a standalone extension which is able to provide PoziTone [features](#features) by communicating directly with PoziTone behind the scenes.
 
 * [Sovyatnik](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([for Opera](https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/)).
-* SoundCloud widget (currently in development).
+* SoundCloud Widget ([in development](https://github.com/PoziWorld/SoundCloud-Widget-external-PoziTone-module)).
 
 
 _Are you a developer?_ Want to add a support for your favorite player and publish it as a PoziTone module under your name? – Check [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
