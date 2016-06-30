@@ -73,7 +73,7 @@ var Global                        = {
   // Embedded modules (replicates manifest's "content_scripts")
   , objModules                    : {
         ru_101                    : {
-            objRegex              : /(http:\/\/|https:\/\/)101.ru\/.*/
+            objRegex              : /^(http:\/\/|https:\/\/)101.ru\/.*/
           , arrHosts              : [
                 '101.ru'
             ]
@@ -88,7 +88,7 @@ var Global                        = {
             ]
         }
       , fm_di : {
-            objRegex : /(http:\/\/|https:\/\/)www.di.fm\/.*/
+            objRegex : /^(http:\/\/|https:\/\/)www.di.fm\/.*/
           , strImageFileName : 'di-logo-120.svg'
           , arrHosts : [
                 'di.fm'
@@ -107,7 +107,7 @@ var Global                        = {
       , ru_ok_audio               : {
             objRegex              :
               // TODO: Cover all possible “OK” URLs
-              /(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
+              /^(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
           , strImageFileName      : 'ok-logo-80.svg'
           , arrHosts              : [
                 'odnoklassniki.ru'
@@ -125,7 +125,7 @@ var Global                        = {
         }
       , com_soundcloud : {
             boolIsApiCompliant : true
-          , objRegex : /(http:\/\/|https:\/\/)soundcloud.com\/.*/
+          , objRegex : /^(http:\/\/|https:\/\/)soundcloud.com\/.*/
           , strImageFileName : 'soundcloud-logo-80.png'
           , arrHosts : [
                 'soundcloud.com'
@@ -140,7 +140,7 @@ var Global                        = {
             ]
         }
       , com_vk_audio              : {
-            objRegex              : /(http:\/\/|https:\/\/)(vk.com|new.vk.com)\/.*/
+            objRegex              : /^(http:\/\/|https:\/\/)(vk.com|new.vk.com)\/.*/
           , strImageFileName      : 'vk-logo-80.svg'
           , arrHosts              : [
                 'vk.com'
@@ -160,7 +160,7 @@ var Global                        = {
             ]
         }
       , com_vgmradio              : {
-            objRegex              : /(http:\/\/|https:\/\/)vgmradio.com\/.*/
+            objRegex              : /^(http:\/\/|https:\/\/)vgmradio.com\/.*/
           , strImageFileName      : 'vgmradio-logo-120.svg'
           , arrHosts              : [
                 'vgmradio.com'
@@ -1573,7 +1573,7 @@ var Global                        = {
    * @param   funcSuccessCallback
    *            Function to run on success.
    * @param   funcErrorCallback
-   *            Function to run on error.
+   *            Optional. Function to run on error.
    * @param   objPreservedData
    *            Data preserved for a callback.
    * @param   strCallerLog
