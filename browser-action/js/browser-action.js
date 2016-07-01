@@ -1,11 +1,9 @@
 /* =============================================================================
 
-  Product                 :           PoziTone
-  Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2013-2016 PoziWorld
-  License                 :           pozitone.com/license
-  File                    :           browser-action/js/browser-action.js
-  Description             :           Popup JavaScript
+  Product: PoziTone
+  Author: PoziWorld
+  Copyright: (c) 2016 PoziWorld
+  License: pozitone.com/license
 
   Table of Contents:
 
@@ -26,12 +24,12 @@
  ============================================================================ */
 
 const
-    strPage                 = 'browser-action'
-  , strListId               = 'recentTracks'
+    strPage = 'browser-action'
+  , strListId = 'recentTracks'
   , strRecentTrackActionUrl = 'https://go.pozitone.com/s/?'
   ;
 
-var Popup                   = {
+var Popup = {
   /**
    * Initialize
    *
@@ -39,6 +37,7 @@ var Popup                   = {
    * @param   No Parameters Taken
    * @return  void
    **/
+
   init : function() {
     Popup.populateRecentTracks();
     Page.trackPageView();
@@ -52,6 +51,7 @@ var Popup                   = {
    * @param   No Parameters Taken
    * @return  void
    **/
+
   populateRecentTracks : function() {
     StorageSync.get( 'arrRecentTracks', function( objReturn ) {
       var arrRecentTracks = objReturn.arrRecentTracks
@@ -82,8 +82,6 @@ var Popup                   = {
             }
         );
       }
-      // TODO: Null case
-      // if ( strHtml === '' )
 
       if ( strHtml !== '' ) {
         document.getElementById( strListId ).innerHTML = strHtml;
@@ -91,7 +89,7 @@ var Popup                   = {
 
       Page.localize( 'popup' );
       Popup.addEventListeners();
-    });
+    } );
   }
   ,
 
@@ -102,6 +100,7 @@ var Popup                   = {
    * @param   No Parameters Taken
    * @return  void
    **/
+
   addEventListeners : function() {
     addEvent(
         document.getElementById( 'toolbarOpenOptionsPageBtn' )
@@ -112,11 +111,11 @@ var Popup                   = {
           // Track clicks
           chrome.runtime.sendMessage(
             {
-                strReceiver     : 'background'
-              , strLog          : strLog
-              , objVars         : {
-                    strAction   : 'openOptions'
-                  , strPage     : strPage
+                strReceiver : 'background'
+              , strLog : strLog
+              , objVars : {
+                    strAction : 'openOptions'
+                  , strPage : strPage
                 }
             }
           );
@@ -132,11 +131,11 @@ var Popup                   = {
           // Track clicks
           chrome.runtime.sendMessage(
             {
-                strReceiver     : 'background'
-              , strLog          : 'browserAction.toolbar'
-              , objVars         : {
-                    strAction   : 'closePopup'
-                  , strPage     : strPage
+                strReceiver : 'background'
+              , strLog : 'browserAction.toolbar'
+              , objVars : {
+                    strAction : 'closePopup'
+                  , strPage : strPage
                 }
             }
           );
@@ -156,10 +155,10 @@ var Popup                   = {
           // Track clicks
           chrome.runtime.sendMessage(
             {
-                strReceiver       : 'background'
-              , strLog            : 'browserAction.tunesSuggestion'
-              , objVars           : {
-                    strPerformer  : $this.dataset.performer
+                strReceiver : 'background'
+              , strLog : 'browserAction.tunesSuggestion'
+              , objVars : {
+                    strPerformer : $this.dataset.performer
                 }
             }
           );
@@ -174,9 +173,7 @@ var Popup                   = {
         document.getElementsByClassName( 'recentTrack' )
       , 'mouseleave'
       , function( objEvent ) {
-          var
-              $this       = objEvent.currentTarget
-            ;
+          var $this = objEvent.currentTarget;
 
           $this.querySelector( '.fadeOutFadeIn' ).classList.remove( 'show' );
           $this.querySelector( '.fadeInFadeOut' ).classList.remove( 'show' );
@@ -187,24 +184,22 @@ var Popup                   = {
         document.getElementsByClassName( 'providerAction' )
       , 'click'
       , function( objEvent ) {
-          var
-              $this       = objEvent.currentTarget
+          var $this = objEvent.currentTarget
             , strProvider = $this.dataset.provider
-            , strTrack    = $this.parentNode.parentNode.dataset.track
-            , strUrl      = 
-                Popup.composeRecentTrackActionUrl( strProvider, strTrack )
+            , strTrack = $this.parentNode.parentNode.dataset.track
+            , strUrl = Popup.composeRecentTrackActionUrl( strProvider, strTrack )
             ;
 
           // Track clicks
           chrome.runtime.sendMessage(
             {
-                strReceiver     : 'background'
-              , strLog          : 'browserAction.recentTracks'
-              , objVars         : {
-                    strAction   : 'providerAction'
+                strReceiver : 'background'
+              , strLog : 'browserAction.recentTracks'
+              , objVars : {
+                    strAction : 'providerAction'
                   , strProvider : strProvider
                   , strLanguage : strConstExtensionLanguage
-                  , strVersion  : strConstExtensionVersion
+                  , strVersion : strConstExtensionVersion
                 }
             }
           );
@@ -218,24 +213,21 @@ var Popup                   = {
       , 'click'
       , function( objEvent ) {
           // http://stackoverflow.com/a/11128179/561712
-          var
-              $this         = objEvent.currentTarget
-            , $text         = $this
-                                .parentNode.parentNode.parentNode
-                                  .previousElementSibling
-            , objSelection  = window.getSelection()
-            , objRange      = document.createRange()
+          var $this = objEvent.currentTarget
+            , $text = $this.parentNode.parentNode.parentNode.previousElementSibling
+            , objSelection = window.getSelection()
+            , objRange = document.createRange()
             ;
 
           // Track clicks
           chrome.runtime.sendMessage(
             {
-                strReceiver     : 'background'
-              , strLog          : 'browserAction.recentTracks'
-              , objVars         : {
-                    strAction   : 'copyToClipboard'
+                strReceiver : 'background'
+              , strLog : 'browserAction.recentTracks'
+              , objVars : {
+                    strAction : 'copyToClipboard'
                   , strLanguage : strConstExtensionLanguage
-                  , strVersion  : strConstExtensionVersion
+                  , strVersion : strConstExtensionVersion
                 }
             }
           );
@@ -264,14 +256,15 @@ var Popup                   = {
    *            Query
    * @return  string
    **/
+
   composeRecentTrackActionUrl : function( strProvider, strQuery ) {
-    if (
-          typeof strProvider === 'undefined'
+    if (  typeof strProvider === 'undefined'
       ||  typeof strQuery === 'undefined'
       ||  strProvider === ''
       ||  strQuery === ''
-    )
+    ) {
       return '';
+    }
 
     return strRecentTrackActionUrl
               +  'p=' + strProvider
@@ -290,6 +283,7 @@ var Popup                   = {
    *            Query
    * @return  string
    **/
+
   encodeQuery : function( strQuery ) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
     return encodeURIComponent( strQuery )
