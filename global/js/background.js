@@ -907,54 +907,20 @@ var Background                    = {
             ;
 
           if ( ! pozitone.global.isModuleBuiltInApiCompliant( strModuleId, true ) || boolIsTabLoading ) {
-            chrome.tabs.sendMessage(
-                intTabId
-              , 'Do you copy?'
-              , function( miscResponse ) {
-                  if (  typeof miscResponse === 'undefined'
-                    ||  miscResponse !== 'Copy that.'
-                    &&  typeof miscResponse.objPozitoneApiResponse === 'undefined'
-                  ) {
-                    var objModule = Global.objModules[ strModuleId ]
-                      , arrCss = objModule.arrCss
-                      , intCss = ( typeof arrCss !== 'undefined' )
-                          ? arrCss.length
-                          : 0
-                      , arrJs = objModule.arrJs
-                      , intJs = ( typeof arrJs !== 'undefined' )
-                          ? arrJs.length
-                          : 0
-                      , funcCallback = function() {
-                          Global.checkForRuntimeError(
-                              undefined
-                            , undefined
-                            , { strModuleId : strModuleId }
-                            , false
-                          );
-                        }
-                      ;
+            var objDataToPreserve = {
+                strModuleId : strModuleId
+              , intTabId : intTabId
+              , objTab : objTab
+            };
 
-                    for ( var j = 0; j < intCss; j++ ) {
-                      chrome.tabs.executeScript(
-                          intTabId
-                        , { file: arrCss[ j ], runAt: 'document_end' }
-                        , function() {
-                            funcCallback();
-                          }
-                      );
-                    }
-
-                    for ( var k = 0; k < intJs; k++ ) {
-                      chrome.tabs.executeScript(
-                          intTabId
-                        , { file: arrJs[ k ], runAt: 'document_end' }
-                        , function() {
-                            funcCallback();
-                          }
-                      );
-                    }
-                  }
-                }
+            Global.isModuleEnabled(
+                strModuleId
+              , intTabId
+              , pozitone.background.injectModuleFiles
+              , pozitone.background.logModuleNotEnabled
+              , objDataToPreserve
+              , 'funcCheckTabBeforeInjecting'
+              , false
             );
           }
         }

@@ -13,6 +13,8 @@
       checkForManagementPermission()
       addManagementOnInstalledListener()
       processMediaNotificationRequest()
+      injectModuleFiles()
+      logModuleNotEnabled()
     On Load
       Initialize
 
@@ -252,6 +254,130 @@
       , 'onMessageCallback'
       , boolExternal
     );
+  };
+
+  /**
+   * A page is supported by one of the built-in modules and the module is enabled,
+   * inject its files into the page.
+   *
+   * @type    method
+   * @param   objPreservedData
+   *            Contains module ID and tab ID.
+   * @return  void
+   **/
+
+  Background2.prototype.injectModuleFiles = function ( objPreservedData ) {
+    strLog = 'Background2.injectModuleFiles';
+    Log.add( strLog, objPreservedData );
+
+    if ( typeof objPreservedData !== 'object' || Array.isArray( objPreservedData ) ) {
+      return;
+    }
+
+    var intTabId = objPreservedData.intTabId
+      , strModuleId = objPreservedData.strModuleId
+      ;
+
+    if ( typeof intTabId !== 'number' || typeof strModuleId !== 'string' ) {
+      return;
+    }
+
+    chrome.tabs.sendMessage(
+        intTabId
+      , 'Do you copy?'
+      , function( miscResponse ) {
+          if (  typeof miscResponse === 'undefined'
+            ||  miscResponse !== 'Copy that.'
+            &&  typeof miscResponse.objPozitoneApiResponse === 'undefined'
+          ) {
+            var objModule = Global.objModules[ strModuleId ]
+              , arrCss = objModule.arrCss
+              , intCss = ( typeof arrCss !== 'undefined' )
+                  ? arrCss.length
+                  : 0
+              , arrJs = objModule.arrJs
+              , intJs = ( typeof arrJs !== 'undefined' )
+                  ? arrJs.length
+                  : 0
+              , funcCallback = function() {
+                  Global.checkForRuntimeError(
+                      undefined
+                    , undefined
+                    , { strModuleId : strModuleId }
+                    , false
+                  );
+                }
+              ;
+
+            strLog = 'injectModuleFiles';
+            Log.add( strLog, { strModuleId : strModuleId }, true );
+
+            for ( var j = 0; j < intCss; j++ ) {
+              chrome.tabs.executeScript(
+                  intTabId
+                , { file: arrCss[ j ], runAt: 'document_end' }
+                , function() {
+                    funcCallback();
+                  }
+              );
+            }
+
+            for ( var k = 0; k < intJs; k++ ) {
+              chrome.tabs.executeScript(
+                  intTabId
+                , { file: arrJs[ k ], runAt: 'document_end' }
+                , function() {
+                    funcCallback();
+                  }
+              );
+            }
+          }
+        }
+    );
+  };
+
+  /**
+   * A page is supported by one of the built-in modules, but the module is not enabled.
+   *
+   * @type    method
+   * @param   objPreservedData
+   *            Contains module ID and tab ID.
+   * @param   strModuleId
+   *            Module ID.
+   * @param   objModuleSettings
+   *            Module settings retrieved from Storage.
+   * @return  void
+   **/
+
+  Background2.prototype.logModuleNotEnabled = function ( objPreservedData, strModuleId, objModuleSettings ) {
+    if (  typeof objModuleSettings === 'object'
+      &&  objModuleSettings.boolIsEnabled === false
+    ) {
+      // On VK, it's the same when refreshed and it's not when History API is used.
+      // On OK, it's both when refreshed and it's not when History API is used.
+      // On both, it's not when PoziTone is reloaded or url is "https://ok.ru/" and title is "https://ok.ru".
+      var boolIsTitleSameAsUrl;
+
+      if ( typeof objPreservedData === 'object' ) {
+        var objTab = objPreservedData.objTab;
+
+        if ( typeof objTab === 'object' ) {
+          boolIsTitleSameAsUrl = ( objTab.title === objTab.url );
+        }
+      }
+
+      strLog = 'logModuleNotEnabled';
+      Log.add(
+          strLog
+        , {
+              strModuleId : strModuleId
+            , boolIsTitleSameAsUrl : boolIsTitleSameAsUrl
+            , title : objTab.title
+            , url : objTab.url
+          }
+        , true
+      );
+    }
   };
 
   pozitone.background = new Background2();

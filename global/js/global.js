@@ -1566,7 +1566,7 @@ var Global                        = {
    * Checks whether the module is enabled.
    *
    * @type    method
-   * @param   strModule
+   * @param   strModuleId
    *            Module ID.
    * @param   intTabId
    *            ID of the tab the request is sent from.
@@ -1583,7 +1583,7 @@ var Global                        = {
    * @return  integer
    **/
   isModuleEnabled : function (
-      strModule
+      strModuleId
     , intTabId
     , funcSuccessCallback
     , funcErrorCallback
@@ -1591,7 +1591,7 @@ var Global                        = {
     , strCallerLog
     , boolExternal
   ) {
-    var strObjSettings = strConstSettingsPrefix + strModule;
+    var strObjSettings = strConstSettingsPrefix + strModuleId;
 
     ( boolExternal ? StorageLocal : StorageSync ).get( strObjSettings, function( objReturn ) {
       var objModuleSettings = objReturn[ strObjSettings ];
@@ -1607,7 +1607,7 @@ var Global                        = {
         }
       }
       else if ( typeof funcErrorCallback === 'function' ) {
-        funcErrorCallback( objPreservedData );
+        funcErrorCallback( objPreservedData, strModuleId, objModuleSettings );
       }
     } );
   }
