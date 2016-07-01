@@ -166,7 +166,7 @@
     "message": "Reproducción no iniciada / detenida"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "¿Buscas canciones?<br />¿Qué te parece algo <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">de punk-rock con elementos hardcore</a>?<br />o<a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop?</a>?"
+    "message": "¿Buscas canciones?<br />¿Qué te parece algo <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">de punk-rock con elementos hardcore</a>?<br />o <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop?</a>?"
   },
   "module_general": {
     "message": "General"

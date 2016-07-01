@@ -543,7 +543,7 @@
       }
         ,
         "popupNavRecentTracksPlaceholder": {
-          "message": "Looking for some tunes?<br />How about some <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock with elements of hardcore</a>?<br />Or <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
+          "message": "Looking for some tunes?<br />How about some <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock with elements of hardcore</a>?<br />Or <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?"
         }
         ,
         "findOnVk": {

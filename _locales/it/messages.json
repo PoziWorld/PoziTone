@@ -207,7 +207,7 @@
     "message": "Quando la riproduzione non inizia / si interrompe"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "Cerchi qualche brano? <br />Che ne dici di <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock con alcuni parti di hardcore</a>?<br />O <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
+    "message": "Cerchi qualche brano? <br />Che ne dici di <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock con alcuni parti di hardcore</a>?<br />O <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?"
   },
   "module_general": {
     "message": "Generale"

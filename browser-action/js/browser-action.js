@@ -83,12 +83,21 @@ var Popup = {
         );
       }
 
-      if ( strHtml !== '' ) {
-        document.getElementById( strListId ).innerHTML = strHtml;
+      var boolIsNullCase = strHtml === ''
+        , $content = document.getElementById( strListId )
+        ;
+
+      if ( ! boolIsNullCase ) {
+        $content.innerHTML = strHtml;
       }
 
       Page.localize( 'popup' );
       Popup.addEventListeners();
+
+      if ( boolIsNullCase ) {
+        $content.querySelector( '[data-performer="funbox"]' ).href = 'https://vk.com/funboxband';
+        $content.querySelector( '[data-performer="nickybutter"]' ).href = 'https://soundcloud.com/nickybutter';
+      }
     } );
   }
   ,

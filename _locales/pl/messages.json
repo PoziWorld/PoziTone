@@ -166,7 +166,7 @@
     "message": "Kiedy odtwarzanie nie jest uruchomione / zatrzymane"
   },
   "popupNavRecentTracksPlaceholder": {
-    "message": "Szukasz czegoś do posłuchania?<br />Co powiesz na <a href=\"https://vk.com/funboxband\" data-performer=\"funbox\" target=\"_blank\">punk-rock z elementami hardcore</a><br />albo <a href=\"https://vk.com/wall622096_2755\" data-performer=\"nickybutter\" target=\"_blank\">hip-hop</a>?"
+    "message": "Szukasz czegoś do posłuchania?<br />Co powiesz na <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock z elementami hardcore</a><br />albo <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?"
   },
   "module_general": {
     "message": "Główne ustawienia"
