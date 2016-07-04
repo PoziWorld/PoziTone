@@ -372,8 +372,6 @@
         , {
               strModuleId : strModuleId
             , boolIsTitleSameAsUrl : boolIsTitleSameAsUrl
-            , title : objTab.title
-            , url : objTab.url
           }
         , true
       );
