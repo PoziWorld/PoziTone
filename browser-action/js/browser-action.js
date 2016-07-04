@@ -97,6 +97,7 @@ var Popup = {
       if ( boolIsNullCase ) {
         $content.querySelector( '[data-performer="funbox"]' ).href = 'https://vk.com/funboxband';
         $content.querySelector( '[data-performer="nickybutter"]' ).href = 'https://soundcloud.com/nickybutter';
+        $content.querySelector( '[data-performer="theroux"]' ).href = 'https://soundcloud.com/theroux';
       }
     } );
   }

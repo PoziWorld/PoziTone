@@ -543,7 +543,7 @@
       }
         ,
         "popupNavRecentTracksPlaceholder": {
-          "message": "Looking for some tunes?<br />How about some <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock with elements of hardcore</a>?<br />Or <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?"
+          "message": "Looking for some tunes?<br><br>How about some <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock with elements of hardcore</a>?<br>Or <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Fond of <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">house</a>?"
         }
         ,
         "findOnVk": {
