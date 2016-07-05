@@ -72,8 +72,8 @@ ___
 
 Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить [возможности](#Возможности) PoziTone, общаясь напрямую с PoziTone незаметно для глаз пользователя.
 
+* [SoundCloud-виджет](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl).
 * [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/)).
-* SoundCloud-виджет ([в разработке](https://github.com/PoziWorld/SoundCloud-Widget-external-PoziTone-module)).
 
 
 _Вы — разработчик?_ Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Присмотритесь к [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
