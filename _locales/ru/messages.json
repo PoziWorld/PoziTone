@@ -543,7 +543,7 @@
       }
         ,
         "popupNavRecentTracksPlaceholder": {
-          "message": "Ищете, что послушать?<br><br>Как насчёт <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock с элементами hardcore</a>?<br>Или <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Любите <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">house</a>?"
+          "message": "Ищете, что послушать?<br><br>Как насчёт <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock с элементами hardcore</a>?<br>Или <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Любите <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">house</a>?<br>Вы сказали <a href=\"#\" target=\"_blank\" data-performer=\"emilyclibourn\">dream pop, indie pop, indie rock, neo soul, art rock</a>?"
         }
         ,
         "findOnVk": {
