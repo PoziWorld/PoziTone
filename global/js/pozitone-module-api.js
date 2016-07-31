@@ -33,7 +33,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.3';
+    var strVersion = '0.3.1';
 
     this.strMediaInfoDivider = ' – ';
     this.strCallDivider = '/';
@@ -59,18 +59,28 @@
    * @param   strPozitoneEdition
    *            PoziTone edition (alpha, beta, stable, test).
    * @param   pageWatcher
-   *            Save PageWatcher instance.
+   *            Optional. Save PageWatcher instance.
+   * @param   boolUseOperaAddonId
+   *            Optional. IDs are different for Opera and Yandex.
    * @return  void
    **/
 
-  Api.prototype.init = function ( strPozitoneEdition, pageWatcher ) {
+  Api.prototype.init = function ( strPozitoneEdition, pageWatcher, boolUseOperaAddonId ) {
     var objPozitoneEditions = {
-        'alpha' : 'lbjkjmmcckjjijnnhdabbnkddgmpinhc'
-      , 'beta' : 'hfdnjjobhcbkciapachaegijeednggeh'
-      , 'stable' : 'bdglbogiolkffcmojmmkipgnpkfipijm'
-      , 'test' : 'ioiggdgamcfglpihfidbphgoofpmncfi'
-      , 'built-in' : ''
-    };
+          'built-in' : ''
+        , 'test' : 'ioiggdgamcfglpihfidbphgoofpmncfi'
+      };
+
+    // Not Opera or Yandex
+    if ( typeof boolUseOperaAddonId !== 'boolean' || ! boolUseOperaAddonId ) {
+      objPozitoneEditions[ 'alpha' ] = 'lbjkjmmcckjjijnnhdabbnkddgmpinhc';
+      objPozitoneEditions[ 'beta' ] = 'hfdnjjobhcbkciapachaegijeednggeh';
+      objPozitoneEditions[ 'stable' ] = 'bdglbogiolkffcmojmmkipgnpkfipijm';
+    }
+    // Opera or Yandex
+    else {
+      objPozitoneEditions[ 'stable' ] = 'bnmpcdcpmgfekpcekglbeendkjkflldd';
+    }
 
     if ( typeof strPozitoneEdition !== 'string'
       || typeof objPozitoneEditions[ strPozitoneEdition ] !== 'string'
