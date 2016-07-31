@@ -44,8 +44,8 @@
                 ></button>
           </p>
           <p
-            ng-repeat="objModule in objModules"
-            ng-if="( strModuleId = objModule.id ) !== '' && ( objGlobalModule = objGlobalModules[ strModuleId ] ) != undefined && strModuleId !== 'general'"
+            ng-repeat="objModuleTmp in arrModulesNames"
+            ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && ( strModuleId = objModule.id ) !== '' && ( objGlobalModule = objGlobalModules[ strModuleId ] ) != undefined && strModuleId !== 'general'"
             class="modulesListItem"
             id="modulesListItem_{{strModuleId}}"
             localize

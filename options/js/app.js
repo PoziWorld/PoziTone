@@ -116,6 +116,8 @@ optionsApp.run( function( $rootScope, $location ) {
       $rootScope.objModules = {};
     }
 
+    var arrModulesNames = $rootScope.arrModulesNames;
+
     $rootScope.intModulesBuiltIn = 0;
     $rootScope.intModulesExternal = 0;
 
@@ -145,6 +147,13 @@ optionsApp.run( function( $rootScope, $location ) {
             objModule.caption = chrome.i18n.getMessage( strModuleVar );
             objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
 
+            if ( strModule !== strConstGeneralSettingsSuffix ) {
+              arrModulesNames.push( {
+                  strModuleId : strModule
+                , strModuleName :  objModule.caption
+              } );
+            }
+
             $rootScope.intModulesBuiltIn++;
           }
           else {
@@ -155,6 +164,11 @@ optionsApp.run( function( $rootScope, $location ) {
             // TODO: Get i18n variotions of name
             objModule.name = objStorage[ strKey ].strName || strModuleExternal;
 
+            arrModulesNames.push( {
+                strModuleId : strModule
+              , strModuleName :  objModule.name
+            } );
+
             $rootScope.intModulesExternal++;
           }
 
@@ -162,10 +176,32 @@ optionsApp.run( function( $rootScope, $location ) {
           $rootScope.objModules[ strModule ] = objModule;
         }
       }
+
+      /*
+       * Sort modules by name disregarding letter case.
+       *
+       * Based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Sorting_with_map
+       */
+
+      // temporary array holds objects with position and sort-value
+      var mapped = arrModulesNames.map( function( el, i ) {
+        return { index: i, value: el.strModuleName.toLowerCase() };
+      } );
+
+      // sorting the mapped array containing the reduced values
+      mapped.sort( function( a, b ) {
+        return +( a.value > b.value ) || +( a.value === b.value ) - 1;
+      } );
+
+      // container for the resulting order
+      $rootScope.arrModulesNames = mapped.map( function( el ) {
+        return arrModulesNames[ el.index ];
+      } );
     } );
   };
 
   // Get available modules on load
+  $rootScope.arrModulesNames = [];
   $rootScope.getModules( StorageSync );
   $rootScope.getModules( StorageLocal );
 

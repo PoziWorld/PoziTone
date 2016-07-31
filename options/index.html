@@ -45,8 +45,8 @@
               <li
                 class="menuItemWrap"
                 id="menuItemWrap_{{objModule.id}}"
-                ng-repeat="objModule in objModules"
-                ng-if="objModule.type === 'built-in' && objModule.id !== 'general'"
+                ng-repeat="objModuleTmp in arrModulesNames"
+                ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && objModule.type === 'built-in'"
                 module-menu-item-directive
                   >
                 <a
@@ -70,8 +70,8 @@
               <li
                 class="menuItemWrap"
                 id="menuItemWrap_{{objModule.id}}"
-                ng-repeat="objModule in objModules"
-                ng-if="objModule.type === 'external'"
+                ng-repeat="objModuleTmp in arrModulesNames"
+                ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && objModule.type === 'external'"
                 module-menu-item-directive
                   >
                 <a
