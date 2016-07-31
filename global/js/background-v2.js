@@ -180,9 +180,11 @@
           strAdditionalInfo = 'notificationButtonsUnmuteFeedback';
           boolIsAdditionalInfoRecognized = true;
           break;
-        // TODO: May reconsider in future. For now, ignore.
         default:
-          objData.objStationInfo.strAdditionalInfo = '';
+          objData.objStationInfo.strAdditionalInfo = ! boolExternal && ! pozitone.global.isModuleBuiltInApiCompliant( objData.objPlayerInfo.strModule, true )
+              ? strAdditionalInfo
+              : ''
+              ;
       }
 
       if ( boolIsAdditionalInfoRecognized ) {
