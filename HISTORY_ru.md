@@ -2,6 +2,18 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.6.5
+    * PoziTone теперь поддерживает все сайты-аудиоплееры сети AudioAddict:
+      — ClassicalRadio.com
+      — Digitally Imported (DI, DI.FM, DI Radio)
+      — JAZZRADIO.com
+      — RadioTunes
+      — ROCKRADIO.COM
+
+      Не забудьте подключить в Настройках!
+
+      Идея — Сергей Свекольников.
+
 ### v0.6.4
     * Новый модуль: SoundCloud | soundcloud.com. Не забудьте подключить в Настройках!
       Идея — Nike Kolder, Іван Зусько.

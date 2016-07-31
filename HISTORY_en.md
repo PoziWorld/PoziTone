@@ -2,6 +2,18 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.5
+    * PoziTone now supports all websites (audio players) of AudioAddict network:
+      – ClassicalRadio.com
+      – Digitally Imported (DI, DI.FM, DI Radio)
+      – JAZZRADIO.com
+      – RadioTunes
+      – ROCKRADIO.COM
+
+      Don't forget to enable in Options!
+
+      Idea by Sergey Svekolnikov.
+
 ### v0.6.4
     * New module: SoundCloud | soundcloud.com. Don't forget to enable in Options!
       Idea by Nike Kolder, Ivan Zusko.
