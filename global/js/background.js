@@ -102,6 +102,27 @@ const
           , boolUseGeneralVolumeDelta             : true
           , intVolumeDelta                        : 10
         }
+      , objSettings_com_classicalradio : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationTitleFormat : 'short'
+          , boolShowKbpsInfo : true
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenMuted : false
+          , boolShowNotificationWhenNoTrackInfo : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
+        }
       , objSettings_fm_di : {
             boolIsEnabled : false
           , boolShowNotificationLogo : true
@@ -121,6 +142,27 @@ const
             ]
           , boolShowNotificationWhenMuted : false
         }
+      , objSettings_com_jazzradio : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationTitleFormat : 'short'
+          , boolShowKbpsInfo : true
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenMuted : false
+          , boolShowNotificationWhenNoTrackInfo : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
+        }
       , objSettings_ru_ok_audio                   : {
             boolIsEnabled                         : false
           , boolShowNotificationLogo              : true
@@ -137,6 +179,48 @@ const
                                                       , 'nextAuth'
                                                     ]
           , boolShowNotificationWhenMuted         : false
+        }
+      , objSettings_com_radiotunes : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationTitleFormat : 'short'
+          , boolShowKbpsInfo : true
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenMuted : false
+          , boolShowNotificationWhenNoTrackInfo : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
+        }
+      , objSettings_com_rockradio : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationTitleFormat : 'short'
+          , boolShowKbpsInfo : true
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenMuted : false
+          , boolShowNotificationWhenNoTrackInfo : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
         }
       , objSettings_com_soundcloud : {
             boolIsEnabled : false

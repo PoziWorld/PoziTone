@@ -29,7 +29,7 @@
    * @type    method
    * @param   strModuleId
    *            Module ID.
-   * @return  integer
+   * @return  boolean
    **/
 
   Global2.prototype.isModuleBuiltIn = function ( strModuleId ) {
@@ -44,7 +44,7 @@
    *            Module ID.
    * @param   boolIsBuiltIn
    *            Optional. Whether the module is built-in.
-   * @return  integer
+   * @return  boolean
    **/
 
   Global2.prototype.isModuleBuiltInApiCompliant = function ( strModuleId, boolIsBuiltIn ) {
@@ -63,7 +63,7 @@
    * @type    method
    * @param   strModuleId
    *            Module ID.
-   * @return  integer
+   * @return  boolean
    **/
 
   Global2.prototype.isModuleExternal = function ( strModuleId ) {

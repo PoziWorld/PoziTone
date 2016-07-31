@@ -87,6 +87,24 @@ var Global                        = {
               , 'modules/ru_101/js/page-watcher.js'
             ]
         }
+      , com_classicalradio : {
+            objRegex : /^(http:\/\/|https:\/\/)www.classicalradio.com\/.*/
+          , strImageFileName : 'classicalradio-logo-120.png'
+          , arrHosts : [
+                'classicalradio.com'
+              , 'audioaddict.com'
+            ]
+          , arrOrigins : [
+                '*://*.audioaddict.com/*'
+              , '*://*.classicalradio.com/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_classicalradio/js/page-watcher.js'
+              , 'modules/com_audioaddict/js/page-watcher.js'
+            ]
+        }
       , fm_di : {
             objRegex : /^(http:\/\/|https:\/\/)www.di.fm\/.*/
           , strImageFileName : 'di-logo-120.svg'
@@ -102,6 +120,24 @@ var Global                        = {
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/fm_di/js/page-watcher.js'
+            ]
+        }
+      , com_jazzradio : {
+            objRegex : /^(http:\/\/|https:\/\/)www.jazzradio.com\/.*/
+          , strImageFileName : 'jazzradio-logo-120.png'
+          , arrHosts : [
+                'jazzradio.com'
+              , 'audioaddict.com'
+            ]
+          , arrOrigins : [
+                '*://*.audioaddict.com/*'
+              , '*://*.jazzradio.com/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_jazzradio/js/page-watcher.js'
+              , 'modules/com_audioaddict/js/page-watcher.js'
             ]
         }
       , ru_ok_audio               : {
@@ -121,6 +157,42 @@ var Global                        = {
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/ru_ok_audio/js/page-watcher.js'
+            ]
+        }
+      , com_radiotunes : {
+            objRegex : /^(http:\/\/|https:\/\/)www.radiotunes.com\/.*/
+          , strImageFileName : 'radiotunes-logo-80.png'
+          , arrHosts : [
+                'radiotunes.com'
+              , 'audioaddict.com'
+            ]
+          , arrOrigins : [
+                '*://*.audioaddict.com/*'
+              , '*://*.radiotunes.com/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_radiotunes/js/page-watcher.js'
+              , 'modules/com_audioaddict/js/page-watcher.js'
+            ]
+        }
+      , com_rockradio : {
+            objRegex : /^(http:\/\/|https:\/\/)www.rockradio.com\/.*/
+          , strImageFileName : 'rockradio-logo-120.png'
+          , arrHosts : [
+                'rockradio.com'
+              , 'audioaddict.com'
+            ]
+          , arrOrigins : [
+                '*://*.audioaddict.com/*'
+              , '*://*.rockradio.com/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'modules/general/js/page-watcher.js'
+              , 'modules/com_rockradio/js/page-watcher.js'
+              , 'modules/com_audioaddict/js/page-watcher.js'
             ]
         }
       , com_soundcloud : {

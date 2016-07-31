@@ -57,12 +57,17 @@ Features
 Supported online media players
 --------
 
-* [SoundCloud](https://soundcloud.com) (full version of site).
-* [VK](https://vk.com) (audio, full version of site – old & new).
-* [VGM Radio](https://vgmradio.com).
-* [Odnoklassniki](http://ok.ru) (audio, full version of site).
-* [Online radio 101.ru](http://101.ru) (stations' main player).
-* [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio).
+* [SoundCloud](https://soundcloud.com) (full version of site)
+* [AudioAddict](http://www.audioaddict.com) network:
+  * [ClassicalRadio.com](http://www.classicalradio.com)
+  * [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio)
+  * [JAZZRADIO.com](http://www.jazzradio.com)
+  * [RadioTunes](http://www.radiotunes.com)
+  * [ROCKRADIO.COM](http://www.rockradio.com)
+* [VK](https://vk.com) (audio, full version of site – old & new)
+* [VGM Radio](https://vgmradio.com)
+* [Odnoklassniki](http://ok.ru) (audio, full version of site)
+* [Online radio 101.ru](http://101.ru) (stations' main player)
 
 More to come...
 

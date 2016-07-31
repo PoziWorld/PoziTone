@@ -586,6 +586,15 @@
       }
 
     ,
+    "module_com_classicalradio": {
+      "message": "ClassicalRadio.com"
+    }
+      ,
+      "module_com_classicalradio_long": {
+        "message": "ClassicalRadio.com"
+      }
+
+    ,
     "module_fm_di": {
       "message": "Digitally Imported"
     }
@@ -595,12 +604,39 @@
       }
 
     ,
+    "module_com_jazzradio": {
+      "message": "JAZZRADIO.com"
+    }
+      ,
+      "module_com_jazzradio_long": {
+        "message": "JAZZRADIO.com"
+      }
+
+    ,
     "module_ru_ok_audio": {
       "message": "Odnoklassniki (audio)"
     }
       ,
       "module_ru_ok_audio_long": {
         "message": "Odnoklassniki (audio) | ok.ru"
+      }
+
+    ,
+    "module_com_radiotunes": {
+      "message": "RadioTunes"
+    }
+      ,
+      "module_com_radiotunes_long": {
+        "message": "RadioTunes | radiotunes.com"
+      }
+
+    ,
+    "module_com_rockradio": {
+      "message": "ROCKRADIO.COM"
+    }
+      ,
+      "module_com_rockradio_long": {
+        "message": "ROCKRADIO.COM"
       }
 
     ,

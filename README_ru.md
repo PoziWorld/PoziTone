@@ -58,12 +58,17 @@ ___
 Поддерживаемые онлайн-медиаплееры
 --------
 
-* [SoundCloud](https://soundcloud.com) (полная версия сайта).
-* [ВКонтакте](https://vk.com) (аудиоплеер, полная версия сайта — новая и старая).
-* [VGM Radio](https://vgmradio.com).
-* [Одноклассники](http://ok.ru) (аудиоплеер, полная версия сайта).
-* [Онлайн-радио 101.ru](http://101.ru) (основной плеер станций).
-* [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio).
+* [SoundCloud](https://soundcloud.com) (полная версия сайта)
+* сеть [AudioAddict](http://www.audioaddict.com):
+  * [ClassicalRadio.com](http://www.classicalradio.com)
+  * [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio)
+  * [JAZZRADIO.com](http://www.jazzradio.com)
+  * [RadioTunes](http://www.radiotunes.com)
+  * [ROCKRADIO.COM](http://www.rockradio.com)
+* [ВКонтакте](https://vk.com) (аудиоплеер, полная версия сайта — новая и старая)
+* [VGM Radio](https://vgmradio.com)
+* [Одноклассники](http://ok.ru) (аудиоплеер, полная версия сайта)
+* [Онлайн-радио 101.ru](http://101.ru) (основной плеер станций)
 
 Список будет пополняться...
 
