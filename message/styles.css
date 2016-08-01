@@ -39,3 +39,13 @@ aside p {
   font-size: small;
   font-weight: bold;
 }
+
+/* v0.6.5 */
+
+.list {
+  margin-top: -1rem;
+}
+.listItem {
+  list-style-type: circle;
+  margin-bottom: 0;
+}
