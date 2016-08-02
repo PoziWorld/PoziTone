@@ -1,7 +1,5 @@
 > This is a Russian version, see [README_en.md](README_en.md) for English.
 
-[![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
-
 [PoziTone<img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
@@ -136,6 +134,7 @@ _Вы — разработчик?_ Хотите добавить поддерж�
 7. Alt+Shift+A — «Увеличить громкость звука» (_не предустановлено_).
 8. Alt+Shift+Z — «Уменьшить громкость звука» (_не предустановлено_).
 9. Alt+Shift+Q — «Показать оповещение».
+10. Alt+Shift+R — «Активация расширения» (_не предустановлено_).
 
 ### Настройка (изменение) быстрых клавиш
 

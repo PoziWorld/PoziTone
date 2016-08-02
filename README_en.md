@@ -1,7 +1,5 @@
 > Это английская версия, см. [README_ru.md](README_ru.md) для русской.
 
-[![Stories in Ready](https://badge.waffle.io/poziworld/pozitone.png?label=ready&title=Ready)](http://waffle.io/poziworld/pozitone)
-
 [PoziTone<img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
@@ -127,6 +125,7 @@ Keyboard shortcuts
 7. Alt+Shift+A — “Increase sound volume” (_not preset_).
 8. Alt+Shift+Z — “Decrease sound volume” (_not preset_).
 9. Alt+Shift+Q — “Show notification”.
+10. Alt+Shift+R — “Activate the extension” (_not preset_).
 
 ### Set up / change keyboards shortcuts
 
