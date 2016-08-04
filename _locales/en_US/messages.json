@@ -299,8 +299,12 @@
               "message": "Display current station name + short description (if available)"
             }
             ,
+            "optionsSettingsNotificationTitleFormatPlayerName": {
+              "message": "Display player name"
+            }
+            ,
             "optionsSettingsNotificationTitleFormatNoStationInfo": {
-              "message": "Don't display information about current station"
+              "message": "Don't display information about current station or player"
             }
 
           ,

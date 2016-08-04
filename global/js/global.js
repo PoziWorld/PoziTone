@@ -723,15 +723,18 @@ var Global                        = {
                 , arrButtons = objModuleSettings.arrActiveNotificationButtons
                 ;
 
-              // Notification Title Settings
+              // Notification Title Format
               if ( strTitleFormat === 'short' ) {
-                objNotificationOptions.title = objTempStationInfo.strStationName;
+                objNotificationOptions.title = objTempStationInfo.strStationName || '';
               }
               else if ( strTitleFormat === 'long' ) {
-                objNotificationOptions.title = objTempStationInfo.strStationNamePlusDesc;
+                objNotificationOptions.title = objTempStationInfo.strStationNamePlusDesc || '';
+              }
+              else if ( strTitleFormat === 'playerName' ) {
+                objNotificationOptions.title = objTempPlayerInfo.strPlayerName || '';
               }
               else {
-                objNotificationOptions.title = chrome.i18n.getMessage( 'extensionName' );
+                objNotificationOptions.title = strConstExtensionName;
               }
 
               // Notification Buttons Settings

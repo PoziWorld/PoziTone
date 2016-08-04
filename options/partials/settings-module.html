@@ -108,6 +108,21 @@
                   </label>
                 </li>
                 <li
+                  id="optionsSettingsNotificationTitleFormatPlayerName"
+                  localize
+                  ng-if="arrAvailableNotificationTitleFormats.indexOf( 'playerName' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationTitleFormat"
+                      value="playerName"
+                      ng-model="objModule.strNotificationTitleFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationTitleFormatPlayerName"></span>
+                  </label>
+                </li>
+                <li
                   id="optionsSettingsNotificationTitleFormatNoStationInfo"
                   localize
                   ng-if="arrAvailableNotificationTitleFormats.indexOf( 'noStationInfo' ) !== -1"

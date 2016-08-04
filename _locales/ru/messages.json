@@ -299,8 +299,12 @@
               "message": "Отображать название текущей станции + краткое описание (если доступно)"
             }
             ,
+            "optionsSettingsNotificationTitleFormatPlayerName": {
+              "message": "Отображать название плеера"
+            }
+            ,
             "optionsSettingsNotificationTitleFormatNoStationInfo": {
-              "message": "Не отображать информацию о текущей станции"
+              "message": "Не отображать информацию о текущей станции или плеере"
             }
 
           ,
