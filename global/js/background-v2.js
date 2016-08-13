@@ -155,6 +155,8 @@
       ;
 
     if ( typeof strAdditionalInfo === 'string' && strAdditionalInfo !== '' ) {
+      var arrSubstitutions;
+
       switch ( strAdditionalInfo ) {
         case 'onFavorite':
           strAdditionalInfo = 'notificationFavoriteStatusSuccess';
@@ -180,6 +182,11 @@
           strAdditionalInfo = 'notificationButtonsUnmuteFeedback';
           boolIsAdditionalInfoRecognized = true;
           break;
+        case 'onVolumeChange':
+          strAdditionalInfo = 'notificationButtonsVolumeChangeFeedback';
+          arrSubstitutions = [ objData.objPlayerInfo.intVolume ];
+          boolIsAdditionalInfoRecognized = true;
+          break;
         default:
           objData.objStationInfo.strAdditionalInfo = ! boolExternal && ! pozitone.global.isModuleBuiltInApiCompliant( objData.objPlayerInfo.strModule, true )
               ? strAdditionalInfo
@@ -188,7 +195,7 @@
       }
 
       if ( boolIsAdditionalInfoRecognized ) {
-        objData.objStationInfo.strAdditionalInfo = chrome.i18n.getMessage( strAdditionalInfo );
+        objData.objStationInfo.strAdditionalInfo = chrome.i18n.getMessage( strAdditionalInfo, arrSubstitutions );
       }
     }
 
