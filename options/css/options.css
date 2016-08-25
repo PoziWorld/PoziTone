@@ -335,9 +335,16 @@
     }
   .modulesListItemHosts
     {
-      display: block;
+      display: inline-block;
       font-size: 1.1em;
       color: #999;
+      cursor: help;
+      opacity: .5;
+      transition: opacity .15s ease-out;
+    }
+  .modulesListItemHosts:hover
+    {
+      opacity: 1;
     }
   .modulesListItemHostWrapper:not( :first-child ):before
     {
@@ -427,7 +434,10 @@
     }
   .projectDescriptionParagraph
     {
+      display: block;
+      font-size: 1.1em;
       padding-top: .3rem;
+      color: #999;
     }
   .projectDescriptionParagraph:first-of-type
     {

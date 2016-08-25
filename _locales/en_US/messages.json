@@ -697,6 +697,11 @@
   }
 
   ,
+  "moduleHosts": {
+    "message": "List of hosts/domains this module needs permission for in order to work properly.\n\nPoziTone, including its built-in modules, does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
+  }
+
+  ,
   "trademarksDisclaimer": {
     "message": "All trademarks mentioned belong to their owners, third party brands, product names, trade names, corporate names and company names mentioned may be trademarks of their respective owners or registered trademarks of other companies and are used for purposes of explanation and to the owner's benefit, without implying a violation of copyright law."
   }
