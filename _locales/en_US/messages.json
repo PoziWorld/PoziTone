@@ -624,6 +624,15 @@
       }
 
     ,
+    "module_com_google_play_music": {
+      "message": "Google Play Music"
+    }
+      ,
+      "module_com_google_play_music_long": {
+        "message": "Google Play Music | play.google.com/music"
+      }
+
+    ,
     "module_com_jazzradio": {
       "message": "JAZZRADIO.com"
     }

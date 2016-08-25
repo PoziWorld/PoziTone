@@ -122,6 +122,25 @@ var Global                        = {
               , 'modules/fm_di/js/page-watcher.js'
             ]
         }
+      , com_google_play_music : {
+            boolIsApiCompliant : true
+          , objRegex : /^(http:\/\/|https:\/\/)play.google.com\/music\/.*/
+          , strImageFileName : 'google-play-music-logo-80.png'
+          , arrHosts : [
+                'play.google.com/music'
+              , 'ggpht.com'
+            ]
+          , arrOrigins : [
+                '*://*.ggpht.com/*'
+              , '*://play.google.com/music/*'
+            ]
+          , arrJs : [
+                'global/js/const.js'
+              , 'global/js/pozitone-module-api.js'
+              , 'modules/com_google_play_music/js/dom-to-image.js'
+              , 'modules/com_google_play_music/js/page-watcher.js'
+            ]
+        }
       , com_jazzradio : {
             objRegex : /^(http:\/\/|https:\/\/)www.jazzradio.com\/.*/
           , strImageFileName : 'jazzradio-logo-120.png'

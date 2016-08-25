@@ -142,6 +142,36 @@ const
             ]
           , boolShowNotificationWhenMuted : false
         }
+      , objSettings_com_google_play_music : {
+            boolIsEnabled : false
+          , strNotificationIconFormat : 'trackImage'
+          , arrAvailableNotificationIconFormats : [
+                'playerLogo'
+              , 'stationLogo'
+              , 'trackImage'
+            ]
+          , strNotificationTitleFormat : 'short'
+          , arrAvailableNotificationTitleFormats : [
+                'short'
+              , 'long'
+              , 'playerName'
+              , 'noStationInfo'
+            ]
+          , arrAvailableNotificationButtons : [
+                'favoriteAuth'
+              , 'next'
+              , 'previous'
+              , 'playStop'
+              , 'muteUnmute'
+            ]
+          , arrActiveNotificationButtons : [
+                'next'
+              , 'playStop'
+            ]
+          , boolShowNotificationWhenMuted : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
+        }
       , objSettings_com_jazzradio : {
             boolIsEnabled : false
           , boolShowNotificationLogo : true
