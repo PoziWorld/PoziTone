@@ -1,11 +1,9 @@
 /* =============================================================================
 
-  Product                 :           PoziTone
-  Author                  :           PoziWorld
-  Copyright               :           Copyright (c) 2016 PoziWorld
-  License                 :           pozitone.com/license
-  File                    :           global/js/api.js
-  Description             :           PoziTone Host API JavaScript
+  Product: PoziTone host API
+  Author: PoziWorld
+  Copyright: (c) 2016 PoziWorld
+  License: pozitone.com/license
 
   Table of Contents:
 
@@ -16,6 +14,8 @@
       connectModule()
       openModuleSettings()
       processMediaCall()
+      processSettingsCall()
+      getVolumeDeltaSettings()
       sendError()
       sendResponse()
       sendCallToTab()
@@ -27,7 +27,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.3';
+    var strVersion = '0.4';
 
     this.strCallDivider = '/';
 
@@ -87,6 +87,9 @@
                 }
                 else if ( strCall === 'media' ) {
                   this.processMediaCall( objRequest, objSender, funcSendResponse );
+                }
+                else if ( strCall.indexOf( 'settings/' ) === 0 ) {
+                  this.processSettingsCall( objRequest, objSender, funcSendResponse, strCall );
                 }
                 else {
                   this.sendError( funcSendResponse, 4 );
@@ -401,6 +404,196 @@
     }
     else {
       this.sendError( funcSendResponse, 6, strMethod );
+    }
+  };
+
+  /**
+   * Process PoziTone API 'settings' call.
+   *
+   * @type    method
+   * @param   objRequest
+   *            API request properties object.
+   * @param   objSender
+   *            Sender of a message.
+   * @param   funcSendResponse
+   *            Used to send a response.
+   * @param   strCall
+   *            PoziTone API "URL".
+   * @return  void
+   **/
+
+  Api.prototype.processSettingsCall = function ( objRequest, objSender, funcSendResponse, strCall ) {
+    strLog = 'Api.processSettingsCall';
+    Log.add(
+        strLog
+      , {
+            objRequest : objRequest
+          , objSender : objSender
+        }
+    );
+
+    var strMethod = objRequest.strMethod;
+
+    if ( strMethod === 'GET' ) {
+      if ( typeof strCall === 'string' ) {
+        if ( strCall !== '' ) {
+          var arrCall = strCall.split( this.strCallDivider );
+          var strModuleId = arrCall[ 1 ];
+
+          if ( typeof strModuleId === 'string' ) {
+            if ( strModuleId !== 'general' ) {
+              if ( strModuleId !== '' ) {
+                var boolIsModuleBuiltIn = pozitone.global.isModuleBuiltIn( strModuleId );
+                var boolIsModuleExternal = pozitone.global.isModuleExternal( strModuleId );
+
+                // TODO: Create isModuleRecognized method
+                if ( boolIsModuleBuiltIn || boolIsModuleExternal ) {
+                  var strSpecificSettings = arrCall[ 2 ];
+
+                  if ( typeof strSpecificSettings === 'string' && strSpecificSettings !== '' ) {
+                    if ( strSpecificSettings === 'volume-delta' ) {
+                      this.getVolumeDeltaSettings( objRequest, objSender, funcSendResponse, strModuleId, boolIsModuleBuiltIn );
+                    }
+                    else {
+                      this.sendError( funcSendResponse, 4 );
+                    }
+                  }
+                  else {
+                    this.sendError( funcSendResponse, 4 );
+                  }
+                }
+                else {
+                  this.sendError( funcSendResponse, 4 );
+                }
+              }
+              else {
+                this.sendError( funcSendResponse, 8, 'strModuleId' );
+              }
+            }
+            else {
+              this.sendError( funcSendResponse, 4 );
+            }
+          }
+          else {
+            this.sendError( funcSendResponse, 4 );
+          }
+        }
+        else {
+          this.sendError( funcSendResponse, 8, 'strCall' );
+        }
+      }
+      else {
+        this.sendError( funcSendResponse, 1, 'strCall', 'string' );
+      }
+    }
+    else {
+      this.sendError( funcSendResponse, 6, strMethod );
+    }
+  };
+
+  /**
+   * Get module settings specific to volume delta.
+   *
+   * @type    method
+   * @param   objRequest
+   *            API request properties object.
+   * @param   objSender
+   *            Sender of a message.
+   * @param   funcSendResponse
+   *            Used to send a response.
+   * @param   strModuleId
+   *            ID of the module the settings are being requested for.
+   * @param   boolIsModuleBuiltIn
+   *            Whether the module is built-in or external.
+   * @return  void
+   **/
+
+  Api.prototype.getVolumeDeltaSettings = function (
+      objRequest
+    , objSender
+    , funcSendResponse
+    , strModuleId
+    , boolIsModuleBuiltIn
+  ) {
+    if ( typeof strModuleId === 'string' ) {
+      var promiseGetGeneralSettings = new Promise( function( funcResolve, funcReject ) {
+        // TODO: Create getGeneralSettings method
+        Global.getStorageItems(
+            StorageSync
+          , strConstGeneralSettings
+          , 'getGeneralSettings'
+          , function( objReturn ) {
+              var objGeneralSettings = objReturn[ strConstGeneralSettings ];
+
+              if ( typeof objGeneralSettings === 'object' && ! Array.isArray( objGeneralSettings ) ) {
+                funcResolve( objGeneralSettings );
+              }
+              else {
+                funcReject();
+              }
+            }
+          , funcReject
+        );
+      } );
+
+      var strModuleSettings = strConstSettingsPrefix + strModuleId;
+
+      var promiseGetModuleSettings = new Promise( function( funcResolve, funcReject ) {
+        // TODO: Create getModuleSettings method
+        Global.getStorageItems(
+            boolIsModuleBuiltIn ? StorageSync : StorageLocal
+          , strModuleSettings
+          , 'getModuleSettings'
+          , function( objReturn ) {
+              var objModuleSettings = objReturn[ strModuleSettings ];
+
+              if ( typeof objModuleSettings === 'object' && ! Array.isArray( objModuleSettings ) ) {
+                funcResolve( objModuleSettings );
+              }
+              else {
+                funcReject();
+              }
+            }
+          , funcReject
+        );
+      } );
+
+      Promise
+        .all( [ promiseGetGeneralSettings, promiseGetModuleSettings ] )
+        .then( function ( arrSettings ) {
+          var objGeneralSettings = arrSettings[ 0 ];
+          var objModuleSettings = arrSettings[ 1 ];
+
+          // Use general delta if set to do so, use player's own delta otherwise
+          if (  typeof objModuleSettings === 'object'
+            &&  typeof objModuleSettings.boolUseGeneralVolumeDelta === 'boolean'
+          ) {
+            if (  objModuleSettings.boolUseGeneralVolumeDelta
+              &&  typeof objGeneralSettings === 'object'
+            ) {
+              var intGeneralVolumeDelta = objGeneralSettings.intVolumeDelta;
+
+              if (  typeof intGeneralVolumeDelta === 'number'
+                &&  intGeneralVolumeDelta > 0
+              ) {
+                funcSendResponse( intGeneralVolumeDelta );
+              }
+            }
+            else {
+              var intModuleVolumeDelta = objModuleSettings.intVolumeDelta;
+
+              if (  typeof intModuleVolumeDelta === 'number'
+                &&  intModuleVolumeDelta > 0
+              ) {
+                funcSendResponse( intModuleVolumeDelta );
+              }
+            }
+          }
+        } )
+        ;
+    }
+    else {
+      this.sendError( funcSendResponse, 1, 'strModuleId', 'string' );
     }
   };
 
