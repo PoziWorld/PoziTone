@@ -2,6 +2,21 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.6.6
+    * Новый модуль: Google Play Музыка | play.google.com/music. Не забудьте подключить в Настройках!
+      Идея — Joe Thomas, Максим Сергієнко.
+    * Исправлено: SoundCloud-модуль иногда не отображал оповещение.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/17980208/01f6127c-6ab3-11e6-84ad-5a08e3e59e56.gif">
+  <img
+    src="https://cloud.githubusercontent.com/assets/9046724/17980207/01ee10f4-6ab3-11e6-9812-f4eb542d756c.png"
+    width="250"
+    height="156"
+    alt="PoziTone v0.6.6 * Как подключить Google Play Музыка-модуль."
+    title="PoziTone v0.6.6 * Как подключить Google Play Музыка-модуль."
+      >
+</a>
+
 ### v0.6.5
     * PoziTone теперь поддерживает все сайты-аудиоплееры сети AudioAddict:
       — ClassicalRadio.com

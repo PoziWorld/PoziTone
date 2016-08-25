@@ -57,6 +57,7 @@ ___
 --------
 
 * [SoundCloud](https://soundcloud.com) (полная версия сайта)
+* [Google Play Музыка](https://play.google.com/music)
 * сеть [AudioAddict](http://www.audioaddict.com):
   * [ClassicalRadio.com](http://www.classicalradio.com)
   * [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio)

@@ -2,6 +2,21 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.6
+    * New module: Google Play Music | play.google.com/music. Don't forget to enable in Options!
+      Idea by Joe Thomas, Maxim Sergyenko.
+    * Fix: SoundCloud module wouldn't show notification sometimes.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/17980205/01dbdcea-6ab3-11e6-8c07-dc0becef5e55.gif">
+  <img
+    src="https://cloud.githubusercontent.com/assets/9046724/17980206/01e99dd0-6ab3-11e6-9000-eb92f2828438.png"
+    width="250"
+    height="156"
+    alt="PoziTone v0.6.6 * How to enable Google Play Music module."
+    title="PoziTone v0.6.6 * How to enable Google Play Music module."
+      >
+</a>
+
 ### v0.6.5
     * PoziTone now supports all websites (audio players) of AudioAddict network:
       – ClassicalRadio.com

@@ -56,6 +56,7 @@ Supported online media players
 --------
 
 * [SoundCloud](https://soundcloud.com) (full version of site)
+* [Google Play Music](https://play.google.com/music)
 * [AudioAddict](http://www.audioaddict.com) network:
   * [ClassicalRadio.com](http://www.classicalradio.com)
   * [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio)

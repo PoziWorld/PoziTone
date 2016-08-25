@@ -552,7 +552,7 @@ $player.addEventListener(
 );
 
 /**
- * Watches for initial playing start
+ * Watches for volume change
  *
  * @type    method
  * @param   objEvent
