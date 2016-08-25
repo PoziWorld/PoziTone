@@ -49,6 +49,8 @@ optionsControllers.controller( 'SettingsCtrl',  function(
       // Buttons
   var arrAvailableNotificationButtons = objModule.arrAvailableNotificationButtons
     , arrActiveNotificationButtons = objModule.arrActiveNotificationButtons
+      // Icon Formats
+    , arrAvailableNotificationIconFormats = objModule.arrAvailableNotificationIconFormats
       // Title Formats
     , arrAvailableNotificationTitleFormats = objModule.arrAvailableNotificationTitleFormats
     ;
@@ -90,6 +92,13 @@ optionsControllers.controller( 'SettingsCtrl',  function(
     checkArray(
         arrActiveNotificationButtons
       , 'arrActiveNotificationButtons'
+    );
+
+  // Icon Formats
+  $scope.boolProvidesIconFormats =
+    checkArray(
+        arrAvailableNotificationIconFormats
+      , 'arrAvailableNotificationIconFormats'
     );
 
   // Title Formats

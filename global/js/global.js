@@ -719,6 +719,21 @@ var Global                        = {
                 objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
               }
 
+              // Alternate Notification Icon Settings
+              var strNotificationIconFormat = objModuleSettings.strNotificationIconFormat;
+
+              if ( typeof strNotificationIconFormat === 'string' ) {
+                if ( strNotificationIconFormat === 'trackImage' ) {
+                  objNotificationOptions.iconUrl = objStationInfo.strTrackImageDataUri;
+                }
+                else if ( strNotificationIconFormat === 'stationLogo' ) {
+                  objNotificationOptions.iconUrl = objStationInfo.strStationLogoDataUri;
+                }
+                else if ( strNotificationIconFormat === 'playerLogo' ) {
+                  objNotificationOptions.iconUrl = objStationInfo.strLogoDataUri;
+                }
+              }
+
               var strTitleFormat = objModuleSettings.strNotificationTitleFormat || ''
                 , arrButtons = objModuleSettings.arrActiveNotificationButtons
                 ;
@@ -1127,20 +1142,18 @@ var Global                        = {
     strLog = 'showSystemNotification';
     Log.add( strLog, strTitle + ' | ' + strMessage );
 
-    var
-        objNotificationOptions  = {
-            type                : 'basic'
-          , title               : strTitle || ''
-          , message             : strMessage || ''
-          , iconUrl             : 
-              strIconUrl || Global.strSystemNotificationIconUrl
+    var objNotificationOptions = {
+            type : 'basic'
+          , title : strTitle || ''
+          , message : strMessage || ''
+          , iconUrl : strIconUrl || Global.strSystemNotificationIconUrl
         }
-      , strNotificationId       = 
-          Global.strSystemNotificationId + strNotificationType
+      , strNotificationId = Global.strSystemNotificationId + strNotificationType
       ;
 
-    if ( Array.isArray( arrButtons ) && arrButtons.length )
+    if ( Array.isArray( arrButtons ) && arrButtons.length ) {
       objNotificationOptions.buttons = arrButtons;
+    }
 
     // Clear previous notification of this type first, then display a new one
     chrome.notifications.clear( strNotificationId, function() {

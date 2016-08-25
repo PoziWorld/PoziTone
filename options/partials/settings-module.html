@@ -50,6 +50,75 @@
               </ul>
             </fieldset>
             <fieldset
+              id="optionsSettingsNotificationIconFormat"
+              localize
+              ng-if="boolProvidesIconFormats === true"
+              ng-class="{ none: ! boolShowAdvancedSettings }"
+                >
+              <legend i18n-content="optionsSettingsNotificationIconFormat" class="sectionHeading"></legend>
+              <ul>
+                <li
+                  id="optionsSettingsNotificationIconFormatTrackImage"
+                  localize
+                  ng-if="arrAvailableNotificationIconFormats.indexOf( 'trackImage' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationIconFormat"
+                      value="trackImage"
+                      ng-model="objModule.strNotificationIconFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationIconFormatTrackImage"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationIconFormatStationLogo"
+                  localize
+                  ng-if="arrAvailableNotificationIconFormats.indexOf( 'stationLogo' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationIconFormat"
+                      value="stationLogo"
+                      ng-model="objModule.strNotificationIconFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationIconFormatStationLogo"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationIconFormatPlayerLogo"
+                  localize
+                  ng-if="arrAvailableNotificationIconFormats.indexOf( 'playerLogo' ) !== -1"
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationIconFormat"
+                      value="playerLogo"
+                      ng-model="objModule.strNotificationIconFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationIconFormatPlayerLogo"></span>
+                  </label>
+                </li>
+                <li
+                  id="optionsSettingsNotificationIconFormatGenericImage"
+                  localize
+                    >
+                  <label>
+                    <input
+                      type="radio" name="strNotificationIconFormat"
+                      value="genericImage"
+                      ng-model="objModule.strNotificationIconFormat"
+                      ng-click="inputChange( $event )"
+                        >
+                    <span i18n-content="optionsSettingsNotificationIconFormatGenericImage"></span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset
               id="optionsSettingsAdditionalInfoShowCbr"
               localize
               ng-if="objModule.boolShowKbpsInfo !== undefined"

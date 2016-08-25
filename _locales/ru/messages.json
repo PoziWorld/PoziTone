@@ -275,6 +275,22 @@
             "optionsSettingsNotificationIconFormatShowSiteLogo": {
               "message": "Отображать логотип сайта"
             }
+            ,
+            "optionsSettingsNotificationIconFormatPlayerLogo": {
+              "message": "Отображать логотип плеера"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatStationLogo": {
+              "message": "Отображать логотип текущей станции"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatTrackImage": {
+              "message": "Отображать картинку текущего трека"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatGenericImage": {
+              "message": "Отображать стандартную картинку"
+            }
 
           ,
           "optionsSettingsAdditionalInfo": {

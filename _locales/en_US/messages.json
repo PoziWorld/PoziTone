@@ -275,6 +275,22 @@
             "optionsSettingsNotificationIconFormatShowSiteLogo": {
               "message": "Display site logo"
             }
+            ,
+            "optionsSettingsNotificationIconFormatPlayerLogo": {
+              "message": "Display player logo"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatStationLogo": {
+              "message": "Display current station logo"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatTrackImage": {
+              "message": "Display current track image"
+            }
+            ,
+            "optionsSettingsNotificationIconFormatGenericImage": {
+              "message": "Display generic image"
+            }
 
           ,
           "optionsSettingsAdditionalInfo": {
