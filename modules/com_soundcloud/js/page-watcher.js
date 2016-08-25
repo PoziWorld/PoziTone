@@ -227,6 +227,7 @@
               ;
 
             if ( intAddedNodesCount ) {
+              // TODO: Is this a bug? j/i
               for ( var j = 0; i < intAddedNodesCount; i++ ) {
                 var arrClassList = arrAddedNodes[ i ].classList;
 
@@ -292,6 +293,7 @@
    **/
 
   PageWatcher.prototype.addRuntimeOnMessageListener = function () {
+    var _this = this;
 
     /**
      * Listens for command sent from Background.
@@ -313,6 +315,7 @@
             objMessage
           , objSender
           , funcSendResponse
+          , _this
         );
 
         // Indicate that the response function will be called asynchronously
