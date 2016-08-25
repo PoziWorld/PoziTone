@@ -26,6 +26,9 @@
       convertImageSrcToDataUrl()
       convertVolumeToPercent()
       convertPercentToVolume()
+      changeVolume()
+      getVolumeDeltaSettings()
+      isEmpty()
 
  ============================================================================ */
 
@@ -33,7 +36,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.3.1';
+    var strVersion = '0.4';
 
     this.strMediaInfoDivider = ' – ';
     this.strCallDivider = '/';
@@ -307,10 +310,12 @@
    *            Sender of a message.
    * @param   funcSendResponse
    *            Used to send a response.
+   * @param   pageWatcher
+   *            Optional. Save PageWatcher instance.
    * @return  void
    **/
 
-  Api.prototype.processRequest = function ( objMessage, objSender, funcSendResponse ) {
+  Api.prototype.processRequest = function ( objMessage, objSender, funcSendResponse, pageWatcher ) {
     var objRequest = objMessage.objPozitoneApiRequest;
 
     if ( typeof objRequest === 'object' && ! Array.isArray( objRequest ) ) {
@@ -326,6 +331,11 @@
                 var arrCall = strCall.split( '/' )
                   , strPrimaryCall = arrCall[ 0 ]
                   ;
+
+                // Update instance
+                if ( typeof pageWatcher === 'undefined' ) {
+                  this.pageWatcher = pageWatcher;
+                }
 
                 if ( strPrimaryCall === 'tab' ) {
                   this.forwardCallToTab( objRequest, objSender, funcSendResponse, arrCall );
@@ -697,6 +707,81 @@
 
   Api.prototype.convertPercentToVolume = function ( intVolume ) {
     return parseFloat( ( intVolume / 100 ).toFixed( 2 ) );
+  };
+
+  /**
+   * Request sound volume level change (up/down).
+   *
+   * @type    method
+   * @param   strDirection
+   *            'up' or 'down'.
+   * @param   intVolume
+   *            Sound volume level in % (0-100). TODO: Switch to 0-1
+   * @param   funcSetVolume
+   *            Different players set volume differently, leave it up to them.
+   * @return  void
+   **/
+
+  Api.prototype.changeVolume = function ( strDirection, intVolume, funcSetVolume ) {
+    // Can't be changed, reached the limit
+    if (  strDirection === 'up' && intVolume >= 100
+      ||  strDirection === 'down' && intVolume <= 0
+    ) {
+      return;
+    }
+
+    this.getVolumeDeltaSettings( strDirection, intVolume, funcSetVolume );
+  };
+
+  /**
+   * Open module settings subpage in PoziTone Options page.
+   *
+   * @type    method
+   * @param   strDirection
+   *            'up' or 'down'.
+   * @param   intVolume
+   *            Sound volume level in % (0-100). TODO: Switch to 0-1
+   * @param   funcSetVolume
+   *            Different players set volume differently, leave it up to them.
+   * @return  void
+   **/
+
+  Api.prototype.getVolumeDeltaSettings = function ( strDirection, intVolume, funcSetVolume ) {
+    var _this = this;
+
+    _this.sendMessage(
+        {
+          objPozitoneApiRequest : {
+              strVersion : _this.getApiVersion()
+            , strCall : _this.createCallString( [
+                  'settings'
+                , _this.pageWatcher.objPlayerInfo.strModule
+                , 'volume-delta'
+              ] )
+            , strMethod : 'GET'
+          }
+        }
+      , function ( intVolumeDelta ) {
+          var intUpDown = 1;
+
+          if ( strDirection === 'down' ) {
+            intUpDown = -1;
+          }
+
+          intVolume += ( intUpDown * intVolumeDelta );
+
+          if ( intVolume > 100 ) {
+            intVolume = 100;
+          }
+          else if ( intVolume < 0 ) {
+            intVolume = 0;
+          }
+
+          if ( typeof funcSetVolume === 'function' ) {
+            funcSetVolume( intVolume );
+          }
+        }
+    );
   };
 
   /**
