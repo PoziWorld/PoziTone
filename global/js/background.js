@@ -1310,6 +1310,7 @@ var Background                    = {
 
     var arrParentContextMenus = [
             'modulesBuiltIn'
+          , 'modulesExternal'
           , 'info'
         ]
       , arrInfoContextMenus = [

@@ -593,7 +593,7 @@
   }
     ,
     "modulesBuiltInDescription": {
-      "message": "Добавьте <em title=\"1. Информация о текущем треке. 2. Лёгкое управление плеером. 3. Список последних треков.\">новые возможности</em> Вашим любимым онлайн-медиаплеерам, подключив соответствующие модули&nbsp;PoziTone."
+      "message": "Добавьте <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о текущем треке/видео.\n\n&#8226; Лёгкое управление плеером.\n\n&#8226; Список последних треков/видео.\">новые возможности</a> Вашим любимым онлайн-медиаплеерам, подключив соответствующие модули&nbsp;PoziTone."
     }
 
     ,
@@ -700,8 +700,32 @@
     "message": "Внешние модули"
   }
     ,
+    "modulesExternalDescription": {
+      "message": "Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о текущем треке/видео.\n\n&#8226; Лёгкое управление плеером.\n\n&#8226; Список последних треков/видео.\">возможности PoziTone</a>, общаясь напрямую с PoziTone."
+    }
+    ,
     "modulesExternalAdvancedSupportEnable": {
       "message": "Включить расширенную поддержку внешних модулей"
+    }
+    ,
+    "moduleExternal_api": {
+      "message": "Хотите разработать Ваш собственный?"
+    }
+    ,
+    "moduleExternal_apiCta": {
+      "message": "Да, я хочу!"
+    }
+    ,
+    "moduleExternal_com_youtube": {
+      "message": "YouTube встроенный плеер"
+    }
+    ,
+    "moduleExternal_com_soundcloud": {
+      "message": "SoundCloud-виджет"
+    }
+    ,
+    "moduleExternal_ru_sovyatnik": {
+      "message": "Совятник"
     }
 
   ,
@@ -719,6 +743,14 @@
   ,
   "enabled": {
     "message": "Подключён"
+  }
+  ,
+  "connected": {
+    "message": "Подсоединён"
+  }
+  ,
+  "install": {
+    "message": "Установить"
   }
 
   ,

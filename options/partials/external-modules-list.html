@@ -1,0 +1,75 @@
+      <section id="settingsModulesList" class="page externalModules">
+        <h1 id="modulesListPageHeading" class="pageHeading">
+          <span i18n-content="modulesExternal"></span>
+          <span
+            id="settingsSaved" class="fadeInFadeOut"
+            i18n-content="optionsSettingsSaved"
+              ></span>
+        </h1>
+        <p
+          class="sectionText first"
+          id="modulesListDescription"
+          i18n-content="modulesExternalDescription"
+            ></p>
+        <form id="modulesListForm">
+          <p
+            ng-repeat="objModule in arrExternalModules"
+            ng-init="objExternalModule = objExternalModules[ objModule[ 'strModuleId' ] ]; boolIsEnabled = objExternalModule.boolIsEnabled"
+            class="externalModulesListItem"
+            id="modulesListItem_{{strModuleId = objModule.strModuleId}}"
+            localize
+              >
+            <a
+              ng-if="boolIsEnabled !== undefined"
+              ng-href="#/settings/modules/external/{{objExternalModule.id}}"
+              class="externalModulesListItemCaption"
+              i18n-content="moduleExternal_{{strModuleId}}"
+                ></a>
+            <span
+              ng-if="boolIsEnabled === undefined"
+              class="externalModulesListItemCaption"
+              i18n-content="moduleExternal_{{strModuleId}}"
+                ></span>
+            <button
+              class="externalModulesListItemCta cta hasText"
+              ng-if="boolIsEnabled !== undefined"
+              ng-disabled="boolIsEnabled === true"
+              i18n-content="connected"
+                ></button>
+            <button
+              class="externalModulesListItemCta cta hasText"
+              ng-if="boolIsEnabled === undefined"
+              ng-click="install( $event )"
+              i18n-content="install"
+              data-module-id="{{strModuleId}}"
+                ></button>
+          </p>
+          <p
+            class="externalModulesListItem"
+            id="modulesListItem_api"
+            localize
+              >
+            <a
+              href="https://github.com/PoziWorld/PoziTone-module-API"
+              target="_blank"
+              class="externalModulesListItemCaption externalLink"
+              data-id="module-api"
+              i18n-content="moduleExternal_api"
+                ></a>
+            <a
+              href="https://github.com/PoziWorld/PoziTone-module-API"
+              class="externalModulesListItemCta cta hasText externalLink"
+              data-id="module-api-cta"
+              i18n-content="moduleExternal_apiCta"
+                ></a>
+          </p>
+        </form>
+        <p
+          class="sectionText modulesListLegalCopy"
+          i18n-content="trademarksDisclaimer"
+            ></p>
+        <p
+          class="sectionText modulesListLegalCopy"
+          i18n-content="trademarksDisclaimerContinued"
+            ></p>
+      </section>

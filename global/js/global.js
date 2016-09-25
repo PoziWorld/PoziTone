@@ -926,7 +926,7 @@ var Global                        = {
                   arrActiveButtons.push( 'playStop|' + ~~ objTempPlayerInfo.boolIsPlaying );
                 }
 
-                if ( ~ arrButtons.indexOf( 'muteUnmute' ) ) {
+                if ( ~ arrButtons.indexOf( 'muteUnmute' ) && typeof objTempPlayerInfo.boolIsMuted === 'boolean' ) {
                   if ( boolExternal
                     || ~ objSettingsSyncable[ strModuleSettings ].arrAvailableNotificationButtons.indexOf( 'muteUnmute' )
                   ) {

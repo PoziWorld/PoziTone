@@ -538,6 +538,10 @@
 
       var strModuleSettings = strConstSettingsPrefix + strModuleId;
 
+      if ( ! boolIsModuleBuiltIn ) {
+        strModuleSettings += strConstGenericStringSeparator + objSender.id;
+      }
+
       var promiseGetModuleSettings = new Promise( function( funcResolve, funcReject ) {
         // TODO: Create getModuleSettings method
         Global.getStorageItems(

@@ -11,6 +11,8 @@
 
     General
     Settings
+    Modules List
+    External Modules List
     Projects
     Feedback
     About
@@ -402,6 +404,41 @@
   #generalPrivacyStatement
     {
       font-weight: bold;
+    }
+
+/* =============================================================================
+
+  External Modules List
+
+ ============================================================================ */
+
+  .externalModules#settingsModulesList #modulesListForm
+    {
+      margin-top: .5rem;
+      border-top: .1rem solid #eee;
+    }
+  .externalModulesListItem
+    {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      min-height: 4rem;
+      border-bottom: .1rem dashed #f0f0f0;
+    }
+  .externalModulesListItem:last-child
+    {
+      border-bottom: none;
+    }
+  .externalModulesListItem:hover
+    {
+      background-color: #fafafa;
+    }
+  .externalModulesListItemCaption
+    {
+      flex: 1 1 auto;
+      font-size: 1.3em;
+      padding-bottom: .3rem;
+      color: #333;
     }
 
 /* =============================================================================

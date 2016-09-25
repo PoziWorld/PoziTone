@@ -35,6 +35,10 @@ optionsApp.config( [ '$routeProvider', function( $routeProvider ) {
         templateUrl : 'partials/settings.html'
       , controller  : 'SettingsCtrl'
     } )
+    .when( '/settings/modules/external', {
+        templateUrl : 'partials/external-modules-list.html'
+      , controller  : 'ExternalModulesListCtrl'
+    } )
     .when( '/settings/modules/external/:moduleId', {
         templateUrl : 'partials/settings.html'
       , controller  : 'SettingsCtrl'
@@ -82,6 +86,9 @@ optionsApp.run( function( $rootScope, $location ) {
           if ( strOptionsPageToOpen === 'modulesBuiltIn' ) {
             strPath = '/settings/modules/built-in';
           }
+          else if ( strOptionsPageToOpen === 'modulesExternal' ) {
+            strPath = '/settings/modules/external';
+          }
 
           var objItems = { strOptionsPageToOpen : '' };
 
@@ -114,6 +121,10 @@ optionsApp.run( function( $rootScope, $location ) {
   $rootScope.getModules = function( Storage ) {
     if ( typeof $rootScope.objModules !== 'object' || Array.isArray( $rootScope.objModules ) ) {
       $rootScope.objModules = {};
+    }
+
+    if ( typeof $rootScope.objExternalModules !== 'object' || Array.isArray( $rootScope.objExternalModules ) ) {
+      $rootScope.objExternalModules = {};
     }
 
     var arrModulesNames = $rootScope.arrModulesNames;
@@ -170,6 +181,9 @@ optionsApp.run( function( $rootScope, $location ) {
             } );
 
             $rootScope.intModulesExternal++;
+
+            // TODO: Avoid name clashes
+            $rootScope.objExternalModules[ strModuleExternal ] = objModule;
           }
 
           // Keep settings in $rootScope
@@ -214,6 +228,13 @@ optionsApp.run( function( $rootScope, $location ) {
     , arrExternalLinkClassList
     ;
 
+  const objExternalLinks = {
+      'features' : {
+          'ru' : 'https://github.com/PoziWorld/PoziTone/blob/develop/README_ru.md#Возможности'
+        , 'default' : 'https://github.com/PoziWorld/PoziTone/blob/develop/README_en.md#features'
+      }
+  };
+
   /**
    * Find all external links and add or remove listeners.
    *
@@ -257,6 +278,20 @@ optionsApp.run( function( $rootScope, $location ) {
           } );
 
           arrExternalLinkClassList.add( strBeingTrackedClass );
+        }
+
+        // Insert href
+        const strId = $$externalLink.getAttribute( 'data-id' );
+
+        if ( strId !== '' && strId in objExternalLinks ) {
+          const strRequestedLang = $$externalLink.getAttribute( 'data-lang' );
+          const objLinks = objExternalLinks[ strId ];
+          const strChosenLang = strRequestedLang in objLinks
+            ? strRequestedLang
+            : 'default'
+            ;
+
+          $$externalLink.href = objLinks[ strChosenLang ];
         }
       } );
     }
@@ -360,8 +395,11 @@ optionsApp.controller( 'MenuController', function( $scope, $rootScope, $location
       for ( var j = 0, m = $allMenuItemWraps.length; j < m; j++ )
         $allMenuItemWraps[ j ].classList.remove( 'selected' );
 
-      // Select current active menu item
-      $targetMenuItem.parentNode.classList.add( 'selected' );
+      // Select current active menu item and make sure it's in viewport
+      const $active = $targetMenuItem.parentNode;
+
+      $active.classList.add( 'selected' );
+      $active.scrollIntoView();
     }
   };
 

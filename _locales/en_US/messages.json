@@ -593,7 +593,7 @@
   }
     ,
     "modulesBuiltInDescription": {
-      "message": "Add <em title=\"1. Current track info. 2. Easy player control. 3. List of recent tracks.\">new features</em> to your favorite online media players by enabling appropriate PoziTone&nbsp;modules."
+      "message": "Add <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about current track/video.\n\n&#8226; Easy player control.\n\n&#8226; List of recent tracks/video.\">new features</a> to your favorite online media players by enabling appropriate PoziTone&nbsp;modules."
     }
 
     ,
@@ -700,8 +700,32 @@
     "message": "External modules"
   }
     ,
+    "modulesExternalDescription": {
+      "message": "An external PoziTone module is a standalone extension which is able to provide <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about current track/video.\n\n&#8226; Easy player control.\n\n&#8226; List of recent tracks/video.\">PoziTone features</a> by communicating directly with PoziTone."
+    }
+    ,
     "modulesExternalAdvancedSupportEnable": {
       "message": "Enable external modules advanced support"
+    }
+    ,
+    "moduleExternal_api": {
+      "message": "Want to develop your own?"
+    }
+    ,
+    "moduleExternal_apiCta": {
+      "message": "Yes, I do!"
+    }
+    ,
+    "moduleExternal_com_youtube": {
+      "message": "YouTube embedded player"
+    }
+    ,
+    "moduleExternal_com_soundcloud": {
+      "message": "SoundCloud Widget"
+    }
+    ,
+    "moduleExternal_ru_sovyatnik": {
+      "message": "Sovyatnik"
     }
 
   ,
@@ -719,6 +743,14 @@
   ,
   "enabled": {
     "message": "Enabled"
+  }
+  ,
+  "connected": {
+    "message": "Connected"
+  }
+  ,
+  "install": {
+    "message": "Install"
   }
 
   ,
