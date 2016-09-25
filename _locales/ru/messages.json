@@ -8,7 +8,7 @@
   }
   ,
   "extensionDescription": {
-    "message": "Добавляет новые возможности любимым плеерам: оповещения с информацией о треке, управление вне браузера, список последних треков."
+    "message": "Добавляет новые возможности плеерам: оповещения с информацией о треке, управление вне браузера, список недавно воспроизведённого."
   }
   ,
   "commandShowNotification": {
@@ -16,15 +16,15 @@
   }
   ,
   "notificationButtonsAddLoggedInTitle": {
-    "message": "Добавить трек в плейлист"
+    "message": "Добавить в плейлист"
   }
     ,
     "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
-      "message": "Трек успешно добавлен в плейлист"
+      "message": "Успешно добавлено в плейлист"
     }
     ,
     "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
-      "message": "Данный трек уже есть в Вашем плейлисте"
+      "message": "Уже есть в Вашем плейлисте"
     }
   ,
   "notificationButtonsFavoriteLoggedInTitle": {
@@ -36,7 +36,7 @@
     }
   ,
   "notificationButtonsNextTitle": {
-    "message": "Следующий трек"
+    "message": "Следующий"
   }
     ,
     "notificationButtonsNextFeedback": {
@@ -44,7 +44,7 @@
     }
   ,
   "notificationButtonsPreviousTitle": {
-    "message": "Предыдущий трек"
+    "message": "Предыдущий"
   }
     ,
     "notificationButtonsPreviousFeedback": {
@@ -179,11 +179,11 @@
             ,
             "showPlayerEventNotification": {
                 "message": "Показывать при смене статуса плеера"
-              , "description": "Показывать оповещение при начале/остановке воспроизведения, при изменении громкости звука, когда трек добавлен в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д."
+              , "description": "Показывать оповещение при начале/остановке воспроизведения, при изменении громкости звука, когда добавлено в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д."
             }
             ,
             "showPlayerEventNotificationLong": {
-              "message": "Показывать оповещение при начале/остановке/возобновлении воспроизведения, при изменении громкости звука, когда трек добавлен в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д.\n\nЕсли неотмеченно, вы по-прежнему можете вызвать оповещение командой «Показать оповещение» с помощью быстрых клавиш (Alt+Shift+Q, если не изменялось)."
+              "message": "Показывать оповещение при начале/остановке/возобновлении воспроизведения, при изменении громкости звука, когда добавлено в плейлист, когда трек отмечен как понравившийся, при смене трека и т.д.\n\nЕсли неотмеченно, вы по-прежнему можете вызвать оповещение командой «Показать оповещение» с помощью быстрых клавиш (Alt+Shift+Q, если не изменялось)."
             }
             ,
             "showSuccessfulUpdateNotification": {
@@ -333,11 +333,11 @@
           }
             ,
             "optionsSettingsNotificationButtonsAdd": {
-              "message": "Добавить трек в плейлист"
+              "message": "Добавить в плейлист"
             }
             ,
             "optionsSettingsNotificationButtonsAddAuthRequired": {
-              "message": "Добавить трек в плейлист <small>(требуется авторизация на сайте)</small>"
+              "message": "Добавить в плейлист <small>(требуется авторизация на сайте)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsFavorite": {
@@ -349,19 +349,19 @@
             }
             ,
             "optionsSettingsNotificationButtonsNext": {
-              "message": "Следующий трек"
+              "message": "Следующий"
             }
             ,
             "optionsSettingsNotificationButtonsNextAuthRequired": {
-              "message": "Следующий трек <small>(требуется авторизация на сайте)</small>"
+              "message": "Следующий <small>(требуется авторизация на сайте)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPrevious": {
-              "message": "Предыдущий трек"
+              "message": "Предыдущий"
             }
             ,
             "optionsSettingsNotificationButtonsPreviousAuthRequired": {
-              "message": "Предыдущий трек <small>(требуется авторизация на сайте)</small>"
+              "message": "Предыдущий <small>(требуется авторизация на сайте)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPlayStop": {
@@ -597,7 +597,7 @@
   }
     ,
     "modulesBuiltInDescription": {
-      "message": "Добавьте <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о текущем треке/видео.\n\n&#8226; Лёгкое управление плеером.\n\n&#8226; Список последних треков/видео.\">новые возможности</a> Вашим любимым онлайн-медиаплеерам, подключив соответствующие модули&nbsp;PoziTone."
+      "message": "Добавьте <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о проигрываемой сейчас песне, подкасте, видео и т.п.\n\n&#8226; Лёгкое управление плеером вне окна браузера.\n\n&#8226; Список недавно воспроизведённого.\">новые возможности</a> Вашим любимым онлайн-медиаплеерам, подключив соответствующие модули&nbsp;PoziTone."
     }
 
     ,
@@ -705,7 +705,7 @@
   }
     ,
     "modulesExternalDescription": {
-      "message": "Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о текущем треке/видео.\n\n&#8226; Лёгкое управление плеером.\n\n&#8226; Список последних треков/видео.\">возможности PoziTone</a>, общаясь напрямую с PoziTone."
+      "message": "Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"ru\" title=\"&#8226; Отображение информации о проигрываемой сейчас песне, подкасте, видео и т.п.\n\n&#8226; Лёгкое управление плеером вне окна браузера.\n\n&#8226; Список недавно воспроизведённого.\">возможности PoziTone</a>, общаясь напрямую с PoziTone."
     }
     ,
     "modulesExternalAdvancedSupportEnable": {

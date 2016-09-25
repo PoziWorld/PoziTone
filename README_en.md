@@ -34,17 +34,17 @@ ___
 Features
 --------
 
-* **Displays info about current track**
+* **Displays info about now playing song, podcast, video, etc.**
 
   _Familiarizing with a new genre or band?_
-  PoziTone will show you track info (its name, band name) via a pop-up notification on every track change.
+  PoziTone will show you track info (its name, artist name) via a pop-up notification on every track change.
 
-* **Easy player control**
+* **Easy player control outside of browser window**
 
   _Want to stop/resume playback, mute/unmute, switch track or add it to playlist?_
   It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of [keyboard shortcuts](#keyboard-shortcuts)!
 
-* **List of recent tracks**
+* **List of recently played**
 
   _What track played five minutes ago?_
   PoziTone keeps information about the last 10 tracks played.
@@ -118,10 +118,10 @@ With every track change you can see the glory of PoziTone! :)
 Keyboard shortcuts
 --------
 
-1. Alt+Shift+D — “Add track to playlist”.
+1. Alt+Shift+D — “Add to playlist”.
 2. Alt+Shift+F — “I like it!” (_not preset_).
-3. Alt+Shift+N — “Next track” (_not preset_).
-4. Alt+Shift+B — “Previous track” (_not preset_).
+3. Alt+Shift+N — “Next” (_not preset_).
+4. Alt+Shift+B — “Previous” (_not preset_).
 5. Alt+Shift+P — “Stop / Play”.
 6. Alt+Shift+M — “Mute / Unmute”.
 7. Alt+Shift+A — “Increase sound volume” (_not preset_).

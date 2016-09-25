@@ -8,7 +8,7 @@
   }
   ,
   "extensionDescription": {
-    "message": "Adds new features to favorite players, such as track info notifications, controls outside of browser window, and recent tracks list."
+    "message": "Adds new features to favorite players: track info notifications, controls outside of browser window, and list of recently played."
   }
   ,
   "commandShowNotification": {
@@ -16,15 +16,15 @@
   }
   ,
   "notificationButtonsAddLoggedInTitle": {
-    "message": "Add track to playlist"
+    "message": "Add to playlist"
   }
     ,
     "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
-      "message": "Successfully added track to playlist"
+      "message": "Successfully added to playlist"
     }
     ,
     "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
-      "message": "Track already in your playlist"
+      "message": "Already in your playlist"
     }
   ,
   "notificationButtonsFavoriteLoggedInTitle": {
@@ -36,7 +36,7 @@
     }
   ,
   "notificationButtonsNextTitle": {
-    "message": "Next track"
+    "message": "Next"
   }
     ,
     "notificationButtonsNextFeedback": {
@@ -44,7 +44,7 @@
     }
   ,
   "notificationButtonsPreviousTitle": {
-    "message": "Previous track"
+    "message": "Previous"
   }
     ,
     "notificationButtonsPreviousFeedback": {
@@ -179,11 +179,11 @@
             ,
             "showPlayerEventNotification": {
                 "message": "Show when player status changes"
-              , "description": "Show notification on playback start/stop, on sound volume change, on track added to playlist, on track favorited event, on track switch, and so on."
+              , "description": "Show notification on playback start/stop, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on."
             }
             ,
             "showPlayerEventNotificationLong": {
-              "message": "Show notification on playback start/stop/resume, on sound volume change, on track added to playlist, on track favorited event, on track switch, and so on.\n\nIf unchecked, you can still make the notification show up by calling “Show notification” command with the help of keyboard shortcuts (Alt+Shift+Q if unchanged)."
+              "message": "Show notification on playback start/stop/resume, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on.\n\nIf unchecked, you can still make the notification show up by calling “Show notification” command with the help of keyboard shortcuts (Alt+Shift+Q if unchanged)."
             }
             ,
             "showSuccessfulUpdateNotification": {
@@ -333,11 +333,11 @@
           }
             ,
             "optionsSettingsNotificationButtonsAdd": {
-              "message": "Add track to playlist"
+              "message": "Add to playlist"
             }
             ,
             "optionsSettingsNotificationButtonsAddAuthRequired": {
-              "message": "Add track to playlist <small>(authorization required on site)</small>"
+              "message": "Add to playlist <small>(authorization required on site)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsFavorite": {
@@ -349,19 +349,19 @@
             }
             ,
             "optionsSettingsNotificationButtonsNext": {
-              "message": "Next track"
+              "message": "Next"
             }
             ,
             "optionsSettingsNotificationButtonsNextAuthRequired": {
-              "message": "Next track <small>(authorization required on site)</small>"
+              "message": "Next <small>(authorization required on site)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPrevious": {
-              "message": "Previous track"
+              "message": "Previous"
             }
             ,
             "optionsSettingsNotificationButtonsPreviousAuthRequired": {
-              "message": "Previous track <small>(authorization required on site)</small>"
+              "message": "Previous <small>(authorization required on site)</small>"
             }
             ,
             "optionsSettingsNotificationButtonsPlayStop": {
@@ -597,7 +597,7 @@
   }
     ,
     "modulesBuiltInDescription": {
-      "message": "Add <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about current track/video.\n\n&#8226; Easy player control.\n\n&#8226; List of recent tracks/video.\">new features</a> to your favorite online media players by enabling appropriate PoziTone&nbsp;modules."
+      "message": "Add <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">new features</a> to your favorite online media players by enabling appropriate PoziTone&nbsp;modules."
     }
 
     ,
@@ -705,7 +705,7 @@
   }
     ,
     "modulesExternalDescription": {
-      "message": "An external PoziTone module is a standalone extension which is able to provide <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about current track/video.\n\n&#8226; Easy player control.\n\n&#8226; List of recent tracks/video.\">PoziTone features</a> by communicating directly with PoziTone."
+      "message": "An external PoziTone module is a standalone extension which is able to provide <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">PoziTone features</a> by communicating directly with PoziTone."
     }
     ,
     "modulesExternalAdvancedSupportEnable": {
