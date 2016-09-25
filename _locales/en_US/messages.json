@@ -118,6 +118,10 @@
     "message": "<button id=\"pwMessageReadCta\">Read message</button> from developers!"
   }
   ,
+  "messageFromDevelopersPageTextShort": {
+    "message": "<button id=\"pwMessageReadCta\">Read message</button>!"
+  }
+  ,
   "messageFromDevelopersTooltipText": {
     "message": "Important message from developers!"
   }
@@ -555,11 +559,11 @@
     }
     ,
     "popupNavRecentTracks": {
-      "message": "Recent Tracks"
+      "message": "Recently played"
     }
       ,
       "popupNavRecentTracksH1": {
-        "message": "Recent Tracks"
+        "message": "Recently played"
       }
         ,
         "popupNavRecentTracksPlaceholder": {

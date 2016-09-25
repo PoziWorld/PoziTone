@@ -118,6 +118,10 @@
     "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button> от разработчиков!"
   }
   ,
+  "messageFromDevelopersPageTextShort": {
+    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button>!"
+  }
+  ,
   "messageFromDevelopersTooltipText": {
     "message": "Важное сообщение от разработчиков!"
   }
@@ -555,11 +559,11 @@
     }
     ,
     "popupNavRecentTracks": {
-      "message": "Последние треки"
+      "message": "Недавно воспроизведённые"
     }
       ,
       "popupNavRecentTracksH1": {
-        "message": "Последние треки"
+        "message": "Недавно воспроизведённые"
       }
         ,
         "popupNavRecentTracksPlaceholder": {
