@@ -76,8 +76,8 @@ ___
 
 Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить [возможности](#Возможности) PoziTone, общаясь напрямую с PoziTone незаметно для глаз пользователя.
 
-* [SoundCloud-виджет](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl) ([для Opera и Яндекс](https://addons.opera.com/en/extensions/details/soundcloud-widget-pozitone-module/)).
-* YouTube встроенный плеер (скоро).
+* [YouTube встроенный плеер](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/youtube-embedded-player-pozitone-module/)).
+* [SoundCloud-виджет](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soundcloud-widget-pozitone-module/)).
 * [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/)).
 
 
