@@ -118,16 +118,23 @@ PoziTone should display a notification with the track info.
 Keyboard shortcuts
 --------
 
+### Preset
+
 1. Alt+Shift+D — “Add to playlist”.
-2. Alt+Shift+F — “I like it!” (_not preset_).
-3. Alt+Shift+N — “Next” (_not preset_).
-4. Alt+Shift+B — “Previous” (_not preset_).
-5. Alt+Shift+P — “Stop / Play”.
-6. Alt+Shift+M — “Mute / Unmute”.
-7. Alt+Shift+A — “Increase sound volume” (_not preset_).
-8. Alt+Shift+Z — “Decrease sound volume” (_not preset_).
-9. Alt+Shift+Q — “Show notification”.
-10. Alt+Shift+R — “Activate the extension” (_not preset_).
+2. Alt+Shift+P — “Stop / Play”.
+3. Alt+Shift+M — “Mute / Unmute”.
+4. Alt+Shift+Q — “Show notification”.
+
+### Also available
+
+Not preset, but can be easily [set up](#set-up--change-keyboards-shortcuts) with the help of next subsection.
+
+5. Alt+Shift+F — “I like it!”.
+6. Alt+Shift+N — “Next”.
+7. Alt+Shift+B — “Previous”.
+8. Alt+Shift+A — “Increase sound volume”.
+9. Alt+Shift+Z — “Decrease sound volume”.
+10. Alt+Shift+R — “Activate the extension”.
 
 ### Set up / change keyboards shortcuts
 
