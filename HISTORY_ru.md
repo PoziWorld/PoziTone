@@ -2,6 +2,19 @@
 
 > Следить за обновлениями также можно здесь — [PoziTone ВКонтакте](https://vk.com/PoziTone)
 
+### v0.6.7
+    * Новое: страница внешних модулей в Параметрах.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/18821810/7e112162-835e-11e6-8aa6-ec1e08efb914.png">
+  <img
+    src="https://cloud.githubusercontent.com/assets/9046724/18821812/7e1552a0-835e-11e6-9b8a-e7ea063f869a.png"
+    width="250"
+    height="176"
+    alt="PoziTone v0.6.7 * Новое: страница внешних модулей в Параметрах."
+    title="PoziTone v0.6.7 * Новое: страница внешних модулей в Параметрах."
+      >
+</a>
+
 ### v0.6.6
     * Новый модуль: Google Play Музыка | play.google.com/music. Не забудьте подключить в Настройках!
       Идея — Joe Thomas, Максим Сергієнко.

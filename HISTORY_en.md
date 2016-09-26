@@ -2,6 +2,19 @@
 
 > Latest updates are also available here — [PoziTone on Facebook](https://facebook.com/PoziTone)
 
+### v0.6.7
+    * New: external modules page in Options.
+
+<a href="https://cloud.githubusercontent.com/assets/9046724/18821813/7e17b662-835e-11e6-8b67-b1d37a8e5fda.png">
+  <img
+    src="https://cloud.githubusercontent.com/assets/9046724/18821811/7e122a30-835e-11e6-939c-16c541d208fd.png"
+    width="250"
+    height="176"
+    alt="PoziTone v0.6.7 * New: external modules page in Options."
+    title="PoziTone v0.6.7 * New: external modules page in Options."
+      >
+</a>
+
 ### v0.6.6
     * New module: Google Play Music | play.google.com/music. Don't forget to enable in Options!
       Idea by Joe Thomas, Maxim Sergyenko.
