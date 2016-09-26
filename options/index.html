@@ -60,7 +60,6 @@
           <li
             class="menuItemWrap mainMenuItemWrap"
             id="modulesExternal"
-            ng-if="intModulesExternal > 0"
             localize
             >
             <a
@@ -68,7 +67,10 @@
               class="menuItem"
               i18n-content="modulesExternal"
                 ></a>
-            <ul id="submenu">
+            <ul
+              id="submenu"
+              ng-if="intModulesExternal > 0"
+                >
               <li
                 class="menuItemWrap"
                 id="menuItemWrap_{{objModule.id}}"
