@@ -11,7 +11,7 @@ ___
 
   * [Features](#features)
   * [Supported online media players](#supported-online-media-players)
-    * [External PoziTone modules](#external-pozitone-modules)
+    * [Supported via external modules](#supported-via-external-modules)
   * [Installation](#installation)
     * [For Opera](#for-opera)
   * [Demo](#demo)
@@ -71,9 +71,9 @@ Supported online media players
 More to come...
 
 
-### External PoziTone modules
+### Supported via external modules
 
-An external PoziTone module is a standalone extension which is able to provide PoziTone [features](#features) by communicating directly with PoziTone behind the scenes.
+An external PoziTone module is a standalone extension which is able to provide [PoziTone features](#features) by communicating directly with PoziTone behind the scenes.
 
 * [YouTube embedded player](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([for Opera](https://addons.opera.com/en/extensions/details/youtube-embedded-player-pozitone-module/)).
 * [SoundCloud Widget](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl) ([for Opera](https://addons.opera.com/en/extensions/details/soundcloud-widget-pozitone-module/)).

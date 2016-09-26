@@ -11,7 +11,7 @@ ___
 
   * [Возможности](#Возможности)
   * [Поддерживаемые онлайн-медиаплееры](#Поддерживаемые-онлайн-медиаплееры)
-    * [Внешние модули PoziTone](#Внешние-модули-pozitone)
+    * [Поддерживаемые с помощью внешних модулей](#Поддерживаемые-с-помощью-внешних-модулей)
   * [Установка](#Установка)
     * [Для Opera](#Для-opera)
     * [Для Яндекс](#Для-Яндекс)
@@ -72,9 +72,9 @@ ___
 Список будет пополняться...
 
 
-### Внешние модули PoziTone
+### Поддерживаемые с помощью внешних модулей
 
-Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить [возможности](#Возможности) PoziTone, общаясь напрямую с PoziTone незаметно для глаз пользователя.
+Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить [возможности PoziTone](#Возможности), общаясь напрямую с PoziTone незаметно для глаз пользователя.
 
 * [YouTube встроенный плеер](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/youtube-embedded-player-pozitone-module/)).
 * [SoundCloud-виджет](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soundcloud-widget-pozitone-module/)).
