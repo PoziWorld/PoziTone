@@ -108,9 +108,9 @@ Done!
 Demo
 --------
 
-Open any station that you like from the [Stations list](http://101.ru/?an=port_allchannels).
+Go to [SoundCloud](https://soundcloud.com) and play any track.
 
-With every track change you can see the glory of PoziTone! :)
+PoziTone should display a notification with the track info. 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
