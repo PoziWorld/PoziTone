@@ -78,7 +78,7 @@ ___
 
 * [YouTube встроенный плеер](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/youtube-embedded-player-pozitone-module/)).
 * [SoundCloud-виджет](https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soundcloud-widget-pozitone-module/)).
-* [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/)).
+* [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soviatnik-pozitone-modul/)).
 
 
 _Вы — разработчик?_ Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Присмотритесь к [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
