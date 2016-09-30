@@ -119,6 +119,8 @@ var
       , objPlayerInfo : {
             strModule : strModule
           , boolIsReady : false
+          , boolIsPlaying : false
+          , boolIsMuted : false
           , intVolume : 100
           , intVolumeBeforeMuted : intVolumeBeforeMutedDefault
           , boolWasVolumeMessageJustDisplayed : false
@@ -269,8 +271,10 @@ var
         : intVolumeBeforeMutedDefault
         ;
 
-    if ( $muteUnmuteButton.classList.contains( strMuteClass ) )
+    if ( $muteUnmuteButton.classList.contains( strMuteClass ) ) {
       $muteUnmuteButton.click();
+      PageWatcher.objPlayerInfo.boolIsMuted = true;
+    }
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
@@ -286,8 +290,10 @@ var
    * @return  void
    **/
   processButtonClick_unmute : function() {
-    if ( $muteUnmuteButton.classList.contains( strUnmuteClass ) )
+    if ( $muteUnmuteButton.classList.contains( strUnmuteClass ) ) {
       $muteUnmuteButton.click();
+      PageWatcher.objPlayerInfo.boolIsMuted = false;
+    }
 
     PageWatcher.sendSameMessage(
       chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
@@ -429,10 +435,12 @@ var
   processCommand_muteUnmute : function() {
     PageWatcher.getPlayerVolume();
 
-    if ( PageWatcher.objPlayerInfo.intVolume !== 0 )
+    if ( PageWatcher.objPlayerInfo.intVolume !== 0 )  {
       PageWatcher.processButtonClick_mute();
-    else
+    }
+    else {
       PageWatcher.processButtonClick_unmute();
+    }
   }
   ,
 
