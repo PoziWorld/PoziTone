@@ -16,10 +16,15 @@
       processMediaCall()
       processSettingsCall()
       getVolumeDeltaSettings()
+      processVoiceControlCall()
+      getVoiceControlStatus()
+      changeVoiceControlStatus()
+      addOnVoiceControlDeactivationListener()
       sendError()
       sendResponse()
       sendCallToTab()
       createCallString()
+      isInternalCall()
 
  ============================================================================ */
 
@@ -27,7 +32,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.4';
+    var strVersion = '0.5.0';
 
     this.strCallDivider = '/';
 
@@ -79,6 +84,10 @@
 
             if ( typeof strMethod === 'string' ) {
               if ( strMethod !== '' ) {
+                /**
+                 * @todo var arrCall = strCall.split( this.strCallDivider );
+                 */
+
                 if ( strCall === 'module' ) {
                   this.processModuleCall( objRequest, objSender, funcSendResponse );
                 }
@@ -90,6 +99,9 @@
                 }
                 else if ( strCall.indexOf( 'settings/' ) === 0 ) {
                   this.processSettingsCall( objRequest, objSender, funcSendResponse, strCall );
+                }
+                else if ( strCall.indexOf( 'voice-control/' ) === 0 ) {
+                  this.processVoiceControlCall( objRequest, objSender, funcSendResponse, strCall );
                 }
                 else {
                   this.sendError( funcSendResponse, 4 );
@@ -515,6 +527,17 @@
     , strModuleId
     , boolIsModuleBuiltIn
   ) {
+    strLog = 'Api.getVolumeDeltaSettings';
+    Log.add(
+        strLog
+      , {
+            objRequest : objRequest
+          , objSender : objSender
+          , strModuleId : strModuleId
+          , boolIsModuleBuiltIn : boolIsModuleBuiltIn
+        }
+    );
+
     if ( typeof strModuleId === 'string' ) {
       var promiseGetGeneralSettings = new Promise( function( funcResolve, funcReject ) {
         // TODO: Create getGeneralSettings method
@@ -599,6 +622,245 @@
     else {
       this.sendError( funcSendResponse, 1, 'strModuleId', 'string' );
     }
+  };
+
+  /**
+   * Used to send a response.
+   *
+   * @callback Api~funcSendResponse
+   */
+
+  /**
+   * Process PoziTone API 'voice-control' call.
+   *
+   * @param {Object} objRequest - API request properties object.
+   * @param {Object} objSender - Sender of a message.
+   * @param {Api~funcSendResponse} funcSendResponse - Used to send a response.
+   * @param {string} strCall - PoziTone API "URL".
+   **/
+
+  Api.prototype.processVoiceControlCall = function ( objRequest, objSender, funcSendResponse, strCall ) {
+    strLog = 'Api.processVoiceControlCall';
+    Log.add(
+        strLog
+      , {
+            objRequest : objRequest
+          , objSender : objSender
+        }
+    );
+
+    var strMethod = objRequest.strMethod;
+    var arrCall;
+    var strCommand;
+
+    if ( strMethod === 'GET' ) {
+      if ( typeof strCall === 'string' ) {
+        if ( strCall !== '' ) {
+          arrCall = strCall.split( this.strCallDivider );
+          strCommand = arrCall[ 1 ];
+          var strSubcommand = arrCall[ 2 ];
+
+          if ( typeof strCommand === 'string' && strCommand !== '' ) {
+            if ( strCommand === 'status' ) {
+              if ( typeof strSubcommand === 'string' && strSubcommand !== '' ) {
+                if ( strSubcommand === 'deactivation' ) {
+                  this.addOnVoiceControlDeactivationListener( objRequest, objSender, funcSendResponse );
+                }
+                else {
+                  this.sendError( funcSendResponse, 4 );
+                }
+              }
+              else {
+                this.getVoiceControlStatus( objRequest, objSender, funcSendResponse );
+              }
+            }
+            else {
+              this.sendError( funcSendResponse, 4 );
+            }
+          }
+          else {
+            this.sendError( funcSendResponse, 4 );
+          }
+        }
+        else {
+          this.sendError( funcSendResponse, 8, 'strCall' );
+        }
+      }
+      else {
+        this.sendError( funcSendResponse, 1, 'strCall', 'string' );
+      }
+    }
+    else if ( strMethod === 'POST' ) {
+      var objData = objRequest.objData;
+
+      if ( typeof objData === 'object' && ! Array.isArray( objData ) ) {
+        if ( ! Global.isEmpty( objData ) ) {
+          if ( typeof strCall === 'string' ) {
+            if ( strCall !== '' ) {
+              arrCall = strCall.split( this.strCallDivider );
+              strCommand = arrCall[ 1 ];
+
+              if ( typeof strCommand === 'string' && strCommand !== '' ) {
+                if ( strCommand === 'status' ) {
+                  this.changeVoiceControlStatus( objData, objSender, funcSendResponse );
+                }
+                else {
+                  this.sendError( funcSendResponse, 4 );
+                }
+              }
+              else {
+                this.sendError( funcSendResponse, 4 );
+              }
+            }
+            else {
+              this.sendError( funcSendResponse, 8, 'strCall' );
+            }
+          }
+          else {
+            this.sendError( funcSendResponse, 1, 'strCall', 'string' );
+          }
+        }
+        else {
+          this.sendError( funcSendResponse, 7 );
+        }
+      }
+      else {
+        this.sendError( funcSendResponse, 1, 'objData', 'object' );
+      }
+    }
+    else {
+      this.sendError( funcSendResponse, 6, strMethod );
+    }
+  };
+
+  /**
+   * Get status of voice control: whether it's enabled/allowed and currently connected.
+   *
+   * @param {Object} objRequest - API request properties object.
+   * @param {Object} objSender - Sender of a message.
+   * @param {Api~funcSendResponse} funcSendResponse - Used to send a response.
+   **/
+
+  Api.prototype.getVoiceControlStatus = function ( objRequest, objSender, funcSendResponse ) {
+    strLog = 'Api.getVoiceControlStatus';
+    Log.add(
+        strLog
+      , {
+            objRequest : objRequest
+          , objSender : objSender
+        }
+    );
+
+    var promiseGetGeneralSettings = new Promise( function( funcResolve, funcReject ) {
+      /**
+       * @todo Create getGeneralSettings method
+       */
+
+      Global.getStorageItems(
+          StorageSync
+        , strConstGeneralSettings
+        , 'getGeneralSettings'
+        , function( objReturn ) {
+            var objGeneralSettings = objReturn[ strConstGeneralSettings ];
+
+            if ( typeof objGeneralSettings === 'object' && ! Array.isArray( objGeneralSettings ) ) {
+              funcResolve( objGeneralSettings );
+            }
+            else {
+              funcReject();
+            }
+          }
+        , funcReject
+      );
+    } );
+
+    promiseGetGeneralSettings
+      .then( function ( objGeneralSettings ) {
+        funcSendResponse( {
+            boolEnableVoiceControl : objGeneralSettings.boolEnableVoiceControl
+          , boolIsConnected : pozitone.voiceControl.isConnected()
+        } );
+      } )
+      .catch( function () {
+        /**
+         * @todo Send error
+         */
+      } )
+      ;
+  };
+
+  /**
+   * Get status of voice control: whether it's enabled/allowed and currently connected.
+   *
+   * @param {Object} objStatus - Object containing properties to change.
+   * @param {Object} objSender - Sender of a message.
+   * @param {Api~funcSendResponse} funcSendResponse - Used to send a response.
+   **/
+
+  Api.prototype.changeVoiceControlStatus = function ( objStatus, objSender, funcSendResponse ) {
+    strLog = 'Api.changeVoiceControlStatus';
+    Log.add(
+        strLog
+      , {
+            objStatus : objStatus
+          , objSender : objSender
+        }
+    );
+
+    if ( ! this.isInternalCall( objSender ) ) {
+      return;
+    }
+
+    var boolIsConnected = objStatus.boolIsConnected;
+
+    if ( typeof boolIsConnected === 'boolean' && boolIsConnected ) {
+      pozitone.voiceControl.connectNative(
+          function () {
+            funcSendResponse( true );
+          }
+        , function () {
+            funcSendResponse( false );
+          }
+      );
+    }
+  };
+
+  /**
+   * Notify when voice control app gets shut down.
+   *
+   * @param {Object} objRequest - API request properties object.
+   * @param {Object} objSender - Sender of a message.
+   * @param {Api~funcSendResponse} funcSendResponse - Used to send a response.
+   **/
+
+  Api.prototype.addOnVoiceControlDeactivationListener = function ( objRequest, objSender, funcSendResponse ) {
+    strLog = 'Api.addOnVoiceControlDeactivationListener';
+    Log.add(
+        strLog
+      , {
+            objRequest : objRequest
+          , objSender : objSender
+        }
+    );
+
+    pozitone.voiceControl.addPortOnDisconnectListener( function () {
+      // By the time this gets called, the messaging port might have got disconnected.
+      // For example, the page got closed.
+      try {
+        funcSendResponse();
+      }
+      catch( objError ) {
+        strLog = 'Api.addOnVoiceControlDeactivationListener, callback, disconnected port';
+        Log.add(
+            strLog
+          , {
+                objRequest : objRequest
+              , objSender : objSender
+              , objError : objError
+            }
+        );
+      }
+    } );
   };
 
   /**
@@ -787,6 +1049,20 @@
     Log.add( strLog, { arrCallParameters : arrCallParameters } );
 
     return arrCallParameters.join( this.strCallDivider );
+  };
+
+  /**
+   * Check whether the call was triggered by some PoziTone extension page.
+   *
+   * @param {Object} objSender - Sender of a message.
+   * @return {string}
+   **/
+
+  Api.prototype.isInternalCall = function ( objSender ) {
+    strLog = 'Api.isInternalCall';
+    Log.add( strLog, objSender );
+
+    return objSender.id === strConstExtensionId && objSender.url.indexOf( 'chrome-extension://' + strConstExtensionId ) === 0;
   };
 
   pozitone.api = new Api();

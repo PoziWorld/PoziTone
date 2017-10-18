@@ -204,6 +204,10 @@
     {
       opacity:                1;
     }
+  #optionsSettingsGeneralShowAdvancedContainer li
+    {
+      line-height: normal;
+    }
   #optionsSettingsGeneralShowAdvancedContainer label
     {
       font-size:              1.2em;
@@ -233,6 +237,40 @@
       padding:                0 0 0 .5rem;
       width:                  3.38rem;
       border:                 .1rem solid #ddd;
+    }
+
+/* =============================================================================
+
+  Voice control
+
+ ============================================================================ */
+
+  #voiceControlForm
+    {
+      margin: .9rem 2rem 0 0;
+    }
+  #voiceControlForm:before
+    {
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: -.1rem;
+      right: 0;
+      left: 0;
+      height: .1rem;
+      background-color: #eee;
+    }
+  #voiceControlList
+    {
+      padding-left: 2rem;
+    }
+  #voiceControlList .listItem
+    {
+      line-height: normal;
+    }
+  #voiceControlActivateCta
+    {
+      margin: .8rem 0;
     }
 
 /* =============================================================================

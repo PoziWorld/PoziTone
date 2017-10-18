@@ -17,9 +17,11 @@
     <script src="/options/js/options.js"></script>
     <script src="/options/js/app.js"></script>
     <script src="/options/js/controllers/settings.js"></script>
+    <script src="/options/js/controllers/voice-control.js"></script>
     <script src="/options/js/controllers/settings-modules-list.js"></script>
     <script src="/options/js/controllers/external-modules-list.js"></script>
     <script src="/options/js/controllers/misc.js"></script>
+    <script src="/global/js/pozitone-module-api.js"></script>
   </head>
   <body>
     <header id="header">
@@ -35,6 +37,13 @@
               ng-href="#/settings/{{objModules.general.id}}"
               class="menuItem"
                 >{{objModules.general.caption}}</a>
+          </li>
+          <li class="menuItemWrap mainMenuItemWrap">
+            <a
+              ng-href="#/settings/voice-control"
+              class="menuItem new"
+              i18n-content="voiceControlMenuItem"
+                ></a>
           </li>
           <li class="menuItemWrap mainMenuItemWrap">
             <a

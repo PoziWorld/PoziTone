@@ -71,16 +71,17 @@ var Global                        = {
   , strPlayerIsOffClass           : 'play'
 
   // Embedded modules (replicates manifest's "content_scripts")
-  , objModules                    : {
-        ru_101                    : {
-            objRegex              : /^(http:\/\/|https:\/\/)101.ru\/.*/
-          , arrHosts              : [
+  , objModules : {
+        ru_101 : {
+            objRegex : /^(http:\/\/|https:\/\/)101.ru\/.*/
+          , strDomain : 'https://101.ru/'
+          , arrHosts : [
                 '101.ru'
             ]
-          , arrOrigins            : [
+          , arrOrigins : [
                 '*://101.ru/*'
             ]
-          , arrJs                 : [
+          , arrJs : [
                 'global/js/const.js'
               , 'modules/ru_101/js/uppod-player-api.js'
               , 'modules/general/js/page-watcher.js'
@@ -90,6 +91,7 @@ var Global                        = {
       , com_classicalradio : {
             objRegex : /^(http:\/\/|https:\/\/)www.classicalradio.com\/.*/
           , strImageFileName : 'classicalradio-logo-120.png'
+          , strDomain : 'https://www.classicalradio.com/'
           , arrHosts : [
                 'classicalradio.com'
               , 'audioaddict.com'
@@ -108,6 +110,7 @@ var Global                        = {
       , fm_di : {
             objRegex : /^(http:\/\/|https:\/\/)www.di.fm\/.*/
           , strImageFileName : 'di-logo-120.svg'
+          , strDomain : 'https://www.di.fm/'
           , arrHosts : [
                 'di.fm'
               , 'audioaddict.com'
@@ -126,6 +129,7 @@ var Global                        = {
             boolIsApiCompliant : true
           , objRegex : /^(http:\/\/|https:\/\/)play.google.com\/music\/.*/
           , strImageFileName : 'google-play-music-logo-80.png'
+          , strDomain : 'https://play.google.com/music/listen'
           , arrHosts : [
                 'play.google.com/music'
               , 'ggpht.com'
@@ -144,6 +148,7 @@ var Global                        = {
       , com_jazzradio : {
             objRegex : /^(http:\/\/|https:\/\/)www.jazzradio.com\/.*/
           , strImageFileName : 'jazzradio-logo-120.png'
+          , strDomain : 'http://www.jazzradio.com/'
           , arrHosts : [
                 'jazzradio.com'
               , 'audioaddict.com'
@@ -159,20 +164,21 @@ var Global                        = {
               , 'modules/com_audioaddict/js/page-watcher.js'
             ]
         }
-      , ru_ok_audio               : {
-            objRegex              :
+      , ru_ok_audio : {
+            objRegex :
               // TODO: Cover all possible “OK” URLs
               /^(http:\/\/|https:\/\/)(odnoklassniki.ru|ok.ru)\/.*/
-          , strImageFileName      : 'ok-logo-80.svg'
-          , arrHosts              : [
+          , strImageFileName : 'ok-logo-80.svg'
+          , strDomain : 'https://ok.ru/'
+          , arrHosts : [
                 'odnoklassniki.ru'
               , 'ok.ru'
             ]
-          , arrOrigins            : [
+          , arrOrigins : [
                 '*://*.odnoklassniki.ru/*'
               , '*://*.ok.ru/*'
             ]
-          , arrJs                 : [
+          , arrJs : [
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/ru_ok_audio/js/page-watcher.js'
@@ -181,6 +187,7 @@ var Global                        = {
       , com_radiotunes : {
             objRegex : /^(http:\/\/|https:\/\/)www.radiotunes.com\/.*/
           , strImageFileName : 'radiotunes-logo-80.png'
+          , strDomain : 'http://www.radiotunes.com/'
           , arrHosts : [
                 'radiotunes.com'
               , 'audioaddict.com'
@@ -199,6 +206,7 @@ var Global                        = {
       , com_rockradio : {
             objRegex : /^(http:\/\/|https:\/\/)www.rockradio.com\/.*/
           , strImageFileName : 'rockradio-logo-120.png'
+          , strDomain : 'https://www.rockradio.com/'
           , arrHosts : [
                 'rockradio.com'
               , 'audioaddict.com'
@@ -218,6 +226,7 @@ var Global                        = {
             boolIsApiCompliant : true
           , objRegex : /^(http:\/\/|https:\/\/)soundcloud.com\/.*/
           , strImageFileName : 'soundcloud-logo-80.png'
+          , strDomain : 'https://soundcloud.com/'
           , arrHosts : [
                 'soundcloud.com'
             ]
@@ -230,19 +239,20 @@ var Global                        = {
               , 'modules/com_soundcloud/js/page-watcher.js'
             ]
         }
-      , com_vk_audio              : {
-            objRegex              : /^(http:\/\/|https:\/\/)(vk.com|new.vk.com)\/.*/
-          , strImageFileName      : 'vk-logo-80.svg'
-          , arrHosts              : [
+      , com_vk_audio : {
+            objRegex : /^(http:\/\/|https:\/\/)(vk.com|new.vk.com)\/.*/
+          , strImageFileName : 'vk-logo-80.svg'
+          , strDomain : 'https://vk.com/'
+          , arrHosts : [
                 'vk.com'
               , 'new.vk.com'
               , 'vk.me'
             ]
-          , arrOrigins            : [
+          , arrOrigins : [
                 '*://*.vk.com/*'
               , '*://*.vk.me/*'
             ]
-          , arrJs                 : [
+          , arrJs : [
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/com_vk_audio/js/page-watcher.js'
@@ -250,16 +260,17 @@ var Global                        = {
               , 'modules/com_vk_audio/js/page-watcher-loader.js'
             ]
         }
-      , com_vgmradio              : {
-            objRegex              : /^(http:\/\/|https:\/\/)vgmradio.com\/.*/
-          , strImageFileName      : 'vgmradio-logo-120.svg'
-          , arrHosts              : [
+      , com_vgmradio : {
+            objRegex : /^(http:\/\/|https:\/\/)vgmradio.com\/.*/
+          , strImageFileName : 'vgmradio-logo-120.svg'
+          , strDomain : 'https://vgmradio.com/'
+          , arrHosts : [
                 'vgmradio.com'
             ]
-          , arrOrigins            : [
+          , arrOrigins : [
                 '*://vgmradio.com/*'
             ]
-          , arrJs                 : [
+          , arrJs : [
                 'global/js/const.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/com_vgmradio/js/page-watcher.js'
@@ -1550,6 +1561,10 @@ var Global                        = {
 
               var strModuleVar = 'module_' + strModule;
 
+              /**
+               * @todo Make sure these don't end up in Storage.
+               */
+
               objModule.type = 'built-in';
               objModule.caption = chrome.i18n.getMessage( strModuleVar );
               objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
@@ -1847,12 +1862,19 @@ var Global                        = {
 
     if ( ~~ strUrl.indexOf( Global.strOptionsUiUrlPrefix ) ) {
       chrome.tabs.query( objUrl, function( objTabs ) {
-        if ( objTabs.length ) {
-          chrome.tabs.update( objTabs[0].id, { active: true } );
-        }
-        else {
-          chrome.tabs.create( objUrl );
-        }
+        Global.checkForRuntimeError(
+            function () {
+              if ( typeof objTabs === 'object' && objTabs.length ) {
+                chrome.tabs.update( objTabs[ 0 ].id, { active: true } );
+              }
+              else {
+                chrome.tabs.create( objUrl );
+              }
+            }
+          , undefined
+          , { strUrl : strUrl }
+          , true
+        );
       } );
     }
     else {
@@ -1956,7 +1978,7 @@ var Global                        = {
         var strUrl  = strConstMessageUrl
                         .replace(
                             strConstVersionParam
-                          , strConstExtensionVersion
+                          , strConstExtensionVersionName
                         )
                         .replace(
                             strConstLangParam

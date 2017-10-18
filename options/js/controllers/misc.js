@@ -79,7 +79,7 @@ optionsControllers.controller( 'FeedbackCtrl', function( $scope, $rootScope ) {
 optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
   document.getElementById( 'logo' ).alt = strConstExtensionName;
   document.getElementById( 'name' ).textContent = strConstExtensionName;
-  document.getElementById( 'version' ).textContent = strConstExtensionVersion;
+  document.getElementById( 'version' ).textContent = strConstExtensionVersionName;
 
   Page.localize( strPage, '#content' );
 

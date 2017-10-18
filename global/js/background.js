@@ -29,6 +29,7 @@
       processButtonClick_doNotNotifyOfUpdates()
       resetDevelopersMessageVars()
       createBrowserActionContextMenu()
+      onBrowserActionContextMenuItemClick()
     Listeners
       runtime.onMessage + runtime.onMessageExternal
       notifications.onClicked
@@ -51,56 +52,62 @@
  ============================================================================ */
 
 const
-    objSettingsNotSyncable                        = {
-        strLatestTrackedVersion                   : strConstExtensionVersion
-      , objActiveButtons                          : {}
-      , objOpenTabs                               : {}
-      , arrTabsIds                                : []
-      , strOptionsPageToOpen                      : ''
+    objSettingsNotSyncable = {
+        strLatestTrackedVersion : strConstExtensionVersion
+      , objActiveButtons : {}
+      , objOpenTabs : {}
+      , arrTabsIds : []
+      , strOptionsPageToOpen : ''
+      , boolOpenOptionsPageOnRestart : false
     }
-  , objSettingsSyncable                           = {
-        arrRecentTracks                           : []
-      , intRecentTracksToKeep                     : 10
+  , objSettingsSyncable = {
+        arrRecentTracks : []
+      , intRecentTracksToKeep : 10
 
-      , boolIsMessageForThisVersionAvailable      : false
-      , boolWasMessageForThisVersionClosed        : false
+      , boolIsMessageForThisVersionAvailable : false
+      , boolWasMessageForThisVersionClosed : false
 
-      , objSettings_general                       : {
-            strJoinUeip                           : 'no'
-          , boolEnableExternalModulesSupport      : false
-          , boolShowAdvancedSettings              : false
-          , boolShowPlayerEventNotification       : true
-          , boolShowShortcutsInNotification       : true
-          , boolShowWasUpdatedNotification        : true
-          , intVolumeDelta                        : 10
+      , objSettings_general : {
+            strJoinUeip : 'no'
+
+          , boolEnableVoiceControl : false
+          , boolAutoActivateVoiceControl : false
+          , boolAutoReactivateVoiceControl : false
+
+          , boolEnableExternalModulesSupport : false
+          , boolShowAdvancedSettings : false
+          , boolShowPlayerEventNotification : true
+          , boolShowShortcutsInNotification : true
+          , boolShowWasUpdatedNotification : true
+          , intVolumeDelta : 10
         }
-      , objSettings_ru_101                        : {
-            boolIsEnabled                         : false
-          , boolShowNotificationLogo              : true
-          , strNotificationLogo                   : 'station'
-          , strNotificationTitleFormat            : 'short'
-          , boolShowKbpsInfo                      : true
-          , arrAvailableNotificationTitleFormats  : [
-                                                        'short'
-                                                      , 'noStationInfo'
-                                                    ]
-          , arrAvailableNotificationButtons       : [
-                                                        'addAuth'
-                                                      , 'favoriteAuth'
-                                                      , 'playStop'
-                                                      , 'muteUnmute'
-                                                      , 'volumeUp'
-                                                      , 'volumeDown'
-                                                    ]
-          , arrActiveNotificationButtons          : [
-                                                        'addAuth'
-                                                      , 'muteUnmute'
-                                                    ]
-          , boolShowNotificationWhenStopped       : false
-          , boolShowNotificationWhenMuted         : false
-          , boolShowNotificationWhenNoTrackInfo   : false
-          , boolUseGeneralVolumeDelta             : true
-          , intVolumeDelta                        : 10
+      , objSettings_ru_101 : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'station'
+          , strNotificationTitleFormat : 'short'
+          , boolShowKbpsInfo : true
+          , arrAvailableNotificationTitleFormats : [
+                'short'
+              , 'noStationInfo'
+            ]
+          , arrAvailableNotificationButtons : [
+                'addAuth'
+              , 'favoriteAuth'
+              , 'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'addAuth'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenStopped : false
+          , boolShowNotificationWhenMuted : false
+          , boolShowNotificationWhenNoTrackInfo : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
         }
       , objSettings_com_classicalradio : {
             boolIsEnabled : false
@@ -193,22 +200,22 @@ const
           , boolUseGeneralVolumeDelta : true
           , intVolumeDelta : 10
         }
-      , objSettings_ru_ok_audio                   : {
-            boolIsEnabled                         : false
-          , boolShowNotificationLogo              : true
-          , strNotificationLogo                   : 'site'
-          , arrAvailableNotificationButtons       : [
-                                                        'addAuth'
-                                                      , 'nextAuth'
-                                                      , 'previousAuth'
-                                                      , 'playStop'
-                                                      , 'muteUnmute'
-                                                    ]
-          , arrActiveNotificationButtons          : [
-                                                        'addAuth'
-                                                      , 'nextAuth'
-                                                    ]
-          , boolShowNotificationWhenMuted         : false
+      , objSettings_ru_ok_audio : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'site'
+          , arrAvailableNotificationButtons : [
+                'addAuth'
+              , 'nextAuth'
+              , 'previousAuth'
+              , 'playStop'
+              , 'muteUnmute'
+            ]
+          , arrActiveNotificationButtons : [
+                'addAuth'
+              , 'nextAuth'
+            ]
+          , boolShowNotificationWhenMuted : false
         }
       , objSettings_com_radiotunes : {
             boolIsEnabled : false
@@ -286,24 +293,24 @@ const
             ]
           , boolShowNotificationWhenMuted : false
         }
-      , objSettings_com_vgmradio                  : {
-            boolIsEnabled                         : false
-          , boolShowNotificationLogo              : true
-          , strNotificationLogo                   : 'station'
-          , arrAvailableNotificationButtons       : [
-                                                        'playStop'
-                                                      , 'muteUnmute'
-                                                      , 'volumeUp'
-                                                      , 'volumeDown'
-                                                    ]
-          , arrActiveNotificationButtons          : [
-                                                        'playStop'
-                                                      , 'muteUnmute'
-                                                    ]
-          , boolShowNotificationWhenStopped       : false
-          , boolShowNotificationWhenMuted         : false
-          , boolUseGeneralVolumeDelta             : true
-          , intVolumeDelta                        : 10
+      , objSettings_com_vgmradio : {
+            boolIsEnabled : false
+          , boolShowNotificationLogo : true
+          , strNotificationLogo : 'station'
+          , arrAvailableNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+              , 'volumeUp'
+              , 'volumeDown'
+            ]
+          , arrActiveNotificationButtons : [
+                'playStop'
+              , 'muteUnmute'
+            ]
+          , boolShowNotificationWhenStopped : false
+          , boolShowNotificationWhenMuted : false
+          , boolUseGeneralVolumeDelta : true
+          , intVolumeDelta : 10
         }
     }
   ;
@@ -314,48 +321,42 @@ const
 
  ============================================================================ */
 
-var Background                    = {
-    strObjOpenTabsName            : 'objOpenTabs'
-  , intCheckSettingsTimeout       : 50
-  , boolWasAnyChromeEventFired    : false
-  , objPreservedSettings          : {}
-  , strPreviousTrack              : ''
-  , arrTrackInfoPlaceholders      : [
+var Background = {
+    strObjOpenTabsName : 'objOpenTabs'
+  , intCheckSettingsTimeout : 50
+  , boolWasAnyChromeEventFired : false
+  , objPreservedSettings : {}
+  , strPreviousTrack : ''
+  , arrTrackInfoPlaceholders : [
       , ''
       , '...'
       , 'Ожидаем следующий трек'
       , 'Ожидаем следующий трек...'
       , 'Ждём название трека...'
     ]
-  , strProcessButtonClick         : 'processButtonClick_'
-  , strProcessCommand             : 'processCommand_'
-  , strChangelogUrl               : 
-      'https://github.com/poziworld/PoziTone/blob/v%v/HISTORY_%lang.md'
-  , objSystemNotificationButtons  : {
-        updated                   : [
+  , strProcessButtonClick : 'processButtonClick_'
+  , strProcessCommand : 'processCommand_'
+  , strChangelogUrl : 'https://github.com/poziworld/PoziTone/blob/v%v/HISTORY_%lang.md'
+  , objSystemNotificationButtons : {
+        updated : [
             {
-                objButton         : {
-                    title         : chrome.i18n.getMessage(
-                                      'systemNotificationUpdatedChanges'
-                                    )
-                  , iconUrl       : 'global/img/list_bullets_icon&16.png'
+                objButton : {
+                    title : chrome.i18n.getMessage( 'systemNotificationUpdatedChanges' )
+                  , iconUrl : 'global/img/list_bullets_icon&16.png'
                 }
-              , strFunction       : 'seeChanges'
+              , strFunction : 'seeChanges'
             }
           , {
-                objButton         : {
-                    title         : chrome.i18n.getMessage(
-                                      'systemNotificationUpdatedDoNotNotify'
-                                    )
-                  , iconUrl       : 'global/img/off_icon&16.png'
+                objButton : {
+                    title : chrome.i18n.getMessage( 'systemNotificationUpdatedDoNotNotify' )
+                  , iconUrl : 'global/img/off_icon&16.png'
                 }
-              , strFunction       : 'doNotNotifyOfUpdates'
+              , strFunction : 'doNotNotifyOfUpdates'
             }
         ]
     }
 
-  , strBrowserActionContextMenuIdPrefix :
-      'browserAction' + strConstGenericStringSeparator
+  , strBrowserActionContextMenuIdPrefix : 'browserAction' + strConstGenericStringSeparator
   ,
 
   /**
@@ -461,7 +462,7 @@ var Background                    = {
           , chrome.i18n.getMessage( 'systemNotificationUpdated' )
           , chrome.i18n.getMessage( 'extensionName' ) +
               chrome.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
-              strConstExtensionVersion
+              strConstExtensionVersionName
           , null
           , [
                 arrButtonsUpdated[ 0 ].objButton
@@ -505,7 +506,6 @@ var Background                    = {
     var arrSettingsToCleanUp = [
         'objActiveButtons'
       , 'arrTabsIds'
-      , 'strOptionsPageToOpen'
     ];
 
     StorageLocal.remove( arrSettingsToCleanUp, function() {
@@ -1230,7 +1230,7 @@ var Background                    = {
     var strUrl  = Background.strChangelogUrl
                     .replace(
                         strConstVersionParam
-                      , strConstExtensionVersion
+                      , strConstExtensionVersionName
                     )
                     .replace(
                         strConstLangParam
@@ -1309,7 +1309,8 @@ var Background                    = {
     Log.add( strLog, {} );
 
     var arrParentContextMenus = [
-            'modulesBuiltIn'
+            'voiceControl'
+          , 'modulesBuiltIn'
           , 'modulesExternal'
           , 'info'
         ]
@@ -1324,15 +1325,23 @@ var Background                    = {
       , m = arrInfoContextMenus.length
       , strContextMenu
       , objContextMenuProperties
+      , arrPromises = []
       ;
 
     function createContextMenu( objProperties ) {
-      chrome.contextMenus.create(
-          objProperties
-        , function() {
-            // TODO: Log error if failed creating
-          }
-      );
+      var promise = new Promise( function ( funcResolve, funcReject ) {
+        chrome.contextMenus.create(
+            objProperties
+          , function() {
+              Global.checkForRuntimeError(
+                  funcResolve
+                , funcReject
+              );
+            }
+        );
+      } );
+
+      arrPromises.push( promise );
     }
 
     function createContextMenuSeparator( strContextMenu ) {
@@ -1354,23 +1363,21 @@ var Background                    = {
         strContextMenu
       , strParentContextMenu
     ) {
-      objContextMenuProperties =
-        createGenericContextMenuProperties( strContextMenu );
+      objContextMenuProperties = createGenericContextMenuProperties( strContextMenu );
 
       objContextMenuProperties.id =
           Background.strBrowserActionOptionsPageContextMenuIdPrefix
         + strContextMenu
         ;
 
-      if (
-            typeof strParentContextMenu === 'string'
-        &&  strParentContextMenu !== ''
-      ) {
+      if ( typeof strParentContextMenu === 'string' && strParentContextMenu !== '' ) {
         objContextMenuProperties.parentId =
             Background.strBrowserActionOptionsPageContextMenuIdPrefix
           + strParentContextMenu
           ;
       }
+
+      objContextMenuProperties.onclick = Background.onBrowserActionContextMenuItemClick;
 
       return objContextMenuProperties;
     }
@@ -1388,11 +1395,9 @@ var Background                    = {
     }
 
     // Rate Extension
-    objContextMenuProperties =
-      createGenericContextMenuProperties( 'rateExtensionShort' );
-
-    objContextMenuProperties.id =
-      Background.strBrowserActionRateExtensionContextMenuId;
+    objContextMenuProperties = createGenericContextMenuProperties( 'rateExtensionShort' );
+    objContextMenuProperties.id = Background.strBrowserActionRateExtensionContextMenuId;
+    objContextMenuProperties.onclick = Background.onBrowserActionContextMenuItemClick;
 
     createContextMenu( objContextMenuProperties );
 
@@ -1413,8 +1418,72 @@ var Background                    = {
       createOptionsPageLinkContextMenu( strContextMenu, 'info' );
     }
 
+    Promise
+      .all( arrPromises )
+      .then( function (  ) {
+        pozitone.background.fireCallbacks( 'browserActionContextMenuCreated' );
+      } )
+      ;
+
     // Create separator in Opera before Options context menu.
     createContextMenuSeparator( 'separator2' );
+  }
+  ,
+
+  /**
+   * Fired when a browser action context menu item is clicked.
+   *
+   * @param {Object} objInfo - Information sent when a context menu item is clicked.
+   * @param {Object} objTab - The details of the tab where the click took place. If the click did not take place in a tab, this parameter will be missing.
+   **/
+
+  onBrowserActionContextMenuItemClick : function( objInfo, objTab ) {
+    var strLog = strLog = 'Background.onBrowserActionContextMenuItemClick';
+    var strOption;
+
+    Log.add( strLog, objInfo );
+
+    var strMenuItemId = objInfo.menuItemId
+      , strBrowserActionOptionsPageContextMenuIdPrefix =
+          Background.strBrowserActionOptionsPageContextMenuIdPrefix
+      , intOptionsPageIndex = strMenuItemId.indexOf(
+          strBrowserActionOptionsPageContextMenuIdPrefix
+        )
+      ;
+
+    if ( ~ intOptionsPageIndex ) {
+      var strPage = strMenuItemId.substr( strBrowserActionOptionsPageContextMenuIdPrefix.length );
+      var objItems = { strOptionsPageToOpen : strPage };
+
+      strOption = strPage;
+
+      if ( strPage !== '' ) {
+        Global.setStorageItems(
+            StorageLocal
+          , objItems
+          , strLog
+          , function() {
+              Global.openOptionsPage( strLog );
+            }
+          , undefined
+          , objItems
+          , true
+        );
+      }
+    }
+    else if ( ~ strMenuItemId.indexOf( Background.strBrowserActionRateExtensionContextMenuId ) ) {
+      strOption = 'rate';
+
+      Global.createTabOrUpdate( strConstRateUrl );
+    }
+
+    // Track clicks
+    var objLogDetails = objConstUserSetUp;
+
+    objLogDetails.strContext = 'browserAction';
+    objLogDetails.strOption = strOption;
+
+    Log.add( 'contextMenuClick', objLogDetails, true );
   }
 };
 
@@ -1810,6 +1879,7 @@ chrome.runtime.onInstalled.addListener(
 
     Log.add( strLog, objDetails, true );
 
+    pozitone.background.checkOptionsPageToOpenOnRestart();
     Background.cleanUp( true, objDetails );
     Background.checkOpenTabs();
 
@@ -1985,72 +2055,3 @@ chrome.alarms.onAlarm.addListener(
     }
   }
 );
-
-/**
- * Fired when a context menu item is clicked.
- *
- * @type    method
- * @param   objInfo
- *            Information sent when a context menu item is clicked.
- * @param   objTab
- *            The details of the tab where the click took place.
- *            If the click did not take place in a tab,
- *            this parameter will be missing.
- * @return  void
- **/
-chrome.contextMenus.onClicked.addListener( function( objInfo, objTab ) {
-  var strLog = strLog = 'chrome.contextMenus.onClicked'
-    , strOption
-    ;
-
-  Log.add( strLog, objInfo );
-
-  var strMenuItemId = objInfo.menuItemId
-    , strBrowserActionOptionsPageContextMenuIdPrefix =
-        Background.strBrowserActionOptionsPageContextMenuIdPrefix
-    , intOptionsPageIndex = strMenuItemId.indexOf(
-        strBrowserActionOptionsPageContextMenuIdPrefix
-      )
-    ;
-
-  if ( ~ intOptionsPageIndex ) {
-    var strPage = strMenuItemId.substr(
-          strBrowserActionOptionsPageContextMenuIdPrefix.length
-        )
-      , objItems = { strOptionsPageToOpen : strPage }
-      ;
-
-    strOption = strPage;
-
-    if ( strPage !== '' ) {
-      Global.setStorageItems(
-          StorageLocal
-        , objItems
-        , strLog
-        , function() {
-            Global.openOptionsPage( strLog );
-          }
-        , undefined
-        , objItems
-        , true
-      );
-    }
-  }
-  else if (
-    ~ strMenuItemId.indexOf(
-        Background.strBrowserActionRateExtensionContextMenuId
-      )
-  ) {
-    strOption = 'rate';
-
-    Global.createTabOrUpdate( strConstRateUrl );
-  }
-
-  // Track clicks
-  var objLogDetails = objConstUserSetUp;
-
-  objLogDetails.strContext = 'browserAction';
-  objLogDetails.strOption = strOption;
-
-  Log.add( 'contextMenuClick', objLogDetails, true );
-} );

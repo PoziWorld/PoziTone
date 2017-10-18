@@ -1,0 +1,128 @@
+<section id="voiceControl" class="page subpage">
+  <h1 class="pageHeading">
+    <span class="new" i18n-content="voiceControl"></span>
+    <span class="fadeInFadeOut" id="settingsSaved">
+      <span i18n-content="optionsSettingsH1"></span>
+      <span i18n-content="optionsSettingsSaved"></span>
+    </span>
+  </h1>
+  <p
+    class="sectionText first"
+    id="projectsDescriptionParagraph1"
+    i18n-content="voiceControlIntro1"
+      ></p>
+  <p
+    class="sectionText"
+    id="projectsDescriptionParagraph2"
+    i18n-content="voiceControlIntro2"
+      ></p>
+  <aside id="optionsSettingsGeneralShowAdvancedContainer" ng-controller="SettingsCtrl">
+    <form>
+      <fieldset
+        id="optionsSettingsGeneralShowAdvanced"
+        localize
+        ng-if="boolShowAdvancedSettings !== undefined"
+          >
+        <legend
+          i18n-content="optionsSettingsGeneralShowAdvanced"
+          class="sectionHeading none"
+            ></legend>
+        <ul>
+          <li>
+            <label>
+              <input
+                type="checkbox" name="boolShowAdvancedSettings"
+                ng-model="boolShowAdvancedSettings"
+                ng-click="inputChange( $event, undefined, strConstGeneralSettingsSuffix, undefined, forcePageRefresh )"
+                data-track-setting-change="true"
+                  >
+              <span i18n-content="optionsSettingsGeneralShowAdvancedToggle"></span>
+            </label>
+          </li>
+        </ul>
+      </fieldset>
+    </form>
+  </aside>
+  <form id="voiceControlForm">
+    <fieldset id="voiceControlAllow" localize>
+      <legend i18n-content="step1" class="sectionHeading"></legend>
+      <ul>
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              name="boolEnableVoiceControl"
+              id="boolEnableVoiceControl"
+              ng-model="boolEnableVoiceControl"
+              ng-click="toggleVoiceControl( $event )"
+              data-track-setting-change="true"
+              disabled
+                >
+            <span
+              class="i18nTitle infoTitle"
+              i18n-content="voiceControlAllow"
+              data-i18n-title="voiceControlAllowInfo"
+                ></span>
+          </label>
+        </li>
+      </ul>
+    </fieldset>
+    <fieldset id="voiceControlDownload" localize>
+      <legend i18n-content="step2" class="sectionHeading"></legend>
+      <ul class="list" id="voiceControlList">
+        <li class="listItem">
+          <a
+            href="https://github.com/PoziWorld/PoziWorld-Elf/releases/latest"
+            i18n-content="voiceControlDownload"
+              ></a>
+        </li>
+        <li class="listItem" i18n-content="voiceControlInstall"></li>
+        <li class="listItem" i18n-content="voiceControlOpen"></li>
+        <li class="listItem" i18n-content="voiceControlConnect"></li>
+      </ul>
+    </fieldset>
+    <fieldset
+      id="voiceControlSettings"
+      ng-controller="SettingsCtrl"
+      localize
+        >
+      <legend i18n-content="step3" class="sectionHeading"></legend>
+      <ul>
+        <li>
+          <button
+            id="voiceControlActivateCta"
+            class="cta hasText"
+            i18n-content="voiceControlActivateCta"
+            disabled
+              ></button>
+        </li>
+      </ul>
+      <ul ng-class="{ none: ! boolShowAdvancedSettings }">
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              name="boolAutoActivateVoiceControl"
+              id="boolAutoActivateVoiceControl"
+              ng-model="objModule.boolAutoActivateVoiceControl"
+              ng-click="inputChange( $event )"
+                >
+            <span i18n-content="voiceControlAutoActivate"></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              name="boolAutoReactivateVoiceControl"
+              id="boolAutoReactivateVoiceControl"
+              ng-model="objModule.boolAutoReactivateVoiceControl"
+              ng-click="inputChange( $event )"
+                >
+            <span i18n-content="voiceControlAutoReactivate"></span>
+          </label>
+        </li>
+      </ul>
+    </fieldset>
+  </form>
+</section>

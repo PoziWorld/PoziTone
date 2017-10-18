@@ -23,6 +23,10 @@ optionsApp.config( [ '$routeProvider', function( $routeProvider ) {
   // IMPORTANT!
   // If any URLs to change, also change logic in optionsApp.run
   $routeProvider
+    .when( '/settings/voice-control', {
+        templateUrl : 'partials/voice-control.html'
+      , controller  : 'VoiceControlCtrl'
+    } )
     .when( '/settings/:moduleId', {
         templateUrl : 'partials/settings.html'
       , controller  : 'SettingsCtrl'
@@ -89,8 +93,14 @@ optionsApp.run( function( $rootScope, $location ) {
           else if ( strOptionsPageToOpen === 'modulesExternal' ) {
             strPath = '/settings/modules/external';
           }
+          else if ( strOptionsPageToOpen === 'voiceControl' ) {
+            strPath = '/settings/voice-control';
+          }
 
-          var objItems = { strOptionsPageToOpen : '' };
+          var objItems = {
+              boolOpenOptionsPageOnRestart : false
+            , strOptionsPageToOpen : ''
+          };
 
           Global.setStorageItems(
               StorageLocal
@@ -399,14 +409,59 @@ optionsApp.controller( 'MenuController', function( $scope, $rootScope, $location
       const $active = $targetMenuItem.parentNode;
 
       $active.classList.add( 'selected' );
-      $active.scrollIntoView();
+
+      // In Chrome, on Options page load, it starts from a small size window,
+      // then gets resized. Wait for the resize to finish.
+      // 'resize' event fired twice. First one, when window.innerHeight is 150px.
+      if ( window.innerHeight > 150 ) {
+        scrollIntoViewIfNeeded( $active );
+      }
+      else {
+        function delayedScrollIntoViewIfNeeded() {
+          scrollIntoViewIfNeeded( $active );
+
+          window.removeEventListener( 'resize', delayedScrollIntoViewIfNeeded );
+        }
+
+        window.addEventListener( 'resize', delayedScrollIntoViewIfNeeded );
+      }
     }
   };
 
   // When all module menu items are templated
-  $scope.$on( 'onLastModuleMenuItem', function(scope){
+  $scope.$on( 'onLastModuleMenuItem', function( scope ) {
     scope.currentScope.highlightActiveMenuItem();
-  });
+  } );
+
+  /**
+   * If the element is not in the viewport at the moment, scroll until it is.
+   *
+   * @param {Node} $element - The element to scroll into view.
+   */
+
+  function scrollIntoViewIfNeeded( $element ) {
+    if ( ! isElementInViewport( $element.firstElementChild ) ) {
+      $element.scrollIntoView( {
+          behavior : 'smooth'
+        , block : 'end'
+      } );
+    }
+  }
+
+  /**
+   * @copyright https://gist.github.com/davidtheclark/5515733
+   */
+
+  function isElementInViewport( $el ) {
+    var rect = $el.getBoundingClientRect();
+
+    return (
+          rect.top >= 0
+      &&  rect.left >= 0
+      &&  rect.bottom <= ( window.innerHeight || document.documentElement.clientHeight )
+      &&  rect.right <= ( window.innerWidth || document.documentElement.clientWidth )
+    );
+  }
 } );
 
 /**

@@ -15,6 +15,10 @@
       processMediaNotificationRequest()
       injectModuleFiles()
       logModuleNotEnabled()
+      checkOptionsPageToOpenOnRestart()
+      updateBrowserActionContextMenuItem()
+      addListener()
+      fireCallbacks()
     On Load
       Initialize
 
@@ -24,7 +28,9 @@
   'use strict';
 
   function Background2() {
-
+    this._objCallbacks = {
+        browserActionContextMenuCreated : []
+    };
   }
 
   /**
@@ -78,7 +84,7 @@
           , function( objSettings ) {
               // Handle errors
               if ( chrome.runtime.lastError ) {
-                var objLogDetails   = {}
+                var objLogDetails = {}
                   , strErrorMessage = chrome.runtime.lastError.message
                   ;
 
@@ -95,8 +101,7 @@
                 for ( strModuleSettings in objSettings ) {
                   var objModuleSettings = objSettings[ strModuleSettings ];
 
-                  if (
-                        objSettings.hasOwnProperty( strModuleSettings )
+                  if (  objSettings.hasOwnProperty( strModuleSettings )
                     &&  typeof objModuleSettings === 'object'
                     &&  strModuleSettings.indexOf( strConstSettingsPrefix ) === 0
                   ) {
@@ -384,6 +389,144 @@
           }
         , true
       );
+    }
+  };
+
+  /**
+   * When PoziTone restart is needed, might need to reopen the last open page.
+   *
+   * @type    method
+   * @param   No Parameters Taken
+   * @return  void
+   **/
+
+  Background2.prototype.checkOptionsPageToOpenOnRestart = function () {
+    strLog = 'Background2.checkOptionsPageToOpenOnRestart';
+    Log.add( strLog );
+
+    Global.getStorageItems(
+        StorageLocal
+      , [ 'boolOpenOptionsPageOnRestart', 'strOptionsPageToOpen' ]
+      , strLog
+      , function( objReturn ) {
+          const boolOpenOptionsPageOnRestart = objReturn.boolOpenOptionsPageOnRestart;
+
+          if ( typeof boolOpenOptionsPageOnRestart === 'boolean' && boolOpenOptionsPageOnRestart ) {
+            const strOptionsPageToOpen = objReturn.strOptionsPageToOpen;
+
+            if ( typeof strOptionsPageToOpen === 'string' && strOptionsPageToOpen !== '' ) {
+              Global.openOptionsPage( strLog );
+            }
+          }
+        }
+    );
+  };
+
+  /**
+   * Called when the context menu has been updated.
+   *
+   * @callback onContextMenuUpdatedCallback
+   */
+
+  /**
+   * Update a menu item that is shown when right-clicked on PoziTone icon next to the address bar.
+   *
+   * @param {string} strItemId - The ID of the context menu item to update.
+   * @param {Boolean} [boolIsOptionsPageRelated] - Whether the item is related to Options page.
+   * @param {Object} [objProperties] - The properties to update.
+   * @param {onContextMenuUpdatedCallback} [funcCallback] - The callback.
+   **/
+
+  Background2.prototype.updateBrowserActionContextMenuItem = function ( strItemId, boolIsOptionsPageRelated, objProperties, funcCallback ) {
+    strLog = 'Background2.updateBrowserActionContextMenuItem';
+    Log.add( strLog );
+
+    boolIsOptionsPageRelated = typeof boolIsOptionsPageRelated === 'boolean' && boolIsOptionsPageRelated;
+
+    /**
+     * @param {Boolean} [boolAddListener] - Whether to add listener if update fails.
+     */
+
+    function update( boolAddListener ) {
+      chrome.contextMenus.update(
+            Background[ boolIsOptionsPageRelated
+              ? 'strBrowserActionOptionsPageContextMenuIdPrefix'
+              : 'strBrowserActionContextMenuIdPrefix'
+            ]
+          + strItemId
+        , objProperties
+        , function () {
+            /**
+             * @todo Figure out why there is no error set, when not updated on start
+             */
+
+            Global.checkForRuntimeError(
+                function () {
+                  onRuntimeErrorCheckComplete( boolAddListener );
+                }
+              , function () {
+                  onRuntimeErrorCheckComplete( boolAddListener );
+                }
+            );
+          }
+      );
+    }
+
+    /**
+     * @param {Boolean} [boolAddListener] - Whether to add listener if update fails.
+     */
+
+    function onRuntimeErrorCheckComplete( boolAddListener ) {
+      if ( typeof boolAddListener === 'boolean' && boolAddListener ) {
+        pozitone.background.addListener( 'browserActionContextMenuCreated', update );
+      }
+
+      if ( typeof funcCallback === 'function' ) {
+        funcCallback();
+      }
+    }
+
+    update( true );
+  };
+
+  /**
+   * Called when an event occurred.
+   *
+   * @callback onEventCallback
+   */
+
+  /**
+   * Remember what callback to fire on a certain event.
+   *
+   * @param {string} strEventName - The name of the event to listen to.
+   * @param {onEventCallback} [funcCallback] - The callback.
+   **/
+
+  Background2.prototype.addListener = function ( strEventName, funcCallback ) {
+    strLog = 'Background2.addListener';
+    Log.add( strLog );
+
+    if ( typeof strEventName === 'string' && typeof funcCallback === 'function' ) {
+      this._objCallbacks[ strEventName ].push( funcCallback );
+    }
+  };
+
+  /**
+   * An event occurred, fire its callbacks.
+   *
+   * @param {string} strEventName - The name of the event occurred.
+   **/
+
+  Background2.prototype.fireCallbacks = function ( strEventName ) {
+    strLog = 'Background2.fireCallbacks';
+    Log.add( strLog );
+
+    if ( typeof strEventName === 'string' ) {
+      var arrThisEventCallbacks = this._objCallbacks[ strEventName ];
+
+      for ( var i = 0, l = arrThisEventCallbacks.length; i < l; i++ ) {
+        arrThisEventCallbacks[ i ]();
+      }
     }
   };
 

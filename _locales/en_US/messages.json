@@ -115,15 +115,15 @@
 
   ,
   "messageFromDevelopersPageText": {
-    "message": "<button id=\"pwMessageReadCta\">Read message</button> from developers!"
+    "message": "<button id=\"pwMessageReadCta\">Read message</button> from developers"
   }
   ,
   "messageFromDevelopersPageTextShort": {
-    "message": "<button id=\"pwMessageReadCta\">Read message</button>!"
+    "message": "<button id=\"pwMessageReadCta\">Read message</button>"
   }
   ,
   "messageFromDevelopersTooltipText": {
-    "message": "Important message from developers!"
+    "message": "Important message from developers"
   }
 
   ,
@@ -372,6 +372,83 @@
               "message": "Mute / Unmute"
             }
     ,
+    "voiceControl": {
+      "message": "Voice control"
+    }
+      ,
+      "voiceControlMenuItem": {
+          "message": "Voice control"
+        , "description": "In some languages (for example, Russian), the name could be too long to fit on one line without wrapping when showing a “NEW” tag/label next to it."
+      }
+      ,
+      "voiceControlIntro1": {
+        "message": "PoziTone has added a new way for you to control your favorite online media players."
+      }
+      ,
+      "voiceControlIntro2": {
+        "message": "Now, besides keyboard shortcuts and buttons in the notification, you can use your voice to stop/resume playback, switch tracks, mute/unmute, add to playlist, etc."
+      }
+      ,
+      "step1": {
+        "message": "Step 1."
+      }
+      ,
+      "voiceControlAllow": {
+        "message": "Allow voice control"
+      }
+        ,
+        "voiceControlAllowInfo": {
+          "message": "After the permission is received, PoziTone will automatically restart for the changes to take effect"
+        }
+      ,
+      "step2": {
+        "message": "Step 2."
+      }
+      ,
+      "voiceControlDownload": {
+        "message": "Download voice control app (VCA)"
+      }
+      ,
+      "voiceControlInstall": {
+        "message": "Install VCA"
+      }
+      ,
+      "voiceControlOpen": {
+        "message": "Open VCA"
+      }
+      ,
+      "voiceControlConnect": {
+        "message": "Follow VCA instructions to connect VCA with your browser"
+      }
+      ,
+      "step3": {
+        "message": "Step 3."
+      }
+      ,
+      "voiceControlSettings": {
+        "message": "Set up voice control"
+      }
+      ,
+      "voiceControlAutoActivate": {
+        "message": "Automatically activate voice control app on PoziTone start or reload"
+      }
+      ,
+      "voiceControlAutoReactivate": {
+        "message": "(Not recommended!) Automatically reactivate voice control app on app exit or shutdown"
+      }
+      ,
+      "voiceControlActivate": {
+        "message": "Activate voice control"
+      }
+      ,
+      "voiceControlActivateCta": {
+        "message": "Activate voice control app"
+      }
+      ,
+      "voiceControlAlreadyActivated": {
+        "message": "Already activated"
+      }
+    ,
     "projects": {
       "message": "Our projects"
     }
@@ -433,7 +510,7 @@
         }
         ,
         "rateExtensionShort": {
-          "message": "Rate PoziTone"
+          "message": "I like PoziTone!"
         }
       ,
       "feedback": {
@@ -445,7 +522,7 @@
         }
         ,
         "feedbackIdeas": {
-          "message": "Please <a href=\"http://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
+          "message": "Please <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
         }
         ,
         "feedbackQuestions": {

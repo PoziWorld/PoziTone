@@ -115,15 +115,15 @@
 
   ,
   "messageFromDevelopersPageText": {
-    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button> от разработчиков!"
+    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button> от разработчиков"
   }
   ,
   "messageFromDevelopersPageTextShort": {
-    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button>!"
+    "message": "<button id=\"pwMessageReadCta\">Прочитать сообщение</button>"
   }
   ,
   "messageFromDevelopersTooltipText": {
-    "message": "Важное сообщение от разработчиков!"
+    "message": "Важное сообщение от разработчиков"
   }
 
   ,
@@ -372,6 +372,83 @@
               "message": "Выключить/Включить звук"
             }
     ,
+    "voiceControl": {
+      "message": "Голосовое управление"
+    }
+      ,
+      "voiceControlMenuItem": {
+          "message": "Голос. управление"
+        , "description": "Сокращённое название, чтобы отобразить в меню без переноса, когда рядом есть пометка/ярлычок «NEW»."
+      }
+      ,
+      "voiceControlIntro1": {
+        "message": "В PoziTone появился новый способ управления Вашими любимыми онлайн-медиаплеерами."
+      }
+      ,
+      "voiceControlIntro2": {
+        "message": "Теперь, помимо быстрых клавиш и кнопок в оповещении, Вы можете задействовать Ваш голос для остановки/возобновления воспроизведения, переключения треков, выключения/включения звука, добавления в плейлист и др."
+      }
+      ,
+      "step1": {
+        "message": "Шаг 1."
+      }
+      ,
+      "voiceControlAllow": {
+        "message": "Разрешите голосовое управление"
+      }
+        ,
+        "voiceControlAllowInfo": {
+          "message": "При получении разрешения PoziTone автоматически перезагрузится, чтобы изменения вступили в силу"
+        }
+      ,
+      "step2": {
+        "message": "Шаг 2."
+      }
+      ,
+      "voiceControlDownload": {
+        "message": "Скачайте приложение для голосового управления (ПГУ)"
+      }
+      ,
+      "voiceControlInstall": {
+        "message": "Установите ПГУ"
+      }
+      ,
+      "voiceControlOpen": {
+        "message": "Откройте ПГУ"
+      }
+      ,
+      "voiceControlConnect": {
+        "message": "Следуйте инструкциям ПГУ для установления связи между ПГУ и Вашим браузером"
+      }
+      ,
+      "step3": {
+        "message": "Шаг 3."
+      }
+      ,
+      "voiceControlSettings": {
+        "message": "Настройки голосового управления"
+      }
+      ,
+      "voiceControlAutoActivate": {
+        "message": "Автоматически активировать ПГУ при старте или перезагрузке PoziTone"
+      }
+      ,
+      "voiceControlAutoReactivate": {
+        "message": "(Не рекомендуется!) Автоматически повторно активировать ПГУ при закрытии или внезапной остановке оного"
+      }
+      ,
+      "voiceControlActivate": {
+        "message": "Активировать голосовое управление"
+      }
+      ,
+      "voiceControlActivateCta": {
+        "message": "Активировать ПГУ"
+      }
+      ,
+      "voiceControlAlreadyActivated": {
+        "message": "Уже активировано"
+      }
+    ,
     "projects": {
       "message": "Наши проекты"
     }
@@ -433,7 +510,7 @@
         }
         ,
         "rateExtensionShort": {
-          "message": "Оцените PoziTone"
+          "message": "Мне нравится PoziTone!"
         }
       ,
       "feedback": {
@@ -445,7 +522,7 @@
         }
         ,
         "feedbackIdeas": {
-          "message": "Пожалуйста, <a href=\"http://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>делитесь своими идеями</a>."
+          "message": "Пожалуйста, <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>делитесь своими идеями</a>."
         }
         ,
         "feedbackQuestions": {

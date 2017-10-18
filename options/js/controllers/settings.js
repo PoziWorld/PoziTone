@@ -2,6 +2,7 @@
 optionsControllers.controller( 'SettingsCtrl',  function(
     $scope
   , $rootScope
+  , $route
   , $routeParams
   , $location
 ) {
@@ -41,7 +42,8 @@ optionsControllers.controller( 'SettingsCtrl',  function(
   // If there are no enabled modules, show modules list - END
 
   var boolShowAdvancedSettings = $rootScope.objModules[ strConstGeneralSettingsSuffix ].boolShowAdvancedSettings
-    , strModuleId = $routeParams.moduleId
+    , strRouteModuleId = $routeParams.moduleId
+    , strModuleId = strRouteModuleId || strConstGeneralSettingsSuffix
     ;
 
   objModule = $rootScope.objModules[ strModuleId ];
@@ -110,9 +112,15 @@ optionsControllers.controller( 'SettingsCtrl',  function(
 
   $scope.format = 'M/d/yy h:mm:ss a';
 
+  // $includeContentLoaded doesn't trigger on Voice control page
+  if ( ! strRouteModuleId ) {
+    $settingsSaved = document.getElementById( 'settingsSaved' );
+  }
+
   // On settings page loaded
   $scope.$on( '$includeContentLoaded', function( $scope ) {
     Options.setPageValues();
+
     Page.localize( strPage, '#content' );
 
     strSubpage = 'settings';
@@ -144,6 +152,14 @@ optionsControllers.controller( 'SettingsCtrl',  function(
   };
 
   /**
+   * Force "page refresh" if some changes can be reflected only after refresh.
+   **/
+
+  $scope.forcePageRefresh = function() {
+    $route.reload();
+  };
+
+  /**
    * Save new setting value.
    *
    * @type    method
@@ -156,6 +172,8 @@ optionsControllers.controller( 'SettingsCtrl',  function(
    *            then the rest on the current Options page.
    * @param   funcDoBefore
    *            Optional. Additional logic to do before saving.
+   * @param   funcDoAfter
+   *            Optional. Additional logic to do after saving.
    * @return  void
    **/
 
@@ -164,8 +182,9 @@ optionsControllers.controller( 'SettingsCtrl',  function(
     , strGroupModel
     , strModuleOverride
     , funcDoBefore
+    , funcDoAfter
   ) {
-    function onSettingChange( $event, strGroupModel, strModuleOverride ) {
+    function onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter ) {
       Options.onSettingChange( $event, strModuleOverride );
 
       var _target     = $event.target
@@ -217,10 +236,14 @@ optionsControllers.controller( 'SettingsCtrl',  function(
           }
         );
       }
+
+      if ( typeof funcDoAfter === 'function' ) {
+        funcDoAfter();
+      }
     }
 
     if ( typeof funcDoBefore !== 'function' ) {
-      onSettingChange( $event, strGroupModel, strModuleOverride );
+      onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter );
     }
     else {
       var promise = new Promise( function( funcResolve, funcReject ) {
@@ -229,7 +252,7 @@ optionsControllers.controller( 'SettingsCtrl',  function(
 
       promise
         .then( function () {
-          onSettingChange( $event, strGroupModel, strModuleOverride );
+          onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter );
         } )
         .catch( function () {
           // TODO

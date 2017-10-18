@@ -94,7 +94,7 @@ var Page = {
           var strUrl  = strConstMessageUrl
                           .replace(
                               strConstVersionParam
-                            , strConstExtensionVersion
+                            , strConstExtensionVersionName
                           )
                           .replace(
                               strConstLangParam

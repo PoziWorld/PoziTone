@@ -357,7 +357,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
                   );
                 }
                 else {
-                  objLogDetails.boolArePermissionsGranted = false;
+                  objLogDetails.boolArePermissionsRemoved = false;
                   objLogDetails.boolAreStorageItemsSet = false;
 
                   onFinished();
@@ -366,7 +366,7 @@ optionsControllers.controller( 'SettingsModulesListCtrl', function( $scope, $roo
               }
             , function() {
                 objLogDetails.boolIsRuntimeLastErrorNotSet = false;
-                objLogDetails.boolArePermissionsGranted = false;
+                objLogDetails.boolArePermissionsRemoved = false;
                 objLogDetails.boolAreStorageItemsSet = false;
 
                 onFinished();

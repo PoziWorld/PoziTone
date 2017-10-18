@@ -211,6 +211,7 @@ var Popup = {
                   , strProvider : strProvider
                   , strLanguage : strConstExtensionLanguage
                   , strVersion : strConstExtensionVersion
+                  , strVersionName : strConstExtensionVersionName
                 }
             }
           );
@@ -239,6 +240,7 @@ var Popup = {
                     strAction : 'copyToClipboard'
                   , strLanguage : strConstExtensionLanguage
                   , strVersion : strConstExtensionVersion
+                  , strVersionName : strConstExtensionVersionName
                 }
             }
           );

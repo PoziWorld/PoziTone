@@ -29,6 +29,7 @@ const
   , objConstExtensionManifest     = chrome.runtime.getManifest()
   , strConstExtensionName         = objConstExtensionManifest.name
   , strConstExtensionVersion      = objConstExtensionManifest.version
+  , strConstExtensionVersionName  = objConstExtensionManifest.version_name || strConstExtensionVersion
   , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
 
     // Browser & UI
@@ -75,8 +76,8 @@ const
     // Developers Message: Browser Action settings (tooltip, badge)
   , strConstTitleOnDevelopersMessageText  =
       chrome.i18n.getMessage( 'messageFromDevelopersTooltipText' )
-  , strConstBadgeOnDevelopersMessageText  = '!'
-  , strConstBadgeOnDevelopersMessageColor = [ 255, 0, 0, 122 ]
+  , strConstBadgeOnDevelopersMessageText  = '1'
+  , strConstBadgeOnDevelopersMessageColor = [ 44, 160, 44, 255 ]
 
     // Developers Message: Alarm
   , strConstDevelopersMessageAlarmName          = 'developersMessage'
@@ -93,6 +94,7 @@ const
   , objConstUserSetUp             = boolConstIsBowserAvailable
       ? {
             currentVersion        : strConstExtensionVersion
+          , currentVersionName    : strConstExtensionVersionName
           , browserName           : bowser.name
           , browserVersion        : bowser.version
           , browserVersionFull    : bowser.versionFull

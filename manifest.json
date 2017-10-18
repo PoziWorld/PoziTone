@@ -43,6 +43,7 @@
       , "*://*.vk.com/"
       , "*://*.vk.me/"
       , "management"
+      , "nativeMessaging"
       , "tabs"
     ]
   , "browser_action"            : {
@@ -95,7 +96,7 @@
         }
     }
   , "background"                : {
-        "persistent"            : false
+        "persistent"            : true
       , "scripts"               : [
             "global/js/tracking.js"
           , "global/js/bowser.js"
@@ -107,6 +108,7 @@
           , "global/js/background.js"
           , "global/js/background-v2.js"
           , "global/js/punycode.min.js"
+          , "global/js/voice-control.js"
         ]
     }
   , "options_page"              : "options/index.html"

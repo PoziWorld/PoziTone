@@ -110,6 +110,18 @@
       position: fixed !important;
     }
 
+  .new::after
+    {
+      content: 'NEW'; /* TODO: This might be not i18n-friendly */
+      position: absolute;
+      font-size: xx-small;
+      margin: -.5rem 0 0 .5rem;
+      color: #2ca02c;
+      font-weight: 700;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
 /* =============================================================================
 
   Header

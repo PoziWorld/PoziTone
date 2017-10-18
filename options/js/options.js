@@ -121,12 +121,11 @@ var Options = {
    * @return  void
    **/
   setPageValues : function() {
-    $allInputs          = document.querySelectorAll( '.subpage input' );
-    intInputs           = $allInputs.length;
+    $allInputs = document.querySelectorAll( '.subpage input' );
+    intInputs = $allInputs.length;
 
-    $settingsSaved      = document.getElementById( strSettingsSavedId );
-    $settingsSubpages   =
-      document.getElementsByClassName( strSettingsSubpageClass );
+    $settingsSaved = document.getElementById( strSettingsSavedId );
+    $settingsSubpages = document.getElementsByClassName( strSettingsSubpageClass );
     intSettingsSubpages = $settingsSubpages.length;
   }
   ,

@@ -28,6 +28,9 @@
       convertPercentToVolume()
       changeVolume()
       getVolumeDeltaSettings()
+      getVoiceControlStatus()
+      activateVoiceControl()
+      addOnVoiceControlDeactivationListener()
       isEmpty()
 
  ============================================================================ */
@@ -36,7 +39,7 @@
   'use strict';
 
   function Api() {
-    var strVersion = '0.4';
+    var strVersion = '0.5.0';
 
     this.strMediaInfoDivider = ' – ';
     this.strCallDivider = '/';
@@ -734,7 +737,7 @@
   };
 
   /**
-   * Open module settings subpage in PoziTone Options page.
+   * Get module settings specific to volume delta.
    *
    * @type    method
    * @param   strDirection
@@ -779,6 +782,122 @@
 
           if ( typeof funcSetVolume === 'function' ) {
             funcSetVolume( intVolume );
+          }
+        }
+    );
+  };
+
+  /**
+   * Generic callback.
+   *
+   * @callback Api~funcCallback
+   */
+
+  /**
+   * Get status of voice control: whether it's enabled/allowed and currently connected.
+   *
+   * Note: doesn't require .init().
+   *
+   * @param {Api~funcCallback} [funcCallback] - Callback on voice control status received.
+   **/
+
+  Api.prototype.getVoiceControlStatus = function ( funcCallback ) {
+    var _this = this;
+
+    _this.sendMessage(
+        {
+          objPozitoneApiRequest : {
+              strVersion : _this.getApiVersion()
+            , strCall : _this.createCallString( [
+                  'voice-control'
+                , 'status'
+              ] )
+            , strMethod : 'GET'
+          }
+        }
+      , function ( objStatus ) {
+          if ( ! _this.isEmpty( objStatus ) && typeof funcCallback === 'function' ) {
+            funcCallback( objStatus );
+          }
+        }
+    );
+  };
+
+  /**
+   * Callback in case of success.
+   *
+   * @callback Api~funcSuccessCallback
+   */
+
+  /**
+   * Callback in case of error.
+   *
+   * @callback Api~funcErrorCallback
+   */
+
+  /**
+   * Activate voice control app.
+   *
+   * Note: only for internal use within PoziTone.
+   *
+   * @param {Api~funcSuccessCallback} [funcSuccessCallback] - Function to run if successfully connected.
+   * @param {Api~funcErrorCallback} [funcErrorCallback] - Function to run if didn't connect.
+   **/
+
+  Api.prototype.activateVoiceControl = function ( funcSuccessCallback, funcErrorCallback ) {
+    var _this = this;
+
+    _this.sendMessage(
+        {
+          objPozitoneApiRequest : {
+              strVersion : _this.getApiVersion()
+            , strCall : _this.createCallString( [
+                  'voice-control'
+                , 'status'
+              ] )
+            , strMethod : 'POST'
+            , objData : {
+                boolIsConnected : true
+              }
+          }
+        }
+      , function ( boolIsConnected ) {
+          if ( typeof boolIsConnected === 'boolean' && boolIsConnected ) {
+            if ( typeof funcSuccessCallback === 'function' ) {
+              funcSuccessCallback();
+            }
+          }
+          else if ( typeof funcErrorCallback === 'function' ) {
+            funcErrorCallback();
+          }
+        }
+    );
+  };
+
+  /**
+   * Get notified when voice control app gets shut down.
+   *
+   * @param {Api~funcCallback} [funcCallback] - Function to run when voice control gets deactivated.
+   **/
+
+  Api.prototype.addOnVoiceControlDeactivationListener = function ( funcCallback ) {
+    var _this = this;
+
+    _this.sendMessage(
+        {
+          objPozitoneApiRequest : {
+              strVersion : _this.getApiVersion()
+            , strCall : _this.createCallString( [
+                  'voice-control'
+                , 'status'
+                , 'deactivation'
+              ] )
+            , strMethod : 'GET'
+          }
+        }
+      , function () {
+          if ( typeof funcCallback === 'function' ) {
+            funcCallback();
           }
         }
     );

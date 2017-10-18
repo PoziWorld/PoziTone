@@ -108,7 +108,7 @@
     "message": "Brano precedente"
   },
   "feedbackIdeas": {
-    "message": " <a href=\"http://feedback.pozitone.com/\" target=\"blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>Condividi le tue idee</a>."
+    "message": " <a href=\"https://feedback.pozitone.com/\" target=\"blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>Condividi le tue idee</a>."
   },
   "optionsSettingsNotificationButtonsMuteUnmute": {
     "message": "Muta / Attiva audio"
@@ -129,7 +129,7 @@
     "message": "Vota PoziTone"
   },
   "messageFromDevelopersPageText": {
-    "message": "<button id=\"pwMessageReadCta\">Leggi messaggio</button> dagli sviluppatori!"
+    "message": "<button id=\"pwMessageReadCta\">Leggi messaggio</button> dagli sviluppatori"
   },
   "notificationButtonsUnmuteTitle": {
     "message": "Attiva audio"
@@ -245,7 +245,7 @@
     "message": "Brano precedente <small>(richiesta l'autorizzazione sul sito)</small>"
   },
   "messageFromDevelopersTooltipText": {
-    "message": "Messaggio importante dagli sviluppatori!"
+    "message": "Messaggio importante dagli sviluppatori"
   },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Quando non ci sono informazioni sul brano corrente (mostrato come \"...\" sul sito)"
