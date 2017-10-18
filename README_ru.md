@@ -60,7 +60,7 @@ ___
 * [Google Play Музыка](https://play.google.com/music)
 * сеть [AudioAddict](http://www.audioaddict.com):
   * [ClassicalRadio.com](http://www.classicalradio.com)
-  * [Digitally Imported](http://www.di.fm) (DI, DI.FM, DI Radio)
+  * [Digitally Imported](https://www.di.fm) (DI, DI.FM, DI Radio)
   * [JAZZRADIO.com](http://www.jazzradio.com)
   * [RadioTunes](http://www.radiotunes.com)
   * [ROCKRADIO.COM](http://www.rockradio.com)
@@ -239,7 +239,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 
 Мы ценим Ваше мнение!
 
-- Пожалуйста, [делитесь своими идеями](http://feedback.pozitone.com/).
+- Пожалуйста, [делитесь своими идеями](https://feedback.pozitone.com/).
 - Не стесняйтесь [задавать вопросы](mailto:feedback@pozitone.com).
 - [Сообщения об ошибках](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) ценны!
 - Нам нравится [похвала](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), кому нет? :)
@@ -251,6 +251,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 PoziTone в социальных сетях
 --------
 
+- [PoziTone в Telegram](https://t.me/PoziTone)
 - [PoziTone ВКонтакте](https://vk.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone на Facebook](https://facebook.com/PoziTone)

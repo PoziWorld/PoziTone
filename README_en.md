@@ -59,7 +59,7 @@ Supported online media players
 * [Google Play Music](https://play.google.com/music)
 * [AudioAddict](http://www.audioaddict.com) network:
   * [ClassicalRadio.com](http://www.classicalradio.com)
-  * [Digitally Imported](http://www.di.fm) (DI, DI.FM, or DI Radio)
+  * [Digitally Imported](https://www.di.fm) (DI, DI.FM, or DI Radio)
   * [JAZZRADIO.com](http://www.jazzradio.com)
   * [RadioTunes](http://www.radiotunes.com)
   * [ROCKRADIO.COM](http://www.rockradio.com)
@@ -230,7 +230,7 @@ Feedback
 
 We appreciate your feedback!
 
-- Please [share your ideas](http://feedback.pozitone.com/).
+- Please [share your ideas](https://feedback.pozitone.com/).
 - Don't be shy to [ask questions](mailto:feedback@pozitone.com).
 - [Bug reports](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support) ([for Opera](https://addons.opera.com/extensions/details/pozitone/?reports#feedback-container)) are valuable!
 - We like [praises](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)), who doesn't? :)
@@ -242,6 +242,7 @@ We appreciate your feedback!
 PoziTone on social networks
 --------
 
+- [PoziTone on Telegram](https://t.me/PoziTone)
 - [PoziTone on VK](https://vk.com/PoziTone)
 - [PoziTone on Twitter](https://twitter.com/PoziTone)
 - [PoziTone on Facebook](https://facebook.com/PoziTone)
