@@ -56,7 +56,7 @@
                 class="menuItemWrap"
                 id="menuItemWrap_{{objModule.id}}"
                 ng-repeat="objModuleTmp in arrModulesNames"
-                ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && objModule.type === 'built-in'"
+                ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && objModule.type === 'built-in' && objModule.boolIsAvailable"
                 module-menu-item-directive
                   >
                 <a

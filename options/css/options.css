@@ -341,6 +341,7 @@
     }
   .modulesListItem
     {
+      position: relative;
       padding: .75rem .75rem .75rem 7.75rem;
       min-height: 5rem;
       border-bottom: .1rem dashed #f0f0f0;
@@ -357,6 +358,18 @@
   .modulesListItem:hover
     {
       background-color: #fafafa;
+    }
+  .unavailable.modulesListItem::after
+    {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #ccc;
+      opacity: .4;
     }
   .modulesListItemImg
     {

@@ -73,7 +73,8 @@ var Global                        = {
   // Embedded modules (replicates manifest's "content_scripts")
   , objModules : {
         ru_101 : {
-            objRegex : /^(http:\/\/|https:\/\/)101.ru\/.*/
+            boolIsAvailable : false
+          , objRegex : /^(http:\/\/|https:\/\/)101.ru\/.*/
           , strDomain : 'https://101.ru/'
           , arrHosts : [
                 '101.ru'
@@ -1719,10 +1720,11 @@ var Global                        = {
 
     ( boolExternal ? StorageLocal : StorageSync ).get( strObjSettings, function( objReturn ) {
       var objModuleSettings = objReturn[ strObjSettings ];
+      var boolIsAvailable = objModuleSettings.boolIsAvailable;
 
-      if (  typeof objModuleSettings === 'object'
-        &&  objModuleSettings.boolIsEnabled
-      ) {
+      boolIsAvailable = typeof boolIsAvailable !== 'boolean' || boolIsAvailable;
+
+      if ( typeof objModuleSettings === 'object' && boolIsAvailable && objModuleSettings.boolIsEnabled ) {
         strLog = 'isModuleEnabled, ' + strCallerLog;
         Log.add( strLog + strLogSuccess, intTabId );
 

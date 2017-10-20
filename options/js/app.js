@@ -105,6 +105,7 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
     for ( var strKey in objStorage ) {
       if ( objStorage.hasOwnProperty( strKey ) && strKey.indexOf( strConstSettingsPrefix ) === 0 ) {
         var strModule = strKey.replace( strConstSettingsPrefix, '' );
+        var objGlobalModule = Global.objModules[ strModule ];
         var objModule = objStorage[ strKey ];
 
         objModule.id = strModule;
@@ -114,7 +115,7 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
          */
         if ( Storage === StorageSync ) {
           // Check if built-in module is available
-          if ( ! Global.objModules[ strModule ] && strModule !== strConstGeneralSettingsSuffix ) {
+          if ( ! objGlobalModule && strModule !== strConstGeneralSettingsSuffix ) {
             continue;
           }
 
@@ -123,6 +124,12 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
           objModule.type = 'built-in';
           objModule.caption = chrome.i18n.getMessage( strModuleVar );
           objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+
+          if ( objGlobalModule ) {
+            var boolIsAvailable = objGlobalModule.boolIsAvailable;
+
+            objModule.boolIsAvailable = typeof boolIsAvailable !== 'boolean' || boolIsAvailable;
+          }
 
           if ( strModule !== strConstGeneralSettingsSuffix ) {
             arrModulesNames.push( {

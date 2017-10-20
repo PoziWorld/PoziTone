@@ -46,6 +46,7 @@
           <p
             ng-repeat="objModuleTmp in arrModulesNames"
             ng-if="( objModule = objModules[ objModuleTmp[ 'strModuleId' ] ] ) && ( strModuleId = objModule.id ) !== '' && ( objGlobalModule = objGlobalModules[ strModuleId ] ) != undefined && strModuleId !== 'general'"
+            ng-class="{ unavailable: ( boolIsAvailable = objGlobalModule.boolIsAvailable ) != undefined && ! boolIsAvailable }"
             class="modulesListItem"
             id="modulesListItem_{{strModuleId}}"
             localize
@@ -65,7 +66,16 @@
             <a
               ng-href="#/settings/modules/built-in/{{strModuleId}}"
               class="modulesListItemCaption"
-                >{{strCaption = objModule.caption}}</a>
+                >
+              <span
+                ng-if="boolIsAvailable != undefined && ! boolIsAvailable"
+                class="modulesListItemCheckboxCopy"
+                i18n-content="unavailable"
+                  >
+                {{strCaption = objModule.caption}}
+              </span>
+              {{strCaption = objModule.caption}}
+            </a>
             <br>
             <span
               class="modulesListItemHosts i18nNoInner i18nTitle"

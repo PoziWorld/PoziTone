@@ -826,6 +826,10 @@
     "message": "Enabled"
   }
   ,
+  "unavailable": {
+    "message": "(Unavailable)"
+  }
+  ,
   "connected": {
     "message": "Connected"
   }

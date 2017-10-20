@@ -826,6 +826,10 @@
     "message": "Подключён"
   }
   ,
+  "unavailable": {
+    "message": "(Недоступен)"
+  }
+  ,
   "connected": {
     "message": "Подсоединён"
   }
