@@ -2,13 +2,12 @@ var optionsApp = angular.module(
     'optionsApp'
   , [ 'ngRoute', 'optionsControllers' ]
   , function( $compileProvider ) {
-      var
-          currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist()
-        , newImgSrcSanitizationWhiteList =
+      var currentImgSrcSanitizationWhitelist = $compileProvider.imgSrcSanitizationWhitelist();
+      var newImgSrcSanitizationWhiteList =
               currentImgSrcSanitizationWhitelist.toString().slice( 0, -1 )
             + '|chrome-extension:'
             + currentImgSrcSanitizationWhitelist.toString().slice( -1 )
-        ;
+            ;
 
       $compileProvider
         .imgSrcSanitizationWhitelist( newImgSrcSanitizationWhiteList )
@@ -19,215 +18,280 @@ var optionsApp = angular.module(
     }
 );
 
-optionsApp.config( [ '$routeProvider', function( $routeProvider ) {
+/**
+ * Resolve promise.
+ *
+ * @callback funcResolve
+ */
+
+/**
+ * Reject promise.
+ *
+ * @callback funcReject
+ */
+
+optionsApp.service( 'OptionsPageToOpenService', function( $rootScope, $location ) {
+  var promise = new Promise( function( funcResolve, funcReject ) {
+    Global.getStorageItems(
+        StorageLocal
+      , 'strOptionsPageToOpen'
+      , strLog
+      , function( objReturn ) {
+          var strOptionsPageToOpen = objReturn.strOptionsPageToOpen;
+
+          if ( strOptionsPageToOpen !== '' ) {
+            var strPath = '/' + strOptionsPageToOpen;
+
+            if ( strOptionsPageToOpen === 'modulesBuiltIn' ) {
+              strPath = '/settings/modules/built-in';
+            }
+            else if ( strOptionsPageToOpen === 'modulesExternal' ) {
+              strPath = '/settings/modules/external';
+            }
+            else if ( strOptionsPageToOpen === 'voiceControl' ) {
+              strPath = '/settings/voice-control';
+            }
+
+            var objItems = {
+                boolOpenOptionsPageOnRestart : false
+              , strOptionsPageToOpen : ''
+            };
+
+            Global.setStorageItems(
+                StorageLocal
+              , objItems
+              , strLog + strConstGenericStringSeparator + 'resetOptionsPageToOpen'
+              , function() {
+                  funcResolve();
+
+                  $rootScope.boolPreventLocationOverriding = true;
+                  $location.path( strPath );
+                }
+              , undefined
+              , objItems
+              , true
+            );
+          }
+          else {
+            funcResolve();
+          }
+        }
+    );
+  } );
+
+  return {
+      promise : promise
+  };
+} );
+
+/**
+ * Get built-in and external connected modules.
+ *
+ * @todo Replace with Global.getModules().
+ *
+ * @param {Storage} Storage - Local or Sync Storage API.
+ * @param $rootScope
+ * @param {funcResolve} funcResolve - Resolve promise.
+ * @param {funcReject} funcReject - Reject promise.
+ **/
+
+function getModules( Storage, $rootScope, funcResolve, funcReject ) {
+  var arrModulesNames = $rootScope.arrModulesNames;
+
+  /**
+   * @todo Switch to Global.getStorageItems().
+   */
+  Storage.get( null, function( objStorage ) {
+    for ( var strKey in objStorage ) {
+      if ( objStorage.hasOwnProperty( strKey ) && strKey.indexOf( strConstSettingsPrefix ) === 0 ) {
+        var strModule = strKey.replace( strConstSettingsPrefix, '' );
+        var objModule = objStorage[ strKey ];
+
+        objModule.id = strModule;
+
+        /**
+         * @todo Avoid confusion when StorageSync === StorageLocal.
+         */
+        if ( Storage === StorageSync ) {
+          // Check if built-in module is available
+          if ( ! Global.objModules[ strModule ] && strModule !== strConstGeneralSettingsSuffix ) {
+            continue;
+          }
+
+          var strModuleVar = 'module_' + strModule;
+
+          objModule.type = 'built-in';
+          objModule.caption = chrome.i18n.getMessage( strModuleVar );
+          objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+
+          if ( strModule !== strConstGeneralSettingsSuffix ) {
+            arrModulesNames.push( {
+                strModuleId : strModule
+              , strModuleName :  objModule.caption
+            } );
+          }
+
+          $rootScope.intModulesBuiltIn++;
+        }
+        else {
+          var strModuleExternal = strModule.substr( 0, strModule.lastIndexOf( strConstExternalModuleSeparator ) );
+
+          objModule.type = 'external';
+          objModule.caption = strModuleExternal;
+          /**
+           * @todo Get i18n variotions of name.
+           */
+          objModule.name = objStorage[ strKey ].strName || strModuleExternal;
+
+          arrModulesNames.push( {
+              strModuleId : strModule
+            , strModuleName :  objModule.name
+          } );
+
+          $rootScope.intModulesExternal++;
+
+          /**
+           * @todo Avoid name clashes.
+           */
+          $rootScope.objExternalModules[ strModuleExternal ] = objModule;
+        }
+
+        // Keep settings in $rootScope
+        $rootScope.objModules[ strModule ] = objModule;
+      }
+    }
+
+    /*
+     * Sort modules by name disregarding letter case.
+     *
+     * Based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Sorting_with_map
+     */
+
+    // temporary array holds objects with position and sort-value
+    var mapped = arrModulesNames.map( function( el, i ) {
+      return { index: i, value: el.strModuleName.toLowerCase() };
+    } );
+
+    // sorting the mapped array containing the reduced values
+    mapped.sort( function( a, b ) {
+      return +( a.value > b.value ) || +( a.value === b.value ) - 1;
+    } );
+
+    // container for the resulting order
+    $rootScope.arrModulesNames = mapped.map( function( el ) {
+      return arrModulesNames[ el.index ];
+    } );
+
+    funcResolve();
+  } );
+}
+
+optionsApp.service( 'ModulesBuiltInService', function( $rootScope ) {
+  var promise = new Promise( function( funcResolve, funcReject ) {
+    getModules( StorageSync, $rootScope, funcResolve, funcReject );
+  } );
+
+  return {
+      promise : promise
+  };
+} );
+
+optionsApp.service( 'ModulesExternalService', function( $rootScope ) {
+  var promise = new Promise( function( funcResolve, funcReject ) {
+    getModules( StorageLocal, $rootScope, funcResolve, funcReject );
+  } );
+
+  return {
+      promise : promise
+  };
+} );
+
+optionsApp.config( function( $routeProvider ) {
+  var resolve = {
+      'OptionsPageToOpenServiceData' : function( OptionsPageToOpenService ) {
+        return OptionsPageToOpenService.promise;
+      }
+    , 'ModulesBuiltInServiceData' : function( ModulesBuiltInService ) {
+        return ModulesBuiltInService.promise;
+      }
+    , 'ModulesExternalServiceData' : function( ModulesExternalService ) {
+        return ModulesExternalService.promise;
+      }
+  };
+
   // IMPORTANT!
   // If any URLs to change, also change logic in optionsApp.run
   $routeProvider
     .when( '/settings/voice-control', {
         templateUrl : 'partials/voice-control.html'
-      , controller  : 'VoiceControlCtrl'
+      , controller : 'VoiceControlCtrl'
+      , resolve : resolve
     } )
     .when( '/settings/:moduleId', {
         templateUrl : 'partials/settings.html'
-      , controller  : 'SettingsCtrl'
+      , controller : 'SettingsCtrl'
+      , resolve : resolve
     } )
     .when( '/settings/modules/built-in', {
         templateUrl : 'partials/settings-modules-list.html'
-      , controller  : 'SettingsModulesListCtrl'
+      , controller : 'SettingsModulesListCtrl'
+      , resolve : resolve
     } )
     .when( '/settings/modules/built-in/:moduleId', {
         templateUrl : 'partials/settings.html'
-      , controller  : 'SettingsCtrl'
+      , controller : 'SettingsCtrl'
+      , resolve : resolve
     } )
     .when( '/settings/modules/external', {
         templateUrl : 'partials/external-modules-list.html'
-      , controller  : 'ExternalModulesListCtrl'
+      , controller : 'ExternalModulesListCtrl'
+      , resolve : resolve
     } )
     .when( '/settings/modules/external/:moduleId', {
         templateUrl : 'partials/settings.html'
-      , controller  : 'SettingsCtrl'
+      , controller : 'SettingsCtrl'
+      , resolve : resolve
     } )
     .when( '/projects', {
         templateUrl : 'partials/projects.html'
-      , controller  : 'ProjectsCtrl'
+      , controller : 'ProjectsCtrl'
+      , resolve : resolve
     } )
     .when( '/contribution', {
         templateUrl : 'partials/contribution.html'
-      , controller  : 'ContributionCtrl'
+      , controller : 'ContributionCtrl'
+      , resolve : resolve
     } )
     .when( '/feedback', {
         templateUrl : 'partials/feedback.html'
-      , controller  : 'FeedbackCtrl'
+      , controller : 'FeedbackCtrl'
+      , resolve : resolve
     } )
     .when( '/about', {
         templateUrl : 'partials/about.html'
-      , controller  : 'AboutCtrl'
+      , controller : 'AboutCtrl'
+      , resolve : resolve
     } )
     .when( '/help', {
         templateUrl : 'partials/help.html'
-      , controller  : 'HelpCtrl'
+      , controller : 'HelpCtrl'
+      , resolve : resolve
     } )
     .otherwise( {
         redirectTo  : '/settings/general'
     } )
     ;
-} ] );
+} );
 
 optionsApp.run( function( $rootScope, $location ) {
   var strLog = strLog = 'optionsApp.run';
   Log.add( strLog, $location );
 
-  Global.getStorageItems(
-      StorageLocal
-    , 'strOptionsPageToOpen'
-    , strLog
-    , function( objReturn ) {
-        var strOptionsPageToOpen = objReturn.strOptionsPageToOpen;
-
-        if ( strOptionsPageToOpen !== '' ) {
-          var strPath = '/' + strOptionsPageToOpen;
-
-          if ( strOptionsPageToOpen === 'modulesBuiltIn' ) {
-            strPath = '/settings/modules/built-in';
-          }
-          else if ( strOptionsPageToOpen === 'modulesExternal' ) {
-            strPath = '/settings/modules/external';
-          }
-          else if ( strOptionsPageToOpen === 'voiceControl' ) {
-            strPath = '/settings/voice-control';
-          }
-
-          var objItems = {
-              boolOpenOptionsPageOnRestart : false
-            , strOptionsPageToOpen : ''
-          };
-
-          Global.setStorageItems(
-              StorageLocal
-            , objItems
-            , strLog + strConstGenericStringSeparator + 'resetOptionsPageToOpen'
-            , function() {
-                $rootScope.boolPreventLocationOverriding = true;
-                $location.path( strPath );
-              }
-            , undefined
-            , objItems
-            , true
-          );
-        }
-      }
-  );
-
-  /**
-   * Get built-in and external connected modules.
-   * 
-   * TODO: Replace with Global.getModules()
-   *
-   * @type    method
-   * @param   Storage
-   *            Local or Sync Storage API.
-   * @return  void
-   **/
-  $rootScope.getModules = function( Storage ) {
-    if ( typeof $rootScope.objModules !== 'object' || Array.isArray( $rootScope.objModules ) ) {
-      $rootScope.objModules = {};
-    }
-
-    if ( typeof $rootScope.objExternalModules !== 'object' || Array.isArray( $rootScope.objExternalModules ) ) {
-      $rootScope.objExternalModules = {};
-    }
-
-    var arrModulesNames = $rootScope.arrModulesNames;
-
-    $rootScope.intModulesBuiltIn = 0;
-    $rootScope.intModulesExternal = 0;
-
-    Storage.get( null, function( objStorage ) {
-      for ( var strKey in objStorage ) {
-        if (  objStorage.hasOwnProperty( strKey )
-          &&  strKey.indexOf( strConstSettingsPrefix ) === 0
-        ) {
-          var strModule = strKey.replace( strConstSettingsPrefix, '' )
-            , objModule = objStorage[ strKey ]
-            ;
-
-          objModule.id = strModule;
-
-          // TODO: Avoid confusion when StorageSync === StorageLocal
-          if ( Storage === StorageSync ) {
-            // Check if built-in module is available
-            if (  ! Global.objModules[ strModule ]
-              &&  strModule !== strConstGeneralSettingsSuffix
-            ) {
-              continue;
-            }
-
-            var strModuleVar = 'module_' + strModule;
-
-            objModule.type = 'built-in';
-            objModule.caption = chrome.i18n.getMessage( strModuleVar );
-            objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
-
-            if ( strModule !== strConstGeneralSettingsSuffix ) {
-              arrModulesNames.push( {
-                  strModuleId : strModule
-                , strModuleName :  objModule.caption
-              } );
-            }
-
-            $rootScope.intModulesBuiltIn++;
-          }
-          else {
-            var strModuleExternal = strModule.substr( 0, strModule.lastIndexOf( strConstExternalModuleSeparator ) );
-
-            objModule.type = 'external';
-            objModule.caption = strModuleExternal;
-            // TODO: Get i18n variotions of name
-            objModule.name = objStorage[ strKey ].strName || strModuleExternal;
-
-            arrModulesNames.push( {
-                strModuleId : strModule
-              , strModuleName :  objModule.name
-            } );
-
-            $rootScope.intModulesExternal++;
-
-            // TODO: Avoid name clashes
-            $rootScope.objExternalModules[ strModuleExternal ] = objModule;
-          }
-
-          // Keep settings in $rootScope
-          $rootScope.objModules[ strModule ] = objModule;
-        }
-      }
-
-      /*
-       * Sort modules by name disregarding letter case.
-       *
-       * Based on https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Sorting_with_map
-       */
-
-      // temporary array holds objects with position and sort-value
-      var mapped = arrModulesNames.map( function( el, i ) {
-        return { index: i, value: el.strModuleName.toLowerCase() };
-      } );
-
-      // sorting the mapped array containing the reduced values
-      mapped.sort( function( a, b ) {
-        return +( a.value > b.value ) || +( a.value === b.value ) - 1;
-      } );
-
-      // container for the resulting order
-      $rootScope.arrModulesNames = mapped.map( function( el ) {
-        return arrModulesNames[ el.index ];
-      } );
-    } );
-  };
-
-  // Get available modules on load
+  $rootScope.objModules = {};
+  $rootScope.objExternalModules = {};
   $rootScope.arrModulesNames = [];
-  $rootScope.getModules( StorageSync );
-  $rootScope.getModules( StorageLocal );
+  $rootScope.intModulesBuiltIn = 0;
+  $rootScope.intModulesExternal = 0;
 
   // Track external links clicks
   var $$externalLinks = null
@@ -419,10 +483,9 @@ optionsApp.controller( 'MenuController', function( $scope, $rootScope, $location
       else {
         function delayedScrollIntoViewIfNeeded() {
           scrollIntoViewIfNeeded( $active );
-
-          window.removeEventListener( 'resize', delayedScrollIntoViewIfNeeded );
         }
 
+        window.removeEventListener( 'resize', delayedScrollIntoViewIfNeeded );
         window.addEventListener( 'resize', delayedScrollIntoViewIfNeeded );
       }
     }
