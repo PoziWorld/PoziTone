@@ -51,9 +51,10 @@
 const
     strPlayerId = 'player'
   , strPlayerContainerId = 'webplayer-region'
-  , strStationTitleContainerSelector = '#webplayer-region .channel-detail'
+  , strStationTitleContainerSelector = '#webplayer-region .context-region'
   , strStationTitleSelector = '.title'
   , strStationDescriptionSelector = '#hero .desc'
+  , strStationLogoSelector = '#webplayer-region .channel-region .artwork img'
 
   , strPlayStopButtonSelector = '#webplayer-region .track-region .controls .ico'
   , strIsPlayingClass = 'icon-pause'
@@ -65,17 +66,21 @@ const
       strFavoriteButtonContainerSelector + ' .vote-btn.up'
   , strFavoriteButtonSuccessClass = 'active'
 
+  , strMuteUnmuteButtonSelector = '[data-toggle-mute]'
+  , strVolumeHandleSelector = '#webplayer-region .handle'
   , intVolumeBeforeMutedDefault = 80
   , strMuteClass = 'icon-sound'
   , strUnmuteClass = 'icon-mute'
-  , strTrackInfoVolumeMuted = 'Volume: Muted'
+  , strTrackInfoVolumeMuted = 'volume: muted'
   , strTrackInfoVolumePercentageRegExp = /(Volume: )+([0-9]{1,3})+(%)/
 
+  , strTrackInfoChannelNameSelector = '.channel-name'
   , strTrackInfoPlaceholder1 = 'connecting...'
   , strTrackInfoPlaceholder2 = 'stopped'
 
-  , $playerContainer =
-      document.getElementById( strPlayerContainerId )
+  , strKbpsInfoSelector = '#settings-bitrate input:checked'
+
+  , $playerContainer = document.getElementById( strPlayerContainerId )
 
   , strModule = 'fm_di'
   , strModuleSettings = strConstSettingsPrefix + strModule
@@ -84,6 +89,7 @@ const
 var
     // On stop player removes track info, so store it in a var
     strTrackInfo
+  , boolIsStationTitleContainerBeingObserved = false
   , $stationTitleContainer
   , $stationTitle
   , strStationName
@@ -100,7 +106,7 @@ var
   , $kbpsInfo
   , $volumeHandle
 
-  , boolIsLoggedInMenuPresent
+  , boolIsLoggedInMenuPresent = document.contains( document.getElementById( 'account-nav' ) )
   , intKbps
 
   , DisconnectableObserver = null
@@ -150,6 +156,10 @@ var
    **/
   init : function() {
     this.initPlayerContainerObserver();
+    this.initPlayerStatusObserver();
+    this.initStationTitleContainerObserver();
+    this.cacheLogoElement();
+    this.initTitleContainerObserver();
   }
   ,
 
@@ -276,9 +286,12 @@ var
       PageWatcher.objPlayerInfo.boolIsMuted = true;
     }
 
-    PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
-    );
+    // Wait for volume to get changed
+    setTimeout( function() {
+      PageWatcher.sendSameMessage(
+        chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+      );
+    }, 0 );
   }
   ,
 
@@ -295,9 +308,12 @@ var
       PageWatcher.objPlayerInfo.boolIsMuted = false;
     }
 
-    PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
-    );
+    // Wait for volume to get changed
+    setTimeout( function() {
+      PageWatcher.sendSameMessage(
+        chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+      );
+    }, 0 );
   }
   ,
 
@@ -507,6 +523,12 @@ var
    * @return  void
    **/
   initPlayerContainerObserver : function() {
+    $player = document.getElementById( strPlayerId );
+    $playStopButton = document.querySelector( strPlayStopButtonSelector );
+    $muteUnmuteButton = document.querySelector( strMuteUnmuteButtonSelector );
+    $volumeHandle = document.querySelector( strVolumeHandleSelector );
+    $kbpsInfo = document.querySelector( strKbpsInfoSelector );
+
     var $target = $playerContainer
       , objOptions = {
             childList : true
@@ -519,43 +541,40 @@ var
               ;
 
             if ( arrAddedNodes.length ) {
-              $player = document.getElementById( strPlayerId );
+              if ( ! $player ) {
+                /**
+                 * @todo DRY.
+                 */
+                $player = document.getElementById( strPlayerId );
 
-              PageWatcher.cacheLogoElement();
-              $playStopButton =
-                document.querySelector( strPlayStopButtonSelector );
-              $muteUnmuteButton =
-                document.querySelector( '[data-toggle-mute]' );
-              $trackInfo =
-                document.querySelector( '#webplayer-region .track-region .track-title' );
-              $kbpsInfo =
-                document.querySelector( '#settings-bitrate input:checked' );
-              $volumeHandle =
-                document.querySelector( '#webplayer-region .handle' );
+                PageWatcher.cacheLogoElement();
+              }
 
-              boolIsLoggedInMenuPresent =
-                document.contains( document.getElementById( 'account-nav' ) );
+              if ( ! $kbpsInfo ) {
+                /**
+                 * @todo DRY.
+                 */
+                $kbpsInfo = document.querySelector( strKbpsInfoSelector );
+              }
+
               intKbps =
                 document.contains( $kbpsInfo )
                   ? parseInt( $kbpsInfo.parentNode.innerText.match( /[0-9]{2,4}/g ) )
                   : 0
                 ;
 
-              $stationTitleContainer =
-                document.querySelector( strStationTitleContainerSelector );
+
+              if ( ! $stationTitleContainer ) {
+                $stationTitleContainer = document.querySelector( strStationTitleContainerSelector );
+              }
+
               PageWatcher.getStationInfo();
 
               PageWatcher.boolIsUserLoggedIn = boolIsLoggedInMenuPresent;
 
               PageWatcher.objPlayerInfo.boolIsReady = true;
 
-              PageWatcher.initPlayerStatusObserver();
               PageWatcher.initStationTitleContainerObserver();
-
-              // There is no such option when not logged-in
-              //if ( PageWatcher.boolIsUserLoggedIn )
-              //  PageWatcher.initFavoriteButtonContainerObserver();
-
               // Once button appeared, it doesn't disappear - disconnect
               DisconnectableObserver.disconnect();
               return;
@@ -576,6 +595,8 @@ var
    * @return  void
    **/
   initTitleContainerObserver : function() {
+    $trackInfo = document.querySelector( '#webplayer-region .track-region .track-title' );
+
     var $target = $trackInfo
       , objOptions = {
             childList : true
@@ -588,14 +609,22 @@ var
               ;
 
             if ( arrAddedNodes.length ) {
-              var strNewTrackInfo = arrAddedNodes[ 1 ].textContent;
+              var $addedNode = arrAddedNodes[ 0 ];
+              var strNewTrackInfo = $addedNode.textContent;
+              var $channelNameNode = $addedNode.querySelector( strTrackInfoChannelNameSelector );
+
+              if ( $channelNameNode ) {
+                strNewTrackInfo = strNewTrackInfo.replace( $channelNameNode.textContent, '' );
+              }
+
+              strNewTrackInfo = strNewTrackInfo.trim();
 
               if (
                     ! ~ [
                         strTrackInfoPlaceholder1
                       , strTrackInfoPlaceholder2
                       , strTrackInfoVolumeMuted
-                    ].indexOf( strNewTrackInfo )
+                    ].indexOf( strNewTrackInfo.toLowerCase() )
                 &&  ! strTrackInfoVolumePercentageRegExp.test( strNewTrackInfo )
                 &&  ! PageWatcher.objPlayerInfo.boolWasVolumeMessageJustDisplayed
               ) {
@@ -668,14 +697,20 @@ var
   ,
 
   /**
-   * Init title container observer
+   * Init station title container observer
    *
    * @type    method
    * @param   No Parameters Taken
    * @return  void
    **/
   initStationTitleContainerObserver : function() {
-    var $target = $stationTitleContainer.parentNode
+    $stationTitleContainer = document.querySelector( strStationTitleContainerSelector );
+
+    if ( ! $stationTitleContainer || boolIsStationTitleContainerBeingObserved ) {
+      return;
+    }
+
+    var $target = $stationTitleContainer
       , objOptions = {
             childList : true
           , subtree : true
@@ -703,6 +738,10 @@ var
       ;
 
     PageWatcher.initObserver( $target, objOptions, funcCallback );
+
+    if ( ! boolIsStationTitleContainerBeingObserved ) {
+      boolIsStationTitleContainerBeingObserved = true;
+    }
   }
   ,
 
@@ -743,7 +782,6 @@ var
             if ( boolIsPlaying ) {
               if ( PageWatcher.boolWasPageJustLoaded ) {
                 PageWatcher.setLogoLoadedCallback();
-                PageWatcher.initTitleContainerObserver();
               }
             }
             else if (
@@ -839,7 +877,7 @@ var
    * @return  void
    **/
   cacheLogoElement : function() {
-    $stationLogo = document.querySelector( '#webplayer-region .channel-region .artwork img' );
+    $stationLogo = document.querySelector( strStationLogoSelector );
   }
   ,
 
