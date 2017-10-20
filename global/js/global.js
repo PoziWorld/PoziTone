@@ -782,6 +782,8 @@ var Global                        = {
                 objNotificationOptions.title = strConstExtensionName;
               }
 
+              objNotificationOptions.title = objNotificationOptions.title.trim();
+
               // Notification Buttons Settings
               if ( arrButtons.length !== 0 ) {
                 // Save active buttons for the listener
