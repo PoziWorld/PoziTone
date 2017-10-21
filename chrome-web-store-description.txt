@@ -1,79 +1,106 @@
 Features:
 
-— Displays info about current track
+– Displays info about now playing song, podcast, video, etc.
 
-Familiarizing with a new genre or band? PoziTone will show you track info (its name, band name) via a pop-up notification on every track change.
+  Familiarizing with a new genre or band?
 
-— Easy player control
+  PoziTone will show you track info (its name, artist name) via a pop-up notification on every track change.
 
-Want to stop/resume playback, mute/unmute, switch track or add it to playlist? It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of keyboard shortcuts!
+– Easy player control outside of browser window
 
-— List of recent tracks
+  Want to stop/resume playback, mute/unmute, switch track or add it to playlist?
 
-What track played five minutes ago? PoziTone keeps information about the last 10 tracks played.
+  Three easy ways to do it:
 
-.   .   .
+    – Click a button in the pop-up notification.
+    – Press keyboard shortcuts.
+    – Or, just say a command*!
+    * (Voice control app PoziWorld Elf needs to be installed)
 
-Supported players:
+– List of recently played
 
-— VK (audio, full version of site).
-— Odnoklassniki (audio, full version of site).
-— Online radio 101.ru (stations' main player).
-— VGM Radio.
+  What track played five minutes ago?
+
+  PoziTone keeps information about the last 10 tracks played.
+
+.   .   .
+
+Supported online media players:
+
+– SoundCloud | soundcloud.com (full version of site)
+– Google Play Music | play.google.com/music
+– AudioAddict network:
+  – ClassicalRadio.com
+  – Digitally Imported | di.fm (DI, DI.FM, or DI Radio)
+  – JAZZRADIO.com
+  – RadioTunes | radiotunes.com
+  – ROCKRADIO.COM
+– VK | vk.com | new.vk.com (audio, full version of site – old & new)
+– VGM Radio | vgmradio.com
+– Odnoklassniki | ok.ru (audio, full version of site)
+– Online radio 101.ru (stations' main player)
 
 More to come...
 
-.   .   .
+.   .   .
+
+Supported via external modules:
+
+(An external PoziTone module is a standalone extension which is able to provide PoziTone features by communicating directly with PoziTone behind the scenes.)
+
+– YouTube embedded player – https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg
+– SoundCloud Widget – https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl
+– Sovyatnik – https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn
+
+.   .   .
 
 Keyboard shortcuts:
 
 Alt+Shift+D — “Add track to playlist”.
+Alt+Shift+P — “Stop / Play”.
+Alt+Shift+M — “Mute / Unmute”.
+Alt+Shift+Q — “Show notification”.
+
 Alt+Shift+F — “I like it!” (not preset).
 Alt+Shift+N — “Next track” (not preset).
 Alt+Shift+B — “Previous track” (not preset).
-Alt+Shift+P — “Stop / Play”.
-Alt+Shift+M — “Mute / Unmute”.
 Alt+Shift+A — “Increase sound volume” (not preset).
 Alt+Shift+Z — “Decrease sound volume” (not preset).
-Alt+Shift+Q — “Show notification”.
+Alt+Shift+R — “Activate the extension” (not preset).
 
-.   .   .
+.   .   .
 
 Privacy:
 
 This extension does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form.
 
-.   .   .
+.   .   .
 
 Are you a developer?
 
-Want to add a support for your favorite player and publish it as a PoziTone module under your name? — Check back, we will soon share a PoziTone API draft.
+Want to add a support for your favorite player and publish it as a PoziTone module under your name? — https://github.com/PoziWorld/PoziTone-module-API
 
-.   .   .
+.   .   .
 
 Feedback:
 
 We appreciate your feedback!
 
-Please share your ideas.
-Don't be shy to ask questions.
-Bug reports are valuable!
-We like praises, who doesn't? :)
+Please share your ideas. – https://feedback.pozitone.com
+Don't be shy to ask questions. – feedback@pozitone.com
+Bug reports are valuable! – https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support
+We like praises, who doesn't? :) – https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews
 
-Recommended method — http://feedback.pozitone.com/?lang=en
-One more method — https://chrome.google.com/webstore/support/bdglbogiolkffcmojmmkipgnpkfipijm?hl=en
-Geeks method — https://github.com/poziworld/pozitone/issues
-Another one — feedback@pozitone.com
+.   .   .
 
-.   .   .
+PoziTone on social networks:
 
-Let's socialize:
-
-— PoziTone on VK — https://vk.com/PoziTone
-— PoziTone on Twitter — https://twitter.com/PoziTone
-— PoziTone on Facebook — https://facebook.com/PoziTone
-— PoziTone on Google+ — https://google.com/+PoziTone
-— PoziTone on Odnoklassniki — http://ok.ru/group/54738320621596
-— PoziTone on 101.ru — https://101.ru/?an=User_Info&userId=709962
-— PoziTone on Instagram — https://instagram.com/PoziTone
-— PoziTone on GitHub — https://github.com/poziworld/PoziTone
+– PoziTone on Telegram — https://t.me/PoziTone
+– PoziTone on VK — https://vk.com/PoziTone
+– PoziTone on Twitter — https://twitter.com/PoziTone
+– PoziTone on Facebook — https://facebook.com/PoziTone
+– PoziTone on Google+ — https://plus.google.com/+PoziTone
+– PoziTone on Odnoklassniki — https://ok.ru/group/54738320621596
+– PoziTone on 101.ru — https://101.ru/?an=User_Info&userId=709962
+– PoziTone on Instagram — https://instagram.com/PoziTone
+– PoziTone on GitHub — https://github.com/PoziWorld/PoziTone
