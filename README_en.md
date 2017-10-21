@@ -37,16 +37,24 @@ Features
 * **Displays info about now playing song, podcast, video, etc.**
 
   _Familiarizing with a new genre or band?_
+
   PoziTone will show you track info (its name, artist name) via a pop-up notification on every track change.
 
 * **Easy player control outside of browser window**
 
   _Want to stop/resume playback, mute/unmute, switch track or add it to playlist?_
-  It is as easy as one, two, three! Do it with one click from the pop-up notification or with the help of [keyboard shortcuts](#keyboard-shortcuts)!
+
+  Three easy ways to do it:
+  * Click a button in the pop-up notification.
+  * Press [keyboard shortcuts](#keyboard-shortcuts).
+  * Or, **_just say a [command](https://github.com/PoziWorld/PoziWorld-Elf/wiki/Commands)_**<sup>*</sup>!
+
+  <sub>\* (Voice control app [PoziWorld Elf](https://github.com/PoziWorld/PoziWorld-Elf) needs to be installed)</sub>
 
 * **List of recently played**
 
   _What track played five minutes ago?_
+
   PoziTone keeps information about the last 10 tracks played.
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
