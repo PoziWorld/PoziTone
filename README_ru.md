@@ -223,7 +223,7 @@ Credits
 
 Есть несколько способов, которыми Вы можете помочь нашему делу:
 
-* Подпишитесь на нас [ВКонтакте](https://vk.com/PoziTone), на [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [Одноклассниках](http://ok.ru/group/54738320621596) и [Instagram](https://instagram.com/PoziTone).
+* Подпишитесь на нас в [Telegram](https://t.me/PoziTone), [ВКонтакте](https://vk.com/PoziTone), на [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [Одноклассниках](https://ok.ru/group/54738320621596) и [Instagram](https://instagram.com/PoziTone).
 * Поделитесь [ссылкой для установки](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/)) в Ваших социальных сетях и/или блоге.
 * [Оцените PoziTone](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/#feedback-container)) — отзывы реально помогают другим найти это расширение!
 

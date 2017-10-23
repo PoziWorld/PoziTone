@@ -214,7 +214,7 @@ If you find PoziTone useful, why not recommend it to your friends, colleagues, a
 
 There are a few ways you can help our cause:
 
-* Follow us on [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [VK](https://vk.com/PoziTone), [Odnoklassniki](http://ok.ru/group/54738320621596), and [Instagram](https://instagram.com/PoziTone).
+* Follow us on [Telegram](https://t.me/PoziTone), [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [VK](https://vk.com/PoziTone), [Odnoklassniki](https://ok.ru/group/54738320621596), and [Instagram](https://instagram.com/PoziTone).
 * Share the [installation link](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm) ([for Opera](https://addons.opera.com/extensions/details/pozitone/)) on your social networks and/or blog.
 * [Rate PoziTone](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([for Opera](https://addons.opera.com/extensions/details/pozitone/#feedback-container)) – the feedback really helps others find this extension!
 
