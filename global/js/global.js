@@ -1720,11 +1720,14 @@ var Global                        = {
 
     ( boolExternal ? StorageLocal : StorageSync ).get( strObjSettings, function( objReturn ) {
       var objModuleSettings = objReturn[ strObjSettings ];
-      var boolIsAvailable = objModuleSettings.boolIsAvailable;
 
-      boolIsAvailable = typeof boolIsAvailable !== 'boolean' || boolIsAvailable;
+      if ( typeof objModuleSettings === 'object' && objModuleSettings.boolIsEnabled ) {
+        var boolIsAvailable = objModuleSettings.boolIsAvailable;
 
-      if ( typeof objModuleSettings === 'object' && boolIsAvailable && objModuleSettings.boolIsEnabled ) {
+        if ( typeof boolIsAvailable === 'boolean' && ! boolIsAvailable ) {
+          return;
+        }
+
         strLog = 'isModuleEnabled, ' + strCallerLog;
         Log.add( strLog + strLogSuccess, intTabId );
 
