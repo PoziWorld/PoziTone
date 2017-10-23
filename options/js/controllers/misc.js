@@ -16,7 +16,7 @@ optionsControllers.controller( 'ProjectsCtrl', function( $scope, $rootScope ) {
     , {
           strName : 'Scroll To Top Button'
         , strAbbreviation : 'sttb'
-        , strImageFileName : 'sttb-icon-38.svg'
+        , strImageFileName : 'sttb-icon-50.svg'
         , strChromeLink : 'https://chrome.google.com/webstore/detail/scroll-to-top-button/chinfkfmaefdlchhempbfgbdagheknoj'
         , strOperaLink : 'https://addons.opera.com/extensions/details/scroll-to-top-button/'
       }
