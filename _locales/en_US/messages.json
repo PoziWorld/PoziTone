@@ -1,6 +1,7 @@
 {
   "lang": {
-    "message": "en"
+      "message": "en"
+    , "description": "https://developer.chrome.com/webstore/i18n?csw=1#localeTable"
   }
   ,
   "extensionName": {
@@ -458,7 +459,7 @@
       }
       ,
       "projectsDescriptionParagraph2": {
-        "message": "PoziWorld develops web browser extensions that help you solve everyday tasks easier, faster, more&nbsp;efficiently, are free to use, and do not track your activity without your prior agreement."
+        "message": "PoziWorld develops software that helps you solve everyday tasks easier, faster, more&nbsp;efficiently, is free to use, and does not track your activity without your prior agreement."
       }
       ,
       "sttbDescriptionParagraph1": {
@@ -474,7 +475,7 @@
       }
       ,
       "pwmDescriptionParagraph2": {
-        "message": "Go Green on the following Print Return Label pages: Amazon, eBay, and Old Navy."
+        "message": "Go Green on the following Print Return Label pages: Amazon (amazon.com), American Eagle (ae.com), eBay, Newgistics SmartLabel, Nordstrom, Old Navy, Return Saver, and UPS (ups.com)."
       }
     ,
     "contribution": {
@@ -494,7 +495,7 @@
         }
         ,
         "spreadTheWordFollowUs": {
-          "message": "Follow us on <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://google.com/+PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"http://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+          "message": "Follow us on <a href=\"https://t.me/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"telegram\" }'>Telegram</a>, <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://plus.google.com/+PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"https://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
         }
         ,
         "spreadTheWordInstallationLink": {
@@ -595,7 +596,7 @@
         }
       ,
       "optionsCopyright": {
-        "message": "&copy; PoziWorld, 2016"
+        "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
       }
       ,
       "optionsFoundation": {
