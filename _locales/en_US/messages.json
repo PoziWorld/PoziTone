@@ -462,6 +462,14 @@
         "message": "PoziWorld develops software that helps you solve everyday tasks easier, faster, more&nbsp;efficiently, is free to use, and does not track your activity without your prior agreement."
       }
       ,
+      "peDescriptionParagraph1": {
+        "message": "Lets you use your voice to control things you usually use your mouse and/or keyboard for."
+      }
+      ,
+      "peDescriptionParagraph2": {
+        "message": "Not a standalone app, works by sending commands to partner extensions installed in your browser."
+      }
+      ,
       "sttbDescriptionParagraph1": {
         "message": "Adds a scroll to top and/or bottom button."
       }

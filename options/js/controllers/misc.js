@@ -4,6 +4,16 @@ optionsControllers.controller( 'ProjectsCtrl', function( $scope, $rootScope ) {
 
   $scope.arrProjects = [
       {
+          strName : 'PoziWorld Elf'
+        , strAbbreviation : 'pe'
+        , strImageFileName : 'pe-icon-64.png'
+          /**
+           * @todo More suitable var names
+           */
+        , strChromeLink : 'https://github.com/PoziWorld/PoziWorld-Elf'
+        , strOperaLink : 'https://github.com/PoziWorld/PoziWorld-Elf'
+      }
+    , {
           strName : 'Scroll To Top Button'
         , strAbbreviation : 'sttb'
         , strImageFileName : 'sttb-icon-38.svg'
