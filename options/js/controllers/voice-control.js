@@ -257,7 +257,7 @@ optionsControllers.controller( 'VoiceControlCtrl', function( $scope, $rootScope 
   };
 
   document.getElementById( 'voiceControlActivateCta' ).addEventListener( 'click', function( objEvent ) {
-    pozitoneModule.api.activateVoiceControl(
+    pozitoneModule.sdk.activateVoiceControl(
         onVoiceControlAlreadyActivated
       , onVoiceControlNotActivated
     );
@@ -268,7 +268,7 @@ optionsControllers.controller( 'VoiceControlCtrl', function( $scope, $rootScope 
     $voiceControlActivateCta.title = chrome.i18n.getMessage( 'voiceControlAlreadyActivated' );
 
     if ( ! boolIsOnVoiceControlDeactivationListenerSet ) {
-      pozitoneModule.api.addOnVoiceControlDeactivationListener( onVoiceControlNotActivated );
+      pozitoneModule.sdk.addOnVoiceControlDeactivationListener( onVoiceControlNotActivated );
       boolIsOnVoiceControlDeactivationListenerSet = true;
     }
   }
@@ -280,7 +280,7 @@ optionsControllers.controller( 'VoiceControlCtrl', function( $scope, $rootScope 
     boolIsOnVoiceControlDeactivationListenerSet = false;
   }
 
-  pozitoneModule.api.getVoiceControlStatus( function( objStatus ) {
+  pozitoneModule.sdk.getVoiceControlStatus( function( objStatus ) {
     var boolIsConnected = objStatus.boolIsConnected;
 
     if ( typeof boolIsConnected === 'boolean' && boolIsConnected ) {

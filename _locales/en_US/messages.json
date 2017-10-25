@@ -798,11 +798,11 @@
       "message": "Enable external modules advanced support"
     }
     ,
-    "moduleExternal_api": {
+    "moduleExternal_sdk": {
       "message": "Want to develop your own?"
     }
     ,
-    "moduleExternal_apiCta": {
+    "moduleExternal_sdkCta": {
       "message": "Yes, I do!"
     }
     ,

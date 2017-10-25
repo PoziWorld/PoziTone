@@ -121,7 +121,7 @@
   }
 
   /**
-   * Set event listeners, initialize API.
+   * Set event listeners, initialize SDK.
    *
    * @type    method
    * @param   No Parameters Taken
@@ -134,7 +134,7 @@
     _this.initBodyObserver();
     _this.initPlayerActivationObserver();
     _this.addRuntimeOnMessageListener();
-    pozitoneModule.api.init( 'built-in', _this );
+    pozitoneModule.sdk.init( 'built-in', _this );
     _this.convertNotificationLogoUrl();
   };
 
@@ -498,7 +498,7 @@
 
     chrome.runtime.onMessage.addListener(
       function( objMessage, objSender, funcSendResponse ) {
-        pozitoneModule.api.processRequest(
+        pozitoneModule.sdk.processRequest(
             objMessage
           , objSender
           , funcSendResponse
@@ -560,7 +560,7 @@
 
   PageWatcher.prototype.getPlayerVolume = function ( $player ) {
     if ( document.contains( $player ) ) {
-      this.objPlayerInfo.intVolume = pozitoneModule.api.convertVolumeToPercent( $player.volume );
+      this.objPlayerInfo.intVolume = pozitoneModule.sdk.convertVolumeToPercent( $player.volume );
     }
   };
 
@@ -578,7 +578,7 @@
   PageWatcher.prototype.convertNotificationLogoUrl = function () {
     var _this = this;
 
-    pozitoneModule.api.convertImageSrcToDataUrl(
+    pozitoneModule.sdk.convertImageSrcToDataUrl(
         chrome.runtime.getURL( _this.objStationInfo.strLogoDataUri )
       , function ( strDataUri ) {
           _this.objStationInfo.strLogoDataUri = strDataUri;
@@ -714,7 +714,7 @@
 
       this.strLatestTrackArtist = strTrackArtist;
       this.strLatestTrackTitle = strTrackTitle;
-      this.objStationInfo.strTrackInfo = pozitoneModule.api.setMediaInfo( strTrackArtist, strTrackTitle );
+      this.objStationInfo.strTrackInfo = pozitoneModule.sdk.setMediaInfo( strTrackArtist, strTrackTitle );
     }
 
     var promise1;
@@ -726,7 +726,7 @@
 
       if ( $trackImage ) {
         promise1 = new Promise( function( funcResolve, funcReject ) {
-          pozitoneModule.api.convertImageSrcToDataUrl(
+          pozitoneModule.sdk.convertImageSrcToDataUrl(
               $trackImage.src
             , function ( strDataUri ) {
                 _this.objStationInfo.strTrackImageDataUri = strDataUri;
@@ -759,7 +759,7 @@
               ;
           }
           else {
-            pozitoneModule.api.convertImageSrcToDataUrl(
+            pozitoneModule.sdk.convertImageSrcToDataUrl(
                 $stationLogo.src
               , function ( strDataUri ) {
                   _this.objStationInfo.strStationLogoDataUri = strDataUri;
@@ -801,12 +801,12 @@
       Promise
         .all( [ promise1, promise2 ] )
         .then( function () {
-          pozitoneModule.api.sendMediaEvent( objData );
+          pozitoneModule.sdk.sendMediaEvent( objData );
         } )
         ;
     }
     else {
-      pozitoneModule.api.sendMediaEvent( objData );
+      pozitoneModule.sdk.sendMediaEvent( objData );
     }
   };
 
@@ -974,7 +974,7 @@
   PageWatcher.prototype.triggerVolumeChange = function( strDirection ) {
     var _this = this;
 
-    pozitoneModule.api.changeVolume(
+    pozitoneModule.sdk.changeVolume(
         strDirection
       , _this.objPlayerInfo.intVolume
       , function ( intVolume ) {
@@ -984,7 +984,7 @@
 
           _this.boolIsVolumeChangeByUser = true;
           _this.objPlayerInfo.intVolume = intVolume;
-          _this.$actualPlayerNode.volume = pozitoneModule.api.convertPercentToVolume( intVolume );
+          _this.$actualPlayerNode.volume = pozitoneModule.sdk.convertPercentToVolume( intVolume );
           _this.sendMediaEvent( 'onVolumeChange' );
         }
     );

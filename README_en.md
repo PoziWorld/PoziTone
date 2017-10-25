@@ -88,7 +88,7 @@ An external PoziTone module is a standalone extension which is able to provide [
 * [Sovyatnik](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([for Opera](https://addons.opera.com/en/extensions/details/soviatnik-pozitone-modul/)).
 
 
-_Are you a developer?_ Want to add a support for your favorite player and publish it as a PoziTone module under your name? – Check [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
+_Are you a developer?_ Want to add a support for your favorite player and publish it as a PoziTone module under your name? – Check [PoziTone module SDK](https://github.com/PoziWorld/PoziTone-module-SDK).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 

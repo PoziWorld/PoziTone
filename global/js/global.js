@@ -141,7 +141,7 @@ var Global                        = {
             ]
           , arrJs : [
                 'global/js/const.js'
-              , 'global/js/pozitone-module-api.js'
+              , 'global/js/pozitone-module-sdk.js'
               , 'modules/com_google_play_music/js/dom-to-image.js'
               , 'modules/com_google_play_music/js/page-watcher.js'
             ]
@@ -236,7 +236,7 @@ var Global                        = {
             ]
           , arrJs : [
                 'global/js/const.js'
-              , 'global/js/pozitone-module-api.js'
+              , 'global/js/pozitone-module-sdk.js'
               , 'modules/com_soundcloud/js/page-watcher.js'
             ]
         }

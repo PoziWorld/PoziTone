@@ -88,7 +88,7 @@
   }
 
   /**
-   * Set event listeners, initialize API.
+   * Set event listeners, initialize SDK.
    *
    * @type    method
    * @param   No Parameters Taken
@@ -100,7 +100,7 @@
 
     self.initPlayerStatusObserver();
     self.addRuntimeOnMessageListener();
-    pozitoneModule.api.init( 'built-in', self );
+    pozitoneModule.sdk.init( 'built-in', self );
     self.convertNotificationLogoUrl();
   };
 
@@ -311,7 +311,7 @@
 
     chrome.runtime.onMessage.addListener(
       function( objMessage, objSender, funcSendResponse ) {
-        pozitoneModule.api.processRequest(
+        pozitoneModule.sdk.processRequest(
             objMessage
           , objSender
           , funcSendResponse
@@ -338,7 +338,7 @@
   PageWatcher.prototype.convertNotificationLogoUrl = function () {
     var self = this;
 
-    pozitoneModule.api.convertImageSrcToDataUrl(
+    pozitoneModule.sdk.convertImageSrcToDataUrl(
         chrome.runtime.getURL( self.objStationInfo.strLogoDataUri )
       , function ( strDataUri ) {
           self.objStationInfo.strLogoDataUri = strDataUri;
@@ -401,7 +401,7 @@
       , strCommand : strCommand
     };
 
-    pozitoneModule.api.sendMediaEvent( objData );
+    pozitoneModule.sdk.sendMediaEvent( objData );
   };
 
   /**

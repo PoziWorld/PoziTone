@@ -89,7 +89,7 @@ ___
 * [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soviatnik-pozitone-modul/)).
 
 
-_Вы — разработчик?_ Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Присмотритесь к [PoziTone module API](https://github.com/PoziWorld/PoziTone-module-API).
+_Вы — разработчик?_ Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Присмотритесь к [PoziTone module SDK](https://github.com/PoziWorld/PoziTone-module-SDK).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 

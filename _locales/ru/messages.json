@@ -798,11 +798,11 @@
       "message": "Включить расширенную поддержку внешних модулей"
     }
     ,
-    "moduleExternal_api": {
+    "moduleExternal_sdk": {
       "message": "Хотите разработать Ваш собственный?"
     }
     ,
-    "moduleExternal_apiCta": {
+    "moduleExternal_sdkCta": {
       "message": "Да, я хочу!"
     }
     ,
