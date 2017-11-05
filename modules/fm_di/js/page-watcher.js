@@ -164,6 +164,21 @@ var
   ,
 
   /**
+   * Check whether the player is ready.
+   *
+   * @return {Boolean}
+   **/
+
+  isPlayerReady : function() {
+    if ( document.contains( $playerContainer ) ) {
+      return PageWatcher.objPlayerInfo.boolIsReady = !! $playerContainer.getAttribute( 'data-state' );
+    }
+
+    return false;
+  }
+  ,
+
+  /**
    * Get player info
    *
    * @type    method
@@ -966,17 +981,22 @@ PageWatcher.processButtonClick_volumeDown =
  ============================================================================ */
 
 /**
- * Listens for command sent from Background.
- * If requested function found, call it.
+ * Used to send a response.
  *
- * @type    method
- * @param   objMessage
- *            Message received
- * @param   objSender
- *            Sender of the message
- * @return  void
+ * @callback funcSendResponse
+ */
+
+/**
+ * Listens for a command sent from Background.
+ * If requested function found, call it.
  **/
 chrome.runtime.onMessage.addListener(
+  /**
+   * @param {string} [strMessage] - Message received.
+   * @param {Object} objSender - Sender of the message.
+   * @param {funcSendResponse} funcSendResponse - Function used for callback.
+   **/
+
   function( strMessage, objSender, funcSendResponse ) {
 
     // Debug
@@ -984,15 +1004,17 @@ chrome.runtime.onMessage.addListener(
 
     var funcToProceedWith = PageWatcher[ strMessage ];
 
-    if ( typeof funcToProceedWith === 'function' )
+    if ( typeof funcToProceedWith === 'function' ) {
       funcToProceedWith();
-    else if ( strMessage === 'Do you copy?' )
+    }
+    else if ( strMessage === 'Do you copy?' ) {
       funcSendResponse( 'Copy that.' );
+    }
     else if ( strMessage === 'Ready for a command? Your name?' ) {
       var objResponse = {
-                            boolIsReady : PageWatcher.objPlayerInfo.boolIsReady
-                          , strModule   : PageWatcher.objPlayerInfo.strModule
-                        };
+          boolIsReady : PageWatcher.isPlayerReady()
+        , strModule : PageWatcher.objPlayerInfo.strModule
+      };
 
       funcSendResponse( objResponse );
     }
