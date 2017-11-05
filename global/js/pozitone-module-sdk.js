@@ -39,7 +39,7 @@
   'use strict';
 
   function Sdk() {
-    var strVersion = '1.0.0'; // semver.org
+    var strVersion = '1.0.1'; // semver.org
 
     this.strMediaInfoDivider = ' – ';
     this.strCallDivider = '/';
@@ -334,7 +334,7 @@
                   ;
 
                 // Update instance
-                if ( typeof pageWatcher === 'undefined' ) {
+                if ( typeof this.pageWatcher === 'undefined' && typeof pageWatcher !== 'undefined' ) {
                   this.pageWatcher = pageWatcher;
                 }
 
