@@ -186,10 +186,10 @@ PoziTone должен отобразить оповещение с информ�
 - Google, Inc. — за все прекрасные проекты.
 - 101.ru — за возможность бесплатно и легально слушать музыку.
 - Переводчикам:
-  - испанский — Paco_Zamo (Francisco Zamorano);
+  - испанский — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - польский — jurczak (Łukasz Jurczak);
-  - итальянский — Aeco (Giuseppe Mariniello);
-  - украинский — ivan.zusko (Ivan Zusko).
+  - итальянский — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
+  - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 

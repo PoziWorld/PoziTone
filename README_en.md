@@ -177,10 +177,10 @@ Gratitudes
 - Google, Inc. — for all their excellent projects.
 - 101.ru — for a chance to listen to music for free and legally.
 - Translators:
-  - Spanish — Paco_Zamo (Francisco Zamorano);
+  - Spanish — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - Polish — jurczak (Łukasz Jurczak);
-  - Italian — Aeco (Giuseppe Mariniello);
-  - Ukrainian — ivan.zusko (Ivan Zusko).
+  - Italian — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
+  - Ukrainian — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
