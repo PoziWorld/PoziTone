@@ -179,7 +179,8 @@ Gratitudes
 - Translators:
   - Spanish — Paco_Zamo (Francisco Zamorano);
   - Polish — jurczak (Łukasz Jurczak);
-  - Italian — Aeco (Giuseppe Mariniello).
+  - Italian — Aeco (Giuseppe Mariniello);
+  - Ukrainian — ivan.zusko (Ivan Zusko).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
