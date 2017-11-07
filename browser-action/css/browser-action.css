@@ -142,3 +142,21 @@
       left:                   50%;
       margin:                 -.8rem 0 0 -.8rem;
     }
+
+/* =============================================================================
+
+  Privacy statement
+
+ ============================================================================ */
+
+  #privacyStatementsContainer
+    {
+      z-index: 2;
+      left: 0;
+      width: auto;
+    }
+  .privacyStatement
+    {
+      font-size: 1.3em;
+      white-space: pre-line;
+    }

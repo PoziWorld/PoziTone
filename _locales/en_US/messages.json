@@ -865,6 +865,10 @@
     "message": "PoziTone does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
   }
   ,
+  "privacyStatementForClipboardWrite": {
+    "message": "“<strong>Modify data you copy and paste</strong>”: this permission is required to copy the requested information to your clipboard.\n\nPoziTone does not and will not read the contents of your clipboard, it only asks to write to it (a safe operation)."
+  }
+  ,
   "privacyStatementForOrigins": {
     "message": "“<strong>Read and change your data</strong>”: this permission is required for the correct operation of PoziTone with a player (controlling playback, adjusting sound volume, getting current track name and performer)."
   }

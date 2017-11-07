@@ -19,7 +19,6 @@
 
   , "permissions"               : [
         "alarms"
-      , "clipboardWrite"
       , "contextMenus"
       , "notifications"
       , "storage"
@@ -42,6 +41,7 @@
       , "*://vgmradio.com/"
       , "*://*.vk.com/"
       , "*://*.vk.me/"
+      , "clipboardWrite"
       , "management"
       , "nativeMessaging"
       , "tabs"

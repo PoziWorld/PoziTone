@@ -11,6 +11,10 @@
       init()
       populateRecentTracks()
       addEventListeners()
+      onCopyToClipboardCtaClick()
+      requestClipboardWritePermission()
+      copyToClipboard()
+      trackData()
       composeRecentTrackActionUrl()
       encodeQuery()
     Events
@@ -26,6 +30,8 @@
 const
     strPage = 'browser-action'
   , strListId = 'recentTracks'
+  , strListElementSelector = '.recentTrack'
+  , strListElementInfoSelector = '.recentTrackInfo'
   , strRecentTrackActionUrl = 'https://go.pozitone.com/s/?'
   ;
 
@@ -113,6 +119,8 @@ var Popup = {
    **/
 
   addEventListeners : function() {
+    const _this = this;
+
     addEvent(
         document.getElementById( 'toolbarOpenOptionsPageBtn' )
       , 'click'
@@ -223,38 +231,141 @@ var Popup = {
     addEvent(
         document.getElementsByClassName( 'copyToClipboard' )
       , 'click'
-      , function( objEvent ) {
-          // http://stackoverflow.com/a/11128179/561712
-          var $this = objEvent.currentTarget
-            , $text = $this.parentNode.parentNode.parentNode.previousElementSibling
-            , objSelection = window.getSelection()
-            , objRange = document.createRange()
-            ;
+      , _this.onCopyToClipboardCtaClick.bind( _this )
+    );
+  }
+  ,
 
-          // Track clicks
-          chrome.runtime.sendMessage(
-            {
-                strReceiver : 'background'
-              , strLog : 'browserAction.recentTracks'
-              , objVars : {
-                    strAction : 'copyToClipboard'
-                  , strLanguage : strConstExtensionLanguage
-                  , strVersion : strConstExtensionVersion
-                  , strVersionName : strConstExtensionVersionName
-                }
+  /**
+   * "Copy to clipboard" call-to-action is clicked on.
+   *
+   * @param {Event} objEvent - MouseEvent object.
+   **/
+
+  onCopyToClipboardCtaClick : function( objEvent ) {
+    const _this = this;
+
+    chrome.permissions.contains( { permissions : [ 'clipboardWrite' ] }, function( boolIsGranted ) {
+      if ( boolIsGranted ) {
+        _this.copyToClipboard( objEvent );
+      }
+      else {
+        _this.requestClipboardWritePermission( objEvent );
+      }
+    } );
+  }
+  ,
+
+  /**
+   * "clipboardWrite" permission hasn't been granted yet, request it.
+   *
+   * @param {Event} objEvent - MouseEvent object.
+   **/
+
+  requestClipboardWritePermission : function( objEvent ) {
+    const _this = this;
+    const strLog = 'requestClipboardWritePermission';
+    const $privacyStatementsContainer = document.getElementById( 'privacyStatementsContainer' );
+
+    Page.toggleElement( $privacyStatementsContainer, true );
+
+    chrome.permissions.request( { permissions: [ 'clipboardWrite' ] }, function( boolIsGranted ) {
+      Global.checkForRuntimeError(
+          function() {
+            _this.trackData( strLog, { boolIsGranted : boolIsGranted } );
+
+            if ( boolIsGranted ) {
+              _this.copyToClipboard( objEvent );
             }
-          );
+          }
+        , undefined
+        , { strAction : strLog }
+        , true
+      );
 
-          objRange.selectNodeContents( $text );
-          objSelection.removeAllRanges();
-          objSelection.addRange( objRange );
+      Page.toggleElement( $privacyStatementsContainer, false );
+    } );
+  }
+  ,
 
-          document.execCommand( 'copy' );
-          objSelection.removeAllRanges();
+  /**
+   * "clipboardWrite" permission granted, copy to clipboard.
+   *
+   * @param {Event} objEvent - MouseEvent object.
+   **/
 
-          Page.showSuccess( $this.children[ 0 ] );
-          Page.showSuccess( $this.children[ 1 ] );
+  copyToClipboard : function( objEvent ) {
+    let $this = objEvent.currentTarget || objEvent.target;
+    const $text = $this.closest( strListElementSelector );
+
+    if ( ! $text ) {
+      /**
+       * @todo Track.
+       */
+      return;
+    }
+
+    const $trackInfo = $text.querySelector( strListElementInfoSelector );
+
+    if ( ! $trackInfo ) {
+      /**
+       * @todo Track.
+       */
+      return;
+    }
+
+    this.trackData( 'copyToClipboard' );
+
+    // http://stackoverflow.com/a/11128179/561712
+    var objSelection = window.getSelection();
+    var objRange = document.createRange();
+
+    objRange.selectNodeContents( $trackInfo );
+    objSelection.removeAllRanges();
+    objSelection.addRange( objRange );
+
+    document.execCommand( 'copy' );
+    objSelection.removeAllRanges();
+
+    // Clicked on (target is) the button icon
+    if ( ! $this.classList.contains( 'cta' ) ) {
+      $this = $this.parentNode;
+    }
+
+    Page.showSuccess( $this.children[ 0 ] );
+    Page.showSuccess( $this.children[ 1 ] );
+  }
+  ,
+
+  /**
+   * If user participates in UEIP, track some helpful insights.
+   *
+   * @param {string} strAction - The action being tracked.
+   * @param {Object} [objData] - Additional data to track.
+   **/
+
+  trackData : function( strAction, objData ) {
+    let objTrackingData = {
+        strAction : strAction
+      , strLanguage : strConstExtensionLanguage
+      , strVersion : strConstExtensionVersion
+      , strVersionName : strConstExtensionVersionName
+    };
+
+    if ( typeof objData === 'object' && ! Global.isEmpty( objData ) ) {
+      for ( let strKey in objData ) {
+        if ( objData.hasOwnProperty( strKey ) && typeof strKey === 'string' ) {
+          objTrackingData[ strKey ] = objData[ strKey ];
         }
+      }
+    }
+
+    chrome.runtime.sendMessage(
+      {
+          strReceiver : 'background'
+        , strLog : 'browserAction.recentTracks'
+        , objVars : objTrackingData
+      }
     );
   }
   ,

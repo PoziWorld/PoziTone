@@ -509,6 +509,46 @@
 
 /* =============================================================================
 
+  Privacy statement
+
+ ============================================================================ */
+
+  #privacyStatementsContainer
+    {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 16.5rem;
+      background-color: #fff;
+      width: 62rem;
+      opacity: 1;
+      transition: all .2s;
+      flex-direction: column;
+      justify-content: center;
+    }
+  [hidden]#privacyStatementsContainer
+    {
+      display: none;
+    }
+  .privacyStatement
+    {
+      font-size: 2em;
+      padding: 3rem 3rem 0;
+      color: #333;
+    }
+  .privacyStatement:first-child
+    {
+      padding-top: 0;
+    }
+  #generalPrivacyStatement
+    {
+      font-weight: bold;
+    }
+
+/* =============================================================================
+
   Animations
 
  ============================================================================ */
