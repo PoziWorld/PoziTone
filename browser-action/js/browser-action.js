@@ -29,9 +29,13 @@
 
 const
     strPage = 'browser-action'
+  , strLogPage = 'browserAction'
+  , strLogPageDivider = '.'
+
   , strListId = 'recentTracks'
   , strListElementSelector = '.recentTrack'
   , strListElementInfoSelector = '.recentTrackInfo'
+
   , strRecentTrackActionUrl = 'https://go.pozitone.com/s/?'
   ;
 
@@ -125,21 +129,15 @@ var Popup = {
         document.getElementById( 'toolbarOpenOptionsPageBtn' )
       , 'click'
       , function( objEvent ) {
-          var strLog = 'browserAction.toolbar';
+          const strLog = 'toolbar';
 
-          // Track clicks
-          chrome.runtime.sendMessage(
-            {
-                strReceiver : 'background'
-              , strLog : strLog
-              , objVars : {
-                    strAction : 'openOptions'
-                  , strPage : strPage
-                }
-            }
+          _this.trackData(
+              strLog
+            , 'openOptions'
+            , { strPage : strPage }
           );
 
-          Global.openOptionsPage( strLog );
+          Global.openOptionsPage( strLogPage + strLogPageDivider + strLog );
         }
     );
 
@@ -147,16 +145,10 @@ var Popup = {
         document.getElementById( 'toolbarClosePopupPageBtn' )
       , 'click'
       , function( objEvent ) {
-          // Track clicks
-          chrome.runtime.sendMessage(
-            {
-                strReceiver : 'background'
-              , strLog : 'browserAction.toolbar'
-              , objVars : {
-                    strAction : 'closePopup'
-                  , strPage : strPage
-                }
-            }
+          _this.trackData(
+              'toolbar'
+            , 'closePopup'
+            , { strPage : strPage }
           );
 
           window.close();
@@ -169,17 +161,12 @@ var Popup = {
         document.querySelectorAll( '#tunesSuggestionInfo a' )
       , 'click'
       , function( objEvent ) {
-          var $this = objEvent.target;
+          const $this = objEvent.target;
 
-          // Track clicks
-          chrome.runtime.sendMessage(
-            {
-                strReceiver : 'background'
-              , strLog : 'browserAction.tunesSuggestion'
-              , objVars : {
-                    strPerformer : $this.dataset.performer
-                }
-            }
+          _this.trackData(
+              'tunesSuggestion'
+            , 'followLink'
+            , { strPerformer : $this.dataset.performer }
           );
 
           Global.createTabOrUpdate( $this.href );
@@ -192,7 +179,7 @@ var Popup = {
         document.getElementsByClassName( 'recentTrack' )
       , 'mouseleave'
       , function( objEvent ) {
-          var $this = objEvent.currentTarget;
+          const $this = objEvent.currentTarget;
 
           $this.querySelector( '.fadeOutFadeIn' ).classList.remove( 'show' );
           $this.querySelector( '.fadeInFadeOut' ).classList.remove( 'show' );
@@ -203,25 +190,15 @@ var Popup = {
         document.getElementsByClassName( 'providerAction' )
       , 'click'
       , function( objEvent ) {
-          var $this = objEvent.currentTarget
-            , strProvider = $this.dataset.provider
-            , strTrack = $this.parentNode.parentNode.dataset.track
-            , strUrl = Popup.composeRecentTrackActionUrl( strProvider, strTrack )
-            ;
+          const $this = objEvent.currentTarget;
+          const strProvider = $this.dataset.provider;
+          const strTrack = $this.parentNode.parentNode.dataset.track;
+          const strUrl = Popup.composeRecentTrackActionUrl( strProvider, strTrack );
 
-          // Track clicks
-          chrome.runtime.sendMessage(
-            {
-                strReceiver : 'background'
-              , strLog : 'browserAction.recentTracks'
-              , objVars : {
-                    strAction : 'providerAction'
-                  , strProvider : strProvider
-                  , strLanguage : strConstExtensionLanguage
-                  , strVersion : strConstExtensionVersion
-                  , strVersionName : strConstExtensionVersionName
-                }
-            }
+          _this.trackData(
+              'recentTracks'
+            , 'providerAction'
+            , { strProvider : strProvider }
           );
 
           Global.createTabOrUpdate( strUrl );
@@ -272,7 +249,11 @@ var Popup = {
     chrome.permissions.request( { permissions: [ 'clipboardWrite' ] }, function( boolIsGranted ) {
       Global.checkForRuntimeError(
           function() {
-            _this.trackData( strLog, { boolIsGranted : boolIsGranted } );
+            _this.trackData(
+                'recentTracks'
+              , strLog
+              , { boolIsGranted : boolIsGranted }
+            );
 
             if ( boolIsGranted ) {
               _this.copyToClipboard( objEvent );
@@ -314,7 +295,10 @@ var Popup = {
       return;
     }
 
-    this.trackData( 'copyToClipboard' );
+    this.trackData(
+        'recentTracks'
+      , 'copyToClipboard'
+    );
 
     // http://stackoverflow.com/a/11128179/561712
     var objSelection = window.getSelection();
@@ -340,11 +324,12 @@ var Popup = {
   /**
    * If user participates in UEIP, track some helpful insights.
    *
+   * @param {string} strLog - The log entry marker.
    * @param {string} strAction - The action being tracked.
    * @param {Object} [objData] - Additional data to track.
    **/
 
-  trackData : function( strAction, objData ) {
+  trackData : function( strLog, strAction, objData ) {
     let objTrackingData = {
         strAction : strAction
       , strLanguage : strConstExtensionLanguage
@@ -360,10 +345,17 @@ var Popup = {
       }
     }
 
+    if ( typeof strLog === 'string' && strLog !== '' ) {
+      strLog = strLogPage + strLogPageDivider + strLog;
+    }
+    else {
+      strLog = strLogPage;
+    }
+
     chrome.runtime.sendMessage(
       {
           strReceiver : 'background'
-        , strLog : 'browserAction.recentTracks'
+        , strLog : strLog
         , objVars : objTrackingData
       }
     );
