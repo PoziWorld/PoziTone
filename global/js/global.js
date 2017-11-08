@@ -1052,6 +1052,8 @@ var Global                        = {
                               );
                             }
                         );
+
+                        return;
                       }
                       else {
                         return;
