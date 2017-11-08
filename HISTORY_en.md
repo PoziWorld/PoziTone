@@ -4,6 +4,29 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v0.8.0
+
+### New
+
+* PoziTone partially [translated](https://www.transifex.com/poziworld/pozitone/) into Ukrainian. / PoziTone частково [перекладений](https://www.transifex.com/poziworld/pozitone/) українською мовою.
+  > Thank you, [Ivan Zusko (Іван Зусько)](https://www.transifex.com/user/profile/ivan.zusko/)!
+
+### Fixed
+
+* Recently played > Copy to clipboard.
+
+### Improved
+
+* Clipboard permission is no longer required during installation.
+* SoundCloud and DI.FM modules wouldn't start playback on just loaded page.
+* “Allow voice control” tooltip text.
+
+### Changed
+
+* Bump minimum Chrome version to 41
+
+---
+
 ## v0.7.0
 
 ### New
