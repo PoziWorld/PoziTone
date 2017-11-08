@@ -148,7 +148,7 @@
     "message": "Ostatnio odtwarzane utwory"
   },
   "optionsCopyright": {
-    "message": "&copy; PoziWorld, 2016"
+    "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
   },
   "popupToolbarClose": {
     "message": "Zamknij"
