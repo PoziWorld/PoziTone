@@ -603,6 +603,11 @@
           , "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_ru.md"
         }
       ,
+      "translatedBy": {
+          "description": "Пример: '<a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">Перевод</a> на русский: [Иван Петров](https://www.transifex.com/user/profile/ivan.petrov777/)"
+        , "message": ""
+      }
+      ,
       "optionsCopyright": {
         "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
       }

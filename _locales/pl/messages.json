@@ -318,5 +318,8 @@
   },
   "notificationPlayerStatusChangeStopped": {
     "message": "Odtwarzanie zatrzymane"
+  },
+  "translatedBy": {
+    "message": "<a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">Tłumaczenie</a> na język polski: jurczak (Łukasz Jurczak)"
   }
 }

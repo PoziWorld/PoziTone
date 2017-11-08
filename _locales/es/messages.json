@@ -318,5 +318,8 @@
   },
   "notificationPlayerStatusChangeStopped": {
     "message": "Reproducción detenida"
+  },
+  "translatedBy": {
+    "message": "<a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">Traducción</a> Española: [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/)"
   }
 }

@@ -91,7 +91,16 @@ optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
   document.getElementById( 'name' ).textContent = strConstExtensionName;
   document.getElementById( 'version' ).textContent = strConstExtensionVersionName;
 
+  const $$translatedBy = document.getElementById( 'translatedBy' );
+
   Page.localize( strPage, '#content' );
+
+  document.querySelector( '[data-id="translation"]' ).href = strConstTranslationUrl;
+  $$translatedBy.innerHTML = $$translatedBy.innerHTML.replace(
+      // Markdown-style link: [John Doe](https://www.transifex.com/user/profile/john.doe777/)
+      /(\[)([^\]]+\.?)(\])(\()(http[s]:\/\/(-\.)?([^\s\/?\.\#\-]+\.?)+(\/[^\s]*)?)(\))/g
+    , '<a href="$5" target="_blank" class="externalLink" data-id="translator" data-params="{ &quot;strTranslator&quot; : &quot;$2&quot; }">$2</a>'
+  );
 
   strSubpage = 'about';
   strSubsection = undefined;

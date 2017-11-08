@@ -374,5 +374,8 @@
   },
   "rateExtension": {
     "message": "Per piacere, manda un feedback su PoziTone così da aiutare altre persone a trovare questa estensione!"
+  },
+  "translatedBy": {
+    "message": "<a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">Traduzione</a> italiana: [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/)"
   }
 }

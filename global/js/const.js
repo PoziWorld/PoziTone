@@ -64,6 +64,7 @@ const
           ? '/support'
           : '?reports#feedback-container'
         )
+  , strConstTranslationUrl = 'https://www.transifex.com/poziworld/pozitone/'
 
     // External modules, separators, and Notifications
   , strConstGenericStringSeparator      = '_'

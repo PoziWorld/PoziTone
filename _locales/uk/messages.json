@@ -717,5 +717,8 @@
   },
   "optionsSettingsNotificationIconFormatStationLogo": {
     "message": "Відображати логотип поточної станції"
+  },
+  "translatedBy": {
+    "message": "Український <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">переклад</a>: [Іван Зусько](https://www.transifex.com/user/profile/ivan.zusko/)"
   }
 }
