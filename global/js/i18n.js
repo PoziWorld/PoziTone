@@ -54,6 +54,7 @@
      */
 
     const arrSupportedLocales = [
+      'be',
       'en_US',
       'es',
       'it',
