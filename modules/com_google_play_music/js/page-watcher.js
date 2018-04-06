@@ -98,7 +98,7 @@
 
     this.objPlayerInfo = {
         strModule : strModule
-      , strPlayerName : chrome.i18n.getMessage( 'module_' + strModule )
+      , strPlayerName : pozitone.i18n.getMessage( 'module_' + strModule )
       , boolIsReady : false
       , boolIsPlaying : false
       , boolIsMuted : false

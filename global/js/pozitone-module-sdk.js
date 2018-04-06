@@ -598,8 +598,8 @@
     var arrMessageArguments = objResponseDetails.arrMessageArguments;
 
     objResponseDetails.strVersion = this.getSdkVersion();
-    objResponseDetails.strStatusText = chrome.i18n.getMessage( 'pozitoneModuleSdkStatusCode' + intStatusCode );
-    objResponseDetails.strMessage = chrome.i18n.getMessage(
+    objResponseDetails.strStatusText = pozitone.i18n.getMessage( 'pozitoneModuleSdkStatusCode' + intStatusCode );
+    objResponseDetails.strMessage = pozitone.i18n.getMessage(
         'api' + objResponseDetails.strMessage
       , arrMessageArguments
     );

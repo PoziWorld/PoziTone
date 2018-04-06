@@ -30,7 +30,6 @@ const
   , strConstExtensionName         = objConstExtensionManifest.name
   , strConstExtensionVersion      = objConstExtensionManifest.version
   , strConstExtensionVersionName  = objConstExtensionManifest.version_name || strConstExtensionVersion
-  , strConstExtensionLanguage     = chrome.i18n.getMessage( 'lang' )
 
     // Browser & UI
   , boolConstIsBowserAvailable    = typeof bowser === 'object'
@@ -75,8 +74,6 @@ const
       strConstExtensionName + strConstNotificationIdSeparator
 
     // Developers Message: Browser Action settings (tooltip, badge)
-  , strConstTitleOnDevelopersMessageText  =
-      chrome.i18n.getMessage( 'messageFromDevelopersTooltipText' )
   , strConstBadgeOnDevelopersMessageText  = '1'
   , strConstBadgeOnDevelopersMessageColor = [ 44, 160, 44, 255 ]
 
@@ -101,8 +98,13 @@ const
           , browserVersionFull    : bowser.versionFull
           , chromeVersion         : strConstChromeVersion
           , chromeVersionFull     : bowser.chromeVersionFull
-          , language              : strConstExtensionLanguage
           , userAgent             : bowser.userAgent
+
+          /**
+           * @todo Use a listener instead of pozitone.i18n.saveExtensionLanguage
+           */
+
+          , language              : ''
         }
       : {}
 

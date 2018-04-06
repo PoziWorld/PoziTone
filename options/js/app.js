@@ -122,8 +122,8 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
           var strModuleVar = 'module_' + strModule;
 
           objModule.type = 'built-in';
-          objModule.caption = chrome.i18n.getMessage( strModuleVar );
-          objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+          objModule.caption = pozitone.i18n.getMessage( strModuleVar );
+          objModule.captionLong = pozitone.i18n.getMessage( strModuleVar + '_long' );
 
           if ( objGlobalModule ) {
             var boolIsAvailable = objGlobalModule.boolIsAvailable;
@@ -282,6 +282,11 @@ optionsApp.config( function( $routeProvider ) {
     .when( '/help', {
         templateUrl : 'partials/help.html'
       , controller : 'HelpCtrl'
+      , resolve : resolve
+    } )
+    .when( '/❤', {
+        templateUrl : 'partials/❤.html'
+      , controller : '❤Ctrl'
       , resolve : resolve
     } )
     .otherwise( {
@@ -453,7 +458,7 @@ optionsApp.run( function( $rootScope, $location ) {
 } );
 
 optionsApp.controller( 'MenuController', function( $scope, $rootScope, $location ) {
-  $scope.arrPages = [ 'projects', 'contribution', 'feedback', 'about', 'help' ];
+  $scope.arrPages = [ 'projects', 'contribution', 'feedback', 'about', 'help', '❤' ];
 
   /**
    * Highlight a menu item corresponding to the active view

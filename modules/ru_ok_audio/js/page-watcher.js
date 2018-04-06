@@ -211,7 +211,7 @@ var
         $addTrackToPlaylistBtn.click();
       else
         PageWatcher.sendSameMessage(
-          chrome.i18n.getMessage(
+          pozitone.i18n.getMessage(
             'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
           )
         );
@@ -278,7 +278,7 @@ var
     }
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
   }
   ,
@@ -300,7 +300,7 @@ var
     }
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
   }
   ,
@@ -464,13 +464,13 @@ var
 
             if ( boolIsPlaying ) {
               var strLangStartedOrResumed = 
-                    chrome.i18n.getMessage(
+                    pozitone.i18n.getMessage(
                       'notificationPlayerStatusChangeResumed'
                     );
 
               if ( PageWatcher.boolWasPageJustLoaded ) {
                 strLangStartedOrResumed =
-                  chrome.i18n.getMessage(
+                  pozitone.i18n.getMessage(
                     'notificationPlayerStatusChangeStarted'
                   );
 
@@ -488,7 +488,7 @@ var
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage(
+                pozitone.i18n.getMessage(
                   'notificationPlayerStatusChangeStopped'
                 )
               );
@@ -571,7 +571,7 @@ var
               &&  ! ~ strOldClass.indexOf( strAddTrackToPlaylistBtnAddedClass )
             ) {
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage(
+                pozitone.i18n.getMessage(
                   'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
                 )
               );
@@ -699,7 +699,7 @@ var
     ) {
       var
           strPreviousStatus = 'play'
-        , strMessage        = chrome.i18n.getMessage(
+        , strMessage        = pozitone.i18n.getMessage(
             'notificationPlayerStatusChangeStarted'
           )
         ;

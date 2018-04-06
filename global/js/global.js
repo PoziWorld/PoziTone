@@ -83,8 +83,7 @@ var Global                        = {
                 '*://101.ru/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/ru_101/js/uppod-player-api.js'
+                'modules/ru_101/js/uppod-player-api.js'
               , 'modules/general/js/page-watcher.js'
               , 'modules/ru_101/js/page-watcher.js'
             ]
@@ -102,8 +101,7 @@ var Global                        = {
               , '*://*.classicalradio.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_classicalradio/js/page-watcher.js'
               , 'modules/com_audioaddict/js/page-watcher.js'
             ]
@@ -121,8 +119,7 @@ var Global                        = {
               , '*://*.di.fm/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/fm_di/js/page-watcher.js'
             ]
         }
@@ -140,8 +137,7 @@ var Global                        = {
               , '*://play.google.com/music/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'global/js/pozitone-module-sdk.js'
+                'global/js/pozitone-module-sdk.js'
               , 'modules/com_google_play_music/js/dom-to-image.js'
               , 'modules/com_google_play_music/js/page-watcher.js'
             ]
@@ -159,8 +155,7 @@ var Global                        = {
               , '*://*.jazzradio.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_jazzradio/js/page-watcher.js'
               , 'modules/com_audioaddict/js/page-watcher.js'
             ]
@@ -180,8 +175,7 @@ var Global                        = {
               , '*://*.ok.ru/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/ru_ok_audio/js/page-watcher.js'
             ]
         }
@@ -198,8 +192,7 @@ var Global                        = {
               , '*://*.radiotunes.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_radiotunes/js/page-watcher.js'
               , 'modules/com_audioaddict/js/page-watcher.js'
             ]
@@ -217,8 +210,7 @@ var Global                        = {
               , '*://*.rockradio.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_rockradio/js/page-watcher.js'
               , 'modules/com_audioaddict/js/page-watcher.js'
             ]
@@ -235,8 +227,7 @@ var Global                        = {
                 '*://*.soundcloud.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'global/js/pozitone-module-sdk.js'
+                'global/js/pozitone-module-sdk.js'
               , 'modules/com_soundcloud/js/page-watcher.js'
             ]
         }
@@ -254,8 +245,7 @@ var Global                        = {
               , '*://*.vk.me/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_vk_audio/js/page-watcher.js'
               , 'modules/com_vk_audio/js/page-watcher-2.js'
               , 'modules/com_vk_audio/js/page-watcher-loader.js'
@@ -272,8 +262,7 @@ var Global                        = {
                 '*://vgmradio.com/*'
             ]
           , arrJs : [
-                'global/js/const.js'
-              , 'modules/general/js/page-watcher.js'
+                'modules/general/js/page-watcher.js'
               , 'modules/com_vgmradio/js/page-watcher.js'
             ]
         }
@@ -281,15 +270,15 @@ var Global                        = {
 
   // Don't show these buttons, if they've been clicked for this track already
   , arrAddTrackToPlaylistFeedback : [
-        chrome.i18n.getMessage(
+        pozitone.i18n.getMessage(
           'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
         )
-      , chrome.i18n.getMessage(
+      , pozitone.i18n.getMessage(
           'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
         )
     ]
   , strFavoriteStatusSuccess      : 
-      chrome.i18n.getMessage( 'notificationFavoriteStatusSuccess' )
+      pozitone.i18n.getMessage( 'notificationFavoriteStatusSuccess' )
 
   , arrCommands                   : []
   , boolShowShortcuts             : true
@@ -299,7 +288,7 @@ var Global                        = {
             loggedIn              : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsAddLoggedInTitle'
                       )
                   , iconUrl       : 'global/img/round_plus_icon&16.png'
@@ -311,7 +300,7 @@ var Global                        = {
             loggedIn              : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsAddLoggedInTitle'
                       )
                   , iconUrl       : 'global/img/round_plus_icon&16.png'
@@ -323,7 +312,7 @@ var Global                        = {
             loggedIn              : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsFavoriteLoggedInTitle'
                       )
                   , iconUrl       : 'global/img/emotion_smile_icon&16.png'
@@ -335,7 +324,7 @@ var Global                        = {
             loggedIn              : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsFavoriteLoggedInTitle'
                       )
                   , iconUrl       : 'global/img/emotion_smile_icon&16.png'
@@ -347,7 +336,7 @@ var Global                        = {
             next                  : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsNextTitle'
                       )
                   , iconUrl       : 'global/img/playback_next_icon&16.png'
@@ -359,7 +348,7 @@ var Global                        = {
             next                  : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsNextTitle'
                       )
                   , iconUrl       : 'global/img/playback_next_icon&16.png'
@@ -371,7 +360,7 @@ var Global                        = {
             previous              : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsPreviousTitle'
                       )
                   , iconUrl       : 'global/img/playback_prev_icon&16.png'
@@ -383,7 +372,7 @@ var Global                        = {
             previous              : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsPreviousTitle'
                       )
                   , iconUrl       : 'global/img/playback_prev_icon&16.png'
@@ -395,7 +384,7 @@ var Global                        = {
             0                     : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsPlayTitle'
                       )
                   , iconUrl       : 'global/img/playback_play_icon&16.png'
@@ -405,7 +394,7 @@ var Global                        = {
           , 1                     : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsStopTitle'
                       )
                   , iconUrl       : 'global/img/playback_stop_icon&16.png'
@@ -417,7 +406,7 @@ var Global                        = {
             mute                  : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsMuteTitle'
                       )
                   , iconUrl       : 'global/img/sound_mute_icon&16.png'
@@ -427,7 +416,7 @@ var Global                        = {
           , unmute                : {
                 objButton         : {
                     title         : 
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsUnmuteTitle'
                       )
                   , iconUrl       : 'global/img/sound_high_icon&16.png'
@@ -439,7 +428,7 @@ var Global                        = {
             volumeUp              : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsVolumeUpTitle'
                       )
                   , iconUrl       : 'global/img/sound_up_icon&16.png'
@@ -451,7 +440,7 @@ var Global                        = {
             volumeDown            : {
                 objButton         : {
                     title         :
-                      chrome.i18n.getMessage(
+                      pozitone.i18n.getMessage(
                         'notificationButtonsVolumeDownTitle'
                       )
                   , iconUrl       : 'global/img/sound_down_icon&16.png'
@@ -1571,8 +1560,8 @@ var Global                        = {
                */
 
               objModule.type = 'built-in';
-              objModule.caption = chrome.i18n.getMessage( strModuleVar );
-              objModule.captionLong = chrome.i18n.getMessage( strModuleVar + '_long' );
+              objModule.caption = pozitone.i18n.getMessage( strModuleVar );
+              objModule.captionLong = pozitone.i18n.getMessage( strModuleVar + '_long' );
             }
             else {
               var intLastIndex = strModule.lastIndexOf( strConstExternalModuleSeparator )
@@ -1991,7 +1980,7 @@ var Global                        = {
                         )
                         .replace(
                             strConstLangParam
-                          , strConstExtensionLanguage
+                          , pozitone.i18n.getLanguage()
                         );
 
         strUrl += Log.strJoinUeip;
@@ -2053,7 +2042,7 @@ var Global                        = {
 
       function funcSetBrowserAction() {
         chrome.browserAction.setTitle( {
-          title: strConstTitleOnDevelopersMessageText
+          title: pozitone.i18n.getMessage( 'messageFromDevelopersTooltipText' )
         } );
 
         chrome.browserAction.setBadgeBackgroundColor( {

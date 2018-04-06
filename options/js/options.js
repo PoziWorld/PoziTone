@@ -244,7 +244,7 @@ var Options = {
               objConstUserSetUp
             , function() {
                 $element.innerText =
-                  chrome.i18n.getMessage( 'optionsHelpSubmitInfoCtaSuccess' );
+                  pozitone.i18n.getMessage( 'optionsHelpSubmitInfoCtaSuccess' );
               }
           );
 
@@ -287,18 +287,23 @@ var Options = {
    **/
   initEeLauncher : function() {
     // http://stackoverflow.com/a/18272907
-    var strInput = '';
+    let strInput = '';
 
     window.addEventListener( 'keypress', function( objEvent ) {
       var c = String.fromCharCode( objEvent.keyCode );
 
       strInput += c.toLowerCase();
 
-      if ( strInput.length > strEeLauncherKeyword.length )
-        strInput = strInput.slice( 1 );
+      if ( ~ strInput.indexOf( strEeLauncherKeyword ) ) {
+        strInput = '';
 
-      if ( strInput == strEeLauncherKeyword )
         document.getElementById( strEeLauncherId ).click();
+      }
+      else if ( ~ strInput.indexOf( window.atob( 'bGlh' ) ) ) {
+        strInput = '';
+
+        location.href='#/❤';
+      }
     } );
   }
 };

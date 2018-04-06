@@ -126,12 +126,12 @@ var
       , objAddTrackToPlaylistFeedback     : {
             'Трек успешно добавлен в плейлист'
                                           :
-              chrome.i18n.getMessage(
+              pozitone.i18n.getMessage(
                 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
               )
           , 'Данный трек уже есть в Вашем плейлисте'
                                           :
-              chrome.i18n.getMessage(
+              pozitone.i18n.getMessage(
                 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
               )
         }
@@ -319,7 +319,7 @@ var
     PageWatcher.objPlayerInfo.boolIsMuted = true;
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
   }
   ,
@@ -344,7 +344,7 @@ var
     PageWatcher.objPlayerInfo.boolIsMuted = false;
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
   }
   ,
@@ -398,7 +398,7 @@ var
         objWmaPlayerSettings.volume = intVolume;
 
       PageWatcher.sendSameMessage(
-        chrome.i18n.getMessage(
+        pozitone.i18n.getMessage(
             'notificationButtonsVolumeChangeFeedback'
           , [ intVolume ]
         )
@@ -462,7 +462,7 @@ var
           &&  objModuleSettings.boolShowKbpsInfo
           &&  intKbps !== 0
         ) {
-          var strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
+          var strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
 
           PageWatcher.objStationInfo.strTrackInfo += 
             strConstNotificationLinesSeparator + strKbpsInfo;
@@ -555,13 +555,13 @@ var
 
             if ( strPlayerStatus === 'stop' ) {
               var strLangStartedOrResumed =
-                    chrome.i18n.getMessage(
+                    pozitone.i18n.getMessage(
                       'notificationPlayerStatusChangeResumed'
                     );
 
               if ( PageWatcher.boolWasPageJustLoaded )
                 strLangStartedOrResumed =
-                  chrome.i18n.getMessage(
+                  pozitone.i18n.getMessage(
                     'notificationPlayerStatusChangeStarted'
                   );
 
@@ -576,7 +576,7 @@ var
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage(
+                pozitone.i18n.getMessage(
                   'notificationPlayerStatusChangeStopped'
                 )
               );
@@ -672,7 +672,7 @@ var
               ||  arrClassList.contains( strFavoriteButtonSuccessClass2 )
             ) {
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage(
+                pozitone.i18n.getMessage(
                   'notificationFavoriteStatusSuccess'
                 )
               );
@@ -776,7 +776,7 @@ $trackInfo.addEventListener(
         &&  ! PageWatcher.objPlayerInfo.boolIsMp3Player
       ) {
         PageWatcher.sendSameMessage(
-            chrome.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
+            pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
           , true
         );
 

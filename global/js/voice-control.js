@@ -529,7 +529,7 @@
         'voiceControl'
       , true
       , {
-            title : chrome.i18n.getMessage( 'voiceControlActivate' )
+            title : pozitone.i18n.getMessage( 'voiceControlActivate' )
           , onclick : function() {
               _this.connectNative();
               return false;

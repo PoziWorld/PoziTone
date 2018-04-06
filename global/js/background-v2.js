@@ -31,6 +31,30 @@
     this._objCallbacks = {
         browserActionContextMenuCreated : []
     };
+
+    /**
+     * Content scripts that are default for all page watchers.
+     */
+
+    const arrDefaultContentScripts = [
+      'global/js/const.js',
+      'global/js/i18next/i18next.min.js',
+      'global/js/i18next/i18nextBrowserLanguageDetector.min.js',
+      'global/js/i18next/i18nextXHRBackend.js',
+      'global/js/i18n.js'
+    ];
+
+    /**
+     * Return content scripts that are default for all page watchers.
+     *
+     * @return {string[]}
+     */
+
+    Background2.prototype.getDefaultContentScripts = function () {
+      Log.add( 'pozitone.background.getDefaultContentScripts' );
+
+      return arrDefaultContentScripts;
+    };
   }
 
   /**
@@ -200,7 +224,7 @@
       }
 
       if ( boolIsAdditionalInfoRecognized ) {
-        objData.objStationInfo.strAdditionalInfo = chrome.i18n.getMessage( strAdditionalInfo, arrSubstitutions );
+        objData.objStationInfo.strAdditionalInfo = pozitone.i18n.getMessage( strAdditionalInfo, arrSubstitutions );
       }
     }
 
@@ -309,7 +333,7 @@
               , intCss = ( typeof arrCss !== 'undefined' )
                   ? arrCss.length
                   : 0
-              , arrJs = objModule.arrJs
+              , arrJs = pozitone.background.getDefaultContentScripts().concat( objModule.arrJs )
               , intJs = ( typeof arrJs !== 'undefined' )
                   ? arrJs.length
                   : 0

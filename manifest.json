@@ -103,6 +103,10 @@
           , "global/js/const.js"
           , "global/js/pozitone-host-api.js"
           , "global/js/log.js"
+          , "global/js/i18next/i18next.min.js"
+          , "global/js/i18next/i18nextBrowserLanguageDetector.min.js"
+          , "global/js/i18next/i18nextXHRBackend.js"
+          , "global/js/i18n.js"
           , "global/js/global.js"
           , "global/js/global-v2.js"
           , "global/js/background.js"
@@ -119,5 +123,6 @@
   , "web_accessible_resources": [
         "*.png"
       , "*.svg"
+      , "*.json"
     ]
 }

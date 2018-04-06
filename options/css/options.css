@@ -80,7 +80,7 @@
     {
       margin-top: 2rem;
     }
-  .mainMenuItemWrap:nth-last-child( 2 )
+  .mainMenuItemWrap:nth-last-child( 3 )
     {
       margin-bottom: 2rem;
     }
@@ -608,4 +608,12 @@
   #helpSubmitInfoCta
     {
         margin-bottom:        2rem;
+    }
+  #\002764
+    {
+      font: .6em/.5 monospace;
+      margin: 0 0 5.8rem 3.75rem;
+      padding-top: 0;
+      text-align: center;
+      white-space: nowrap;
     }

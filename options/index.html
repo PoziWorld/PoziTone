@@ -11,6 +11,10 @@
     <script src="/global/js/bowser.js"></script>
     <script src="/global/js/const.js"></script>
     <script src="/global/js/log.js"></script>
+    <script src="/global/js/i18next/i18next.min.js"></script>
+    <script src="/global/js/i18next/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="/global/js/i18next/i18nextXHRBackend.js"></script>
+    <script src="/global/js/i18n.js"></script>
     <script src="/global/js/global.js"></script>
     <script src="/global/js/global-v2.js"></script>
     <script src="/global/js/page.js"></script>
@@ -96,7 +100,7 @@
           </li>
           <li
             class="menuItemWrap mainMenuItemWrap"
-            ng-class="{none : strPage === 'help'}"
+            ng-class="{none : strPage === 'help' || strPage === '❤'}"
             ng-repeat="strPage in arrPages"
             >
             <a

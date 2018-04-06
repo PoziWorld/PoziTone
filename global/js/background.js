@@ -341,14 +341,14 @@ var Background = {
         updated : [
             {
                 objButton : {
-                    title : chrome.i18n.getMessage( 'systemNotificationUpdatedChanges' )
+                    title : pozitone.i18n.getMessage( 'systemNotificationUpdatedChanges' )
                   , iconUrl : 'global/img/list_bullets_icon&16.png'
                 }
               , strFunction : 'seeChanges'
             }
           , {
                 objButton : {
-                    title : chrome.i18n.getMessage( 'systemNotificationUpdatedDoNotNotify' )
+                    title : pozitone.i18n.getMessage( 'systemNotificationUpdatedDoNotNotify' )
                   , iconUrl : 'global/img/off_icon&16.png'
                 }
               , strFunction : 'doNotNotifyOfUpdates'
@@ -459,9 +459,9 @@ var Background = {
 
         Global.showSystemNotification(
             'updated'
-          , chrome.i18n.getMessage( 'systemNotificationUpdated' )
-          , chrome.i18n.getMessage( 'extensionName' ) +
-              chrome.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
+          , pozitone.i18n.getMessage( 'systemNotificationUpdated' )
+          , pozitone.i18n.getMessage( 'extensionName' ) +
+              pozitone.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
               strConstExtensionVersionName
           , null
           , [
@@ -1234,7 +1234,7 @@ var Background = {
                     )
                     .replace(
                         strConstLangParam
-                      , strConstExtensionLanguage
+                      , pozitone.i18n.getLanguage()
                     );
 
     Global.createTabOrUpdate( strUrl );
@@ -1354,7 +1354,7 @@ var Background = {
 
     function createGenericContextMenuProperties( strContextMenu ) {
       return {
-          title : chrome.i18n.getMessage( strContextMenu )
+          title : pozitone.i18n.getMessage( strContextMenu )
         , contexts : [ 'browser_action' ]
       };
     }

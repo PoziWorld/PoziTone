@@ -941,8 +941,8 @@
     var arrMessageArguments = objResponseDetails.arrMessageArguments;
 
     objResponseDetails.strVersion = this.getApiVersion();
-    objResponseDetails.strStatusText = chrome.i18n.getMessage( 'apiStatusCode' + intStatusCode );
-    objResponseDetails.strMessage = chrome.i18n.getMessage(
+    objResponseDetails.strStatusText = pozitone.i18n.getMessage( 'apiStatusCode' + intStatusCode );
+    objResponseDetails.strMessage = pozitone.i18n.getMessage(
         'api' + objResponseDetails.strMessage
       , arrMessageArguments
     );

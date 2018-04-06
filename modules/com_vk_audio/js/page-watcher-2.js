@@ -387,11 +387,11 @@
 
               if ( boolIsPlaying ) {
                 var strLangStartedOrResumed =
-                      chrome.i18n.getMessage( 'notificationPlayerStatusChangeResumed' );
+                      pozitone.i18n.getMessage( 'notificationPlayerStatusChangeResumed' );
 
                 if ( PageWatcher.boolWasPageJustLoaded ) {
                   strLangStartedOrResumed =
-                    chrome.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
+                    pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
 
                   PageWatcher.initTrackTitleObserver();
                 }
@@ -407,7 +407,7 @@
               }
               else if ( ! boolIsPlaying && PageWatcher.boolHadPlayedBefore ) {
                 PageWatcher.sendSameMessage(
-                  chrome.i18n.getMessage( 'notificationPlayerStatusChangeStopped' )
+                  pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStopped' )
                 );
               }
 
@@ -600,7 +600,7 @@
               PageWatcher.hideOrKeepPlayer2();
 
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+                pozitone.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
               );
             } );
 
@@ -608,7 +608,7 @@
           }
           else {
             PageWatcher.sendSameMessage(
-              chrome.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
+              pozitone.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
             );
           }
         }
@@ -741,7 +741,7 @@
                         intKbps = 320;
                       }
 
-                      strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
+                      strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
                     }
 
                     PageWatcher.setTrackInfoAndSend(

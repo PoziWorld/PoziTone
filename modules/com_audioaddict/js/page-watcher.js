@@ -256,7 +256,7 @@ var
     }
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsMuteFeedback' )
     );
   }
   ,
@@ -275,7 +275,7 @@ var
     }
 
     PageWatcher.sendSameMessage(
-      chrome.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+      pozitone.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
     );
   }
   ,
@@ -329,7 +329,7 @@ var
       intPercentage = Math.round( intVolume * 100 );
 
       PageWatcher.sendSameMessage(
-        chrome.i18n.getMessage(
+        pozitone.i18n.getMessage(
             'notificationButtonsVolumeChangeFeedback'
           , [ intPercentage ]
         )
@@ -394,7 +394,7 @@ var
           &&  objModuleSettings.boolShowKbpsInfo
           &&  intKbps !== 0
         ) {
-          var strKbpsInfo = intKbps + chrome.i18n.getMessage( 'kbps' );
+          var strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
 
           PageWatcher.objStationInfo.strTrackInfo += strConstNotificationLinesSeparator + strKbpsInfo;
         }
@@ -516,7 +516,7 @@ var
                 PageWatcher.boolHadPlayedBefore = true;
 
                 PageWatcher.sendSameMessage(
-                    chrome.i18n.getMessage(
+                    pozitone.i18n.getMessage(
                       'notificationPlayerStatusChangeStarted'
                     )
                   , true
@@ -564,7 +564,7 @@ var
 
             if ( strPlayerStatus === 'stop' ) {
               PageWatcher.sendSameMessage(
-                  chrome.i18n.getMessage(
+                  pozitone.i18n.getMessage(
                       'notificationPlayerStatusChangeResumed'
                     )
                 , true
@@ -572,7 +572,7 @@ var
             }
             else if ( strPlayerStatus === 'play' && PageWatcher.boolHadPlayedBefore ) {
               PageWatcher.sendSameMessage(
-                chrome.i18n.getMessage(
+                pozitone.i18n.getMessage(
                   'notificationPlayerStatusChangeStopped'
                 )
               );
@@ -620,7 +620,7 @@ var
                 // If favorited track
                 if ( $favoriteButton.classList.contains( strFavoriteButtonSuccessClass ) ) {
                   PageWatcher.sendSameMessage(
-                    chrome.i18n.getMessage(
+                    pozitone.i18n.getMessage(
                       'notificationFavoriteStatusSuccess'
                     )
                   );

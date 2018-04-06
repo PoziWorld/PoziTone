@@ -332,7 +332,7 @@ var Popup = {
   trackData : function( strLog, strAction, objData ) {
     let objTrackingData = {
         strAction : strAction
-      , strLanguage : strConstExtensionLanguage
+      , strLanguage : pozitone.i18n.getLanguage()
       , strVersion : strConstExtensionVersion
       , strVersionName : strConstExtensionVersionName
     };
@@ -386,7 +386,7 @@ var Popup = {
               +  'p=' + strProvider
               + '&q=' + Popup.encodeQuery( strQuery )
               + '&v=' + strConstExtensionVersion
-              + '&l=' + strConstExtensionLanguage
+              + '&l=' + pozitone.i18n.getLanguage()
               ;
   }
   ,

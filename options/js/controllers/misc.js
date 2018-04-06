@@ -143,3 +143,24 @@ optionsControllers.controller( 'HelpCtrl', function( $scope ) {
   if ( strHtml !== '' )
     document.getElementById( strHelpInfoToSubmitId ).innerHTML = strHtml;
 } );
+
+// Controller for ❤ page
+optionsControllers.controller( '❤Ctrl', function( $scope ) {
+  document.getElementById( 'header' ).hidden = true;
+  document.getElementById( 'toolbar' ).hidden = true;
+  document.getElementById( 'footer' ).hidden = true;
+
+  const $$ascii = document.getElementById( '❤❤' );
+  const strReadyAttribute = 'data-ready';
+  const boolIsReady = JSON.parse( $$ascii.getAttribute( strReadyAttribute ) );
+
+  if ( ! boolIsReady ) {
+    $$ascii.textContent = window.atob( $$ascii.textContent );
+    $$ascii.setAttribute( strReadyAttribute, true );
+  }
+
+  strSubpage = '❤';
+  strSubsection = undefined;
+
+  Page.trackPageView( '❤' );
+} );
