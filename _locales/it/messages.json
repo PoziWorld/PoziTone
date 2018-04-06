@@ -191,9 +191,6 @@
   "optionsSettingsNotificationTitleFormatNoStationInfo": {
     "message": "Non mostrare informazioni riguardo la stazione radio corrente"
   },
-  "lang": {
-    "message": "it"
-  },
   "feedback": {
     "message": "Commenti"
   },

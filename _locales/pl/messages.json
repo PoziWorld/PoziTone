@@ -156,9 +156,6 @@
   "optionsSettingsNotificationTitleFormatNoStationInfo": {
     "message": "Nie wyświetlaj informacji o aktualnie odtwarzanej stacji"
   },
-  "lang": {
-    "message": "pl_PL"
-  },
   "notificationPlayerStatusChangeStarted": {
     "message": "Odtwarzanie rozpoczęte"
   },

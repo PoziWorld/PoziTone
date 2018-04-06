@@ -1,9 +1,4 @@
 {
-  "lang": {
-      "message": "en"
-    , "description": "https://developer.chrome.com/webstore/i18n?csw=1#localeTable"
-  }
-  ,
   "extensionName": {
     "message": "PoziTone"
   }

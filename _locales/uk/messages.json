@@ -398,10 +398,6 @@
   "voiceControlAllowInfo": {
     "message": "After the permission is received, PoziTone will automatically restart itself for the changes to take effect.\n\nIf this page is not reopened after the restart, please open it manually to continue.\nWe apologize for the inconvenience."
   },
-  "lang": {
-    "message": "ua",
-    "description": "https://developer.chrome.com/webstore/i18n?csw=1#localeTable"
-  },
   "feedback": {
     "message": "Зворотній зв'язок"
   },

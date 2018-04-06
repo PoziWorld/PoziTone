@@ -156,9 +156,6 @@
   "optionsSettingsNotificationTitleFormatNoStationInfo": {
     "message": "No mostrar información sobre esta estación"
   },
-  "lang": {
-    "message": "es"
-  },
   "notificationPlayerStatusChangeStarted": {
     "message": "Reproducción iniciada"
   },
