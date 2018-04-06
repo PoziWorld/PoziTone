@@ -617,3 +617,13 @@
       text-align: center;
       white-space: nowrap;
     }
+
+@media ( max-width: 51em ) { /* 816px - To not affect Opera standalone page style; also, lower values make the page shake in older Chrome */
+  #content {
+    height: 60rem;
+    overflow-y: scroll;
+  }
+  [data-scrollable="false"]#html #content {
+    overflow-y: initial;
+  }
+}

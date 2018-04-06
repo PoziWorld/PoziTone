@@ -423,6 +423,25 @@ optionsApp.run( function( $rootScope, $location ) {
     objEvent.preventDefault();
   };
 
+  /**
+   * Content pages need scroll enforced in Material Design-enabled Extensions page.
+   * Otherwise, they spread to 100vh, but are not scrollable.
+   *
+   * @param {Object} objNewRoute - Details about the route being loaded.
+   */
+
+  $rootScope.checkScrollEnforcement = function ( objNewRoute ) {
+    const objRouteConfig = objNewRoute.$$route;
+
+    if ( objRouteConfig ) {
+      const strController = objRouteConfig.controller;
+
+      if ( typeof strController === 'string' && strController !== '' ) {
+        document.documentElement.setAttribute( 'data-scrollable', strController.replace( 'Ctrl', '' ) !== decodeURIComponent( escape ( window.atob( '4p2k' ) ) ) )
+      }
+    }
+  };
+
   // Remove external links listeners
   $rootScope.$on( '$routeChangeStart', function() {
     $rootScope.toggleExternalLinksListeners( false );
@@ -431,6 +450,7 @@ optionsApp.run( function( $rootScope, $location ) {
   // Highlight a menu item corresponding to the active view on route change
   $rootScope.$on( '$routeChangeSuccess', function() {
     $rootScope.$$childHead.highlightActiveMenuItem();
+    $rootScope.checkScrollEnforcement( arguments[ 1 ] );
   } );
 
   $rootScope.strRateUrl = strConstRateUrl;
