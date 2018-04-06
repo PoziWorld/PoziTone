@@ -190,6 +190,7 @@ PoziTone должен отобразить оповещение с информ�
   - польский — jurczak (Łukasz Jurczak);
   - итальянский — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
   - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
+  - беларуский — [natasmirnova1392 (Natalia Smirnova)](https://www.transifex.com/user/profile/natasmirnova1392/).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 

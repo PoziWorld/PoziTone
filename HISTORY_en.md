@@ -4,6 +4,19 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v0.9.0
+
+### New
+
+* PoziTone [translated](https://www.transifex.com/poziworld/pozitone/) into Belarusian. / PoziTone [перакладзены](https://www.transifex.com/poziworld/pozitone/) на беларускую мову.
+  > Thank you, [Natalia Smirnova (Наталия Смирнова)](https://www.transifex.com/user/profile/natasmirnova1392/)!
+
+### Fixed
+
+* Options scrollability on Material Design-enabled Extensions page.
+
+---
+
 ## v0.8.0
 
 ### New

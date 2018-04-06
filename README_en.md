@@ -181,6 +181,7 @@ Gratitudes
   - Polish — jurczak (Łukasz Jurczak);
   - Italian — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
   - Ukrainian — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
+  - Belarusian — [natasmirnova1392 (Natalia Smirnova)](https://www.transifex.com/user/profile/natasmirnova1392/).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 

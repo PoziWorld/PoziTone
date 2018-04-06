@@ -4,6 +4,19 @@
 
 > [Следить за обновлениями PoziTone](README_ru.md#pozitone-в-социальных-сетях)
 
+## v0.9.0
+
+### Новое
+ 
+* PoziTone [переведён](https://www.transifex.com/poziworld/pozitone/) на беларуский. / PoziTone [перакладзены](https://www.transifex.com/poziworld/pozitone/) на беларускую мову.
+  > Благодарим Вас, [Natalia Smirnova (Наталия Смирнова)](https://www.transifex.com/user/profile/natasmirnova1392/)!
+
+### Исправлено
+
+* Прокрутка Параметров на странице Расширений в Material Design.
+
+---
+
 ## v0.8.0
 
 ### Новое
