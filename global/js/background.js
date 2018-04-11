@@ -1217,25 +1217,20 @@ var Background = {
   ,
 
   /**
-   * Opens the changelog
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
+   * Open the changelog.
    **/
+
   processButtonClick_seeChanges : function() {
     strLog = 'processButtonClick_seeChanges';
     Log.add( strLog, {} );
 
-    var strUrl  = Background.strChangelogUrl
-                    .replace(
-                        strConstVersionParam
-                      , strConstExtensionVersionName
-                    )
-                    .replace(
-                        strConstLangParam
-                      , pozitone.i18n.getLanguage()
-                    );
+    const strCurrentLanguage = pozitone.i18n.getLanguage();
+    // Currently the changelog is available only in Russian and English
+    const strTargetLanguage = ~ [ 'ru', 'be', 'uk' ].indexOf( strCurrentLanguage ) ? 'ru' : 'en';
+    const strUrl = Background.strChangelogUrl
+      .replace( strConstVersionParam, strConstExtensionVersion )
+      .replace( strConstLangParam, strTargetLanguage )
+      ;
 
     Global.createTabOrUpdate( strUrl );
   }
