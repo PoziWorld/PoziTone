@@ -108,6 +108,7 @@
           , "global/js/i18next/i18nextBrowserLanguageDetector.min.js"
           , "global/js/i18next/i18nextXHRBackend.js"
           , "global/js/i18n.js"
+          , "global/js/notifications.js"
           , "global/js/global.js"
           , "global/js/global-v2.js"
           , "global/js/background.js"

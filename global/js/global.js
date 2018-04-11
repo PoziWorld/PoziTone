@@ -1179,14 +1179,7 @@ var Global                        = {
       objNotificationOptions.buttons = arrButtons;
     }
 
-    // Clear previous notification of this type first, then display a new one
-    chrome.notifications.clear( strNotificationId, function() {
-      chrome.notifications.create(
-          strNotificationId
-        , objNotificationOptions
-        , function( strNotificationId ) {}
-      );
-    });
+    pozitone.notifications.create( strNotificationId, objNotificationOptions );
   }
   ,
 
@@ -2100,7 +2093,7 @@ var Global                        = {
       );
 
       if ( typeof funcErrorCallback === 'function' ) {
-        funcErrorCallback();
+        funcErrorCallback( strErrorMessage );
       }
     }
     else if ( typeof funcCallback === 'function' ) {
