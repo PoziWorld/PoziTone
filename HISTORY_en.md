@@ -4,6 +4,14 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v0.9.1
+
+### Fixed
+
+* Translations wouldn't load in Chrome 72.
+
+---
+
 ## v0.9.0
 
 ### New
