@@ -457,6 +457,14 @@
         "message": "PoziWorld develops software that helps you solve everyday tasks easier, faster, more&nbsp;efficiently, is free to use, and does not track your activity without your prior agreement."
       }
       ,
+      "swaggyDescriptionParagraph1": {
+        "message": "Voice control for Swagbucks.com (unofficial). Accessibility-friendly."
+      }
+      ,
+      "swaggyDescriptionParagraph2": {
+        "message": "Swaggy makes Swagbucks.com a little bit more accessible by letting you search, navigate, click, sort* without looking for the corresponding buttons, links, toggles on a page."
+      }
+      ,
       "peDescriptionParagraph1": {
         "message": "Lets you use your voice to control things you usually use your mouse and/or keyboard for."
       }

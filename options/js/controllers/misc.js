@@ -1,9 +1,19 @@
-// Controller for Our Projects page
+// Controller for Sister Projects page
 optionsControllers.controller( 'ProjectsCtrl', function( $scope, $rootScope ) {
   $scope.boolIsNotOperaAddon = ! boolConstIsOperaAddon;
 
   $scope.arrProjects = [
       {
+          strName : 'Swaggy'
+        , strAbbreviation : 'swaggy'
+        , strImageFileName : 'swaggy-icon-48.svg'
+          /**
+           * @todo More suitable var names
+           */
+        , strChromeLink : 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf'
+        , strOperaLink : 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf'
+      }
+    , {
           strName : 'PoziWorld Elf'
         , strAbbreviation : 'pe'
         , strImageFileName : 'pe-icon-64.png'
