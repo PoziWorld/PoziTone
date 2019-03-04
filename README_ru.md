@@ -239,7 +239,7 @@ Sprechen Sie Deutsch? Vous parlez français?
 
 ### Поощрение
 
-Если Вы цените проделанную нами работу, пожалуйста, подумайте о стимулировании разработки PoziTone посредством [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone) или [Coinbase](https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac).
+Если Вы цените проделанную нами работу, пожалуйста, подумайте о стимулировании разработки PoziTone посредством [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone) или [Coinbase](https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 

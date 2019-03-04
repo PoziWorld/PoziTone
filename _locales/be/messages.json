@@ -310,7 +310,7 @@
     "message": "Мне падабаецца! <small>(патрабуецца аўтарызацыя на сайце)</small>"
   },
   "incentiveParagraph": {
-    "message": "Калі Вы цэніце праведзеную намі працу, калі ласка, падумайце пра стымуляванне распрацоўкі PoziTone пасродкам <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a> или <a href=\"https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+    "message": "Калі Вы цэніце праведзеную намі працу, калі ласка, падумайце пра стымуляванне распрацоўкі PoziTone пасродкам <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a> или <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
   },
   "optionsSettingsNotificationIconFormatGenericImage": {
     "message": "Адлюстроўваць стандартны малюнак"

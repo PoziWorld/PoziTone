@@ -230,7 +230,7 @@ If you know any foreign language or just noticed a discrepancy in the translatio
 
 ### Incentive
 
-If you appreciate the work we have done, please consider stimulating PoziTone development via [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone), or [Coinbase](https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac).
+If you appreciate the work we have done, please consider stimulating PoziTone development via [PayPal](https://www.paypal.me/pozitone), [Square Cash](https://cash.me/$PoziTone), or [Coinbase](https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 

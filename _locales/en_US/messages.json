@@ -566,7 +566,7 @@
       }
         ,
         "incentiveParagraph": {
-          "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://www.coinbase.com/checkouts/175d457cd15ff519444e5c892ed08cac\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+          "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
         }
     ,
     "about": {
