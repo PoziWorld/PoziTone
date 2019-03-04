@@ -45,7 +45,7 @@
      */
 
     const i18nextXhrBackendOptions = {
-      loadPath: chrome.extension.getURL( '_locales/{{lng}}/messages.json' ),
+      loadPath: chrome.runtime.getURL( '_locales/{{lng}}/messages.json' ),
       async: false
     };
 

@@ -2126,7 +2126,7 @@ var Global                        = {
       var strOptionsUrl =
             boolConstUseOptionsUi
               ? 'chrome://extensions?options=' + strConstExtensionId
-              : chrome.extension.getURL( 'options/index.html' )
+              : chrome.runtime.getURL( 'options/index.html' )
               ;
 
       Global.createTabOrUpdate( strOptionsUrl );
