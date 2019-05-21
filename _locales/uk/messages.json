@@ -1,521 +1,194 @@
 {
-  "systemNotificationUpdated": {
-    "message": "Розширення оновлено!"
+  "extensionDescription": {
+    "message": "Додає нові можливості улюбленим плеєрам: сповіщення з інформацією про трек, керування поза браузером, перелік останніх треків."
+  },
+  "commandShowNotification": {
+    "message": "Показати сповіщення"
+  },
+  "notificationButtonsAddLoggedInTitle": {
+    "message": "Додати у плейліст"
+  },
+  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "message": "Успішно додано у плейліст"
+  },
+  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "message": "Вже знаходиться у Вашому плейлісті"
+  },
+  "notificationButtonsFavoriteLoggedInTitle": {
+    "message": "Мені подобається!"
+  },
+  "notificationFavoriteStatusSuccess": {
+    "message": "Дякуємо за відзначення важкої праці діджея!"
+  },
+  "notificationButtonsNextTitle": {
+    "message": "Наступний"
+  },
+  "notificationButtonsNextFeedback": {
+    "message": "Трек переключено"
+  },
+  "notificationButtonsPreviousTitle": {
+    "message": "Попередній"
+  },
+  "notificationButtonsPreviousFeedback": {
+    "message": "Трек переключено"
+  },
+  "notificationButtonsPlayTitle": {
+    "message": "Відновити відтворення"
+  },
+  "notificationButtonsStopTitle": {
+    "message": "Стоп"
+  },
+  "notificationPlayerStatusChangeStarted": {
+    "message": "Відтворення розпочато"
+  },
+  "notificationPlayerStatusChangeStopped": {
+    "message": "Відтворення зупинено"
+  },
+  "notificationPlayerStatusChangeResumed": {
+    "message": "Відтворення відновлено"
+  },
+  "notificationButtonsMuteTitle": {
+    "message": "Вимкнути звук"
+  },
+  "notificationButtonsMuteFeedback": {
+    "message": "Звук вимкнено"
+  },
+  "notificationButtonsUnmuteTitle": {
+    "message": "Увімкнути звук"
+  },
+  "notificationButtonsUnmuteFeedback": {
+    "message": "Звук ввімкнуто"
   },
   "notificationButtonsVolumeUpTitle": {
     "message": "Збільшити гучність звуку",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "connected": {
-    "message": "Connected"
+  "notificationButtonsVolumeDownTitle": {
+    "message": "Зменшити гучність звуку",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "unavailable": {
-    "message": "(Unavailable)"
-  },
-  "module_ru_ok_audio_long": {
-    "message": "Однокласники (аудіо) | ok.ru"
-  },
-  "optionsSettingsSoundVolumeControlDelta": {
-    "message": "Змінити на, %",
-    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
-  },
-  "optionsSettingsSupportEnabled": {
-    "message": "Увімкнено"
-  },
-  "notificationButtonsMuteTitle": {
-    "message": "Вимкнути звук"
-  },
-  "optionsSettingsGeneralUeipPrivacyHref": {
-    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
-  },
-  "apiStatusCode500": {
-    "message": "Внутрішня Помилка Сервера",
-    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#500 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500"
-  },
-  "module_com_google_play_music_long": {
-    "message": "Google Play Музика | play.google.com/music"
-  },
-  "module_ru_ok_audio": {
-    "message": "Однокласники (аудіо)"
-  },
-  "notificationButtonsAddLoggedInTitle": {
-    "message": "Додати у плейліст"
-  },
-  "optionsSettingsGeneralUeipPrivacy": {
-    "message": "Заява про конфіденційність"
-  },
-  "notificationButtonsFavoriteLoggedInTitle": {
-    "message": "Мені подобається!"
-  },
-  "apiErrorMethodNotSupported": {
-    "message": "Метод “$METHOD$” не підтримується",
-    "description": "When method is valid but not supported by this call or not valid (for example, there is a typo)"
-    , "placeholders" : {
-          "method" : {
-              "content" : "$1"
-            , "example" : "POST"
-          }
-      }
-  },
-  "projectsDescriptionParagraph2": {
-    "message": "PoziWorld develops software that helps you solve everyday tasks easier, faster, more&nbsp;efficiently, is free to use, and does not track your activity without your prior agreement."
-  },
-  "optionsSettingsGeneralUeip": {
-    "message": "Програма покращення якості PoziTone"
-  },
-  "privacyStatementForTabs": {
-    "message": "“<strong>Зчитування історії переглядів</strong>”: цей дозвіл потрібен для отримання поточної адреси (URL) сторінки, на підставі чого PoziTone перевіряє, чи завантажувати відповідний модуль."
+  "notificationButtonsVolumeChangeFeedback": {
+    "message": "Гучність звуку — $VOLUME_LEVEL$%",
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
   "kbps": {
     "message": " кбіт/с",
     "description": "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
   },
-  "optionsTerms": {
-    "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">Ліцензійна угода</a> PoziTone"
-  },
-  "privacyStatementForOrigins": {
-    "message": "“<strong>Перегляд та зміна даних</strong>”: цей дозвіл потрібний для коректної роботи PoziTone з плеєром (керування відтворенням, регулювання гучності звуку, отримання назви поточного треку та виконавця)."
-  },
-  "systemNotificationUpdatedVersion": {
-    "message": " v"
-  },
-  "voiceControlIntro1": {
-    "message": "PoziTone has added a new way for you to control your favorite online media players."
-  },
-  "module_com_vgmradio_long": {
-    "message": "VGM Radio | vgmradio.com"
-  },
-  "translationParagraph2": {
-    "message": "Ми прагнемо, щоб якомога більша кількість користувачів PoziTone мала змогу взаємодіяти з розширенням на їхній рідній мові."
-  },
-  "notificationButtonsUnmuteFeedback": {
-    "message": "Звук ввімкнуто"
-  },
-  "notificationButtonsNextFeedback": {
-    "message": "Трек переключено"
-  },
-  "module_com_radiotunes": {
-    "message": "RadioTunes"
-  },
-  "sttbDescriptionParagraph1": {
-    "message": "Додає кнопку гортання сторінки вверх та/або вниз."
-  },
-  "optionsSettingsNotificationIconFormatPlayerLogo": {
-    "message": "Display player logo"
-  },
-  "module_com_soundcloud": {
-    "message": "SoundCloud"
-  },
-  "voiceControlActivateCta": {
-    "message": "Activate voice control app"
-  },
-  "optionsSettingsGeneralUeipMoreHref": {
-    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
-  },
-  "extensionDescription": {
-    "message": "Додає нові можливості улюбленим плеєрам: сповіщення з інформацією про трек, керування поза браузером, перелік останніх треків."
-  },
-  "moduleExternal_com_soundcloud": {
-    "message": "SoundCloud Widget"
-  },
-  "voiceControlActivate": {
-    "message": "Activate voice control"
-  },
-  "optionsSettingsNotificationButtonsAdd": {
-    "message": "Додати у плейліст"
-  },
-  "optionsSettingsH1": {
-    "message": "Налаштування"
-  },
-  "trademarksDisclaimerContinued": {
-    "message": "All information and content (texts, graphics and images) are reported to the best of our knowledge, public knowledge, if unintentionally, has been published or copyrighted material in violation of the law, please inform us and we will immediately remove it."
-  },
-  "modulesBuiltIn": {
-    "message": "Вбудовані модулі"
-  },
-  "module_com_classicalradio": {
-    "message": "ClassicalRadio.com"
-  },
-  "notificationButtonsMuteFeedback": {
-    "message": "Звук вимкнено"
-  },
-  "spreadTheWordRateLink": {
-    "message": "<a href=\"#\" target=\"_blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Оцініть PoziTone</a> – відгуки дійсно допомагають іншим знайти це розширення!"
-  },
-  "help": {
-    "message": "Допомога"
-  },
-  "info": {
-    "message": "Інфо"
-  },
-  "optionsSettingsGeneral": {
-    "message": "Загальні"
-  },
-  "voiceControlMenuItem": {
-    "message": "Voice control",
-    "description": "In some languages (for example, Russian), the name could be too long to fit on one line without wrapping when showing a “NEW” tag/label next to it."
-  },
-  "about": {
-    "message": "Про розширення"
-  },
-  "pwmDescriptionParagraph1": {
-    "message": "Допомогає вам мінімізувати відходи від друку та зберегти чорнила."
-  },
-  "optionsSettingsGeneralShowAdvanced": {
-    "message": "Показати розширені налаштування"
-  },
-  "module_com_vk_audio_long": {
-    "message": "ВКонтакті (аудіо) | vk.com"
-  },
-  "apiStatusCode409": {
-    "message": "Конфлікт",
-    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#409 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#409"
-  },
-  "module_com_rockradio_long": {
-    "message": "ROCKRADIO.COM"
-  },
-  "findOnGoogle": {
-    "message": "Знайти у Google"
-  },
-  "module_com_soundcloud_long": {
-    "message": "SoundCloud | soundcloud.com"
-  },
-  "optionsSettingsNotificationButtonsNext": {
-    "message": "Наступний"
-  },
-  "step3": {
-    "message": "Step 3."
-  },
-  "notificationButtonsPreviousTitle": {
-    "message": "Попередній"
-  },
-  "feedbackIdeas": {
-    "message": "Будь ласка, <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>діліться вашими ідеями</a>."
-  },
-  "optionsSettingsNotificationButtonsMuteUnmute": {
-    "message": "Вимкнути/Увімкнути звук"
-  },
-  "spreadTheWord": {
-    "message": "Розкажіть про нас"
-  },
-  "findOnAmazon": {
-    "message": "Знайти на Amazon"
-  },
-  "generalPrivacyStatement": {
-    "message": "PoziTone не переглядає, не змінює, не зберігає та не передає Ваші особисті дані (наприклад, логіни, паролі, повідомлення, контакти), пов'язані з будь-якими сайтами, у будь-якій формі, а також з комп'ютера."
-  },
-  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
-    "message": "Вже знаходиться у Вашому плейлісті"
-  },
-  "disableAll": {
-    "message": "Вимкнути все"
-  },
-  "projectsDescriptionParagraph1": {
-    "message": "PoziTone розробляється маленькою командою, яка називається PoziWorld."
-  },
-  "feedbackIncentives": {
-    "message": "Батіг корисний, але <a href=\"#\" target=\"_blank\" id=\"incentiveLink\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"carrot\" }'>пряник</a> - смачніше. ;)"
-  },
-  "rateExtensionShort": {
-    "message": "Мені подобається PoziTone!"
-  },
-  "voiceControlConnect": {
-    "message": "Follow VCA instructions to connect VCA with your browser"
-  },
   "messageFromDevelopersPageText": {
     "message": "<button id=\"pwMessageReadCta\">Прочитати повідомлення</button> від розробників"
-  },
-  "apiErrorMissingRequiredParameter": {
-    "message": "Відсутній обов'язковий параметр: $PARAMETER$",
-    "description": "Missing a parameter required for correct operation"
-    , "placeholders" : {
-          "parameter" : {
-              "content" : "$1"
-            , "example" : "boolIsEnabled"
-          }
-      }
-  },
-  "notificationButtonsUnmuteTitle": {
-    "message": "Увімкнути звук"
-  },
-  "voiceControlInstall": {
-    "message": "Install VCA"
-  },
-  "apiStatusCode201": {
-    "message": "Створено",
-    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#201 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#201"
-  },
-  "notificationButtonsNextTitle": {
-    "message": "Наступний"
-  },
-  "apiErrorMethodNotSpecified": {
-    "message": "Метод не зазначено"
-  },
-  "optionsFoundation": {
-    "message": "Розширення PoziTone було зроблено на основі <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">любові</a> та <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">добра</a>."
-  },
-  "module_fm_di_long": {
-    "message": "Digitally Imported | di.fm"
-  },
-  "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Відображати постійний бітрейт",
-    "description": "https://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
-  },
-  "enabled": {
-    "message": "Підключено"
-  },
-  "apiErrorCallUnknown": {
-    "message": "Невідомий виклик"
-  },
-  "optionsSettingsGeneralShowAdvancedToggle": {
-    "message": "Розширені"
-  },
-  "modulesExternalAdvancedSupportEnable": {
-    "message": "Увімкнути розширену підтримку зовнішніх модулів"
-  },
-  "optionsSettingsDisplayWhen": {
-    "message": "Відображати сповіщення"
-  },
-  "optionsSettingsGeneralUeipDesc": {
-    "message": "Ця програма збирає інформацію про те, як наші користувачі використовують PoziTone і з якими проблемами вони при цьому зіштовхуються. Команда розробників PoziTone — PoziWorld — використовує цю інформацію, щоб вдосконалити продукт та його функції, які користувачі використовують найчастіше, а також для вирішення проблем, що виникають. Участь в цій програмі добровільна, а її кінцевим результатом є покращення продукту, який зможе якнайкраще відповідати потребам користувачів PoziTone."
-  },
-  "module_com_jazzradio_long": {
-    "message": "JAZZRADIO.com"
-  },
-  "voiceControlDownload": {
-    "message": "Download voice control app (VCA)"
-  },
-  "optionsSettingsNotificationButtonsNextAuthRequired": {
-    "message": "Наступний <small>(потрібна авторизація на сайті)</small>"
-  },
-  "optionsVersion": {
-    "message": "Версія"
-  },
-  "optionsSettingsAdditionalInfo": {
-    "message": "Додаткова інформація"
-  },
-  "optionsNavSettings": {
-    "message": "Налаштування"
-  },
-  "versionHistory": {
-    "message": "історія версій"
-  },
-  "module_com_vk_audio": {
-    "message": "ВКонтакті (аудіо)"
-  },
-  "voiceControlAutoActivate": {
-    "message": "Automatically activate voice control app on PoziTone start or reload"
-  },
-  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
-    "message": "Мені подобається! <small>(потрібна авторизація на сайті)</small>"
-  },
-  "incentiveParagraph": {
-    "message": "Якщо Ви цінуєте виконану нами роботу, будь ласка, подумайте про стимулювання розробки PoziTone за допомогою <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, або <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
-  },
-  "optionsSettingsNotificationIconFormatGenericImage": {
-    "message": "Display generic image"
-  },
-  "module_com_radiotunes_long": {
-    "message": "RadioTunes | radiotunes.com"
-  },
-  "showPlayerEventNotification": {
-    "message": "Show when player status changes",
-    "description": "Show notification on playback start/stop, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on."
   },
   "messageFromDevelopersPageTextShort": {
     "message": "<button id=\"pwMessageReadCta\">Прочитати повідомлення</button>"
   },
-  "translationParagraph3": {
-    "message": "Якщо Ви володієте будь-якою іноземною мовою, або просто помітили неточність у перекладі, буль ласка, <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">повідомте нам</a>."
+  "messageFromDevelopersTooltipText": {
+    "message": "Важливе повідомлення від розробників"
   },
-  "moduleExternal_sdkCta": {
-    "message": "Yes, I do!"
+  "systemNotificationUpdated": {
+    "message": "Розширення оновлено!"
   },
-  "module_com_google_play_music": {
-    "message": "Google Play Музика"
+  "systemNotificationUpdatedVersion": {
+    "message": " v"
   },
-  "optionsContact": {
-    "message": "Зв'язатись з розробниками PoziTone"
+  "systemNotificationUpdatedChanges": {
+    "message": "Перегляд змін"
   },
-  "feedbackQuestions": {
-    "message": "Не соромтесь <a href=\"mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"questions\" }'>задавати запитання</a>."
+  "systemNotificationUpdatedDoNotNotify": {
+    "message": "Не повідомляти мене про оновлення"
   },
-  "module_com_vgmradio": {
-    "message": "VGM Radio"
+  "optionsTitle": {
+    "message": "Налаштування PoziTone"
   },
-  "popupTitle": {
-    "message": "PoziTone"
+  "optionsNavSettings": {
+    "message": "Налаштування"
+  },
+  "optionsSettingsH1": {
+    "message": "Налаштування"
+  },
+  "optionsSettingsSaved": {
+    "message": " збережено"
+  },
+  "optionsSettingsGeneral": {
+    "message": "Загальні"
+  },
+  "optionsSettingsGeneralShowAdvanced": {
+    "message": "Показати розширені налаштування"
+  },
+  "optionsSettingsGeneralShowAdvancedToggle": {
+    "message": "Розширені"
+  },
+  "notifications": {
+    "message": "Сповіщення"
+  },
+  "showPlayerEventNotification": {
+    "message": "Показати, коли змінюється статус програвача",
+    "description": "Show notification on playback start/stop, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on."
   },
   "showPlayerEventNotificationLong": {
-    "message": "Show notification on playback start/stop/resume, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on.\n\nIf unchecked, you can still make the notification show up by calling “Show notification” command with the help of keyboard shortcuts (Alt+Shift+Q if unchanged)."
-  },
-  "versionHistoryHref": {
-    "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md",
-    "description": "Please check whether there is a version of https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md for your language."
-  },
-  "modulesExternal": {
-    "message": "Зовнішні модулі"
-  },
-  "peDescriptionParagraph1": {
-    "message": "Lets you use your voice to control things you usually use your mouse and/or keyboard for."
-  },
-  "popupNavRecentTracksH1": {
-    "message": "Recently played"
-  },
-  "incentive": {
-    "message": "Заохочення"
-  },
-  "optionsSettingsNotificationTitleFormatPlayerName": {
-    "message": "Display player name"
-  },
-  "install": {
-    "message": "Install"
-  },
-  "apiConnectModuleHadBeenConnected": {
-    "message": "Модуль вже підключено до PoziTone"
-  },
-  "apiErrorUnrecognizedMessage": {
-    "message": "Нерозпізнане повідомлення"
-  },
-  "optionsCopyright": {
-    "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
-  },
-  "pwmDescriptionParagraph2": {
-    "message": "Go Green on the following Print Return Label pages: Amazon (amazon.com), American Eagle (ae.com), eBay, Newgistics SmartLabel, Nordstrom, Old Navy, Return Saver, and UPS (ups.com)."
-  },
-  "popupToolbarClose": {
-    "message": "Закрити"
-  },
-  "peDescriptionParagraph2": {
-    "message": "Not a standalone app, works by sending commands to partner extensions installed in your browser."
+    "message": "Показувати сповіщення про початок/зупинку/відновлення відтворення, про зміну гучності, про подію додавання до списку відтворення, про додавання до списку улюблених, про зміну треку, та іншого.\n\nЯкщо не увімкнено, ви маєте можливість показати сповіщення промовивши команду  “Показати сповіщення” command with the help of keyboard shortcuts (Alt+Shift+Q якщо вона не змінилася)."
   },
   "showSuccessfulUpdateNotification": {
     "message": "Показувати, коли PoziTone успішно оновлено"
   },
-  "optionsSettingsNotificationTitleFormatNoStationInfo": {
-    "message": "Don't display information about current station or player"
-  },
-  "voiceControlAllowInfo": {
-    "message": "After the permission is received, PoziTone will automatically restart itself for the changes to take effect.\n\nIf this page is not reopened after the restart, please open it manually to continue.\nWe apologize for the inconvenience."
-  },
-  "feedback": {
-    "message": "Зворотній зв'язок"
-  },
-  "voiceControlSettings": {
-    "message": "Set up voice control"
-  },
-  "apiErrorTypeofMismatch": {
-    "message": "Тип параметру “$PARAMETER$” повинен бути “$TYPE$”",
-    "description": "When the following JavaScript snippet equals true: typeof strCall !== 'string'"
-    , "placeholders" : {
-          "parameter" : {
-              "content" : "$1"
-            , "example" : "strCall"
-          }
-        , "type" : {
-              "content" : "$2"
-            , "example" : "string"
-          }
-      }
-  },
-  "notificationPlayerStatusChangeStarted": {
-    "message": "Відтворення розпочато"
-  },
-  "spreadTheWordWhyNot": {
-    "message": "Якщо Ви вважаєте PoziTone корисним, то чому б не порекомендувати його Вашим друзям, колегам та/або підпищикам?"
-  },
-  "contribution": {
-    "message": "Внесок"
-  },
-  "optionsSettingsDisplayWhenStopped": {
-    "message": "Коли відтворення не розпочато / зупинено"
-  },
-  "popupNavRecentTracksPlaceholder": {
-    "message": "Looking for some tunes?<br><br>How about some <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock with elements of hardcore</a>?<br>Or <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Fond of <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">house</a>?<br><a href=\"#\" target=\"_blank\" data-performer=\"emilyclibourn\">Dream pop, indie pop, indie rock, neo soul, art rock</a>, you said?"
-  },
-  "module_general": {
-    "message": "Загальні"
-  },
-  "optionsSettingsSoundVolumeControlUseDefaults": {
-    "message": "Використати <a href=\"#/settings/general\">загальні налаштування</a>",
-    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
-  },
-  "projects": {
-    "message": "Наші проекти"
-  },
-  "moduleExternal_com_youtube": {
-    "message": "YouTube embedded player"
-  },
-  "apiErrorDataObjectCantBeEmpty": {
-    "message": "Об'єкт з даними не може бути порожнім"
-  },
-  "voiceControlIntro2": {
-    "message": "Now, besides keyboard shortcuts and buttons in the notification, you can use your voice to stop/resume playback, switch tracks, mute/unmute, add to playlist, etc."
-  },
-  "voiceControlAllow": {
-    "message": "Allow voice control"
-  },
-  "apiStatusCode400": {
-    "message": "Невірний Запит",
-    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#400 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400"
-  },
-  "optionsInfo": {
-    "message": "Детальніше про PoziTone"
-  },
-  "spreadTheWordFollowUs": {
-    "message": "Підпишіться на нас у <a href=\"https://t.me/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"telegram\" }'>Telegram</a>, <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://plus.google.com/+PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>ВКонтакті</a>, <a href=\"https://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Однокласники</a> та <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+  "displayKeyboardShortcutsTips": {
+    "message": "Показувати підказки з комбінаціями клавіш поруч з командами"
   },
   "optionsSettingsSoundVolumeControl": {
     "message": "Керування гучністю звуку",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "voiceControl": {
-    "message": "Voice control"
+  "optionsSettingsSoundVolumeControlUseDefaults": {
+    "message": "Використати <a href=\"#/settings/general\">загальні налаштування</a>",
+    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
   },
-  "optionsSettingsNotificationTitleFormatLong": {
-    "message": "Відображати назву поточної станції + короткий опис (якщо доступний)"
+  "optionsSettingsSoundVolumeControlDelta": {
+    "message": "Змінити на, %",
+    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
   },
-  "voiceControlOpen": {
-    "message": "Open VCA"
+  "optionsSettingsGeneralUeip": {
+    "message": "Програма покращення якості PoziTone"
   },
-  "optionsSettingsNotificationButtons": {
-    "message": "Доступні кнопки <small>(одночасно можуть відображатись максимум 2)</small>"
+  "optionsSettingsGeneralUeipDesc": {
+    "message": "Ця програма збирає інформацію про те, як наші користувачі використовують PoziTone і з якими проблемами вони при цьому зіштовхуються. Команда розробників PoziTone — PoziWorld — використовує цю інформацію, щоб вдосконалити продукт та його функції, які користувачі використовують найчастіше, а також для вирішення проблем, що виникають. Участь в цій програмі добровільна, а її кінцевим результатом є покращення продукту, який зможе якнайкраще відповідати потребам користувачів PoziTone."
   },
-  "optionsSettingsSaved": {
-    "message": " збережені"
+  "optionsSettingsGeneralUeipMore": {
+    "message": "Розкажіть мені більше про програму"
   },
-  "privacyStatementForClipboardWrite": {
-    "message": "“<strong>Modify data you copy and paste</strong>”: this permission is required to copy the requested information to your clipboard.\n\nPoziTone does not and will not read the contents of your clipboard, it only asks to write to it (a safe operation)."
+  "optionsSettingsGeneralUeipMoreHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
   },
-  "module_fm_di": {
-    "message": "Digitally Imported"
+  "optionsSettingsGeneralUeipPrivacy": {
+    "message": "Заява про конфіденційність"
   },
-  "systemNotificationUpdatedDoNotNotify": {
-    "message": "Не повідомляти мене про оновлення"
+  "optionsSettingsGeneralUeipPrivacyHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
   },
-  "optionsHelpText": {
-    "message": "Надсилаючи зазначену нижче інформацію, Ви надасте змогу розробникам PoziTone знайти вирішення проблеми, з якою Ви, можливо, зіштовхнулись, швидше."
+  "optionsSettingsGeneralUeipJoin": {
+    "message": "Взяти участь анонімно"
   },
-  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
-    "message": "Попередній <small>(потрібна авторизація на сайті)</small>"
+  "optionsSettingsGeneralUeipDoNotJoin": {
+    "message": "Не брати участь"
   },
-  "messageFromDevelopersTooltipText": {
-    "message": "Важливе повідомлення від розробників"
+  "optionsSettingsSupport": {
+    "message": "Підтримка цього плеєра"
+  },
+  "optionsSettingsSupportEnabled": {
+    "message": "Увімкнено"
+  },
+  "optionsSettingsDisplayWhen": {
+    "message": "Відображати сповіщення"
+  },
+  "optionsSettingsDisplayWhenStopped": {
+    "message": "Коли відтворення не розпочато / зупинено"
+  },
+  "optionsSettingsDisplayWhenMuted": {
+    "message": "Коли гучність на 0% або звук повністю вимкнено"
   },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Коли немає інформації про те, що зараз відтворюється (на сайті відображається як \"...\")"
   },
-  "notificationPlayerStatusChangeResumed": {
-    "message": "Відтворення відновлено"
-  },
-  "enableAll": {
-    "message": "Підключити всі"
-  },
-  "optionsSettingsNotificationButtonsPrevious": {
-    "message": "Попередній"
-  },
-  "popupNavRecentTracks": {
-    "message": "Recently played"
+  "optionsSettingsNotificationIconFormat": {
+    "message": "Формат іконки сповіщення"
   },
   "optionsSettingsNotificationIconFormatShowStationLogo": {
     "message": "Відображати логотип поточної станції"
@@ -523,198 +196,564 @@
   "optionsSettingsNotificationIconFormatShowSiteLogo": {
     "message": "Відображати логотип сайту"
   },
-  "optionsSettingsGeneralUeipMore": {
-    "message": "Розкажіть мені більше про програму"
-  },
-  "apiConnectModuleSuccess": {
-    "message": "Модуль успішно під'єднано"
-  },
-  "module_com_classicalradio_long": {
-    "message": "ClassicalRadio.com"
-  },
-  "save": {
-    "message": "Зберегти"
-  },
-  "notificationButtonsStopTitle": {
-    "message": "Стоп"
-  },
-  "translation": {
-    "message": "Переклад"
-  },
-  "module_com_rockradio": {
-    "message": "ROCKRADIO.COM"
-  },
-  "voiceControlAlreadyActivated": {
-    "message": "Already activated"
-  },
-  "trademarksDisclaimer": {
-    "message": "All trademarks mentioned belong to their owners, third party brands, product names, trade names, corporate names and company names mentioned may be trademarks of their respective owners or registered trademarks of other companies and are used for purposes of explanation and to the owner's benefit, without implying a violation of copyright law."
-  },
-  "feedbackIssues": {
-    "message": "<a href=\"#\" target=\"_blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Повідомлення про помилки</a> цінні!"
-  },
-  "optionsSettingsNotificationButtonsPlayStop": {
-    "message": "Зупинити/Відновити відтворення"
-  },
-  "commandShowNotification": {
-    "message": "Показати сповіщення"
-  },
-  "optionsSettingsNotificationButtonsAddAuthRequired": {
-    "message": "Додати у плейліст <small>(потрібна авторизація на сайті)</small>"
-  },
-  "notificationButtonsVolumeChangeFeedback": {
-    "message": "Гучність звуку — $VOLUME_LEVEL$%",
-    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
-    , "placeholders"    : {
-        "volume_level"  : {
-            "content"   : "$1"
-          , "example"   : "90"
-        }
-      }
-  },
-  "optionsHelpSubmitInfoCta": {
-    "message": "Надіслати інформцію"
-  },
-  "moduleExternal_ru_sovyatnik": {
-    "message": "Sovyatnik"
-  },
-  "findOnVk": {
-    "message": "Знайти ВКонтакті"
-  },
-  "optionsHelpSubmitInfoCtaSuccess": {
-    "message": "Надіслано"
-  },
-  "optionsSettingsSupport": {
-    "message": "Підтримка цього плеєра"
-  },
-  "apiConnectModuleError": {
-    "message": "Модуль не під'єднано"
-  },
-  "notificationButtonsPlayTitle": {
-    "message": "Відновити відтворення"
-  },
-  "modulesBuiltInDescription": {
-    "message": "Додати <em title=\"1. Інформація про поточний трек. 2. Легке керування плеєром. 3. Перелік останніх треків.\">нові можливості</em> Вашим улюбленим онлайн-медіаплеєрам, підключивши відповідні модулі&nbsp;PoziTone."
-  },
-  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
-    "message": "Успішно додано у плейліст"
-  },
-  "spreadTheWordInstallationLink": {
-    "message": "Поділіться <a href=\"#\" target=\"_blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">посиланням на встановлення</a> у Ваших соціальних мережах та/або блозі."
-  },
-  "optionsSettingsNotificationButtonsFavorite": {
-    "message": "Мені подобається!"
-  },
-  "optionsSettingsNotificationIconFormat": {
-    "message": "Формат іконки сповіщення"
-  },
-  "moduleExternal_sdk": {
-    "message": "Want to develop your own?"
-  },
-  "systemNotificationUpdatedChanges": {
-    "message": "Перегляд змін"
-  },
-  "modulesExternalDescription": {
-    "message": "An external PoziTone module is a standalone extension which is able to provide <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">PoziTone features</a> by communicating directly with PoziTone."
-  },
-  "optionsInfoHref": {
-    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
-  },
-  "module_ru_101_long": {
-    "message": "Онлайн-радіо 101.ru"
-  },
-  "optionsSettingsNotificationIconFormatTrackImage": {
-    "message": "Display current track image"
-  },
-  "optionsSettingsGeneralUeipDoNotJoin": {
-    "message": "Не брати участь"
-  },
-  "notificationButtonsPreviousFeedback": {
-    "message": "Трек переключено"
-  },
-  "optionsSettingsGeneralUeipJoin": {
-    "message": "Взяти участь анонімно"
-  },
-  "spreadTheWordWays": {
-    "message": "Є декілька способів, якими Ви можете допомогти нашій справі:"
-  },
-  "optionsSettingsNotificationTitleFormat": {
-    "message": "Формат заголовку сповіщення"
-  },
-  "sttbDescriptionParagraph2": {
-    "message": "Ідеально підходить для відображення довгих/нескінченних сторінок, таких як Facebook, Twitter і т.д."
-  },
-  "step2": {
-    "message": "Step 2."
-  },
-  "extensionName": {
-    "message": "PoziTone"
-  },
-  "optionsSettingsDisplayWhenMuted": {
-    "message": "Коли гучність на 0% або звук повністю вимкнено"
-  },
-  "module_ru_101": {
-    "message": "Онлайн-радіо 101.ru"
-  },
-  "feedbackPraises": {
-    "message": "Нам подобаються <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>дифірамби</a>, а кому ні? :)"
-  },
-  "step1": {
-    "message": "Step 1."
-  },
-  "apiErrorCallNotSpecified": {
-    "message": "Виклик не зазначено"
-  },
-  "optionsSettingsNotificationTitleFormatShort": {
-    "message": "Відображати лише назву поточної станції"
-  },
-  "voiceControlAutoReactivate": {
-    "message": "(Not recommended!) Automatically reactivate voice control app on app exit or shutdown"
-  },
-  "copyToClipboard": {
-    "message": "Копіювати у буфер обміну"
-  },
-  "feedbackAppreciated": {
-    "message": "Ми цінуємо Ваш відгук!"
-  },
-  "notificationButtonsVolumeDownTitle": {
-    "message": "Зменшити гучність звуку",
-    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
-  },
-  "apiErrorRequestObjectCantBeEmpty": {
-    "message": "Об’єкт запиту не може бути порожнім"
-  },
-  "displayKeyboardShortcutsTips": {
-    "message": "Показувати підсказки з комбінаціями клавіш поруч з командами"
-  },
-  "moduleHosts": {
-    "message": "List of hosts/domains this module needs permission for in order to work properly.\n\nPoziTone, including its built-in modules, does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
-  },
-  "notificationFavoriteStatusSuccess": {
-    "message": "Дякуємо за відзначення важкої праці діджея!"
-  },
-  "optionsTitle": {
-    "message": "Налаштування PoziTone"
-  },
-  "notifications": {
-    "message": "Сповіщення"
-  },
-  "module_com_jazzradio": {
-    "message": "JAZZRADIO.com"
-  },
-  "notificationPlayerStatusChangeStopped": {
-    "message": "Відтворення зупинено"
-  },
-  "rateExtension": {
-    "message": "Будь ласка, оцініть PoziTone – відгуки дійсно допомагають іншим знайти це розширення!"
-  },
-  "translationParagraph1": {
-    "message": "Sprechen Sie Deutsch? Vous parlez français?"
+  "optionsSettingsNotificationIconFormatPlayerLogo": {
+    "message": "Відображати логотип програвача"
   },
   "optionsSettingsNotificationIconFormatStationLogo": {
     "message": "Відображати логотип поточної станції"
   },
+  "optionsSettingsNotificationIconFormatTrackImage": {
+    "message": "Відображати зображення поточного треку"
+  },
+  "optionsSettingsNotificationIconFormatGenericImage": {
+    "message": "Відображати стандартне зображення"
+  },
+  "optionsSettingsAdditionalInfo": {
+    "message": "Додаткова інформація"
+  },
+  "optionsSettingsAdditionalInfoShowCbr": {
+    "message": "Відображати постійний бітрейт",
+    "description": "https://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
+  },
+  "optionsSettingsNotificationTitleFormat": {
+    "message": "Формат заголовку сповіщення"
+  },
+  "optionsSettingsNotificationTitleFormatShort": {
+    "message": "Відображати лише назву поточної станції"
+  },
+  "optionsSettingsNotificationTitleFormatLong": {
+    "message": "Відображати назву поточної станції + короткий опис (якщо доступний)"
+  },
+  "optionsSettingsNotificationTitleFormatPlayerName": {
+    "message": "Відображати назву програвача"
+  },
+  "optionsSettingsNotificationTitleFormatNoStationInfo": {
+    "message": "Не відображати інформацію про поточну станцію чи плеєр"
+  },
+  "optionsSettingsNotificationButtons": {
+    "message": "Доступні кнопки <small>(одночасно можуть відображатись максимум 2)</small>"
+  },
+  "optionsSettingsNotificationButtonsAdd": {
+    "message": "Додати у плейліст"
+  },
+  "optionsSettingsNotificationButtonsAddAuthRequired": {
+    "message": "Додати у плейліст <small>(потрібна авторизація на сайті)</small>"
+  },
+  "optionsSettingsNotificationButtonsFavorite": {
+    "message": "Мені подобається!"
+  },
+  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
+    "message": "Мені подобається! <small>(потрібна авторизація на сайті)</small>"
+  },
+  "optionsSettingsNotificationButtonsNext": {
+    "message": "Наступний"
+  },
+  "optionsSettingsNotificationButtonsNextAuthRequired": {
+    "message": "Наступний <small>(потрібна авторизація на сайті)</small>"
+  },
+  "optionsSettingsNotificationButtonsPrevious": {
+    "message": "Попередній"
+  },
+  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+    "message": "Попередній <small>(потрібна авторизація на сайті)</small>"
+  },
+  "optionsSettingsNotificationButtonsPlayStop": {
+    "message": "Зупинити/Відновити відтворення"
+  },
+  "optionsSettingsNotificationButtonsMuteUnmute": {
+    "message": "Вимкнути/Увімкнути звук"
+  },
+  "voiceControl": {
+    "message": "Голосове керування"
+  },
+  "voiceControlMenuItem": {
+    "message": "Голосове керування",
+    "description": "In some languages (for example, Russian), the name could be too long to fit on one line without wrapping when showing a “NEW” tag/label next to it."
+  },
+  "voiceControlIntro1": {
+    "message": "PoziTone додав новий спосіб керування вашими улюбленими онлайн медіаплеєрами"
+  },
+  "voiceControlIntro2": {
+    "message": "Тепер, окрім клавіатурних скорочень і кнопок у сповіщенні, можна використовувати голос, щоб зупинити/відновити відтворення, перемкнути треки, вимкнути/увімкнути звук, додати до списку відтворення, тощо."
+  },
+  "step1": {
+    "message": "Крок 1."
+  },
+  "voiceControlAllow": {
+    "message": "Дозволити голосове керування"
+  },
+  "voiceControlAllowInfo": {
+    "message": "Після отримання дозволу PoziTone автоматично перезавантажиться для того, щоб зміни набули чинності.\n\nЯкщо після перезапуску цю сторінку не буде знову відкрито, відкрийте її вручну, щоб продовжити.\nМи просимо вибачення за незручності."
+  },
+  "step2": {
+    "message": "Крок 2."
+  },
+  "voiceControlDownload": {
+    "message": "Завантажити додаток для голосового керування (ДГК)"
+  },
+  "voiceControlInstall": {
+    "message": "Встановити ДГК"
+  },
+  "voiceControlOpen": {
+    "message": "Відкрити ДГК"
+  },
+  "voiceControlConnect": {
+    "message": "Дотримуйся інструкцій ДГК, щоб під'єднати ДГК до вашого браузера"
+  },
+  "step3": {
+    "message": "Крок 3."
+  },
+  "voiceControlSettings": {
+    "message": "Налаштуйте голосове керування"
+  },
+  "voiceControlAutoActivate": {
+    "message": "Автоматично активувати голосове керування, коли PoziTone стартує чи перезавантажується"
+  },
+  "voiceControlAutoReactivate": {
+    "message": "(Не рекомендовано!) Автоматично повторно активувати ДГК при виході чи вимиканні додатку"
+  },
+  "voiceControlActivate": {
+    "message": "Активувати голосове керування"
+  },
+  "voiceControlActivateCta": {
+    "message": "Активувати ДГК"
+  },
+  "voiceControlAlreadyActivated": {
+    "message": "Вже активований"
+  },
+  "projects": {
+    "message": "Сестринські проекти"
+  },
+  "projectsDescriptionParagraph1": {
+    "message": "PoziTone розробляється маленькою командою, яка називається PoziWorld."
+  },
+  "projectsDescriptionParagraph2": {
+    "message": "PoziWorld розробляє програмне забезпечення, яке дозволяє вам вирішувати повсякденні задачі легше, швидше, більше&nbsp;ефективніше, при цьому безкоштовне і не відслідковує вашої активності без вашої попередньої згоди."
+  },
+  "swaggyDescriptionParagraph1": {
+    "message": "Голосове керування для Swagbucks.com (неофіційно). Надає можливості доступності."
+  },
+  "swaggyDescriptionParagraph2": {
+    "message": "Swaggy робить Swagbucks.com трохи більш доступним, дозволяючи здійснювати пошук, навігацію, клацання, сортування * без пошуку відповідних кнопок, посилань, перемикань на сторінці."
+  },
+  "peDescriptionParagraph1": {
+    "message": "Дозволяє вам використовувати голос для керування речами, якими ви зазвичай керуєте за допомогою миші та/або клавіатури."
+  },
+  "peDescriptionParagraph2": {
+    "message": "Не є окремою програмою, вона працює, надсилаючи команди розширень партнерів, встановлених у Вашому браузері."
+  },
+  "sttbDescriptionParagraph1": {
+    "message": "Додає кнопку гортання сторінки вверх та/або вниз."
+  },
+  "sttbDescriptionParagraph2": {
+    "message": "Ідеально підходить для відображення довгих/нескінченних сторінок, таких як Facebook, Twitter і т.д."
+  },
+  "pwmDescriptionParagraph1": {
+    "message": "Допомогає вам мінімізувати відходи від друку та зберегти чорнила."
+  },
+  "pwmDescriptionParagraph2": {
+    "message": "Зберігайте папір на наступних сторінках друку етикеток для повернення замовлень: Amazon (amazon.com), American Eagle (ae.com), eBay, Newgistics SmartLabel, Nordstrom, Old Navy, Return Saver, та UPS (ups.com)."
+  },
+  "contribution": {
+    "message": "Внесок"
+  },
+  "spreadTheWord": {
+    "message": "Розкажіть про нас"
+  },
+  "spreadTheWordWhyNot": {
+    "message": "Якщо Ви вважаєте PoziTone корисним, то чому б не порекомендувати його Вашим друзям, колегам та/або підпищикам?"
+  },
+  "spreadTheWordWays": {
+    "message": "Є декілька способів, якими Ви можете допомогти нашій справі:"
+  },
+  "spreadTheWordFollowUs": {
+    "message": "Підпишіться на нас у <a href=\"https://t.me/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"telegram\" }'>Telegram</a>, <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://plus.google.com/+PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"googlePlus\" }'>Google+</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>ВКонтакті</a>, <a href=\"https://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Однокласники</a> та <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+  },
+  "spreadTheWordInstallationLink": {
+    "message": "Поділіться <a href=\"#\" target=\"_blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">посиланням на встановлення</a> у Ваших соціальних мережах та/або блозі."
+  },
+  "spreadTheWordRateLink": {
+    "message": "<a href=\"#\" target=\"_blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Оцініть PoziTone</a> – відгуки дійсно допомагають іншим знайти це розширення!"
+  },
+  "rateExtension": {
+    "message": "Будь ласка, оцініть PoziTone – відгуки дійсно допомагають іншим знайти це розширення!"
+  },
+  "rateExtensionShort": {
+    "message": "Мені подобається PoziTone!"
+  },
+  "feedback": {
+    "message": "Зворотній зв'язок"
+  },
+  "feedbackAppreciated": {
+    "message": "Ми цінуємо Ваш відгук!"
+  },
+  "feedbackIdeas": {
+    "message": "Будь ласка, <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>діліться вашими ідеями</a>."
+  },
+  "feedbackQuestions": {
+    "message": "Не соромтесь <a href=\"mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"questions\" }'>задавати запитання</a>."
+  },
+  "feedbackIssues": {
+    "message": "<a href=\"#\" target=\"_blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Повідомлення про помилки</a> цінні!"
+  },
+  "feedbackPraises": {
+    "message": "Нам подобаються <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>дифірамби</a>, а кому ні? :)"
+  },
+  "feedbackIncentives": {
+    "message": "Батіг корисний, але <a href=\"#\" target=\"_blank\" id=\"incentiveLink\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"carrot\" }'>пряник</a> - смачніше. ;)"
+  },
+  "translation": {
+    "message": "Переклад"
+  },
+  "translationParagraph1": {
+    "message": "Sprechen Sie Deutsch? Vous parlez français?"
+  },
+  "translationParagraph2": {
+    "message": "Ми прагнемо, щоб якомога більша кількість користувачів PoziTone мала змогу взаємодіяти з розширенням на їхній рідній мові."
+  },
+  "translationParagraph3": {
+    "message": "Якщо Ви володієте будь-якою іноземною мовою, або просто помітили неточність у перекладі, буль ласка, <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">повідомте нам</a>."
+  },
+  "incentive": {
+    "message": "Заохочення"
+  },
+  "incentiveParagraph": {
+    "message": "Якщо Ви цінуєте виконану нами роботу, будь ласка, подумайте про стимулювання розробки PoziTone за допомогою <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, або <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+  },
+  "about": {
+    "message": "Про розширення"
+  },
+  "optionsInfo": {
+    "message": "Детальніше про PoziTone"
+  },
+  "optionsInfoHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
+  },
+  "optionsContact": {
+    "message": "Зв'язатись з розробниками PoziTone"
+  },
+  "optionsVersion": {
+    "message": "Версія"
+  },
+  "versionHistory": {
+    "message": "історія версій"
+  },
+  "versionHistoryHref": {
+    "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md",
+    "description": "Please check whether there is a version of https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md for your language."
+  },
   "translatedBy": {
-    "message": "Український <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">переклад</a>: [Іван Зусько](https://www.transifex.com/user/profile/ivan.zusko/)"
+    "message": "Український <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">переклад</a>: [Іван Зусько](https://www.transifex.com/user/profile/ivan.zusko/), [Коваленко Станіслав](https://www.transifex.com/user/profile/KovalenkoStas/).",
+    "description": "Example: 'English <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">translation</a>: [John Doe](https://www.transifex.com/user/profile/john.doe777/)"
+  },
+  "optionsCopyright": {
+    "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
+  },
+  "optionsFoundation": {
+    "message": "Розширення PoziTone було зроблено на основі <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">любові</a> та <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">добра</a>."
+  },
+  "optionsTerms": {
+    "message": "<a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">Ліцензійна угода</a> PoziTone"
+  },
+  "help": {
+    "message": "Допомога"
+  },
+  "optionsHelpText": {
+    "message": "Надсилаючи зазначену нижче інформацію, Ви надасте змогу розробникам PoziTone знайти вирішення проблеми, з якою Ви, можливо, зіштовхнулись, швидше."
+  },
+  "optionsHelpSubmitInfoCta": {
+    "message": "Надіслати інформцію"
+  },
+  "optionsHelpSubmitInfoCtaSuccess": {
+    "message": "Надіслано"
+  },
+  "info": {
+    "message": "Інфо"
+  },
+  "popupTitle": {
+    "message": "PoziTone"
+  },
+  "popupToolbarClose": {
+    "message": "Закрити"
+  },
+  "popupNavRecentTracks": {
+    "message": "Недавно відтворювані"
+  },
+  "popupNavRecentTracksH1": {
+    "message": "Недавно відтворювані"
+  },
+  "popupNavRecentTracksPlaceholder": {
+    "message": "Шукаєте, що послухати?<br><br>Як щодо <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock з елементами hardcore</a>?<br>Або <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Любите <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">хауз</a>?<br>Ви сказали <a href=\"#\" target=\"_blank\" data-performer=\"emilyclibourn\">dream pop, indie pop, indie rock, neo soul або art rock</a>?"
+  },
+  "findOnVk": {
+    "message": "Знайти ВКонтакті"
+  },
+  "findOnGoogle": {
+    "message": "Знайти у Google"
+  },
+  "findOnAmazon": {
+    "message": "Знайти на Amazon"
+  },
+  "copyToClipboard": {
+    "message": "Копіювати у буфер обміну"
+  },
+  "module_general": {
+    "message": "Загальні"
+  },
+  "modulesBuiltIn": {
+    "message": "Вбудовані модулі"
+  },
+  "modulesBuiltInDescription": {
+    "message": "Додати <em title=\"1. Інформація про поточний трек. 2. Легке керування плеєром. 3. Перелік останніх треків.\">нові можливості</em> Вашим улюбленим онлайн-медіаплеєрам, підключивши відповідні модулі&nbsp;PoziTone."
+  },
+  "module_ru_101": {
+    "message": "Онлайн-радіо 101.ru"
+  },
+  "module_ru_101_long": {
+    "message": "Онлайн-радіо 101.ru"
+  },
+  "module_com_classicalradio": {
+    "message": "ClassicalRadio.com"
+  },
+  "module_com_classicalradio_long": {
+    "message": "ClassicalRadio.com"
+  },
+  "module_fm_di": {
+    "message": "Digitally Imported"
+  },
+  "module_fm_di_long": {
+    "message": "Digitally Imported | di.fm"
+  },
+  "module_com_google_play_music": {
+    "message": "Google Play Музика"
+  },
+  "module_com_google_play_music_long": {
+    "message": "Google Play Музика | play.google.com/music"
+  },
+  "module_com_jazzradio": {
+    "message": "JAZZRADIO.com"
+  },
+  "module_com_jazzradio_long": {
+    "message": "JAZZRADIO.com"
+  },
+  "module_ru_ok_audio": {
+    "message": "Однокласники (аудіо)"
+  },
+  "module_ru_ok_audio_long": {
+    "message": "Однокласники (аудіо) | ok.ru"
+  },
+  "module_com_radiotunes": {
+    "message": "RadioTunes"
+  },
+  "module_com_radiotunes_long": {
+    "message": "RadioTunes | radiotunes.com"
+  },
+  "module_com_rockradio": {
+    "message": "ROCKRADIO.COM"
+  },
+  "module_com_rockradio_long": {
+    "message": "ROCKRADIO.COM"
+  },
+  "module_com_soundcloud": {
+    "message": "SoundCloud"
+  },
+  "module_com_soundcloud_long": {
+    "message": "SoundCloud | soundcloud.com"
+  },
+  "module_com_vk_audio": {
+    "message": "ВКонтакті (аудіо)"
+  },
+  "module_com_vk_audio_long": {
+    "message": "ВКонтакті (аудіо) | vk.com"
+  },
+  "module_com_vgmradio": {
+    "message": "VGM Radio"
+  },
+  "module_com_vgmradio_long": {
+    "message": "VGM Radio | vgmradio.com"
+  },
+  "modulesExternal": {
+    "message": "Зовнішні модулі"
+  },
+  "modulesExternalDescription": {
+    "message": "Зовнішній модуль PoziTone - це окреме розширення, яке здатне надавати <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">можливості PoziTone</a>, безпосередньо спілкуючись з ним."
+  },
+  "modulesExternalAdvancedSupportEnable": {
+    "message": "Увімкнути розширену підтримку зовнішніх модулів"
+  },
+  "moduleExternal_sdk": {
+    "message": "Хочете розробити свій власний?"
+  },
+  "moduleExternal_sdkCta": {
+    "message": "Так, я хочу!"
+  },
+  "moduleExternal_com_youtube": {
+    "message": "YouTube вбудований плеєр"
+  },
+  "moduleExternal_com_soundcloud": {
+    "message": "SoundCloud-віджет"
+  },
+  "moduleExternal_ru_sovyatnik": {
+    "message": "Совятнік"
+  },
+  "enableAll": {
+    "message": "Підключити всі"
+  },
+  "disableAll": {
+    "message": "Вимкнути все"
+  },
+  "save": {
+    "message": "Зберегти"
+  },
+  "enabled": {
+    "message": "Підключено"
+  },
+  "unavailable": {
+    "message": "(Недоступний)"
+  },
+  "connected": {
+    "message": "Під'єднано"
+  },
+  "install": {
+    "message": "Встановити"
+  },
+  "moduleHosts": {
+    "message": "Список хостів/доменів, для яких цей модуль потребує дозволу, щоб працювати належним чином.\n\nPoziTone, включаючи його вбудовані модулі, не читає, не змінює, не зберігає і не передає жодних Ваших особистих даних (наприклад, логінів, паролів, повідомлень, контактів) з будь-яких сайтів або Вашого комп'ютера в будь-якій формі."
+  },
+  "trademarksDisclaimer": {
+    "message": "Всі зазначені торгові марки належать їх власникам. Сторонні бренди, назви продуктів, торгові найменування, назви корпорацій та компаній можуть бути торговими марками відповідних власників або зареєстрованими торговими марками інших компаній і використовуються з метою пояснення на користь власника, не маючи на увазі порушення закону про авторські права."
+  },
+  "trademarksDisclaimerContinued": {
+    "message": "Вся інформація та зміст (тексти, графіка та зображення) повідомляються наскільки нам це відомо, громадські знання, якщо ненавмисно, були опубліковані або захищені авторським правом матеріали з порушення закону, будь ласка, повідомте нам, і ми негайно видалимо їх."
+  },
+  "generalPrivacyStatement": {
+    "message": "PoziTone не переглядає, не змінює, не зберігає та не передає Ваші особисті дані (наприклад, логіни, паролі, повідомлення, контакти), пов'язані з будь-якими сайтами, у будь-якій формі, а також з комп'ютера."
+  },
+  "privacyStatementForClipboardWrite": {
+    "message": "“<strong>Змінювати дані, які ви копіюєте та вставляєте</strong>”: цей дозвіл потрібно для копіювання запитаної інформації до буфера обміну.\n\nPoziTone не читає і не буде читати вміст вашого буфера обміну, він тільки просить написати до нього (це безпечна операція)."
+  },
+  "privacyStatementForOrigins": {
+    "message": "“<strong>Перегляд та зміна даних</strong>”: цей дозвіл потрібний для коректної роботи PoziTone з плеєром (керування відтворенням, регулювання гучності звуку, отримання назви поточного треку та виконавця)."
+  },
+  "privacyStatementForTabs": {
+    "message": "“<strong>Зчитування історії переглядів</strong>”: цей дозвіл потрібен для отримання поточної адреси (URL) сторінки, на підставі чого PoziTone перевіряє, чи завантажувати відповідний модуль."
+  },
+  "apiErrorUnrecognizedMessage": {
+    "message": "Нерозпізнане повідомлення"
+  },
+  "apiErrorRequestObjectCantBeEmpty": {
+    "message": "Об’єкт запиту не може бути порожнім"
+  },
+  "apiErrorTypeofMismatch": {
+    "message": "Тип параметру “$PARAMETER$” повинен бути “$TYPE$”",
+    "description": "When the following JavaScript snippet equals true: typeof strCall !== 'string'"
+  },
+  "apiErrorCallNotSpecified": {
+    "message": "Виклик не зазначено"
+  },
+  "apiErrorCallUnknown": {
+    "message": "Невідомий виклик"
+  },
+  "apiErrorMethodNotSpecified": {
+    "message": "Метод не зазначено"
+  },
+  "apiErrorMethodNotSupported": {
+    "message": "Метод “$METHOD$” не підтримується",
+    "description": "When method is valid but not supported by this call or not valid (for example, there is a typo)"
+  },
+  "apiErrorDataObjectCantBeEmpty": {
+    "message": "Об'єкт з даними не може бути порожнім"
+  },
+  "apiErrorMissingRequiredParameter": {
+    "message": "Відсутній обов'язковий параметр: $PARAMETER$",
+    "description": "Missing a parameter required for correct operation"
+  },
+  "apiStatusCode201": {
+    "message": "Створено",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#201 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#201"
+  },
+  "apiStatusCode400": {
+    "message": "Невірний Запит",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#400 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400"
+  },
+  "apiStatusCode409": {
+    "message": "Конфлікт",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#409 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#409"
+  },
+  "apiStatusCode500": {
+    "message": "Внутрішня Помилка Сервера",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#500 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500"
+  },
+  "apiConnectModuleSuccess": {
+    "message": "Модуль успішно під'єднано"
+  },
+  "apiConnectModuleError": {
+    "message": "Модуль не під'єднано"
+  },
+  "apiConnectModuleHadBeenConnected": {
+    "message": "Модуль вже підключено до PoziTone"
+  },
+  "uiLanguage": {
+    "message": "Мова",
+    "description": "Setting on the Options page: language of the user interface."
+  },
+  "uiLanguageNote": {
+    "message": "При зміні мови, PoziTone автоматично перезавантажиться, щоб зміни вступили в силу.\n\nЯкщо після перезапуску цю сторінку не буде знову відкрито, відкрийте її вручну, щоб продовжити.\nМи просимо вибачення за незручності.",
+    "description": "A note that is displayed to user in regards to changing the UI language. In this case, it warns user that the extension will be restarted to apply the change."
+  },
+  "language_browserDefault": {
+    "message": "Автоматично (за замовчуванням браузера)",
+    "description": "Language option.\n\nIf the extension supports the language that is chosen as default in the browser, use that one. Otherwise, use English (United States)."
+  },
+  "language_browserDefault_tooltip": {
+    "message": "Якщо розширення підтримує мову, вибрану за умовчанням у веб-переглядачі, використовуйте його. В іншому випадку використовуйте англійську мову (Сполучені Штати).",
+    "description": "Explanation of the \"Automatic (browser default)\"\" language option that should be shown in a tooltip."
+  },
+  "language_be": {
+    "message": "Білоруська - беларуская",
+    "description": "Language option: be (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_cs": {
+    "message": "Чеська - čeština",
+    "description": "Language option: cs (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_en_US": {
+    "message": "Англійська (Сполучені Штати) - English (United States)",
+    "description": "Language option: en-US (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes - https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_es": {
+    "message": "Іспанська - español",
+    "description": "Language option: es (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_gl": {
+    "message": "Галісійська - galego",
+    "description": "Language option: gl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_it": {
+    "message": "Італійська - italiano",
+    "description": "Language option: it (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_nl": {
+    "message": "Нідерландська - Nederlands",
+    "description": "Language option: nl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_pl": {
+    "message": "Польська - polski",
+    "description": "Language option: pl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_ru": {
+    "message": "Російська - русский",
+    "description": "Language option: ru (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_uk": {
+    "message": "Українська",
+    "description": "Language option: uk (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_zh_CN": {
+    "message": "Китайська (Китай) - 中文（中国）",
+    "description": "Language option: zh_CN (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "extensionName": {
+    "message": "PoziTone"
   }
 }
