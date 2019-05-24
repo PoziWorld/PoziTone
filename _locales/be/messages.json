@@ -69,7 +69,13 @@
   },
   "notificationButtonsVolumeChangeFeedback": {
     "message": "Гучнасць гуку — $VOLUME_LEVEL$%",
-    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'.",
+    "placeholders": {
+      "volume_level": {
+        "content": "$1",
+        "example": "90"
+      }
+    }
   },
   "kbps": {
     "message": " кбіт/с",
@@ -646,7 +652,17 @@
   },
   "apiErrorTypeofMismatch": {
     "message": "Тып параметра «$PARAMETER$» павінен быць «$TYPE$»",
-    "description": "When the following JavaScript snippet equals true: typeof strCall !== 'string'"
+    "description": "When the following JavaScript snippet equals true: typeof strCall !== 'string'",
+    "placeholders": {
+      "parameter": {
+        "content": "$1",
+        "example": "strCall"
+      },
+      "type": {
+        "content": "$2",
+        "example": "string"
+      }
+    }
   },
   "apiErrorCallNotSpecified": {
     "message": "Выклік не ўказаны"
@@ -659,14 +675,26 @@
   },
   "apiErrorMethodNotSupported": {
     "message": "Метад «$METHOD$» не падтрымліваецца",
-    "description": "When method is valid but not supported by this call or not valid (for example, there is a typo)"
+    "description": "When method is valid but not supported by this call or not valid (for example, there is a typo)",
+    "placeholders": {
+      "method": {
+        "content": "$1",
+        "example": "POST"
+      }
+    }
   },
   "apiErrorDataObjectCantBeEmpty": {
     "message": "Аб'ект з дадзенымі ня можа быць пустым"
   },
   "apiErrorMissingRequiredParameter": {
     "message": "Адсутнічае абавязковы параметр: $PARAMETER$",
-    "description": "Missing a parameter required for correct operation"
+    "description": "Missing a parameter required for correct operation",
+    "placeholders": {
+      "parameter": {
+        "content": "$1",
+        "example": "boolIsEnabled"
+      }
+    }
   },
   "apiStatusCode201": {
     "message": "Створана",
