@@ -1,213 +1,200 @@
 {
-  "systemNotificationUpdated": {
-    "message": "¡Extensión actualizada!"
+  "extensionDescription": {
+    "message": "Adds new features to favorite players: track info notifications, controls outside of browser window, and list of recently played."
+  },
+  "commandShowNotification": {
+    "message": "Mostrar notificación"
+  },
+  "notificationButtonsAddLoggedInTitle": {
+    "message": "Add to playlist"
+  },
+  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
+    "message": "Successfully added to playlist"
+  },
+  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
+    "message": "Already in your playlist"
+  },
+  "notificationButtonsFavoriteLoggedInTitle": {
+    "message": "¡Me gusta!"
+  },
+  "notificationFavoriteStatusSuccess": {
+    "message": "¡Gracias por reconocer el duro trabajo de un DJ!"
+  },
+  "notificationButtonsNextTitle": {
+    "message": "Next"
+  },
+  "notificationButtonsNextFeedback": {
+    "message": "Cambio de pista"
+  },
+  "notificationButtonsPreviousTitle": {
+    "message": "Previous"
+  },
+  "notificationButtonsPreviousFeedback": {
+    "message": "Cambio de pista"
+  },
+  "notificationButtonsPlayTitle": {
+    "message": "Reproducir"
+  },
+  "notificationButtonsStopTitle": {
+    "message": "Detener"
+  },
+  "notificationPlayerStatusChangeStarted": {
+    "message": "Reproducción iniciada"
+  },
+  "notificationPlayerStatusChangeStopped": {
+    "message": "Reproducción detenida"
+  },
+  "notificationPlayerStatusChangeResumed": {
+    "message": "Reproducción reanudada"
+  },
+  "notificationButtonsMuteTitle": {
+    "message": "Silenciar"
+  },
+  "notificationButtonsMuteFeedback": {
+    "message": "Silencioso"
+  },
+  "notificationButtonsUnmuteTitle": {
+    "message": "Reactivar"
+  },
+  "notificationButtonsUnmuteFeedback": {
+    "message": "Reactivado"
   },
   "notificationButtonsVolumeUpTitle": {
     "message": "Subir volumen de sonido",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "module_ru_ok_audio_long": {
-    "message": "Odnoklassniki (audio) | ok.ru"
+  "notificationButtonsVolumeDownTitle": {
+    "message": "Bajar volumen de sonido",
+    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "optionsSettingsSoundVolumeControlDelta": {
-    "message": "Cambiar en, %",
-    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
-  },
-  "optionsSettingsSupportEnabled": {
-    "message": "Activado"
-  },
-  "notificationButtonsMuteTitle": {
-    "message": "Silenciar"
-  },
-  "optionsSettingsGeneralUeipPrivacyHref": {
-    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
-  },
-  "module_ru_ok_audio": {
-    "message": "Odnoklassniki (audio)"
-  },
-  "notificationButtonsAddLoggedInTitle": {
-    "message": "Añadir pista a lista de reproducción"
-  },
-  "optionsSettingsGeneralUeipPrivacy": {
-    "message": "Declaración de privacidad"
-  },
-  "notificationButtonsFavoriteLoggedInTitle": {
-    "message": "¡Me gusta!"
-  },
-  "optionsContactHref": {
-    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md#feedback"
-  },
-  "optionsSettingsGeneralUeip": {
-    "message": "Programa de Mejora de la Experiencia de Usuario de PoziTone"
+  "notificationButtonsVolumeChangeFeedback": {
+    "message": "Volumen de sonido — $VOLUME_LEVEL$%",
+    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'.",
+    "placeholders": {
+      "volume_level": {
+        "content": "$1",
+        "example": "90"
+      }
+    }
   },
   "kbps": {
     "message": " kbps",
     "description": "Kilobit per second. See http://en.wikipedia.org/wiki/Data_rate_units#Kilobit_per_second for more information."
   },
-  "optionsTerms": {
-    "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\">contrato de licencia</a>"
+  "messageFromDevelopersPageText": {
+    "message": "<button id=\"pwMessageReadCta\">Read message</button> from developers"
+  },
+  "messageFromDevelopersPageTextShort": {
+    "message": "<button id=\"pwMessageReadCta\">Read message</button>"
+  },
+  "messageFromDevelopersTooltipText": {
+    "message": "Important message from developers"
+  },
+  "systemNotificationUpdated": {
+    "message": "¡Extensión actualizada!"
   },
   "systemNotificationUpdatedVersion": {
     "message": " v"
   },
-  "notificationButtonsUnmuteFeedback": {
-    "message": "Reactivado"
+  "systemNotificationUpdatedChanges": {
+    "message": "Ver cambios"
   },
-  "notificationButtonsNextFeedback": {
-    "message": "Cambio de pista"
+  "systemNotificationUpdatedDoNotNotify": {
+    "message": "No notificar actualizaciones"
   },
-  "optionsSettingsGeneralUeipMoreHref": {
-    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
-  },
-  "extensionDescription": {
-    "message": "Notificaciones sobre información de pistas, controles externos a la ventana del explorador y lista de pistas recientes."
-  },
-  "optionsSettingsNotificationButtonsAdd": {
-    "message": "Añadir pista a la lista de reproducción"
-  },
-  "optionsSettingsH1": {
-    "message": "Configuración"
-  },
-  "help": {
-    "message": "Ayuda"
-  },
-  "notificationButtonsMuteFeedback": {
-    "message": "Silencioso"
-  },
-  "optionsSettingsGeneral": {
-    "message": "General"
-  },
-  "module_com_vk_audio_long": {
-    "message": "VK (audio) | vk.com"
-  },
-  "findOnGoogle": {
-    "message": "Buscar en Google"
-  },
-  "optionsSettingsNotificationButtonsNext": {
-    "message": "Pista siguiente"
-  },
-  "notificationButtonsPreviousTitle": {
-    "message": "Pista anterior"
-  },
-  "optionsSettingsNotificationButtonsMuteUnmute": {
-    "message": "Silenciar / Reactivar "
-  },
-  "findOnAmazon": {
-    "message": "Buscar en Amazon"
-  },
-  "notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist": {
-    "message": "Pista ya existente en lista de reproducción"
-  },
-  "notificationButtonsUnmuteTitle": {
-    "message": "Reactivar"
-  },
-  "notificationButtonsNextTitle": {
-    "message": "Pista siguiente"
-  },
-  "optionsFoundation": {
-    "message": "PoziTone es una realidad gracias al <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\">amor</a> y <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\">la generosidad</a>."
-  },
-  "optionsSettingsAdditionalInfoShowCbr": {
-    "message": "Mostrar <a href=\"http://en.wikipedia.org/wiki/Constant_Bit_Rate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">velocidad de bits</a>",
-    "description": "http://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
-  },
-  "optionsSettingsDisplayWhen": {
-    "message": "Mostrar notificaciones"
-  },
-  "optionsSettingsGeneralUeipDesc": {
-    "message": "El Programa de Mejora de la Experiencia de Usuario recopila información sobre como nuestros usuarios usan PoziTone y los problemas que encuentran. Nuestro equipo de desarrolladores — PoziWorld — utiliza esta información para mejorar el producto, las funciones más usadas por los usuarios y ayuda en la resolución de problemas. La participación en este programa es voluntaria y el objetivo final es realizar mejoras en el programa para satisfacer a nuestros usuarios."
-  },
-  "optionsSettingsNotificationButtonsNextAuthRequired": {
-    "message": "Pista siguiente <small>(autorización expresa necesaria)</small>"
-  },
-  "optionsVersion": {
-    "message": "Versión"
-  },
-  "optionsSettingsAdditionalInfo": {
-    "message": "Información adicional"
+  "optionsTitle": {
+    "message": "Configuración de PoziTone"
   },
   "optionsNavSettings": {
     "message": "Configuración"
   },
-  "module_com_vk_audio": {
-    "message": "VK (audio)"
+  "optionsSettingsH1": {
+    "message": "Configuración"
   },
-  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
-    "message": "¡Me gusta! <small>(autorización expresa necesaria)</small>"
+  "optionsSettingsSaved": {
+    "message": "guardada"
   },
-  "optionsContact": {
-    "message": "Contactar con los desarrolladores de PoziTone"
-  },
-  "about": {
-    "message": "Acerca de"
-  },
-  "popupTitle": {
-    "message": "PoziTone"
-  },
-  "popupNavRecentTracksH1": {
-    "message": "Pistas recientes"
-  },
-  "optionsCopyright": {
-    "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
-  },
-  "popupToolbarClose": {
-    "message": "Cerrar"
-  },
-  "optionsSettingsNotificationTitleFormatNoStationInfo": {
-    "message": "No mostrar información sobre esta estación"
-  },
-  "notificationPlayerStatusChangeStarted": {
-    "message": "Reproducción iniciada"
-  },
-  "optionsSettingsDisplayWhenStopped": {
-    "message": "Reproducción no iniciada / detenida"
-  },
-  "popupNavRecentTracksPlaceholder": {
-    "message": "¿Buscas canciones?<br />¿Qué te parece algo <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">de punk-rock con elementos hardcore</a>?<br />o <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop?</a>?"
-  },
-  "module_general": {
+  "optionsSettingsGeneral": {
     "message": "General"
   },
-  "optionsSettingsSoundVolumeControlUseDefaults": {
-    "message": "Use <a href=\"#/settings/general\">configuración general</a>",
-    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
+  "optionsSettingsGeneralShowAdvanced": {
+    "message": "Show advanced settings"
   },
-  "optionsInfo": {
-    "message": "Detalles sobre PoziTone"
+  "optionsSettingsGeneralShowAdvancedToggle": {
+    "message": "Advanced"
+  },
+  "notifications": {
+    "message": "Notifications"
+  },
+  "showPlayerEventNotification": {
+    "message": "Show when player status changes",
+    "description": "Show notification on playback start/stop, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on."
+  },
+  "showPlayerEventNotificationLong": {
+    "message": "Show notification on playback start/stop/resume, on sound volume change, on added to playlist event, on track favorited event, on track switch, and so on.\n\nIf unchecked, you can still make the notification show up by calling “Show notification” command with the help of keyboard shortcuts (Alt+Shift+Q if unchanged)."
+  },
+  "showSuccessfulUpdateNotification": {
+    "message": "Show when PoziTone is successfully updated"
+  },
+  "displayKeyboardShortcutsTips": {
+    "message": "Display keyboard shortcuts tips next to commands"
   },
   "optionsSettingsSoundVolumeControl": {
     "message": "Control de volumen de sonido",
     "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
   },
-  "optionsSettingsNotificationTitleFormatLong": {
-    "message": "Mostrar nombre de esta estación + breve descripción (si existe)"
+  "optionsSettingsSoundVolumeControlUseDefaults": {
+    "message": "Use <a href=\"#/settings/general\">general settings</a>",
+    "description": "Words inside <a /> tag should be the ones from 'module_general' and 'optionsNavSettings' ('General' and 'Settings' => 'general settings')."
   },
-  "optionsSettingsNotificationButtons": {
-    "message": "Botones disponibles <small>(un máximo de 2 se puede mostrar a la vez)</small>"
+  "optionsSettingsSoundVolumeControlDelta": {
+    "message": "Cambiar en, %",
+    "description": "Used for a field asking to enter an integer value of percentage (1-99) which will be used when increasing or decreasing sound volume."
   },
-  "optionsSettingsSaved": {
-    "message": "guardada"
+  "optionsSettingsGeneralUeip": {
+    "message": "Programa de Mejora de la Experiencia de Usuario de PoziTone"
   },
-  "systemNotificationUpdatedDoNotNotify": {
-    "message": "No notificar actualizaciones"
+  "optionsSettingsGeneralUeipDesc": {
+    "message": "El Programa de Mejora de la Experiencia de Usuario recopila información sobre como nuestros usuarios usan PoziTone y los problemas que encuentran. Nuestro equipo de desarrolladores — PoziWorld — utiliza esta información para mejorar el producto, las funciones más usadas por los usuarios y ayuda en la resolución de problemas. La participación en este programa es voluntaria y el objetivo final es realizar mejoras en el programa para satisfacer a nuestros usuarios."
   },
-  "optionsHelpText": {
-    "message": "Al enviar a los desarrolladores de PoziTone la información especificada aquí abajo, estos intentarán solucionar de forma rápida el problema que estás experimentando."
+  "optionsSettingsGeneralUeipMore": {
+    "message": "Indícanos que cosas cambiar para mejorar el programa"
   },
-  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
-    "message": "Pista anterior <small>(autorización expresa necesaria)</small>"
+  "optionsSettingsGeneralUeipMoreHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/PoziTone-User-Experience-Improvement-Program"
+  },
+  "optionsSettingsGeneralUeipPrivacy": {
+    "message": "Declaración de privacidad"
+  },
+  "optionsSettingsGeneralUeipPrivacyHref": {
+    "message": "https://github.com/poziworld/pozitone/wiki/Privacy-Statement-for-the-PoziTone-User-Experience-Improvement-Program"
+  },
+  "optionsSettingsGeneralUeipJoin": {
+    "message": "Participar de forma anónima"
+  },
+  "optionsSettingsGeneralUeipDoNotJoin": {
+    "message": "No participar"
+  },
+  "optionsSettingsSupport": {
+    "message": "Support this player"
+  },
+  "optionsSettingsSupportEnabled": {
+    "message": "Enabled"
+  },
+  "optionsSettingsDisplayWhen": {
+    "message": "Mostrar notificaciones"
+  },
+  "optionsSettingsDisplayWhenStopped": {
+    "message": "Reproducción no iniciada / detenida"
+  },
+  "optionsSettingsDisplayWhenMuted": {
+    "message": "Si el volumen esta a 0 % o sonido apagado"
   },
   "optionsSettingsDisplayWhenNoTrackInfo": {
     "message": "Si no hay información sobre lo que actualmente se está reproduciendo (aparece como \"...\" en el sitio web)"
   },
-  "notificationPlayerStatusChangeResumed": {
-    "message": "Reproducción reanudada"
-  },
-  "optionsSettingsNotificationButtonsPrevious": {
-    "message": "Pista anterior"
-  },
-  "popupNavRecentTracks": {
-    "message": "Pistas recientes"
+  "optionsSettingsNotificationIconFormat": {
+    "message": "Formato de icono de la notificación"
   },
   "optionsSettingsNotificationIconFormatShowStationLogo": {
     "message": "Mostrar logo de esta estación"
@@ -215,108 +202,586 @@
   "optionsSettingsNotificationIconFormatShowSiteLogo": {
     "message": "Mostrar logo del sitio"
   },
-  "optionsSettingsGeneralUeipMore": {
-    "message": "Indícanos que cosas cambiar para mejorar el programa"
+  "optionsSettingsNotificationIconFormatPlayerLogo": {
+    "message": "Display player logo"
   },
-  "notificationButtonsStopTitle": {
-    "message": "Detener"
+  "optionsSettingsNotificationIconFormatStationLogo": {
+    "message": "Display current station logo"
   },
-  "optionsSettingsNotificationButtonsPlayStop": {
-    "message": "Detener / Reproducir"
+  "optionsSettingsNotificationIconFormatTrackImage": {
+    "message": "Display current track image"
   },
-  "commandShowNotification": {
-    "message": "Mostrar notificación"
+  "optionsSettingsNotificationIconFormatGenericImage": {
+    "message": "Display generic image"
   },
-  "optionsSettingsNotificationButtonsAddAuthRequired": {
-    "message": "Añadir pista a la lista de reproducción <small>(autorización expresa necesaria)</small>"
+  "optionsSettingsAdditionalInfo": {
+    "message": "Información adicional"
   },
-  "notificationButtonsVolumeChangeFeedback": {
-    "message": "Volumen de sonido — $VOLUME_LEVEL$%",
-    "description": "Sound volume level after a change. Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'.",
-    "placeholders" : {
-      "volume_level"  : {
-          "content"   : "$1"
-        , "example"   : "90"
-      }
-    }
-  },
-  "optionsHelpSubmitInfoCta": {
-    "message": "Enviar información"
-  },
-  "optionsNavFaq": {
-    "message": "P+F (Preguntas más frecuentes)"
-  },
-  "findOnVk": {
-    "message": "Buscar en VK"
-  },
-  "optionsHelpSubmitInfoCtaSuccess": {
-    "message": "Enviada"
-  },
-  "optionsSettingsSupport": {
-    "message": "Patrocina el reproductor"
-  },
-  "notificationButtonsPlayTitle": {
-    "message": "Reproducir"
-  },
-  "notificationAddTrackToPlaylistFeedbackSuccessfullyAdded": {
-    "message": "Pista añadida con éxito a lista de reproducción"
-  },
-  "optionsSettingsNotificationButtonsFavorite": {
-    "message": "¡Me gusta!"
-  },
-  "optionsSettingsNotificationIconFormat": {
-    "message": "Formato de icono de la notificación"
-  },
-  "systemNotificationUpdatedChanges": {
-    "message": "Ver cambios"
-  },
-  "optionsInfoHref": {
-    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
-  },
-  "module_ru_101_long": {
-    "message": "Online radio 101.ru"
-  },
-  "optionsSettingsGeneralUeipDoNotJoin": {
-    "message": "No participar"
-  },
-  "notificationButtonsPreviousFeedback": {
-    "message": "Cambio de pista"
-  },
-  "optionsSettingsGeneralUeipJoin": {
-    "message": "Participar de forma anónima"
+  "optionsSettingsAdditionalInfoShowCbr": {
+    "message": "Display <a href=\"https://en.wikipedia.org/wiki/Constant_bitrate\" target=\"_blank\" class=\"externalLink\" data-id=\"constantBitrateWiki\">constant bitrate</a>",
+    "description": "https://en.wikipedia.org/wiki/Constant_bitrate — if Wikipedia has an article in this language, please include a link. Otherwise remove <a /> from the translation."
   },
   "optionsSettingsNotificationTitleFormat": {
     "message": "Formato de título de notificación"
   },
-  "extensionName": {
-    "message": "PoziTone"
-  },
-  "optionsSettingsDisplayWhenMuted": {
-    "message": "Si el volumen esta a 0 % o sonido apagado"
-  },
-  "module_ru_101": {
-    "message": "101.ru"
-  },
   "optionsSettingsNotificationTitleFormatShort": {
     "message": "Mostrar solo el nombre de esta estación"
+  },
+  "optionsSettingsNotificationTitleFormatLong": {
+    "message": "Mostrar nombre de esta estación + breve descripción (si existe)"
+  },
+  "optionsSettingsNotificationTitleFormatPlayerName": {
+    "message": "Display player name"
+  },
+  "optionsSettingsNotificationTitleFormatNoStationInfo": {
+    "message": "Don't display information about current station or player"
+  },
+  "optionsSettingsNotificationButtons": {
+    "message": "Botones disponibles <small>(un máximo de 2 se puede mostrar a la vez)</small>"
+  },
+  "optionsSettingsNotificationButtonsAdd": {
+    "message": "Add to playlist"
+  },
+  "optionsSettingsNotificationButtonsAddAuthRequired": {
+    "message": "Add to playlist <small>(authorization required on site)</small>"
+  },
+  "optionsSettingsNotificationButtonsFavorite": {
+    "message": "¡Me gusta!"
+  },
+  "optionsSettingsNotificationButtonsFavoriteAuthRequired": {
+    "message": "¡Me gusta! <small>(autorización expresa necesaria)</small>"
+  },
+  "optionsSettingsNotificationButtonsNext": {
+    "message": "Next"
+  },
+  "optionsSettingsNotificationButtonsNextAuthRequired": {
+    "message": "Next <small>(authorization required on site)</small>"
+  },
+  "optionsSettingsNotificationButtonsPrevious": {
+    "message": "Previous"
+  },
+  "optionsSettingsNotificationButtonsPreviousAuthRequired": {
+    "message": "Previous <small>(authorization required on site)</small>"
+  },
+  "optionsSettingsNotificationButtonsPlayStop": {
+    "message": "Detener / Reproducir"
+  },
+  "optionsSettingsNotificationButtonsMuteUnmute": {
+    "message": "Silenciar / Reactivar "
+  },
+  "voiceControl": {
+    "message": "Voice control"
+  },
+  "voiceControlMenuItem": {
+    "message": "Voice control",
+    "description": "In some languages (for example, Russian), the name could be too long to fit on one line without wrapping when showing a “NEW” tag/label next to it."
+  },
+  "voiceControlIntro1": {
+    "message": "PoziTone has added a new way for you to control your favorite online media players."
+  },
+  "voiceControlIntro2": {
+    "message": "Now, besides keyboard shortcuts and buttons in the notification, you can use your voice to stop/resume playback, switch tracks, mute/unmute, add to playlist, etc."
+  },
+  "step1": {
+    "message": "Step 1."
+  },
+  "voiceControlAllow": {
+    "message": "Allow voice control"
+  },
+  "voiceControlAllowInfo": {
+    "message": "After the permission is received, PoziTone will automatically restart itself for the changes to take effect."
+  },
+  "step2": {
+    "message": "Step 2."
+  },
+  "voiceControlDownload": {
+    "message": "Download voice control app (VCA)"
+  },
+  "voiceControlInstall": {
+    "message": "Install VCA"
+  },
+  "voiceControlOpen": {
+    "message": "Open VCA"
+  },
+  "voiceControlConnect": {
+    "message": "Follow VCA instructions to connect VCA with your browser"
+  },
+  "step3": {
+    "message": "Step 3."
+  },
+  "voiceControlSettings": {
+    "message": "Set up voice control"
+  },
+  "voiceControlAutoActivate": {
+    "message": "Automatically activate voice control app on PoziTone start or reload"
+  },
+  "voiceControlAutoReactivate": {
+    "message": "(Not recommended!) Automatically reactivate voice control app on app exit or shutdown"
+  },
+  "voiceControlActivate": {
+    "message": "Activate voice control"
+  },
+  "voiceControlActivateCta": {
+    "message": "Activate voice control app"
+  },
+  "voiceControlAlreadyActivated": {
+    "message": "Already activated"
+  },
+  "projects": {
+    "message": "Sister projects"
+  },
+  "projectsDescriptionParagraph1": {
+    "message": "PoziTone is being developed by a small team called PoziWorld."
+  },
+  "projectsDescriptionParagraph2": {
+    "message": "PoziWorld develops software that helps you solve everyday tasks easier, faster, more&nbsp;efficiently, is free to use, and does not track your activity without your prior agreement."
+  },
+  "swaggyDescriptionParagraph1": {
+    "message": "Voice control for Swagbucks.com (unofficial). Accessibility-friendly."
+  },
+  "swaggyDescriptionParagraph2": {
+    "message": "Swaggy makes Swagbucks.com a little bit more accessible by letting you search, navigate, click, sort* without looking for the corresponding buttons, links, toggles on a page."
+  },
+  "peDescriptionParagraph1": {
+    "message": "Lets you use your voice to control things you usually use your mouse and/or keyboard for."
+  },
+  "peDescriptionParagraph2": {
+    "message": "Not a standalone app, works by sending commands to partner extensions installed in your browser."
+  },
+  "sttbDescriptionParagraph1": {
+    "message": "Adds a scroll to top and/or bottom button."
+  },
+  "sttbDescriptionParagraph2": {
+    "message": "Great for viewing long/infinite pages such as Facebook, Twitter, etc."
+  },
+  "pwmDescriptionParagraph1": {
+    "message": "Helps you minimize print waste, save ink."
+  },
+  "pwmDescriptionParagraph2": {
+    "message": "Go Green on the following Print Return Label pages: Amazon (amazon.com), American Eagle (ae.com), eBay, Newgistics SmartLabel, Nordstrom, Old Navy, Return Saver, and UPS (ups.com)."
+  },
+  "contribution": {
+    "message": "Contribution"
+  },
+  "spreadTheWord": {
+    "message": "Spread the word"
+  },
+  "spreadTheWordWhyNot": {
+    "message": "If you find PoziTone useful, why not recommend it to your friends, colleagues, and/or followers?"
+  },
+  "spreadTheWordWays": {
+    "message": "There are a few ways you can help our cause:"
+  },
+  "spreadTheWordFollowUs": {
+    "message": "Follow us on <a href=\"https://t.me/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"telegram\" }'>Telegram</a>, <a href=\"https://facebook.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"facebook\" }'>Facebook</a>, <a href=\"https://twitter.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"twitter\" }'>Twitter</a>, <a href=\"https://vk.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"vk\" }'>VK</a>, <a href=\"https://ok.ru/group/54738320621596\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"odnoklassniki\" }'>Odnoklassniki</a>, and <a href=\"https://instagram.com/PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"social\" data-params='{ \"strSocialNetwork\" : \"instagram\" }'>Instagram</a>."
+  },
+  "spreadTheWordInstallationLink": {
+    "message": "Share the <a href=\"#\" target=\"_blank\" id=\"installationLink\" class=\"externalLink\" data-id=\"installation\">installation link</a> on your social networks and/or blog."
+  },
+  "spreadTheWordRateLink": {
+    "message": "<a href=\"#\" target=\"_blank\" id=\"rateLink\" class=\"externalLink\" data-id=\"rate\">Rate PoziTone</a> – the feedback really helps others find this extension!"
+  },
+  "rateExtension": {
+    "message": "Please rate PoziTone – the feedback really helps others find this extension!"
+  },
+  "rateExtensionShort": {
+    "message": "I like PoziTone!"
+  },
+  "feedback": {
+    "message": "Feedback"
+  },
+  "feedbackAppreciated": {
+    "message": "We appreciate your feedback!"
+  },
+  "feedbackIdeas": {
+    "message": "Please <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>share your ideas</a>."
+  },
+  "feedbackQuestions": {
+    "message": "Don't be shy to <a href=\"mailto:&#102;&#101;&#101;&#100;&#98;&#97;&#99;&#107;&#64;&#112;&#111;&#122;&#105;&#116;&#111;&#110;&#101;&#46;&#99;&#111;&#109;\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"questions\" }'>ask questions</a>."
+  },
+  "feedbackIssues": {
+    "message": "<a href=\"#\" target=\"_blank\" id=\"bugLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"issues\" }'>Bug reports</a> are valuable!"
+  },
+  "feedbackPraises": {
+    "message": "We like <a href=\"#\" target=\"_blank\" id=\"reviewLink\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"praises\" }'>praises</a>, who doesn't? :)"
+  },
+  "feedbackIncentives": {
+    "message": "Stick is helpful, but <a href=\"#\" target=\"_blank\" id=\"incentiveLink\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"carrot\" }'>carrot</a> is sweeter. ;)"
+  },
+  "translation": {
+    "message": "Translation"
+  },
+  "translationParagraph1": {
+    "message": "Sprechen Sie Deutsch? Vous parlez français?"
+  },
+  "translationParagraph2": {
+    "message": "We want as many PoziTone users as possible to be able to interact with the extension in their native language."
+  },
+  "translationParagraph3": {
+    "message": "If you know any foreign language or just noticed a discrepancy in the translation, please <a href=\"https://www.transifex.com/poziworld/pozitone/\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">let us know</a>."
+  },
+  "incentive": {
+    "message": "Incentive"
+  },
+  "incentiveParagraph": {
+    "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+  },
+  "about": {
+    "message": "About"
+  },
+  "optionsInfo": {
+    "message": "Detalles sobre PoziTone"
+  },
+  "optionsInfoHref": {
+    "message": "https://github.com/poziworld/pozitone/blob/develop/README_en.md"
+  },
+  "optionsContact": {
+    "message": "Contactar con los desarrolladores de PoziTone"
+  },
+  "optionsVersion": {
+    "message": "Versión"
+  },
+  "versionHistory": {
+    "message": "version history"
+  },
+  "versionHistoryHref": {
+    "message": "https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md",
+    "description": "Please check whether there is a version of https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md for your language."
+  },
+  "translatedBy": {
+    "message": "",
+    "description": "Example: 'English <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">translation</a>: [John Doe](https://www.transifex.com/user/profile/john.doe777/)"
+  },
+  "optionsCopyright": {
+    "message": "&copy; <span class=\"copyrightYear\" data-copyright-start-year=\"2013\"></span> PoziWorld, Inc."
+  },
+  "optionsFoundation": {
+    "message": "PoziTone is made possible by <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#gratitudes\" target=\"_blank\" class=\"externalLink\" data-id=\"gratitudes\">love</a> and <a href=\"https://github.com/poziworld/pozitone/blob/develop/README_en.md#credits\" target=\"_blank\" class=\"externalLink\" data-id=\"credits\">kindness</a>."
+  },
+  "optionsTerms": {
+    "message": "PoziTone <a href=\"https://github.com/poziworld/pozitone/blob/develop/LICENSE_en\" target=\"_blank\" class=\"externalLink\" data-id=\"license\">license agreement</a>"
+  },
+  "help": {
+    "message": "Help"
+  },
+  "optionsHelpText": {
+    "message": "Al enviar a los desarrolladores de PoziTone la información especificada aquí abajo, estos intentarán solucionar de forma rápida el problema que estás experimentando."
+  },
+  "optionsHelpSubmitInfoCta": {
+    "message": "Enviar información"
+  },
+  "optionsHelpSubmitInfoCtaSuccess": {
+    "message": "Enviada"
+  },
+  "info": {
+    "message": "Info"
+  },
+  "popupTitle": {
+    "message": "PoziTone"
+  },
+  "popupToolbarClose": {
+    "message": "Cerrar"
+  },
+  "popupNavRecentTracks": {
+    "message": "Recently played"
+  },
+  "popupNavRecentTracksH1": {
+    "message": "Recently played"
+  },
+  "popupNavRecentTracksPlaceholder": {
+    "message": "Looking for some tunes?<br><br>How about some <a href=\"#\" target=\"_blank\" data-performer=\"funbox\">punk-rock with elements of hardcore</a>?<br>Or <a href=\"#\" target=\"_blank\" data-performer=\"nickybutter\">hip-hop</a>?<br>Fond of <a href=\"#\" target=\"_blank\" data-performer=\"theroux\">house</a>?<br><a href=\"#\" target=\"_blank\" data-performer=\"emilyclibourn\">Dream pop, indie pop, indie rock, neo soul, art rock</a>, you said?"
+  },
+  "findOnVk": {
+    "message": "Buscar en VK"
+  },
+  "findOnGoogle": {
+    "message": "Buscar en Google"
+  },
+  "findOnAmazon": {
+    "message": "Buscar en Amazon"
   },
   "copyToClipboard": {
     "message": "Copiar al portapapeles"
   },
-  "notificationButtonsVolumeDownTitle": {
-    "message": "Bajar volumen de sonido",
-    "description": "Out of 3 possible variants (volume, sound volume, sound volume level), please use 'sound volume'."
+  "module_general": {
+    "message": "General"
   },
-  "notificationFavoriteStatusSuccess": {
-    "message": "¡Gracias por reconocer el duro trabajo de un DJ!"
+  "modulesBuiltIn": {
+    "message": "Built-in modules"
   },
-  "optionsTitle": {
-    "message": "Configuración de PoziTone"
+  "modulesBuiltInDescription": {
+    "message": "Add <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesBuiltIn\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">new features</a> to your favorite online media players by enabling appropriate PoziTone&nbsp;modules."
   },
-  "notificationPlayerStatusChangeStopped": {
-    "message": "Reproducción detenida"
+  "module_ru_101": {
+    "message": "Online radio 101.ru"
   },
-  "translatedBy": {
-    "message": "<a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">Traducción</a> Española: [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/)"
+  "module_ru_101_long": {
+    "message": "Online radio 101.ru"
+  },
+  "module_com_classicalradio": {
+    "message": "ClassicalRadio.com"
+  },
+  "module_com_classicalradio_long": {
+    "message": "ClassicalRadio.com"
+  },
+  "module_fm_di": {
+    "message": "Digitally Imported"
+  },
+  "module_fm_di_long": {
+    "message": "Digitally Imported | di.fm"
+  },
+  "module_com_google_play_music": {
+    "message": "Google Play Music"
+  },
+  "module_com_google_play_music_long": {
+    "message": "Google Play Music | play.google.com/music"
+  },
+  "module_com_jazzradio": {
+    "message": "JAZZRADIO.com"
+  },
+  "module_com_jazzradio_long": {
+    "message": "JAZZRADIO.com"
+  },
+  "module_ru_ok_audio": {
+    "message": "Odnoklassniki (audio)"
+  },
+  "module_ru_ok_audio_long": {
+    "message": "Odnoklassniki (audio) | ok.ru"
+  },
+  "module_com_radiotunes": {
+    "message": "RadioTunes"
+  },
+  "module_com_radiotunes_long": {
+    "message": "RadioTunes | radiotunes.com"
+  },
+  "module_com_rockradio": {
+    "message": "ROCKRADIO.COM"
+  },
+  "module_com_rockradio_long": {
+    "message": "ROCKRADIO.COM"
+  },
+  "module_com_soundcloud": {
+    "message": "SoundCloud"
+  },
+  "module_com_soundcloud_long": {
+    "message": "SoundCloud | soundcloud.com"
+  },
+  "module_com_vk_audio": {
+    "message": "VK (audio)"
+  },
+  "module_com_vk_audio_long": {
+    "message": "VK (audio) | vk.com"
+  },
+  "module_com_vgmradio": {
+    "message": "VGM Radio"
+  },
+  "module_com_vgmradio_long": {
+    "message": "VGM Radio | vgmradio.com"
+  },
+  "modulesExternal": {
+    "message": "External modules"
+  },
+  "modulesExternalDescription": {
+    "message": "An external PoziTone module is a standalone extension which is able to provide <a href=\"#\" target=\"_blank\" id=\"featuresLink\" class=\"externalLink\" data-id=\"features\" data-params='{ \"strPage\" : \"modulesExternal\" }' data-lang=\"en_US\" title=\"&#8226; Displays info about now playing song, podcast, video, etc.\n\n&#8226; Easy player control outside of browser window.\n\n&#8226; List of recently played.\">PoziTone features</a> by communicating directly with PoziTone."
+  },
+  "modulesExternalAdvancedSupportEnable": {
+    "message": "Enable external modules advanced support"
+  },
+  "moduleExternal_sdk": {
+    "message": "Want to develop your own?"
+  },
+  "moduleExternal_sdkCta": {
+    "message": "Yes, I do!"
+  },
+  "moduleExternal_com_youtube": {
+    "message": "YouTube embedded player"
+  },
+  "moduleExternal_com_soundcloud": {
+    "message": "SoundCloud Widget"
+  },
+  "moduleExternal_ru_sovyatnik": {
+    "message": "Sovyatnik"
+  },
+  "enableAll": {
+    "message": "Enable all"
+  },
+  "disableAll": {
+    "message": "Disable all"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "enabled": {
+    "message": "Enabled"
+  },
+  "unavailable": {
+    "message": "(Unavailable)"
+  },
+  "connected": {
+    "message": "Connected"
+  },
+  "install": {
+    "message": "Install"
+  },
+  "moduleHosts": {
+    "message": "List of hosts/domains this module needs permission for in order to work properly.\n\nPoziTone, including its built-in modules, does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
+  },
+  "trademarksDisclaimer": {
+    "message": "All trademarks mentioned belong to their owners. Third-party brands, product names, trade names, corporate names and company names may be trademarks of their respective owners or registered trademarks of other companies, and have been used for the purposes of explanation to the owner's benefit, without implying a violation of copyright law."
+  },
+  "trademarksDisclaimerContinued": {
+    "message": "All information and content (texts, graphics and images) are reported to the best of our knowledge, public knowledge, if unintentionally, has been published or copyrighted material in violation of the law, please inform us and we will immediately remove it."
+  },
+  "generalPrivacyStatement": {
+    "message": "PoziTone does not read, change, store, or transmit any of your personal data (e.g., logins, passwords, messages, contacts) from any of the sites or your computer in absolutely any form."
+  },
+  "privacyStatementForClipboardWrite": {
+    "message": "“<strong>Modify data you copy and paste</strong>”: this permission is required to copy the requested information to your clipboard.\n\nPoziTone does not and will not read the contents of your clipboard, it only asks to write to it (a safe operation)."
+  },
+  "privacyStatementForOrigins": {
+    "message": "“<strong>Read and change your data</strong>”: this permission is required for the correct operation of PoziTone with a player (controlling playback, adjusting sound volume, getting current track name and performer)."
+  },
+  "privacyStatementForTabs": {
+    "message": "“<strong>Read your browsing history</strong>”: this permission is required for getting a current URL of the page on the basis of which PoziTone checks whether to load a corresponding module."
+  },
+  "apiErrorUnrecognizedMessage": {
+    "message": "Unrecognized message"
+  },
+  "apiErrorRequestObjectCantBeEmpty": {
+    "message": "Request object can't be empty"
+  },
+  "apiErrorTypeofMismatch": {
+    "message": "Type of “$PARAMETER$” parameter must be “$TYPE$”",
+    "description": "When the following JavaScript snippet equals true: typeof strCall !== 'string'",
+    "placeholders": {
+      "parameter": {
+        "content": "$1",
+        "example": "strCall"
+      },
+      "type": {
+        "content": "$2",
+        "example": "string"
+      }
+    }
+  },
+  "apiErrorCallNotSpecified": {
+    "message": "Call not specified"
+  },
+  "apiErrorCallUnknown": {
+    "message": "Call unknown"
+  },
+  "apiErrorMethodNotSpecified": {
+    "message": "Method not specified"
+  },
+  "apiErrorMethodNotSupported": {
+    "message": "Method “$METHOD$” not supported",
+    "description": "When method is valid but not supported by this call or not valid (for example, there is a typo)",
+    "placeholders": {
+      "method": {
+        "content": "$1",
+        "example": "POST"
+      }
+    }
+  },
+  "apiErrorDataObjectCantBeEmpty": {
+    "message": "Data object can't be empty"
+  },
+  "apiErrorMissingRequiredParameter": {
+    "message": "Missing a required parameter: $PARAMETER$",
+    "description": "Missing a parameter required for correct operation",
+    "placeholders": {
+      "parameter": {
+        "content": "$1",
+        "example": "boolIsEnabled"
+      }
+    }
+  },
+  "apiStatusCode201": {
+    "message": "Created",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#201 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#201"
+  },
+  "apiStatusCode400": {
+    "message": "Bad Request",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#400 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#400"
+  },
+  "apiStatusCode409": {
+    "message": "Conflict",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#409 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#409"
+  },
+  "apiStatusCode500": {
+    "message": "Internal Server Error",
+    "description": "See https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes#500 or https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500"
+  },
+  "apiConnectModuleSuccess": {
+    "message": "Module successfully connected"
+  },
+  "apiConnectModuleError": {
+    "message": "Module has not been connected"
+  },
+  "apiConnectModuleHadBeenConnected": {
+    "message": "Module had already been connected to PoziTone"
+  },
+  "uiLanguage": {
+    "message": "Language",
+    "description": "Setting on the Options page: language of the user interface."
+  },
+  "uiLanguageNote": {
+    "message": "On language change, PoziTone will automatically restart itself for the changes to take effect.",
+    "description": "A note that is displayed to user in regards to changing the UI language. In this case, it warns user that the extension will be restarted to apply the change."
+  },
+  "language_browserDefault": {
+    "message": "Automatic (browser default)",
+    "description": "Language option.\n\nIf the extension supports the language that is chosen as default in the browser, use that one. Otherwise, use English (United States)."
+  },
+  "language_browserDefault_tooltip": {
+    "message": "If the extension supports the language that is chosen as default in the browser, use that one. Otherwise, use English (United States).",
+    "description": "Explanation of the “Automatic (browser default)” language option that should be shown in a tooltip."
+  },
+  "language_be": {
+    "message": "Belarusian - беларуская",
+    "description": "Language option: be (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_cs": {
+    "message": "Czech - čeština",
+    "description": "Language option: cs (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_en_US": {
+    "message": "English (United States)",
+    "description": "Language option: en-US (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes - https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_es": {
+    "message": "Español",
+    "description": "Language option: es (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_gl": {
+    "message": "Galician - galego",
+    "description": "Language option: gl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_it": {
+    "message": "Italian - italiano",
+    "description": "Language option: it (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_nl": {
+    "message": "Dutch - Nederlands",
+    "description": "Language option: nl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_pl": {
+    "message": "Polish - polski",
+    "description": "Language option: pl (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_ru": {
+    "message": "Russian - русский",
+    "description": "Language option: ru (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_uk": {
+    "message": "Ukrainian - українська",
+    "description": "Language option: uk (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "language_zh_CN": {
+    "message": "Chinese (China) - 中文（中国）",
+    "description": "Language option: zh_CN (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).\n\nIf it doesn't match the current language, then write: *name of this language in the current language* - *native name of this language*.\nIf it does match the current language, then write: *native name of this language*.\n\nExamples:\nIf the current language isn't English (United States) but Russian, this should say: Английский (Соединённые Штаты) - English (United States).\nIf the current language is English (United States), this should match it: English (United States)."
+  },
+  "extensionName": {
+    "message": "PoziTone"
   }
 }
