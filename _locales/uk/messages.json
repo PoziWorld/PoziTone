@@ -289,7 +289,7 @@
     "message": "Дозволити голосове керування"
   },
   "voiceControlAllowInfo": {
-    "message": "Після отримання дозволу PoziTone автоматично перезавантажиться для того, щоб зміни набули чинності.\n\nЯкщо після перезапуску цю сторінку не буде знову відкрито, відкрийте її вручну, щоб продовжити.\nМи просимо вибачення за незручності."
+    "message": "Після отримання дозволу PoziTone автоматично перезавантажиться для того, щоб зміни набули чинності."
   },
   "step2": {
     "message": "Крок 2."
@@ -367,7 +367,7 @@
     "message": "Розкажіть про нас"
   },
   "spreadTheWordWhyNot": {
-    "message": "Якщо Ви вважаєте PoziTone корисним, то чому б не порекомендувати його Вашим друзям, колегам та/або підпищикам?"
+    "message": "Якщо Ви вважаєте PoziTone корисним, то чому б не порекомендувати його Вашим друзям, колегам та/або підписникам?"
   },
   "spreadTheWordWays": {
     "message": "Є декілька способів, якими Ви можете допомогти нашій справі:"
@@ -391,7 +391,7 @@
     "message": "Зворотній зв'язок"
   },
   "feedbackAppreciated": {
-    "message": "Ми цінуємо Ваш відгук!"
+    "message": "Ми цінуємо Вашу думку!"
   },
   "feedbackIdeas": {
     "message": "Будь ласка, <a href=\"https://feedback.pozitone.com/\" target=\"_blank\" class=\"externalLink\" data-id=\"feedback\" data-params='{ \"strFeedbackCategory\" : \"ideas\" }'>діліться вашими ідеями</a>."
@@ -726,7 +726,7 @@
     "description": "Setting on the Options page: language of the user interface."
   },
   "uiLanguageNote": {
-    "message": "При зміні мови, PoziTone автоматично перезавантажиться, щоб зміни вступили в силу.\n\nЯкщо після перезапуску цю сторінку не буде знову відкрито, відкрийте її вручну, щоб продовжити.\nМи просимо вибачення за незручності.",
+    "message": "При зміні мови, PoziTone автоматично перезавантажиться, щоб зміни вступили в силу.",
     "description": "A note that is displayed to user in regards to changing the UI language. In this case, it warns user that the extension will be restarted to apply the change."
   },
   "language_browserDefault": {
