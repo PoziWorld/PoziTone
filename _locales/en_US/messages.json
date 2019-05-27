@@ -394,7 +394,7 @@
       }
         ,
         "voiceControlAllowInfo": {
-          "message": "After the permission is received, PoziTone will automatically restart itself for the changes to take effect.\n\nIf this page is not reopened after the restart, please open it manually to continue.\nWe apologize for the inconvenience."
+          "message": "After the permission is received, PoziTone will automatically restart itself for the changes to take effect."
         }
       ,
       "step2": {
@@ -862,7 +862,7 @@
 
   ,
   "trademarksDisclaimer": {
-    "message": "All trademarks mentioned belong to their owners, third party brands, product names, trade names, corporate names and company names mentioned may be trademarks of their respective owners or registered trademarks of other companies and are used for purposes of explanation and to the owner's benefit, without implying a violation of copyright law."
+    "message": "All trademarks mentioned belong to their owners. Third-party brands, product names, trade names, corporate names and company names may be trademarks of their respective owners or registered trademarks of other companies, and have been used for the purposes of explanation to the owner's benefit, without implying a violation of copyright law."
   }
   ,
   "trademarksDisclaimerContinued": {
