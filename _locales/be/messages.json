@@ -289,7 +289,7 @@
     "message": "Дазвольце галасавое кіраванне"
   },
   "voiceControlAllowInfo": {
-    "message": "Пры атрыманні дазволу PoziTone аўтаматычна перазагрузіцца, каб змены набылі моц.\n\n Калі гэта старонка не адкрыецца зноў пасля перазагрузкі, адкрыйце яе ручна, калі ласка, каб працягнуць.\nПросім прабачэння за нязручнасць."
+    "message": "Пры атрыманні дазволу PoziTone аўтаматычна перазагрузіцца, каб змены набылі моц."
   },
   "step2": {
     "message": "Крок 2."
@@ -424,7 +424,7 @@
     "message": "Заахвочванне"
   },
   "incentiveParagraph": {
-    "message": "If you appreciate the work we have done, please consider stimulating PoziTone development via <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a>, or <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
+    "message": "Калі Вы цэніце праведзеную намі працу, калі ласка, падумайце пра стымуляванне распрацоўкі PoziTone пасродкам <a href=\"https://www.paypal.me/pozitone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"paypal\" }'>PayPal</a>, <a href=\"https://cash.me/&#36;PoziTone\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"squareCash\" }'>Square Cash</a> или <a href=\"https://commerce.coinbase.com/checkout/6c0d5cf3-cd19-4b8b-bda3-e843716226df\" target=\"_blank\" class=\"externalLink\" data-id=\"incentive\" data-params='{ \"strIncentivePlatform\" : \"coinbase\" }'>Coinbase</a>."
   },
   "about": {
     "message": "Пра пашырэнне"
@@ -449,7 +449,7 @@
     "description": "Please check whether there is a version of https://github.com/PoziWorld/PoziTone/blob/develop/HISTORY_en.md for your language."
   },
   "translatedBy": {
-    "message": "",
+    "message": "Беларускі <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">пераклад</a>: [Наталля Смірнова](https://www.transifex.com/user/profile/natasmirnova1392/)",
     "description": "Example: 'English <a href=\"#\" target=\"_blank\" class=\"externalLink\" data-id=\"translation\">translation</a>: [John Doe](https://www.transifex.com/user/profile/john.doe777/)"
   },
   "optionsCopyright": {
@@ -726,7 +726,7 @@
     "description": "Setting on the Options page: language of the user interface."
   },
   "uiLanguageNote": {
-    "message": "On language change, PoziTone will automatically restart itself for the changes to take effect.\n\nIf this page is not reopened after the restart, please open it manually to continue.\nWe apologize for the inconvenience.",
+    "message": "On language change, PoziTone will automatically restart itself for the changes to take effect.",
     "description": "A note that is displayed to user in regards to changing the UI language. In this case, it warns user that the extension will be restarted to apply the change."
   },
   "language_browserDefault": {
@@ -735,7 +735,7 @@
   },
   "language_browserDefault_tooltip": {
     "message": "If the extension supports the language that is chosen as default in the browser, use that one. Otherwise, use English (United States).",
-    "description": "Explanation of the \"Automatic (browser default)\"\" language option that should be shown in a tooltip."
+    "description": "Explanation of the “Automatic (browser default)” language option that should be shown in a tooltip."
   },
   "language_be": {
     "message": "Беларуская",
