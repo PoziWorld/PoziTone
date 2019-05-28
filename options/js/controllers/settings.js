@@ -162,102 +162,117 @@ optionsControllers.controller( 'SettingsCtrl',  function(
   /**
    * Save new setting value.
    *
-   * @type    method
-   * @param   $event
-   *            Event object.
-   * @param   strGroupModel
-   *            Optional. Checkbox group model name.
-   * @param   strModuleOverride
-   *            Optional. If the setting belongs to a different module,
-   *            then the rest on the current Options page.
-   * @param   funcDoBefore
-   *            Optional. Additional logic to do before saving.
-   * @param   funcDoAfter
-   *            Optional. Additional logic to do after saving.
-   * @return  void
+   * @param {(Event|Object)} event - Event object.
+   * @param {string} [groupModel] - Checkbox group model name.
+   * @param {string} [moduleOverride] - If the setting belongs to a different module, then the rest on the current Options page.
+   * @param {function} [callbackBefore] - Additional logic to do before saving.
+   * @param {function} [callbackAfter] - Additional logic to do after saving.
    **/
 
-  $scope.inputChange = function(
-      $event
-    , strGroupModel
-    , strModuleOverride
-    , funcDoBefore
-    , funcDoAfter
-  ) {
-    function onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter ) {
-      Options.onSettingChange( $event, strModuleOverride );
-
-      var _target     = $event.target
-        , strName     = _target.name
-        , strValue    = _target.value
-        , boolChecked = _target.checked
-        ;
-
-      // ng-model doesn't work right for checkbox group
-      if ( typeof strGroupModel === 'string' ) {
-        var arrGroup = $scope.objModule[ strGroupModel ];
-
-        // Save if just selected and not in array yet
-        if ( boolChecked && ~~ arrGroup.indexOf( strValue ) ) {
-          arrGroup.push( strValue );
-        }
-        // Remove if just unselected and in array
-        else if ( ! boolChecked && ~ arrGroup.indexOf( strValue ) ) {
-          arrGroup.splice( arrGroup.indexOf( strValue ), 1 );
-        }
-      }
-
-      // model doesn't get changed for some reason
-      if ( typeof strModuleOverride === 'string' ) {
-        if ( _target.type === 'checkbox' ) {
-          $scope[ strName ] = boolChecked;
-          $rootScope.objModules[ strModuleOverride ][ strName ] = boolChecked;
-        }
-      }
-
-      // Track setting change if needed
-      if ( _target.getAttribute( 'data-track-setting-change' ) ) {
-        var miscTrackedValue;
-
-        // TODO: Add other types
-        if ( _target.type === 'checkbox' ) {
-          miscTrackedValue = boolChecked;
-        }
-
-        chrome.runtime.sendMessage(
-          {
-              strReceiver     : 'background'
-            , strLog          : 'settingChange'
-            , objVars         : {
-                  strName     : strName
-                , miscValue   : miscTrackedValue
-                , strModule   : strModuleId
-              }
-          }
-        );
-      }
-
-      if ( typeof funcDoAfter === 'function' ) {
-        funcDoAfter();
-      }
-    }
-
-    if ( typeof funcDoBefore !== 'function' ) {
-      onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter );
+  $scope.inputChange = function ( event, groupModel, moduleOverride, callbackBefore, callbackAfter ) {
+    if ( poziworldExtension.utils.isType( callbackBefore, 'function' ) ) {
+      new Promise( callbackBefore )
+        .then( onSettingChange.bind( null, event, groupModel, moduleOverride, callbackAfter ) );
     }
     else {
-      var promise = new Promise( function( funcResolve, funcReject ) {
-        funcDoBefore( funcResolve, funcReject );
-      } );
-
-      promise
-        .then( function () {
-          onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter );
-        } )
-        .catch( function () {
-          // TODO
-        } )
-        ;
+      onSettingChange( event, groupModel, moduleOverride, callbackAfter );
     }
   };
+
+  /**
+   * Handle dropdown (select) value change.
+   *
+   * @param {string} id - Dropdown element ID attribute.
+   * @param callback
+   */
+
+  $scope.handleDropdownChange = function ( id, callback ) {
+    this.$parent.inputChange(
+      {
+        target: document.getElementById( id ),
+      },
+      undefined,
+      undefined,
+      undefined,
+      callback
+    );
+  };
+
+  /**
+   * Apply the UI language change.
+   */
+
+  $scope.changeUiLanguage = function () {
+    pozitone.global.reloadExtensionAndOptions( 'settingsGeneral', 'changeUiLanguage' );
+  };
+
+  /**
+   * Process the setting change.
+   *
+   * @param {(Event|Object)} $event - Event object.
+   * @param {string} [strGroupModel] - Checkbox group model name.
+   * @param {string} [strModuleOverride] - If the setting belongs to a different module, then the rest on the current Options page.
+   * @param {function} [funcDoAfter] - Additional logic to do after saving.
+   */
+
+  function onSettingChange( $event, strGroupModel, strModuleOverride, funcDoAfter ) {
+    Options.onSettingChange( $event, strModuleOverride );
+
+    var _target     = $event.target
+      , strName     = _target.name
+      , strValue    = _target.value
+      , boolChecked = _target.checked
+      ;
+
+    // ng-model doesn't work right for checkbox group
+    if ( typeof strGroupModel === 'string' ) {
+      var arrGroup = $scope.objModule[ strGroupModel ];
+
+      // Save if just selected and not in array yet
+      if ( boolChecked && ~~ arrGroup.indexOf( strValue ) ) {
+        arrGroup.push( strValue );
+      }
+      // Remove if just unselected and in array
+      else if ( ! boolChecked && ~ arrGroup.indexOf( strValue ) ) {
+        arrGroup.splice( arrGroup.indexOf( strValue ), 1 );
+      }
+    }
+
+    // model doesn't get changed for some reason
+    if ( typeof strModuleOverride === 'string' ) {
+      if ( _target.type === 'checkbox' ) {
+        $scope[ strName ] = boolChecked;
+        $rootScope.objModules[ strModuleOverride ][ strName ] = boolChecked;
+      }
+    }
+
+    // Track setting change if needed
+    if ( _target.getAttribute( 'data-track-setting-change' ) ) {
+      var miscTrackedValue;
+
+      // TODO: Add other types
+      if ( _target.type === 'checkbox' ) {
+        miscTrackedValue = boolChecked;
+      }
+      else if ( _target.tagName === 'SELECT' ) {
+        miscTrackedValue = _target.value;
+      }
+
+      chrome.runtime.sendMessage(
+        {
+            strReceiver     : 'background'
+          , strLog          : 'settingChange'
+          , objVars         : {
+                strName     : strName
+              , miscValue   : miscTrackedValue
+              , strModule   : strModuleId
+            }
+        }
+      );
+    }
+
+    if ( typeof funcDoAfter === 'function' ) {
+      funcDoAfter();
+    }
+  }
 } );

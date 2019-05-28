@@ -42,7 +42,10 @@ optionsApp.service( 'OptionsPageToOpenService', function( $rootScope, $location 
           if ( strOptionsPageToOpen !== '' ) {
             var strPath = '/' + strOptionsPageToOpen;
 
-            if ( strOptionsPageToOpen === 'modulesBuiltIn' ) {
+            if ( strOptionsPageToOpen === 'settingsGeneral' ) {
+              strPath = '/settings/general';
+            }
+            else if ( strOptionsPageToOpen === 'modulesBuiltIn' ) {
               strPath = '/settings/modules/built-in';
             }
             else if ( strOptionsPageToOpen === 'modulesExternal' ) {
@@ -122,8 +125,8 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
           var strModuleVar = 'module_' + strModule;
 
           objModule.type = 'built-in';
-          objModule.caption = pozitone.i18n.getMessage( strModuleVar );
-          objModule.captionLong = pozitone.i18n.getMessage( strModuleVar + '_long' );
+          objModule.caption = poziworldExtension.i18n.getMessage( strModuleVar );
+          objModule.captionLong = poziworldExtension.i18n.getMessage( strModuleVar + '_long' );
 
           if ( objGlobalModule ) {
             var boolIsAvailable = objGlobalModule.boolIsAvailable;
@@ -604,7 +607,8 @@ optionsControllers.directive( 'localize', function( $rootScope ) {
     $scope.$watch( function() {
       var strId = attributes.id;
 
-      Page.localize( strPage, '#' + strId );
+      poziworldExtension.i18n.init()
+        .then( Page.localize.bind( null, strPage, '#' + strId ) );
 
       $rootScope.toggleExternalLinksListeners(
           true

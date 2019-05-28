@@ -189,7 +189,7 @@ PoziTone должен отобразить оповещение с информ�
   - испанский — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - польский — jurczak (Łukasz Jurczak);
   - итальянский — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
-  - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
+  - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/), [KovalenkoStas (Коваленко Станіслав)](https://www.transifex.com/user/profile/KovalenkoStas/).
   - беларуский — [natasmirnova1392 (Natalia Smirnova)](https://www.transifex.com/user/profile/natasmirnova1392/).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
@@ -225,7 +225,7 @@ Credits
 
 Есть несколько способов, которыми Вы можете помочь нашему делу:
 
-* Подпишитесь на нас в [Telegram](https://t.me/PoziTone), [ВКонтакте](https://vk.com/PoziTone), на [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Google+](https://plus.google.com/+PoziTone), [Одноклассниках](https://ok.ru/group/54738320621596) и [Instagram](https://instagram.com/PoziTone).
+* Подпишитесь на нас в [Telegram](https://t.me/PoziTone), [ВКонтакте](https://vk.com/PoziTone), на [Facebook](https://facebook.com/PoziTone), [Twitter](https://twitter.com/PoziTone), [Одноклассниках](https://ok.ru/group/54738320621596) и [Instagram](https://instagram.com/PoziTone).
 * Поделитесь [ссылкой для установки](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/)) в Ваших социальных сетях и/или блоге.
 * [Оцените PoziTone](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews) ([для Opera и Яндекс](https://addons.opera.com/extensions/details/pozitone/#feedback-container)) — отзывы реально помогают другим найти это расширение!
 
@@ -265,7 +265,6 @@ PoziTone в социальных сетях
 - [PoziTone ВКонтакте](https://vk.com/PoziTone)
 - [PoziTone в Twitter](https://twitter.com/PoziTone)
 - [PoziTone на Facebook](https://facebook.com/PoziTone)
-- [PoziTone в Google+](https://plus.google.com/+PoziTone)
 - [PoziTone на Одноклассниках](https://ok.ru/group/54738320621596)
 - [PoziTone на 101.ru](https://101.ru/?an=User_Info&userId=709962)
 - [PoziTone в Instagram](https://instagram.com/PoziTone)

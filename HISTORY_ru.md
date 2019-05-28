@@ -4,6 +4,20 @@
 
 > [Следить за обновлениями PoziTone](README_ru.md#pozitone-в-социальных-сетях)
 
+## v0.10.0
+
+### Новое
+
+* Возможность смены языка в Параметрах.
+
+### Улучшено
+
+* PoziTone теперь полностью [переведён](https://www.transifex.com/poziworld/pozitone/) на украинский.
+
+  > Благодарим Вас, [Коваленко Станіслав](https://www.transifex.com/user/profile/KovalenkoStas/)!
+
+---
+
 ## v0.9.1
 
 ### Исправлено

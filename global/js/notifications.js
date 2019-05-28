@@ -61,21 +61,22 @@
     Log.add( 'pozitone.notifications.create', strNotificationId, objNotificationOptions );
 
     const _this = this;
+    const options = localize( objNotificationOptions );
 
     chrome.notifications.create(
       strNotificationId,
-      objNotificationOptions,
+      options,
       function ( strNotificationId ) {
         Global.checkForRuntimeError(
           funcSuccessCallback,
           function ( strErrorMessage ) {
             // Opera doesn't allow buttons
             if ( _this._isKnownErrorMessage( strErrorMessage, 'buttons' ) ) {
-              delete objNotificationOptions.buttons;
+              delete options.buttons;
 
               chrome.notifications.create(
                 strNotificationId,
-                objNotificationOptions,
+                options,
                 funcSuccessCallback
               );
             }
@@ -84,6 +85,44 @@
       }
     );
   };
+
+  /**
+   * The notification title and the buttons' captions need to be localized right before the notification is shown, as i18n API is async.
+   *
+   * @param {Object} options
+   * @return {Object}
+   */
+
+  function localize( options ) {
+    options = localizeTitle( options );
+
+    const buttons = options.buttons;
+
+    if ( Array.isArray( buttons ) && buttons.length ) {
+      buttons.forEach( localizeTitle );
+
+      options.buttons = buttons;
+    }
+
+    return options;
+  }
+
+  /**
+   * Notification itself and buttons are captioned with the “title” property, which needs to be localized.
+   *
+   * @param {Object} object
+   * @return {Object}
+   */
+
+  function localizeTitle( object ) {
+    const title = object.title;
+
+    if ( poziworldExtension.utils.isNonEmptyString( title ) ) {
+      object.title = poziworldExtension.i18n.getMessage( title );
+    }
+
+    return object;
+  }
 
   if ( typeof pozitone === 'undefined' ) {
     window.pozitone = {};

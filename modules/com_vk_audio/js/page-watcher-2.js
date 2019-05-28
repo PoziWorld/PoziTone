@@ -387,11 +387,11 @@
 
               if ( boolIsPlaying ) {
                 var strLangStartedOrResumed =
-                      pozitone.i18n.getMessage( 'notificationPlayerStatusChangeResumed' );
+                      poziworldExtension.i18n.getMessage( 'notificationPlayerStatusChangeResumed' );
 
                 if ( PageWatcher.boolWasPageJustLoaded ) {
                   strLangStartedOrResumed =
-                    pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
+                    poziworldExtension.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
 
                   PageWatcher.initTrackTitleObserver();
                 }
@@ -407,7 +407,7 @@
               }
               else if ( ! boolIsPlaying && PageWatcher.boolHadPlayedBefore ) {
                 PageWatcher.sendSameMessage(
-                  pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStopped' )
+                  poziworldExtension.i18n.getMessage( 'notificationPlayerStatusChangeStopped' )
                 );
               }
 
@@ -600,7 +600,7 @@
               PageWatcher.hideOrKeepPlayer2();
 
               PageWatcher.sendSameMessage(
-                pozitone.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
+                poziworldExtension.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded' )
               );
             } );
 
@@ -608,7 +608,7 @@
           }
           else {
             PageWatcher.sendSameMessage(
-              pozitone.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
+              poziworldExtension.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' )
             );
           }
         }
@@ -741,7 +741,7 @@
                         intKbps = 320;
                       }
 
-                      strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
+                      strKbpsInfo = intKbps + poziworldExtension.i18n.getMessage( 'kbps' );
                     }
 
                     PageWatcher.setTrackInfoAndSend(

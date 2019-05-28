@@ -98,7 +98,7 @@ var Page = {
                           )
                           .replace(
                               strConstLangParam
-                            , pozitone.i18n.getLanguage()
+                            , poziworldExtension.i18n.getLanguage()
                           );
 
           strUrl += Log.strJoinUeip;
@@ -149,7 +149,7 @@ var Page = {
           arrI18nParameters = strI18nParameters.split( '|' );
         }
 
-        var strMessage = pozitone.i18n.getMessage( strI18n, arrI18nParameters );
+        var strMessage = poziworldExtension.i18n.getMessage( strI18n, arrI18nParameters );
 
         if ( $$localizableElement.nodeName === 'LABEL' ) {
           $$localizableElement.innerHTML = $$localizableElement.innerHTML + strMessage;
@@ -160,7 +160,7 @@ var Page = {
           $$localizableElement.innerHTML = strMessage;
 
           if ( $$localizableElement.href === '' ) {
-            $$localizableElement.href = pozitone.i18n.getMessage( strI18n + 'Href' );
+            $$localizableElement.href = poziworldExtension.i18n.getMessage( strI18n + 'Href' );
           }
         }
         else if ( $$localizableElement.nodeName === 'IMG' ) {
@@ -179,10 +179,17 @@ var Page = {
             ;
 
           if ( typeof strI18nTitle === 'string' && strI18nTitle !== '' ) {
-            strTitle = pozitone.i18n.getMessage( strI18nTitle );
+            strTitle = poziworldExtension.i18n.getMessage( strI18nTitle );
           }
 
           $$localizableElement.setAttribute( 'title', strTitle );
+        }
+        else {
+          const tooltip = $$localizableElement.getAttribute( 'data-i18n-tooltip' );
+
+          if ( poziworldExtension.utils.isNonEmptyString( tooltip ) ) {
+            $$localizableElement.setAttribute( 'title', poziworldExtension.i18n.getMessage( tooltip ) );
+          }
         }
 
         // Replace copyright year placeholder with the current year if the start year matches
@@ -210,7 +217,7 @@ var Page = {
     }
 
     if ( ! boolIsCustomSelectorParentPresent && strPageName ) {
-      document.title = pozitone.i18n.getMessage( strPageName + 'Title' );
+      document.title = poziworldExtension.i18n.getMessage( strPageName + 'Title' );
     }
   }
   ,

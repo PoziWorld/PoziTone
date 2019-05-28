@@ -101,7 +101,7 @@ const
           , userAgent             : bowser.userAgent
 
           /**
-           * @todo Use a listener instead of pozitone.i18n.saveExtensionLanguage
+           * @todo Use a listener instead of poziworldExtension.i18n.saveExtensionLanguage
            */
 
           , language              : ''

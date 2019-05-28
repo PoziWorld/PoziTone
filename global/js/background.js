@@ -68,7 +68,8 @@ const
       , boolWasMessageForThisVersionClosed : false
 
       , objSettings_general : {
-            strJoinUeip : 'no'
+            uiLanguage : 'browserDefault'
+          , strJoinUeip : 'no'
 
           , boolEnableVoiceControl : false
           , boolAutoActivateVoiceControl : false
@@ -328,7 +329,7 @@ var Background = {
   , objPreservedSettings : {}
   , strPreviousTrack : ''
   , arrTrackInfoPlaceholders : [
-      , ''
+        ''
       , '...'
       , 'Ожидаем следующий трек'
       , 'Ожидаем следующий трек...'
@@ -341,14 +342,14 @@ var Background = {
         updated : [
             {
                 objButton : {
-                    title : pozitone.i18n.getMessage( 'systemNotificationUpdatedChanges' )
+                    title : 'systemNotificationUpdatedChanges'
                   , iconUrl : 'global/img/list_bullets_icon&16.png'
                 }
               , strFunction : 'seeChanges'
             }
           , {
                 objButton : {
-                    title : pozitone.i18n.getMessage( 'systemNotificationUpdatedDoNotNotify' )
+                    title : 'systemNotificationUpdatedDoNotNotify'
                   , iconUrl : 'global/img/off_icon&16.png'
                 }
               , strFunction : 'doNotNotifyOfUpdates'
@@ -374,6 +375,7 @@ var Background = {
     } );
 
     pozitone.background.checkForManagementPermission();
+    pozitone.background.checkOptionsPageToOpenOnRestart();
   }
   ,
 
@@ -459,9 +461,9 @@ var Background = {
 
         Global.showSystemNotification(
             'updated'
-          , pozitone.i18n.getMessage( 'systemNotificationUpdated' )
-          , pozitone.i18n.getMessage( 'extensionName' ) +
-              pozitone.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
+          , poziworldExtension.i18n.getMessage( 'systemNotificationUpdated' )
+          , poziworldExtension.i18n.getMessage( 'extensionName' ) +
+              poziworldExtension.i18n.getMessage( 'systemNotificationUpdatedVersion' ) +
               strConstExtensionVersionName
           , null
           , [
@@ -577,7 +579,7 @@ var Background = {
             }
           ;
 
-        for ( miscSetting in objDeprecatedSettings ) {
+        for ( let miscSetting in objDeprecatedSettings ) {
           if ( objDeprecatedSettings.hasOwnProperty( miscSetting ) ) {
             if ( objDeprecatedSettings[ miscSetting ] === null ) {
               // Remove it only if it is present
@@ -942,6 +944,10 @@ var Background = {
               , funcSendResponse
             );
           }
+
+          if ( poziworldExtension.utils.isType( objMessage.extensionReloadRequested, 'boolean' ) ) {
+            pozitone.background.reloadExtension();
+          }
         }
 
         // Don't break only when there is no receiver info
@@ -1224,7 +1230,7 @@ var Background = {
     strLog = 'processButtonClick_seeChanges';
     Log.add( strLog, {} );
 
-    const strCurrentLanguage = pozitone.i18n.getLanguage();
+    const strCurrentLanguage = poziworldExtension.i18n.getLanguage();
     // Currently the changelog is available only in Russian and English
     const strTargetLanguage = ~ [ 'ru', 'be', 'uk' ].indexOf( strCurrentLanguage ) ? 'ru' : 'en';
     const strUrl = Background.strChangelogUrl
@@ -1349,7 +1355,7 @@ var Background = {
 
     function createGenericContextMenuProperties( strContextMenu ) {
       return {
-          title : pozitone.i18n.getMessage( strContextMenu )
+          title : poziworldExtension.i18n.getMessage( strContextMenu )
         , contexts : [ 'browser_action' ]
       };
     }
@@ -1903,7 +1909,8 @@ chrome.runtime.onInstalled.addListener(
       Global.checkForDevelopersMessage();
     }
 
-    Background.createBrowserActionContextMenu();
+    poziworldExtension.i18n.init()
+      .then( Background.createBrowserActionContextMenu );
   }
 );
 
@@ -1923,7 +1930,9 @@ chrome.runtime.onStartup.addListener(
 
     Background.cleanUp();
     Background.checkOpenTabs();
-    Background.createBrowserActionContextMenu();
+
+    poziworldExtension.i18n.init()
+      .then( Background.createBrowserActionContextMenu );
   }
 );
 

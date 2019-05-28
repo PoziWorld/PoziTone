@@ -4,6 +4,20 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v0.10.0
+
+### New
+
+* Ability to change language in Options.
+
+### Improved
+
+* PoziTone is now fully [translated](https://www.transifex.com/poziworld/pozitone/) into Ukrainian.
+
+  > Thank you, [Коваленко Станіслав](https://www.transifex.com/user/profile/KovalenkoStas/)!
+
+---
+
 ## v0.9.1
 
 ### Fixed
