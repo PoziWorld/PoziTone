@@ -20,12 +20,14 @@
               ng-disabled="intEnabledModules === intModules"
                 >
               <span i18n-content="enableAll"></span>
-              <img
-                src="/global/img/info-icon.svg"
-                class="i18nNoInner i18nTitle"
-                id="enableAllCtaInfoImg"
-                i18n-content="generalPrivacyStatement"
+              <span
+                i18n-content=""
+                data-i18n-title="generalPrivacyStatement"
+                class="i18nNoInner i18nTitle infoTitle"
+                tabindex="0"
                   >
+                <span i18n-content="generalPrivacyStatement" class="pwVisuallyHidden"></span>
+              </span>
             </button>
             <button
               id="disableAllCta"

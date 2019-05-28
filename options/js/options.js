@@ -84,7 +84,8 @@ var Options = {
       document.getElementById( strMainHeadingId ).remove();
     }
 
-    Page.localize( strPage );
+    poziworldExtension.i18n.init()
+      .then( Page.localize.bind( null, strPage ) );
     Options.setPageValues();
     Options.addEventListeners();
     Options.initEeLauncher();
@@ -183,11 +184,15 @@ var Options = {
 
       miscSetting = arrTemp;
     }
-    else if ( $this.type === 'radio' ) {
+    else if ( $this.type === 'radio' || $this.tagName === 'SELECT' ) {
       miscSetting = $this.value;
     }
     else if ( $this.type === 'number' ) {
       miscSetting = parseInt( $this.value );
+    }
+
+    if ( typeof miscSetting === 'undefined' ) {
+      return;
     }
 
     strModuleSettings = strConstSettingsPrefix + strModule;
@@ -244,7 +249,7 @@ var Options = {
               objConstUserSetUp
             , function() {
                 $element.innerText =
-                  pozitone.i18n.getMessage( 'optionsHelpSubmitInfoCtaSuccess' );
+                  poziworldExtension.i18n.getMessage( 'optionsHelpSubmitInfoCtaSuccess' );
               }
           );
 

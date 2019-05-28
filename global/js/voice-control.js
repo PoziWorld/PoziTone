@@ -498,18 +498,7 @@
 
         // The appropriate permission has been granted
         if ( Array.isArray( arrPermissions ) && ~ arrPermissions.indexOf( _this._getPermissionName() ) ) {
-          // Automatically reopen Options
-          Global.setStorageItems(
-              StorageLocal
-            , {
-                  boolOpenOptionsPageOnRestart : true
-                , strOptionsPageToOpen : 'voiceControl'
-              }
-            , strLog + ', reopen Options'
-            , function () {
-                chrome.runtime.reload();
-              }
-          );
+          pozitone.global.reloadExtensionAndOptions( 'voiceControl' );
         }
       }
     } );
@@ -529,7 +518,7 @@
         'voiceControl'
       , true
       , {
-            title : pozitone.i18n.getMessage( 'voiceControlActivate' )
+            title : poziworldExtension.i18n.getMessage( 'voiceControlActivate' )
           , onclick : function() {
               _this.connectNative();
               return false;

@@ -312,7 +312,7 @@
       PageWatcher.objPlayerInfo.boolIsMuted = true;
 
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+        poziworldExtension.i18n.getMessage( 'notificationButtonsMuteFeedback' )
       );
     }
     ,
@@ -329,7 +329,7 @@
       PageWatcher.objPlayerInfo.boolIsMuted = false;
 
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+        poziworldExtension.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
       );
     }
     ,
@@ -379,7 +379,7 @@
         intPercentage = Math.round( intVolume * 100 );
 
         PageWatcher.sendSameMessage(
-          pozitone.i18n.getMessage(
+          poziworldExtension.i18n.getMessage(
               'notificationButtonsVolumeChangeFeedback'
             , [ intPercentage ]
           )
@@ -555,13 +555,13 @@
 
               if ( boolIsPlaying ) {
                 var strLangStartedOrResumed =
-                      pozitone.i18n.getMessage(
+                      poziworldExtension.i18n.getMessage(
                         'notificationPlayerStatusChangeResumed'
                       );
 
                 if ( PageWatcher.boolWasPageJustLoaded ) {
                   strLangStartedOrResumed =
-                    pozitone.i18n.getMessage(
+                    poziworldExtension.i18n.getMessage(
                       'notificationPlayerStatusChangeStarted'
                     );
 
@@ -578,7 +578,7 @@
                 &&  PageWatcher.boolHadPlayedBefore
               )
                 PageWatcher.sendSameMessage(
-                  pozitone.i18n.getMessage(
+                  poziworldExtension.i18n.getMessage(
                     'notificationPlayerStatusChangeStopped'
                   )
                 );
@@ -810,7 +810,7 @@
         &&  $targetPlayStopBtn.classList.contains( strIsPlayingClass )
       ) {
         var strMessage =
-              pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
+              poziworldExtension.i18n.getMessage( 'notificationPlayerStatusChangeStarted' );
 
         PageWatcher.objPlayerInfo.strPreviousStatus = 'play';
 
@@ -869,7 +869,7 @@
                   .contains( strAddTrackToPlaylistBtnAddedClass )
         )
           PageWatcher.sendSameMessage(
-            pozitone.i18n.getMessage(
+            poziworldExtension.i18n.getMessage(
               'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
             )
           );
@@ -1022,7 +1022,7 @@
                       if ( intKbps > 320 )
                         intKbps = 320;
 
-                      strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
+                      strKbpsInfo = intKbps + poziworldExtension.i18n.getMessage( 'kbps' );
                     }
 
                     PageWatcher.setTrackInfoAndSend(

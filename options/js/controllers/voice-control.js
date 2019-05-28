@@ -265,7 +265,7 @@ optionsControllers.controller( 'VoiceControlCtrl', function( $scope, $rootScope 
 
   function onVoiceControlAlreadyActivated() {
     $voiceControlActivateCta.disabled = true;
-    $voiceControlActivateCta.title = pozitone.i18n.getMessage( 'voiceControlAlreadyActivated' );
+    $voiceControlActivateCta.title = poziworldExtension.i18n.getMessage( 'voiceControlAlreadyActivated' );
 
     if ( ! boolIsOnVoiceControlDeactivationListenerSet ) {
       pozitoneModule.sdk.addOnVoiceControlDeactivationListener( onVoiceControlNotActivated );

@@ -16,11 +16,36 @@
 
  ============================================================================ */
 
-( function() {
+( function () {
   'use strict';
 
-  function Global2() {
+  setUp();
 
+  /**
+   * Make the logic readily available.
+   */
+
+  function setUp() {
+    exposeApi();
+  }
+
+  /**
+   * Create an instance of the Global2 API and expose it to other parts of the extension.
+   */
+
+  function exposeApi() {
+    if ( typeof pozitone === 'undefined' ) {
+      window.pozitone = {};
+    }
+
+    pozitone.global = new Global2();
+  }
+
+  /**
+   * @constructor
+   */
+
+  function Global2() {
   }
 
   /**
@@ -70,7 +95,65 @@
     return ! this.isModuleBuiltIn( strModuleId );
   };
 
-  pozitone.global = new Global2();
+  /**
+   * Don't show these buttons, if they've been clicked for this track already.
+   *
+   * @return {string[]} - Messages-indicators.
+   */
+
+  Global2.prototype.getAddTrackToPlaylistFeedbackMessages = function () {
+    return [
+      poziworldExtension.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded' ),
+      poziworldExtension.i18n.getMessage( 'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist' ),
+    ];
+  };
+
+  /**
+   * Don't show these buttons, if they've been clicked for this track already.
+   *
+   * @return {string} - Message-indicator.
+   */
+
+  Global2.prototype.getFavoriteStatusSuccess = function () {
+    return poziworldExtension.i18n.getMessage( 'notificationFavoriteStatusSuccess' );
+  };
+
+  /**
+   * Some changes might require reloading the extension and reopening the Options page.
+   *
+   * @param {string} optionsPageTab - The options page tab/section/“subpage” to reopen after the extension reload.
+   * @param {string} [logMessage] - The log message passed to the background view.
+   */
+
+  Global2.prototype.reloadExtensionAndOptions = function ( optionsPageTab, logMessage ) {
+    Global.setStorageItems(
+      StorageLocal,
+      {
+        boolOpenOptionsPageOnRestart: true,
+        strOptionsPageToOpen: optionsPageTab,
+      },
+      strLog + ', reopen Options',
+      pozitone.background ?
+        pozitone.background.reloadExtension :
+        requestExtensionReload.bind( null, logMessage )
+    );
+  };
+
+  /**
+   * Ask the background view to handle the extension reload.
+   *
+   * @param {string} logMessage - The log message passed to the background view.
+   */
+
+  function requestExtensionReload( logMessage ) {
+    chrome.runtime.sendMessage(
+      {
+        strReceiver: 'background',
+        strLog: logMessage,
+        extensionReloadRequested: true,
+      }
+    );
+  }
 } )();
 
 /* =============================================================================

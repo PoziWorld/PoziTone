@@ -112,7 +112,7 @@
 
   .new::after
     {
-      content: 'NEW'; /* TODO: This might be not i18n-friendly */
+      content: 'NEW'; /* @todo This is not a11y- or i18n-friendly */
       position: absolute;
       font-size: xx-small;
       margin: -.5rem 0 0 .5rem;
@@ -121,6 +121,14 @@
       overflow: hidden;
       white-space: nowrap;
     }
+
+.pwVisuallyHidden {
+  position: absolute !important;
+  height: .1rem;
+  width: .1rem;
+  overflow: hidden;
+  clip: rect( .1rem, .1rem, .1rem, .1rem );
+}
 
 /* =============================================================================
 
@@ -399,13 +407,13 @@
       font:                   inherit;
       text-shadow:            0 .1rem 0 rgb( 240, 240, 240 );
     }
-  input[type='checkbox']:focus
-, input[type='radio']:focus
-    {
-      background-image:       -webkit-linear-gradient( #fff, #fff 38%, #eee );
-      border-color:           rgba( 0, 0, 0, .75 );
-      box-shadow:             0 .1rem 0 rgba( 0, 0, 0, .08 ), inset 0 .1rem .2rem rgba( 255, 255, 255, 1 );
-    }
+  input[type='checkbox']:focus,
+  input[type='radio']:focus,
+  .dropdownOption:focus {
+    background-image: -webkit-linear-gradient( #fff, #fff 38%, #eee );
+    border-color: rgba( 0, 0, 0, .75 );
+    box-shadow: 0 .1rem 0 rgba( 0, 0, 0, .08 ), inset 0 .1rem .2rem rgba( 255, 255, 255, 1 );
+  }
   input[type='checkbox']:checked:before
     {
       -webkit-user-select:    none;
@@ -492,20 +500,27 @@
       color:                  #999;
       cursor:                 default;
     }
-  .infoTitle
-    {
-      cursor: help;
-    }
-  .infoTitle:after
-    {
-      content: '';
-      display: inline-block;
-      vertical-align: text-bottom;
-      margin-left: 1rem;
-      width: 1.5rem;
-      height: 1.5rem;
-      background: url( /global/img/info-icon.svg );
-    }
+
+/* Info “popup” / Tooltip */
+
+.infoTitle {
+  cursor: help;
+}
+
+.infoTitle::after {
+  content: '';
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-left: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url( /global/img/info-icon.svg ) 0 0 / 6.35rem no-repeat;
+}
+
+.infoTitle:hover::after,
+.infoTitle:focus::after {
+  background-position-x: -1.9rem;
+}
 
 /* =============================================================================
 

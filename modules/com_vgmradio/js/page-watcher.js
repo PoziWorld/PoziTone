@@ -298,7 +298,7 @@ var
    **/
   showNotificationOnVolumeChange : function( intVolume ) {
     PageWatcher.sendSameMessage(
-      pozitone.i18n.getMessage(
+      poziworldExtension.i18n.getMessage(
           'notificationButtonsVolumeChangeFeedback'
         , [ Math.round( intVolume ) ]
       )
@@ -341,7 +341,7 @@ var
       }
 
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage(
+        poziworldExtension.i18n.getMessage(
           'notificationButtons' + strCommand + 'Feedback'
         )
       );
@@ -453,7 +453,7 @@ var
   onInitialPlaying : function() {
     if ( PageWatcher.boolWasLogoLoadedOnce ) {
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
+        poziworldExtension.i18n.getMessage( 'notificationPlayerStatusChangeStarted' )
       );
 
       PageWatcher.boolWasPageJustLoaded = false;
@@ -489,13 +489,13 @@ var
    **/
   onPlaying : function() {
     var strLangStartedOrResumed =
-          pozitone.i18n.getMessage(
+          poziworldExtension.i18n.getMessage(
             'notificationPlayerStatusChangeResumed'
           );
 
     if ( PageWatcher.boolWasPageJustLoaded ) {
       strLangStartedOrResumed =
-        pozitone.i18n.getMessage(
+        poziworldExtension.i18n.getMessage(
           'notificationPlayerStatusChangeStarted'
         );
     }
@@ -517,7 +517,7 @@ var
    **/
   onPause : function() {
     PageWatcher.sendSameMessage(
-      pozitone.i18n.getMessage(
+      poziworldExtension.i18n.getMessage(
         'notificationPlayerStatusChangeStopped'
       )
     );

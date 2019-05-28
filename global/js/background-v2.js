@@ -24,8 +24,87 @@
 
  ============================================================================ */
 
-( function() {
+( function () {
   'use strict';
+
+  let checkedOptionsPageToReopen = false;
+
+  setUp();
+
+  /**
+   * Make the logic readily available.
+   */
+
+  function setUp() {
+    exposeApi();
+  }
+
+  /**
+   * Create an instance of the Background2 API and expose it to other parts of the extension.
+   */
+
+  function exposeApi() {
+    if ( typeof pozitone === 'undefined' ) {
+      window.pozitone = {};
+    }
+
+    pozitone.background = new Background2();
+  }
+
+  /**
+   * Some Options changes, such as language and voice control, might require an extension reload.
+   * After the Options page had been closed and the extension reloaded, the Options page should get reopened.
+   *
+   * @param {Object} storageData
+   * @param {boolean} storageData.boolOpenOptionsPageOnRestart
+   * @param {string} storageData.strOptionsPageToOpen
+   */
+
+  function reopenOptionsPage( storageData ) {
+    const optionsPageReopenRequested = storageData.boolOpenOptionsPageOnRestart;
+
+    if ( poziworldExtension.utils.isType( optionsPageReopenRequested, 'boolean' ) && optionsPageReopenRequested ) {
+      const pageName = storageData.strOptionsPageToOpen;
+
+      if ( poziworldExtension.utils.isNonEmptyString( pageName ) ) {
+        Global.openOptionsPage( strLog );
+      }
+    }
+  }
+
+  /**
+   * Identify whether it had already been checked whether the Options page (and what tab/section within the page) needs to be reopened.
+   *
+   * @return {boolean}
+   */
+
+  function hadCheckedOptionsPageToReopen() {
+    return getCheckedOptionsPageToReopen();
+  }
+
+  /**
+   * Return whether the Options page (and what tab/section/“subpage” within the page) needs to be reopened.
+   *
+   * @return {boolean}
+   */
+
+  function getCheckedOptionsPageToReopen() {
+    return checkedOptionsPageToReopen;
+  }
+
+  /**
+   * Save whether the Options page (and what tab/section/“subpage” within the page) needs to be reopened.
+   *
+   * @param {boolean} checked
+   */
+
+  function setCheckedOptionsPageToReopen( checked ) {
+    checkedOptionsPageToReopen = checked;
+  }
+
+  /**
+   * @constructor
+   */
 
   function Background2() {
     this._objCallbacks = {
@@ -41,7 +120,9 @@
       'global/js/i18next/i18next.min.js',
       'global/js/i18next/i18nextBrowserLanguageDetector.min.js',
       'global/js/i18next/i18nextXHRBackend.js',
-      'global/js/i18n.js'
+      'global/js/i18n.js',
+      'global/js/utils.js',
+      'global/js/global.js',
     ];
 
     /**
@@ -224,7 +305,7 @@
       }
 
       if ( boolIsAdditionalInfoRecognized ) {
-        objData.objStationInfo.strAdditionalInfo = pozitone.i18n.getMessage( strAdditionalInfo, arrSubstitutions );
+        objData.objStationInfo.strAdditionalInfo = poziworldExtension.i18n.getMessage( strAdditionalInfo, arrSubstitutions );
       }
     }
 
@@ -418,32 +499,27 @@
 
   /**
    * When PoziTone restart is needed, might need to reopen the last open page.
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
    **/
 
   Background2.prototype.checkOptionsPageToOpenOnRestart = function () {
     strLog = 'Background2.checkOptionsPageToOpenOnRestart';
     Log.add( strLog );
 
+    if ( hadCheckedOptionsPageToReopen() ) {
+      return;
+    }
+
     Global.getStorageItems(
-        StorageLocal
-      , [ 'boolOpenOptionsPageOnRestart', 'strOptionsPageToOpen' ]
-      , strLog
-      , function( objReturn ) {
-          const boolOpenOptionsPageOnRestart = objReturn.boolOpenOptionsPageOnRestart;
-
-          if ( typeof boolOpenOptionsPageOnRestart === 'boolean' && boolOpenOptionsPageOnRestart ) {
-            const strOptionsPageToOpen = objReturn.strOptionsPageToOpen;
-
-            if ( typeof strOptionsPageToOpen === 'string' && strOptionsPageToOpen !== '' ) {
-              Global.openOptionsPage( strLog );
-            }
-          }
-        }
+      StorageLocal,
+      [
+        'boolOpenOptionsPageOnRestart',
+        'strOptionsPageToOpen',
+      ],
+      strLog,
+      reopenOptionsPage
     );
+
+    setCheckedOptionsPageToReopen( true );
   };
 
   /**
@@ -554,7 +630,25 @@
     }
   };
 
-  pozitone.background = new Background2();
+  /**
+   * Some Options changes, such as language and voice control, might require an extension reload.
+   * Close the Options page first, then reload the extension, which should automatically reopen the Options page.
+   */
+
+  Background2.prototype.reloadExtension = function () {
+    const views = chrome.extension.getViews();
+
+    while ( views.length ) {
+      const view = views.shift();
+
+      // Close all views that are not the background (check for the presence of the Background object)
+      if ( ! Boolean( view.Background ) && ! view.closed ) {
+        view.close();
+      }
+    }
+
+    chrome.runtime.reload();
+  };
 } )();
 
 /* =============================================================================
@@ -571,4 +665,5 @@
  * @return  void
  **/
 
-Background.init();
+poziworldExtension.i18n.init()
+  .then( Background.init );

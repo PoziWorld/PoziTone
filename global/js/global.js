@@ -268,18 +268,6 @@ var Global                        = {
         }
   }
 
-  // Don't show these buttons, if they've been clicked for this track already
-  , arrAddTrackToPlaylistFeedback : [
-        pozitone.i18n.getMessage(
-          'notificationAddTrackToPlaylistFeedbackSuccessfullyAdded'
-        )
-      , pozitone.i18n.getMessage(
-          'notificationAddTrackToPlaylistFeedbackAlreadyInPlaylist'
-        )
-    ]
-  , strFavoriteStatusSuccess      : 
-      pozitone.i18n.getMessage( 'notificationFavoriteStatusSuccess' )
-
   , arrCommands                   : []
   , boolShowShortcuts             : true
 
@@ -287,10 +275,7 @@ var Global                        = {
         add                       : {
             loggedIn              : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsAddLoggedInTitle'
-                      )
+                    title         : 'notificationButtonsAddLoggedInTitle'
                   , iconUrl       : 'global/img/round_plus_icon&16.png'
                 }
               , strFunction       : 'add'
@@ -299,10 +284,7 @@ var Global                        = {
       , addAuth                   : {
             loggedIn              : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsAddLoggedInTitle'
-                      )
+                    title         : 'notificationButtonsAddLoggedInTitle'
                   , iconUrl       : 'global/img/round_plus_icon&16.png'
                 }
               , strFunction       : 'add'
@@ -311,10 +293,7 @@ var Global                        = {
       , favorite                  : {
             loggedIn              : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsFavoriteLoggedInTitle'
-                      )
+                    title         : 'notificationButtonsFavoriteLoggedInTitle'
                   , iconUrl       : 'global/img/emotion_smile_icon&16.png'
                 }
               , strFunction       : 'favorite'
@@ -323,10 +302,7 @@ var Global                        = {
       , favoriteAuth              : {
             loggedIn              : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsFavoriteLoggedInTitle'
-                      )
+                    title         : 'notificationButtonsFavoriteLoggedInTitle'
                   , iconUrl       : 'global/img/emotion_smile_icon&16.png'
                 }
               , strFunction       : 'favorite'
@@ -335,10 +311,7 @@ var Global                        = {
       , next                      : {
             next                  : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsNextTitle'
-                      )
+                    title         : 'notificationButtonsNextTitle'
                   , iconUrl       : 'global/img/playback_next_icon&16.png'
                 }
               , strFunction       : 'next'
@@ -347,10 +320,7 @@ var Global                        = {
       , nextAuth                  : {
             next                  : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsNextTitle'
-                      )
+                    title         : 'notificationButtonsNextTitle'
                   , iconUrl       : 'global/img/playback_next_icon&16.png'
                 }
               , strFunction       : 'next'
@@ -359,10 +329,7 @@ var Global                        = {
       , previous                  : {
             previous              : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsPreviousTitle'
-                      )
+                    title         : 'notificationButtonsPreviousTitle'
                   , iconUrl       : 'global/img/playback_prev_icon&16.png'
                 }
               , strFunction       : 'previous'
@@ -371,10 +338,7 @@ var Global                        = {
       , previousAuth              : {
             previous              : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsPreviousTitle'
-                      )
+                    title         : 'notificationButtonsPreviousTitle'
                   , iconUrl       : 'global/img/playback_prev_icon&16.png'
                 }
               , strFunction       : 'previous'
@@ -383,20 +347,14 @@ var Global                        = {
       , playStop                  : {
             0                     : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsPlayTitle'
-                      )
+                    title         : 'notificationButtonsPlayTitle'
                   , iconUrl       : 'global/img/playback_play_icon&16.png'
                 }
               , strFunction       : 'playStop'
             }
           , 1                     : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsStopTitle'
-                      )
+                    title         : 'notificationButtonsStopTitle'
                   , iconUrl       : 'global/img/playback_stop_icon&16.png'
                 }
               , strFunction       : 'playStop'
@@ -405,20 +363,14 @@ var Global                        = {
       , muteUnmute                : {
             mute                  : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsMuteTitle'
-                      )
+                    title         : 'notificationButtonsMuteTitle'
                   , iconUrl       : 'global/img/sound_mute_icon&16.png'
                 }
               , strFunction       : 'mute'
             }
           , unmute                : {
                 objButton         : {
-                    title         : 
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsUnmuteTitle'
-                      )
+                    title         : 'notificationButtonsUnmuteTitle'
                   , iconUrl       : 'global/img/sound_high_icon&16.png'
                 }
               , strFunction       : 'unmute'
@@ -427,10 +379,7 @@ var Global                        = {
       , volumeUp                  : {
             volumeUp              : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsVolumeUpTitle'
-                      )
+                    title         : 'notificationButtonsVolumeUpTitle'
                   , iconUrl       : 'global/img/sound_up_icon&16.png'
                 }
               , strFunction       : 'volumeUp'
@@ -439,10 +388,7 @@ var Global                        = {
       , volumeDown                : {
             volumeDown            : {
                 objButton         : {
-                    title         :
-                      pozitone.i18n.getMessage(
-                        'notificationButtonsVolumeDownTitle'
-                      )
+                    title         : 'notificationButtonsVolumeDownTitle'
                   , iconUrl       : 'global/img/sound_down_icon&16.png'
                 }
               , strFunction       : 'volumeDown'
@@ -796,7 +742,7 @@ var Global                        = {
                 ) {
                   // Don't show button, if track is in playlist
                   // TODO: Show if track changed while waited for server response
-                  if ( ~~ Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) ) {
+                  if ( ~~ pozitone.global.getAddTrackToPlaylistFeedbackMessages().indexOf( arrTrackInfo[ 1 ] ) ) {
                     objNotificationOptions.buttons.push(
                       Global.addShortcutInfo( objNotificationButtons.add.loggedIn.objButton, 'add' )
                     );
@@ -817,7 +763,7 @@ var Global                        = {
                 ) {
                   // Don't show button, if track is in playlist
                   // TODO: Show if track changed while waited for server response
-                  if ( ~~ Global.arrAddTrackToPlaylistFeedback.indexOf( arrTrackInfo[ 1 ] ) ) {
+                  if ( ~~ pozitone.global.getAddTrackToPlaylistFeedbackMessages().indexOf( arrTrackInfo[ 1 ] ) ) {
                     objNotificationOptions.buttons.push(
                       Global.addShortcutInfo( objNotificationButtons.addAuth.loggedIn.objButton, 'add' )
                     );
@@ -829,7 +775,7 @@ var Global                        = {
                 if ( ~ arrButtons.indexOf( 'favorite' ) && boolIsUserLoggedIn ) {
                   // Don't show button, if liked this track already
                   // TODO: Show if track changed while waited for server response
-                  if ( ~~ Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) ) {
+                  if ( ~~ pozitone.global.getFavoriteStatusSuccess().indexOf( arrTrackInfo[ 1 ] ) ) {
                     objNotificationOptions.buttons.push(
                       Global.addShortcutInfo( objNotificationButtons.favorite.loggedIn.objButton, 'favorite' )
                     );
@@ -841,7 +787,7 @@ var Global                        = {
                 if ( ~ arrButtons.indexOf( 'favoriteAuth' ) && boolIsUserLoggedIn ) {
                   // Don't show button, if liked this track already
                   // TODO: Show if track changed while waited for server response
-                  if ( ~~ Global.strFavoriteStatusSuccess.indexOf( arrTrackInfo[ 1 ] ) ) {
+                  if ( ~~ pozitone.global.getFavoriteStatusSuccess().indexOf( arrTrackInfo[ 1 ] ) ) {
                     objNotificationOptions.buttons.push(
                       Global.addShortcutInfo( objNotificationButtons.favoriteAuth.loggedIn.objButton, 'favorite' )
                     );
@@ -1141,45 +1087,38 @@ var Global                        = {
   ,
 
   /**
-   * Displays system notification.
+   * Displays a “system” (not playback-related) notification.
    *
-   * @type    method
-   * @param   strNotificationType
-   *            Type of the notification
-   * @param   strTitle
-   *            Optional. Title of the notification
-   * @param   strMessage
-   *            Optional. Message of the notification
-   * @param   strIconUrl
-   *            Optional. URL of the notification icon
-   * @param   arrButtons
-   *            Optional. Buttons of the notification
-   * @return  void
+   * @param {string} notificationType - Type of the notification.
+   * @param {string} [title] - Title of the notification.
+   * @param {string} [message] - Message of the notification.
+   * @param {string} [iconUrl] - URL of the notification icon.
+   * @param {Object[]} [buttons] - Buttons of the notification.
    **/
-  showSystemNotification : function(
-      strNotificationType
-    , strTitle
-    , strMessage
-    , strIconUrl
-    , arrButtons
+
+  showSystemNotification: function (
+    notificationType,
+    title,
+    message,
+    iconUrl,
+    buttons
   ) {
     strLog = 'showSystemNotification';
-    Log.add( strLog, strTitle + ' | ' + strMessage );
+    Log.add( strLog, title + ' | ' + message );
 
-    var objNotificationOptions = {
-            type : 'basic'
-          , title : strTitle || ''
-          , message : strMessage || ''
-          , iconUrl : strIconUrl || Global.strSystemNotificationIconUrl
-        }
-      , strNotificationId = Global.strSystemNotificationId + strNotificationType
-      ;
+    const id = Global.strSystemNotificationId + notificationType;
+    const options = {
+      type: 'basic',
+      title: title || '',
+      message: message || '',
+      iconUrl: iconUrl || Global.strSystemNotificationIconUrl,
+    };
 
-    if ( Array.isArray( arrButtons ) && arrButtons.length ) {
-      objNotificationOptions.buttons = arrButtons;
+    if ( Array.isArray( buttons ) && buttons.length ) {
+      options.buttons = buttons;
     }
 
-    pozitone.notifications.create( strNotificationId, objNotificationOptions );
+    pozitone.notifications.create( id, options );
   }
   ,
 
@@ -1553,8 +1492,8 @@ var Global                        = {
                */
 
               objModule.type = 'built-in';
-              objModule.caption = pozitone.i18n.getMessage( strModuleVar );
-              objModule.captionLong = pozitone.i18n.getMessage( strModuleVar + '_long' );
+              objModule.caption = poziworldExtension.i18n.getMessage( strModuleVar );
+              objModule.captionLong = poziworldExtension.i18n.getMessage( strModuleVar + '_long' );
             }
             else {
               var intLastIndex = strModule.lastIndexOf( strConstExternalModuleSeparator )
@@ -1798,39 +1737,45 @@ var Global                        = {
   ,
 
   /**
-   * Adds shortcut info to the title of the button
+   * Adds shortcut info to the title of the button.
    *
-   * @type    method
-   * @param   objButton
-   *            Button properties
-   * @return  object
+   * @param {Object} button - The button properties.
+   * @param {string} command - The command whose shortcut info needs to be added.
+   * @return {Object}
    **/
-  addShortcutInfo : function ( objButton, strCommand )
-  {
+
+  addShortcutInfo: function ( button, command ) {
     if ( Global.boolShowShortcuts ) {
       // We need a copy, otherwise it will append info again and again
-      var objButtonCopy   = ( typeof objButton === 'object' ) ?
-                              JSON.parse( JSON.stringify( objButton ) ) : {};
+      const buttonCopy = poziworldExtension.utils.isType( button, 'object' ) ?
+        JSON.parse( JSON.stringify( button ) ) :
+        {};
+      const title = buttonCopy.title;
 
-      if ( typeof objButtonCopy.title === 'string' ) {
-        var intCommandsIndex  = Global.returnIndexOfSubitemContaining(
-                                    Global.arrCommands
-                                  , strCommand
-                                  , 'name'
-                                );
+      if ( poziworldExtension.utils.isType( title, 'string' ) ) {
+        const commandIndex = Global.returnIndexOfSubitemContaining(
+          Global.arrCommands,
+          command,
+          'name'
+        );
 
-        if ( intCommandsIndex !== -1 ) {
-          var strShortcut = Global.arrCommands[ intCommandsIndex ].shortcut;
+        buttonCopy.title = poziworldExtension.i18n.getMessage( title );
 
-          if ( strShortcut !== '' )
-            objButtonCopy.title += ' (' + strShortcut + ')';
+        if ( commandIndex !== -1 ) {
+          const shortcut = Global.arrCommands[ commandIndex ].shortcut;
+
+          if ( poziworldExtension.utils.isNonEmptyString( shortcut ) ) {
+            buttonCopy.title += ' (' + shortcut + ')';
+          }
         }
       }
 
-      return objButtonCopy;
+      return buttonCopy;
     }
-    else
-      return objButton;
+
+    button.title = poziworldExtension.i18n.getMessage( button.title );
+
+    return button;
   }
   ,
 
@@ -1973,7 +1918,7 @@ var Global                        = {
                         )
                         .replace(
                             strConstLangParam
-                          , pozitone.i18n.getLanguage()
+                          , poziworldExtension.i18n.getLanguage()
                         );
 
         strUrl += Log.strJoinUeip;
@@ -2035,7 +1980,7 @@ var Global                        = {
 
       function funcSetBrowserAction() {
         chrome.browserAction.setTitle( {
-          title: pozitone.i18n.getMessage( 'messageFromDevelopersTooltipText' )
+          title: poziworldExtension.i18n.getMessage( 'messageFromDevelopersTooltipText' )
         } );
 
         chrome.browserAction.setBadgeBackgroundColor( {

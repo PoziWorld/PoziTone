@@ -1,401 +1,470 @@
-/* =============================================================================
-
-  PoziTone
-  © 2013-2018 PoziWorld, Inc.
-  https://pozitone.com
-
- ============================================================================ */
+/**
+ * The platform natively supports only a limited set of locales (https://developer.chrome.com/webstore/i18n?csw=1#localeTable).
+ * Use a third-party tool to support all locales (languages).
+ * Replace chrome.i18n.getMessage with poziworldExtension.i18n.getMessage.
+ */
 
 ( function () {
   'use strict';
 
   /**
-   * Resolve promise.
+   * @todo Get dynamically or don't forget to update.
+   */
+
+  const LOCALES = [
+    // First one ever supported
+    'en_US',
+
+    // Added over time
+    'be',
+    'es',
+    'it',
+    'pl',
+    'ru',
+    'uk',
+  ];
+
+  const DEFAULT_LOCALE = LOCALES[ 0 ];
+
+  /**
+   * Locale to be used.
    *
-   * @callback funcResolve
+   * @type {string}
+   */
+
+  let locale = '';
+
+  /**
+   * https://github.com/i18next/i18next-browser-languageDetector#detector-options.
+   */
+
+  const i18nextBrowserLanguageDetectorOptions = {
+    order: [
+      'browserExtension',
+    ],
+  };
+
+  /**
+   * https://github.com/i18next/i18next-xhr-backend#backend-options.
+   */
+
+  const i18nextXhrBackendOptions = {
+    loadPath: chrome.runtime.getURL( '_locales/{{lng}}/messages.json' ),
+    async: false,
+  };
+
+  /**
+   * https://github.com/i18next/i18next-browser-languageDetector#adding-own-detection-functionality
+   */
+
+  const browserExtensionDetector = {
+    name: 'browserExtension',
+    lookup: getLanguage,
+  };
+
+  const languageDetector = new i18nextBrowserLanguageDetector();
+
+  languageDetector.addDetector( browserExtensionDetector );
+
+  /**
+   * https://www.i18next.com/configuration-options.html
+   */
+
+  const i18nextOptions = {
+    initImmediate: false,
+    detection: i18nextBrowserLanguageDetectorOptions,
+    backend: i18nextXhrBackendOptions,
+    fallbackLng: {
+      'default': [
+        DEFAULT_LOCALE,
+      ],
+    },
+    load: 'currentOnly',
+    ns: 'messages',
+    defaultNS: 'messages',
+  };
+
+  /**
+   * https://www.i18next.com/api.html#t
+   *
+   * @callback I18n~t
    */
 
   /**
-   * Reject promise.
-   *
-   * @callback funcReject
+   * @typedef {I18n~t} T
    */
 
+  let translationFunction;
+
+  setUp();
+
   /**
-   * The platform natively supports only a limited set of locales (https://developer.chrome.com/webstore/i18n?csw=1#localeTable).
-   * Use a third-party tool to support all locales (languages).
-   * Replace chrome.i18n.getMessage with pozitone.i18n.getMessage.
-   *
+   * Make the logic readily available.
+   */
+
+  function setUp() {
+    exposeApi();
+    stubLog();
+  }
+
+  /**
+   * Create an instance of the I18n API and expose it to other parts of the extension.
+   */
+
+  function exposeApi() {
+    if ( typeof poziworldExtension === 'undefined' ) {
+      window.poziworldExtension = {};
+    }
+
+    poziworldExtension.i18n = new I18n();
+  }
+
+  /**
+   * In some contexts (for example, content scripts), Log might not be defined.
+   */
+
+  function stubLog() {
+    if ( typeof Log === 'undefined' ) {
+      window.Log = {
+        add: function () {},
+      };
+    }
+  }
+
+  /**
    * @constructor
    */
 
   function I18n() {
-    /**
-     * https://github.com/i18next/i18next-browser-languageDetector#detector-options.
-     */
-
-    const i18nextBrowserLanguageDetectorOptions = {
-      order: [
-        'browserExtension'
-      ]
-    };
-
-    /**
-     * https://github.com/i18next/i18next-xhr-backend#backend-options.
-     */
-
-    const i18nextXhrBackendOptions = {
-      loadPath: chrome.runtime.getURL( '_locales/{{lng}}/messages.json' ),
-      async: false
-    };
-
-    /**
-     * @todo Get dynamically or don't forget to update.
-     */
-
-    const arrSupportedLocales = [
-      'be',
-      'en_US',
-      'es',
-      'it',
-      'pl',
-      'ru',
-      'uk'
-    ];
-
-    const defaultLocale = 'en_US';
-
-    /**
-     * https://github.com/i18next/i18next-browser-languageDetector#adding-own-detection-functionality
-     */
-
-    const browserExtensionDetector = {
-      name: 'browserExtension',
-      lookup: function () {
-        let strLanguageCode = chrome.i18n.getUILanguage();
-
-        if ( strLanguageCode ) {
-          strLanguageCode = formatLanguageCode(strLanguageCode);
-        }
-
-        if ( strLanguageCode && isSupported( strLanguageCode ) ) {
-          return strLanguageCode;
-        }
-        else {
-          const arrLanguageCodes = navigator.languages;
-
-          if ( Array.isArray( arrLanguageCodes ) ) {
-            for ( let i = 0, l = arrLanguageCodes.length; i < l; i++ ) {
-              strLanguageCode = formatLanguageCode( arrLanguageCodes[ i ] );
-
-              if ( isSupported( strLanguageCode ) ) {
-                return strLanguageCode;
-              }
-            }
-          }
-        }
-
-        return defaultLocale;
-      }
-    };
-
-    const languageDetector = new i18nextBrowserLanguageDetector();
-
-    languageDetector.addDetector( browserExtensionDetector );
-
-    /**
-     * https://www.i18next.com/configuration-options.html
-     */
-
-    const i18nextOptions = {
-      initImmediate: false,
-      detection: i18nextBrowserLanguageDetectorOptions,
-      backend: i18nextXhrBackendOptions,
-      fallbackLng: {
-        'default': [
-          defaultLocale
-        ]
-      },
-      load: 'currentOnly',
-      ns: 'messages',
-      defaultNS: 'messages'
-    };
-
-    /**
-     * https://www.i18next.com/api.html#t
-     *
-     * @callback I18n~t
-     */
-
-    /**
-     * @typedef {I18n~t} T
-     */
-
-    let translationFunction;
-
-    /**
-     * Convert the format returned by APIs (“-” as a separator) to the format used by extensions (“_” as a separator).
-     *
-     * @param {string} strLanguageCode - en-US, en, ru
-     * @return {string} - en_US, en, ru
-     */
-
-    function formatLanguageCode( strLanguageCode ) {
-      return strLanguageCode.replace( '-', '_' );
-    }
-
-    /**
-     * Check whether there is a PoziTone translation for the provided locale.
-     *
-     * @param {string} strLanguageCode - en_US, en, ru
-     * @return {boolean}
-     */
-
-    function isSupported( strLanguageCode ) {
-      return arrSupportedLocales.indexOf( strLanguageCode ) > -1;
-    }
-
-    /**
-     * Return language detector.
-     *
-     * @return {i18nextBrowserLanguageDetector}
-     */
-
-    I18n.prototype.getLanguageDetector = function () {
-      Log.add( 'pozitone.i18n.getLanguageDetector' );
-
-      return languageDetector;
-    };
-
-    /**
-     * Return i18next options.
-     *
-     * @return {Object}
-     */
-
-    I18n.prototype.getI18nextOptions = function () {
-      Log.add( 'pozitone.i18n.getI18nextOptions' );
-
-      return i18nextOptions;
-    };
-
-    /**
-     * Return translation function.
-     *
-     * @return {T}
-     */
-
-    I18n.prototype.getTranslationFunction = function () {
-      Log.add( 'pozitone.i18n.getTranslationFunction' );
-
-      return translationFunction;
-    };
-
-    /**
-     * Save translation function.
-     *
-     * @param {T} t
-     * @return {boolean} - Whether the operation succeeded.
-     */
-
-    I18n.prototype.setTranslationFunction = function ( t ) {
-      Log.add( 'pozitone.i18n.setTranslationFunction' );
-
-      if ( typeof t === 'function' ) {
-        translationFunction = t;
-
-        return true;
-      }
-
-      return false;
-    };
-
-    this.init();
   }
 
   /**
-   * Initialize.
+   * Initialize. Identify language to be used and load the translations.
+   *
+   * @return {Promise}
    */
 
   I18n.prototype.init = function () {
-    Log.add( 'pozitone.i18n.init' );
+    Log.add( 'poziworldExtension.i18n.init' );
 
-    const initPromise = new Promise( this.initI18next.bind( this ) );
-
-    initPromise
-      .then( this.handleInitSuccess.bind( this ) )
-      .catch( this.handleInitError.bind( this ) )
-      ;
-  };
-
-  /**
-   * Initialize i18next.
-   *
-   * @param {funcResolve} funcResolve
-   * @param {funcReject} funcReject
-   */
-
-  I18n.prototype.initI18next = function ( funcResolve, funcReject ) {
-    Log.add( 'pozitone.i18n.initI18next' );
-
-    const _this = this;
-    const _funcResolve = funcResolve;
-    const _funcReject = funcReject;
-
-    return i18next
-      .use( _this.getLanguageDetector() )
-      .use( i18nextXHRBackend )
-      .init(
-        _this.getI18nextOptions(),
-        _this.handleI18nextInitCallback.bind( _this, _funcResolve, _funcReject )
-      );
-  };
-
-  /**
-   * Initialization succeeded.
-   */
-
-  I18n.prototype.handleInitSuccess = function () {
-    Log.add( 'pozitone.i18n.handleInitSuccess' );
-  };
-
-  /**
-   * Initialization failed.
-   *
-   * @param {string[]} [arrErrors]
-   */
-
-  I18n.prototype.handleInitError = function ( arrErrors ) {
-    Log.add( 'pozitone.i18n.handleInitError', arrErrors, true );
-  };
-
-  /**
-   * Called after all translations were loaded or with an error when failed (in case of using a backend).
-   *
-   * @param {funcResolve} funcResolve
-   * @param {funcReject} funcReject
-   * @param {string[]} [arrErrors]
-   * @param {T} [t]
-   */
-
-  I18n.prototype.handleI18nextInitCallback = function ( funcResolve, funcReject, arrErrors, t ) {
-    Log.add( 'pozitone.i18n.handleI18nextInitCallback' );
-
-    this.checkForInitErrors( arrErrors, funcReject );
-    this.checkForInitSuccess( t, funcResolve, funcReject );
-  };
-
-  /**
-   * Check whether initialization failed (in case of using a backend).
-   *
-   * @param {string[]} [arrErrors]
-   * @param {funcReject} funcReject
-   */
-
-  I18n.prototype.checkForInitErrors = function ( arrErrors, funcReject ) {
-    Log.add( 'pozitone.i18n.checkForInitErrors', arrErrors );
-
-    if ( Array.isArray( arrErrors ) ) {
-      funcReject( arrErrors );
+    if ( isInitialized() ) {
+      return Promise.resolve();
     }
-  };
 
-  /**
-   * Check whether initialization succeeded (in case of using a backend).
-   *
-   * @param {T} [t]
-   * @param {funcResolve} funcResolve
-   * @param {funcReject} funcReject
-   */
-
-  I18n.prototype.checkForInitSuccess = function ( t, funcResolve, funcReject ) {
-    Log.add( 'pozitone.i18n.checkForInitSuccess' );
-
-    if ( this.setTranslationFunction( t ) ) {
-      funcResolve();
-
-      this.saveExtensionLanguage();
-    }
-    else {
-      funcReject();
-    }
-  };
-
-  /**
-   * Remember the set language (used for debugging).
-   */
-
-  I18n.prototype.saveExtensionLanguage = function () {
-    Log.add( 'pozitone.i18n.saveExtensionLanguage' );
-
-    /**
-     * @todo Use a listener instead, fire callbacks here.
-     */
-
-    if ( typeof objConstUserSetUp === 'object' ) {
-      objConstUserSetUp.language = this.getLanguage();
-    }
+    return setLanguage()
+      .then( loadLanguage );
   };
 
   /**
    * https://developer.chrome.com/extensions/i18n#method-getMessage replacement.
    *
-   * @param {string} strKey - The name of the message, as specified in the messages.json file.
-   * @param {(string|number)[]} [arrSubstitutions]
+   * @param {string} key - The name of the message, as specified in the messages.json file.
+   * @param {(string|number)[]} [substitutions]
    * @return {string}
    */
 
-  I18n.prototype.getMessage = function ( strKey, arrSubstitutions ) {
-    Log.add( 'pozitone.i18n.getMessage', strKey );
+  I18n.prototype.getMessage = function ( key, substitutions ) {
+    Log.add( 'poziworldExtension.i18n.getMessage', key );
 
-    const t = this.getTranslationFunction();
+    const t = getTranslationFunction();
 
     if ( t ) {
       // i18next treats messages.json keys as objects:
       // To get translation for “extensionName”, get “message” property of the “extensionName” object
-      const strObjectProperty = '.message';
-      const strLookup = strKey + strObjectProperty;
-      let strMessage = t( strLookup );
+      const objectProperty = '.message';
+      const lookup = key + objectProperty;
+      let message = t( lookup );
 
-      if ( Array.isArray( arrSubstitutions ) ) {
+      if ( Array.isArray( substitutions ) ) {
         // Find all $PLACEHOLDER$ variables in the message property
         // Example: find “$VOLUME_LEVEL$” in “Sound volume — $VOLUME_LEVEL$%”
-        const arrPlaceholders = strMessage.match( /(\$.[A-Z0-9_]*\$)/g );
+        const placeholders = message.match( /(\$.[A-Z0-9_]*\$)/g );
 
-        if ( Array.isArray( arrPlaceholders ) ) {
-          for ( let i = 0, l = arrPlaceholders.length; i < l; i++ ) {
-            const strPlaceholder = arrPlaceholders[ i ];
+        if ( Array.isArray( placeholders ) ) {
+          while ( placeholders.length ) {
+            const placeholder = placeholders.shift();
             // $VOLUME_LEVEL$ -> volume_level
-            const strPlaceholderKey = strPlaceholder.replace( /\$/g, '' ).toLowerCase();
+            const placeholderKey = placeholder.replace( /\$/g, '' ).toLowerCase();
             // In messages.json, indices start with 1 ("content": "$1"), but from 0 in the array
-            const intSubstitutionIndex = Number( t( strKey + '.placeholders.' + strPlaceholderKey + '.content' ).replace( /\$/, '' ) ) - 1;
+            const substitutionIndex = Number( t( key + '.placeholders.' + placeholderKey + '.content' ).replace( /\$/, '' ) ) - 1;
 
-            strMessage = strMessage.replace( arrPlaceholders[ i ], arrSubstitutions[ intSubstitutionIndex ] );
+            message = message.replace( placeholder, substitutions[ substitutionIndex ] );
           }
         }
       }
       // Translation isn't found: Output as it is, but without “debugging” info
-      else if ( strMessage === strLookup ) {
-        strMessage = strKey;
+      else if ( message === lookup ) {
+        message = key;
       }
 
-      return strMessage;
+      return message;
     }
 
-    return this.handleTranslationException();
+    return handleTranslationException();
   };
 
   /**
-   * Most likely, third-party tool hasn't been initialized.
+   * Return the current UI language.
    *
    * @return {string}
    */
 
-  I18n.prototype.handleTranslationException = function () {
-    Log.add( 'pozitone.i18n.handleTranslationException' );
+  I18n.prototype.getLanguage = getLanguage;
+
+  /**
+   * Prevent redundant consequent initializations.
+   *
+   * @return {boolean}
+   */
+
+  function isInitialized() {
+    return poziworldExtension.utils.isNonEmptyString( locale );
+  }
+
+  /**
+   * Identify what language should be used:
+   * If user set a preference, use that.
+   * Otherwise, check whether the browser UI language can be used.
+   * If not, loop through other languages set in browser.
+   * Last resort is to use the extension default.
+   *
+   * @return {Promise<string>}
+   */
+
+  function setLanguage() {
+    return new Promise( getLanguagePreferences )
+      .then( setLanguageToPreferred )
+      .catch( setLanguageToDefault );
+  }
+
+  /**
+   * If user set a language preference, use that.
+   * Otherwise, check whether the browser UI language can be used.
+   * If not, loop through other languages set in browser.
+   *
+   * @param {resolve} resolve
+   * @param {reject} reject
+   */
+
+  function getLanguagePreferences( resolve, reject ) {
+    poziworldExtension.utils.getSettings(
+      '',
+      getExtensionLanguageSettings.bind( null, resolve, reject ),
+      getBrowserLanguageSettings.bind( null, resolve, reject )
+    );
+  }
+
+  /**
+   * If user set a language preference in Options, use that.
+   *
+   * @param {resolve} resolve
+   * @param {reject} reject
+   * @param {Object} settings - Key-value pairs.
+   */
+
+  function getExtensionLanguageSettings( resolve, reject, settings ) {
+    if ( poziworldExtension.utils.isType( settings, 'object' ) ) {
+      const language = settings.uiLanguage;
+
+      if ( ! language || language === 'browserDefault' ) {
+        getBrowserLanguageSettings( resolve, reject );
+      }
+      else if ( poziworldExtension.utils.isType( language, 'string' ) ) {
+        resolve( language );
+      }
+    }
+  }
+
+  /**
+   * Check whether the browser UI language can be used.
+   * If not, loop through other languages set in browser.
+   * Last resort is to use the extension default.
+   *
+   * @param {resolve} resolve
+   * @param {reject} reject
+   */
+
+  function getBrowserLanguageSettings( resolve, reject ) {
+    let languageCode = chrome.i18n.getUILanguage();
+
+    if ( languageCode ) {
+      languageCode = formatLanguageCode( languageCode );
+    }
+
+    if ( languageCode && isSupported( languageCode ) ) {
+      resolve( languageCode );
+
+      return;
+    }
+    else {
+      const browserLanguages = window.navigator.languages;
+
+      if ( Array.isArray( browserLanguages ) ) {
+        // navigator.languages is read-only, not shiftable
+        const languageCodes = Array.from( browserLanguages );
+
+        while ( languageCodes.length ) {
+          languageCode = formatLanguageCode( languageCodes.shift() );
+
+          if ( isSupported( languageCode ) ) {
+            resolve( languageCode );
+
+            return;
+          }
+        }
+      }
+    }
+
+    resolve( DEFAULT_LOCALE );
+  }
+
+  /**
+   * A specific language should be used, as set in the extension or browser settings.
+   *
+   * @param {string} language
+   */
+
+  function setLanguageToPreferred( language ) {
+    locale = language;
+  }
+
+  /**
+   * Use the default language when failed to identify which one to use.
+   */
+
+  function setLanguageToDefault() {
+    locale = DEFAULT_LOCALE;
+  }
+
+  /**
+   * Language to be used identified, try to load it.
+   */
+
+  function loadLanguage() {
+    new Promise( initI18next )
+      .then( handleInitSuccess )
+      .catch( handleInitError );
+  }
+
+  /**
+   * Initialize i18next, a third-party internationalization framework.
+   * https://www.i18next.com/
+   *
+   * @param {resolve} resolve
+   * @param {reject} reject
+   */
+
+  function initI18next( resolve, reject ) {
+    i18next
+      .use( getLanguageDetector() )
+      .use( i18nextXHRBackend )
+      .init(
+        getI18nextOptions(),
+        handleI18nextInitCallback.bind( null, resolve, reject )
+      );
+  }
+
+  /**
+   * Initialization succeeded.
+   */
+
+  function handleInitSuccess() {
+    Log.add( 'poziworldExtension.i18n -> handleInitSuccess' );
+  }
+
+  /**
+   * Initialization failed.
+   *
+   * @param {string[]} [errors]
+   */
+
+  function handleInitError( errors ) {
+    Log.add( 'poziworldExtension.i18n -> handleInitError', errors, true );
+  }
+
+  /**
+   * Called after all translations were loaded or with an error when failed (in case of using a backend).
+   *
+   * @param {resolve} resolve
+   * @param {reject} reject
+   * @param {string[]} [errors]
+   * @param {T} [t]
+   */
+
+  function handleI18nextInitCallback( resolve, reject, errors, t ) {
+    checkForInitErrors( errors, reject );
+    checkForInitSuccess( t, resolve, reject );
+  }
+
+  /**
+   * Check whether initialization failed (in case of using a backend).
+   *
+   * @param {string[]} [errors]
+   * @param {reject} reject
+   */
+
+  function checkForInitErrors( errors, reject ) {
+    Log.add( 'poziworldExtension.i18n -> checkForInitErrors', errors );
+
+    if ( Array.isArray( errors ) ) {
+      reject( errors );
+    }
+  }
+
+  /**
+   * Check whether initialization succeeded (in case of using a backend).
+   *
+   * @param {T} [t]
+   * @param {resolve} resolve
+   * @param {reject} reject
+   */
+
+  function checkForInitSuccess( t, resolve, reject ) {
+    if ( setTranslationFunction( t ) ) {
+      resolve();
+
+      saveExtensionLanguage();
+    }
+    else {
+      reject();
+    }
+  }
+
+  /**
+   * Remember the set language (used for debugging).
+   */
+
+  function saveExtensionLanguage() {
+    /**
+     * @todo Use a listener instead, fire callbacks here.
+     */
+
+    if ( typeof objConstUserSetUp === 'object' ) {
+      objConstUserSetUp.language = getSetLanguage();
+    }
+  }
+
+  /**
+   * Most likely, third-party framework hasn't been initialized.
+   *
+   * @return {string}
+   */
+
+  function handleTranslationException() {
+    Log.add( 'poziworldExtension.i18n -> handleTranslationException' );
 
     return 'i18n services not initialized.';
-  };
+  }
+
+  /**
+   * Return the language name that should be used.
+   *
+   * @return {string}
+   */
+
+  function getLanguage() {
+    return locale;
+  }
 
   /**
    * Return the current detected or set language.
@@ -404,22 +473,88 @@
    * @return {string}
    */
 
-  I18n.prototype.getLanguage = function () {
-    Log.add( 'pozitone.i18n.getLanguage' );
-
+  function getSetLanguage() {
     return i18next.language;
-  };
-
-  if ( typeof pozitone === 'undefined' ) {
-    window.pozitone = {};
   }
 
-  // Fallback for content scripts
-  if ( typeof Log === 'undefined' ) {
-    window.Log = {
-      add: function () {}
-    };
+  /**
+   * Return language detector.
+   *
+   * @return {i18nextBrowserLanguageDetector}
+   */
+
+  function getLanguageDetector() {
+    return languageDetector;
   }
 
-  pozitone.i18n = new I18n();
+  /**
+   * Return i18next options.
+   *
+   * @return {Object}
+   */
+
+  function getI18nextOptions() {
+    return i18nextOptions;
+  }
+
+  /**
+   * Save translation function.
+   *
+   * @param {T} t
+   * @return {boolean} - Whether the operation succeeded.
+   */
+
+  function setTranslationFunction( t ) {
+    if ( typeof t === 'function' ) {
+      translationFunction = t;
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Return translation function.
+   *
+   * @return {T}
+   */
+
+  function getTranslationFunction() {
+    return translationFunction;
+  }
+
+  /**
+   * Convert the format returned by APIs (“-” as a separator) to the format used by extensions (“_” as a separator).
+   *
+   * @param {string} languageCode - en-US, en, ru
+   * @return {string} - en_US, en, ru
+   */
+
+  function formatLanguageCode( languageCode ) {
+    return languageCode.replace( '-', '_' );
+  }
+
+  /**
+   * Check whether there is a translation for the provided locale.
+   *
+   * @param {string} languageCode - en_US, en, ru
+   * @return {boolean}
+   */
+
+  function isSupported( languageCode ) {
+    return LOCALES.indexOf( languageCode ) > -1;
+  }
+
+  /**
+   * Resolve promise.
+   *
+   * @callback resolve
+   */
+
+  /**
+   * Reject promise.
+   *
+   * @callback reject
+   */
 } )();

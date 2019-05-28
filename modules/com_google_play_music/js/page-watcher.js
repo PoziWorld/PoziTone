@@ -98,7 +98,7 @@
 
     this.objPlayerInfo = {
         strModule : strModule
-      , strPlayerName : pozitone.i18n.getMessage( 'module_' + strModule )
+      , strPlayerName : poziworldExtension.i18n.getMessage( 'module_' + strModule )
       , boolIsReady : false
       , boolIsPlaying : false
       , boolIsMuted : false

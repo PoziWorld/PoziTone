@@ -1,6 +1,44 @@
           <h1 i18n-content="optionsSettingsGeneral" class="subpageHeading"></h1>
           <form id="form">
             <fieldset>
+              <legend i18n-content="uiLanguage" class="sectionHeading"></legend>
+              <ul>
+                <li>
+                  <label>
+                    <select
+                      id="uiLanguage"
+                      class="optionsChanger dropdownOption"
+                      name="uiLanguage"
+                      ng-model="objModule.uiLanguage"
+                      ng-change="handleDropdownChange( 'uiLanguage', changeUiLanguage )"
+                      data-track-setting-change="true"
+                        >
+                      <option
+                        value="browserDefault"
+                        i18n-content="language_browserDefault"
+                        data-i18n-tooltip="language_browserDefault_tooltip"
+                          ></option>
+                      <option value="be" i18n-content="language_be"></option>
+                      <option value="en_US" i18n-content="language_en_US"></option>
+                      <option value="es" i18n-content="language_es"></option>
+                      <option value="it" i18n-content="language_it"></option>
+                      <option value="pl" i18n-content="language_pl"></option>
+                      <option value="ru" i18n-content="language_ru"></option>
+                      <option value="uk" i18n-content="language_uk"></option>
+                    </select>
+                  </label>
+                  <span
+                    i18n-content=""
+                    data-i18n-title="uiLanguageNote"
+                    class="i18nNoInner i18nTitle infoTitle"
+                    tabindex="0"
+                      >
+                    <span i18n-content="uiLanguageNote" class="pwVisuallyHidden"></span>
+                  </span>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset>
               <legend i18n-content="notifications" class="sectionHeading"></legend>
               <ul>
                 <li>

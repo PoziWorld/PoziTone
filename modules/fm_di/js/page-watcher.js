@@ -304,7 +304,7 @@ var
     // Wait for volume to get changed
     setTimeout( function() {
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage( 'notificationButtonsMuteFeedback' )
+        poziworldExtension.i18n.getMessage( 'notificationButtonsMuteFeedback' )
       );
     }, 0 );
   }
@@ -326,7 +326,7 @@ var
     // Wait for volume to get changed
     setTimeout( function() {
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
+        poziworldExtension.i18n.getMessage( 'notificationButtonsUnmuteFeedback' )
       );
     }, 0 );
   }
@@ -377,7 +377,7 @@ var
       intPercentage = Math.round( intVolume * 100 );
 
       PageWatcher.sendSameMessage(
-        pozitone.i18n.getMessage(
+        poziworldExtension.i18n.getMessage(
             'notificationButtonsVolumeChangeFeedback'
           , [ intPercentage ]
         )
@@ -441,7 +441,7 @@ var
           &&  objModuleSettings.boolShowKbpsInfo
           &&  intKbps !== 0
         ) {
-          var strKbpsInfo = intKbps + pozitone.i18n.getMessage( 'kbps' );
+          var strKbpsInfo = intKbps + poziworldExtension.i18n.getMessage( 'kbps' );
 
           PageWatcher.objStationInfo.strTrackInfo +=
             strConstNotificationLinesSeparator + strKbpsInfo;
@@ -650,7 +650,7 @@ var
 
                   if ( PageWatcher.boolWasPageJustLoaded ) {
                     strMessage =
-                      pozitone.i18n.getMessage(
+                      poziworldExtension.i18n.getMessage(
                         'notificationPlayerStatusChangeStarted'
                       );
 
@@ -658,7 +658,7 @@ var
                   }
                   else if ( PageWatcher.objPlayerInfo.strPreviousStatus === 'stopped' ) {
                     strMessage=
-                      pozitone.i18n.getMessage(
+                      poziworldExtension.i18n.getMessage(
                         'notificationPlayerStatusChangeResumed'
                       );
 
@@ -804,7 +804,7 @@ var
               &&  PageWatcher.boolHadPlayedBefore
             )
               PageWatcher.sendSameMessage(
-                pozitone.i18n.getMessage(
+                poziworldExtension.i18n.getMessage(
                   'notificationPlayerStatusChangeStopped'
                 )
               );
@@ -866,7 +866,7 @@ var
                       .contains( strFavoriteButtonSuccessClass )
                 )
                   PageWatcher.sendSameMessage(
-                    pozitone.i18n.getMessage(
+                    poziworldExtension.i18n.getMessage(
                       'notificationFavoriteStatusSuccess'
                     )
                   );

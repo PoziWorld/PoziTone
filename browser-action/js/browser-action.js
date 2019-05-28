@@ -27,42 +27,42 @@
 
  ============================================================================ */
 
-const
-    strPage = 'browser-action'
-  , strLogPage = 'browserAction'
-  , strLogPageDivider = '.'
+( function () {
+  window.strPage = 'browser-action';
 
-  , strListId = 'recentTracks'
-  , strListElementSelector = '.recentTrack'
-  , strListElementInfoSelector = '.recentTrackInfo'
+  const strLogPage = 'browserAction';
+  const strLogPageDivider = '.';
 
-  , strRecentTrackActionUrl = 'https://go.pozitone.com/s/?'
-  ;
+  const strListId = 'recentTracks';
+  const strListElementSelector = '.recentTrack';
+  const strListElementInfoSelector = '.recentTrackInfo';
 
-var Popup = {
+  const strRecentTrackActionUrl = 'https://go.pozitone.com/s/?';
+
+  setUp();
+
   /**
-   * Initialize
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
+   * Make the logic readily available.
+   */
+
+  function setUp() {
+    document.addEventListener( 'DOMContentLoaded', init );
+  }
+
+  /**
+   * Initialize the view.
    **/
 
-  init : function() {
-    Popup.populateRecentTracks();
+  function init() {
+    populateRecentTracks();
     Page.trackPageView();
   }
-  ,
 
   /**
-   * Populate Last Tracks list
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
+   * Populate the Recently Played list.
    **/
 
-  populateRecentTracks : function() {
+  function populateRecentTracks() {
     StorageSync.get( 'arrRecentTracks', function( objReturn ) {
       var arrRecentTracks = objReturn.arrRecentTracks
         , strHtml = ''
@@ -101,37 +101,25 @@ var Popup = {
         $content.innerHTML = strHtml;
       }
 
-      Page.localize( 'popup' );
-      Popup.addEventListeners();
-
-      if ( boolIsNullCase ) {
-        $content.querySelector( '[data-performer="funbox"]' ).href = 'https://vk.com/funboxband';
-        $content.querySelector( '[data-performer="nickybutter"]' ).href = 'https://soundcloud.com/nickybutter';
-        $content.querySelector( '[data-performer="theroux"]' ).href = 'https://soundcloud.com/theroux';
-        $content.querySelector( '[data-performer="emilyclibourn"]' ).href = 'https://soundcloud.com/emilyclibourn';
-      }
+      poziworldExtension.i18n.init()
+        .then( Page.localize.bind( null, 'popup' ) )
+        .then( addEventListeners )
+        .then( setLinksUrls.bind( null, boolIsNullCase, $content ) );
     } );
   }
-  ,
 
   /**
-   * Add event listeners
-   *
-   * @type    method
-   * @param   No Parameters Taken
-   * @return  void
+   * Add event listeners.
    **/
 
-  addEventListeners : function() {
-    const _this = this;
-
+  function addEventListeners() {
     addEvent(
         document.getElementById( 'toolbarOpenOptionsPageBtn' )
       , 'click'
-      , function( objEvent ) {
+      , function() {
           const strLog = 'toolbar';
 
-          _this.trackData(
+          trackData(
               strLog
             , 'openOptions'
             , { strPage : strPage }
@@ -144,8 +132,8 @@ var Popup = {
     addEvent(
         document.getElementById( 'toolbarClosePopupPageBtn' )
       , 'click'
-      , function( objEvent ) {
-          _this.trackData(
+      , function() {
+          trackData(
               'toolbar'
             , 'closePopup'
             , { strPage : strPage }
@@ -163,7 +151,7 @@ var Popup = {
       , function( objEvent ) {
           const $this = objEvent.target;
 
-          _this.trackData(
+          trackData(
               'tunesSuggestion'
             , 'followLink'
             , { strPerformer : $this.dataset.performer }
@@ -193,9 +181,9 @@ var Popup = {
           const $this = objEvent.currentTarget;
           const strProvider = $this.dataset.provider;
           const strTrack = $this.parentNode.parentNode.dataset.track;
-          const strUrl = Popup.composeRecentTrackActionUrl( strProvider, strTrack );
+          const strUrl = composeRecentTrackActionUrl( strProvider, strTrack );
 
-          _this.trackData(
+          trackData(
               'recentTracks'
             , 'providerAction'
             , { strProvider : strProvider }
@@ -208,10 +196,9 @@ var Popup = {
     addEvent(
         document.getElementsByClassName( 'copyToClipboard' )
       , 'click'
-      , _this.onCopyToClipboardCtaClick.bind( _this )
+      , onCopyToClipboardCtaClick
     );
   }
-  ,
 
   /**
    * "Copy to clipboard" call-to-action is clicked on.
@@ -219,19 +206,16 @@ var Popup = {
    * @param {Event} objEvent - MouseEvent object.
    **/
 
-  onCopyToClipboardCtaClick : function( objEvent ) {
-    const _this = this;
-
+  function onCopyToClipboardCtaClick( objEvent ) {
     chrome.permissions.contains( { permissions : [ 'clipboardWrite' ] }, function( boolIsGranted ) {
       if ( boolIsGranted ) {
-        _this.copyToClipboard( objEvent );
+        copyToClipboard( objEvent );
       }
       else {
-        _this.requestClipboardWritePermission( objEvent );
+        requestClipboardWritePermission( objEvent );
       }
     } );
   }
-  ,
 
   /**
    * "clipboardWrite" permission hasn't been granted yet, request it.
@@ -239,8 +223,7 @@ var Popup = {
    * @param {Event} objEvent - MouseEvent object.
    **/
 
-  requestClipboardWritePermission : function( objEvent ) {
-    const _this = this;
+  function requestClipboardWritePermission( objEvent ) {
     const strLog = 'requestClipboardWritePermission';
     const $privacyStatementsContainer = document.getElementById( 'privacyStatementsContainer' );
 
@@ -249,14 +232,14 @@ var Popup = {
     chrome.permissions.request( { permissions: [ 'clipboardWrite' ] }, function( boolIsGranted ) {
       Global.checkForRuntimeError(
           function() {
-            _this.trackData(
+            trackData(
                 'recentTracks'
               , strLog
               , { boolIsGranted : boolIsGranted }
             );
 
             if ( boolIsGranted ) {
-              _this.copyToClipboard( objEvent );
+              copyToClipboard( objEvent );
             }
           }
         , undefined
@@ -267,7 +250,6 @@ var Popup = {
       Page.toggleElement( $privacyStatementsContainer, false );
     } );
   }
-  ,
 
   /**
    * "clipboardWrite" permission granted, copy to clipboard.
@@ -275,7 +257,7 @@ var Popup = {
    * @param {Event} objEvent - MouseEvent object.
    **/
 
-  copyToClipboard : function( objEvent ) {
+  function copyToClipboard( objEvent ) {
     let $this = objEvent.currentTarget || objEvent.target;
     const $text = $this.closest( strListElementSelector );
 
@@ -295,7 +277,7 @@ var Popup = {
       return;
     }
 
-    this.trackData(
+    trackData(
         'recentTracks'
       , 'copyToClipboard'
     );
@@ -319,7 +301,6 @@ var Popup = {
     Page.showSuccess( $this.children[ 0 ] );
     Page.showSuccess( $this.children[ 1 ] );
   }
-  ,
 
   /**
    * If user participates in UEIP, track some helpful insights.
@@ -329,10 +310,10 @@ var Popup = {
    * @param {Object} [objData] - Additional data to track.
    **/
 
-  trackData : function( strLog, strAction, objData ) {
+  function trackData( strLog, strAction, objData ) {
     let objTrackingData = {
         strAction : strAction
-      , strLanguage : pozitone.i18n.getLanguage()
+      , strLanguage : poziworldExtension.i18n.getLanguage()
       , strVersion : strConstExtensionVersion
       , strVersionName : strConstExtensionVersionName
     };
@@ -360,20 +341,16 @@ var Popup = {
       }
     );
   }
-  ,
 
   /**
    * Compose a URL from the given parameters
    *
-   * @type    method
-   * @param   strProvider
-   *            Service provider
-   * @param   strQuery
-   *            Query
-   * @return  string
+   * @param {string} strProvider - Service provider.
+   * @param {string} strQuery - Query.
+   * @return {string}
    **/
 
-  composeRecentTrackActionUrl : function( strProvider, strQuery ) {
+  function composeRecentTrackActionUrl( strProvider, strQuery ) {
     if (  typeof strProvider === 'undefined'
       ||  typeof strQuery === 'undefined'
       ||  strProvider === ''
@@ -384,41 +361,46 @@ var Popup = {
 
     return strRecentTrackActionUrl
               +  'p=' + strProvider
-              + '&q=' + Popup.encodeQuery( strQuery )
+              + '&q=' + encodeQuery( strQuery )
               + '&v=' + strConstExtensionVersion
-              + '&l=' + pozitone.i18n.getLanguage()
+              + '&l=' + poziworldExtension.i18n.getLanguage()
               ;
   }
-  ,
 
   /**
    * Encode query
    *
-   * @type    method
-   * @param   strQuery
-   *            Query
-   * @return  string
+   * @param {string} strQuery - Query.
+   * @return {string}
    **/
 
-  encodeQuery : function( strQuery ) {
+  function encodeQuery( strQuery ) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
     return encodeURIComponent( strQuery )
               // Note that although RFC3986 reserves "!", RFC5987 does not,
               // so we do not need to escape it
               .replace( /['()]/g, escape ) // i.e., %27 %28 %29
               .replace( /\*/g, '%2A' )
-              // The following are not required for percent-encoding 
+              // The following are not required for percent-encoding
               // per RFC5987, so we can allow for a little better readability
               // over the wire: |`^
               .replace( /%(?:7C|60|5E)/g, unescape )
               ;
   }
-};
 
-/* =============================================================================
+  /**
+   * The null case (when there are no items in the Recently Played list) shows suggestions for different styles of music. The text comes from the translation, but the translation doesn't contain URLs.
+   *
+   * @param {boolean} nullCase - Whether there are any items in the Recently Played list.
+   * @param {HTMLElement} container
+   */
 
-  Events
-
- ============================================================================ */
-
-document.addEventListener( 'DOMContentLoaded', Popup.init );
+  function setLinksUrls( nullCase, container ) {
+    if ( nullCase ) {
+      container.querySelector( '[data-performer="funbox"]' ).href = 'https://vk.com/funboxband';
+      container.querySelector( '[data-performer="nickybutter"]' ).href = 'https://soundcloud.com/nickybutter';
+      container.querySelector( '[data-performer="theroux"]' ).href = 'https://soundcloud.com/theroux';
+      container.querySelector( '[data-performer="emilyclibourn"]' ).href = 'https://soundcloud.com/emilyclibourn';
+    }
+  }
+} )();
