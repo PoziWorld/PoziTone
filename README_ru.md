@@ -189,7 +189,7 @@ PoziTone должен отобразить оповещение с информ�
   - испанский — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - польский — jurczak (Łukasz Jurczak);
   - итальянский — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
-  - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
+  - украинский — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/), [KovalenkoStas (Коваленко Станіслав)](https://www.transifex.com/user/profile/KovalenkoStas/).
   - беларуский — [natasmirnova1392 (Natalia Smirnova)](https://www.transifex.com/user/profile/natasmirnova1392/).
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>

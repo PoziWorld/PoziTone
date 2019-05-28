@@ -180,7 +180,7 @@ Gratitudes
   - Spanish — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - Polish — jurczak (Łukasz Jurczak);
   - Italian — [Aeco (Giuseppe Mariniello)](https://www.transifex.com/user/profile/Aeco/);
-  - Ukrainian — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/).
+  - Ukrainian — [ivan.zusko (Ivan Zusko)](https://www.transifex.com/user/profile/ivan.zusko/), [KovalenkoStas (Коваленко Станіслав)](https://www.transifex.com/user/profile/KovalenkoStas/).
   - Belarusian — [natasmirnova1392 (Natalia Smirnova)](https://www.transifex.com/user/profile/natasmirnova1392/).
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
