@@ -97,8 +97,7 @@
         }
     }
   , "background"                : {
-        "persistent"            : true
-      , "scripts"               : [
+        "scripts"               : [
             "global/js/tracking.js"
           , "global/js/bowser.js"
           , "global/js/const.js"
@@ -117,11 +116,6 @@
           , "global/js/punycode.min.js"
           , "global/js/voice-control.js"
         ]
-    }
-  , "options_page"              : "options/index.html"
-  , "options_ui"                : {
-        "page"                  : "options/index.html"
-      , "chrome_style"          : false
     }
   , "web_accessible_resources": [
         "*.png"

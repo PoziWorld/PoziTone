@@ -2,6 +2,11 @@
   "name": "pozitone",
   "version": "0.10.0",
   "description": "PoziTone is a browser extension (add-on) for the Google Chrome, Opera, and other Chromium-based browsers that adds new features to your favorite online media players.",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack --mode development --progress",
+    "build": "NODE_ENV=production webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PoziWorld/PoziTone.git"
@@ -22,5 +27,15 @@
   "bugs": {
     "url": "https://github.com/PoziWorld/PoziTone/issues"
   },
-  "homepage": "https://pozitone.com"
+  "homepage": "https://pozitone.com",
+  "devDependencies": {
+    "clean-webpack-plugin": "0.1.19",
+    "copy-webpack-plugin": "4.5.2",
+    "fs": "^0.0.1-security",
+    "immutable": "4.0.0-rc.9",
+    "path": "0.12.7",
+    "webpack": "^5.0.0-beta.9",
+    "webpack-clean": "1.2.2",
+    "webpack-cli": "^3.3.10"
+  }
 }
