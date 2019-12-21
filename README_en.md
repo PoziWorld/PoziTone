@@ -3,7 +3,7 @@
 [PoziTone<img src="/static/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
-An extension for the Google Chrome, Opera, and other Chromium-based browsers that adds new [features](#features) to your favorite [online media players](#supported-online-media-players).
+An extension for the Google Chrome, Opera, Microsoft Edge, and other Chromium-based browsers that adds new [features](#features) to your favorite [online media players](#supported-online-media-players).
 
 ___
 
@@ -118,7 +118,7 @@ Demo
 
 Go to [SoundCloud](https://soundcloud.com) and play any track.
 
-PoziTone should display a notification with the track info. 
+PoziTone should display a notification with the track info.
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
