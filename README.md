@@ -1,4 +1,4 @@
-[PoziTone<img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
+[PoziTone<img src="/static/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
 
