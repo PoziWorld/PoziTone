@@ -9,8 +9,6 @@
   , "version_name"              : "0.10.0 DD"
 
   , "short_name"                : "PoziTone"
-  , "author"                    : "PoziWorld"
-  , "homepage_url"              : "https://pozitone.com/"
 
   , "icons"                     : {
         "16"                    : "global/img/pozitone-icon-16.png"
