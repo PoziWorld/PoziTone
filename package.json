@@ -1,0 +1,26 @@
+{
+  "name": "pozitone",
+  "version": "0.10.0",
+  "description": "PoziTone is a browser extension (add-on) for the Google Chrome, Opera, and other Chromium-based browsers that adds new features to your favorite online media players.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PoziWorld/PoziTone.git"
+  },
+  "keywords": [
+    "pozitone",
+    "media player",
+    "browser",
+    "extension",
+    "addon",
+    "chrome",
+    "edge",
+    "opera",
+    "chromium"
+  ],
+  "author": "PoziWorld, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PoziWorld/PoziTone/issues"
+  },
+  "homepage": "https://pozitone.com"
+}
