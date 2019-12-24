@@ -101,16 +101,8 @@ optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
   document.getElementById( 'name' ).textContent = strConstExtensionName;
   document.getElementById( 'version' ).textContent = strConstExtensionVersionName;
 
-  const $$translatedBy = document.getElementById( 'translatedBy' );
-
   Page.localize( strPage, '#content' );
-
-  document.querySelector( '[data-id="translation"]' ).href = strConstTranslationUrl;
-  $$translatedBy.innerHTML = $$translatedBy.innerHTML.replace(
-      // Markdown-style link: [John Doe](https://www.transifex.com/user/profile/john.doe777/)
-      /(\[)([^\]]+\.?)(\])(\()(http[s]:\/\/(-\.)?([^\s\/?\.\#\-]+\.?)+(\/[^\s]*)?)(\))/g
-    , '<a href="$5" target="_blank" class="externalLink" data-id="translator" data-params="{ &quot;strTranslator&quot; : &quot;$2&quot; }">$2</a>'
-  );
+  setLinks();
 
   strSubpage = 'about';
   strSubsection = undefined;
@@ -123,6 +115,28 @@ optionsControllers.controller( 'AboutCtrl', function( $scope, $rootScope ) {
     , strPage
     , strSubpage
   );
+
+  /**
+   * Some links come from the translation files and don't have URLs, so it's easier to make updates to the URLs.
+   * Others use Markdown, so the markup is not hardcoded in the translation files.
+   */
+
+  function setLinks() {
+    const translationPortalLink = document.querySelector( '[data-id="translation"]' );
+    const translatedByText = document.getElementById( 'translatedBy' );
+
+    if ( translationPortalLink ) {
+      translationPortalLink.href = strConstTranslationUrl;
+    }
+
+    if ( translatedByText ) {
+      translatedByText.innerHTML = translatedByText.innerHTML.replace(
+          // Markdown-style link: [John Doe](https://www.transifex.com/user/profile/john.doe777/)
+          /(\[)([^\]]+\.?)(\])(\()(http[s]:\/\/(-\.)?([^\s\/?\.\#\-]+\.?)+(\/[^\s]*)?)(\))/g
+        , '<a href="$5" target="_blank" class="externalLink" data-id="translator" data-params="{ &quot;strTranslator&quot; : &quot;$2&quot; }">$2</a>'
+      );
+    }
+  }
 } );
 
 // Controller for Help page
