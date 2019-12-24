@@ -32,7 +32,6 @@
 
 const
     strPage                           = 'options'
-  , strMainHeadingId                  = 'extensionName'
   , strNotAvailableOperaSettingsClass = 'moduleAvailableNotificationButtons'
   , strModuleLocalPrefix              = 'module_'
   , strSettingsId                     = 'settings'
@@ -79,11 +78,6 @@ var Options = {
    * @return  void
    **/
   init : function() {
-    // Hide h1 in Chrome 40.0+ because new Options UI has heading already
-    if ( boolConstUseOptionsUi ) {
-      document.getElementById( strMainHeadingId ).remove();
-    }
-
     poziworldExtension.i18n.init()
       .then( Page.localize.bind( null, strPage ) );
     Options.setPageValues();
@@ -206,7 +200,7 @@ var Options = {
       StorageTemp.get( strModuleSettings, function( objReturn ) {
         for ( var strKey in objModuleSettings ) {
           if ( objModuleSettings.hasOwnProperty( strKey ) )
-            objReturn[ strModuleSettings ][ strKey ] = 
+            objReturn[ strModuleSettings ][ strKey ] =
               objModuleSettings[ strKey ];
         }
 
@@ -336,7 +330,7 @@ chrome.runtime.onMessage.addListener(
 
       for ( strProp in objVars ) {
         if ( objVars.hasOwnProperty( strProp ) )
-          document.querySelector( '[name="' + strProp + '"]' ).checked = 
+          document.querySelector( '[name="' + strProp + '"]' ).checked =
             objVars[ strProp ];
       }
     }
