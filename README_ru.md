@@ -1,9 +1,9 @@
 > This is a Russian version, see [README_en.md](README_en.md) for English.
 
-[PoziTone<img src="/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
+[PoziTone<img src="/static/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
-Расширение для браузеров Google Chrome, Opera, Яндекс и Амиго, которое добавляет новые [возможности](#Возможности) Вашим любимым [онлайн-медиаплеерам](#Поддерживаемые-онлайн-медиаплееры).
+Расширение для браузеров Google Chrome, Opera, Яндекс и нового Microsoft Edge, которое добавляет новые [возможности](#Возможности) Вашим любимым [онлайн-медиаплеерам](#Поддерживаемые-онлайн-медиаплееры).
 
 ___
 
