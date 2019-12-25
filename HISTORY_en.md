@@ -4,6 +4,15 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v1.0.0
+
+### New
+
+* Support for the new Microsoft Edge.
+* Options page gets opened in a new tab.
+
+---
+
 ## v0.10.0
 
 ### New

@@ -5,8 +5,8 @@
   "default_locale": "en_US",
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "0.10.0",
-  "version_name": "0.10.0 DD",
+  "version": "1.0.0",
+  "version_name": "1.0.0 SSV+SVV",
   "short_name": "PoziTone",
 
   "icons": {
