@@ -99,6 +99,16 @@
       result.chromeVersion = result.version;
       result.chromeVersionFull = result.versionFull;
     }
+    else if (/ edg\//i.test(ua)) {
+      result = {
+        name: 'Edge (Chromium)'
+      , version: getFirstMatch(/(?:edg)\/(\d+(\.\d+)?)/i)
+      , versionFull: getFirstMatch(/(?:edg)\/(\d+(\.\d+)+(\.\d+)?)/i)
+      }
+
+      result.chromeVersion = result.version;
+      result.chromeVersionFull = result.versionFull;
+    }
     else if (/chrome|crios/i.test(ua)) {
       result = {
         name: 'Chrome' // or a few others that don't identify themselves
@@ -113,7 +123,7 @@
         name: 'Unknown'
       }
 
-    if ( typeof result.name !== 'undefined' && [ 'Amigo', 'Chrome', 'Unknown', 'Uran' ].indexOf(result.name) === -1 ) {
+    if ( typeof result.name !== 'undefined' && [ 'Amigo', 'Chrome', 'Unknown', 'Uran', 'Edge (Chromium)' ].indexOf(result.name) === -1 ) {
       result.chromeVersion = getFirstMatch(/(?:chrome|crios)\/(\d+(\.\d+)?)/i);
       result.chromeVersionFull = getFirstMatch(/(?:chrome|crios)\/(\d+(\.\d+)+(\.\d+)?)/i);
     }
