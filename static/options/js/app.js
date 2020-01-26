@@ -456,7 +456,7 @@ optionsApp.run( function( $rootScope, $location ) {
     $rootScope.checkScrollEnforcement( arguments[ 1 ] );
   } );
 
-  $rootScope.strRateUrl = strConstRateUrl;
+  $rootScope.strRateUrl = pozitone.global.getRatingUrl();
 
   // Track rating stars clicks
   var $$stars = document.getElementsByClassName( 'rateCtaStar' );

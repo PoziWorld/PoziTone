@@ -526,7 +526,7 @@ var Background = {
    *
    * @type    method
    * @param   objDetails
-   *            Reason - install/update/chrome_update - 
+   *            Reason - install/update/chrome_update -
    *            and (optional) previous version
    * @return  void
    **/
@@ -632,7 +632,7 @@ var Background = {
                 }
 
                 if ( ! Global.isEmpty( objDeprecatedSetting ) ) {
-                  Background.objPreservedSettings[ miscSetting ] = 
+                  Background.objPreservedSettings[ miscSetting ] =
                     objCurrentSetting;
 
                   arrSettingsToRemove.push( miscSetting );
@@ -677,7 +677,7 @@ var Background = {
     }
     else {
       Log.add( strLog + strLogDoNot );
-      
+
       Background.setExtensionDefaults( objDetails );
     }
   }
@@ -1475,7 +1475,7 @@ var Background = {
     else if ( ~ strMenuItemId.indexOf( Background.strBrowserActionRateExtensionContextMenuId ) ) {
       strOption = 'rate';
 
-      Global.createTabOrUpdate( strConstRateUrl );
+      Global.createTabOrUpdate( pozitone.global.getRatingUrl() );
     }
 
     // Track clicks
@@ -1539,8 +1539,8 @@ chrome.runtime.onMessageExternal.addListener(
 
 /**
  * Listens for clicks on notification.
- * 
- * Makes a tab which initiated the notification active, 
+ *
+ * Makes a tab which initiated the notification active,
  * and makes the window focused.
  *
  * @type    method
@@ -1854,13 +1854,13 @@ chrome.commands.onCommand.addListener(
 );
 
 /**
- * Fired when the extension is first installed, 
- * when the extension is updated to a new version, 
+ * Fired when the extension is first installed,
+ * when the extension is updated to a new version,
  * and when Chrome is updated to a new version.
  *
  * @type    method
  * @param   objDetails
- *            Reason - install/update/chrome_update - 
+ *            Reason - install/update/chrome_update -
  *            and (optional) previous version.
  * @return  void
  **/
@@ -1937,8 +1937,8 @@ chrome.runtime.onStartup.addListener(
 );
 
 /**
- * When tab is updated (most likely NOT loaded from cache), recheck open tabs. 
- * So that if we, for example, changed URL of tab which would get commands, 
+ * When tab is updated (most likely NOT loaded from cache), recheck open tabs.
+ * So that if we, for example, changed URL of tab which would get commands,
  * after it has been changed, another one gets commands.
  *
  * @type    method
@@ -1984,8 +1984,8 @@ chrome.tabs.onUpdated.addListener(
 
 /**
  * When tab is replaced with another tab due to prerendering or instant
- * (most likely loaded from cache), recheck open tabs. 
- * So that if we, for example, changed URL of tab which would get commands, 
+ * (most likely loaded from cache), recheck open tabs.
+ * So that if we, for example, changed URL of tab which would get commands,
  * after it has been changed, another one gets commands.
  *
  * @type    method
@@ -2014,7 +2014,7 @@ chrome.tabs.onReplaced.addListener(
 );
 
 /**
- * When tab is closed, recheck open tabs. 
+ * When tab is closed, recheck open tabs.
  * So that if we closed tab which would get commands, after it has been closed,
  * another one gets commands.
  *

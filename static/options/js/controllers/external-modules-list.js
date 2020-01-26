@@ -1,21 +1,30 @@
 // Controller for External Modules list page
 optionsControllers.controller( 'ExternalModulesListCtrl', function( $scope, $rootScope ) {
   $scope.arrExternalModules = [
-      {
-          strModuleId : 'com_youtube'
-        , strChromeUrl : 'https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg'
-        , strOperaUrl : 'https://addons.opera.com/extensions/details/youtube-embedded-player-pozitone-module/'
-      }
-    , {
-          strModuleId : 'com_soundcloud'
-        , strChromeUrl : 'https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl?hl=en'
-        , strOperaUrl : 'https://addons.opera.com/extensions/details/soundcloud-widget-pozitone-module/'
-      }
-    , {
-          strModuleId : 'ru_sovyatnik'
-        , strChromeUrl : 'https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn'
-        , strOperaUrl : 'https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/'
-      }
+    {
+      strModuleId: 'com_youtube',
+      url: {
+        chrome: 'https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg',
+        opera: 'https://addons.opera.com/extensions/details/youtube-embedded-player-pozitone-module/',
+        edge: 'https://microsoftedge.microsoft.com/addons/detail/endgoolfeicagiackhdalbfkinelcgin',
+      },
+    },
+    {
+      strModuleId: 'com_soundcloud',
+      url: {
+        chrome: 'https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl?hl=en',
+        opera: 'https://addons.opera.com/extensions/details/soundcloud-widget-pozitone-module/',
+        edge: 'https://microsoftedge.microsoft.com/addons/detail/imijjplgbohoagfnhbdlfhfcgfikgjab',
+      },
+    },
+    {
+      strModuleId: 'ru_sovyatnik',
+      url: {
+        chrome: 'https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn',
+        opera: 'https://addons.opera.com/extensions/details/soviatnik-pozitone-modul/',
+        edge: 'https://microsoftedge.microsoft.com/addons/detail/fkgcpgookmofjfedpfhadkgkhddcdbpp',
+      },
+    },
   ];
 
   Page.localize( strPage, '#content' );
@@ -55,15 +64,13 @@ optionsControllers.controller( 'ExternalModulesListCtrl', function( $scope, $roo
    **/
 
   $scope.install = function( objEvent ) {
-    const strModuleId = objEvent.target.getAttribute( 'data-module-id' );
-    const strUrlType = boolConstIsOperaAddon
-      ? 'strOperaUrl'
-      : 'strChromeUrl'
-      ;
-    const strUrl = $scope.arrExternalModules.filter( function( objExternalModule ) {
-      return strModuleId === objExternalModule.strModuleId;
-    } )[ 0 ][ strUrlType ];
+    const moduleId = objEvent.target.getAttribute( 'data-module-id' );
+    const MATCHING_RESULT_INDEX = 0;
+    const MODULE_DETAILS_URL_KEY = 'url';
+    const url = $scope.arrExternalModules.filter( function ( externalModuleDetails ) {
+      return moduleId === externalModuleDetails.strModuleId;
+    } )[ MATCHING_RESULT_INDEX ][ MODULE_DETAILS_URL_KEY ][ poziworldExtension.utils.getExtensionStoreType() ];
 
-    Global.createTabOrUpdate( strUrl );
+    Global.createTabOrUpdate( url );
   };
 } );

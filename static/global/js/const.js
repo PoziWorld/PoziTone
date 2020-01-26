@@ -48,21 +48,6 @@ const
   , strConstLangParam             = '%lang'
   , strConstMessageUrl            =
       'https://poziworld.github.io/PoziTone/message/v%v/?lang=%lang&ref=ext&ueip='
-  , strConstInstallationUrl       = ! boolConstIsOperaAddon
-      ? 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm'
-      : 'https://addons.opera.com/extensions/details/pozitone/'
-  , strConstRateUrl               =
-        strConstInstallationUrl
-      + ( ! boolConstIsOperaAddon
-          ? '/reviews'
-          : '#feedback-container'
-        )
-  , strConstBugsUrl               =
-        strConstInstallationUrl
-      + ( ! boolConstIsOperaAddon
-          ? '/support'
-          : '?reports#feedback-container'
-        )
   , strConstTranslationUrl = 'https://www.transifex.com/poziworld/pozitone/'
 
     // External modules, separators, and Notifications

@@ -19,6 +19,42 @@
 ( function () {
   'use strict';
 
+  /**
+   * Browser-specific extension-related URLs.
+   *
+   * @typedef {object} ExtensionStoreSpecificUrls
+   * @property {string} chrome - URL for an extension installed via the Chrome Web Store.
+   * @property {string} edge - URL for an extension for the new Microsoft Edge.
+   * @property {string} opera - URL for an extension installed via the Opera add-ons catalogue.
+   */
+
+  /**
+   * Browser-specific extension-related URLs.
+   *
+   * @typedef {object} Urls
+   * @property {ExtensionStoreSpecificUrls} installation
+   * @property {ExtensionStoreSpecificUrls} rating
+   * @property {ExtensionStoreSpecificUrls} feedback
+   */
+
+  const URLS = {
+    installation: {
+      chrome: 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm',
+      edge: 'https://microsoftedge.microsoft.com/addons/detail/mnfohmojhhcbbnafeehfhghjaeaokjbl',
+      opera: 'https://addons.opera.com/extensions/details/pozitone/',
+    },
+    rating: {
+      chrome: 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/reviews',
+      edge: 'https://microsoftedge.microsoft.com/addons/detail/mnfohmojhhcbbnafeehfhghjaeaokjbl',
+      opera: 'https://addons.opera.com/extensions/details/pozitone/#rating-form',
+    },
+    feedback: {
+      chrome: 'https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/support',
+      edge: 'https://feedback.pozitone.com/',
+      opera: 'https://addons.opera.com/extensions/details/pozitone/#feedback-container',
+    },
+  };
+
   setUp();
 
   /**
@@ -140,6 +176,30 @@
   };
 
   /**
+   * Return browser-specific extension installation URL.
+   */
+
+  Global2.prototype.getInstallationUrl = function () {
+    return getUrl( 'installation' );
+  };
+
+  /**
+   * Return browser-specific extension rating/review URL.
+   */
+
+  Global2.prototype.getRatingUrl = function () {
+    return getUrl( 'rating' );
+  };
+
+  /**
+   * Return browser-specific extension feedback/issue reporting URL.
+   */
+
+  Global2.prototype.getFeedbackUrl = function () {
+    return getUrl( 'feedback' );
+  };
+
+  /**
    * Ask the background view to handle the extension reload.
    *
    * @param {string} logMessage - The log message passed to the background view.
@@ -153,6 +213,16 @@
         extensionReloadRequested: true,
       }
     );
+  }
+
+  /**
+   * Return an extension-related URL depending on the browser.
+   *
+   * @param {('installation'|'rating'|'feedback')} urlType
+   */
+
+  function getUrl( urlType ) {
+    return URLS[ urlType ][ poziworldExtension.utils.getExtensionStoreType() ];
   }
 } )();
 

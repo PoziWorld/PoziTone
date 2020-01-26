@@ -70,8 +70,8 @@ optionsControllers.controller( 'ContributionCtrl', function( $scope, $rootScope 
     , strSubpage
   );
 
-  document.getElementById( 'installationLink' ).href = strConstInstallationUrl;
-  document.getElementById( 'rateLink' ).href = strConstRateUrl;
+  document.getElementById( 'installationLink' ).href = pozitone.global.getInstallationUrl();
+  document.getElementById( 'rateLink' ).href = pozitone.global.getRatingUrl();
 } );
 
 // Controller for Feedback page
@@ -90,8 +90,8 @@ optionsControllers.controller( 'FeedbackCtrl', function( $scope, $rootScope ) {
     , strSubpage
   );
 
-  document.getElementById( 'reviewLink' ).href = strConstRateUrl;
-  document.getElementById( 'bugLink' ).href = strConstBugsUrl;
+  document.getElementById( 'reviewLink' ).href = pozitone.global.getRatingUrl();
+  document.getElementById( 'bugLink' ).href = pozitone.global.getFeedbackUrl();
   document.getElementById( 'incentiveLink' ).href = objConst.strIncentiveCarrotUrl;
 } );
 

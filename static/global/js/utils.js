@@ -68,6 +68,24 @@
   };
 
   /**
+   * Detect the best suitable extension (add-on) store (catalogue).
+   *
+   * @returns {(ExtensionStoreSpecificUrls.chrome|ExtensionStoreSpecificUrls.edge|ExtensionStoreSpecificUrls.opera)}
+   */
+
+  Utils.prototype.getExtensionStoreType = function () {
+    if ( boolConstIsOperaAddon ) {
+      return 'opera';
+    }
+
+    if ( bowser.name === 'Edge (Chromium)' ) {
+      return 'edge';
+    }
+
+    return 'chrome';
+  };
+
+  /**
    * Utilize legacy code to retrieve general (main - not each module's) settings.
    *
    * @param {string} logPrefix - Debug line "prefix".
