@@ -4,6 +4,14 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v1.0.1
+
+### Improved
+
+* Microsoft Edge-specific links for rating, feedback, extensions.
+
+---
+
 ## v1.0.0
 
 ### New
@@ -381,7 +389,7 @@
 ## v0.0.2.0
     * Added a support for VK's audio player (only on the full version of the site – vk.com).
     * Separate settings for each player.
-    * New available button – “Next track” (only for VK). 
+    * New available button – “Next track” (only for VK).
       Idea by Nikita Maslennikov.
     * Now when the pop-up notification is clicked, a tab with that player will be found and activated.
     * Added a draft PoziTone API: third-party developers will be able to create the extensions
@@ -401,7 +409,7 @@
     * Fixed a bug where repeated track info was saved on a player status change.
 
 ## v0.0.1.6
-    * Added “feedback” for the main actions. 
+    * Added “feedback” for the main actions.
       Now, after clicking a button on the notification or using keyboard shortcuts,
       a new notification will inform of a result of the performed action:
       * “Add track to playlist” – “Successfully added track to playlist”
