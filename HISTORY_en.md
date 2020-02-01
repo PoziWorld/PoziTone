@@ -4,6 +4,14 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v1.0.2
+
+### Improved
+
+* Microsoft Edge-specific links for sister projects.
+
+---
+
 ## v1.0.1
 
 ### Improved
