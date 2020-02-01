@@ -53,6 +53,26 @@
       edge: 'https://feedback.pozitone.com/',
       opera: 'https://addons.opera.com/extensions/details/pozitone/#feedback-container',
     },
+    swaggyProject: {
+      chrome: 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf',
+      edge: 'https://github.com/PoziWorld/Swaggy',
+      opera: 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf',
+    },
+    poziworldElfProject: {
+      chrome: 'https://github.com/PoziWorld/PoziWorld-Elf',
+      edge: 'https://github.com/PoziWorld/PoziWorld-Elf',
+      opera: 'https://github.com/PoziWorld/PoziWorld-Elf',
+    },
+    scrollToTopButtonProject: {
+      chrome: 'https://chrome.google.com/webstore/detail/scroll-to-top-button/chinfkfmaefdlchhempbfgbdagheknoj',
+      edge: 'https://microsoftedge.microsoft.com/addons/detail/dobeplcigkjlbajngcgnndecohjkjmia',
+      opera: 'https://addons.opera.com/extensions/details/scroll-to-top-button/',
+    },
+    printWasteMinimizerProject: {
+      chrome: 'https://chrome.google.com/webstore/detail/print-waste-minimizer/nhglpabogkpplpcemgiaopjoehcpajdk',
+      edge: 'https://microsoftedge.microsoft.com/addons/detail/badkpckfhemokiobdfnjepgnllimkbia',
+      opera: 'https://addons.opera.com/extensions/details/print-waste-minimizer/',
+    },
   };
 
   setUp();
@@ -177,6 +197,8 @@
 
   /**
    * Return browser-specific extension installation URL.
+   *
+   * @returns {string}
    */
 
   Global2.prototype.getInstallationUrl = function () {
@@ -185,6 +207,8 @@
 
   /**
    * Return browser-specific extension rating/review URL.
+   *
+   * @returns {string}
    */
 
   Global2.prototype.getRatingUrl = function () {
@@ -193,10 +217,23 @@
 
   /**
    * Return browser-specific extension feedback/issue reporting URL.
+   *
+   * @returns {string}
    */
 
   Global2.prototype.getFeedbackUrl = function () {
     return getUrl( 'feedback' );
+  };
+
+  /**
+   * Return browser-specific sister project URL.
+   *
+   * @param {string} urlId
+   * @returns {string}
+   */
+
+  Global2.prototype.getSisterProjectUrl = function ( urlId ) {
+    return getUrl( urlId );
   };
 
   /**

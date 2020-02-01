@@ -149,7 +149,7 @@ function getModules( Storage, $rootScope, funcResolve, funcReject ) {
           objModule.type = 'external';
           objModule.caption = strModuleExternal;
           /**
-           * @todo Get i18n variotions of name.
+           * @todo Get i18n variations of name.
            */
           objModule.name = objStorage[ strKey ].strName || strModuleExternal;
 

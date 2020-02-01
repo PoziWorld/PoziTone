@@ -3,40 +3,33 @@ optionsControllers.controller( 'ProjectsCtrl', function( $scope, $rootScope ) {
   $scope.boolIsNotOperaAddon = ! boolConstIsOperaAddon;
 
   $scope.arrProjects = [
-      {
-          strName : 'Swaggy'
-        , strAbbreviation : 'swaggy'
-        , strImageFileName : 'swaggy-icon-48.svg'
-          /**
-           * @todo More suitable var names
-           */
-        , strChromeLink : 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf'
-        , strOperaLink : 'https://chrome.google.com/webstore/detail/beblcchllamebejoakjbhhajpmlkjoaf'
-      }
-    , {
-          strName : 'PoziWorld Elf'
-        , strAbbreviation : 'pe'
-        , strImageFileName : 'pe-icon-64.png'
-          /**
-           * @todo More suitable var names
-           */
-        , strChromeLink : 'https://github.com/PoziWorld/PoziWorld-Elf'
-        , strOperaLink : 'https://github.com/PoziWorld/PoziWorld-Elf'
-      }
-    , {
-          strName : 'Scroll To Top Button'
-        , strAbbreviation : 'sttb'
-        , strImageFileName : 'sttb-icon-50.svg'
-        , strChromeLink : 'https://chrome.google.com/webstore/detail/scroll-to-top-button/chinfkfmaefdlchhempbfgbdagheknoj'
-        , strOperaLink : 'https://addons.opera.com/extensions/details/scroll-to-top-button/'
-      }
-    , {
-          strName : 'Print Waste Minimizer'
-        , strAbbreviation : 'pwm'
-        , strImageFileName : 'pwm-icon-128.svg'
-        , strChromeLink : 'https://chrome.google.com/webstore/detail/print-waste-minimizer/nhglpabogkpplpcemgiaopjoehcpajdk'
-        , strOperaLink : 'https://addons.opera.com/extensions/details/print-waste-minimizer/'
-      }
+    {
+      strName: 'Swaggy',
+      abbreviatedName: 'swaggy',
+      strImageFileName: 'swaggy-icon-48.svg',
+      /**
+       * @todo Camelize strName instead?
+       */
+      urlId: 'swaggyProject',
+    },
+    {
+      strName: 'PoziWorld Elf',
+      abbreviatedName: 'pe',
+      strImageFileName: 'pe-icon-64.png',
+      urlId: 'poziworldElfProject',
+    },
+    {
+      strName: 'Scroll To Top Button',
+      abbreviatedName: 'sttb',
+      strImageFileName: 'sttb-icon-50.svg',
+      urlId: 'scrollToTopButtonProject',
+    },
+    {
+      strName: 'Print Waste Minimizer',
+      abbreviatedName: 'pwm',
+      strImageFileName: 'pwm-icon-128.svg',
+      urlId: 'printWasteMinimizerProject',
+    },
   ];
 
   Page.localize( strPage, '#content' );
@@ -52,6 +45,16 @@ optionsControllers.controller( 'ProjectsCtrl', function( $scope, $rootScope ) {
     , strPage
     , strSubpage
   );
+
+  /**
+   * Return browser-specific sister project URL.
+   *
+   * @param {string} urlId
+   */
+
+  $scope.getSisterProjectUrl = function ( urlId ) {
+    return pozitone.global.getSisterProjectUrl( urlId );
+  };
 } );
 
 // Controller for Contribution page

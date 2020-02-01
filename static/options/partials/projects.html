@@ -21,20 +21,20 @@
               alt="{{strName = objProject.strName}}"
                 >
             <a
-              ng-href="{{boolIsNotOperaAddon ? objProject.strChromeLink : objProject.strOperaLink}}"
+              ng-href="{{ getSisterProjectUrl( objProject.urlId ) }}"
               class="modulesListItemCaption externalLink"
               data-id="project"
-              data-params='{ "strProjectName" : "{{strName}}", "strProjectAbbreviation" : "{{strAbbreviation = objProject.strAbbreviation}}" }'
+              data-params='{ "strProjectName" : "{{strName}}", "strProjectAbbreviation" : "{{abbreviatedName = objProject.abbreviatedName}}" }'
                 >{{strName}}</a>
             <span
-              id="{{strAbbreviation}}DescriptionParagraph1"
+              id="{{abbreviatedName}}DescriptionParagraph1"
               class="projectDescriptionParagraph"
-              i18n-content="{{strAbbreviation}}DescriptionParagraph1"
+              i18n-content="{{abbreviatedName}}DescriptionParagraph1"
                 ></span>
             <span
-              id="{{strAbbreviation}}DescriptionParagraph2"
+              id="{{abbreviatedName}}DescriptionParagraph2"
               class="projectDescriptionParagraph"
-              i18n-content="{{strAbbreviation}}DescriptionParagraph2"
+              i18n-content="{{abbreviatedName}}DescriptionParagraph2"
                 ></span>
           </p>
         </form>
