@@ -162,7 +162,7 @@ Not preset, but can be easily [set up](#set-up--change-keyboards-shortcuts) with
 
 By default, while the browser is not in the foreground, the shortcut will be inactive.
 
-As of version 35 (Chrome), you can make the shortcuts work even when the browser is not in the foreground: see [steps 1–7](#set-up--change-keyboards-shortcuts) above, change “In Chrome” to “Global” on step 6.
+You can make the shortcuts work even when the browser is not in the foreground: see [steps 1–7](#set-up--change-keyboards-shortcuts) above, change “In Chrome” to “Global” on step 6.
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
@@ -173,9 +173,6 @@ Gratitudes
 - To all those who give us life and happiness!
 - To the inspirers and testers of PoziTone: Darya, Evgeny, Mel, Nike, Sergey.
 - [UserEcho](https://userecho.com/?pcode=1014487) — for the excellent service, kindness and generosity!
-- [DreamHost](http://www.dreamhost.com/r.cgi?623835) — for the reliable hosting.
-- Google, Inc. — for all their excellent projects.
-- 101.ru — for a chance to listen to music for free and legally.
 - Translators:
   - Spanish — [Paco_Zamo (Francisco Zamorano)](https://www.transifex.com/user/profile/Paco_Zamo/);
   - Polish — jurczak (Łukasz Jurczak);
