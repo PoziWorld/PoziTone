@@ -9,6 +9,6 @@ An extension for the Google Chrome, Opera, Microsoft Edge, and other Chromium-ba
 ---
 
 
-Расширение для браузеров Google Chrome, Opera, Яндекс и нового Microsoft Edge, которое добавляет новые возможности Вашим любимым онлайн-медиаплеерам.
+Расширение для браузеров Google Chrome, Opera, Яндекс, Microsoft Edge и других, основанных на Chromium, которое добавляет новые возможности Вашим любимым онлайн-медиаплеерам.
 
 [Узнать больше о PoziTone](README_ru.md).

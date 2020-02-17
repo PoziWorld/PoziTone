@@ -13,7 +13,6 @@ ___
   * [Supported online media players](#supported-online-media-players)
     * [Supported via external modules](#supported-via-external-modules)
   * [Installation](#installation)
-    * [For Opera](#for-opera)
   * [Demo](#demo)
   * [Keyboard shortcuts](#keyboard-shortcuts)
     * [Set up / change keyboards shortcuts](#set-up--change-keyboards-shortcuts)
@@ -83,9 +82,9 @@ More to come...
 
 An external PoziTone module is a standalone extension which is able to provide [PoziTone features](#features) by communicating directly with PoziTone behind the scenes.
 
-* [YouTube embedded player](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([for Opera](https://addons.opera.com/en/extensions/details/youtube-embedded-player-pozitone-module/)).
-* [SoundCloud Widget](https://chrome.google.com/webstore/detail/pozitone-module-for-sound/iijloaojdghegopdahladbajodcgnmgh) ([for Opera](https://addons.opera.com/en/extensions/details/soundcloud-widget-pozitone-module/)).
-* [Sovyatnik](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([for Opera](https://addons.opera.com/en/extensions/details/soviatnik-pozitone-modul/)).
+* [YouTube embedded player](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg "PoziTone module for YouTube embedded player") ([for Opera](https://addons.opera.com/en/extensions/details/youtube-embedded-player-pozitone-module/ "“PoziTone module for YouTube embedded player” for Opera"), [for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/endgoolfeicagiackhdalbfkinelcgin "“PoziTone module for YouTube embedded player” for Microsoft Edge")).
+* [SoundCloud Widget](https://chrome.google.com/webstore/detail/pozitone-module-for-sound/iijloaojdghegopdahladbajodcgnmgh "PoziTone module for SoundCloud Widget") ([for Opera](https://addons.opera.com/en/extensions/details/soundcloud-widget-pozitone-module/ "“PoziTone module for SoundCloud Widget” for Opera"), [for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/imijjplgbohoagfnhbdlfhfcgfikgjab "“PoziTone module for SoundCloud Widget” for Microsoft Edge")).
+* [Sovyatnik](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn "PoziTone module for Sovyatnik") ([for Opera](https://addons.opera.com/en/extensions/details/soviatnik-pozitone-modul/ "“PoziTone module for Sovyatnik” for Opera"), [for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/fkgcpgookmofjfedpfhadkgkhddcdbpp "“PoziTone module for Sovyatnik” for Microsoft Edge")).
 
 
 _Are you a developer?_ Want to add a support for your favorite player and publish it as a PoziTone module under your name? – Check [PoziTone module SDK](https://github.com/PoziWorld/PoziTone-module-SDK).
@@ -96,19 +95,9 @@ _Are you a developer?_ Want to add a support for your favorite player and publis
 Installation
 --------
 
-1. Go to a [PoziTone in the Chrome Web Store](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=en) page.
-2. Click on “ADD TO CHROME”.
-3. Then “Add extension”.
-
-Done!
-
-
-### For Opera
-
-1. Go to a [PoziTone in the Opera add-ons catalog](https://addons.opera.com/en/extensions/details/pozitone/?display=en_US) page.
-2. Click on “Add to Opera”.
-
-Done!
+* [PoziTone in the Chrome Web Store](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=en)
+* [PoziTone in the Opera add-ons catalog](https://addons.opera.com/en/extensions/details/pozitone/?display=en_US)
+* [PoziTone in the Microsoft Edge Addons store](https://microsoftedge.microsoft.com/addons/detail/mnfohmojhhcbbnafeehfhghjaeaokjbl)
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 

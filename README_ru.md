@@ -3,7 +3,7 @@
 [PoziTone<img src="/static/global/img/pozitone-icon-48.png" width="48" height="48" alt="PoziTone">](https://pozitone.com)
 =======
 
-Расширение для браузеров Google Chrome, Opera, Яндекс и Microsoft Edge, которое добавляет новые [возможности](#Возможности) Вашим любимым [онлайн-медиаплеерам](#Поддерживаемые-онлайн-медиаплееры).
+Расширение для браузеров Google Chrome, Opera, Яндекс, Microsoft Edge и других, основанных на Chromium, которое добавляет новые [возможности](#Возможности) Вашим любимым [онлайн-медиаплеерам](#Поддерживаемые-онлайн-медиаплееры).
 
 ___
 
@@ -13,8 +13,6 @@ ___
   * [Поддерживаемые онлайн-медиаплееры](#Поддерживаемые-онлайн-медиаплееры)
     * [Поддерживаемые с помощью внешних модулей](#Поддерживаемые-с-помощью-внешних-модулей)
   * [Установка](#Установка)
-    * [Для Opera](#Для-opera)
-    * [Для Яндекс](#Для-Яндекс)
   * [Демо](#Демо)
   * [Быстрые клавиши](#Быстрые-клавиши)
     * [Настройка (изменение) быстрых клавиш](#Настройка-изменение-быстрых-клавиш)
@@ -84,9 +82,9 @@ ___
 
 Внешний модуль PoziTone — это отдельное расширение, которое способно предоставить [возможности PoziTone](#Возможности), общаясь напрямую с PoziTone незаметно для глаз пользователя.
 
-* [YouTube встроенный плеер](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/youtube-embedded-player-pozitone-module/)).
-* [SoundCloud-виджет](https://chrome.google.com/webstore/detail/pozitone-module-for-sound/iijloaojdghegopdahladbajodcgnmgh) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soundcloud-widget-pozitone-module/)).
-* [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn) ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soviatnik-pozitone-modul/)).
+* [YouTube встроенный плеер](https://chrome.google.com/webstore/detail/youtube-embedded-player-p/bajalgkbfjloemafmkiheboebghhibbg "PoziTone-модуль для встроенного плеера YouTube") ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/youtube-embedded-player-pozitone-module/ "“PoziTone-модуль для встроенного плеера YouTube” для Opera и Яндекс"), [для Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/endgoolfeicagiackhdalbfkinelcgin "“PoziTone-модуль для встроенного плеера YouTube” для Microsoft Edge")).
+* [SoundCloud-виджет](https://chrome.google.com/webstore/detail/pozitone-module-for-sound/iijloaojdghegopdahladbajodcgnmgh "PoziTone-модуль для SoundCloud-виджета") ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soundcloud-widget-pozitone-module/ "“PoziTone-модуль для SoundCloud-виджета” для Opera и Яндекс"), [для Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/imijjplgbohoagfnhbdlfhfcgfikgjab "“PoziTone-модуль для SoundCloud-виджета” для Microsoft Edge")).
+* [Совятник](https://chrome.google.com/webstore/detail/sovyatnik-pozitone-module/ihdoljplikdgegdooeohfmgaaabcbmpn "PoziTone-модуль для Совятника") ([для Opera и Яндекс](https://addons.opera.com/ru/extensions/details/soviatnik-pozitone-modul/ "“PoziTone-модуль для Совятника” для Opera и Яндекс"), [для Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/fkgcpgookmofjfedpfhadkgkhddcdbpp "“PoziTone-модуль для Совятника” для Microsoft Edge")).
 
 
 _Вы — разработчик?_ Хотите добавить поддержку Вашего любимого плеера и опубликовать это в качестве модуля PoziTone под своим именем? — Присмотритесь к [PoziTone module SDK](https://github.com/PoziWorld/PoziTone-module-SDK).
@@ -97,27 +95,9 @@ _Вы — разработчик?_ Хотите добавить поддерж�
 Установка
 --------
 
-1. Перейдите на страницу [PoziTone в Интернет-магазине Chrome](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=ru).
-2. Нажмите на кнопку «УСТАНОВИТЬ».
-3. Затем — «Установить расширение».
-
-Готово!
-
-
-### Для Opera
-
-1. Перейдите на страницу [PoziTone в каталоге дополнений Opera](https://addons.opera.com/ru/extensions/details/pozitone/?display=ru).
-2. Нажмите на кнопку «Добавить в Opera».
-
-Готово!
-
-
-### Для Яндекс
-
-1. Перейдите на страницу [PoziTone в каталоге расширений](https://addons.opera.com/ru/extensions/details/pozitone/?display=ru).
-2. Нажмите на кнопку «Добавить в Яндекс.Браузер».
-
-Готово!
+* [PoziTone в Интернет-магазине Chrome](https://chrome.google.com/webstore/detail/pozitone/bdglbogiolkffcmojmmkipgnpkfipijm/details?hl=ru)
+* [PoziTone в каталоге дополнений Opera](https://addons.opera.com/ru/extensions/details/pozitone/?display=ru)
+* [PoziTone в магазине Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/mnfohmojhhcbbnafeehfhghjaeaokjbl)
 
 <sup>[(вернуться к содержанию)](#Содержание)</sup>
 
