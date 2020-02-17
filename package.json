@@ -1,6 +1,6 @@
 {
   "name": "pozitone",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PoziTone is a browser extension (add-on) for the Google Chrome, Opera, Microsoft Edge, and other Chromium-based browsers that adds new features to your favorite online media players.",
   "scripts": {
     "dev": "NODE_ENV=development webpack --mode development --progress",

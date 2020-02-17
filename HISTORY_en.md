@@ -4,6 +4,14 @@
 
 > [Follow PoziTone updates](README_en.md#pozitone-on-social-networks)
 
+## v1.0.3
+
+### Changed
+
+* Updated URL for “PoziTone module for SoundCloud Widget” extension.
+
+---
+
 ## v1.0.2
 
 ### Improved
