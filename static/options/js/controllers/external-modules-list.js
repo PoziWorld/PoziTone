@@ -12,7 +12,7 @@ optionsControllers.controller( 'ExternalModulesListCtrl', function( $scope, $roo
     {
       strModuleId: 'com_soundcloud',
       url: {
-        chrome: 'https://chrome.google.com/webstore/detail/soundcloud-widget-poziton/fpkahopapmbodflbcjpdejckahglfmdl?hl=en',
+        chrome: 'https://chrome.google.com/webstore/detail/pozitone-module-for-sound/iijloaojdghegopdahladbajodcgnmgh',
         opera: 'https://addons.opera.com/extensions/details/soundcloud-widget-pozitone-module/',
         edge: 'https://microsoftedge.microsoft.com/addons/detail/imijjplgbohoagfnhbdlfhfcgfikgjab',
       },
